@@ -1,5 +1,7 @@
 package main
 
+//go:generate go-bindata data/...
+
 import (
 	"flag"
 	"github.com/gotk3/gotk3/gtk"
@@ -47,7 +49,14 @@ func showAboutDialog() {
 		log.Print(err)
 		return
 	}
-	err = builder.AddFromFile("about.ui")
+
+	data, err := Asset("data/about.ui")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	err = builder.AddFromString(string(data))
 	if err != nil {
 		log.Print(err)
 		return

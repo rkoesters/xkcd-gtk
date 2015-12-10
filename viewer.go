@@ -36,7 +36,11 @@ func New() (*Viewer, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = builder.AddFromFile("viewer.ui")
+	data, err := Asset("data/viewer.ui")
+	if err != nil {
+		return nil, err
+	}
+	err = builder.AddFromString(string(data))
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +161,12 @@ func (v *Viewer) ShowTranscript() {
 		log.Print(err)
 		return
 	}
-	err = builder.AddFromFile("transcript.ui")
+	data, err := Asset("data/transcript.ui")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	err = builder.AddFromString(string(data))
 	if err != nil {
 		log.Print(err)
 		return
