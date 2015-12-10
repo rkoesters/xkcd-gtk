@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+	<object class="GtkWindow" id="viewer-window">
+		<property name="visible">True</property>
+		<property name="default-height">600</property>
+		<property name="default-width">800</property>
+		<child type="titlebar">
+			<object class="GtkHeaderBar" id="header">
+				<property name="visible">True</property>
+				<property name="show-close-button">True</property>
+				<property name="title">XKCD</property>
+				<child>
+					<object class="GtkBox">
+						<property name="visible">True</property>
+						<property name="orientation">horizontal</property>
+						<property name="homogeneous">True</property>
+						<style>
+							<class name="linked"/>
+						</style>
+						<child>
+							<object class="GtkButton" id="previous">
+								<property name="visible">True</property>
+								<signal name="clicked" handler="PreviousComic"/>
+								<style>
+									<class name="image-button"/>
+								</style>
+								<child>
+									<object class="GtkImage">
+										<property name="visible">True</property>
+										<property name="icon-name">go-previous-symbolic</property>
+									</object>
+								</child>
+							</object>
+						</child>
+						<child>
+							<object class="GtkButton" id="next">
+								<property name="visible">True</property>
+								<signal name="clicked" handler="NextComic"/>
+								<style>
+									<class name="image-button"/>
+								</style>
+								<child>
+									<object class="GtkImage">
+										<property name="visible">True</property>
+										<property name="icon-name">go-next-symbolic</property>
+									</object>
+								</child>
+							</object>
+						</child>
+					</object>
+				</child>
+				<child>
+					<object class="GtkButton" id="random">
+						<property name="visible">True</property>
+						<signal name="clicked" handler="RandomComic"/>
+						<style>
+							<class name="image-button"/>
+						</style>
+						<child>
+							<object class="GtkImage">
+								<property name="visible">True</property>
+								<property name="icon-name">media-playlist-shuffle-symbolic</property>
+							</object>
+						</child>
+					</object>
+				</child>
+				<child>
+					<object class="GtkMenuButton" id="menu-button">
+						<property name="visible">True</property>
+						<property name="use-popover">True</property>
+						<property name="popover">menu-popover</property>
+						<style>
+							<class name="image-button"/>
+						</style>
+						<child>
+							<object class="GtkImage">
+								<property name="visible">True</property>
+								<property name="icon-name">open-menu-symbolic</property>
+							</object>
+						</child>
+					</object>
+					<packing>
+						<property name="pack-type">end</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkMenuButton" id="details-button">
+						<property name="visible">True</property>
+						<property name="use-popover">True</property>
+						<property name="popover">details-popover</property>
+						<style>
+							<class name="image-button"/>
+						</style>
+						<child>
+							<object class="GtkImage">
+								<property name="visible">True</property>
+								<property name="icon-name">document-properties-symbolic</property>
+							</object>
+						</child>
+					</object>
+					<packing>
+						<property name="pack-type">end</property>
+					</packing>
+				</child>
+			</object>
+		</child>
+		<child>
+			<object class="GtkScrolledWindow">
+				<property name="visible">True</property>
+				<child>
+					<object class="GtkImage" id="comic-image">
+						<property name="visible">True</property>
+					</object>
+				</child>
+			</object>
+		</child>
+	</object>
+	<object class="GtkPopover" id="details-popover">
+		<property name="visible">True</property>
+		<child>
+			<object class="GtkGrid">
+				<property name="visible">True</property>
+				<property name="margin">10</property>
+				<property name="row-spacing">6</property>
+				<property name="column-spacing">10</property>
+				<child>
+					<object class="GtkLabel">
+						<property name="visible">True</property>
+						<property name="xalign">1</property>
+						<property name="label">Number</property>
+						<style>
+							<class name="dim-label"/>
+						</style>
+					</object>
+					<packing>
+						<property name="top_attach">0</property>
+						<property name="left_attach">0</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel" id="details-number">
+						<property name="visible">True</property>
+						<property name="selectable">True</property>
+						<property name="xalign">0</property>
+					</object>
+					<packing>
+						<property name="top_attach">0</property>
+						<property name="left_attach">1</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel">
+						<property name="visible">True</property>
+						<property name="xalign">1</property>
+						<property name="label">Title</property>
+						<style>
+							<class name="dim-label"/>
+						</style>
+					</object>
+					<packing>
+						<property name="top_attach">1</property>
+						<property name="left_attach">0</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel" id="details-title">
+						<property name="visible">True</property>
+						<property name="selectable">True</property>
+						<property name="xalign">0</property>
+					</object>
+					<packing>
+						<property name="top_attach">1</property>
+						<property name="left_attach">1</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel">
+						<property name="visible">True</property>
+						<property name="xalign">1</property>
+						<property name="label">Date</property>
+						<style>
+							<class name="dim-label"/>
+						</style>
+					</object>
+					<packing>
+						<property name="top_attach">2</property>
+						<property name="left_attach">0</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel" id="details-date">
+						<property name="visible">True</property>
+						<property name="selectable">True</property>
+						<property name="xalign">0</property>
+					</object>
+					<packing>
+						<property name="top_attach">2</property>
+						<property name="left_attach">1</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel">
+						<property name="visible">True</property>
+						<property name="xalign">1</property>
+						<property name="label">Link</property>
+						<style>
+							<class name="dim-label"/>
+						</style>
+					</object>
+					<packing>
+						<property name="top_attach">3</property>
+						<property name="left_attach">0</property>
+					</packing>
+				</child>
+				<child>
+					<object class="GtkLabel" id="details-link">
+						<property name="visible">True</property>
+						<property name="xalign">0</property>
+					</object>
+					<packing>
+						<property name="top_attach">3</property>
+						<property name="left_attach">1</property>
+					</packing>
+				</child>
+			</object>
+		</child>
+	</object>
+	<object class="GtkPopover" id="menu-popover">
+		<property name="visible">True</property>
+		<child>
+			<object class="GtkBox">
+				<property name="visible">True</property>
+				<property name="orientation">vertical</property>
+				<property name="margin">10</property>
+				<child>
+					<object class="GtkModelButton">
+						<property name="visible">True</property>
+						<property name="text">Go to</property>
+					</object>
+				</child>
+				<child>
+					<object class="GtkModelButton">
+						<property name="visible">True</property>
+						<property name="text">View Transcript</property>
+						<signal name="clicked" handler="ShowTranscript"/>
+					</object>
+				</child>
+				<child>
+					<object class="GtkSeparator">
+						<property name="visible">True</property>
+						<property name="margin-start">12</property>
+						<property name="margin-end">12</property>
+						<property name="margin-top">3</property>
+						<property name="margin-bottom">3</property>
+						<property name="orientation">horizontal</property>
+					</object>
+				</child>
+				<child>
+					<object class="GtkModelButton">
+						<property name="visible">True</property>
+						<property name="text">About</property>
+						<signal name="clicked" handler="showAboutDialog"/>
+					</object>
+				</child>
+			</object>
+		</child>
+	</object>
+</interface>
