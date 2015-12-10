@@ -9,7 +9,7 @@
 			<object class="GtkHeaderBar" id="header">
 				<property name="visible">True</property>
 				<property name="show-close-button">True</property>
-				<property name="title">XKCD</property>
+				<property name="title">XKCD Viewer</property>
 				<child>
 					<object class="GtkBox">
 						<property name="visible">True</property>
