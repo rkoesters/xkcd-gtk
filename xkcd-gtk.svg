@@ -1,45 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
-   viewBox="0 0 48.000003 48.000004"
-   id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="xkcd-gtk.svg">
+   id="svg2"
+   viewBox="0 0 256.00002 256.00002"
+   height="256"
+   width="256">
   <defs
      id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="37.366574"
-     inkscape:cy="26.418478"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     showborder="true"
-     borderlayer="false"
-     inkscape:showpageshadow="true"
-     inkscape:window-width="1366"
-     inkscape:window-height="704"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -53,56 +25,50 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0,-1004.3626)">
-    <circle
-       style="fill:#ffffff;stroke:#000000"
-       id="path3340"
-       cx="24.000002"
-       cy="1028.3625"
-       r="22.097088" />
+     transform="translate(0,-796.36256)"
+     id="layer1">
     <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15.00000089px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="13.384521"
-       y="1018.6487"
        id="text4142"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4144"
+       y="1018.6487"
+       x="13.384521"
+       style="font-style:normal;font-weight:normal;font-size:15.00000095px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="1018.6487"
          x="13.384521"
-         y="1018.6487"></tspan></text>
+         id="tspan4144" /></text>
     <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.09309387px;line-height:85.00000238%;font-family:Courier;-inkscape-font-specification:Courier;letter-spacing:1.00000012px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="24.008951"
-       y="1026.7778"
        id="text4146"
-       sodipodi:linespacing="85.000002%"><tspan
-         sodipodi:role="line"
-         x="24.008951"
-         y="1026.7778"
+       y="1026.7778"
+       x="24.008951"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.09309387px;line-height:85.00000238%;font-family:Courier;-inkscape-font-specification:Courier;letter-spacing:1.00000012px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         id="tspan4177"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:85.00000238%;font-family:Cantarell;-inkscape-font-specification:Cantarell;text-align:center;letter-spacing:1.00000012px;writing-mode:lr-tb;text-anchor:middle"
-         id="tspan4177" /></text>
+         y="1026.7778"
+         x="24.008951" /></text>
+    <circle
+       r="122.23418"
+       cy="924.36255"
+       cx="128.00002"
+       id="path3340"
+       style="fill:#ffffff;stroke:#000000;stroke-width:5.53168726" />
     <g
-       id="g4224"
-       transform="matrix(0.9002107,-0.29286751,0.29286751,0.9002107,-298.73346,110.42036)">
+       transform="matrix(4.979684,-1.6200515,1.6200515,4.979684,-1657.2605,-4153.4063)"
+       id="g4224">
       <rect
-         y="1022.1345"
-         x="10.743622"
-         height="7.5723996"
-         width="26.51276"
+         style="fill:#000000;stroke:#000000;stroke-width:0.87747604"
          id="rect4216"
-         style="fill:#000000;stroke:#000000;stroke-width:0.87747604" />
+         width="26.51276"
+         height="7.5723996"
+         x="10.743622"
+         y="1022.1345" />
       <rect
-         y="1030.1245"
-         x="5.579093"
-         height="0.47632709"
-         width="36.841816"
+         style="fill:#000000;stroke:#000000;stroke-width:1.02874923"
          id="rect4218"
-         style="fill:#000000;stroke:#000000;stroke-width:1.02874923" />
+         width="36.841816"
+         height="0.47632709"
+         x="5.579093"
+         y="1030.1245" />
     </g>
   </g>
 </svg>
