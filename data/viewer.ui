@@ -103,6 +103,25 @@
             <property name="pack-type">end</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkMenuButton" id="search-button">
+            <property name="visible">True</property>
+            <property name="use-popover">True</property>
+            <property name="popover">search-popover</property>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">edit-find-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
       </object>
     </child>
     <child>
@@ -244,6 +263,13 @@
             <property name="visible">True</property>
             <property name="text">View Transcript</property>
             <signal name="clicked" handler="ShowTranscript"/>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text">Properties</property>
+            <signal name="clicked" handler="ShowProperties"/>
           </object>
         </child>
         <child>
