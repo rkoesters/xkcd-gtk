@@ -1,1 +1,3 @@
-`xkcd-gtk` is a simple XKCD comic viewer using GTK+3.
+![](xkcd-gtk.svg)
+
+`xkcd-gtk` is a simple XKCD comic viewer written in go using GTK+3.
