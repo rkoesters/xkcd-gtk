@@ -236,7 +236,7 @@
 				<child>
 					<object class="GtkModelButton">
 						<property name="visible">True</property>
-						<property name="text">Go to</property>
+						<property name="text">Go to...</property>
 					</object>
 				</child>
 				<child>
