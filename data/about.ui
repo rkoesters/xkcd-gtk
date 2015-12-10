@@ -5,7 +5,7 @@
     <property name="visible">True</property>
     <property name="logo-icon-name">xkcd-gtk</property>
     <property name="program-name">XKCD Viewer</property>
-    <property name="version">0.1</property>
+    <property name="version">0.2</property>
     <property name="comments">A simple XKCD comic reader for GNOME</property>
     <property name="website">https://github.com/rkoesters/xkcd-gtk</property>
     <property name="copyright">Copyright © 2015 Ryan Koesters</property>
