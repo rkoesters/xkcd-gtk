@@ -16,6 +16,7 @@ var number = flag.Int("n", 0, "Comic number.")
 func main() {
 	flag.Parse()
 	gtk.Init(nil)
+	gtk.WindowSetDefaultIconName("xkcd-gtk")
 
 	if flag.NArg() != 0 {
 		flag.Usage()
