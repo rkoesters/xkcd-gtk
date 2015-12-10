@@ -20,11 +20,6 @@ type Viewer struct {
 	previous *gtk.Button
 	next     *gtk.Button
 	img      *gtk.Image
-	// The labels in the details popover.
-	detailsNumber *gtk.Label
-	detailsTitle  *gtk.Label
-	detailsDate   *gtk.Label
-	detailsLink   *gtk.Label
 }
 
 // New creates a new XKCD viewer window.
@@ -50,7 +45,7 @@ func New() (*Viewer, error) {
 		"PreviousComic":   v.PreviousComic,
 		"NextComic":       v.NextComic,
 		"RandomComic":     v.RandomComic,
-		"ShowTranscript":  v.ShowTranscript,
+		"ShowProperties":  v.ShowProperties,
 		"showAboutDialog": showAboutDialog,
 	})
 
@@ -98,24 +93,6 @@ func New() (*Viewer, error) {
 		return nil, errors.New("error getting comic-image")
 	}
 
-	// Get details labels.
-	v.detailsNumber, err = getLabel(builder, "details-number")
-	if err != nil {
-		return nil, err
-	}
-	v.detailsTitle, err = getLabel(builder, "details-title")
-	if err != nil {
-		return nil, err
-	}
-	v.detailsDate, err = getLabel(builder, "details-date")
-	if err != nil {
-		return nil, err
-	}
-	v.detailsLink, err = getLabel(builder, "details-link")
-	if err != nil {
-		return nil, err
-	}
-
 	// Closing the window should exit the program.
 	v.win.Connect("destroy", func() {
 		gtk.MainQuit()
@@ -153,15 +130,13 @@ func (v *Viewer) RandomComic() {
 	}
 }
 
-// ShowTranscript opens a dialog displaying the transcript for the
-// current comic.
-func (v *Viewer) ShowTranscript() {
+func (v *Viewer) ShowProperties() {
 	builder, err := gtk.BuilderNew()
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	data, err := Asset("data/transcript.ui")
+	data, err := Asset("data/properties.ui")
 	if err != nil {
 		log.Print(err)
 		return
@@ -172,36 +147,71 @@ func (v *Viewer) ShowTranscript() {
 		return
 	}
 
-	obj, err := builder.GetObject("transcript-dialog")
+	obj, err := builder.GetObject("properties-dialog")
 	if err != nil {
 		log.Print(err)
 		return
 	}
 	dialog, ok := obj.(*gtk.Dialog)
 	if !ok {
-		log.Print("error getting transcript-dialog")
+		log.Print("error getting properties-dialog")
 		return
 	}
 	dialog.SetTransientFor(v.win)
 	dialog.SetModal(true)
 
-	obj, err = builder.GetObject("text-view")
+	number, err := getLabel(builder, "properties-number")
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	textview, ok := obj.(*gtk.TextView)
-	if !ok {
-		log.Print("error getting text-view")
-		return
-	}
-
-	buf, err := textview.GetBuffer()
+	number.SetText(strconv.Itoa(v.comic.Num))
+	title, err := getLabel(builder, "properties-title")
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	buf.SetText(strings.Replace(v.comic.Transcript, "\\n", "\n", -1))
+	title.SetText(v.comic.Title)
+	image, err := getLabel(builder, "properties-image")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	fmtImage := fmt.Sprintf("<a href=\"%v\">%[1]v</a>", v.comic.Img)
+	image.SetMarkup(fmtImage)
+	alt, err := getLabel(builder, "properties-alt")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	alt.SetText(v.comic.Alt)
+	date, err := getLabel(builder, "properties-date")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	date.SetText(formatDate(v.comic.Year, v.comic.Month, v.comic.Day))
+	news, err := getLabel(builder, "properties-news")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	news.SetText(v.comic.News)
+	link, err := getLabel(builder, "properties-link")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	if v.comic.Link != "" {
+		fmtLink := fmt.Sprintf("<a href=\"%v\">%[1]v</a>", v.comic.Link)
+		link.SetMarkup(fmtLink)
+	}
+	transcript, err := getLabel(builder, "properties-transcript")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	transcript.SetText(strings.Replace(v.comic.Transcript, "\\n", "\n", -1))
 
 	dialog.Show()
 }
@@ -221,17 +231,6 @@ func (v *Viewer) SetComic(n int) error {
 	v.hdr.SetSubtitle(fmt.Sprintf("#%v: %v", v.comic.Num, v.comic.Title))
 	v.img.SetFromFile(imgPath)
 	v.img.SetTooltipText(v.comic.Alt)
-
-	// Update the details popover.
-	v.detailsNumber.SetText(strconv.Itoa(v.comic.Num))
-	v.detailsTitle.SetText(v.comic.Title)
-	v.detailsDate.SetText(formatDate(v.comic.Year, v.comic.Month, v.comic.Day))
-	if v.comic.Link != "" {
-		fmtLink := fmt.Sprintf("<a href=\"%v\">%[1]v</a>", v.comic.Link)
-		v.detailsLink.SetMarkup(fmtLink)
-	} else {
-		v.detailsLink.SetText("")
-	}
 
 	// Enable/disable previous button.
 	if v.comic.Num > 1 {
