@@ -10,9 +10,6 @@ Todo
 
 - Add search.
   - Will probably use blevesearch
-  - A will implemented search can replace "Go to..."
-  - Search button should replace details button
-    - Details should be moved to menu as "Properties"
 - Improve startup time.
 
 License
