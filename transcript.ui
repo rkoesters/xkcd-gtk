@@ -11,6 +11,7 @@
 			<object class="GtkBox">
 				<property name="visible">True</property>
 				<property name="homogeneous">True</property>
+				<property name="border-width">0</property>
 				<child>
 					<object class="GtkScrolledWindow">
 						<property name="visible">True</property>
