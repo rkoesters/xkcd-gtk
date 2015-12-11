@@ -8,12 +8,15 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"runtime"
 	"time"
 )
 
 var number = flag.Int("n", 0, "Comic number.")
 
 func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
 	flag.Parse()
 	gtk.Init(nil)
 	gtk.WindowSetDefaultIconName("xkcd-gtk")
