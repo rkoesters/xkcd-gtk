@@ -130,6 +130,8 @@ func (v *Viewer) RandomComic() {
 	}
 }
 
+// ShowProperties shows a properties dialog containing all the
+// information on the current comic.
 func (v *Viewer) ShowProperties() {
 	builder, err := gtk.BuilderNew()
 	if err != nil {
