@@ -10,7 +10,7 @@ Todo
 
 - Add search.
   - Will probably use blevesearch
-- Improve startup time.
+- Improve SetComic so that the UI doesn't hang.
 
 License
 -------
