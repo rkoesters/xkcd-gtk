@@ -218,15 +218,24 @@ func (v *Viewer) ShowProperties() {
 
 // SetComic sets the current comic to the given comic.
 func (v *Viewer) SetComic(n int) error {
-	c, err := getComicInfo(n)
-	if err != nil {
-		return err
+	var c *xkcd.Comic
+	var err error
+	if n == 0 {
+		c, err = getNewestComicInfo()
+		if err != nil {
+			return err
+		}
+	} else {
+		c, err = getComicInfo(n)
+		if err != nil {
+			return err
+		}
 	}
 	v.comic = c
 
-	imgPath, err := getComicImage(n)
+	imgPath, err := getComicImage(v.comic.Num)
 	if err != nil {
-		log.Printf("error downloading comic: %v", n)
+		log.Printf("error downloading comic: %v", v.comic.Num)
 	}
 	v.hdr.SetSubtitle(fmt.Sprintf("#%v: %v", v.comic.Num, v.comic.Title))
 	v.img.SetFromFile(imgPath)

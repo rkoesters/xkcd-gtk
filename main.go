@@ -23,14 +23,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	if *number == 0 {
-		c, err := getNewestComicInfo()
-		if err != nil {
-			log.Fatal(err)
-		}
-		*number = c.Num
-	}
-
 	rand.Seed(time.Now().Unix())
 
 	viewer, err := New()
@@ -38,8 +30,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	viewer.SetComic(*number)
 	viewer.win.ShowAll()
+
+	go func() {
+		viewer.SetComic(*number)
+	}()
 
 	gtk.Main()
 }

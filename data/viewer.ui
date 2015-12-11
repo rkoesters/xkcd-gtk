@@ -111,6 +111,7 @@
         <child>
           <object class="GtkImage" id="comic-image">
             <property name="visible">True</property>
+	    <property name="icon-name">emblem-synchronizing-symbolic</property>
           </object>
         </child>
       </object>
