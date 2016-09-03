@@ -151,4 +151,14 @@
       </object>
     </child>
   </object>
+  <object class="GtkPopover" id="search-popover">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="margin">10</property>
+      </object>
+    </child>
+  </object>
 </interface>
