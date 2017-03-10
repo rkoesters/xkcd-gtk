@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
@@ -12,10 +11,10 @@ import (
 	"time"
 )
 
-// Viewer is a struct holding a gtk window for viewing XKCD comics.
-type Viewer struct {
+// Window is the main application window.
+type Window struct {
 	comic    *xkcd.Comic
-	win      *gtk.Window
+	win      *gtk.ApplicationWindow
 	hdr      *gtk.HeaderBar
 	previous *gtk.Button
 	next     *gtk.Button
@@ -23,108 +22,90 @@ type Viewer struct {
 }
 
 // New creates a new XKCD viewer window.
-func New() (*Viewer, error) {
-	v := new(Viewer)
+func NewWindow(app *Application) (*Window, error) {
+	var err error
 
-	// Builder the gtk interface using gtk.Builder.
-	builder, err := gtk.BuilderNew()
-	if err != nil {
-		return nil, err
-	}
-	data, err := Asset("data/viewer.ui")
-	if err != nil {
-		return nil, err
-	}
-	err = builder.AddFromString(string(data))
-	if err != nil {
-		return nil, err
-	}
+	w := new(Window)
 
-	// Connect the gtk signals to our functions.
-	builder.ConnectSignals(map[string]interface{}{
-		"PreviousComic":   v.PreviousComic,
-		"NextComic":       v.NextComic,
-		"RandomComic":     v.RandomComic,
-		"ShowProperties":  v.ShowProperties,
-		"showAboutDialog": showAboutDialog,
-	})
+	w.win, err = gtk.ApplicationWindowNew(app.GtkApp)
+	if err != nil {
+		return nil, err
+	}
+	w.win.SetDefaultSize(1000, 800)
 
-	// We want access to Window, HeaderBar, and Image in the future,
-	// so lets get access to them now.
-	var ok bool
-	obj, err := builder.GetObject("viewer-window")
+	// Create HeaderBar
+	w.hdr, err = gtk.HeaderBarNew()
 	if err != nil {
 		return nil, err
 	}
-	v.win, ok = obj.(*gtk.Window)
-	if !ok {
-		return nil, errors.New("error getting viewer-window")
-	}
-	obj, err = builder.GetObject("header")
+	w.hdr.SetTitle("XKCD Viewer")
+	w.hdr.SetShowCloseButton(true)
+
+	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
-	v.hdr, ok = obj.(*gtk.HeaderBar)
-	if !ok {
-		return nil, errors.New("error getting header")
-	}
-	obj, err = builder.GetObject("previous")
+	w.previous.Connect("clicked", w.PreviousComic)
+	w.hdr.PackStart(w.previous)
+
+	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
-	v.previous, ok = obj.(*gtk.Button)
-	if !ok {
-		return nil, errors.New("error getting previous")
-	}
-	obj, err = builder.GetObject("next")
+	w.next.Connect("clicked", w.NextComic)
+	w.hdr.PackStart(w.next)
+
+	randBtn, err := gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
-	v.next, ok = obj.(*gtk.Button)
-	if !ok {
-		return nil, errors.New("error getting next")
-	}
-	obj, err = builder.GetObject("comic-image")
+	randBtn.Connect("clicked", w.RandomComic)
+	w.hdr.PackStart(randBtn)
+
+	w.hdr.ShowAll()
+	w.win.SetTitlebar(w.hdr)
+
+	// Create main part of window.
+	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
-	}
-	v.img, ok = obj.(*gtk.Image)
-	if !ok {
-		return nil, errors.New("error getting comic-image")
 	}
 
-	// Closing the window should exit the program.
-	v.win.Connect("destroy", func() {
-		gtk.MainQuit()
-	})
+	w.img, err = gtk.ImageNewFromIconName("emblem-synchronizing-symbolic", gtk.ICON_SIZE_DIALOG)
+	if err != nil {
+		return nil, err
+	}
+	scwin.Add(w.img)
+	scwin.ShowAll()
+	w.win.Add(scwin)
 
-	return v, nil
+	return w, nil
 }
 
 // PreviousComic sets the current comic to the previous comic.
-func (v *Viewer) PreviousComic() {
-	err := v.SetComic(v.comic.Num - 1)
+func (w *Window) PreviousComic() {
+	err := w.SetComic(w.comic.Num - 1)
 	if err != nil {
 		log.Print(err)
 	}
 }
 
 // NextComic sets the current comic to the next comic.
-func (v *Viewer) NextComic() {
-	err := v.SetComic(v.comic.Num + 1)
+func (w *Window) NextComic() {
+	err := w.SetComic(w.comic.Num + 1)
 	if err != nil {
 		log.Print(err)
 	}
 }
 
 // RandomComic sets the current comic to a random comic.
-func (v *Viewer) RandomComic() {
+func (w *Window) RandomComic() {
 	c, err := getNewestComicInfo()
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	err = v.SetComic(rand.Intn(c.Num) + 1)
+	err = w.SetComic(rand.Intn(c.Num) + 1)
 	if err != nil {
 		log.Print(err)
 	}
@@ -132,7 +113,7 @@ func (v *Viewer) RandomComic() {
 
 // ShowProperties shows a properties dialog containing all the
 // information on the current comic.
-func (v *Viewer) ShowProperties() {
+func (v *Window) ShowProperties() {
 	builder, err := gtk.BuilderNew()
 	if err != nil {
 		log.Print(err)
@@ -219,7 +200,7 @@ func (v *Viewer) ShowProperties() {
 }
 
 // SetComic sets the current comic to the given comic.
-func (v *Viewer) SetComic(n int) error {
+func (w *Window) SetComic(n int) error {
 	var c *xkcd.Comic
 	var err error
 	if n == 0 {
@@ -233,21 +214,21 @@ func (v *Viewer) SetComic(n int) error {
 			return err
 		}
 	}
-	v.comic = c
+	w.comic = c
 
-	imgPath, err := getComicImage(v.comic.Num)
+	imgPath, err := getComicImage(w.comic.Num)
 	if err != nil {
-		log.Printf("error downloading comic: %v", v.comic.Num)
+		log.Printf("error downloading comic: %v", w.comic.Num)
 	}
-	v.hdr.SetSubtitle(fmt.Sprintf("#%v: %v", v.comic.Num, v.comic.Title))
-	v.img.SetFromFile(imgPath)
-	v.img.SetTooltipText(v.comic.Alt)
+	w.hdr.SetSubtitle(fmt.Sprintf("#%v: %v", w.comic.Num, w.comic.Title))
+	w.img.SetFromFile(imgPath)
+	w.img.SetTooltipText(w.comic.Alt)
 
 	// Enable/disable previous button.
-	if v.comic.Num > 1 {
-		v.previous.SetSensitive(true)
+	if w.comic.Num > 1 {
+		w.previous.SetSensitive(true)
 	} else {
-		v.previous.SetSensitive(false)
+		w.previous.SetSensitive(false)
 	}
 
 	// Enable/disable next button.
@@ -255,24 +236,13 @@ func (v *Viewer) SetComic(n int) error {
 	if err != nil {
 		return err
 	}
-	if v.comic.Num < newest.Num {
-		v.next.SetSensitive(true)
+	if w.comic.Num < newest.Num {
+		w.next.SetSensitive(true)
 	} else {
-		v.next.SetSensitive(false)
+		w.next.SetSensitive(false)
 	}
 
 	return nil
-}
-
-// formatDate takes a year, month, and date as strings and turns them
-// into a pretty date.
-func formatDate(year, month, day string) string {
-	date := strings.Join([]string{year, month, day}, "-")
-	t, err := time.Parse("2006-1-2", date)
-	if err != nil {
-		return ""
-	}
-	return t.Format("Jan _2, 2006")
 }
 
 func getLabel(b *gtk.Builder, id string) (*gtk.Label, error) {
@@ -285,4 +255,15 @@ func getLabel(b *gtk.Builder, id string) (*gtk.Label, error) {
 		return nil, fmt.Errorf("error getting label: %v", id)
 	}
 	return label, nil
+}
+
+// formatDate takes a year, month, and date as strings and turns them
+// into a pretty date.
+func formatDate(year, month, day string) string {
+	date := strings.Join([]string{year, month, day}, "-")
+	t, err := time.Parse("2006-1-2", date)
+	if err != nil {
+		return ""
+	}
+	return t.Format("Jan _2, 2006")
 }

@@ -27,14 +27,13 @@ func NewApplication() (*Application, error) {
 }
 
 func (a *Application) Activate() {
-	viewer, err := New()
+	window, err := NewWindow(a)
 	if err != nil {
 		log.Fatal(err)
 	}
-	a.GtkApp.AddWindow(viewer.win)
-	viewer.win.ShowAll()
+	window.win.Present()
 
 	go func() {
-		viewer.SetComic(*number)
+		window.SetComic(*number)
 	}()
 }
