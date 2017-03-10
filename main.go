@@ -22,8 +22,10 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Make sure our random number generator is seeded.
 	rand.Seed(time.Now().Unix())
 
+	// Create and run our application.
 	app, err := NewApplication()
 	if err != nil {
 		log.Fatal(err)
