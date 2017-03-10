@@ -4,7 +4,6 @@ package main
 
 import (
 	"flag"
-	"github.com/gotk3/gotk3/gtk"
 	"log"
 	"math/rand"
 	"os"
@@ -18,9 +17,6 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	flag.Parse()
-	gtk.Init(nil)
-	gtk.WindowSetDefaultIconName("xkcd-gtk")
-
 	if flag.NArg() != 0 {
 		flag.Usage()
 		os.Exit(1)
@@ -28,16 +24,12 @@ func main() {
 
 	rand.Seed(time.Now().Unix())
 
-	viewer, err := New()
+	app, err := NewApplication()
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	viewer.win.ShowAll()
-
-	go func() {
-		viewer.SetComic(*number)
-	}()
-
-	gtk.Main()
+	status := app.Run(os.Args)
+	if status != 0 {
+		log.Printf("exit status: %v", status)
+	}
 }
