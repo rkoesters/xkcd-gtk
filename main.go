@@ -41,22 +41,3 @@ func main() {
 
 	gtk.Main()
 }
-
-func showAboutDialog() {
-	abt, err := gtk.AboutDialogNew()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	abt.SetProgramName("XKCD Viewer")
-	abt.SetLogoIconName("xkcd-gtk")
-	abt.SetVersion("0.2")
-	abt.SetComments("A simple XKCD comic reader for GNOME")
-	abt.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
-	abt.SetAuthors([]string{"Ryan Koesters"})
-	abt.SetCopyright("Copyright © 2015-2017 Ryan Koesters")
-	abt.SetLicenseType(gtk.LICENSE_GPL_3_0)
-
-	abt.Show()
-}
