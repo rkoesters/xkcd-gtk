@@ -30,7 +30,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	status := app.Run(os.Args)
+	status := app.GtkApp.Run(os.Args)
 	if status != 0 {
 		log.Printf("exit status: %v", status)
 	}

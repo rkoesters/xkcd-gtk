@@ -26,10 +26,6 @@ func NewApplication() (*Application, error) {
 	return &app, nil
 }
 
-func (a *Application) Run(args []string) int {
-	return a.GtkApp.Run(args)
-}
-
 func (a *Application) Activate() {
 	viewer, err := New()
 	if err != nil {
