@@ -12,6 +12,7 @@ Todo
   - Will probably use blevesearch
 - Improve SetComic so that the UI doesn't hang.
 - Consider using gtk-dark-theme.
+- Implement more GtkApplication features.
 
 License
 -------
