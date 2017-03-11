@@ -62,6 +62,61 @@ func NewWindow(app *Application) (*Window, error) {
 	randBtn.Connect("clicked", w.RandomComic)
 	w.hdr.PackStart(randBtn)
 
+	menu, err := gtk.MenuButtonNew()
+	if err != nil {
+		return nil, err
+	}
+	cogImg, err := gtk.ImageNewFromIconName("open-menu-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	if err != nil {
+		return nil, err
+	}
+	menu.SetImage(cogImg)
+
+	// Create the cog menu.
+	popover, err := gtk.PopoverNew(menu)
+	if err != nil {
+		return nil, err
+	}
+	menu.SetPopover(popover)
+
+	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	if err != nil {
+		return nil, err
+	}
+	// TODO: this should be a GtkModelButton, but gotk3 doesn't support
+	// it yet.
+	menuProp, err := gtk.ButtonNewWithLabel("Properties")
+	if err != nil {
+		return nil, err
+	}
+	menuProp.SetRelief(gtk.RELIEF_NONE)
+	menuProp.Connect("clicked", w.ShowProperties)
+	box.Add(menuProp)
+	menuSep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	box.Add(menuSep)
+	// TODO: this should be a GtkModelButton, but gotk3 doesn't support
+	// it yet.
+	menuAbout, err := gtk.ButtonNewWithLabel("About")
+	if err != nil {
+		return nil, err
+	}
+	menuAbout.SetRelief(gtk.RELIEF_NONE)
+	menuAbout.Connect("clicked", showAboutDialog)
+	box.Add(menuAbout)
+	box.ShowAll()
+	popover.Add(box)
+
+	w.hdr.PackEnd(menu)
+
+	searchBtn, err := gtk.ButtonNewFromIconName("edit-find-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	if err != nil {
+		return nil, err
+	}
+	w.hdr.PackEnd(searchBtn)
+
 	w.hdr.ShowAll()
 	w.win.SetTitlebar(w.hdr)
 
