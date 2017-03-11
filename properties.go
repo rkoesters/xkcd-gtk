@@ -63,11 +63,13 @@ func addRowToGrid(grid *gtk.Grid, row int, key interface{}, val interface{}) err
 		return err
 	}
 	keyLabel.SetHAlign(gtk.ALIGN_END)
+	keyLabel.SetVAlign(gtk.ALIGN_START)
 	valLabel, err := gtk.LabelNew(fmt.Sprint(val))
 	if err != nil {
 		return err
 	}
 	valLabel.SetHAlign(gtk.ALIGN_START)
+	valLabel.SetVAlign(gtk.ALIGN_START)
 	valLabel.SetLineWrap(true)
 	valLabel.SetSelectable(true)
 
