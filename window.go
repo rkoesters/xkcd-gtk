@@ -38,19 +38,31 @@ func NewWindow(app *Application) (*Window, error) {
 	w.hdr.SetTitle("XKCD Viewer")
 	w.hdr.SetShowCloseButton(true)
 
+	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
+	if err != nil {
+		return nil, err
+	}
+	navBoxStyleContext, err := navBox.GetStyleContext()
+	if err != nil {
+		return nil, err
+	}
+	navBoxStyleContext.AddClass("linked")
+
 	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
 	w.previous.Connect("clicked", w.PreviousComic)
-	w.hdr.PackStart(w.previous)
+	navBox.Add(w.previous)
 
 	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
 	w.next.Connect("clicked", w.NextComic)
-	w.hdr.PackStart(w.next)
+	navBox.Add(w.next)
+
+	w.hdr.PackStart(navBox)
 
 	randBtn, err := gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
