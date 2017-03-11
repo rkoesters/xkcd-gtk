@@ -32,5 +32,5 @@ func showAboutDialog() {
 		log.Print(err)
 		return
 	}
-	abt.Show()
+	abt.Present()
 }

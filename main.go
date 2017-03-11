@@ -1,7 +1,5 @@
 package main
 
-//go:generate go-bindata -nomemcopy data/...
-
 import (
 	"flag"
 	"log"

@@ -6,9 +6,6 @@ import (
 	"github.com/rkoesters/xkcd"
 	"log"
 	"math/rand"
-	"strconv"
-	"strings"
-	"time"
 )
 
 // Window is the main application window.
@@ -166,94 +163,6 @@ func (w *Window) RandomComic() {
 	}
 }
 
-// ShowProperties shows a properties dialog containing all the
-// information on the current comic.
-func (v *Window) ShowProperties() {
-	builder, err := gtk.BuilderNew()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	data, err := Asset("data/properties.ui")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	err = builder.AddFromString(string(data))
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	obj, err := builder.GetObject("properties-dialog")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	dialog, ok := obj.(*gtk.Dialog)
-	if !ok {
-		log.Print("error getting properties-dialog")
-		return
-	}
-	dialog.SetTransientFor(v.win)
-	dialog.SetModal(true)
-
-	number, err := getLabel(builder, "properties-number")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	number.SetText(strconv.Itoa(v.comic.Num))
-	title, err := getLabel(builder, "properties-title")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	title.SetText(v.comic.Title)
-	image, err := getLabel(builder, "properties-image")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	fmtImage := fmt.Sprintf("<a href=\"%v\">%[1]v</a>", v.comic.Img)
-	image.SetMarkup(fmtImage)
-	alt, err := getLabel(builder, "properties-alt")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	alt.SetText(v.comic.Alt)
-	date, err := getLabel(builder, "properties-date")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	date.SetText(formatDate(v.comic.Year, v.comic.Month, v.comic.Day))
-	news, err := getLabel(builder, "properties-news")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	news.SetText(v.comic.News)
-	link, err := getLabel(builder, "properties-link")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	if v.comic.Link != "" {
-		fmtLink := fmt.Sprintf("<a href=\"%v\">%[1]v</a>", v.comic.Link)
-		link.SetMarkup(fmtLink)
-	}
-	transcript, err := getLabel(builder, "properties-transcript")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	transcript.SetText(strings.Replace(v.comic.Transcript, "\\n", "\n", -1))
-
-	dialog.Show()
-}
-
 // SetComic sets the current comic to the given comic.
 func (w *Window) SetComic(n int) error {
 	var c *xkcd.Comic
@@ -300,25 +209,11 @@ func (w *Window) SetComic(n int) error {
 	return nil
 }
 
-func getLabel(b *gtk.Builder, id string) (*gtk.Label, error) {
-	obj, err := b.GetObject(id)
+func (w *Window) ShowProperties() {
+	pd, err := NewPropertiesDialog(w.win, w.comic)
 	if err != nil {
-		return nil, err
+		log.Print(err)
+		return
 	}
-	label, ok := obj.(*gtk.Label)
-	if !ok {
-		return nil, fmt.Errorf("error getting label: %v", id)
-	}
-	return label, nil
-}
-
-// formatDate takes a year, month, and date as strings and turns them
-// into a pretty date.
-func formatDate(year, month, day string) string {
-	date := strings.Join([]string{year, month, day}, "-")
-	t, err := time.Parse("2006-1-2", date)
-	if err != nil {
-		return ""
-	}
-	return t.Format("Jan _2, 2006")
+	pd.Present()
 }
