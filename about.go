@@ -25,7 +25,7 @@ func NewAboutDialog() (*gtk.AboutDialog, error) {
 	return abt, nil
 }
 
-// TODO: temp function to support viewer.ui
+// TODO: this function should probably become a method of Application.
 func showAboutDialog() {
 	abt, err := NewAboutDialog()
 	if err != nil {
