@@ -11,7 +11,6 @@ Todo
 - Add search.
   - Will probably use blevesearch
 - Improve SetComic so that the UI doesn't hang.
-- Use GtkApplication (currently difficult with gotk3 bindings).
 - Consider using gtk-dark-theme.
 
 License
