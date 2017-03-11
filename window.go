@@ -75,7 +75,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	cogImg, err := gtk.ImageNewFromIconName("open-menu-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	cogImg, err := gtk.ImageNewFromIconName("open-menu", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackEnd(menu)
 
-	searchBtn, err := gtk.ButtonNewFromIconName("edit-find-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	searchBtn, err := gtk.ButtonNewFromIconName("edit-find", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
