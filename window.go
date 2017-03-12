@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
 	"log"
 	"math/rand"
+	"strconv"
 )
 
 // Window is the main application window.
@@ -196,7 +196,8 @@ func (w *Window) SetComic(n int) error {
 	if err != nil {
 		log.Printf("error downloading comic: %v", w.comic.Num)
 	}
-	w.hdr.SetSubtitle(fmt.Sprintf("#%v: %v", w.comic.Num, w.comic.Title))
+	w.hdr.SetTitle(w.comic.Title)
+	w.hdr.SetSubtitle(strconv.Itoa(w.comic.Num))
 	w.img.SetFromFile(imgPath)
 	w.img.SetTooltipText(w.comic.Alt)
 
