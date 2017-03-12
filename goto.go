@@ -20,7 +20,6 @@ func NewGoto(parent *Window) (*Goto, error) {
 		return nil, err
 	}
 	gt.dialog.SetTransientFor(parent.win)
-	gt.dialog.SetDefaultSize(500, 200)
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 12)
 	if err != nil {
@@ -30,6 +29,7 @@ func NewGoto(parent *Window) (*Goto, error) {
 	if err != nil {
 		return nil, err
 	}
+	gt.entry.SetActivatesDefault(true)
 	gt.entry.SetPlaceholderText("Comic #")
 	gt.entry.SetHExpand(true)
 	box.PackStart(gt.entry, true, false, 12)
@@ -37,10 +37,12 @@ func NewGoto(parent *Window) (*Goto, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, err = gt.dialog.AddButton("Go", 1)
+	submit, err := gt.dialog.AddButton("Go", 1)
 	if err != nil {
 		return nil, err
 	}
+	submit.SetCanDefault(true)
+	submit.GrabDefault()
 	box.ShowAll()
 
 	contentArea, err := gt.dialog.GetContentArea()
