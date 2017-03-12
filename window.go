@@ -134,6 +134,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	scwin.SetSizeRequest(400, 300)
 
 	w.img, err = gtk.ImageNewFromIconName("emblem-synchronizing-symbolic", gtk.ICON_SIZE_DIALOG)
 	if err != nil {
