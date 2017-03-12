@@ -255,5 +255,6 @@ func (w *Window) ShowAboutDialog() {
 		log.Print(err)
 		return
 	}
-	aboutDialog.Present()
+	aboutDialog.Run()
+	aboutDialog.Close()
 }
