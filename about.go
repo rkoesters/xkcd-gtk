@@ -14,7 +14,7 @@ func NewAboutDialog(parent *Window) (*gtk.AboutDialog, error) {
 
 	abt.SetLogoIconName("xkcd-gtk")
 	abt.SetProgramName("XKCD Viewer")
-	abt.SetVersion("0.3")
+	abt.SetVersion("0.3.1")
 	abt.SetComments("A simple XKCD comic reader for GNOME")
 	abt.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
 	abt.SetCopyright("Copyright © 2015-2017 Ryan Koesters")
