@@ -6,3 +6,8 @@ Comment=View XKCD comics
 TryExec=xkcd-gtk
 Exec=xkcd-gtk
 Icon=xkcd-gtk
+Actions=NewWindow;
+
+[Desktop Action NewWindow]
+Name=New Window
+Exec=xkcd-gtk
