@@ -2,15 +2,15 @@ package main
 
 import (
 	"github.com/gotk3/gotk3/gtk"
-	"log"
 )
 
 // NewAboutDialog creates a gtk.AboutDialog with our app's info.
-func NewAboutDialog() (*gtk.AboutDialog, error) {
+func NewAboutDialog(parent *Window) (*gtk.AboutDialog, error) {
 	abt, err := gtk.AboutDialogNew()
 	if err != nil {
 		return nil, err
 	}
+	abt.SetTransientFor(parent.win)
 
 	abt.SetLogoIconName("xkcd-gtk")
 	abt.SetProgramName("XKCD Viewer")
@@ -23,14 +23,4 @@ func NewAboutDialog() (*gtk.AboutDialog, error) {
 	abt.SetAuthors([]string{"Ryan Koesters"})
 
 	return abt, nil
-}
-
-// TODO: this function should probably become a method of Application.
-func showAboutDialog() {
-	abt, err := NewAboutDialog()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	abt.Present()
 }

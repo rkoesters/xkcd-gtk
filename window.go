@@ -86,6 +86,12 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
+	menuGoto, err := gtk.MenuItemNewWithLabel("Go to...")
+	if err != nil {
+		return nil, err
+	}
+	menuGoto.Connect("activate", w.ShowGoto)
+	menu.Add(menuGoto)
 	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
 	if err != nil {
 		return nil, err
@@ -101,7 +107,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	menuAbout.Connect("activate", showAboutDialog)
+	menuAbout.Connect("activate", w.ShowAboutDialog)
 	menu.Add(menuAbout)
 	menuBtn.SetPopup(menu)
 	menu.ShowAll()
@@ -218,4 +224,36 @@ func (w *Window) ShowProperties() {
 		return
 	}
 	pd.Present()
+}
+
+func (w *Window) ShowGoto() {
+	gt, err := NewGoto(w)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	defer gt.dialog.Close()
+	status := gt.dialog.Run()
+	if status == 1 {
+		input, err := gt.entry.GetText()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		number, err := strconv.Atoi(input)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		w.SetComic(number)
+	}
+}
+
+func (w *Window) ShowAboutDialog() {
+	aboutDialog, err := NewAboutDialog(w)
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	aboutDialog.Present()
 }
