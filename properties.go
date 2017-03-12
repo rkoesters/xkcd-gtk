@@ -14,7 +14,7 @@ func NewPropertiesDialog(parent *gtk.ApplicationWindow, comic *xkcd.Comic) (*gtk
 		return nil, err
 	}
 	d.SetTransientFor(parent)
-	d.SetDefaultSize(600, 600)
+	d.SetDefaultSize(600, 500)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
