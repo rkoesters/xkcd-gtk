@@ -71,7 +71,7 @@ func NewWindow(app *Application) (*Window, error) {
 	randBtn.Connect("clicked", w.RandomComic)
 	w.hdr.PackStart(randBtn)
 
-	menu, err := gtk.MenuButtonNew()
+	menuBtn, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
@@ -79,46 +79,38 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	menu.SetImage(cogImg)
+	menuBtn.SetImage(cogImg)
 
-	// Create the cog menu.
-	popover, err := gtk.PopoverNew(menu)
+	menu, err := gtk.MenuNew()
 	if err != nil {
 		return nil, err
 	}
-	menu.SetPopover(popover)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
-	if err != nil {
-		return nil, err
-	}
 	// TODO: this should be a GtkModelButton, but gotk3 doesn't support
 	// it yet.
-	menuProp, err := gtk.ButtonNewWithLabel("Properties")
+	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
 	if err != nil {
 		return nil, err
 	}
-	menuProp.SetRelief(gtk.RELIEF_NONE)
-	menuProp.Connect("clicked", w.ShowProperties)
-	box.Add(menuProp)
-	menuSep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	menuProp.Connect("activate", w.ShowProperties)
+	menu.Add(menuProp)
+	menuSep, err := gtk.SeparatorMenuItemNew()
 	if err != nil {
 		return nil, err
 	}
-	box.Add(menuSep)
+	menu.Add(menuSep)
 	// TODO: this should be a GtkModelButton, but gotk3 doesn't support
 	// it yet.
-	menuAbout, err := gtk.ButtonNewWithLabel("About")
+	menuAbout, err := gtk.MenuItemNewWithLabel("About")
 	if err != nil {
 		return nil, err
 	}
-	menuAbout.SetRelief(gtk.RELIEF_NONE)
-	menuAbout.Connect("clicked", showAboutDialog)
-	box.Add(menuAbout)
-	box.ShowAll()
-	popover.Add(box)
+	menuAbout.Connect("activate", showAboutDialog)
+	menu.Add(menuAbout)
+	menuBtn.SetPopup(menu)
+	menu.ShowAll()
 
-	w.hdr.PackEnd(menu)
+	w.hdr.PackEnd(menuBtn)
 
 	searchBtn, err := gtk.ButtonNewFromIconName("edit-find", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
