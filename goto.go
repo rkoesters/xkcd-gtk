@@ -20,19 +20,26 @@ func NewGoto(parent *Window) (*Goto, error) {
 		return nil, err
 	}
 	gt.dialog.SetTransientFor(parent.win)
+	gt.dialog.SetResizable(false)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 12)
+	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 12)
 	if err != nil {
 		return nil, err
 	}
+	box.SetMarginStart(6)
+	box.SetMarginEnd(6)
+	label, err := gtk.LabelNew("Go to comic number")
+	if err != nil {
+		return nil, err
+	}
+	box.Add(label)
 	gt.entry, err = gtk.EntryNew()
 	if err != nil {
 		return nil, err
 	}
 	gt.entry.SetActivatesDefault(true)
 	gt.entry.SetPlaceholderText("Comic #")
-	gt.entry.SetHExpand(true)
-	box.PackStart(gt.entry, true, false, 12)
+	box.Add(gt.entry)
 	_, err = gt.dialog.AddButton("Cancel", 0)
 	if err != nil {
 		return nil, err
