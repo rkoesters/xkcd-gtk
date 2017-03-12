@@ -22,13 +22,23 @@ func NewGoto(parent *Window) (*Goto, error) {
 	gt.dialog.SetTransientFor(parent.win)
 	gt.dialog.SetResizable(false)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 12)
+	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 12)
 	if err != nil {
 		return nil, err
 	}
-	box.SetMarginStart(6)
-	box.SetMarginEnd(6)
-	label, err := gtk.LabelNew("Go to comic number")
+	box.SetMarginStart(12)
+	box.SetMarginEnd(12)
+
+	icon, err := gtk.ImageNewFromIconName("dialog-question", gtk.ICON_SIZE_DIALOG)
+	if err != nil {
+		return nil, err
+	}
+	icon.SetMarginTop(12)
+	icon.SetMarginBottom(12)
+	icon.SetVAlign(gtk.ALIGN_CENTER)
+	box.Add(icon)
+
+	label, err := gtk.LabelNew("Go to")
 	if err != nil {
 		return nil, err
 	}
