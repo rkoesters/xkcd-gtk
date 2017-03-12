@@ -86,8 +86,6 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
-	// TODO: this should be a GtkModelButton, but gotk3 doesn't support
-	// it yet.
 	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
 	if err != nil {
 		return nil, err
@@ -99,8 +97,6 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	menu.Add(menuSep)
-	// TODO: this should be a GtkModelButton, but gotk3 doesn't support
-	// it yet.
 	menuAbout, err := gtk.MenuItemNewWithLabel("About")
 	if err != nil {
 		return nil, err
