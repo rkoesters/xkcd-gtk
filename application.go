@@ -34,6 +34,6 @@ func (a *Application) Activate() {
 	window.win.Present()
 
 	go func() {
-		window.SetComic(*number)
+		window.SetComic(0)
 	}()
 }
