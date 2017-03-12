@@ -21,6 +21,7 @@ func NewPropertiesDialog(parent *gtk.ApplicationWindow, comic *xkcd.Comic) (*gtk
 		return nil, err
 	}
 	scwin.SetPolicy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+	scwin.SetSizeRequest(400, 300)
 
 	grid, err := gtk.GridNew()
 	if err != nil {
