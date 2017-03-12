@@ -41,6 +41,11 @@ func NewGoto(parent *Window) (*Goto, error) {
 	if err != nil {
 		return nil, err
 	}
+	submitStyle, err := submit.GetStyleContext()
+	if err != nil {
+		return nil, err
+	}
+	submitStyle.AddClass("suggested-action")
 	submit.SetCanDefault(true)
 	submit.GrabDefault()
 	box.ShowAll()
