@@ -21,6 +21,7 @@ func NewAboutDialog() (*gtk.AboutDialog, error) {
 
 	abt.SetAuthors([]string{"Ryan Koesters"})
 
+	// Close the about dialog when it tries to return a response.
 	abt.Connect("response", abt.Close)
 
 	return abt, nil
