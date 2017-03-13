@@ -32,6 +32,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	w.win.SetDefaultSize(1000, 800)
+	w.win.Connect("destroy", w.Close)
 
 	// Create HeaderBar
 	w.hdr, err = gtk.HeaderBarNew()
@@ -266,5 +267,11 @@ func (w *Window) ShowGoto() {
 			return
 		}
 		w.SetComic(number)
+	}
+}
+
+func (w *Window) Close() {
+	if w.properties != nil {
+		w.properties.dialog.Close()
 	}
 }
