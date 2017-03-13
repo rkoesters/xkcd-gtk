@@ -75,6 +75,7 @@ func NewWindow(app *Application) (*Window, error) {
 	w.rand.Connect("clicked", w.RandomComic)
 	w.hdr.PackStart(w.rand)
 
+	// Create the menu
 	menuBtn, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
@@ -102,6 +103,12 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	menuProp.Connect("activate", w.ShowProperties)
 	menu.Add(menuProp)
+	menuNewWindow, err := gtk.MenuItemNewWithLabel("New Window")
+	if err != nil {
+		return nil, err
+	}
+	menuNewWindow.Connect("activate", app.Activate)
+	menu.Add(menuNewWindow)
 	menuSep, err := gtk.SeparatorMenuItemNew()
 	if err != nil {
 		return nil, err
