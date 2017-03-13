@@ -3,19 +3,31 @@ package main
 import (
 	"fmt"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd"
 	"strings"
 	"time"
 )
 
-func NewPropertiesDialog(parent *gtk.ApplicationWindow, comic *xkcd.Comic) (*gtk.Dialog, error) {
-	d, err := gtk.DialogNew()
+type PropertiesDialog struct {
+	parent *Window
+	dialog *gtk.Dialog
+	labels map[string]*gtk.Label
+}
+
+func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
+	var err error
+
+	pd := new(PropertiesDialog)
+	pd.labels = make(map[string]*gtk.Label)
+	pd.parent = parent
+
+	pd.dialog, err = gtk.DialogNew()
 	if err != nil {
 		return nil, err
 	}
-	d.SetTransientFor(parent)
-	d.SetTitle("Properties")
-	d.SetDefaultSize(600, 500)
+	pd.dialog.SetTransientFor(parent.win)
+	pd.dialog.SetTitle("Properties")
+	pd.dialog.SetDefaultSize(600, 500)
+	pd.dialog.Connect("delete-event", pd.Destroy)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
@@ -35,18 +47,19 @@ func NewPropertiesDialog(parent *gtk.ApplicationWindow, comic *xkcd.Comic) (*gtk
 	grid.SetMarginStart(24)
 	grid.SetMarginTop(24)
 
-	addRowToGrid(grid, 0, "Number", comic.Num)
-	addRowToGrid(grid, 1, "Title", comic.Title)
-	addRowToGrid(grid, 2, "Image", comic.Img)
-	addRowToGrid(grid, 3, "Alt Text", comic.Alt)
-	addRowToGrid(grid, 4, "Date", formatDate(comic.Year, comic.Month, comic.Day))
-	addRowToGrid(grid, 5, "News", comic.News)
-	addRowToGrid(grid, 6, "Link", comic.Link)
-	addRowToGrid(grid, 7, "Transcript", comic.Transcript)
+	pd.addRowToGrid(grid, 0, "Number")
+	pd.addRowToGrid(grid, 1, "Title")
+	pd.addRowToGrid(grid, 2, "Image")
+	pd.addRowToGrid(grid, 3, "Alt Text")
+	pd.addRowToGrid(grid, 4, "Date")
+	pd.addRowToGrid(grid, 5, "News")
+	pd.addRowToGrid(grid, 6, "Link")
+	pd.addRowToGrid(grid, 7, "Transcript")
+	pd.Update()
 
 	scwin.Add(grid)
 
-	box, err := d.GetContentArea()
+	box, err := pd.dialog.GetContentArea()
 	if err != nil {
 		return nil, err
 	}
@@ -56,17 +69,17 @@ func NewPropertiesDialog(parent *gtk.ApplicationWindow, comic *xkcd.Comic) (*gtk
 	box.SetProperty("orientation", gtk.ORIENTATION_HORIZONTAL)
 	box.ShowAll()
 
-	return d, nil
+	return pd, nil
 }
 
-func addRowToGrid(grid *gtk.Grid, row int, key interface{}, val interface{}) error {
-	keyLabel, err := gtk.LabelNew(fmt.Sprint(key))
+func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) error {
+	keyLabel, err := gtk.LabelNew(key)
 	if err != nil {
 		return err
 	}
 	keyLabel.SetHAlign(gtk.ALIGN_END)
 	keyLabel.SetVAlign(gtk.ALIGN_START)
-	valLabel, err := gtk.LabelNew(fmt.Sprint(val))
+	valLabel, err := gtk.LabelNew("")
 	if err != nil {
 		return err
 	}
@@ -78,7 +91,31 @@ func addRowToGrid(grid *gtk.Grid, row int, key interface{}, val interface{}) err
 	grid.Attach(keyLabel, 0, row, 1, 1)
 	grid.Attach(valLabel, 1, row, 1, 1)
 
+	pd.labels[key] = valLabel
+
 	return nil
+}
+
+func (pd *PropertiesDialog) Present() {
+	pd.dialog.Present()
+}
+
+func (pd *PropertiesDialog) Update() {
+	pd.labels["Number"].SetText(fmt.Sprint(pd.parent.comic.Num))
+	pd.labels["Title"].SetText(pd.parent.comic.Title)
+	pd.labels["Image"].SetText(pd.parent.comic.Img)
+	pd.labels["Alt Text"].SetText(pd.parent.comic.Alt)
+	pd.labels["Date"].SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
+	pd.labels["News"].SetText(pd.parent.comic.News)
+	pd.labels["Link"].SetText(pd.parent.comic.Link)
+	pd.labels["Transcript"].SetText(pd.parent.comic.Transcript)
+}
+
+func (pd *PropertiesDialog) Destroy() {
+	pd.labels = nil
+	pd.dialog = nil
+	pd.parent.properties = nil
+	pd.parent = nil
 }
 
 // formatDate takes a year, month, and date as strings and turns them

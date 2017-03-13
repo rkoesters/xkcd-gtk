@@ -11,13 +11,14 @@ import (
 
 // Window is the main application window.
 type Window struct {
-	comic    *xkcd.Comic
-	win      *gtk.ApplicationWindow
-	hdr      *gtk.HeaderBar
-	previous *gtk.Button
-	next     *gtk.Button
-	rand     *gtk.Button
-	img      *gtk.Image
+	comic      *xkcd.Comic
+	win        *gtk.ApplicationWindow
+	hdr        *gtk.HeaderBar
+	previous   *gtk.Button
+	next       *gtk.Button
+	rand       *gtk.Button
+	img        *gtk.Image
+	properties *PropertiesDialog
 }
 
 // New creates a new XKCD viewer window.
@@ -227,15 +228,22 @@ func (w *Window) DisplayComic() {
 
 	// Enable random button.
 	w.rand.SetSensitive(true)
+
+	if w.properties != nil {
+		w.properties.Update()
+	}
 }
 
 func (w *Window) ShowProperties() {
-	pd, err := NewPropertiesDialog(w.win, w.comic)
-	if err != nil {
-		log.Print(err)
-		return
+	var err error
+	if w.properties == nil {
+		w.properties, err = NewPropertiesDialog(w)
+		if err != nil {
+			log.Print(err)
+			return
+		}
 	}
-	pd.Present()
+	w.properties.Present()
 }
 
 func (w *Window) ShowGoto() {
