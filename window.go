@@ -166,6 +166,8 @@ func (w *Window) RandomComic() {
 // SetComic sets the current comic to the given comic.
 func (w *Window) SetComic(n int) {
 	// Make it clear that we are loading a comic.
+	w.hdr.SetTitle("Loading comic...")
+	w.hdr.SetSubtitle(strconv.Itoa(n))
 	w.previous.SetSensitive(false)
 	w.next.SetSensitive(false)
 	w.rand.SetSensitive(false)
