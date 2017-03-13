@@ -27,7 +27,9 @@ func ShowAboutDialog() {
 
 		aboutDialog.SetAuthors([]string{"Ryan Koesters"})
 
-		// Close the about dialog when it tries to return a response
+		// We want to keep the about dialog around in case we want to
+		// show it again.
+		aboutDialog.HideOnDelete()
 		aboutDialog.Connect("response", aboutDialog.Hide)
 	}
 	aboutDialog.Present()
