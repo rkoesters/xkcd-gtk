@@ -26,7 +26,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	}
 	pd.dialog.SetTransientFor(parent.win)
 	pd.dialog.SetTitle("Properties")
-	pd.dialog.SetDefaultSize(600, 500)
+	pd.dialog.SetDefaultSize(500, 400)
 	pd.dialog.Connect("delete-event", pd.Destroy)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
@@ -34,13 +34,13 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	scwin.SetPolicy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-	scwin.SetSizeRequest(400, 300)
+	scwin.SetSizeRequest(150, 50)
 
 	grid, err := gtk.GridNew()
 	if err != nil {
 		return nil, err
 	}
-	grid.SetColumnSpacing(24)
+	grid.SetColumnSpacing(12)
 	grid.SetRowSpacing(12)
 	grid.SetMarginStart(24)
 	grid.SetMarginEnd(24)
