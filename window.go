@@ -107,7 +107,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	menuAbout.Connect("activate", app.ShowAboutDialog)
+	menuAbout.Connect("activate", ShowAboutDialog)
 	menu.Add(menuAbout)
 	menuBtn.SetPopup(menu)
 	menu.ShowAll()
