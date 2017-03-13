@@ -42,10 +42,10 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	}
 	grid.SetColumnSpacing(24)
 	grid.SetRowSpacing(12)
-	grid.SetMarginBottom(24)
-	grid.SetMarginEnd(24)
 	grid.SetMarginStart(24)
-	grid.SetMarginTop(24)
+	grid.SetMarginEnd(24)
+	grid.SetMarginTop(12)
+	grid.SetMarginBottom(12)
 
 	pd.addRowToGrid(grid, 0, "Number")
 	pd.addRowToGrid(grid, 1, "Title")
