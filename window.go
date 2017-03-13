@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
 	"log"
@@ -15,6 +16,7 @@ type Window struct {
 	hdr      *gtk.HeaderBar
 	previous *gtk.Button
 	next     *gtk.Button
+	rand     *gtk.Button
 	img      *gtk.Image
 }
 
@@ -64,12 +66,12 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackStart(navBox)
 
-	randBtn, err := gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	w.rand, err = gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
-	randBtn.Connect("clicked", w.RandomComic)
-	w.hdr.PackStart(randBtn)
+	w.rand.Connect("clicked", w.RandomComic)
+	w.hdr.PackStart(w.rand)
 
 	menuBtn, err := gtk.MenuButtonNew()
 	if err != nil {
@@ -130,7 +132,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	scwin.SetSizeRequest(400, 300)
 
-	w.img, err = gtk.ImageNewFromIconName("emblem-synchronizing-symbolic", gtk.ICON_SIZE_DIALOG)
+	w.img, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
 	}
@@ -143,18 +145,12 @@ func NewWindow(app *Application) (*Window, error) {
 
 // PreviousComic sets the current comic to the previous comic.
 func (w *Window) PreviousComic() {
-	err := w.SetComic(w.comic.Num - 1)
-	if err != nil {
-		log.Print(err)
-	}
+	w.SetComic(w.comic.Num - 1)
 }
 
 // NextComic sets the current comic to the next comic.
 func (w *Window) NextComic() {
-	err := w.SetComic(w.comic.Num + 1)
-	if err != nil {
-		log.Print(err)
-	}
+	w.SetComic(w.comic.Num + 1)
 }
 
 // RandomComic sets the current comic to a random comic.
@@ -164,36 +160,48 @@ func (w *Window) RandomComic() {
 		log.Print(err)
 		return
 	}
-	err = w.SetComic(rand.Intn(c.Num) + 1)
-	if err != nil {
-		log.Print(err)
-	}
+	w.SetComic(rand.Intn(c.Num) + 1)
 }
 
 // SetComic sets the current comic to the given comic.
-func (w *Window) SetComic(n int) error {
-	var c *xkcd.Comic
-	var err error
-	if n == 0 {
-		c, err = getNewestComicInfo()
-		if err != nil {
-			return err
-		}
-	} else {
-		c, err = getComicInfo(n)
-		if err != nil {
-			return err
-		}
-	}
-	w.comic = c
+func (w *Window) SetComic(n int) {
+	// Make it clear that we are loading a comic.
+	w.previous.SetSensitive(false)
+	w.next.SetSensitive(false)
+	w.rand.SetSensitive(false)
 
-	imgPath, err := getComicImage(w.comic.Num)
-	if err != nil {
-		log.Printf("error downloading comic: %v", w.comic.Num)
-	}
+	go func() {
+		var c *xkcd.Comic
+		var err error
+		if n == 0 {
+			c, err = getNewestComicInfo()
+			if err != nil {
+				log.Printf("error finding latest comic")
+			}
+		} else {
+			c, err = getComicInfo(n)
+			if err != nil {
+				log.Printf("error downloading comic info: %v", w.comic.Num)
+			}
+		}
+		w.comic = c
+
+		_, err = getComicImage(w.comic.Num)
+		if err != nil {
+			log.Printf("error downloading comic image: %v", w.comic.Num)
+		}
+
+		// Add the DisplayComic function to the event loop so our UI
+		// gets updated with the new comic.
+		glib.IdleAdd(w.DisplayComic)
+	}()
+}
+
+// DisplayComic updates the UI to show the contents of w.comic
+func (w *Window) DisplayComic() {
 	w.hdr.SetTitle(w.comic.Title)
 	w.hdr.SetSubtitle(strconv.Itoa(w.comic.Num))
-	w.img.SetFromFile(imgPath)
+	w.img.SetFromFile(getComicImagePath(w.comic.Num))
 	w.img.SetTooltipText(w.comic.Alt)
 
 	// Enable/disable previous button.
@@ -206,7 +214,8 @@ func (w *Window) SetComic(n int) error {
 	// Enable/disable next button.
 	newest, err := getNewestComicInfo()
 	if err != nil {
-		return err
+		log.Print(err)
+		return
 	}
 	if w.comic.Num < newest.Num {
 		w.next.SetSensitive(true)
@@ -214,7 +223,8 @@ func (w *Window) SetComic(n int) error {
 		w.next.SetSensitive(false)
 	}
 
-	return nil
+	// Enable random button.
+	w.rand.SetSensitive(true)
 }
 
 func (w *Window) ShowProperties() {
