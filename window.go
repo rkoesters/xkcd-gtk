@@ -52,14 +52,14 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	navBoxStyleContext.AddClass("linked")
 
-	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
 	w.previous.Connect("clicked", w.PreviousComic)
 	navBox.Add(w.previous)
 
-	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackStart(navBox)
 
-	w.rand, err = gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	w.rand, err = gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	cogImg, err := gtk.ImageNewFromIconName("open-menu", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	cogImg, err := gtk.ImageNewFromIconName("open-menu", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackEnd(menuBtn)
 
-	searchBtn, err := gtk.ButtonNewFromIconName("edit-find", gtk.ICON_SIZE_SMALL_TOOLBAR)
+	searchBtn, err := gtk.ButtonNewFromIconName("edit-find", gtk.ICON_SIZE_LARGE_TOOLBAR)
 	if err != nil {
 		return nil, err
 	}
