@@ -21,11 +21,7 @@ func NewAboutDialog() (*gtk.AboutDialog, error) {
 
 	abt.SetAuthors([]string{"Ryan Koesters"})
 
-	abt.Connect("response", aboutDialogClose, abt)
+	abt.Connect("response", abt.Close)
 
 	return abt, nil
-}
-
-func aboutDialogClose(abt *gtk.AboutDialog) {
-	abt.Close()
 }
