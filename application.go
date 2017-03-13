@@ -33,7 +33,5 @@ func (a *Application) Activate() {
 	}
 	window.win.Present()
 
-	go func() {
-		window.SetComic(0)
-	}()
+	window.SetComic(0)
 }
