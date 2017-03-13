@@ -5,7 +5,6 @@ Todo
 
 - Add search.
   - Will probably use blevesearch
-- Improve SetComic so that the UI doesn't hang.
 - Implement more GtkApplication features.
 
 License
