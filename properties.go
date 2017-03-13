@@ -87,6 +87,7 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) er
 	valLabel.SetVAlign(gtk.ALIGN_START)
 	valLabel.SetLineWrap(true)
 	valLabel.SetSelectable(true)
+	valLabel.SetCanFocus(false)
 
 	grid.Attach(keyLabel, 0, row, 1, 1)
 	grid.Attach(valLabel, 1, row, 1, 1)
