@@ -34,7 +34,6 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	scwin.SetPolicy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-	scwin.SetSizeRequest(150, 50)
 
 	grid, err := gtk.GridNew()
 	if err != nil {
