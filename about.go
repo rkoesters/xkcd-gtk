@@ -5,12 +5,11 @@ import (
 )
 
 // NewAboutDialog creates a gtk.AboutDialog with our app's info.
-func NewAboutDialog(parent *Window) (*gtk.AboutDialog, error) {
+func NewAboutDialog() (*gtk.AboutDialog, error) {
 	abt, err := gtk.AboutDialogNew()
 	if err != nil {
 		return nil, err
 	}
-	abt.SetTransientFor(parent.win)
 
 	abt.SetLogoIconName("xkcd-gtk")
 	abt.SetProgramName("XKCD Viewer")
@@ -22,5 +21,11 @@ func NewAboutDialog(parent *Window) (*gtk.AboutDialog, error) {
 
 	abt.SetAuthors([]string{"Ryan Koesters"})
 
+	abt.Connect("response", aboutDialogClose, abt)
+
 	return abt, nil
+}
+
+func aboutDialogClose(abt *gtk.AboutDialog) {
+	abt.Close()
 }

@@ -37,3 +37,12 @@ func (a *Application) Activate() {
 		window.SetComic(0)
 	}()
 }
+
+func (a *Application) ShowAboutDialog() {
+	abt, err := NewAboutDialog()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	abt.Present()
+}

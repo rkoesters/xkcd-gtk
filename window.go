@@ -107,7 +107,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	menuAbout.Connect("activate", w.ShowAboutDialog)
+	menuAbout.Connect("activate", app.ShowAboutDialog)
 	menu.Add(menuAbout)
 	menuBtn.SetPopup(menu)
 	menu.ShowAll()
@@ -247,14 +247,4 @@ func (w *Window) ShowGoto() {
 		}
 		w.SetComic(number)
 	}
-}
-
-func (w *Window) ShowAboutDialog() {
-	aboutDialog, err := NewAboutDialog(w)
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	aboutDialog.Run()
-	aboutDialog.Close()
 }
