@@ -20,6 +20,7 @@ func NewGoto(parent *Window) (*Goto, error) {
 		return nil, err
 	}
 	gt.dialog.SetTransientFor(parent.win)
+	gt.dialog.SetTitle("Go to comic number...")
 	gt.dialog.SetResizable(false)
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 12)
