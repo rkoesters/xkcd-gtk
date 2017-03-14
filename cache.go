@@ -59,46 +59,42 @@ func getNewestComicInfo() *xkcd.Comic {
 		newestComic, err = xkcd.GetCurrent()
 		if err != nil {
 			log.Print("offline, lets get newest avaliable")
-			return getNewestAvaliableComicInfo()
+			newestAvaliable := &xkcd.Comic{
+				Num:   0,
+				Title: "Comic Not Found",
+			}
+
+			d, err := os.Open(cacheDir())
+			if err != nil {
+				log.Print("couldn't open cache dir")
+				return newestAvaliable
+			}
+			defer d.Close()
+
+			cachedirs, err := d.Readdirnames(0)
+			if err != nil {
+				log.Print("couldn't read from cache dir")
+				return newestAvaliable
+			}
+			log.Printf("found dirs: %v", cachedirs)
+
+			for _, f := range cachedirs {
+				comicId, err := strconv.Atoi(f)
+				if err != nil {
+					continue
+				}
+				comic, err := getComicInfo(comicId)
+				if err != nil {
+					continue
+				}
+				if comicId > newestAvaliable.Num {
+					newestAvaliable = comic
+				}
+			}
+			return newestAvaliable
 		}
 	}
 	return newestComic
-}
-
-func getNewestAvaliableComicInfo() (newest *xkcd.Comic) {
-	newest = &xkcd.Comic{
-		Num:   0,
-		Title: "Comic Not Found",
-	}
-
-	d, err := os.Open(cacheDir())
-	if err != nil {
-		log.Print("couldn't open cache dir")
-		return
-	}
-	defer d.Close()
-
-	cachedirs, err := d.Readdirnames(0)
-	if err != nil {
-		log.Print("couldn't read from cache dir")
-		return
-	}
-	log.Printf("found dirs: %v", cachedirs)
-
-	for _, f := range cachedirs {
-		comicId, err := strconv.Atoi(f)
-		if err != nil {
-			continue
-		}
-		comic, err := getComicInfo(comicId)
-		if err != nil {
-			continue
-		}
-		if comicId > newest.Num {
-			newest = comic
-		}
-	}
-	return
 }
 
 func downloadComicInfo(n int) error {
