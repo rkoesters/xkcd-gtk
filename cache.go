@@ -103,13 +103,7 @@ func getNewestAvaliableComicInfo() (newest *xkcd.Comic) {
 
 func downloadComicInfo(n int) error {
 	comic, err := xkcd.Get(n)
-	if err == xkcd.ErrNotFound {
-		comic = &xkcd.Comic{
-			Num:   n,
-			Title: "Comic Not Found",
-		}
-		return err
-	} else if err != nil {
+	if err != nil {
 		return err
 	}
 
