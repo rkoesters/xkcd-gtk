@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/rkoesters/xdg/basedir"
 	"github.com/rkoesters/xkcd"
 	"io"
@@ -29,7 +30,7 @@ func getComicImagePath(n int) string {
 }
 
 // GetComicInfo always returns a valid *xkcd.Comic that can be used, and
-// err will be set if any errors where encountered, however these errors
+// err will be set if any errors were encountered, however these errors
 // can be ignored safely.
 func GetComicInfo(n int) (*xkcd.Comic, error) {
 	infoPath := getComicInfoPath(n)
@@ -71,7 +72,15 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 
 var newestComic *xkcd.Comic
 
-func getNewestComicInfo() *xkcd.Comic {
+var (
+	ErrCache   = errors.New("error accessing local xkcd cache")
+	ErrOffline = errors.New("error accessing xkcd server")
+)
+
+// GetNewestComicInfo always returns a valid *xkcd.Comic that appears to
+// be newest, and err will be set if any errors were encountered,
+// however these errors can be ignored safely.
+func GetNewestComicInfo() (*xkcd.Comic, error) {
 	var err error
 	if newestComic == nil {
 		newestComic, err = xkcd.GetCurrent()
@@ -85,14 +94,14 @@ func getNewestComicInfo() *xkcd.Comic {
 			d, err := os.Open(cacheDir())
 			if err != nil {
 				log.Print("couldn't open cache dir")
-				return newestAvaliable
+				return newestAvaliable, ErrCache
 			}
 			defer d.Close()
 
 			cachedirs, err := d.Readdirnames(0)
 			if err != nil {
 				log.Print("couldn't read from cache dir")
-				return newestAvaliable
+				return newestAvaliable, ErrCache
 			}
 			log.Printf("found dirs: %v", cachedirs)
 
@@ -109,10 +118,10 @@ func getNewestComicInfo() *xkcd.Comic {
 					newestAvaliable = comic
 				}
 			}
-			return newestAvaliable
+			return newestAvaliable, ErrOffline
 		}
 	}
-	return newestComic
+	return newestComic, nil
 }
 
 func downloadComicInfo(n int) error {
