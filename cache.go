@@ -5,14 +5,19 @@ import (
 	"github.com/rkoesters/xdg/basedir"
 	"github.com/rkoesters/xkcd"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
 )
 
+func cacheDir() string {
+	return filepath.Join(basedir.CacheHome, "xkcd-gtk")
+}
+
 func getComicPath(n int) string {
-	return filepath.Join(basedir.CacheHome, "xkcd-gtk", strconv.Itoa(n))
+	return filepath.Join(cacheDir(), strconv.Itoa(n))
 }
 
 func getComicInfoPath(n int) string {
@@ -29,10 +34,7 @@ func getComicInfo(n int) (*xkcd.Comic, error) {
 	// First, check if we have the file.
 	_, err := os.Stat(infoPath)
 	if os.IsNotExist(err) {
-		err = downloadComicInfo(n)
-		if err != nil {
-			return nil, err
-		}
+		downloadComicInfo(n)
 	} else if err != nil {
 		return nil, err
 	}
@@ -51,15 +53,52 @@ func getComicInfo(n int) (*xkcd.Comic, error) {
 
 var newestComic *xkcd.Comic
 
-func getNewestComicInfo() (*xkcd.Comic, error) {
+func getNewestComicInfo() *xkcd.Comic {
 	var err error
 	if newestComic == nil {
 		newestComic, err = xkcd.GetCurrent()
 		if err != nil {
-			return nil, err
+			log.Print("offline, lets get newest avaliable")
+			return getNewestAvaliableComicInfo()
 		}
 	}
-	return newestComic, nil
+	return newestComic
+}
+
+func getNewestAvaliableComicInfo() (newest *xkcd.Comic) {
+	newest = &xkcd.Comic{
+		Num:   0,
+		Title: "Comic Not Found",
+	}
+
+	d, err := os.Open(cacheDir())
+	if err != nil {
+		log.Print("couldn't open cache dir")
+		return
+	}
+	defer d.Close()
+
+	cachedirs, err := d.Readdirnames(0)
+	if err != nil {
+		log.Print("couldn't read from cache dir")
+		return
+	}
+	log.Printf("found dirs: %v", cachedirs)
+
+	for _, f := range cachedirs {
+		comicId, err := strconv.Atoi(f)
+		if err != nil {
+			continue
+		}
+		comic, err := getComicInfo(comicId)
+		if err != nil {
+			continue
+		}
+		if comicId > newest.Num {
+			newest = comic
+		}
+	}
+	return
 }
 
 func downloadComicInfo(n int) error {
@@ -69,6 +108,7 @@ func downloadComicInfo(n int) error {
 			Num:   n,
 			Title: "Comic Not Found",
 		}
+		return err
 	} else if err != nil {
 		return err
 	}

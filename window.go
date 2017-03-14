@@ -4,8 +4,10 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
+	"io/ioutil"
 	"log"
 	"math/rand"
+	"path/filepath"
 	"strconv"
 )
 
@@ -170,12 +172,7 @@ func (w *Window) NextComic() {
 
 // RandomComic sets the current comic to a random comic.
 func (w *Window) RandomComic() {
-	c, err := getNewestComicInfo()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	w.SetComic(rand.Intn(c.Num) + 1)
+	w.SetComic(rand.Intn(getNewestComicInfo().Num) + 1)
 }
 
 // SetComic sets the current comic to the given comic.
@@ -192,13 +189,17 @@ func (w *Window) SetComic(n int) {
 		var err error
 		c, err = getComicInfo(n)
 		if err != nil {
-			log.Printf("error downloading comic info: %v", w.comic.Num)
+			log.Printf("error downloading comic info: %v", n)
+			c = &xkcd.Comic{
+				Num:   n,
+				Title: "Comic Download Error",
+			}
 		}
 		w.comic = c
 
-		_, err = getComicImage(w.comic.Num)
+		_, err = getComicImage(n)
 		if err != nil {
-			log.Printf("error downloading comic image: %v", w.comic.Num)
+			log.Printf("error downloading comic image: %v", n)
 		}
 
 		// Add the DisplayComic function to the event loop so our UI
@@ -222,11 +223,7 @@ func (w *Window) DisplayComic() {
 	}
 
 	// Enable/disable next button.
-	newest, err := getNewestComicInfo()
-	if err != nil {
-		log.Print(err)
-		return
-	}
+	newest := getNewestComicInfo()
 	if w.comic.Num < newest.Num {
 		w.next.SetSensitive(true)
 	} else {
@@ -283,15 +280,17 @@ func (w *Window) GotoNewest() {
 	w.next.SetSensitive(false)
 	w.rand.SetSensitive(false)
 
-	newest, err := getNewestComicInfo()
-	if err != nil {
-		log.Print(err)
-	}
-	w.SetComic(newest.Num)
+	w.SetComic(getNewestComicInfo().Num)
 }
 
 func (w *Window) Close() {
 	if w.properties != nil {
 		w.properties.dialog.Close()
+	}
+
+	// Remember what comic we were viewing.
+	err := ioutil.WriteFile(filepath.Join(cacheDir(), "latest"), []byte(strconv.Itoa(w.comic.Num)), 0666)
+	if err != nil {
+		log.Print("error writing latest comic file")
 	}
 }
