@@ -36,6 +36,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	w.win.SetDefaultSize(1000, 800)
 	w.win.Connect("destroy", w.Close)
+	w.comic = &xkcd.Comic{Title: "XKCD Viewer"}
 
 	// Create HeaderBar
 	w.hdr, err = gtk.HeaderBarNew()
@@ -186,8 +187,7 @@ func (w *Window) SetComic(n int) {
 	// Make it clear that we are loading a comic.
 	w.hdr.SetTitle("Loading comic...")
 	w.hdr.SetSubtitle(strconv.Itoa(n))
-	w.previous.SetSensitive(false)
-	w.next.SetSensitive(false)
+	w.updateNextPreviousButtonStatus()
 	w.rand.SetSensitive(false)
 
 	go func() {
@@ -219,7 +219,15 @@ func (w *Window) DisplayComic() {
 	w.hdr.SetSubtitle(strconv.Itoa(w.comic.Num))
 	w.img.SetFromFile(getComicImagePath(w.comic.Num))
 	w.img.SetTooltipText(w.comic.Alt)
+	w.updateNextPreviousButtonStatus()
+	w.rand.SetSensitive(true)
 
+	if w.properties != nil {
+		w.properties.Update()
+	}
+}
+
+func (w *Window) updateNextPreviousButtonStatus() {
 	// Enable/disable previous button.
 	if w.comic.Num > 1 {
 		w.previous.SetSensitive(true)
@@ -233,13 +241,6 @@ func (w *Window) DisplayComic() {
 		w.next.SetSensitive(true)
 	} else {
 		w.next.SetSensitive(false)
-	}
-
-	// Enable random button.
-	w.rand.SetSensitive(true)
-
-	if w.properties != nil {
-		w.properties.Update()
 	}
 }
 
