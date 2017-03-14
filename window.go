@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
+	"os"
 	"path/filepath"
 	"strconv"
 )
@@ -199,9 +200,14 @@ func (w *Window) SetComic(n int) {
 			log.Printf("error downloading comic info: %v", n)
 		}
 
-		err = DownloadComicImage(n)
-		if err != nil {
-			log.Printf("error downloading comic image: %v", n)
+		_, err = os.Stat(getComicImagePath(n))
+		if os.IsNotExist(err) {
+			err = DownloadComicImage(n)
+			if err != nil {
+				log.Printf("error downloading comic image: %v", n)
+			}
+		} else if err != nil {
+			log.Print(err)
 		}
 
 		// Add the DisplayComic function to the event loop so our UI
