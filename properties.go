@@ -48,9 +48,9 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 
 	pd.addRowToGrid(grid, 0, "Number")
 	pd.addRowToGrid(grid, 1, "Title")
-	pd.addRowToGrid(grid, 2, "Image")
-	pd.addRowToGrid(grid, 3, "Alt Text")
-	pd.addRowToGrid(grid, 4, "Date")
+	pd.addRowToGrid(grid, 2, "Date")
+	pd.addRowToGrid(grid, 3, "Image")
+	pd.addRowToGrid(grid, 4, "Alt Text")
 	pd.addRowToGrid(grid, 5, "News")
 	pd.addRowToGrid(grid, 6, "Link")
 	pd.addRowToGrid(grid, 7, "Transcript")
