@@ -196,7 +196,7 @@ func (w *Window) SetComic(n int) {
 			log.Printf("error downloading comic info: %v", n)
 		}
 
-		_, err = getComicImage(n)
+		err = DownloadComicImage(n)
 		if err != nil {
 			log.Printf("error downloading comic image: %v", n)
 		}

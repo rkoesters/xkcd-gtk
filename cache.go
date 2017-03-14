@@ -140,22 +140,9 @@ func downloadComicInfo(n int) error {
 	return nil
 }
 
-func getComicImage(n int) (string, error) {
-	imagePath := getComicImagePath(n)
-
-	_, err := os.Stat(imagePath)
-	if os.IsNotExist(err) {
-		err = downloadComicImage(n)
-		if err != nil {
-			return "", err
-		}
-	} else if err != nil {
-		return "", err
-	}
-	return imagePath, nil
-}
-
-func downloadComicImage(n int) error {
+// DownloadComicImage tries to add a comic image to our local cache. Any
+// errors are indicated by err.
+func DownloadComicImage(n int) error {
 	c, err := GetComicInfo(n)
 	if err != nil {
 		return err
