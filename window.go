@@ -91,6 +91,12 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
+	menuGotoNewest, err := gtk.MenuItemNewWithLabel("Go to Newest Comic")
+	if err != nil {
+		return nil, err
+	}
+	menuGotoNewest.Connect("activate", w.GotoNewest)
+	menu.Add(menuGotoNewest)
 	menuGoto, err := gtk.MenuItemNewWithLabel("Go to...")
 	if err != nil {
 		return nil, err
@@ -184,16 +190,9 @@ func (w *Window) SetComic(n int) {
 	go func() {
 		var c *xkcd.Comic
 		var err error
-		if n == 0 {
-			c, err = getNewestComicInfo()
-			if err != nil {
-				log.Printf("error finding latest comic")
-			}
-		} else {
-			c, err = getComicInfo(n)
-			if err != nil {
-				log.Printf("error downloading comic info: %v", w.comic.Num)
-			}
+		c, err = getComicInfo(n)
+		if err != nil {
+			log.Printf("error downloading comic info: %v", w.comic.Num)
 		}
 		w.comic = c
 
@@ -275,6 +274,20 @@ func (w *Window) ShowGoto() {
 		}
 		w.SetComic(number)
 	}
+}
+
+func (w *Window) GotoNewest() {
+	// Make it clear that we are checking for a new comic.
+	w.hdr.SetTitle("Checking for new comic...")
+	w.previous.SetSensitive(false)
+	w.next.SetSensitive(false)
+	w.rand.SetSensitive(false)
+
+	newest, err := getNewestComicInfo()
+	if err != nil {
+		log.Print(err)
+	}
+	w.SetComic(newest.Num)
 }
 
 func (w *Window) Close() {

@@ -33,5 +33,5 @@ func (a *Application) Activate() {
 	}
 	window.win.Present()
 
-	window.SetComic(0)
+	window.GotoNewest()
 }
