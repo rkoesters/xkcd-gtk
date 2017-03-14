@@ -28,25 +28,43 @@ func getComicImagePath(n int) string {
 	return filepath.Join(getComicPath(n), "image")
 }
 
-func getComicInfo(n int) (*xkcd.Comic, error) {
+// GetComicInfo always returns a valid *xkcd.Comic that can be used, and
+// err will be set if any errors where encountered, however these errors
+// can be ignored safely.
+func GetComicInfo(n int) (*xkcd.Comic, error) {
 	infoPath := getComicInfoPath(n)
 
 	// First, check if we have the file.
 	_, err := os.Stat(infoPath)
 	if os.IsNotExist(err) {
-		downloadComicInfo(n)
+		err = downloadComicInfo(n)
+		if err != nil {
+			return &xkcd.Comic{
+				Num:   n,
+				Title: "Comic Not Found",
+			}, err
+		}
 	} else if err != nil {
-		return nil, err
+		return &xkcd.Comic{
+			Num:   n,
+			Title: "I guess we can't access our cache",
+		}, err
 	}
 
 	f, err := os.Open(infoPath)
 	if err != nil {
-		return nil, err
+		return &xkcd.Comic{
+			Num:   n,
+			Title: "Error trying to read comic info from cache",
+		}, err
 	}
 	defer f.Close()
 	c, err := xkcd.New(f)
 	if err != nil {
-		return nil, err
+		return &xkcd.Comic{
+			Num:   n,
+			Title: "I guess the cached comic info is invalid",
+		}, err
 	}
 	return c, nil
 }
@@ -61,7 +79,7 @@ func getNewestComicInfo() *xkcd.Comic {
 			log.Print("offline, lets get newest avaliable")
 			newestAvaliable := &xkcd.Comic{
 				Num:   0,
-				Title: "Comic Not Found",
+				Title: "Connect to the internet to download some comics!",
 			}
 
 			d, err := os.Open(cacheDir())
@@ -83,7 +101,7 @@ func getNewestComicInfo() *xkcd.Comic {
 				if err != nil {
 					continue
 				}
-				comic, err := getComicInfo(comicId)
+				comic, err := GetComicInfo(comicId)
 				if err != nil {
 					continue
 				}
@@ -138,7 +156,7 @@ func getComicImage(n int) (string, error) {
 }
 
 func downloadComicImage(n int) error {
-	c, err := getComicInfo(n)
+	c, err := GetComicInfo(n)
 	if err != nil {
 		return err
 	}

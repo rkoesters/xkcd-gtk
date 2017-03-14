@@ -172,7 +172,12 @@ func (w *Window) NextComic() {
 
 // RandomComic sets the current comic to a random comic.
 func (w *Window) RandomComic() {
-	w.SetComic(rand.Intn(getNewestComicInfo().Num) + 1)
+	newestComicNumber := getNewestComicInfo().Num
+	if newestComicNumber <= 0 {
+		w.SetComic(getNewestComicInfo().Num)
+	} else {
+		w.SetComic(rand.Intn(newestComicNumber) + 1)
+	}
 }
 
 // SetComic sets the current comic to the given comic.
@@ -185,17 +190,11 @@ func (w *Window) SetComic(n int) {
 	w.rand.SetSensitive(false)
 
 	go func() {
-		var c *xkcd.Comic
 		var err error
-		c, err = getComicInfo(n)
+		w.comic, err = GetComicInfo(n)
 		if err != nil {
 			log.Printf("error downloading comic info: %v", n)
-			c = &xkcd.Comic{
-				Num:   n,
-				Title: "Couldn't Download Comic",
-			}
 		}
-		w.comic = c
 
 		_, err = getComicImage(n)
 		if err != nil {
