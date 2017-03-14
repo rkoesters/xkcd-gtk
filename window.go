@@ -192,7 +192,7 @@ func (w *Window) SetComic(n int) {
 			log.Printf("error downloading comic info: %v", n)
 			c = &xkcd.Comic{
 				Num:   n,
-				Title: "Comic Download Error",
+				Title: "Couldn't Download Comic",
 			}
 		}
 		w.comic = c
