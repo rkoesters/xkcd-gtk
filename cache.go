@@ -6,7 +6,6 @@ import (
 	"github.com/rkoesters/xdg/basedir"
 	"github.com/rkoesters/xkcd"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -39,7 +38,7 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 	_, err := os.Stat(infoPath)
 	if os.IsNotExist(err) {
 		err = downloadComicInfo(n)
-		if err != nil {
+		if err == xkcd.ErrNotFound {
 			return &xkcd.Comic{
 				Num:   n,
 				Title: "Comic Not Found",
@@ -85,7 +84,6 @@ func GetNewestComicInfo() (*xkcd.Comic, error) {
 	if newestComic == nil {
 		newestComic, err = xkcd.GetCurrent()
 		if err != nil {
-			log.Print("offline, lets get newest avaliable")
 			newestAvaliable := &xkcd.Comic{
 				Num:   0,
 				Title: "Connect to the internet to download some comics!",
@@ -93,17 +91,14 @@ func GetNewestComicInfo() (*xkcd.Comic, error) {
 
 			d, err := os.Open(cacheDir())
 			if err != nil {
-				log.Print("couldn't open cache dir")
 				return newestAvaliable, ErrCache
 			}
 			defer d.Close()
 
 			cachedirs, err := d.Readdirnames(0)
 			if err != nil {
-				log.Print("couldn't read from cache dir")
 				return newestAvaliable, ErrCache
 			}
-			log.Printf("found dirs: %v", cachedirs)
 
 			for _, f := range cachedirs {
 				comicId, err := strconv.Atoi(f)

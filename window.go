@@ -173,10 +173,7 @@ func (w *Window) NextComic() {
 
 // RandomComic sets the current comic to a random comic.
 func (w *Window) RandomComic() {
-	newestComic, err := GetNewestComicInfo()
-	if err != nil {
-		log.Print(err)
-	}
+	newestComic, _ := GetNewestComicInfo()
 	if newestComic.Num <= 0 {
 		w.SetComic(newestComic.Num)
 	} else {
@@ -231,10 +228,7 @@ func (w *Window) DisplayComic() {
 	}
 
 	// Enable/disable next button.
-	newest, err := GetNewestComicInfo()
-	if err != nil {
-		log.Print(err)
-	}
+	newest, _ := GetNewestComicInfo()
 	if w.comic.Num < newest.Num {
 		w.next.SetSensitive(true)
 	} else {
