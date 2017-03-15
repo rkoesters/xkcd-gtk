@@ -13,15 +13,16 @@ import (
 
 // Window is the main application window.
 type Window struct {
-	comic       *xkcd.Comic
-	win         *gtk.ApplicationWindow
-	hdr         *gtk.HeaderBar
-	previous    *gtk.Button
-	next        *gtk.Button
-	rand        *gtk.Button
-	img         *gtk.Image
-	properties  *PropertiesDialog
-	searchEntry *gtk.SearchEntry
+	comic         *xkcd.Comic
+	win           *gtk.ApplicationWindow
+	hdr           *gtk.HeaderBar
+	previous      *gtk.Button
+	next          *gtk.Button
+	rand          *gtk.Button
+	img           *gtk.Image
+	properties    *PropertiesDialog
+	searchEntry   *gtk.SearchEntry
+	searchResults *gtk.ScrolledWindow
 }
 
 // New creates a new XKCD viewer window.
@@ -157,16 +158,21 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.searchEntry, err = gtk.SearchEntryNew()
-	if err != nil {
-		return nil, err
-	}
-	box.Add(w.searchEntry)
 	box.SetMarginTop(12)
 	box.SetMarginBottom(12)
 	box.SetMarginStart(12)
 	box.SetMarginEnd(12)
 	box.SetSizeRequest(400, 300)
+	w.searchEntry, err = gtk.SearchEntryNew()
+	if err != nil {
+		return nil, err
+	}
+	box.Add(w.searchEntry)
+	w.searchResults, err = gtk.ScrolledWindowNew(nil, nil)
+	if err != nil {
+		return nil, err
+	}
+	box.Add(w.searchResults)
 	box.ShowAll()
 	searchPopover.Add(box)
 
