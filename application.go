@@ -3,10 +3,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"io/ioutil"
 	"log"
-	"path/filepath"
-	"strconv"
 )
 
 const appId = "com.ryankoesters.xkcd-gtk"
@@ -35,16 +32,4 @@ func (a *Application) Activate() {
 		log.Fatal(err)
 	}
 	window.win.Present()
-
-	lastBytes, err := ioutil.ReadFile(filepath.Join(cacheDir(), "latest"))
-	if err == nil {
-		cn, err := strconv.Atoi(string(lastBytes))
-		if err != nil {
-			window.GotoNewest()
-		} else {
-			window.SetComic(cn)
-		}
-	} else {
-		window.GotoNewest()
-	}
 }

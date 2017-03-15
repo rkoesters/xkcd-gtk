@@ -4,7 +4,6 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
-	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
@@ -30,13 +29,14 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w := new(Window)
 
+	w.comic = &xkcd.Comic{Title: "XKCD Viewer"}
+
 	w.win, err = gtk.ApplicationWindowNew(app.GtkApp)
 	if err != nil {
 		return nil, err
 	}
-	w.win.SetDefaultSize(1000, 800)
 	w.win.Connect("destroy", w.Close)
-	w.comic = &xkcd.Comic{Title: "XKCD Viewer"}
+	w.win.SetDefaultSize(1000, 800)
 
 	// Create HeaderBar
 	w.hdr, err = gtk.HeaderBarNew()
@@ -158,6 +158,12 @@ func NewWindow(app *Application) (*Window, error) {
 	scwin.Add(w.img)
 	scwin.ShowAll()
 	w.win.Add(scwin)
+
+	// Remember what comic we were viewing.
+	ws := NewWindowState(w)
+	ws.ReadFile(filepath.Join(cacheDir(), "state"))
+	w.win.Resize(ws.Width, ws.Height)
+	w.SetComic(ws.ComicNumber)
 
 	return w, nil
 }
@@ -299,8 +305,9 @@ func (w *Window) Close() {
 	}
 
 	// Remember what comic we were viewing.
-	err := ioutil.WriteFile(filepath.Join(cacheDir(), "latest"), []byte(strconv.Itoa(w.comic.Num)), 0666)
+	ws := NewWindowState(w)
+	err := ws.WriteFile(filepath.Join(cacheDir(), "state"))
 	if err != nil {
-		log.Print("error writing latest comic file")
+		log.Print(err)
 	}
 }
