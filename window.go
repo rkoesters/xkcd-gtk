@@ -20,6 +20,7 @@ type Window struct {
 	next          *gtk.Button
 	rand          *gtk.Button
 	img           *gtk.Image
+	gotoDialog    *GotoDialog
 	properties    *PropertiesDialog
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.ScrolledWindow
@@ -315,12 +316,15 @@ func (w *Window) ShowProperties() {
 }
 
 func (w *Window) ShowGoto() {
-	gt, err := NewGoto(w)
-	if err != nil {
-		log.Print(err)
-		return
+	var err error
+	if w.gotoDialog == nil {
+		w.gotoDialog, err = NewGotoDialog(w)
+		if err != nil {
+			log.Print(err)
+			return
+		}
 	}
-	gt.dialog.Present()
+	w.gotoDialog.Present()
 }
 
 func (w *Window) GotoNewest() {

@@ -6,15 +6,15 @@ import (
 	"strconv"
 )
 
-type Goto struct {
+type GotoDialog struct {
 	parent *Window
 	dialog *gtk.Dialog
 	entry  *gtk.Entry
 }
 
-func NewGoto(parent *Window) (*Goto, error) {
+func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 	var err error
-	gt := new(Goto)
+	gt := new(GotoDialog)
 	gt.parent = parent
 
 	gt.dialog, err = gtk.DialogNew()
@@ -80,7 +80,11 @@ func NewGoto(parent *Window) (*Goto, error) {
 	return gt, nil
 }
 
-func (gt *Goto) Response(dialog *gtk.Dialog, responseId int) {
+func (gt *GotoDialog) Present() {
+	gt.dialog.Present()
+}
+
+func (gt *GotoDialog) Response(dialog *gtk.Dialog, responseId int) {
 	defer dialog.Close()
 	if responseId == 1 {
 		input, err := gt.entry.GetText()
