@@ -27,6 +27,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	pd.dialog.SetTransientFor(parent.win)
 	pd.dialog.SetTitle("Properties")
 	pd.dialog.SetDefaultSize(500, 400)
+	pd.dialog.SetDestroyWithParent(true)
 	pd.dialog.Connect("delete-event", pd.Destroy)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)

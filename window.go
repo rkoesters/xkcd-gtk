@@ -35,7 +35,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.win.Connect("destroy", w.Close)
+	w.win.Connect("delete-event", w.DeleteEvent)
 	w.win.SetDefaultSize(1000, 800)
 
 	// Create HeaderBar
@@ -300,11 +300,7 @@ func (w *Window) GotoNewest() {
 	w.SetComic(newestComic.Num)
 }
 
-func (w *Window) Close() {
-	if w.properties != nil {
-		w.properties.dialog.Close()
-	}
-
+func (w *Window) DeleteEvent() {
 	// Remember what comic we were viewing.
 	ws := NewWindowState(w)
 	err := ws.WriteFile(filepath.Join(cacheDir(), "state"))

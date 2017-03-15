@@ -62,9 +62,9 @@ func (ws *WindowState) Write(w io.Writer) error {
 }
 
 func (ws *WindowState) WriteFile(filename string) error {
-	log.Printf("writing state to %v", filename)
 	f, err := os.Create(filename)
 	if err != nil {
+		log.Printf("writing state to %v: %v", filename, err)
 		return err
 	}
 	defer f.Close()
