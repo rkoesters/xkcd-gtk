@@ -6,6 +6,7 @@ Comment=View XKCD comics
 TryExec=BINDIR/xkcd-gtk
 Exec=BINDIR/xkcd-gtk
 Icon=ICONDIR/xkcd-gtk.svg
+Terminal=false
 Actions=NewWindow;
 
 [Desktop Action NewWindow]
