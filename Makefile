@@ -10,6 +10,7 @@ clean:
 	go clean
 
 home-install: xkcd-gtk
+	mkdir -p $$HOME/bin
 	install xkcd-gtk $$HOME/bin
 	mkdir -p $$HOME/.local/share/applications
 	cp com.ryankoesters.xkcd-gtk.desktop $$HOME/.local/share/applications
@@ -22,6 +23,7 @@ home-uninstall:
 	   $$HOME/.local/share/icons/hicolor/scalable/apps/xkcd-gtk.svg
 
 root-install: xkcd-gtk
+	mkdir -p /usr/local/bin
 	install xkcd-gtk /usr/local/bin
 	mkdir -p /usr/share/applications
 	cp com.ryankoesters.xkcd-gtk.desktop /usr/share/applications
