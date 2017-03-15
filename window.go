@@ -21,7 +21,7 @@ type Window struct {
 	rand        *gtk.Button
 	img         *gtk.Image
 	properties  *PropertiesDialog
-	searchEntry *gtk.Entry
+	searchEntry *gtk.SearchEntry
 }
 
 // New creates a new XKCD viewer window.
@@ -157,7 +157,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.searchEntry, err = gtk.EntryNew()
+	w.searchEntry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err
 	}
