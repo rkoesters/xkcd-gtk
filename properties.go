@@ -35,6 +35,10 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	scwin.SetPolicy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+	scwin.SetMarginTop(0)
+	scwin.SetMarginBottom(0)
+	scwin.SetMarginStart(0)
+	scwin.SetMarginEnd(0)
 
 	grid, err := gtk.GridNew()
 	if err != nil {
@@ -42,10 +46,10 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	}
 	grid.SetColumnSpacing(12)
 	grid.SetRowSpacing(12)
-	grid.SetMarginStart(24)
-	grid.SetMarginEnd(24)
 	grid.SetMarginTop(12)
 	grid.SetMarginBottom(12)
+	grid.SetMarginStart(12)
+	grid.SetMarginEnd(12)
 
 	pd.addRowToGrid(grid, 0, "Number")
 	pd.addRowToGrid(grid, 1, "Title")
