@@ -163,6 +163,7 @@ func NewWindow(app *Application) (*Window, error) {
 	ws := NewWindowState(w)
 	ws.ReadFile(filepath.Join(cacheDir(), "state"))
 	w.win.Resize(ws.Width, ws.Height)
+	w.win.Move(ws.PositionX, ws.PositionY)
 	w.SetComic(ws.ComicNumber)
 
 	return w, nil
