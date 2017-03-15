@@ -164,6 +164,17 @@ func NewWindow(app *Application) (*Window, error) {
 	ws.ReadFile(filepath.Join(cacheDir(), "state"))
 	w.win.Resize(ws.Width, ws.Height)
 	w.win.Move(ws.PositionX, ws.PositionY)
+	if ws.PropertiesVisible {
+		if w.properties == nil {
+			w.properties, err = NewPropertiesDialog(w)
+			if err != nil {
+				return nil, err
+			}
+		}
+		w.properties.dialog.Resize(ws.PropertiesWidth, ws.PropertiesHeight)
+		w.properties.dialog.Move(ws.PropertiesPositionX, ws.PropertiesPositionY)
+		w.properties.Present()
+	}
 	w.SetComic(ws.ComicNumber)
 
 	return w, nil

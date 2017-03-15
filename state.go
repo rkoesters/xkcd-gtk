@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -14,6 +13,12 @@ type WindowState struct {
 	Width       int
 	PositionX   int
 	PositionY   int
+
+	PropertiesVisible   bool
+	PropertiesHeight    int
+	PropertiesWidth     int
+	PropertiesPositionX int
+	PropertiesPositionY int
 }
 
 func NewWindowState(w *Window) *WindowState {
@@ -21,11 +26,12 @@ func NewWindowState(w *Window) *WindowState {
 	ws.ComicNumber = w.comic.Num
 	ws.Width, ws.Height = w.win.GetSize()
 	ws.PositionX, ws.PositionY = w.win.GetPosition()
+	if w.properties != nil {
+		ws.PropertiesVisible = true
+		ws.PropertiesWidth, ws.PropertiesHeight = w.properties.dialog.GetSize()
+		ws.PropertiesPositionX, ws.PropertiesPositionY = w.properties.dialog.GetPosition()
+	}
 	return ws
-}
-
-func (ws *WindowState) String() string {
-	return fmt.Sprintf("WindowState{ ComicNumber: %v, Height: %v, Width: %v PositionX: %v, PositionY: %v }", ws.ComicNumber, ws.Height, ws.Width, ws.PositionX, ws.PositionY)
 }
 
 func (ws *WindowState) Read(r io.Reader) {
