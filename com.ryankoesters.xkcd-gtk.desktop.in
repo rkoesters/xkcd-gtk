@@ -7,6 +7,7 @@ TryExec=BINDIR/xkcd-gtk
 Exec=BINDIR/xkcd-gtk
 Icon=ICONDIR/xkcd-gtk.svg
 Terminal=false
+StartupWMClass=xkcd-gtk
 Actions=NewWindow;
 
 [Desktop Action NewWindow]
