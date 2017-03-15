@@ -4,7 +4,7 @@ Requirements
 ------------
 
 To build this program, you will need [Go](https://golang.org/) and
-[Gotk3](https://github.com/gotk3/gotk3/wiki#installation).
+[gotk3](https://github.com/gotk3/gotk3/wiki#installation).
 
 Install
 -------
