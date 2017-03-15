@@ -19,7 +19,7 @@ func ShowAboutDialog() {
 
 		aboutDialog.SetLogoIconName("xkcd-gtk")
 		aboutDialog.SetProgramName("XKCD Viewer")
-		aboutDialog.SetVersion("0.5")
+		aboutDialog.SetVersion("0.5.1")
 		aboutDialog.SetComments("A simple XKCD comic reader for GNOME")
 		aboutDialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
 		aboutDialog.SetCopyright("Copyright © 2015-2017 Ryan Koesters")
