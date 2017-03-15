@@ -49,6 +49,8 @@ func NewWindow(app *Application) (*Window, error) {
 	w.hdr.SetTitle("XKCD Viewer")
 	w.hdr.SetShowCloseButton(true)
 
+	headerBarIconSize := lookupHeaderBarIconSize()
+
 	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
 		return nil, err
@@ -59,14 +61,14 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	navBoxStyleContext.AddClass("linked")
 
-	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", headerBarIconSize)
 	if err != nil {
 		return nil, err
 	}
 	w.previous.Connect("clicked", w.PreviousComic)
 	navBox.Add(w.previous)
 
-	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", headerBarIconSize)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +77,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackStart(navBox)
 
-	w.rand, err = gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	w.rand, err = gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize)
 	if err != nil {
 		return nil, err
 	}
@@ -87,7 +89,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	cogImg, err := gtk.ImageNewFromIconName("open-menu", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	cogImg, err := gtk.ImageNewFromIconName("open-menu", headerBarIconSize)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +144,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	searchImg, err := gtk.ImageNewFromIconName("edit-find", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	searchImg, err := gtk.ImageNewFromIconName("edit-find", headerBarIconSize)
 	if err != nil {
 		return nil, err
 	}
@@ -347,5 +349,15 @@ func (w *Window) DeleteEvent() {
 	err := ws.WriteFile(filepath.Join(CacheDir(), "state"))
 	if err != nil {
 		log.Print(err)
+	}
+}
+
+func lookupHeaderBarIconSize() gtk.IconSize {
+	interfaceSettings := glib.SettingsNew("org.gnome.desktop.interface")
+	theme := interfaceSettings.GetString("gtk-theme")
+	if theme == "elementary" {
+		return gtk.ICON_SIZE_LARGE_TOOLBAR
+	} else {
+		return gtk.ICON_SIZE_SMALL_TOOLBAR
 	}
 }
