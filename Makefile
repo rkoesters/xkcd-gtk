@@ -14,9 +14,9 @@ install: xkcd-gtk
 	mkdir -p $(desktopdir)
 	cp com.ryankoesters.xkcd-gtk.desktop $(desktopdir)
 	mkdir -p $(icondir)
-	cp com.ryankoesters.xkcd-gtk.svg $(icondir)
+	cp xkcd-gtk.svg $(icondir)
 
 uninstall:
 	rm $(bindir)/xkcd-gtk \
 	   $(desktopdir)/com.ryankoesters.xkcd-gtk.desktop \
-	   $(icondir)/com.ryankoesters.xkcd-gtk.svg
+	   $(icondir)/xkcd-gtk.svg

@@ -5,7 +5,7 @@ Name=XKCD Viewer
 Comment=View XKCD comics
 TryExec=xkcd-gtk
 Exec=xkcd-gtk
-Icon=com.ryankoesters.xkcd-gtk.svg
+Icon=xkcd-gtk
 Actions=NewWindow;
 
 [Desktop Action NewWindow]
