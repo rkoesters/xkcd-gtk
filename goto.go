@@ -80,8 +80,8 @@ func NewGoto(parent *Window) (*Goto, error) {
 	return gt, nil
 }
 
-func (gt *Goto) Response(_ interface{}, responseId int) {
-	defer gt.dialog.Close()
+func (gt *Goto) Response(dialog *gtk.Dialog, responseId int) {
+	defer dialog.Close()
 	if responseId == 1 {
 		input, err := gt.entry.GetText()
 		if err != nil {
