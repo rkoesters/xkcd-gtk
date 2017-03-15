@@ -161,7 +161,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// Remember what comic we were viewing.
 	ws := NewWindowState(w)
-	ws.ReadFile(filepath.Join(cacheDir(), "state"))
+	ws.ReadFile(filepath.Join(CacheDir(), "state"))
 	w.win.Resize(ws.Width, ws.Height)
 	w.win.Move(ws.PositionX, ws.PositionY)
 	if ws.PropertiesVisible {
@@ -314,7 +314,7 @@ func (w *Window) GotoNewest() {
 func (w *Window) DeleteEvent() {
 	// Remember what comic we were viewing.
 	ws := NewWindowState(w)
-	err := ws.WriteFile(filepath.Join(cacheDir(), "state"))
+	err := ws.WriteFile(filepath.Join(CacheDir(), "state"))
 	if err != nil {
 		log.Print(err)
 	}

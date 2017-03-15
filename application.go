@@ -3,7 +3,9 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xdg/basedir"
 	"log"
+	"path/filepath"
 )
 
 const appId = "com.ryankoesters.xkcd-gtk"
@@ -32,4 +34,16 @@ func (a *Application) Activate() {
 		log.Fatal(err)
 	}
 	window.win.Present()
+}
+
+func CacheDir() string {
+	return filepath.Join(basedir.CacheHome, appId)
+}
+
+func ConfigDir() string {
+	return filepath.Join(basedir.ConfigHome, appId)
+}
+
+func DataDir() string {
+	return filepath.Join(basedir.DataHome, appId)
 }

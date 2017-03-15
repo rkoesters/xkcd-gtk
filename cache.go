@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"github.com/rkoesters/xdg/basedir"
 	"github.com/rkoesters/xkcd"
 	"io"
 	"net/http"
@@ -12,12 +11,8 @@ import (
 	"strconv"
 )
 
-func cacheDir() string {
-	return filepath.Join(basedir.CacheHome, "xkcd-gtk")
-}
-
 func getComicPath(n int) string {
-	return filepath.Join(cacheDir(), strconv.Itoa(n))
+	return filepath.Join(CacheDir(), strconv.Itoa(n))
 }
 
 func getComicInfoPath(n int) string {
@@ -89,7 +84,7 @@ func GetNewestComicInfo() (*xkcd.Comic, error) {
 				Title: "Connect to the internet to download some comics!",
 			}
 
-			d, err := os.Open(cacheDir())
+			d, err := os.Open(CacheDir())
 			if err != nil {
 				return newestAvaliable, ErrCache
 			}
