@@ -199,7 +199,7 @@ func NewWindow(app *Application) (*Window, error) {
 	scwin.ShowAll()
 	w.win.Add(scwin)
 
-	// Remember what comic we were viewing.
+	// Recall our window state.
 	ws := NewWindowState(w)
 	ws.ReadFile(filepath.Join(CacheDir(), "state"))
 	w.win.Resize(ws.Width, ws.Height)
