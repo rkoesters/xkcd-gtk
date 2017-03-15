@@ -351,13 +351,3 @@ func (w *Window) DeleteEvent() {
 		log.Print(err)
 	}
 }
-
-func lookupHeaderBarIconSize() gtk.IconSize {
-	interfaceSettings := glib.SettingsNew("org.gnome.desktop.interface")
-	theme := interfaceSettings.GetString("gtk-theme")
-	if theme == "elementary" {
-		return gtk.ICON_SIZE_LARGE_TOOLBAR
-	} else {
-		return gtk.ICON_SIZE_SMALL_TOOLBAR
-	}
-}
