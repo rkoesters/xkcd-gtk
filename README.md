@@ -5,7 +5,8 @@ Todo
 
 - Add search.
   - Will probably use blevesearch
-- Implement more GtkApplication features.
+- Save state: it seems our gtk wrapper doesn't support
+  win.IsMaximized(), so we can't remember if we were maximized.
 
 License
 -------
