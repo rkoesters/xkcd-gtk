@@ -162,7 +162,6 @@ func NewWindow(app *Application) (*Window, error) {
 	box.SetMarginBottom(12)
 	box.SetMarginStart(12)
 	box.SetMarginEnd(12)
-	box.SetSizeRequest(400, 300)
 	w.searchEntry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err
@@ -173,6 +172,12 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	box.Add(w.searchResults)
+	searchDoesNotWork, err := gtk.LabelNew("Sorry, search doesn't work yet :(")
+	if err != nil {
+		return nil, err
+	}
+	w.searchResults.Add(searchDoesNotWork)
+	w.searchResults.SetSizeRequest(400, 250)
 	box.ShowAll()
 	searchPopover.Add(box)
 
