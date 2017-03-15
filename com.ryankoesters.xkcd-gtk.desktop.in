@@ -3,11 +3,11 @@ Version=1.0
 Type=Application
 Name=XKCD Viewer
 Comment=View XKCD comics
-TryExec=xkcd-gtk
-Exec=xkcd-gtk
-Icon=xkcd-gtk
+TryExec=BINDIR/xkcd-gtk
+Exec=BINDIR/xkcd-gtk
+Icon=ICONDIR/xkcd-gtk.svg
 Actions=NewWindow;
 
 [Desktop Action NewWindow]
 Name=New Window
-Exec=xkcd-gtk
+Exec=BINDIR/xkcd-gtk
