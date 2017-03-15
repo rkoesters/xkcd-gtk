@@ -22,8 +22,9 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	app.GtkApp.Connect("activate", app.Activate)
+
+	app.GtkApp.SetDefault()
 
 	return &app, nil
 }
