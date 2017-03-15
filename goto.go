@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/gotk3/gotk3/gtk"
+	"log"
+	"strconv"
 )
 
 type Goto struct {
@@ -22,6 +24,7 @@ func NewGoto(parent *Window) (*Goto, error) {
 	gt.dialog.SetTransientFor(parent.win)
 	gt.dialog.SetTitle("Go to comic number...")
 	gt.dialog.SetResizable(false)
+	gt.dialog.Connect("response", gt.Response)
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 12)
 	if err != nil {
@@ -75,4 +78,21 @@ func NewGoto(parent *Window) (*Goto, error) {
 	contentArea.Add(box)
 
 	return gt, nil
+}
+
+func (gt *Goto) Response(_ interface{}, responseId int) {
+	defer gt.dialog.Close()
+	if responseId == 1 {
+		input, err := gt.entry.GetText()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		number, err := strconv.Atoi(input)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		gt.parent.SetComic(number)
+	}
 }

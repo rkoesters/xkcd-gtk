@@ -320,21 +320,7 @@ func (w *Window) ShowGoto() {
 		log.Print(err)
 		return
 	}
-	defer gt.dialog.Close()
-	status := gt.dialog.Run()
-	if status == 1 {
-		input, err := gt.entry.GetText()
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		number, err := strconv.Atoi(input)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		w.SetComic(number)
-	}
+	gt.dialog.Present()
 }
 
 func (w *Window) GotoNewest() {
