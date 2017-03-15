@@ -16,7 +16,6 @@ func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 	var err error
 	gt := new(GotoDialog)
 	gt.parent = parent
-
 	gt.dialog, err = gtk.DialogNew()
 	if err != nil {
 		return nil, err
@@ -24,6 +23,7 @@ func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 	gt.dialog.SetTransientFor(parent.win)
 	gt.dialog.SetTitle("Go to comic number...")
 	gt.dialog.SetResizable(false)
+	gt.dialog.Connect("delete-event", gt.Destroy)
 	gt.dialog.Connect("response", gt.Response)
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 12)
@@ -82,6 +82,13 @@ func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 
 func (gt *GotoDialog) Present() {
 	gt.dialog.Present()
+}
+
+func (gt *GotoDialog) Destroy() {
+	gt.entry = nil
+	gt.dialog = nil
+	gt.parent.gotoDialog = nil
+	gt.parent = nil
 }
 
 func (gt *GotoDialog) Response(dialog *gtk.Dialog, responseId int) {
