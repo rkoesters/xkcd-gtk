@@ -1,5 +1,7 @@
+BUILDFLAGS=-v -tags gtk_3_18
+
 xkcd-gtk: *.go
-	go build
+	go build $(BUILDFLAGS)
 
 clean:
 	go clean
