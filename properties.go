@@ -26,7 +26,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	}
 	pd.dialog.SetTransientFor(parent.win)
 	pd.dialog.SetTitle("Properties")
-	pd.dialog.SetDefaultSize(500, 400)
+	pd.dialog.SetDefaultSize(500, 500)
 	pd.dialog.SetDestroyWithParent(true)
 	pd.dialog.Connect("delete-event", pd.Destroy)
 
