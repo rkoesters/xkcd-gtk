@@ -92,7 +92,7 @@ func (gt *GotoDialog) Destroy() {
 	gt.parent = nil
 }
 
-func (gt *GotoDialog) Response(dialog *gtk.Dialog, responseId int) {
+func (gt *GotoDialog) Response(dialog *gtk.Dialog, responseId gtk.ResponseType) {
 	defer dialog.Close()
 	if responseId == 1 {
 		input, err := gt.entry.GetText()
