@@ -24,8 +24,6 @@ func NewApplication() (*Application, error) {
 	}
 	app.GtkApp.Connect("activate", app.Activate)
 
-	glib.SetApplicationName("XKCD Viewer")
-	gtk.WindowSetDefaultIconName("xkcd-gtk")
 	app.GtkApp.SetDefault()
 
 	return &app, nil

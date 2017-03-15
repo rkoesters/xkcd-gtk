@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/gotk3/gotk3/glib"
+	"github.com/gotk3/gotk3/gtk"
 	"log"
 	"math/rand"
 	"os"
@@ -13,6 +15,9 @@ func main() {
 
 	// Make sure our random number generator is seeded.
 	rand.Seed(time.Now().Unix())
+
+	glib.SetApplicationName("XKCD Viewer")
+	gtk.WindowSetDefaultIconName("xkcd-gtk")
 
 	// Create and run our application.
 	app, err := NewApplication()
