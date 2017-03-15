@@ -3,7 +3,9 @@ BUILDFLAGS=-tags gtk_3_18
 xkcd-gtk: *.go
 	go build $(BUILDFLAGS)
 
-gotk3:
+deps:
+	go get -u $(BUILDFLAGS) github.com/rkoesters/xkcd
+	go get -u $(BUILDFLAGS) github.com/rkoesters/xdg/...
 	go get -u $(BUILDFLAGS) github.com/gotk3/gotk3/...
 
 clean:
