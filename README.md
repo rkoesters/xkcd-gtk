@@ -1,5 +1,11 @@
 `xkcd-gtk` is a simple XKCD comic viewer written in go using GTK+3.
 
+Requirements
+------------
+
+To build this program, you will need [Go](https://golang.org/) and
+[Gotk3](https://github.com/gotk3/gotk3/wiki#installation).
+
 Install
 -------
 
