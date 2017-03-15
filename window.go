@@ -13,14 +13,15 @@ import (
 
 // Window is the main application window.
 type Window struct {
-	comic      *xkcd.Comic
-	win        *gtk.ApplicationWindow
-	hdr        *gtk.HeaderBar
-	previous   *gtk.Button
-	next       *gtk.Button
-	rand       *gtk.Button
-	img        *gtk.Image
-	properties *PropertiesDialog
+	comic       *xkcd.Comic
+	win         *gtk.ApplicationWindow
+	hdr         *gtk.HeaderBar
+	previous    *gtk.Button
+	next        *gtk.Button
+	rand        *gtk.Button
+	img         *gtk.Image
+	properties  *PropertiesDialog
+	searchEntry *gtk.Entry
 }
 
 // New creates a new XKCD viewer window.
@@ -135,11 +136,39 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackEnd(menuBtn)
 
-	searchBtn, err := gtk.ButtonNewFromIconName("edit-find", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	searchBtn, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
+	searchImg, err := gtk.ImageNewFromIconName("edit-find", gtk.ICON_SIZE_LARGE_TOOLBAR)
+	if err != nil {
+		return nil, err
+	}
+	searchBtn.SetImage(searchImg)
 	w.hdr.PackEnd(searchBtn)
+
+	searchPopover, err := gtk.PopoverNew(searchBtn)
+	if err != nil {
+		return nil, err
+	}
+	searchBtn.SetPopover(searchPopover)
+
+	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	if err != nil {
+		return nil, err
+	}
+	w.searchEntry, err = gtk.EntryNew()
+	if err != nil {
+		return nil, err
+	}
+	box.Add(w.searchEntry)
+	box.SetMarginTop(12)
+	box.SetMarginBottom(12)
+	box.SetMarginStart(12)
+	box.SetMarginEnd(12)
+	box.SetSizeRequest(400, 300)
+	box.ShowAll()
+	searchPopover.Add(box)
 
 	w.hdr.ShowAll()
 	w.win.SetTitlebar(w.hdr)
