@@ -23,6 +23,7 @@ func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 	gt.dialog.SetTransientFor(parent.win)
 	gt.dialog.SetTitle("Go to comic number...")
 	gt.dialog.SetResizable(false)
+	gt.dialog.SetDestroyWithParent(true)
 	gt.dialog.Connect("delete-event", gt.Destroy)
 	gt.dialog.Connect("response", gt.Response)
 
