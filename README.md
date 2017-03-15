@@ -13,22 +13,22 @@ Install
 
 To install for current user:
 
-	make && make home-install
+	make deps && make && make home-install
 
 To install for all users:
 
-	make && sudo make root-install
+	make deps && make && sudo make root-install
 
 Uninstall
 ---------
 
 To uninstall for current user:
 
-	make && make home-uninstall
+	make home-uninstall
 
 To uninstall for all users:
 
-	make && sudo make root-uninstall
+	sudo make root-uninstall
 
 Todo
 ----
