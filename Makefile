@@ -12,11 +12,11 @@ clean:
 install: xkcd-gtk
 	install xkcd-gtk $(prefix)/bin
 	mkdir -p $(desktopdir)
-	cp xkcd-gtk.desktop $(desktopdir)
+	cp com.ryankoesters.xkcd-gtk.desktop $(desktopdir)
 	mkdir -p $(icondir)
-	cp xkcd-gtk.svg $(icondir)
+	cp com.ryankoesters.xkcd-gtk.svg $(icondir)
 
 uninstall:
 	rm $(bindir)/xkcd-gtk \
-	   $(desktopdir)/xkcd-gtk.desktop \
-	   $(icondir)/xkcd-gtk.svg
+	   $(desktopdir)/com.ryankoesters.xkcd-gtk.desktop \
+	   $(icondir)/com.ryankoesters.xkcd-gtk.svg
