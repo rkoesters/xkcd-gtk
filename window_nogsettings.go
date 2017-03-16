@@ -7,5 +7,5 @@ import (
 )
 
 func lookupHeaderBarIconSize() gtk.IconSize {
-	return gtk.ICON_SIZE_SMALL_TOOLBAR
+	return gtk.ICON_SIZE_LARGE_TOOLBAR
 }
