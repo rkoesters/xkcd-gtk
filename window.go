@@ -264,7 +264,10 @@ func (w *Window) SetComic(n int) {
 		if os.IsNotExist(err) {
 			err = DownloadComicImage(n)
 			if err != nil {
-				log.Printf("error downloading comic image: %v", n)
+				// We can be sneaky, we use SafeTitle for window title,
+				// but we can leave Title alone so the properties dialog
+				// can still be correct.
+				w.comic.SafeTitle = "Connect to the internet to download comic image"
 			}
 		} else if err != nil {
 			log.Print(err)
@@ -278,7 +281,7 @@ func (w *Window) SetComic(n int) {
 
 // DisplayComic updates the UI to show the contents of w.comic
 func (w *Window) DisplayComic() {
-	w.hdr.SetTitle(w.comic.Title)
+	w.hdr.SetTitle(w.comic.SafeTitle)
 	w.hdr.SetSubtitle(strconv.Itoa(w.comic.Num))
 	w.img.SetFromFile(getComicImagePath(w.comic.Num))
 	w.img.SetTooltipText(w.comic.Alt)
