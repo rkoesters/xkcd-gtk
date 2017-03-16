@@ -276,7 +276,6 @@ func (w *Window) SetComic(n int) {
 	w.hdr.SetTitle("Loading comic...")
 	w.hdr.SetSubtitle(strconv.Itoa(n))
 	w.updateNextPreviousButtonStatus()
-	w.rand.SetSensitive(false)
 
 	go func() {
 		var err error
@@ -311,7 +310,6 @@ func (w *Window) DisplayComic() {
 	w.img.SetFromFile(getComicImagePath(w.comic.Num))
 	w.img.SetTooltipText(w.comic.Alt)
 	w.updateNextPreviousButtonStatus()
-	w.rand.SetSensitive(true)
 
 	// If the comic has a link, lets give the option of visiting it.
 	if w.comic.Link == "" {
