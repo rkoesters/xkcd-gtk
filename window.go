@@ -283,19 +283,19 @@ func (w *Window) SetComic(n int) {
 		w.comic, err = GetComicInfo(n)
 		if err != nil {
 			log.Printf("error downloading comic info: %v", n)
-		}
-
-		_, err = os.Stat(getComicImagePath(n))
-		if os.IsNotExist(err) {
-			err = DownloadComicImage(n)
-			if err != nil {
-				// We can be sneaky, we use SafeTitle for window title,
-				// but we can leave Title alone so the properties dialog
-				// can still be correct.
-				w.comic.SafeTitle = "Connect to the internet to download comic image"
+		} else {
+			_, err = os.Stat(getComicImagePath(n))
+			if os.IsNotExist(err) {
+				err = DownloadComicImage(n)
+				if err != nil {
+					// We can be sneaky, we use SafeTitle for window title,
+					// but we can leave Title alone so the properties dialog
+					// can still be correct.
+					w.comic.SafeTitle = "Connect to the internet to download comic image"
+				}
+			} else if err != nil {
+				log.Print(err)
 			}
-		} else if err != nil {
-			log.Print(err)
 		}
 
 		// Add the DisplayComic function to the event loop so our UI

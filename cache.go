@@ -35,30 +35,40 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 		err = downloadComicInfo(n)
 		if err == xkcd.ErrNotFound {
 			return &xkcd.Comic{
-				Num:   n,
-				Title: "Comic Not Found",
+				Num:       n,
+				Title:     "Comic Not Found",
+				SafeTitle: "Comic Not Found",
+			}, err
+		} else {
+			return &xkcd.Comic{
+				Num:       n,
+				Title:     "Couldn't Get Comic",
+				SafeTitle: "Couldn't Get Comic",
 			}, err
 		}
 	} else if err != nil {
 		return &xkcd.Comic{
-			Num:   n,
-			Title: "I guess we can't access our cache",
+			Num:       n,
+			Title:     "I guess we can't access our cache",
+			SafeTitle: "I guess we can't access our cache",
 		}, err
 	}
 
 	f, err := os.Open(infoPath)
 	if err != nil {
 		return &xkcd.Comic{
-			Num:   n,
-			Title: "Error trying to read comic info from cache",
+			Num:       n,
+			Title:     "Error trying to read comic info from cache",
+			SafeTitle: "Error trying to read comic info from cache",
 		}, err
 	}
 	defer f.Close()
 	c, err := xkcd.New(f)
 	if err != nil {
 		return &xkcd.Comic{
-			Num:   n,
-			Title: "I guess the cached comic info is invalid",
+			Num:       n,
+			Title:     "I guess the cached comic info is invalid",
+			SafeTitle: "I guess the cached comic info is invalid",
 		}, err
 	}
 	return c, nil
