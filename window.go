@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
@@ -29,6 +30,7 @@ type Window struct {
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
 
+	menuExplain  *gtk.MenuItem
 	menuOpenLink *gtk.MenuItem
 }
 
@@ -106,6 +108,12 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
+	w.menuExplain, err = gtk.MenuItemNewWithLabel("Explain")
+	if err != nil {
+		return nil, err
+	}
+	w.menuExplain.Connect("activate", w.Explain)
+	menu.Add(w.menuExplain)
 	w.menuOpenLink, err = gtk.MenuItemNewWithLabel("Open Link")
 	if err != nil {
 		return nil, err
@@ -307,6 +315,7 @@ func (w *Window) DisplayComic() {
 		w.menuOpenLink.SetTooltipText(w.comic.Link)
 		w.menuOpenLink.Show()
 	}
+	w.menuExplain.SetTooltipText(explainUrl(w.comic.Num))
 
 	if w.properties != nil {
 		w.properties.Update()
@@ -366,6 +375,18 @@ func (w *Window) GotoNewest() {
 		log.Print(err)
 	}
 	w.SetComic(newestComic.Num)
+}
+
+// Open explainxkcd in web browser.
+func (w *Window) Explain() {
+	err := open.Start(explainUrl(w.comic.Num))
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+func explainUrl(n int) string {
+	return fmt.Sprintf("https://www.explainxkcd.com/%v/", n)
 }
 
 // Open the comic's link in a web browser.
