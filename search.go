@@ -38,7 +38,7 @@ func (a *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
-	progressBar.SetText("Building search index...")
+	progressBar.SetText("Updating comic index...")
 	progressBar.SetShowText(true)
 	progressBar.Show()
 	ca, err := loadingDialog.GetContentArea()
