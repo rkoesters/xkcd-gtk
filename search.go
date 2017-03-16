@@ -68,8 +68,8 @@ func (a *Application) LoadSearchIndex() {
 			glib.IdleAdd(func() { progressBar.SetFraction(float64(i) / float64(newest.Num)) })
 			GetComicInfo(i)
 		}
-		glib.IdleAdd(loadingDialog.Close)
 		done = true
+		glib.IdleAdd(loadingDialog.Close)
 	}()
 }
 
