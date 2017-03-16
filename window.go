@@ -181,7 +181,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	scwin.Add(w.searchResults)
-	scwin.SetSizeRequest(400, 250)
+	scwin.SetSizeRequest(375, 250)
 	w.loadSearchResults(nil)
 	box.ShowAll()
 	searchPopover.Add(box)
