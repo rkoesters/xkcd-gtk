@@ -4,6 +4,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
+	"github.com/skratchdot/open-golang/open"
 	"log"
 	"math/rand"
 	"os"
@@ -13,17 +14,22 @@ import (
 
 // Window is the main application window.
 type Window struct {
-	comic         *xkcd.Comic
-	win           *gtk.ApplicationWindow
-	hdr           *gtk.HeaderBar
-	previous      *gtk.Button
-	next          *gtk.Button
-	rand          *gtk.Button
-	img           *gtk.Image
-	gotoDialog    *GotoDialog
-	properties    *PropertiesDialog
+	comic *xkcd.Comic
+
+	win      *gtk.ApplicationWindow
+	hdr      *gtk.HeaderBar
+	previous *gtk.Button
+	next     *gtk.Button
+	rand     *gtk.Button
+	img      *gtk.Image
+
+	gotoDialog *GotoDialog
+	properties *PropertiesDialog
+
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
+
+	menuOpenLink *gtk.MenuItem
 }
 
 // New creates a new XKCD viewer window.
@@ -100,6 +106,12 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
+	w.menuOpenLink, err = gtk.MenuItemNewWithLabel("Open Link")
+	if err != nil {
+		return nil, err
+	}
+	w.menuOpenLink.Connect("activate", w.OpenLink)
+	menu.Add(w.menuOpenLink)
 	menuGotoNewest, err := gtk.MenuItemNewWithLabel("Go to Newest Comic")
 	if err != nil {
 		return nil, err
@@ -288,6 +300,13 @@ func (w *Window) DisplayComic() {
 	w.updateNextPreviousButtonStatus()
 	w.rand.SetSensitive(true)
 
+	// If the comic has a link, lets give the option of visiting it.
+	if w.comic.Link == "" {
+		w.menuOpenLink.Hide()
+	} else {
+		w.menuOpenLink.Show()
+	}
+
 	if w.properties != nil {
 		w.properties.Update()
 	}
@@ -346,6 +365,14 @@ func (w *Window) GotoNewest() {
 		log.Print(err)
 	}
 	w.SetComic(newestComic.Num)
+}
+
+// Open the comic's link in a web browser.
+func (w *Window) OpenLink() {
+	err := open.Start(w.comic.Link)
+	if err != nil {
+		log.Print(err)
+	}
 }
 
 func (w *Window) DeleteEvent() {
