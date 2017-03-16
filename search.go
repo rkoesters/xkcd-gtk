@@ -117,6 +117,9 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 		w.searchResults.Add(label)
 		return
 	}
+	// We are grabbing the newest comic so we can figure out how wide to
+	// make comic Id column.
+	newest, _ := GetNewestComicInfo()
 	for _, sr := range result.Hits {
 		item, err := gtk.ButtonNew()
 		if err != nil {
@@ -124,13 +127,27 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 			return
 		}
 		item.Connect("clicked", w.setComicFromSearch, sr.ID)
-		label, err := gtk.LabelNew(fmt.Sprintf("%v: %v", sr.ID, sr.Fields["title"]))
+		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
 			log.Print(err)
 			return
 		}
-		label.SetHAlign(gtk.ALIGN_START)
-		item.Add(label)
+		labelId, err := gtk.LabelNew(sr.ID)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		// Set character column width using character width of largest
+		// comic number.
+		labelId.SetWidthChars(len(fmt.Sprint(newest.Num)))
+		box.Add(labelId)
+		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["title"]))
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		box.Add(labelTitle)
+		item.Add(box)
 		item.SetRelief(gtk.RELIEF_NONE)
 		w.searchResults.Add(item)
 	}
