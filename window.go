@@ -11,11 +11,13 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"sync"
 )
 
 // Window is the main application window.
 type Window struct {
-	comic *xkcd.Comic
+	comic      *xkcd.Comic
+	comicMutex *sync.Mutex
 
 	win      *gtk.ApplicationWindow
 	hdr      *gtk.HeaderBar
@@ -41,6 +43,7 @@ func NewWindow(app *Application) (*Window, error) {
 	w := new(Window)
 
 	w.comic = &xkcd.Comic{Title: "XKCD Viewer"}
+	w.comicMutex = new(sync.Mutex)
 
 	w.win, err = gtk.ApplicationWindowNew(app.GtkApp)
 	if err != nil {
@@ -279,6 +282,11 @@ func (w *Window) SetComic(n int) {
 
 	go func() {
 		var err error
+
+		// Make sure we are the only ones changing w.comic.
+		w.comicMutex.Lock()
+		defer w.comicMutex.Unlock()
+
 		w.comic, err = GetComicInfo(n)
 		if err != nil {
 			log.Printf("error downloading comic info: %v", n)
