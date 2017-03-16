@@ -33,8 +33,6 @@ To uninstall for all users:
 Todo
 ----
 
-- Add search.
-  - Will probably use blevesearch
 - Save state: it seems our gtk wrapper doesn't support
   win.IsMaximized(), so we can't remember if we were maximized.
 
