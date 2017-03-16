@@ -39,7 +39,7 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 				Title:     "Comic Not Found",
 				SafeTitle: "Comic Not Found",
 			}, err
-		} else {
+		} else if err != nil {
 			return &xkcd.Comic{
 				Num:       n,
 				Title:     "Couldn't Get Comic",
