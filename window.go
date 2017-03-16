@@ -378,9 +378,6 @@ func (w *Window) ShowGoto() {
 func (w *Window) GotoNewest() {
 	// Make it clear that we are checking for a new comic.
 	w.hdr.SetTitle("Checking for new comic...")
-	w.previous.SetSensitive(false)
-	w.next.SetSensitive(false)
-	w.rand.SetSensitive(false)
 
 	// Force GetNewestComicInfo to check for a new comic.
 	cachedNewestComic = nil
