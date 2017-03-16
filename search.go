@@ -142,7 +142,7 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 		// comic number.
 		labelId.SetWidthChars(len(fmt.Sprint(newest.Num)))
 		box.Add(labelId)
-		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["title"]))
+		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["safe_title"]))
 		if err != nil {
 			log.Print(err)
 			return
