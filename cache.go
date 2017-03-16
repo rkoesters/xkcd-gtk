@@ -74,7 +74,7 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 	return c, nil
 }
 
-var newestComic *xkcd.Comic
+var cachedNewestComic *xkcd.Comic
 
 var (
 	ErrCache   = errors.New("error accessing local xkcd cache")
@@ -86,8 +86,8 @@ var (
 // however these errors can be ignored safely.
 func GetNewestComicInfo() (*xkcd.Comic, error) {
 	var err error
-	if newestComic == nil {
-		newestComic, err = xkcd.GetCurrent()
+	if cachedNewestComic == nil {
+		cachedNewestComic, err = xkcd.GetCurrent()
 		if err != nil {
 			newestAvaliable := &xkcd.Comic{
 				Num:   0,
@@ -121,7 +121,7 @@ func GetNewestComicInfo() (*xkcd.Comic, error) {
 			return newestAvaliable, ErrOffline
 		}
 	}
-	return newestComic, nil
+	return cachedNewestComic, nil
 }
 
 func downloadComicInfo(n int) error {

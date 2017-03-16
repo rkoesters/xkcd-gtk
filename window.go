@@ -382,6 +382,8 @@ func (w *Window) GotoNewest() {
 	w.next.SetSensitive(false)
 	w.rand.SetSensitive(false)
 
+	// Force GetNewestComicInfo to check for a new comic.
+	cachedNewestComic = nil
 	newestComic, err := GetNewestComicInfo()
 	if err != nil {
 		log.Print(err)
