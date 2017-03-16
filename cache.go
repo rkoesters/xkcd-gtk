@@ -136,7 +136,9 @@ func downloadComicInfo(n int) error {
 	if err != nil {
 		return err
 	}
-	return nil
+
+	// Now add the new file to the searchIndex.
+	return searchIndex.Index(strconv.Itoa(comic.Num), comic)
 }
 
 // DownloadComicImage tries to add a comic image to our local cache. Any

@@ -23,7 +23,7 @@ type Window struct {
 	gotoDialog    *GotoDialog
 	properties    *PropertiesDialog
 	searchEntry   *gtk.SearchEntry
-	searchResults *gtk.ScrolledWindow
+	searchResults *gtk.Box
 }
 
 // New creates a new XKCD viewer window.
@@ -169,18 +169,25 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	w.searchEntry.Connect("search-changed", w.UpdateSearch)
 	box.Add(w.searchEntry)
-	w.searchResults, err = gtk.ScrolledWindowNew(nil, nil)
+	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	box.Add(w.searchResults)
-	searchDoesNotWork, err := gtk.LabelNew("Sorry, search doesn't work yet :(")
+	box.Add(scwin)
+	w.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
 	}
-	w.searchResults.Add(searchDoesNotWork)
-	w.searchResults.SetSizeRequest(400, 250)
+	scwin.Add(w.searchResults)
+	scwin.SetSizeRequest(400, 250)
+	searchLabel, err := gtk.LabelNew("Whatcha lookin' for?")
+	if err != nil {
+		return nil, err
+	}
+	searchLabel.SetVExpand(true)
+	w.searchResults.Add(searchLabel)
 	box.ShowAll()
 	searchPopover.Add(box)
 
@@ -188,19 +195,19 @@ func NewWindow(app *Application) (*Window, error) {
 	w.win.SetTitlebar(w.hdr)
 
 	// Create main part of window.
-	scwin, err := gtk.ScrolledWindowNew(nil, nil)
+	searchScroller, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	scwin.SetSizeRequest(400, 300)
+	searchScroller.SetSizeRequest(400, 300)
 
 	w.img, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
 	}
-	scwin.Add(w.img)
-	scwin.ShowAll()
-	w.win.Add(scwin)
+	searchScroller.Add(w.img)
+	searchScroller.ShowAll()
+	w.win.Add(searchScroller)
 
 	// Recall our window state.
 	ws := NewWindowState(w)
