@@ -5,8 +5,8 @@
 Requirements
 ------------
 
-To build this program, you will need [Go](https://golang.org/) and
-[gotk3](https://github.com/gotk3/gotk3/wiki#installation).
+To build this program, you will need [Go](https://golang.org/) and GTK+3
+developement files (something like `libgtk-3-dev`).
 
 Install
 -------
