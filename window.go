@@ -304,6 +304,7 @@ func (w *Window) DisplayComic() {
 	if w.comic.Link == "" {
 		w.menuOpenLink.Hide()
 	} else {
+		w.menuOpenLink.SetTooltipText(w.comic.Link)
 		w.menuOpenLink.Show()
 	}
 
