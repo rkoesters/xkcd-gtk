@@ -85,7 +85,7 @@ func (w *Window) UpdateSearch() {
 	}
 	query := query.NewFuzzyQuery(userQuery)
 	searchRequest := bleve.NewSearchRequest(query)
-	searchRequest.Size = 20
+	searchRequest.Size = 50
 	searchRequest.Fields = []string{"*"}
 	result, err := searchIndex.Search(searchRequest)
 	if err != nil {
