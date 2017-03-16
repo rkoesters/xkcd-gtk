@@ -182,12 +182,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	scwin.Add(w.searchResults)
 	scwin.SetSizeRequest(400, 250)
-	searchLabel, err := gtk.LabelNew("Whatcha lookin' for?")
-	if err != nil {
-		return nil, err
-	}
-	searchLabel.SetVExpand(true)
-	w.searchResults.Add(searchLabel)
+	w.loadSearchResults(nil)
 	box.ShowAll()
 	searchPopover.Add(box)
 

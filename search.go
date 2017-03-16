@@ -33,9 +33,14 @@ func (w *Window) UpdateSearch() {
 	if err != nil {
 		log.Print(err)
 	}
+	if userQuery == "" {
+		w.clearSearchResults()
+		w.loadSearchResults(nil)
+		return
+	}
 	query := query.NewFuzzyQuery(userQuery)
 	searchRequest := bleve.NewSearchRequest(query)
-	searchRequest.Size = 10
+	searchRequest.Size = 20
 	searchRequest.Fields = []string{"*"}
 	result, err := searchIndex.Search(searchRequest)
 	if err != nil {
@@ -55,6 +60,18 @@ func (w *Window) clearSearchResults() {
 }
 
 func (w *Window) loadSearchResults(result *bleve.SearchResult) {
+	defer w.searchResults.ShowAll()
+	if result == nil {
+		// If there are no results to display, show a friendly message.
+		label, err := gtk.LabelNew("Whatcha lookin' for?")
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		label.SetVExpand(true)
+		w.searchResults.Add(label)
+		return
+	}
 	for _, sr := range result.Hits {
 		item, err := gtk.ButtonNew()
 		if err != nil {
@@ -81,7 +98,6 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 		label.SetVExpand(true)
 		w.searchResults.Add(label)
 	}
-	w.searchResults.ShowAll()
 }
 
 // setComicFromSearch is a wrapper around w.SetComic to work with search
