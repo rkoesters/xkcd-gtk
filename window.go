@@ -108,18 +108,18 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
-	w.menuExplain, err = gtk.MenuItemNewWithLabel("Explain")
-	if err != nil {
-		return nil, err
-	}
-	w.menuExplain.Connect("activate", w.Explain)
-	menu.Add(w.menuExplain)
 	w.menuOpenLink, err = gtk.MenuItemNewWithLabel("Open Link")
 	if err != nil {
 		return nil, err
 	}
 	w.menuOpenLink.Connect("activate", w.OpenLink)
 	menu.Add(w.menuOpenLink)
+	w.menuExplain, err = gtk.MenuItemNewWithLabel("Explain")
+	if err != nil {
+		return nil, err
+	}
+	w.menuExplain.Connect("activate", w.Explain)
+	menu.Add(w.menuExplain)
 	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
 	if err != nil {
 		return nil, err
@@ -315,10 +315,11 @@ func (w *Window) DisplayComic() {
 
 	// If the comic has a link, lets give the option of visiting it.
 	if w.comic.Link == "" {
-		w.menuOpenLink.Hide()
+		w.menuOpenLink.SetTooltipText("")
+		w.menuOpenLink.SetSensitive(false)
 	} else {
 		w.menuOpenLink.SetTooltipText(w.comic.Link)
-		w.menuOpenLink.Show()
+		w.menuOpenLink.SetSensitive(true)
 	}
 	w.menuExplain.SetTooltipText(explainUrl(w.comic.Num))
 
