@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/blevesearch/bleve"
 	"github.com/blevesearch/bleve/search/query"
+	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"log"
 	"path/filepath"
@@ -26,6 +27,38 @@ func (a *Application) LoadSearchIndex() {
 	} else if err != nil {
 		log.Print(err)
 	}
+
+	loadingDialog, err := gtk.DialogNew()
+	if err != nil {
+		log.Print(err)
+	}
+	progressBar, err := gtk.ProgressBarNew()
+	if err != nil {
+		log.Print(err)
+	}
+	progressBar.SetText("Building search index...")
+	progressBar.SetShowText(true)
+	progressBar.Show()
+	ca, err := loadingDialog.GetContentArea()
+	if err != nil {
+		log.Print(err)
+	}
+	ca.SetMarginTop(12)
+	ca.SetMarginBottom(12)
+	ca.SetMarginStart(12)
+	ca.SetMarginEnd(12)
+	ca.Add(progressBar)
+	loadingDialog.Present()
+
+	go func() {
+		// Make sure all comic metadata is cached and indexed.
+		newest, _ := GetNewestComicInfo()
+		for i := 1; i <= newest.Num; i++ {
+			glib.IdleAdd(func() { progressBar.SetFraction(float64(i) / float64(newest.Num)) })
+			GetComicInfo(i)
+		}
+		glib.IdleAdd(loadingDialog.Close)
+	}()
 }
 
 func (w *Window) UpdateSearch() {
