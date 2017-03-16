@@ -120,6 +120,17 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	w.menuOpenLink.Connect("activate", w.OpenLink)
 	menu.Add(w.menuOpenLink)
+	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
+	if err != nil {
+		return nil, err
+	}
+	menuProp.Connect("activate", w.ShowProperties)
+	menu.Add(menuProp)
+	menuSep, err := gtk.SeparatorMenuItemNew()
+	if err != nil {
+		return nil, err
+	}
+	menu.Add(menuSep)
 	menuGotoNewest, err := gtk.MenuItemNewWithLabel("Go to Newest Comic")
 	if err != nil {
 		return nil, err
@@ -132,19 +143,13 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	menuGoto.Connect("activate", w.ShowGoto)
 	menu.Add(menuGoto)
-	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
-	if err != nil {
-		return nil, err
-	}
-	menuProp.Connect("activate", w.ShowProperties)
-	menu.Add(menuProp)
 	menuNewWindow, err := gtk.MenuItemNewWithLabel("New Window")
 	if err != nil {
 		return nil, err
 	}
 	menuNewWindow.Connect("activate", app.Activate)
 	menu.Add(menuNewWindow)
-	menuSep, err := gtk.SeparatorMenuItemNew()
+	menuSep, err = gtk.SeparatorMenuItemNew()
 	if err != nil {
 		return nil, err
 	}
