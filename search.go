@@ -33,6 +33,7 @@ func (a *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
+	loadingDialog.SetTitle("Comic Index Update")
 	loadingDialog.SetResizable(false)
 	progressBar, err := gtk.ProgressBarNew()
 	if err != nil {
