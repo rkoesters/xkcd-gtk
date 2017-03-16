@@ -9,6 +9,7 @@ import (
 	"log"
 	"path/filepath"
 	"strconv"
+	"time"
 )
 
 var searchIndex bleve.Index
@@ -32,6 +33,7 @@ func (a *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
+	loadingDialog.SetResizable(false)
 	progressBar, err := gtk.ProgressBarNew()
 	if err != nil {
 		log.Print(err)
@@ -43,21 +45,31 @@ func (a *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
-	ca.SetMarginTop(12)
-	ca.SetMarginBottom(12)
-	ca.SetMarginStart(12)
-	ca.SetMarginEnd(12)
+	ca.SetMarginTop(24)
+	ca.SetMarginBottom(24)
+	ca.SetMarginStart(24)
+	ca.SetMarginEnd(24)
 	ca.Add(progressBar)
-	loadingDialog.Present()
 
+	done := false
+
+	// Lets only open the dialog if our loading will be longer.
 	go func() {
-		// Make sure all comic metadata is cached and indexed.
+		time.Sleep(time.Second)
+		if !done {
+			glib.IdleAdd(loadingDialog.Present)
+		}
+	}()
+
+	// Make sure all comic metadata is cached and indexed.
+	go func() {
 		newest, _ := GetNewestComicInfo()
 		for i := 1; i <= newest.Num; i++ {
 			glib.IdleAdd(func() { progressBar.SetFraction(float64(i) / float64(newest.Num)) })
 			GetComicInfo(i)
 		}
 		glib.IdleAdd(loadingDialog.Close)
+		done = true
 	}()
 }
 
