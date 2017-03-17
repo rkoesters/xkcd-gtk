@@ -36,7 +36,7 @@ type Window struct {
 	menuOpenLink *gtk.MenuItem
 }
 
-// New creates a new XKCD viewer window.
+// NewWindow creates a new XKCD viewer window.
 func NewWindow(app *Application) (*Window, error) {
 	var err error
 
@@ -327,7 +327,7 @@ func (w *Window) DisplayComic() {
 		w.menuOpenLink.SetTooltipText(w.comic.Link)
 		w.menuOpenLink.SetSensitive(true)
 	}
-	w.menuExplain.SetTooltipText(explainUrl(w.comic.Num))
+	w.menuExplain.SetTooltipText(explainURL(w.comic.Num))
 
 	if w.properties != nil {
 		w.properties.Update()
@@ -351,6 +351,8 @@ func (w *Window) updateNextPreviousButtonStatus() {
 	}
 }
 
+// ShowProperties presents the properties dialog to the user. If the
+// dialog doesn't exist yet, we create it.
 func (w *Window) ShowProperties() {
 	var err error
 	if w.properties == nil {
@@ -363,6 +365,8 @@ func (w *Window) ShowProperties() {
 	w.properties.Present()
 }
 
+// ShowGoto presents the goto dialog to the user. If the dialog doesn't
+// exist yet, we create it.
 func (w *Window) ShowGoto() {
 	var err error
 	if w.gotoDialog == nil {
@@ -375,6 +379,8 @@ func (w *Window) ShowGoto() {
 	w.gotoDialog.Present()
 }
 
+// GotoNewest checks for a new comic and then shows the newest comic to
+// the user.
 func (w *Window) GotoNewest() {
 	// Make it clear that we are checking for a new comic.
 	w.hdr.SetTitle("Checking for new comic...")
@@ -388,19 +394,19 @@ func (w *Window) GotoNewest() {
 	w.SetComic(newestComic.Num)
 }
 
-// Open explainxkcd in web browser.
+// Explain opens a link to explainxkcd.com in the user's web browser.
 func (w *Window) Explain() {
-	err := open.Start(explainUrl(w.comic.Num))
+	err := open.Start(explainURL(w.comic.Num))
 	if err != nil {
 		log.Print(err)
 	}
 }
 
-func explainUrl(n int) string {
+func explainURL(n int) string {
 	return fmt.Sprintf("https://www.explainxkcd.com/%v/", n)
 }
 
-// Open the comic's link in a web browser.
+// OpenLink opens the comic's Link in the user's web browser..
 func (w *Window) OpenLink() {
 	err := open.Start(w.comic.Link)
 	if err != nil {
@@ -408,6 +414,8 @@ func (w *Window) OpenLink() {
 	}
 }
 
+// DeleteEvent gets called when our window gets deleted, and we want to
+// save our window state for next time.
 func (w *Window) DeleteEvent() {
 	// Remember what comic we were viewing.
 	ws := NewWindowState(w)
