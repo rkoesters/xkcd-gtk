@@ -19,12 +19,15 @@ type Window struct {
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
 
-	win      *gtk.ApplicationWindow
-	hdr      *gtk.HeaderBar
+	win *gtk.ApplicationWindow
+	hdr *gtk.HeaderBar
+	img *gtk.Image
+
 	previous *gtk.Button
 	next     *gtk.Button
 	rand     *gtk.Button
-	img      *gtk.Image
+	search   *gtk.MenuButton
+	menu     *gtk.MenuButton
 
 	gotoDialog *GotoDialog
 	properties *PropertiesDialog
@@ -50,6 +53,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	w.win.Connect("delete-event", w.DeleteEvent)
+	w.win.Connect("style-updated", w.StyleUpdatedEvent)
 	w.win.SetDefaultSize(1000, 800)
 
 	// Create HeaderBar
@@ -59,8 +63,6 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	w.hdr.SetTitle("XKCD Viewer")
 	w.hdr.SetShowCloseButton(true)
-
-	headerBarIconSize := lookupHeaderBarIconSize()
 
 	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
@@ -72,14 +74,14 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	navBoxStyleContext.AddClass("linked")
 
-	w.previous, err = gtk.ButtonNewFromIconName("go-previous-symbolic", headerBarIconSize)
+	w.previous, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
 	w.previous.Connect("clicked", w.PreviousComic)
 	navBox.Add(w.previous)
 
-	w.next, err = gtk.ButtonNewFromIconName("go-next-symbolic", headerBarIconSize)
+	w.next, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +90,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackStart(navBox)
 
-	w.rand, err = gtk.ButtonNewFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize)
+	w.rand, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
@@ -96,15 +98,10 @@ func NewWindow(app *Application) (*Window, error) {
 	w.hdr.PackStart(w.rand)
 
 	// Create the menu
-	menuBtn, err := gtk.MenuButtonNew()
+	w.menu, err = gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	cogImg, err := gtk.ImageNewFromIconName("open-menu", headerBarIconSize)
-	if err != nil {
-		return nil, err
-	}
-	menuBtn.SetImage(cogImg)
 
 	menu, err := gtk.MenuNew()
 	if err != nil {
@@ -163,27 +160,22 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	menuAbout.Connect("activate", ShowAboutDialog)
 	menu.Add(menuAbout)
-	menuBtn.SetPopup(menu)
+	w.menu.SetPopup(menu)
 	menu.ShowAll()
 
-	w.hdr.PackEnd(menuBtn)
+	w.hdr.PackEnd(w.menu)
 
-	searchBtn, err := gtk.MenuButtonNew()
+	w.search, err = gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	searchImg, err := gtk.ImageNewFromIconName("edit-find", headerBarIconSize)
-	if err != nil {
-		return nil, err
-	}
-	searchBtn.SetImage(searchImg)
-	w.hdr.PackEnd(searchBtn)
+	w.hdr.PackEnd(w.search)
 
-	searchPopover, err := gtk.PopoverNew(searchBtn)
+	searchPopover, err := gtk.PopoverNew(w.search)
 	if err != nil {
 		return nil, err
 	}
-	searchBtn.SetPopover(searchPopover)
+	w.search.SetPopover(searchPopover)
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
 	if err != nil {
@@ -249,6 +241,8 @@ func NewWindow(app *Application) (*Window, error) {
 		w.properties.Present()
 	}
 	w.SetComic(ws.ComicNumber)
+
+	w.StyleUpdatedEvent()
 
 	return w, nil
 }
@@ -422,5 +416,47 @@ func (w *Window) DeleteEvent() {
 	err := ws.WriteFile(filepath.Join(CacheDir(), "state"))
 	if err != nil {
 		log.Print(err)
+	}
+}
+
+// StyleUpdatedEvent is called when the style of our gtk window is
+// updated.
+func (w *Window) StyleUpdatedEvent() {
+	log.Print("StyleUpdateEvent()")
+	headerBarIconSize := lookupHeaderBarIconSize()
+
+	nextImg, err := gtk.ImageNewFromIconName("go-next-symbolic", headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		w.next.SetImage(nextImg)
+	}
+
+	previousImg, err := gtk.ImageNewFromIconName("go-previous-symbolic", headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		w.previous.SetImage(previousImg)
+	}
+
+	randImg, err := gtk.ImageNewFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		w.rand.SetImage(randImg)
+	}
+
+	searchImg, err := gtk.ImageNewFromIconName("edit-find", headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		w.search.SetImage(searchImg)
+	}
+
+	menuImg, err := gtk.ImageNewFromIconName("open-menu", headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		w.menu.SetImage(menuImg)
 	}
 }
