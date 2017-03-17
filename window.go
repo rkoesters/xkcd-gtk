@@ -419,6 +419,10 @@ func (w *Window) DeleteEvent() {
 	}
 }
 
+// largeToolbarThemes is the list of gtk themes for which we should use
+// large toolbar buttons.
+var largeToolbarThemes = []string{"elementary", "win32"}
+
 // StyleUpdatedEvent is called when the style of our gtk window is
 // updated.
 func (w *Window) StyleUpdatedEvent() {
@@ -436,8 +440,10 @@ func (w *Window) StyleUpdatedEvent() {
 		}
 		themeNameString, ok := themeName.(string)
 		if ok && err == nil {
-			if themeNameString == "elementary" {
-				headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
+			for _, largeToolbarTheme := range largeToolbarThemes {
+				if themeNameString == largeToolbarTheme {
+					headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
+				}
 			}
 		}
 	}
