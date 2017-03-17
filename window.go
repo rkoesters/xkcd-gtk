@@ -53,7 +53,6 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	w.win.Connect("delete-event", w.DeleteEvent)
-	w.win.Connect("style-updated", w.StyleUpdatedEvent)
 	w.win.SetDefaultSize(1000, 800)
 
 	// Create HeaderBar
@@ -242,6 +241,8 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	w.SetComic(ws.ComicNumber)
 
+	// If the gtk theme changes, we might want to adjust our styling.
+	w.win.Connect("style-updated", w.StyleUpdatedEvent)
 	w.StyleUpdatedEvent()
 
 	return w, nil
