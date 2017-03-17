@@ -12,7 +12,6 @@ func lookupHeaderBarIconSize() gtk.IconSize {
 	theme := interfaceSettings.GetString("gtk-theme")
 	if theme == "elementary" {
 		return gtk.ICON_SIZE_LARGE_TOOLBAR
-	} else {
-		return gtk.ICON_SIZE_SMALL_TOOLBAR
 	}
+	return gtk.ICON_SIZE_SMALL_TOOLBAR
 }

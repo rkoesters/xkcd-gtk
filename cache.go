@@ -79,7 +79,7 @@ var cachedNewestComic *xkcd.Comic
 var (
 	// ErrCache means that there was an error while trying to access the
 	// local cache.
-	ErrCache   = errors.New("error accessing local xkcd cache")
+	ErrCache = errors.New("error accessing local xkcd cache")
 	// ErrOffline means that there was an error trying to access the
 	// xkcd server.
 	ErrOffline = errors.New("error accessing xkcd server")
