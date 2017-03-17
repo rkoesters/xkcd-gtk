@@ -1,5 +1,7 @@
 BUILDFLAGS=-tags gtk_3_18
 
+all: fmt lint xkcd-gtk
+
 xkcd-gtk: *.go
 	go build $(BUILDFLAGS)
 
@@ -12,6 +14,12 @@ deps:
 
 clean:
 	go clean
+
+fmt:
+	go fmt
+
+lint:
+	golint
 
 home-install: xkcd-gtk
 	mkdir -p $$HOME/bin
