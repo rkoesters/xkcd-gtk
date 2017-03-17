@@ -6,12 +6,16 @@ import (
 	"strconv"
 )
 
+// GotoDialog holds a gtk dialog that asks the user for a comic number
+// to jump to.
 type GotoDialog struct {
 	parent *Window
 	dialog *gtk.Dialog
 	entry  *gtk.Entry
 }
 
+// NewGotoDialog creates and returns a GotoDialog with parent set as
+// dialog's parent.
 func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 	var err error
 	gt := new(GotoDialog)
@@ -81,10 +85,13 @@ func NewGotoDialog(parent *Window) (*GotoDialog, error) {
 	return gt, nil
 }
 
+// Present is a wrapper around gt.dialog.Present()
 func (gt *GotoDialog) Present() {
 	gt.dialog.Present()
 }
 
+// Destroy removes our references to the dialog so the garbage collector
+// can take care of it.
 func (gt *GotoDialog) Destroy() {
 	gt.entry = nil
 	gt.dialog = nil
@@ -92,9 +99,11 @@ func (gt *GotoDialog) Destroy() {
 	gt.parent = nil
 }
 
-func (gt *GotoDialog) Response(dialog *gtk.Dialog, responseId gtk.ResponseType) {
+// Response is called when a `response` signal is received by the
+// dialog.
+func (gt *GotoDialog) Response(dialog *gtk.Dialog, responseID gtk.ResponseType) {
 	defer dialog.Close()
-	if responseId == 1 {
+	if responseID == 1 {
 		input, err := gt.entry.GetText()
 		if err != nil {
 			log.Print(err)
