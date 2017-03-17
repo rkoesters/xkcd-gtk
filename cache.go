@@ -106,15 +106,15 @@ func GetNewestComicInfo() (*xkcd.Comic, error) {
 			}
 
 			for _, f := range cachedirs {
-				comicId, err := strconv.Atoi(f)
+				comicID, err := strconv.Atoi(f)
 				if err != nil {
 					continue
 				}
-				comic, err := GetComicInfo(comicId)
+				comic, err := GetComicInfo(comicID)
 				if err != nil {
 					continue
 				}
-				if comicId > newestAvaliable.Num {
+				if comicID > newestAvaliable.Num {
 					newestAvaliable = comic
 				}
 			}
