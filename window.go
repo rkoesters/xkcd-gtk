@@ -423,8 +423,6 @@ func (w *Window) DeleteEvent() {
 // StyleUpdatedEvent is called when the style of our gtk window is
 // updated.
 func (w *Window) StyleUpdatedEvent() {
-	log.Print("StyleUpdateEvent()")
-
 	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
 
 	// First, lets find out what theme we are using and use that to
