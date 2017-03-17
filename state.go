@@ -7,6 +7,9 @@ import (
 	"os"
 )
 
+// WindowState is a struct that holds the information about the state of
+// a Window. This struct is meant to be stored so we can restore the
+// state of a Window.
 type WindowState struct {
 	ComicNumber int
 	Height      int
@@ -21,6 +24,8 @@ type WindowState struct {
 	PropertiesPositionY int
 }
 
+// NewWindowState creates a WindowState struct by looking at the state
+// of the given Window.
 func NewWindowState(w *Window) *WindowState {
 	ws := new(WindowState)
 	ws.ComicNumber = w.comic.Num
@@ -34,6 +39,8 @@ func NewWindowState(w *Window) *WindowState {
 	return ws
 }
 
+// Read takes the given io.Reader and tries to parse json encoded state
+// from it.
 func (ws *WindowState) Read(r io.Reader) {
 	dec := json.NewDecoder(r)
 	err := dec.Decode(ws)
@@ -47,6 +54,7 @@ func (ws *WindowState) Read(r io.Reader) {
 	}
 }
 
+// ReadFile opens the given file and calls Read on the contents.
 func (ws *WindowState) ReadFile(filename string) {
 	f, err := os.Open(filename)
 	if err != nil {
@@ -62,11 +70,14 @@ func (ws *WindowState) ReadFile(filename string) {
 	ws.Read(f)
 }
 
+// Write takes the given io.Writer and writes the WindowState struct to
+// it in json.
 func (ws *WindowState) Write(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	return enc.Encode(ws)
 }
 
+// WriteFile creates or truncates the given file and calls Write on it.
 func (ws *WindowState) WriteFile(filename string) error {
 	f, err := os.Create(filename)
 	if err != nil {
