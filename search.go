@@ -14,6 +14,8 @@ import (
 
 var searchIndex bleve.Index
 
+// LoadSearchIndex makes sure that every xkcd comic metadata is cached
+// and indexed in the search index.
 func (a *Application) LoadSearchIndex() {
 	var err error
 	searchIndexPath := filepath.Join(CacheDir(), "search")
@@ -74,7 +76,9 @@ func (a *Application) LoadSearchIndex() {
 	}()
 }
 
-func (w *Window) UpdateSearch() {
+// Search preforms a search with w.searchEntry.GetText() and puts the
+// results into w.searchResults.
+func (w *Window) Search() {
 	userQuery, err := w.searchEntry.GetText()
 	if err != nil {
 		log.Print(err)
@@ -133,15 +137,15 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 			log.Print(err)
 			return
 		}
-		labelId, err := gtk.LabelNew(sr.ID)
+		labelID, err := gtk.LabelNew(sr.ID)
 		if err != nil {
 			log.Print(err)
 			return
 		}
 		// Set character column width using character width of largest
 		// comic number.
-		labelId.SetWidthChars(len(fmt.Sprint(newest.Num)))
-		box.Add(labelId)
+		labelID.SetWidthChars(len(fmt.Sprint(newest.Num)))
+		box.Add(labelID)
 		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["safe_title"]))
 		if err != nil {
 			log.Print(err)

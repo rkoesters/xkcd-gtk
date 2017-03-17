@@ -197,7 +197,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.searchEntry.Connect("search-changed", w.UpdateSearch)
+	w.searchEntry.Connect("search-changed", w.Search)
 	box.Add(w.searchEntry)
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
