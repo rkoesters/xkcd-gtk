@@ -424,7 +424,26 @@ func (w *Window) DeleteEvent() {
 // updated.
 func (w *Window) StyleUpdatedEvent() {
 	log.Print("StyleUpdateEvent()")
-	headerBarIconSize := lookupHeaderBarIconSize()
+
+	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
+
+	// First, lets find out what theme we are using and use that to
+	// decide the size of HeaderBar icons.
+	settings, err := gtk.SettingsGetDefault()
+	if err != nil {
+		log.Print(err)
+	} else {
+		themeName, err := settings.GetProperty("gtk-theme-name")
+		if err != nil {
+			log.Print(err)
+		}
+		themeNameString, ok := themeName.(string)
+		if ok && err == nil {
+			if themeNameString == "elementary" {
+				headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
+			}
+		}
+	}
 
 	nextImg, err := gtk.ImageNewFromIconName("go-next-symbolic", headerBarIconSize)
 	if err != nil {
