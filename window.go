@@ -426,6 +426,7 @@ var largeToolbarThemes = []string{"elementary", "win32"}
 // StyleUpdatedEvent is called when the style of our gtk window is
 // updated.
 func (w *Window) StyleUpdatedEvent() {
+	// The default size for our headerbar buttons is small.
 	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
 
 	// First, lets find out what theme we are using and use that to
