@@ -243,7 +243,6 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// If the gtk theme changes, we might want to adjust our styling.
 	w.win.Connect("style-updated", w.StyleUpdatedEvent)
-	w.StyleUpdatedEvent()
 
 	return w, nil
 }
