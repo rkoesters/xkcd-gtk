@@ -7,12 +7,16 @@ import (
 	"time"
 )
 
+// PropertiesDialog holds a gtk dialog that shows the comic information
+// for the parent window's comic.
 type PropertiesDialog struct {
 	parent *Window
 	dialog *gtk.Dialog
 	labels map[string]*gtk.Label
 }
 
+// NewPropertiesDialog creates and returns a PropertiesDialog for the
+// given parent Window.
 func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	var err error
 
@@ -101,10 +105,13 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) er
 	return nil
 }
 
+// Present is a wrapper around pd.dialog.Present().
 func (pd *PropertiesDialog) Present() {
 	pd.dialog.Present()
 }
 
+// Update changes the dialog's contents to match the parent Window's
+// comic.
 func (pd *PropertiesDialog) Update() {
 	pd.labels["Number"].SetText(fmt.Sprint(pd.parent.comic.Num))
 	pd.labels["Title"].SetText(pd.parent.comic.Title)
@@ -116,6 +123,8 @@ func (pd *PropertiesDialog) Update() {
 	pd.labels["Transcript"].SetText(pd.parent.comic.Transcript)
 }
 
+// Destroy removes our references to the dialog so the garbage collector
+// can take care of it.
 func (pd *PropertiesDialog) Destroy() {
 	pd.labels = nil
 	pd.dialog = nil
