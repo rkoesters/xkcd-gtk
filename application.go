@@ -8,17 +8,19 @@ import (
 	"path/filepath"
 )
 
-const appId = "com.ryankoesters.xkcd-gtk"
+const appID = "com.ryankoesters.xkcd-gtk"
 
+// Application holds onto our GTK representation of our application.
 type Application struct {
 	GtkApp *gtk.Application
 }
 
+// NewApplication creates an instance of our GTK Application.
 func NewApplication() (*Application, error) {
 	var app Application
 	var err error
 
-	app.GtkApp, err = gtk.ApplicationNew(appId, glib.APPLICATION_FLAGS_NONE)
+	app.GtkApp, err = gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
 	if err != nil {
 		return nil, err
 	}
@@ -30,6 +32,7 @@ func NewApplication() (*Application, error) {
 	return &app, nil
 }
 
+// Activate creates and presents a new window to the user.
 func (a *Application) Activate() {
 	window, err := NewWindow(a)
 	if err != nil {
@@ -38,14 +41,17 @@ func (a *Application) Activate() {
 	window.win.Present()
 }
 
+// CacheDir returns the path to our app's cache directory.
 func CacheDir() string {
-	return filepath.Join(basedir.CacheHome, appId)
+	return filepath.Join(basedir.CacheHome, appID)
 }
 
+// ConfigDir returns the path to our app's user configuration directory.
 func ConfigDir() string {
-	return filepath.Join(basedir.ConfigHome, appId)
+	return filepath.Join(basedir.ConfigHome, appID)
 }
 
+// DataDir returns the path to our app's user data directory.
 func DataDir() string {
-	return filepath.Join(basedir.DataHome, appId)
+	return filepath.Join(basedir.DataHome, appID)
 }
