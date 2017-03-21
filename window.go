@@ -426,26 +426,35 @@ var largeToolbarThemes = []string{"elementary", "win32"}
 // StyleUpdatedEvent is called when the style of our gtk window is
 // updated.
 func (w *Window) StyleUpdatedEvent() {
-	// The default size for our headerbar buttons is small.
-	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
-
-	// First, lets find out what theme we are using and use that to
-	// decide the size of HeaderBar icons.
-	settings, err := gtk.SettingsGetDefault()
-	if err != nil {
-		log.Print(err)
-	} else {
-		themeName, err := settings.GetProperty("gtk-theme-name")
+	// First, lets find out what GTK theme we are using.
+	themeName := os.Getenv("GTK_THEME")
+	if themeName == "" {
+		// The theme is not being set by the environment, so lets ask
+		// GTK what theme it is going to use.
+		settings, err := gtk.SettingsGetDefault()
 		if err != nil {
 			log.Print(err)
-		}
-		themeNameString, ok := themeName.(string)
-		if ok && err == nil {
-			for _, largeToolbarTheme := range largeToolbarThemes {
-				if themeNameString == largeToolbarTheme {
-					headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
+		} else {
+			// settings.GetProperty returns an interface{}, we will convert
+			// it to a string in a moment.
+			themeNameIface, err := settings.GetProperty("gtk-theme-name")
+			if err != nil {
+				log.Print(err)
+			} else {
+				themeNameStr, ok := themeNameIface.(string)
+				if ok {
+					themeName = themeNameStr
 				}
 			}
+		}
+	}
+	log.Printf("Using GTK Theme: %v", themeName)
+
+	// The default size for our headerbar buttons is small.
+	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
+	for _, largeToolbarTheme := range largeToolbarThemes {
+		if themeName == largeToolbarTheme {
+			headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
 		}
 	}
 
