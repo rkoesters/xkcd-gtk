@@ -448,7 +448,6 @@ func (w *Window) StyleUpdatedEvent() {
 			}
 		}
 	}
-	log.Printf("Using GTK Theme: %v", themeName)
 
 	// The default size for our headerbar buttons is small.
 	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
