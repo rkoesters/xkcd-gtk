@@ -478,14 +478,14 @@ func (w *Window) StyleUpdatedEvent() {
 		w.rand.SetImage(randImg)
 	}
 
-	searchImg, err := gtk.ImageNewFromIconName("edit-find", headerBarIconSize)
+	searchImg, err := gtk.ImageNewFromIconName("edit-find-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		w.search.SetImage(searchImg)
 	}
 
-	menuImg, err := gtk.ImageNewFromIconName("open-menu", headerBarIconSize)
+	menuImg, err := gtk.ImageNewFromIconName("open-menu-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
