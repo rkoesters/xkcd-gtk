@@ -6,6 +6,7 @@ xkcd-gtk: *.go
 	go build $(BUILDFLAGS)
 
 deps:
+	go get -u $(BUILDFLAGS) github.com/golang/lint/golint
 	go get -u $(BUILDFLAGS) github.com/rkoesters/xkcd
 	go get -u $(BUILDFLAGS) github.com/rkoesters/xdg/...
 	go get -u $(BUILDFLAGS) github.com/skratchdot/open-golang/open
