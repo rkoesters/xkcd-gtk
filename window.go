@@ -153,6 +153,29 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	menu.Add(menuSep)
+	menuWebsiteWhatIf, err := gtk.MenuItemNewWithLabel("what if?")
+	if err != nil {
+		return nil, err
+	}
+	menuWebsiteWhatIf.Connect("activate", OpenURL, "https://what-if.xkcd.com/")
+	menu.Add(menuWebsiteWhatIf)
+	menuWebsiteBlag, err := gtk.MenuItemNewWithLabel("xkcd blog")
+	if err != nil {
+		return nil, err
+	}
+	menuWebsiteBlag.Connect("activate", OpenURL, "https://blog.xkcd.com/")
+	menu.Add(menuWebsiteBlag)
+	menuWebsiteStore, err := gtk.MenuItemNewWithLabel("xkcd store")
+	if err != nil {
+		return nil, err
+	}
+	menuWebsiteStore.Connect("activate", OpenURL, "https://store.xkcd.com/")
+	menu.Add(menuWebsiteStore)
+	menuSep, err = gtk.SeparatorMenuItemNew()
+	if err != nil {
+		return nil, err
+	}
+	menu.Add(menuSep)
 	menuAbout, err := gtk.MenuItemNewWithLabel("About")
 	if err != nil {
 		return nil, err
