@@ -106,6 +106,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	menu.SetHAlign(gtk.ALIGN_END)
 
 	w.menuOpenLink, err = gtk.MenuItemNewWithLabel("Open Link")
 	if err != nil {
