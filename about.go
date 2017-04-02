@@ -8,7 +8,7 @@ import (
 var aboutDialog *gtk.AboutDialog
 
 // ShowAboutDialog shows our application info to the user.
-func ShowAboutDialog() {
+func (a *Application) ShowAboutDialog() {
 	var err error
 	if aboutDialog == nil {
 		aboutDialog, err = gtk.AboutDialogNew()
@@ -31,6 +31,10 @@ func ShowAboutDialog() {
 		// show it again.
 		aboutDialog.HideOnDelete()
 		aboutDialog.Connect("response", aboutDialog.Hide)
+		aboutDialog.Connect("hide", func() {
+			a.GtkApp.RemoveWindow(&aboutDialog.Window)
+		})
 	}
+	a.GtkApp.AddWindow(&aboutDialog.Window)
 	aboutDialog.Present()
 }
