@@ -6,7 +6,7 @@ Requirements
 ------------
 
 To build this program, you will need [Go](https://golang.org/) and GTK+3
-developement files (something like `libgtk-3-dev`).
+development files (something like `libgtk-3-dev`).
 
 Install
 -------
