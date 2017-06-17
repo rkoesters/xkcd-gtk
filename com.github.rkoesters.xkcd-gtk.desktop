@@ -7,7 +7,11 @@ TryExec=xkcd-gtk
 Exec=xkcd-gtk
 Icon=xkcd-gtk
 Terminal=false
-Actions=NewWindow;
+Actions=NewWindow;About;
+
+[Desktop Action About]
+Name=About XKCD Viewer
+Exec=xkcd-gtk --about
 
 [Desktop Action NewWindow]
 Name=New Window
