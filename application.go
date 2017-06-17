@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 )
 
-const appID = "com.ryankoesters.xkcd-gtk"
+const appID = "com.github.rkoesters.xkcd-gtk"
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
