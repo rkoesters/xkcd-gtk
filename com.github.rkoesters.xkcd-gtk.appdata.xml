@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.rkoesters.xkcd-gtk</id>
+  <metadata_license></metadata_lincense>
+  <project_license>GPL-3.0+</project_license>
+
+  <description>
+    <p>
+      XKCD Viewer lets you view xkcd comics and cache them offline.
+    </p>
+  </description>
+ 
+  <launchable type="desktop-id">com.github.rkoesters.xkcd-gtk.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <image></image>
+    </screenshot>
+  </screenshot>
+
+  <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
+  <developer_name>Ryan Koesters</developer_name>
+
+  <provides>
+    <binary>com.github.rkoesters.xkcd-gtk</binary>
+  </provides>
+</component>
