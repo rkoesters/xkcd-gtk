@@ -445,9 +445,15 @@ func (w *Window) DeleteEvent() {
 	}
 }
 
-// largeToolbarThemes is the list of gtk themes for which we should use
-// large toolbar buttons.
-var largeToolbarThemes = []string{"elementary", "win32"}
+var (
+	// largeToolbarThemes is the list of gtk themes for which we should use
+	// large toolbar buttons.
+	largeToolbarThemes = []string{"elementary", "win32"}
+
+	// symbolicIconThemes is the list of gtk themes for which we should use
+	// symbolic icons.
+	symbolicIconThemes = []string{"Adwaita"}
+)
 
 // StyleUpdatedEvent is called when the style of our gtk window is
 // updated.
@@ -483,35 +489,50 @@ func (w *Window) StyleUpdatedEvent() {
 		}
 	}
 
-	nextImg, err := gtk.ImageNewFromIconName("go-next-symbolic", headerBarIconSize)
+	// Should we use symbolic icons?
+	useSymbolicIcons := false
+	for _, symbolicIconTheme := range symbolicIconThemes {
+		if themeName == symbolicIconTheme {
+			useSymbolicIcons = true
+		}
+	}
+	// we will call icon() to automatically add -symbolic if needed.
+	icon := func(s string) string {
+		if useSymbolicIcons {
+			return fmt.Sprint(s, "-symbolic")
+		}
+		return s
+	}
+
+	nextImg, err := gtk.ImageNewFromIconName(icon("go-next"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		w.next.SetImage(nextImg)
 	}
 
-	previousImg, err := gtk.ImageNewFromIconName("go-previous-symbolic", headerBarIconSize)
+	previousImg, err := gtk.ImageNewFromIconName(icon("go-previous"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		w.previous.SetImage(previousImg)
 	}
 
-	randImg, err := gtk.ImageNewFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize)
+	randImg, err := gtk.ImageNewFromIconName(icon("media-playlist-shuffle"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		w.rand.SetImage(randImg)
 	}
 
-	searchImg, err := gtk.ImageNewFromIconName("edit-find-symbolic", headerBarIconSize)
+	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		w.search.SetImage(searchImg)
 	}
 
-	menuImg, err := gtk.ImageNewFromIconName("open-menu-symbolic", headerBarIconSize)
+	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
