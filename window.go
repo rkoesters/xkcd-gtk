@@ -89,7 +89,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w.hdr.PackStart(navBox)
 
-	w.rand, err = gtk.ButtonNew()
+	w.rand, err = gtk.ButtonNewWithLabel("Random")
 	if err != nil {
 		return nil, err
 	}
@@ -516,13 +516,6 @@ func (w *Window) StyleUpdatedEvent() {
 		log.Print(err)
 	} else {
 		w.previous.SetImage(previousImg)
-	}
-
-	randImg, err := gtk.ImageNewFromIconName(icon("media-playlist-shuffle"), headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		w.rand.SetImage(randImg)
 	}
 
 	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
