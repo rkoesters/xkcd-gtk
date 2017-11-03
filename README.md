@@ -13,11 +13,11 @@ Install
 
 To install for current user:
 
-	make deps && make && make home-install
+	make && make home-install
 
 To install for all users:
 
-	make deps && make && sudo make root-install
+	make && sudo make root-install
 
 Uninstall
 ---------
