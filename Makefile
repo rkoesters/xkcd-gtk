@@ -1,6 +1,6 @@
 BUILDFLAGS=-tags gtk_3_18
 
-all: fmt lint xkcd-gtk
+all: deps xkcd-gtk
 
 xkcd-gtk: *.go
 	go build $(BUILDFLAGS)
