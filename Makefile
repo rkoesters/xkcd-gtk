@@ -1,7 +1,8 @@
 APP=com.github.rkoesters.xkcd-gtk
 EXE=$(APP)
-DESKTOP_FILE=$(APP).desktop
 ICON=$(APP).svg
+DESKTOP_FILE=$(APP).desktop
+APPDATA_FILE=$(APP).appdata.xml
 
 BUILDFLAGS=-tags gtk_3_18
 
@@ -27,12 +28,15 @@ clean:
 install: $(EXE)
 	mkdir -p $(bindir)
 	install $(EXE) $(bindir)
-	mkdir -p $(datadir)/applications
-	cp $(DESKTOP_FILE) $(datadir)/applications
 	mkdir -p $(datadir)/icons/hicolor/scalable/apps
 	cp $(ICON) $(datadir)/icons/hicolor/scalable/apps
+	mkdir -p $(datadir)/applications
+	cp $(DESKTOP_FILE) $(datadir)/applications
+	mkdir -p $(datadir)/metainfo
+	cp $(APPDATA_FILE) $(datadir)/metainfo
 
 uninstall:
 	rm $(bindir)/$(EXE) \
+	   $(datadir)/icons/hicolor/scalable/apps/$(ICON) \
 	   $(datadir)/applications/$(DESKTOP_FILE) \
-	   $(datadir)/icons/hicolor/scalable/apps/$(ICON)
+	   $(datadir)/metainfo/$(APPDATA_FILE)
