@@ -1,4 +1,7 @@
-![xkcd-gtk icon](https://cdn.rawgit.com/rkoesters/xkcd-gtk/master/xkcd-gtk.svg)
+XKCD Viewer
+===========
+
+![screenshot](screenshots/screenshot-1.png)
 
 `xkcd-gtk` is a simple XKCD comic viewer written in go using GTK+3.
 
