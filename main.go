@@ -19,7 +19,7 @@ func main() {
 	rand.Seed(time.Now().Unix())
 
 	glib.SetApplicationName("XKCD Viewer")
-	gtk.WindowSetDefaultIconName("xkcd-gtk")
+	gtk.WindowSetDefaultIconName(appID)
 
 	// Create and run our application.
 	app, err := NewApplication()
