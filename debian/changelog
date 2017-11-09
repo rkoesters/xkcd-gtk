@@ -1,5 +1,5 @@
-com.github.rkoesters.xkcd-gtk (0.8.13) precise; urgency=low
+com.github.rkoesters.xkcd-gtk (0.8.14) precise; urgency=low
 
   * Initial AppCenter release.
 
- -- Ryan Koesters <rmkoesters@gmail.com> Thu, 09 Nov 2017 14:12:53 -0600
+ -- Ryan Koesters <rmkoesters@gmail.com> Thu, 09 Nov 2017 14:23:35 -0600
