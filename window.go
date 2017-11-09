@@ -172,17 +172,6 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	menuWebsiteStore.Connect("activate", OpenURL, "https://store.xkcd.com/")
 	menu.Add(menuWebsiteStore)
-	menuSep, err = gtk.SeparatorMenuItemNew()
-	if err != nil {
-		return nil, err
-	}
-	menu.Add(menuSep)
-	menuAbout, err := gtk.MenuItemNewWithLabel("About")
-	if err != nil {
-		return nil, err
-	}
-	menuAbout.Connect("activate", app.ShowAboutDialog)
-	menu.Add(menuAbout)
 	w.menu.SetPopup(menu)
 	menu.ShowAll()
 
