@@ -1,5 +1,5 @@
-com.github.rkoesters.xkcd-gtk (0.8.6) precise; urgency=low
+com.github.rkoesters.xkcd-gtk (0.8.8) precise; urgency=low
 
-  * Added debian packaging.
+  * Initial AppCenter release.
 
- -- Ryan Koesters <rmkoesters@gmail.com> Thu Nov  9 12:21:22 CST 2017
+ -- Ryan Koesters <rmkoesters@gmail.com> Thu Nov  9 13:19:52 CST 2017
