@@ -20,7 +20,7 @@ To install for current user:
 
 To install for all users:
 
-	sudo make install
+	make && sudo make install
 
 Uninstall
 ---------
