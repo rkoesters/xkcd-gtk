@@ -12,7 +12,6 @@ datadir=$(prefix)/share
 all: deps $(EXE)
 
 deps:
-	go get -u $(BUILDFLAGS) github.com/golang/lint/golint
 	go get -u $(BUILDFLAGS) github.com/rkoesters/xkcd
 	go get -u $(BUILDFLAGS) github.com/rkoesters/xdg/...
 	go get -u $(BUILDFLAGS) github.com/skratchdot/open-golang/open
@@ -23,14 +22,7 @@ $(EXE): *.go
 	go build $(BUILDFLAGS) -o $@
 
 clean:
-	go clean
 	rm -f $(EXE)
-
-fmt:
-	go fmt
-
-lint:
-	golint
 
 install: $(EXE)
 	mkdir -p $(bindir)
