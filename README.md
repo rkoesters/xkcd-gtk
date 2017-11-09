@@ -13,22 +13,22 @@ Install
 
 To install for current user:
 
-	make && make home-install
+	make prefix=$HOME/.local install
 
 To install for all users:
 
-	make && sudo make root-install
+	sudo make install
 
 Uninstall
 ---------
 
 To uninstall for current user:
 
-	make home-uninstall
+	make prefix=$HOME/.local uninstall
 
 To uninstall for all users:
 
-	sudo make root-uninstall
+	sudo make uninstall
 
 Todo
 ----
