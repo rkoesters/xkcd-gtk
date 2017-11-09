@@ -3,11 +3,10 @@ Section: x11
 Priority: extra
 Maintainer: Ryan Koesters <rmkoesters@gmail.com>
 Homepage: https://github.com/rkoesters/xkcd-gtk
+Standards-Version: 3.9.3
 Build-Depends: golang (>= 1.6),
                debhelper (>= 9),
                libgtk-3-dev,
-
-Standards-Version: 3.9.3
 
 Package: com.github.rkoesters.xkcd-gtk
 Architecture: any

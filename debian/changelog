@@ -2,4 +2,4 @@ com.github.rkoesters.xkcd-gtk (0.8.6) precise; urgency=low
 
   * Added debian packaging.
 
- -- Ryan Koesters <rmkoesters@gmail.com> Sat, 17 Jun 2017 14:18:26 -0500
+ -- Ryan Koesters <rmkoesters@gmail.com> Thu Nov  9 12:21:22 CST 2017
