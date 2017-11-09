@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>com.github.rkoesters.xkcd-gtk</id>
-  <metadata_license></metadata_lincense>
+  <metadata_license></metadata_license>
   <project_license>GPL-3.0+</project_license>
 
   <description>
@@ -16,7 +16,7 @@
     <screenshot type="default">
       <image></image>
     </screenshot>
-  </screenshot>
+  </screenshots>
 
   <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
   <developer_name>Ryan Koesters</developer_name>
