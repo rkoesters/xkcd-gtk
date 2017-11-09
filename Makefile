@@ -5,7 +5,7 @@ ICON=$(APP).svg
 
 BUILDFLAGS=-tags gtk_3_18
 
-prefix=$(DESTDIR)/usr/local
+prefix=$(DESTDIR)/usr
 bindir=$(prefix)/bin
 datadir=$(prefix)/share
 
