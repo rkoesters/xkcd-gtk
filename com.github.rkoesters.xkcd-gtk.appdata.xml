@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop-application">
-  <id>com.github.rkoesters.xkcd-gtk</id>
-  <metadata_license></metadata_license>
+<component type="desktop">
+  <id>com.github.rkoesters.xkcd-gtk.desktop</id>
+  <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-
+  <name>XKCD Viewer</name>
+  <summary>Browse XKCD comics</summary>
   <description>
-    <p>
-      XKCD Viewer lets you view xkcd comics and cache them offline.
-    </p>
+    <p>XKCD Viewer lets you view xkcd comics and cache them offline.</p>
+    <p>Features include:</p>
+    <ul>
+      <li>Search for comics</li>
+      <li>View comic metadata</li>
+      <li>Cache comics for later offline viewing</li>
+    </ul>
   </description>
- 
-  <launchable type="desktop-id">com.github.rkoesters.xkcd-gtk.desktop</launchable>
 
-  <screenshots>
-    <screenshot type="default">
-      <image></image>
-    </screenshot>
-  </screenshots>
-
-  <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
   <developer_name>Ryan Koesters</developer_name>
-
+  <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
+  <url type="bugtracker">https://github.com/rkoesters/xkcd-gtk/issues</url>
+ 
   <provides>
     <binary>com.github.rkoesters.xkcd-gtk</binary>
   </provides>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/master/screenshots/screenshot-1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/master/screenshots/screenshot-2.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/master/screenshots/screenshot-3.png</image>
+    </screenshot>
+  </screenshots>
 </component>
