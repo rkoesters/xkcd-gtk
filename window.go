@@ -54,7 +54,6 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.win.SetDefaultSize(1000, 800)
 
 	// If the gtk theme changes, we might want to adjust our styling.
 	w.win.Connect("style-updated", w.StyleUpdated)
@@ -247,7 +246,9 @@ func NewWindow(app *Application) (*Window, error) {
 		w.win.Maximize()
 	} else {
 		w.win.Resize(w.state.Width, w.state.Height)
-		w.win.Move(w.state.PositionX, w.state.PositionY)
+		if w.state.PositionX != 0 && w.state.PositionY != 0 {
+			w.win.Move(w.state.PositionX, w.state.PositionY)
+		}
 	}
 	if w.state.PropertiesVisible {
 		if w.properties == nil {

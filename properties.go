@@ -33,7 +33,9 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	pd.dialog.SetSizeRequest(400, 400)
 	pd.dialog.SetDestroyWithParent(true)
 	pd.dialog.Resize(parent.state.PropertiesWidth, parent.state.PropertiesHeight)
-	pd.dialog.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
+	if parent.state.PropertiesPositionX != 0 && parent.state.PropertiesPositionY != 0 {
+		pd.dialog.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
+	}
 
 	pd.dialog.Connect("delete-event", pd.Destroy)
 
