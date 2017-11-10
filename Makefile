@@ -29,11 +29,11 @@ install: $(EXE)
 	mkdir -p $(bindir)
 	install $(EXE) $(bindir)
 	mkdir -p $(datadir)/icons/hicolor/scalable/apps
-	cp $(ICON) $(datadir)/icons/hicolor/scalable/apps
+	cp data/$(ICON) $(datadir)/icons/hicolor/scalable/apps
 	mkdir -p $(datadir)/applications
-	cp $(DESKTOP_FILE) $(datadir)/applications
+	cp data/$(DESKTOP_FILE) $(datadir)/applications
 	mkdir -p $(datadir)/metainfo
-	cp $(APPDATA_FILE) $(datadir)/metainfo
+	cp data/$(APPDATA_FILE) $(datadir)/metainfo
 
 uninstall:
 	rm $(bindir)/$(EXE) \
