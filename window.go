@@ -255,7 +255,7 @@ func NewWindow(app *Application) (*Window, error) {
 	w.SetComic(ws.ComicNumber)
 
 	// If the gtk theme changes, we might want to adjust our styling.
-	w.win.Connect("style-updated", w.StyleUpdatedEvent)
+	w.win.Connect("style-updated", w.StyleUpdated)
 
 	return w, nil
 }
@@ -444,9 +444,8 @@ var (
 	symbolicIconThemes = []string{"Adwaita"}
 )
 
-// StyleUpdatedEvent is called when the style of our gtk window is
-// updated.
-func (w *Window) StyleUpdatedEvent() {
+// StyleUpdated is called when the style of our gtk window is updated.
+func (w *Window) StyleUpdated() {
 	// First, lets find out what GTK theme we are using.
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
