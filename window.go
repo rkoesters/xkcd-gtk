@@ -170,13 +170,13 @@ func NewWindow(app *Application) (*Window, error) {
 	menuWebsiteWhatIf.Connect("activate", OpenURL, whatifLink)
 	menuWebsiteWhatIf.SetTooltipText(whatifLink)
 	menu.Add(menuWebsiteWhatIf)
-	menuWebsiteBlag, err := gtk.MenuItemNewWithLabel("xkcd blog")
+	menuWebsiteBlog, err := gtk.MenuItemNewWithLabel("xkcd blog")
 	if err != nil {
 		return nil, err
 	}
-	menuWebsiteBlag.Connect("activate", OpenURL, blogLink)
-	menuWebsiteBlag.SetTooltipText(blogLink)
-	menu.Add(menuWebsiteBlag)
+	menuWebsiteBlog.Connect("activate", OpenURL, blogLink)
+	menuWebsiteBlog.SetTooltipText(blogLink)
+	menu.Add(menuWebsiteBlog)
 	menuWebsiteStore, err := gtk.MenuItemNewWithLabel("xkcd store")
 	if err != nil {
 		return nil, err
