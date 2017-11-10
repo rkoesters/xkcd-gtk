@@ -3,7 +3,7 @@ XKCD Viewer
 
 ![screenshot](screenshots/screenshot-1.png)
 
-`xkcd-gtk` is a simple XKCD comic viewer written in go using GTK+3.
+`xkcd-gtk` is a simple xkcd comic viewer written in Go using GTK+3.
 
 Requirements
 ------------
