@@ -35,14 +35,15 @@ func (a *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
-	loadingDialog.SetTitle("Comic Index Update")
+	loadingDialog.SetTitle("Search Index Update")
 	loadingDialog.SetResizable(false)
 	progressBar, err := gtk.ProgressBarNew()
 	if err != nil {
 		log.Print(err)
 	}
-	progressBar.SetText("Updating comic index...")
+	progressBar.SetText("Updating comic search index...")
 	progressBar.SetShowText(true)
+	progressBar.SetFraction(0)
 	progressBar.Show()
 	ca, err := loadingDialog.GetContentArea()
 	if err != nil {
@@ -68,8 +69,8 @@ func (a *Application) LoadSearchIndex() {
 	go func() {
 		newest, _ := GetNewestComicInfo()
 		for i := 1; i <= newest.Num; i++ {
-			glib.IdleAdd(func() { progressBar.SetFraction(float64(i) / float64(newest.Num)) })
 			GetComicInfo(i)
+			glib.IdleAdd(func() { progressBar.SetFraction(float64(i) / float64(newest.Num)) })
 		}
 		done = true
 		glib.IdleAdd(loadingDialog.Close)
