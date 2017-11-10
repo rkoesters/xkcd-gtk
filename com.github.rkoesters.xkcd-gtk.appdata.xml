@@ -34,4 +34,8 @@
       <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/master/screenshots/screenshot-3.png</image>
     </screenshot>
   </screenshots>
+  <custom>
+    <value key="x-appcenter-color-primary">#96A8C8</value>
+    <value key="x-appcenter-color-primary-text">#000000</value>
+  </custom>
 </component>
