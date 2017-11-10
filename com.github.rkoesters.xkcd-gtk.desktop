@@ -7,7 +7,7 @@ TryExec=com.github.rkoesters.xkcd-gtk
 Exec=com.github.rkoesters.xkcd-gtk
 Icon=com.github.rkoesters.xkcd-gtk
 Terminal=false
-Categories=Network;
+Categories=Network;GTK;
 Keywords=xkcd;Comic;
 Actions=NewWindow;
 
