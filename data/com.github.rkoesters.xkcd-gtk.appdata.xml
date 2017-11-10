@@ -3,6 +3,11 @@
   <id>com.github.rkoesters.xkcd-gtk.desktop</id>
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
+
+  <provides>
+    <binary>com.github.rkoesters.xkcd-gtk</binary>
+  </provides>
+
   <name>XKCD Viewer</name>
   <summary>Browse XKCD comics</summary>
   <description>
@@ -14,14 +19,10 @@
       <li>Cache comics for later offline viewing</li>
     </ul>
   </description>
-
-  <developer_name>Ryan Koesters</developer_name>
   <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
   <url type="bugtracker">https://github.com/rkoesters/xkcd-gtk/issues</url>
- 
-  <provides>
-    <binary>com.github.rkoesters.xkcd-gtk</binary>
-  </provides>
+  <url type="help">https://github.com/rkoesters/xkcd-gtk/issues</url>
+  <developer_name>Ryan Koesters</developer_name>
 
   <screenshots>
     <screenshot type="default">
@@ -34,6 +35,7 @@
       <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/master/screenshots/screenshot-3.png</image>
     </screenshot>
   </screenshots>
+
   <custom>
     <value key="x-appcenter-color-primary">#96A8C8</value>
     <value key="x-appcenter-color-primary-text">#000000</value>
