@@ -251,13 +251,16 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	if w.state.PropertiesVisible {
 		if w.properties == nil {
+			// NewPropertiesDialog will use these values, so we set the
+			// defaults here.
+			w.state.PropertiesWidth = 500
+			w.state.PropertiesHeight = 600
+
 			w.properties, err = NewPropertiesDialog(w)
 			if err != nil {
 				return nil, err
 			}
 		}
-		w.properties.dialog.Resize(w.state.PropertiesWidth, w.state.PropertiesHeight)
-		w.properties.dialog.Move(w.state.PropertiesPositionX, w.state.PropertiesPositionY)
 		w.properties.Present()
 	}
 	w.SetComic(w.state.ComicNumber)

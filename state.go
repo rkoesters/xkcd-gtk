@@ -83,7 +83,9 @@ func (w *Window) StateChanged() {
 		w.state.Width, w.state.Height = w.win.GetSize()
 		w.state.PositionX, w.state.PositionY = w.win.GetPosition()
 	}
-	if w.properties != nil {
+	if w.properties == nil {
+		w.state.PropertiesVisible = false
+	} else {
 		w.state.PropertiesVisible = true
 		w.state.PropertiesWidth, w.state.PropertiesHeight = w.properties.dialog.GetSize()
 		w.state.PropertiesPositionX, w.state.PropertiesPositionY = w.properties.dialog.GetPosition()

@@ -30,9 +30,18 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	}
 	pd.dialog.SetTransientFor(parent.win)
 	pd.dialog.SetTitle("Properties")
-	pd.dialog.SetDefaultSize(500, 600)
+	pd.dialog.SetSizeRequest(400, 400)
 	pd.dialog.SetDestroyWithParent(true)
+	pd.dialog.Resize(parent.state.PropertiesWidth, parent.state.PropertiesHeight)
+	pd.dialog.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
+
 	pd.dialog.Connect("delete-event", pd.Destroy)
+
+	// The parent keeps track of our state, so we want to tell the
+	// parent when our state changes.
+	pd.dialog.Connect("delete-event", parent.StateChanged)
+	pd.dialog.Connect("size-allocate", parent.StateChanged)
+	pd.dialog.Connect("window-state-event", parent.StateChanged)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
