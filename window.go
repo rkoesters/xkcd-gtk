@@ -241,6 +241,9 @@ func NewWindow(app *Application) (*Window, error) {
 	ws.ReadFile(filepath.Join(CacheDir(), "state"))
 	w.win.Resize(ws.Width, ws.Height)
 	w.win.Move(ws.PositionX, ws.PositionY)
+	if ws.Maximized {
+		w.win.Maximize()
+	}
 	if ws.PropertiesVisible {
 		if w.properties == nil {
 			w.properties, err = NewPropertiesDialog(w)

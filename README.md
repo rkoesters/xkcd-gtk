@@ -33,12 +33,6 @@ To uninstall for all users:
 
 	sudo make uninstall
 
-Todo
-----
-
-- Save state: it seems our gtk wrapper doesn't support
-  win.IsMaximized(), so we can't remember if we were maximized.
-
 License
 -------
 

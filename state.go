@@ -16,6 +16,7 @@ type WindowState struct {
 	Width       int
 	PositionX   int
 	PositionY   int
+	Maximized   bool
 
 	PropertiesVisible   bool
 	PropertiesHeight    int
@@ -31,6 +32,7 @@ func NewWindowState(w *Window) *WindowState {
 	ws.ComicNumber = w.comic.Num
 	ws.Width, ws.Height = w.win.GetSize()
 	ws.PositionX, ws.PositionY = w.win.GetPosition()
+	ws.Maximized = w.win.IsMaximized()
 	if w.properties != nil {
 		ws.PropertiesVisible = true
 		ws.PropertiesWidth, ws.PropertiesHeight = w.properties.dialog.GetSize()
