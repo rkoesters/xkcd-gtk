@@ -26,18 +26,27 @@ type WindowState struct {
 	PropertiesPositionY int
 }
 
+func (ws *WindowState) loadDefaults() {
+	newestComic, _ := GetNewestComicInfo()
+	ws.ComicNumber = newestComic.Num
+	ws.Height = 800
+	ws.Width = 1000
+	ws.PositionX = 0
+	ws.PositionY = 0
+	ws.PropertiesVisible = false
+	ws.PropertiesHeight = 600
+	ws.PropertiesWidth = 500
+	ws.PropertiesPositionX = 0
+	ws.PropertiesPositionY = 0
+}
+
 // Read takes the given io.Reader and tries to parse json encoded state
 // from it.
 func (ws *WindowState) Read(r io.Reader) {
 	dec := json.NewDecoder(r)
 	err := dec.Decode(ws)
 	if err != nil {
-		// Something is wrong, lets load defaults.
-		log.Printf("reading state: %v", err)
-		newestComic, _ := GetNewestComicInfo()
-		ws.ComicNumber = newestComic.Num
-		ws.Height = 800
-		ws.Width = 1000
+		ws.loadDefaults()
 	}
 }
 
@@ -45,12 +54,7 @@ func (ws *WindowState) Read(r io.Reader) {
 func (ws *WindowState) ReadFile(filename string) {
 	f, err := os.Open(filename)
 	if err != nil {
-		// Can't read file, lets load defaults.
-		log.Printf("reading state from %v: %v", filename, err)
-		newestComic, _ := GetNewestComicInfo()
-		ws.ComicNumber = newestComic.Num
-		ws.Height = 800
-		ws.Width = 1000
+		ws.loadDefaults()
 		return
 	}
 	defer f.Close()
