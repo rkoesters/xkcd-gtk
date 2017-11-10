@@ -16,6 +16,8 @@ import (
 
 // Window is the main application window.
 type Window struct {
+	state *WindowState
+
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
 
@@ -52,8 +54,10 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.win.Connect("delete-event", w.DeleteEvent)
 	w.win.SetDefaultSize(1000, 800)
+
+	// If the gtk theme changes, we might want to adjust our styling.
+	w.win.Connect("style-updated", w.StyleUpdated)
 
 	// Create HeaderBar
 	w.hdr, err = gtk.HeaderBarNew()
@@ -237,29 +241,34 @@ func NewWindow(app *Application) (*Window, error) {
 	w.win.Add(searchScroller)
 
 	// Recall our window state.
-	ws := NewWindowState(w)
-	ws.ReadFile(filepath.Join(CacheDir(), "state"))
-	if ws.Maximized {
+	w.state = new(WindowState)
+	w.state.ReadFile(filepath.Join(CacheDir(), "state"))
+	if w.state.Maximized {
 		w.win.Maximize()
 	} else {
-		w.win.Resize(ws.Width, ws.Height)
-		w.win.Move(ws.PositionX, ws.PositionY)
+		w.win.Resize(w.state.Width, w.state.Height)
+		w.win.Move(w.state.PositionX, w.state.PositionY)
 	}
-	if ws.PropertiesVisible {
+	if w.state.PropertiesVisible {
 		if w.properties == nil {
 			w.properties, err = NewPropertiesDialog(w)
 			if err != nil {
 				return nil, err
 			}
 		}
-		w.properties.dialog.Resize(ws.PropertiesWidth, ws.PropertiesHeight)
-		w.properties.dialog.Move(ws.PropertiesPositionX, ws.PropertiesPositionY)
+		w.properties.dialog.Resize(w.state.PropertiesWidth, w.state.PropertiesHeight)
+		w.properties.dialog.Move(w.state.PropertiesPositionX, w.state.PropertiesPositionY)
 		w.properties.Present()
 	}
-	w.SetComic(ws.ComicNumber)
+	w.SetComic(w.state.ComicNumber)
 
-	// If the gtk theme changes, we might want to adjust our styling.
-	w.win.Connect("style-updated", w.StyleUpdated)
+	// If the gtk window state changes, we want to update our internal
+	// window state.
+	w.win.Connect("size-allocate", w.StateChanged)
+	w.win.Connect("window-state-event", w.StateChanged)
+
+	// If the window is closed, we want to write our state to disk.
+	w.win.Connect("delete-event", w.SaveState)
 
 	return w, nil
 }
@@ -290,6 +299,7 @@ func (w *Window) SetComic(n int) {
 	w.hdr.SetTitle("Loading comic...")
 	w.hdr.SetSubtitle(strconv.Itoa(n))
 	w.updateNextPreviousButtonStatus()
+	w.state.ComicNumber = n
 
 	go func() {
 		var err error
@@ -421,17 +431,6 @@ func explainURL(n int) string {
 // OpenLink opens the comic's Link in the user's web browser..
 func (w *Window) OpenLink() {
 	err := open.Start(w.comic.Link)
-	if err != nil {
-		log.Print(err)
-	}
-}
-
-// DeleteEvent gets called when our window gets deleted, and we want to
-// save our window state for next time.
-func (w *Window) DeleteEvent() {
-	// Remember what comic we were viewing.
-	ws := NewWindowState(w)
-	err := ws.WriteFile(filepath.Join(CacheDir(), "state"))
 	if err != nil {
 		log.Print(err)
 	}

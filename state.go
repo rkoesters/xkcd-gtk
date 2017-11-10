@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 // WindowState is a struct that holds the information about the state of
@@ -23,24 +24,6 @@ type WindowState struct {
 	PropertiesWidth     int
 	PropertiesPositionX int
 	PropertiesPositionY int
-}
-
-// NewWindowState creates a WindowState struct by looking at the state
-// of the given Window.
-func NewWindowState(w *Window) *WindowState {
-	ws := new(WindowState)
-	ws.ComicNumber = w.comic.Num
-	ws.Maximized = w.win.IsMaximized()
-	if !ws.Maximized {
-		ws.Width, ws.Height = w.win.GetSize()
-		ws.PositionX, ws.PositionY = w.win.GetPosition()
-	}
-	if w.properties != nil {
-		ws.PropertiesVisible = true
-		ws.PropertiesWidth, ws.PropertiesHeight = w.properties.dialog.GetSize()
-		ws.PropertiesPositionX, ws.PropertiesPositionY = w.properties.dialog.GetPosition()
-	}
-	return ws
 }
 
 // Read takes the given io.Reader and tries to parse json encoded state
@@ -90,4 +73,28 @@ func (ws *WindowState) WriteFile(filename string) error {
 	}
 	defer f.Close()
 	return ws.Write(f)
+}
+
+// StateChanged is called when GTK's window state changes and we want to
+// update our internal state to match GTK's changes.
+func (w *Window) StateChanged() {
+	w.state.Maximized = w.win.IsMaximized()
+	if !w.state.Maximized {
+		w.state.Width, w.state.Height = w.win.GetSize()
+		w.state.PositionX, w.state.PositionY = w.win.GetPosition()
+	}
+	if w.properties != nil {
+		w.state.PropertiesVisible = true
+		w.state.PropertiesWidth, w.state.PropertiesHeight = w.properties.dialog.GetSize()
+		w.state.PropertiesPositionX, w.state.PropertiesPositionY = w.properties.dialog.GetPosition()
+	}
+}
+
+// SaveState writes w.state to disk so it can be loaded next time we
+// open a window.
+func (w *Window) SaveState() {
+	err := w.state.WriteFile(filepath.Join(CacheDir(), "state"))
+	if err != nil {
+		log.Print(err)
+	}
 }
