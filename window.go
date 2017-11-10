@@ -14,6 +14,12 @@ import (
 	"sync"
 )
 
+const (
+	whatifLink = "https://what-if.xkcd.com/"
+	blogLink   = "https://blog.xkcd.com/"
+	storeLink  = "https://store.xkcd.com/"
+)
+
 // Window is the main application window.
 type Window struct {
 	state *WindowState
@@ -161,19 +167,22 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	menuWebsiteWhatIf.Connect("activate", OpenURL, "https://what-if.xkcd.com/")
+	menuWebsiteWhatIf.Connect("activate", OpenURL, whatifLink)
+	menuWebsiteWhatIf.SetTooltipText(whatifLink)
 	menu.Add(menuWebsiteWhatIf)
 	menuWebsiteBlag, err := gtk.MenuItemNewWithLabel("xkcd blog")
 	if err != nil {
 		return nil, err
 	}
-	menuWebsiteBlag.Connect("activate", OpenURL, "https://blog.xkcd.com/")
+	menuWebsiteBlag.Connect("activate", OpenURL, blogLink)
+	menuWebsiteBlag.SetTooltipText(blogLink)
 	menu.Add(menuWebsiteBlag)
 	menuWebsiteStore, err := gtk.MenuItemNewWithLabel("xkcd store")
 	if err != nil {
 		return nil, err
 	}
-	menuWebsiteStore.Connect("activate", OpenURL, "https://store.xkcd.com/")
+	menuWebsiteStore.Connect("activate", OpenURL, storeLink)
+	menuWebsiteStore.SetTooltipText(storeLink)
 	menu.Add(menuWebsiteStore)
 	w.menu.SetPopup(menu)
 	menu.ShowAll()
