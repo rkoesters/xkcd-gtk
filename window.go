@@ -86,6 +86,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	w.previous.SetTooltipText("Go to the previous comic")
 	w.previous.Connect("clicked", w.PreviousComic)
 	navBox.Add(w.previous)
 
@@ -93,6 +94,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	w.next.SetTooltipText("Go to the next comic")
 	w.next.Connect("clicked", w.NextComic)
 	navBox.Add(w.next)
 
@@ -102,6 +104,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	w.rand.SetTooltipText("Go to a random comic")
 	w.rand.Connect("clicked", w.RandomComic)
 	w.hdr.PackStart(w.rand)
 
@@ -110,6 +113,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	w.menu.SetTooltipText("Menu")
 
 	menu, err := gtk.MenuNew()
 	if err != nil {
@@ -193,6 +197,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	w.search.SetTooltipText("Search")
 	w.hdr.PackEnd(w.search)
 
 	searchPopover, err := gtk.PopoverNew(w.search)
