@@ -13,7 +13,7 @@ datadir=$(prefix)/share
 all: deps $(EXE)
 
 deps:
-	go get -u $(BUILDFLAGS) `tools/list-imports.sh`
+	go get -u $(BUILDFLAGS) `tools/list-deps.sh`
 
 $(EXE): *.go
 	go build $(BUILDFLAGS) -o $@
