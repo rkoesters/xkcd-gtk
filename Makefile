@@ -6,7 +6,7 @@ APPDATA_FILE=$(APP).appdata.xml
 
 BUILDFLAGS=-tags gtk_3_18
 
-prefix=$(DESTDIR)/usr
+prefix=/usr
 bindir=$(prefix)/bin
 datadir=$(prefix)/share
 
@@ -26,17 +26,17 @@ clean:
 	rm -f $(EXE)
 
 install: $(EXE)
-	mkdir -p $(bindir)
-	install $(EXE) $(bindir)
-	mkdir -p $(datadir)/icons/hicolor/scalable/apps
-	cp data/$(ICON) $(datadir)/icons/hicolor/scalable/apps
-	mkdir -p $(datadir)/applications
-	cp data/$(DESKTOP_FILE) $(datadir)/applications
-	mkdir -p $(datadir)/metainfo
-	cp data/$(APPDATA_FILE) $(datadir)/metainfo
+	mkdir -p $(DESTDIR)$(bindir)
+	install $(EXE) $(DESTDIR)$(bindir)
+	mkdir -p $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
+	cp data/$(ICON) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
+	mkdir -p $(DESTDIR)$(datadir)/applications
+	cp data/$(DESKTOP_FILE) $(DESTDIR)$(datadir)/applications
+	mkdir -p $(DESTDIR)$(datadir)/metainfo
+	cp data/$(APPDATA_FILE) $(DESTDIR)$(datadir)/metainfo
 
 uninstall:
-	rm $(bindir)/$(EXE) \
-	   $(datadir)/icons/hicolor/scalable/apps/$(ICON) \
-	   $(datadir)/applications/$(DESKTOP_FILE) \
-	   $(datadir)/metainfo/$(APPDATA_FILE)
+	rm $(DESTDIR)$(bindir)/$(EXE) \
+	   $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON) \
+	   $(DESTDIR)$(datadir)/applications/$(DESKTOP_FILE) \
+	   $(DESTDIR)$(datadir)/metainfo/$(APPDATA_FILE)
