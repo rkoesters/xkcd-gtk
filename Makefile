@@ -13,11 +13,7 @@ datadir=$(prefix)/share
 all: deps $(EXE)
 
 deps:
-	go get -u $(BUILDFLAGS) github.com/rkoesters/xkcd
-	go get -u $(BUILDFLAGS) github.com/rkoesters/xdg/...
-	go get -u $(BUILDFLAGS) github.com/skratchdot/open-golang/open
-	go get -u $(BUILDFLAGS) github.com/blevesearch/bleve/...
-	go get -u $(BUILDFLAGS) github.com/gotk3/gotk3/...
+	go get -u $(BUILDFLAGS) `tools/list-imports.sh`
 
 $(EXE): *.go
 	go build $(BUILDFLAGS) -o $@
