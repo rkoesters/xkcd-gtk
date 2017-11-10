@@ -239,10 +239,11 @@ func NewWindow(app *Application) (*Window, error) {
 	// Recall our window state.
 	ws := NewWindowState(w)
 	ws.ReadFile(filepath.Join(CacheDir(), "state"))
-	w.win.Resize(ws.Width, ws.Height)
-	w.win.Move(ws.PositionX, ws.PositionY)
 	if ws.Maximized {
 		w.win.Maximize()
+	} else {
+		w.win.Resize(ws.Width, ws.Height)
+		w.win.Move(ws.PositionX, ws.PositionY)
 	}
 	if ws.PropertiesVisible {
 		if w.properties == nil {

@@ -30,9 +30,11 @@ type WindowState struct {
 func NewWindowState(w *Window) *WindowState {
 	ws := new(WindowState)
 	ws.ComicNumber = w.comic.Num
-	ws.Width, ws.Height = w.win.GetSize()
-	ws.PositionX, ws.PositionY = w.win.GetPosition()
 	ws.Maximized = w.win.IsMaximized()
+	if !ws.Maximized {
+		ws.Width, ws.Height = w.win.GetSize()
+		ws.PositionX, ws.PositionY = w.win.GetPosition()
+	}
 	if w.properties != nil {
 		ws.PropertiesVisible = true
 		ws.PropertiesWidth, ws.PropertiesHeight = w.properties.dialog.GetSize()
