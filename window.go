@@ -327,11 +327,10 @@ func (w *Window) DisplayComic() {
 	w.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
+	w.menuOpenLink.SetTooltipText(w.comic.Link)
 	if w.comic.Link == "" {
-		w.menuOpenLink.SetTooltipText("")
 		w.menuOpenLink.SetSensitive(false)
 	} else {
-		w.menuOpenLink.SetTooltipText(w.comic.Link)
 		w.menuOpenLink.SetSensitive(true)
 	}
 	w.menuExplain.SetTooltipText(explainURL(w.comic.Num))
