@@ -239,19 +239,19 @@ func NewWindow(app *Application) (*Window, error) {
 	w.win.SetTitlebar(w.hdr)
 
 	// Create main part of window.
-	mainScroller, err := gtk.ScrolledWindowNew(nil, nil)
+	imgScroller, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	mainScroller.SetSizeRequest(400, 300)
+	imgScroller.SetSizeRequest(400, 300)
 
 	w.img, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
 	}
-	mainScroller.Add(w.img)
-	mainScroller.ShowAll()
-	w.win.Add(mainScroller)
+	imgScroller.Add(w.img)
+	imgScroller.ShowAll()
+	w.win.Add(imgScroller)
 
 	// Recall our window state.
 	w.state = new(WindowState)
