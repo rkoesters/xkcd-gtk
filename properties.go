@@ -102,6 +102,7 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) er
 	if err != nil {
 		return err
 	}
+	valLabel.SetXAlign(0)
 	valLabel.SetHAlign(gtk.ALIGN_START)
 	valLabel.SetVAlign(gtk.ALIGN_START)
 	valLabel.SetLineWrap(true)
