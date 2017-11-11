@@ -4,16 +4,17 @@ ICON=$(APP).svg
 DESKTOP_FILE=$(APP).desktop
 APPDATA_FILE=$(APP).appdata.xml
 
-BUILDFLAGS=-tags gtk_3_18
-
 prefix=/usr
 bindir=$(prefix)/bin
 datadir=$(prefix)/share
 
+BUILDFLAGS=-tags gtk_3_18
+DEPS=$(shell tools/list-deps.sh)
+
 all: deps $(EXE)
 
 deps:
-	go get -u $(BUILDFLAGS) `tools/list-deps.sh`
+	go get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE): *.go
 	go build $(BUILDFLAGS) -o $@
