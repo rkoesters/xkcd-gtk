@@ -143,6 +143,7 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 			log.Print(err)
 			return
 		}
+		labelID.SetXAlign(1)
 		// Set character column width using character width of largest
 		// comic number.
 		labelID.SetWidthChars(len(fmt.Sprint(newest.Num)))
