@@ -37,7 +37,6 @@ type Window struct {
 	search   *gtk.MenuButton
 	menu     *gtk.MenuButton
 
-	gotoDialog *GotoDialog
 	properties *PropertiesDialog
 
 	searchEntry   *gtk.SearchEntry
@@ -150,12 +149,6 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	menuGotoNewest.Connect("activate", w.GotoNewest)
 	menu.Add(menuGotoNewest)
-	menuGoto, err := gtk.MenuItemNewWithLabel("Go to...")
-	if err != nil {
-		return nil, err
-	}
-	menuGoto.Connect("activate", w.ShowGoto)
-	menu.Add(menuGoto)
 	menuNewWindow, err := gtk.MenuItemNewWithLabel("New Window")
 	if err != nil {
 		return nil, err
@@ -395,20 +388,6 @@ func (w *Window) ShowProperties() {
 		}
 	}
 	w.properties.Present()
-}
-
-// ShowGoto presents the goto dialog to the user. If the dialog doesn't
-// exist yet, we create it.
-func (w *Window) ShowGoto() {
-	var err error
-	if w.gotoDialog == nil {
-		w.gotoDialog, err = NewGotoDialog(w)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-	}
-	w.gotoDialog.Present()
 }
 
 // GotoNewest checks for a new comic and then shows the newest comic to
