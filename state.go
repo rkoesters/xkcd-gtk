@@ -13,11 +13,12 @@ import (
 // state of a Window.
 type WindowState struct {
 	ComicNumber int
-	Height      int
-	Width       int
-	PositionX   int
-	PositionY   int
-	Maximized   bool
+
+	Maximized bool
+	Height    int
+	Width     int
+	PositionX int
+	PositionY int
 
 	PropertiesVisible   bool
 	PropertiesHeight    int
