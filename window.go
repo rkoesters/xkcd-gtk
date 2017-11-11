@@ -22,12 +22,12 @@ const (
 
 // Window is the main application window.
 type Window struct {
+	win   *gtk.ApplicationWindow
 	state *WindowState
 
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
 
-	win *gtk.ApplicationWindow
 	hdr *gtk.HeaderBar
 	img *gtk.Image
 
