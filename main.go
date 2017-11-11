@@ -18,7 +18,7 @@ func main() {
 	// Make sure our random number generator is seeded.
 	rand.Seed(time.Now().Unix())
 
-	glib.SetApplicationName("XKCD Viewer")
+	glib.SetApplicationName(appName)
 	gtk.WindowSetDefaultIconName(appID)
 
 	// Create and run our application.

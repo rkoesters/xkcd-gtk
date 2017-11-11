@@ -53,7 +53,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 	w := new(Window)
 
-	w.comic = &xkcd.Comic{Title: "XKCD Viewer"}
+	w.comic = &xkcd.Comic{Title: appName}
 	w.comicMutex = new(sync.Mutex)
 
 	w.win, err = gtk.ApplicationWindowNew(app.GtkApp)
@@ -69,7 +69,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	w.hdr.SetTitle("XKCD Viewer")
+	w.hdr.SetTitle(appName)
 	w.hdr.SetShowCloseButton(true)
 
 	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
