@@ -37,13 +37,13 @@ type Window struct {
 	search   *gtk.MenuButton
 	menu     *gtk.MenuButton
 
-	properties *PropertiesDialog
-
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
 
 	menuExplain  *gtk.MenuItem
 	menuOpenLink *gtk.MenuItem
+
+	properties *PropertiesDialog
 }
 
 // NewWindow creates a new xkcd viewer window.
