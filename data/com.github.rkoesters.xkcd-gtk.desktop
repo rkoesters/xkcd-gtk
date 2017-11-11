@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=XKCD Viewer
-Comment=View XKCD comics
+Comment=Browse xkcd comics
 TryExec=com.github.rkoesters.xkcd-gtk
 Exec=com.github.rkoesters.xkcd-gtk
 Icon=com.github.rkoesters.xkcd-gtk

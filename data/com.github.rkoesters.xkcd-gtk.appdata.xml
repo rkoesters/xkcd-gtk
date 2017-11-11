@@ -9,7 +9,7 @@
   </provides>
 
   <name>XKCD Viewer</name>
-  <summary>Browse XKCD comics</summary>
+  <summary>Browse xkcd comics</summary>
   <description>
     <p>XKCD Viewer lets you view xkcd comics and cache them offline.</p>
     <p>Features include:</p>

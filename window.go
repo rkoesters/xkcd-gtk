@@ -46,7 +46,7 @@ type Window struct {
 	menuOpenLink *gtk.MenuItem
 }
 
-// NewWindow creates a new XKCD viewer window.
+// NewWindow creates a new xkcd viewer window.
 func NewWindow(app *Application) (*Window, error) {
 	var err error
 

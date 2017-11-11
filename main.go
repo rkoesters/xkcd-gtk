@@ -1,4 +1,4 @@
-// xkcd-gtk is a XKCD Comic Viewer App written in Go and GTK+3 (using
+// xkcd-gtk is a xkcd comic viewer app written in Go with GTK+3 (using
 // the gotk3 bindings).
 package main
 
