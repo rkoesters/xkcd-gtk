@@ -30,6 +30,7 @@ type WindowState struct {
 func (ws *WindowState) loadDefaults() {
 	newestComic, _ := GetNewestComicInfo()
 	ws.ComicNumber = newestComic.Num
+	ws.Maximized = false
 	ws.Height = 800
 	ws.Width = 1000
 	ws.PositionX = 0
