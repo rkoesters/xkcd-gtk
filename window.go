@@ -23,7 +23,7 @@ const (
 // Window is the main application window.
 type Window struct {
 	win   *gtk.ApplicationWindow
-	state *WindowState
+	state WindowState
 
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
@@ -254,7 +254,6 @@ func NewWindow(app *Application) (*Window, error) {
 	w.win.Add(imgScroller)
 
 	// Recall our window state.
-	w.state = new(WindowState)
 	w.state.ReadFile(filepath.Join(CacheDir(), "state"))
 	if w.state.Maximized {
 		w.win.Maximize()
