@@ -9,5 +9,5 @@ Homepage: https://github.com/rkoesters/xkcd-gtk
 Package: com.github.rkoesters.xkcd-gtk
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: XKCD Viewer
+Description: Comic Sticks
  xkcd-gtk is a xkcd comic viewer written in Go.
