@@ -11,7 +11,7 @@ import (
 
 const (
 	appID   = "com.github.rkoesters.xkcd-gtk"
-	appName = "XKCD Viewer"
+	appName = "Comic Sticks"
 )
 
 // Application holds onto our GTK representation of our application.

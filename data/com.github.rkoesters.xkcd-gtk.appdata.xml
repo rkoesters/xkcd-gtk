@@ -8,10 +8,10 @@
     <binary>com.github.rkoesters.xkcd-gtk</binary>
   </provides>
 
-  <name>XKCD Viewer</name>
+  <name>Comic Sticks</name>
   <summary>Browse xkcd comics</summary>
   <description>
-    <p>XKCD Viewer lets you view xkcd comics and cache them offline.</p>
+    <p>Comic Sticks lets you view xkcd comics and cache them offline.</p>
     <p>Features include:</p>
     <ul>
       <li>Search for comics</li>
