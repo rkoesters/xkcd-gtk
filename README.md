@@ -3,6 +3,9 @@ Comic Sticks
 
 `xkcd-gtk` is a simple xkcd comic viewer written in Go using GTK+3.
 
+[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk)
+
+
 ![screenshot](screenshots/screenshot-1.png)
 
 Requirements
