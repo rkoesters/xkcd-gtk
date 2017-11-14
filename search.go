@@ -106,6 +106,7 @@ func (w *Window) Search() {
 	w.loadSearchResults(result)
 }
 
+// Remove all widgets from the search results area.
 func (w *Window) clearSearchResults() {
 	children := w.searchResults.GetChildren()
 	for i := uint(0); i < children.Length(); i++ {
@@ -115,6 +116,7 @@ func (w *Window) clearSearchResults() {
 	}
 }
 
+// Show the user the given search results.
 func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 	defer w.searchResults.ShowAll()
 	if result == nil {
@@ -176,7 +178,7 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 
 // setComicFromSearch is a wrapper around w.SetComic to work with search
 // result buttons.
-func (w *Window) setComicFromSearch(btn *gtk.Button, id string) {
+func (w *Window) setComicFromSearch(_ interface{}, id string) {
 	number, err := strconv.Atoi(id)
 	if err != nil {
 		log.Print(err)
