@@ -108,12 +108,9 @@ func (w *Window) Search() {
 
 // Remove all widgets from the search results area.
 func (w *Window) clearSearchResults() {
-	children := w.searchResults.GetChildren()
-	for i := uint(0); i < children.Length(); i++ {
-		data := children.NthData(i)
-		widget := data.(gtk.IWidget)
-		w.searchResults.Remove(widget)
-	}
+	w.searchResults.GetChildren().Foreach(func(child interface{}) {
+		w.searchResults.Remove(child.(gtk.IWidget))
+	})
 }
 
 // Show the user the given search results.
