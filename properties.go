@@ -54,6 +54,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	scwin.SetMarginBottom(0)
 	scwin.SetMarginStart(0)
 	scwin.SetMarginEnd(0)
+	scwin.SetVExpand(true)
 
 	grid, err := gtk.GridNew()
 	if err != nil {
@@ -83,9 +84,6 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	box.Add(scwin)
-	// Not sure why this line is needed, but the dialog will be blank
-	// without it.
-	box.SetProperty("orientation", gtk.ORIENTATION_HORIZONTAL)
 	box.ShowAll()
 
 	return pd, nil
