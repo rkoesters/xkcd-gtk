@@ -31,6 +31,6 @@ func main() {
 	// Tell glib that this is our process's main application.
 	app.GtkApp.SetDefault()
 
-	// Run the event loop, exit if it returns.
+	// Run the event loop; exit if it returns.
 	os.Exit(app.GtkApp.Run(os.Args))
 }
