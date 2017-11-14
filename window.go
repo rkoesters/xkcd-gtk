@@ -181,9 +181,20 @@ func NewWindow(app *Application) (*Window, error) {
 	menuWebsiteStore.Connect("activate", OpenURL, storeLink)
 	menuWebsiteStore.SetTooltipText(storeLink)
 	menu.Add(menuWebsiteStore)
+	menuSep, err = gtk.SeparatorMenuItemNew()
+	if err != nil {
+		return nil, err
+	}
+	menu.Add(menuSep)
+	menuAbout, err := gtk.MenuItemNewWithLabel("About " + appName)
+	if err != nil {
+		return nil, err
+	}
+	menuAbout.Connect("activate", app.ShowAboutDialog)
+	menu.Add(menuAbout)
+
 	w.menu.SetPopup(menu)
 	menu.ShowAll()
-
 	w.hdr.PackEnd(w.menu)
 
 	w.search, err = gtk.MenuButtonNew()
