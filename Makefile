@@ -8,7 +8,7 @@ prefix=/usr
 bindir=$(prefix)/bin
 datadir=$(prefix)/share
 
-BUILDFLAGS=-tags gtk_3_18
+BUILDFLAGS=-tags $(shell tools/gtk-version.sh)
 DEPS=$(shell tools/list-deps.sh)
 
 all: deps $(EXE)
