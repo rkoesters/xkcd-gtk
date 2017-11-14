@@ -31,8 +31,6 @@ func NewApplication() (*Application, error) {
 	app.GtkApp.Connect("startup", app.LoadSearchIndex)
 	app.GtkApp.Connect("activate", app.Activate)
 
-	app.GtkApp.SetDefault()
-
 	return &app, nil
 }
 

@@ -13,11 +13,13 @@ import (
 )
 
 func main() {
+	// Tell the go runtime to use as many CPUs as are available.
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	// Make sure our random number generator is seeded.
 	rand.Seed(time.Now().Unix())
 
+	// Let glib and gtk know who we are.
 	glib.SetApplicationName(appName)
 	gtk.WindowSetDefaultIconName(appID)
 
@@ -26,5 +28,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Tell glib that this is our process's main application.
+	app.GtkApp.SetDefault()
+
+	// Run the event loop, exit if it returns.
 	os.Exit(app.GtkApp.Run(os.Args))
 }
