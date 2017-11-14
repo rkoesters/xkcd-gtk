@@ -49,6 +49,11 @@ func (a *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
+	// A gtk.Dialog content area has some children by default, we want
+	// to remove those children so the only child is progressBar.
+	ca.GetChildren().Foreach(func(child interface{}) {
+		ca.Remove(child.(gtk.IWidget))
+	})
 	ca.SetMarginTop(24)
 	ca.SetMarginBottom(24)
 	ca.SetMarginStart(24)
