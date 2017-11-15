@@ -9,11 +9,6 @@ import (
 	"path/filepath"
 )
 
-const (
-	appID   = "com.github.rkoesters.xkcd-gtk"
-	appName = "Comic Sticks"
-)
-
 // Application holds onto our GTK representation of our application.
 type Application struct {
 	GtkApp *gtk.Application
