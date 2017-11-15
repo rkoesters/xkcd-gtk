@@ -14,7 +14,7 @@ bindir=$(prefix)/bin
 datadir=$(prefix)/share
 
 # If GOPATH isn't set, then just use the current directory.
-ifndef GOPATH
+ifeq "$(shell go env GOPATH)" ""
 export GOPATH=$(shell pwd)
 endif
 
