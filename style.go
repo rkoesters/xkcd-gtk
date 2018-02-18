@@ -7,7 +7,7 @@ import (
 )
 
 const css = `
-.comic-container {
+.comic-container > .frame {
 	background-color: #ffffff;
 }
 `
