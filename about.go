@@ -8,7 +8,7 @@ import (
 const (
 	appID      = "com.github.rkoesters.xkcd-gtk"
 	appName    = "Comic Sticks"
-	appVersion = "0.9.6"
+	appVersion = "0.9.7"
 )
 
 var aboutDialog *gtk.AboutDialog
@@ -28,7 +28,7 @@ func (a *Application) ShowAboutDialog() {
 		aboutDialog.SetVersion(appVersion)
 		aboutDialog.SetComments("A simple xkcd viewer written in Go using GTK3")
 		aboutDialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
-		aboutDialog.SetCopyright("Copyright © 2015-2017 Ryan Koesters")
+		aboutDialog.SetCopyright("Copyright © 2015-2018 Ryan Koesters")
 		aboutDialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
 
 		aboutDialog.SetAuthors([]string{"Ryan Koesters"})
