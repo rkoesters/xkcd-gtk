@@ -61,7 +61,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 
 	// If the gtk theme changes, we might want to adjust our styling.
-	w.win.Connect("style-updated", w.StyleUpdated)
+	w.win.Window.Connect("style-updated", w.StyleUpdated)
 
 	// Create HeaderBar
 	w.hdr, err = gtk.HeaderBarNew()
@@ -249,6 +249,12 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	imgScroller.SetSizeRequest(400, 300)
 
+	imgContext, err := imgScroller.GetStyleContext()
+	if err != nil {
+		return nil, err
+	}
+	imgContext.AddClass("comic-container")
+
 	w.img, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
@@ -280,11 +286,11 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// If the gtk window state changes, we want to update our internal
 	// window state.
-	w.win.Connect("size-allocate", w.StateChanged)
-	w.win.Connect("window-state-event", w.StateChanged)
+	w.win.Window.Connect("size-allocate", w.StateChanged)
+	w.win.Window.Connect("window-state-event", w.StateChanged)
 
 	// If the window is closed, we want to write our state to disk.
-	w.win.Connect("delete-event", w.SaveState)
+	w.win.Window.Connect("delete-event", w.SaveState)
 
 	return w, nil
 }

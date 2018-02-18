@@ -23,6 +23,7 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		return nil, err
 	}
+	app.GtkApp.Connect("startup", app.LoadCSS)
 	app.GtkApp.Connect("startup", app.LoadSearchIndex)
 	app.GtkApp.Connect("activate", app.Activate)
 
