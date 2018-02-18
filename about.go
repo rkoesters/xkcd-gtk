@@ -8,7 +8,7 @@ import (
 const (
 	appID      = "com.github.rkoesters.xkcd-gtk"
 	appName    = "Comic Sticks"
-	appVersion = "0.9.7"
+	appVersion = "0.9.8"
 )
 
 var aboutDialog *gtk.AboutDialog
