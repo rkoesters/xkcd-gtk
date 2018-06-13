@@ -26,6 +26,7 @@ INSTALL_DATA = cp
 
 BUILDFLAGS = -tags $(shell tools/gtk-version.sh)
 DEPS       = $(shell tools/list-deps.sh)
+VERSION    = $(shell git describe --always --tags --dirty)
 
 # If GOPATH isn't set, then just use the current directory.
 ifeq "$(shell go env GOPATH)" ""
@@ -52,7 +53,7 @@ deps:
 	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE_PATH): *.go
-	$(GO) build $(BUILDFLAGS) -o $@
+	$(GO) build $(BUILDFLAGS) -ldflags="-X main.appVersion=$(VERSION)" -o $@
 
 clean:
 	$(RM) $(EXE_PATH)
