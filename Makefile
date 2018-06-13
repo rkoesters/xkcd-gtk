@@ -45,14 +45,14 @@ datadir = $(prefix)/share
 # Targets
 ################################################################################
 
-.PHONY: all deps clean install uninstall
+.PHONY: all deps $(EXE_PATH) clean install uninstall
 
 all: deps $(EXE_PATH)
 
 deps:
 	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
-$(EXE_PATH): *.go
+$(EXE_PATH):
 	$(GO) build $(BUILDFLAGS) -ldflags="-X main.appVersion=$(VERSION)" -o $@
 
 clean:
