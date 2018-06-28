@@ -1,3 +1,28 @@
+################################################################################
+# Build Variables
+################################################################################
+
+GO           = go
+RM           = rm -f
+MKDIR        = mkdir -p
+INSTALL_EXE  = install
+INSTALL_DATA = cp
+
+BUILDFLAGS = -tags $(GTK_VERSION)
+LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
+
+################################################################################
+# Install Variables
+################################################################################
+
+prefix  = /usr
+bindir  = $(prefix)/bin
+datadir = $(prefix)/share
+
+################################################################################
+# Application Variables
+################################################################################
+
 APP = com.github.rkoesters.xkcd-gtk
 
 EXE_NAME     = $(APP)
@@ -11,22 +36,14 @@ DESKTOP_PATH = data/$(DESKTOP_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
 
 ################################################################################
-# Command Variables
+# Automatic Variables
 ################################################################################
 
-GO           = go
-RM           = rm -f
-MKDIR        = mkdir -p
-INSTALL_EXE  = install
-INSTALL_DATA = cp
+SOURCES = $(shell find . -type f -name '*.go')
+DEPS    = $(shell tools/list-deps.sh ./...)
 
-################################################################################
-# Build Variables
-################################################################################
-
-BUILDFLAGS = -tags $(shell tools/gtk-version.sh)
-DEPS       = $(shell tools/list-deps.sh)
-VERSION    = $(shell git describe --always --tags --dirty)
+APP_VERSION = $(shell git describe --always --tags --dirty)
+GTK_VERSION = $(shell tools/gtk-version.sh)
 
 # If GOPATH isn't set, then just use the current directory.
 ifeq "$(shell go env GOPATH)" ""
@@ -34,26 +51,16 @@ export GOPATH = $(shell pwd)
 endif
 
 ################################################################################
-# Install Variables
-################################################################################
-
-prefix  = /usr
-bindir  = $(prefix)/bin
-datadir = $(prefix)/share
-
-################################################################################
 # Targets
 ################################################################################
 
-.PHONY: all deps $(EXE_PATH) clean install uninstall
-
-all: deps $(EXE_PATH)
+all: $(EXE_PATH)
 
 deps:
 	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
-$(EXE_PATH):
-	$(GO) build $(BUILDFLAGS) -ldflags="-X main.appVersion=$(VERSION)" -o $@
+$(EXE_PATH): Makefile $(SOURCES)
+	$(GO) build -o $@ $(BUILDFLAGS) $(LDFLAGS)
 
 clean:
 	$(RM) $(EXE_PATH)
@@ -73,3 +80,5 @@ uninstall:
 	      $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME) \
 	      $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
 	      $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
+
+.PHONY: all clean deps install uninstall

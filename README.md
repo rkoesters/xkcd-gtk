@@ -25,6 +25,8 @@ it using your preferred installation tool.
 
 To install for current user:
 
+	make deps
+	make
 	make prefix=$HOME/.local install
 
 To uninstall for current user:
@@ -33,7 +35,9 @@ To uninstall for current user:
 
 To install for all users:
 
-	make && sudo make install
+	make deps
+	make
+	sudo make install
 
 To uninstall for all users:
 
