@@ -27,7 +27,7 @@ func (a *Application) ShowAboutDialog() {
 		aboutDialog.SetLogoIconName(appID)
 		aboutDialog.SetProgramName(appName)
 		aboutDialog.SetVersion(appVersion)
-		aboutDialog.SetComments("A simple xkcd viewer written in Go using GTK3")
+		aboutDialog.SetComments("A simple xkcd viewer written in Go using GTK+3")
 		aboutDialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
 		aboutDialog.SetCopyright("Copyright © 2015-2018 Ryan Koesters")
 		aboutDialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
