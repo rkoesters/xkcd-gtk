@@ -26,7 +26,6 @@ it using your preferred installation tool.
 To install for current user:
 
 	make deps
-	make
 	make prefix=$HOME/.local install
 
 To uninstall for current user:
