@@ -46,7 +46,7 @@ APP_VERSION = $(shell git describe --always --tags --dirty)
 GTK_VERSION = $(shell tools/gtk-version.sh)
 
 # If GOPATH isn't set, then just use the current directory.
-ifeq "$(shell go env GOPATH)" ""
+ifeq "$(shell $(GO) env GOPATH)" ""
 export GOPATH = $(shell pwd)
 endif
 
