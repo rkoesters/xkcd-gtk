@@ -60,7 +60,7 @@ deps:
 	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	$(GO) build -o $@ $(BUILDFLAGS) $(LDFLAGS)
+	$(GO) build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
 clean:
 	$(RM) $(EXE_PATH)
