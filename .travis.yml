@@ -16,7 +16,6 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - libstdc++-5-dev
-      - golang
 
 cache:
   directories:
