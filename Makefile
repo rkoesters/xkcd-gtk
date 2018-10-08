@@ -61,8 +61,8 @@ $(EXE_PATH): Makefile $(SOURCES)
 	$(GO) build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
 clean:
-	$(GO) clean ./...
-	$(RM) $(EXE_PATH)
+	-$(GO) clean ./...
+	-$(RM) $(EXE_PATH)
 
 install: $(EXE_PATH)
 	$(MKDIR) $(DESTDIR)$(bindir)
