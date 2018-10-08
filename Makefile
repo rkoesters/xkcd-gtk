@@ -39,7 +39,9 @@ APPDATA_PATH = data/$(APPDATA_NAME)
 # Automatic Variables
 ################################################################################
 
-SOURCES     = $(shell find . -type f -name '*.go')
+SOURCES = $(shell find . -type f -name '*.go')
+DEPS    = $(shell tools/list-deps.sh ./...)
+
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
 
@@ -55,7 +57,7 @@ endif
 all: $(EXE_PATH)
 
 deps:
-	$(GO) get -u -t $(BUILDFLAGS) ./...
+	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE_PATH): Makefile $(SOURCES)
 	$(GO) build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
