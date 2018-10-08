@@ -1,6 +1,0 @@
-*.log
-*.substvars
-debhelper-build-stamp
-files
-/com.github.rkoesters.xkcd-gtk/
-.debhelper
