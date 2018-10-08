@@ -1,6 +1,7 @@
 # Comic Sticks
 
-`xkcd-gtk` is a simple xkcd comic viewer written in Go using GTK+3.
+Comic Sticks (`xkcd-gtk`) is a simple xkcd comic viewer written in Go
+using GTK+3.
 
 ![screenshot](screenshots/screenshot-1.png)
 
