@@ -57,6 +57,8 @@ endif
 all: $(EXE_PATH)
 
 deps:
+	pwd
+	$(GO) env
 	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE_PATH): Makefile $(SOURCES)
