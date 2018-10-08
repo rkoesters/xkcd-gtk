@@ -40,7 +40,7 @@ APPDATA_PATH = data/$(APPDATA_NAME)
 ################################################################################
 
 SOURCES     = $(shell find . -type f -name '*.go')
-APP_VERSION = $(shell git describe --always --tags --dirty)
+APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
 
 # If GOPATH isn't set, then just use the current directory.
