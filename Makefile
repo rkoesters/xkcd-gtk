@@ -50,6 +50,10 @@ ifeq "$(shell $(GO) env GOPATH)" ""
 export GOPATH = $(shell pwd)
 endif
 
+ifeq "$(shell $(GO) env GOPATH)" "/nonexistent/go"
+export GOPATH = $(shell pwd)
+endif
+
 ################################################################################
 # Targets
 ################################################################################
@@ -58,6 +62,7 @@ all: $(EXE_PATH)
 
 deps:
 	pwd
+	env
 	$(GO) env
 	$(GO) get -u $(BUILDFLAGS) $(DEPS)
 
