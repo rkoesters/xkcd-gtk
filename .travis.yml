@@ -1,28 +1,35 @@
----
+matrix:
+  include:
+    - language: go
+      go:
+        - "1.7.x"  # debian stable
+        - "1.10.x" # ubuntu 18.04
+        - "1.x"    # latest release
+      addons:
+        apt:
+          packages:
+            - libgtk-3-dev
+      install:
+        - make deps
+      script:
+        - make
 
-language: node_js
-
-node_js:
-  - lts/*
-
-sudo: required
-
-services:
-  - docker
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - libstdc++-5-dev
-
-cache:
-  directories:
-    - /tmp/liftoff
-
-install:
-  - npm install @elementaryos/houston
-
-script:
-  - houston ci
+    - language: node_js
+      node_js:
+        - lts/*
+      sudo: required
+      services:
+        - docker
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - libstdc++-5-dev
+      cache:
+        directories:
+          - /tmp/liftoff
+      install:
+        - npm install @elementaryos/houston
+      script:
+        - houston ci
