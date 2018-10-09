@@ -131,18 +131,108 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	w.menu.SetTooltipText("Menu")
 
-	menu := glib.MenuNew()
-	menu.Append("Open Link", "win.open-link")
-	menu.Append("Explain", "win.explain")
-	menu.Append("Properties", "win.show-properties")
-	menu.Append("Go to Newest Comic", "win.goto-newest")
-	menu.Append("New Window", "win.new-window")
-	menu.Append("what if?", "win.open-what-if")
-	menu.Append("xkcd blog", "win.open-blog")
-	menu.Append("xkcd store", "win.open-store")
-	menu.Append("About "+appName, "win.show-about")
+	// We don't have gtk.ModelButton in our gtk bindings, so right now
+	// we are going to approximate it with this helper function.
+	newModelButton := func(label, action string) (*gtk.Button, error) {
+		button, err := gtk.ButtonNewWithLabel(label)
+		if err != nil {
+			return nil, err
+		}
+		button.SetRelief(gtk.RELIEF_NONE)
+		button.SetProperty("action-name", action)
+		button.SetHExpand(true)
 
-	w.menu.SetMenuModel(&menu.MenuModel)
+		sc, err := button.GetStyleContext()
+		if err != nil {
+			return nil, err
+		}
+		sc.AddClass("menuitem")
+
+		child, err := button.GetChild()
+		if err != nil {
+			return nil, err
+		}
+		child.SetHAlign(gtk.ALIGN_START)
+
+		return button, nil
+	}
+
+	menuOpenLink, err := newModelButton("Open Link", "win.open-link")
+	if err != nil {
+		return nil, err
+	}
+	menuExplain, err := newModelButton("Explain", "win.explain")
+	if err != nil {
+		return nil, err
+	}
+	menuProperties, err := newModelButton("Properties", "win.show-properties")
+	if err != nil {
+		return nil, err
+	}
+	menuSeparator1, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	menuGotoNewest, err := newModelButton("Go to Newest Comic", "win.goto-newest")
+	if err != nil {
+		return nil, err
+	}
+	menuNewWindow, err := newModelButton("New Window", "win.new-window")
+	if err != nil {
+		return nil, err
+	}
+	menuSeparator2, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	menuWhatIf, err := newModelButton("what if?", "win.open-what-if")
+	if err != nil {
+		return nil, err
+	}
+	menuBlog, err := newModelButton("xkcd blog", "win.open-blog")
+	if err != nil {
+		return nil, err
+	}
+	menuStore, err := newModelButton("xkcd store", "win.open-store")
+	if err != nil {
+		return nil, err
+	}
+	menuSeparator3, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	menuAbout, err := newModelButton("About "+appName, "win.show-about")
+	if err != nil {
+		return nil, err
+	}
+
+	menuGrid, err := gtk.GridNew()
+	if err != nil {
+		return nil, err
+	}
+	menuGrid.SetMarginBottom(3)
+	menuGrid.SetSizeRequest(150, -1)
+	menuGrid.Attach(menuOpenLink, 0, 0, 1, 1)
+	menuGrid.Attach(menuExplain, 0, 1, 1, 1)
+	menuGrid.Attach(menuProperties, 0, 2, 1, 1)
+	menuGrid.Attach(menuSeparator1, 0, 3, 1, 1)
+	menuGrid.Attach(menuGotoNewest, 0, 4, 1, 1)
+	menuGrid.Attach(menuNewWindow, 0, 5, 1, 1)
+	menuGrid.Attach(menuSeparator2, 0, 6, 1, 1)
+	menuGrid.Attach(menuWhatIf, 0, 7, 1, 1)
+	menuGrid.Attach(menuBlog, 0, 8, 1, 1)
+	menuGrid.Attach(menuStore, 0, 9, 1, 1)
+	menuGrid.Attach(menuSeparator3, 0, 10, 1, 1)
+	menuGrid.Attach(menuAbout, 0, 11, 1, 1)
+	menuGrid.ShowAll()
+
+	menu, err := gtk.PopoverNew(w.menu)
+	if err != nil {
+		return nil, err
+	}
+	menu.Add(menuGrid)
+
+	w.menu.SetPopover(menu)
 	w.hdr.PackEnd(w.menu)
 
 	// Create the search menu
