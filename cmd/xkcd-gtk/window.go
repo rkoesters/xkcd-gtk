@@ -49,7 +49,7 @@ func NewWindow(app *Application) (*Window, error) {
 	w.comic = &xkcd.Comic{Title: appName}
 	w.comicMutex = new(sync.Mutex)
 
-	w.win, err = gtk.ApplicationWindowNew(app.GtkApp)
+	w.win, err = gtk.ApplicationWindowNew(app.gtkApp)
 	if err != nil {
 		return nil, err
 	}

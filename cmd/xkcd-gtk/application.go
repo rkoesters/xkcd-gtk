@@ -11,7 +11,7 @@ import (
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
-	GtkApp *gtk.Application
+	gtkApp *gtk.Application
 
 	actions map[string]*glib.SimpleAction
 }
@@ -21,7 +21,7 @@ func NewApplication() (*Application, error) {
 	var app Application
 	var err error
 
-	app.GtkApp, err = gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
+	app.gtkApp, err = gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
 	if err != nil {
 		return nil, err
 	}
@@ -40,12 +40,12 @@ func NewApplication() (*Application, error) {
 		action.Connect("activate", function)
 
 		app.actions[name] = action
-		app.GtkApp.AddAction(action)
+		app.gtkApp.AddAction(action)
 	}
 
-	app.GtkApp.Connect("startup", app.LoadCSS)
-	app.GtkApp.Connect("startup", app.LoadSearchIndex)
-	app.GtkApp.Connect("activate", app.Activate)
+	app.gtkApp.Connect("startup", app.LoadCSS)
+	app.gtkApp.Connect("startup", app.LoadSearchIndex)
+	app.gtkApp.Connect("activate", app.Activate)
 
 	return &app, nil
 }
