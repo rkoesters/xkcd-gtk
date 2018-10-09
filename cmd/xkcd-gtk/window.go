@@ -44,44 +44,44 @@ type Window struct {
 func NewWindow(app *Application) (*Window, error) {
 	var err error
 
-	w := new(Window)
+	win := new(Window)
 
-	w.comic = &xkcd.Comic{Title: appName}
-	w.comicMutex = new(sync.Mutex)
+	win.comic = &xkcd.Comic{Title: appName}
+	win.comicMutex = new(sync.Mutex)
 
-	w.window, err = gtk.ApplicationWindowNew(app.application)
+	win.window, err = gtk.ApplicationWindowNew(app.application)
 	if err != nil {
 		return nil, err
 	}
 
 	actionFuncs := map[string]interface{}{
-		"explain":         w.Explain,
-		"goto-newest":     w.GotoNewest,
-		"open-link":       w.OpenLink,
-		"show-properties": w.ShowProperties,
+		"explain":         win.Explain,
+		"goto-newest":     win.GotoNewest,
+		"open-link":       win.OpenLink,
+		"show-properties": win.ShowProperties,
 	}
 
-	w.actions = make(map[string]*glib.SimpleAction)
-	w.actionGroup = glib.SimpleActionGroupNew()
+	win.actions = make(map[string]*glib.SimpleAction)
+	win.actionGroup = glib.SimpleActionGroupNew()
 	for name, function := range actionFuncs {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", function)
 
-		w.actions[name] = action
-		w.actionGroup.AddAction(action)
+		win.actions[name] = action
+		win.actionGroup.AddAction(action)
 	}
-	w.window.InsertActionGroup("win", w.actionGroup)
+	win.window.InsertActionGroup("win", win.actionGroup)
 
 	// If the gtk theme changes, we might want to adjust our styling.
-	w.window.Window.Connect("style-updated", w.StyleUpdated)
+	win.window.Window.Connect("style-updated", win.StyleUpdated)
 
 	// Create HeaderBar
-	w.hdr, err = gtk.HeaderBarNew()
+	win.hdr, err = gtk.HeaderBarNew()
 	if err != nil {
 		return nil, err
 	}
-	w.hdr.SetTitle(appName)
-	w.hdr.SetShowCloseButton(true)
+	win.hdr.SetTitle(appName)
+	win.hdr.SetShowCloseButton(true)
 
 	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
@@ -93,38 +93,38 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	navBoxStyleContext.AddClass("linked")
 
-	w.previous, err = gtk.ButtonNew()
+	win.previous, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	w.previous.SetTooltipText("Go to the previous comic")
-	w.previous.Connect("clicked", w.PreviousComic)
-	navBox.Add(w.previous)
+	win.previous.SetTooltipText("Go to the previous comic")
+	win.previous.Connect("clicked", win.PreviousComic)
+	navBox.Add(win.previous)
 
-	w.next, err = gtk.ButtonNew()
+	win.next, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	w.next.SetTooltipText("Go to the next comic")
-	w.next.Connect("clicked", w.NextComic)
-	navBox.Add(w.next)
+	win.next.SetTooltipText("Go to the next comic")
+	win.next.Connect("clicked", win.NextComic)
+	navBox.Add(win.next)
 
-	w.hdr.PackStart(navBox)
+	win.hdr.PackStart(navBox)
 
-	w.rand, err = gtk.ButtonNewWithLabel("Random")
+	win.rand, err = gtk.ButtonNewWithLabel("Random")
 	if err != nil {
 		return nil, err
 	}
-	w.rand.SetTooltipText("Go to a random comic")
-	w.rand.Connect("clicked", w.RandomComic)
-	w.hdr.PackStart(w.rand)
+	win.rand.SetTooltipText("Go to a random comic")
+	win.rand.Connect("clicked", win.RandomComic)
+	win.hdr.PackStart(win.rand)
 
 	// Create the menu
-	w.menu, err = gtk.MenuButtonNew()
+	win.menu, err = gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	w.menu.SetTooltipText("Menu")
+	win.menu.SetTooltipText("Menu")
 
 	menuSection1 := glib.MenuNew()
 	menuSection1.Append("Open Link", "win.open-link")
@@ -145,22 +145,22 @@ func NewWindow(app *Application) (*Window, error) {
 	menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
 	menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
 
-	w.menu.SetMenuModel(&menu.MenuModel)
-	w.hdr.PackEnd(w.menu)
+	win.menu.SetMenuModel(&menu.MenuModel)
+	win.hdr.PackEnd(win.menu)
 
 	// Create the search menu
-	w.search, err = gtk.MenuButtonNew()
+	win.search, err = gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	w.search.SetTooltipText("Search")
-	w.hdr.PackEnd(w.search)
+	win.search.SetTooltipText("Search")
+	win.hdr.PackEnd(win.search)
 
-	searchPopover, err := gtk.PopoverNew(w.search)
+	searchPopover, err := gtk.PopoverNew(win.search)
 	if err != nil {
 		return nil, err
 	}
-	w.search.SetPopover(searchPopover)
+	win.search.SetPopover(searchPopover)
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
 	if err != nil {
@@ -170,29 +170,29 @@ func NewWindow(app *Application) (*Window, error) {
 	box.SetMarginBottom(12)
 	box.SetMarginStart(12)
 	box.SetMarginEnd(12)
-	w.searchEntry, err = gtk.SearchEntryNew()
+	win.searchEntry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err
 	}
-	w.searchEntry.Connect("search-changed", w.Search)
-	box.Add(w.searchEntry)
+	win.searchEntry.Connect("search-changed", win.Search)
+	box.Add(win.searchEntry)
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
 	box.Add(scwin)
-	w.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	win.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
 	}
-	scwin.Add(w.searchResults)
+	scwin.Add(win.searchResults)
 	scwin.SetSizeRequest(375, 250)
-	w.loadSearchResults(nil)
+	win.loadSearchResults(nil)
 	box.ShowAll()
 	searchPopover.Add(box)
 
-	w.hdr.ShowAll()
-	w.window.SetTitlebar(w.hdr)
+	win.hdr.ShowAll()
+	win.window.SetTitlebar(win.hdr)
 
 	// Create main part of window.
 	imgScroller, err := gtk.ScrolledWindowNew(nil, nil)
@@ -207,82 +207,82 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	imgContext.AddClass("comic-container")
 
-	w.img, err = gtk.ImageNew()
+	win.img, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
 	}
-	imgScroller.Add(w.img)
+	imgScroller.Add(win.img)
 	imgScroller.ShowAll()
-	w.window.Add(imgScroller)
+	win.window.Add(imgScroller)
 
 	// Recall our window state.
-	w.state.ReadFile(filepath.Join(CacheDir(), "state"))
-	if w.state.Maximized {
-		w.window.Maximize()
+	win.state.ReadFile(filepath.Join(CacheDir(), "state"))
+	if win.state.Maximized {
+		win.window.Maximize()
 	} else {
-		w.window.Resize(w.state.Width, w.state.Height)
-		if w.state.PositionX != 0 && w.state.PositionY != 0 {
-			w.window.Move(w.state.PositionX, w.state.PositionY)
+		win.window.Resize(win.state.Width, win.state.Height)
+		if win.state.PositionX != 0 && win.state.PositionY != 0 {
+			win.window.Move(win.state.PositionX, win.state.PositionY)
 		}
 	}
-	if w.state.PropertiesVisible {
-		if w.properties == nil {
-			w.properties, err = NewPropertiesDialog(w)
+	if win.state.PropertiesVisible {
+		if win.properties == nil {
+			win.properties, err = NewPropertiesDialog(win)
 			if err != nil {
 				return nil, err
 			}
 		}
-		w.properties.Present()
+		win.properties.Present()
 	}
-	w.SetComic(w.state.ComicNumber)
+	win.SetComic(win.state.ComicNumber)
 
 	// If the gtk window state changes, we want to update our internal
 	// window state.
-	w.window.Window.Connect("size-allocate", w.StateChanged)
-	w.window.Window.Connect("window-state-event", w.StateChanged)
+	win.window.Window.Connect("size-allocate", win.StateChanged)
+	win.window.Window.Connect("window-state-event", win.StateChanged)
 
 	// If the window is closed, we want to write our state to disk.
-	w.window.Window.Connect("delete-event", w.SaveState)
+	win.window.Window.Connect("delete-event", win.SaveState)
 
-	return w, nil
+	return win, nil
 }
 
 // PreviousComic sets the current comic to the previous comic.
-func (w *Window) PreviousComic() {
-	w.SetComic(w.comic.Num - 1)
+func (win *Window) PreviousComic() {
+	win.SetComic(win.comic.Num - 1)
 }
 
 // NextComic sets the current comic to the next comic.
-func (w *Window) NextComic() {
-	w.SetComic(w.comic.Num + 1)
+func (win *Window) NextComic() {
+	win.SetComic(win.comic.Num + 1)
 }
 
 // RandomComic sets the current comic to a random comic.
-func (w *Window) RandomComic() {
+func (win *Window) RandomComic() {
 	newestComic, _ := GetNewestComicInfo()
 	if newestComic.Num <= 0 {
-		w.SetComic(newestComic.Num)
+		win.SetComic(newestComic.Num)
 	} else {
-		w.SetComic(rand.Intn(newestComic.Num) + 1)
+		win.SetComic(rand.Intn(newestComic.Num) + 1)
 	}
 }
 
 // SetComic sets the current comic to the given comic.
-func (w *Window) SetComic(n int) {
+func (win *Window) SetComic(n int) {
 	// Make it clear that we are loading a comic.
-	w.hdr.SetTitle("Loading comic...")
-	w.hdr.SetSubtitle(strconv.Itoa(n))
-	w.updateNextPreviousButtonStatus()
-	w.state.ComicNumber = n
+	win.hdr.SetTitle("Loading comic...")
+	win.hdr.SetSubtitle(strconv.Itoa(n))
+	win.updateNextPreviousButtonStatus()
+	win.state.ComicNumber = n
 
 	go func() {
 		var err error
 
-		// Make sure we are the only ones changing w.comic.
-		w.comicMutex.Lock()
-		defer w.comicMutex.Unlock()
+		// Make sure we are the only ones changing win.comic.
+		win.comicMutex.Lock()
+		defer win.comicMutex.Unlock()
 
-		w.comic, err = GetComicInfo(n)
+		win.comic, err = GetComicInfo(n)
 		if err != nil {
 			log.Printf("error downloading comic info: %v", n)
 		} else {
@@ -290,10 +290,10 @@ func (w *Window) SetComic(n int) {
 			if os.IsNotExist(err) {
 				err = DownloadComicImage(n)
 				if err != nil {
-					// We can be sneaky, we use SafeTitle for window title,
-					// but we can leave Title alone so the properties dialog
-					// can still be correct.
-					w.comic.SafeTitle = "Connect to the internet to download comic image"
+					// We can be sneaky, we use SafeTitle for window
+					// title, but we can leave Title alone so the
+					// properties dialog can still be correct.
+					win.comic.SafeTitle = "Connect to the internet to download comic image"
 				}
 			} else if err != nil {
 				log.Print(err)
@@ -302,68 +302,68 @@ func (w *Window) SetComic(n int) {
 
 		// Add the DisplayComic function to the event loop so our UI
 		// gets updated with the new comic.
-		glib.IdleAdd(w.DisplayComic)
+		glib.IdleAdd(win.DisplayComic)
 	}()
 }
 
-// DisplayComic updates the UI to show the contents of w.comic
-func (w *Window) DisplayComic() {
-	w.hdr.SetTitle(w.comic.SafeTitle)
-	w.hdr.SetSubtitle(strconv.Itoa(w.comic.Num))
-	w.img.SetFromFile(getComicImagePath(w.comic.Num))
-	w.img.SetTooltipText(w.comic.Alt)
-	w.updateNextPreviousButtonStatus()
+// DisplayComic updates the UI to show the contents of win.comic
+func (win *Window) DisplayComic() {
+	win.hdr.SetTitle(win.comic.SafeTitle)
+	win.hdr.SetSubtitle(strconv.Itoa(win.comic.Num))
+	win.img.SetFromFile(getComicImagePath(win.comic.Num))
+	win.img.SetTooltipText(win.comic.Alt)
+	win.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
-	if w.comic.Link == "" {
-		w.actions["open-link"].SetEnabled(false)
+	if win.comic.Link == "" {
+		win.actions["open-link"].SetEnabled(false)
 	} else {
-		w.actions["open-link"].SetEnabled(true)
+		win.actions["open-link"].SetEnabled(true)
 	}
 
-	if w.properties != nil {
-		w.properties.Update()
+	if win.properties != nil {
+		win.properties.Update()
 	}
 }
 
-func (w *Window) updateNextPreviousButtonStatus() {
+func (win *Window) updateNextPreviousButtonStatus() {
 	// Enable/disable previous button.
-	if w.comic.Num > 1 {
-		w.previous.SetSensitive(true)
+	if win.comic.Num > 1 {
+		win.previous.SetSensitive(true)
 	} else {
-		w.previous.SetSensitive(false)
+		win.previous.SetSensitive(false)
 	}
 
 	// Enable/disable next button.
 	newest, _ := GetNewestComicInfo()
-	if w.comic.Num < newest.Num {
-		w.next.SetSensitive(true)
+	if win.comic.Num < newest.Num {
+		win.next.SetSensitive(true)
 	} else {
-		w.next.SetSensitive(false)
+		win.next.SetSensitive(false)
 	}
 }
 
 // ShowProperties presents the properties dialog to the user. If the
 // dialog doesn't exist yet, we create it.
-func (w *Window) ShowProperties() {
+func (win *Window) ShowProperties() {
 	var err error
-	if w.properties == nil {
-		w.properties, err = NewPropertiesDialog(w)
+	if win.properties == nil {
+		win.properties, err = NewPropertiesDialog(win)
 		if err != nil {
 			log.Print(err)
 			return
 		}
 	}
-	w.properties.Present()
+	win.properties.Present()
 }
 
 // GotoNewest checks for a new comic and then shows the newest comic to
 // the user.
-func (w *Window) GotoNewest() {
+func (win *Window) GotoNewest() {
 	// Make it clear that we are checking for a new comic.
-	w.hdr.SetTitle("Checking for new comic...")
+	win.hdr.SetTitle("Checking for new comic...")
 	// Close the menu.
-	w.menu.GetPopup().Popdown()
+	win.menu.GetPopup().Popdown()
 
 	// Force GetNewestComicInfo to check for a new comic.
 	cachedNewestComic = nil
@@ -371,20 +371,20 @@ func (w *Window) GotoNewest() {
 	if err != nil {
 		log.Print(err)
 	}
-	w.SetComic(newestComic.Num)
+	win.SetComic(newestComic.Num)
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
-func (w *Window) Explain() {
-	err := open.Start(fmt.Sprintf("https://www.explainxkcd.com/%v/", w.comic.Num))
+func (win *Window) Explain() {
+	err := open.Start(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comic.Num))
 	if err != nil {
 		log.Print(err)
 	}
 }
 
-// OpenLink opens the comic's Link in the user's web browser..
-func (w *Window) OpenLink() {
-	err := open.Start(w.comic.Link)
+// OpenLink opens the comic's Link in the user's web browser.
+func (win *Window) OpenLink() {
+	err := open.Start(win.comic.Link)
 	if err != nil {
 		log.Print(err)
 	}

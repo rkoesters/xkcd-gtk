@@ -50,11 +50,11 @@ func NewApplication() (*Application, error) {
 
 // Activate creates and presents a new window to the user.
 func (app *Application) Activate() {
-	window, err := NewWindow(app)
+	win, err := NewWindow(app)
 	if err != nil {
 		log.Fatal(err)
 	}
-	window.window.Present()
+	win.window.Present()
 }
 
 const (

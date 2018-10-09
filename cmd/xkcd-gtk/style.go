@@ -46,7 +46,7 @@ func (app *Application) LoadCSS() {
 }
 
 // StyleUpdated is called when the style of our gtk window is updated.
-func (w *Window) StyleUpdated() {
+func (win *Window) StyleUpdated() {
 	// First, lets find out what GTK theme we are using.
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
@@ -97,31 +97,31 @@ func (w *Window) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		w.next.SetImage(nextImg)
+		win.next.SetImage(nextImg)
 	}
 
 	previousImg, err := gtk.ImageNewFromIconName(icon("go-previous"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		w.previous.SetImage(previousImg)
+		win.previous.SetImage(previousImg)
 	}
 
 	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		w.search.SetImage(searchImg)
+		win.search.SetImage(searchImg)
 	}
 
 	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		w.menu.SetImage(menuImg)
+		win.menu.SetImage(menuImg)
 	}
 
-	menuPopoverChild, err := w.menu.GetPopover().GetChild()
+	menuPopoverChild, err := win.menu.GetPopover().GetChild()
 	if err != nil {
 		log.Print(err)
 	} else {

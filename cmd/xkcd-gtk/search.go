@@ -82,16 +82,16 @@ func (app *Application) LoadSearchIndex() {
 	}()
 }
 
-// Search preforms a search with w.searchEntry.GetText() and puts the
-// results into w.searchResults.
-func (w *Window) Search() {
-	userQuery, err := w.searchEntry.GetText()
+// Search preforms a search with win.searchEntry.GetText() and puts the
+// results into win.searchResults.
+func (win *Window) Search() {
+	userQuery, err := win.searchEntry.GetText()
 	if err != nil {
 		log.Print(err)
 	}
 	if userQuery == "" {
-		w.clearSearchResults()
-		w.loadSearchResults(nil)
+		win.clearSearchResults()
+		win.loadSearchResults(nil)
 		return
 	}
 	query := query.NewQueryStringQuery(userQuery)
@@ -102,20 +102,20 @@ func (w *Window) Search() {
 	if err != nil {
 		log.Print(err)
 	}
-	w.clearSearchResults()
-	w.loadSearchResults(result)
+	win.clearSearchResults()
+	win.loadSearchResults(result)
 }
 
 // Remove all widgets from the search results area.
-func (w *Window) clearSearchResults() {
-	w.searchResults.GetChildren().Foreach(func(child interface{}) {
-		w.searchResults.Remove(child.(gtk.IWidget))
+func (win *Window) clearSearchResults() {
+	win.searchResults.GetChildren().Foreach(func(child interface{}) {
+		win.searchResults.Remove(child.(gtk.IWidget))
 	})
 }
 
 // Show the user the given search results.
-func (w *Window) loadSearchResults(result *bleve.SearchResult) {
-	defer w.searchResults.ShowAll()
+func (win *Window) loadSearchResults(result *bleve.SearchResult) {
+	defer win.searchResults.ShowAll()
 	if result == nil {
 		// If there are no results to display, show a friendly message.
 		label, err := gtk.LabelNew("Whatcha lookin' for?")
@@ -124,7 +124,7 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 			return
 		}
 		label.SetVExpand(true)
-		w.searchResults.Add(label)
+		win.searchResults.Add(label)
 		return
 	}
 	// We are grabbing the newest comic so we can figure out how wide to
@@ -136,7 +136,7 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 			log.Print(err)
 			return
 		}
-		item.Connect("clicked", w.setComicFromSearch, sr.ID)
+		item.Connect("clicked", win.setComicFromSearch, sr.ID)
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
 			log.Print(err)
@@ -160,7 +160,7 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 		box.Add(labelTitle)
 		item.Add(box)
 		item.SetRelief(gtk.RELIEF_NONE)
-		w.searchResults.Add(item)
+		win.searchResults.Add(item)
 	}
 	if result.Hits.Len() == 0 {
 		label, err := gtk.LabelNew("0 search results")
@@ -169,17 +169,17 @@ func (w *Window) loadSearchResults(result *bleve.SearchResult) {
 			return
 		}
 		label.SetVExpand(true)
-		w.searchResults.Add(label)
+		win.searchResults.Add(label)
 	}
 }
 
-// setComicFromSearch is a wrapper around w.SetComic to work with search
+// setComicFromSearch is a wrapper around win.SetComic to work with search
 // result buttons.
-func (w *Window) setComicFromSearch(_ interface{}, id string) {
+func (win *Window) setComicFromSearch(_ interface{}, id string) {
 	number, err := strconv.Atoi(id)
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	w.SetComic(number)
+	win.SetComic(number)
 }

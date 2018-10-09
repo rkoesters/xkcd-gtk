@@ -82,25 +82,25 @@ func (ws *WindowState) WriteFile(filename string) error {
 
 // StateChanged is called when GTK's window state changes and we want to
 // update our internal state to match GTK's changes.
-func (w *Window) StateChanged() {
-	w.state.Maximized = w.window.IsMaximized()
-	if !w.state.Maximized {
-		w.state.Width, w.state.Height = w.window.GetSize()
-		w.state.PositionX, w.state.PositionY = w.window.GetPosition()
+func (win *Window) StateChanged() {
+	win.state.Maximized = win.window.IsMaximized()
+	if !win.state.Maximized {
+		win.state.Width, win.state.Height = win.window.GetSize()
+		win.state.PositionX, win.state.PositionY = win.window.GetPosition()
 	}
-	if w.properties == nil {
-		w.state.PropertiesVisible = false
+	if win.properties == nil {
+		win.state.PropertiesVisible = false
 	} else {
-		w.state.PropertiesVisible = true
-		w.state.PropertiesWidth, w.state.PropertiesHeight = w.properties.dialog.GetSize()
-		w.state.PropertiesPositionX, w.state.PropertiesPositionY = w.properties.dialog.GetPosition()
+		win.state.PropertiesVisible = true
+		win.state.PropertiesWidth, win.state.PropertiesHeight = win.properties.dialog.GetSize()
+		win.state.PropertiesPositionX, win.state.PropertiesPositionY = win.properties.dialog.GetPosition()
 	}
 }
 
-// SaveState writes w.state to disk so it can be loaded next time we
+// SaveState writes win.state to disk so it can be loaded next time we
 // open a window.
-func (w *Window) SaveState() {
-	err := w.state.WriteFile(filepath.Join(CacheDir(), "state"))
+func (win *Window) SaveState() {
+	err := win.state.WriteFile(filepath.Join(CacheDir(), "state"))
 	if err != nil {
 		log.Printf("error saving window state: %v", err)
 	}
