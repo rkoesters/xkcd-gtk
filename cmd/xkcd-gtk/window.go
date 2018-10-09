@@ -376,14 +376,10 @@ func (w *Window) GotoNewest() {
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
 func (w *Window) Explain() {
-	err := open.Start(explainURL(w.comic.Num))
+	err := open.Start(fmt.Sprintf("https://www.explainxkcd.com/%v/", w.comic.Num))
 	if err != nil {
 		log.Print(err)
 	}
-}
-
-func explainURL(n int) string {
-	return fmt.Sprintf("https://www.explainxkcd.com/%v/", n)
 }
 
 // OpenLink opens the comic's Link in the user's web browser..
