@@ -8,7 +8,7 @@ import (
 
 const css = `
 @define-color colorPrimary #96a8c8;
-@define-color textColorPrimary #071419;
+@define-color textColorPrimary #1a1a1a;
 
 .comic-container > .frame {
 	background-color: #ffffff;
