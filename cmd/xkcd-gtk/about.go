@@ -39,9 +39,9 @@ func (app *Application) ShowAboutDialog() {
 		aboutDialog.HideOnDelete()
 		aboutDialog.Connect("response", aboutDialog.Hide)
 		aboutDialog.Connect("hide", func() {
-			app.gtkApp.RemoveWindow(&aboutDialog.Window)
+			app.application.RemoveWindow(&aboutDialog.Window)
 		})
 	}
-	app.gtkApp.AddWindow(&aboutDialog.Window)
+	app.application.AddWindow(&aboutDialog.Window)
 	aboutDialog.Present()
 }
