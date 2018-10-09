@@ -55,15 +55,10 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 
 	actionFuncs := map[string]interface{}{
-		"open-link":       w.OpenLink,
 		"explain":         w.Explain,
-		"show-properties": w.ShowProperties,
 		"goto-newest":     w.GotoNewest,
-		"new-window":      app.Activate,
-		"open-what-if":    w.OpenWhatIf,
-		"open-blog":       w.OpenBlog,
-		"open-store":      w.OpenStore,
-		"show-about":      app.ShowAboutDialog,
+		"open-link":       w.OpenLink,
+		"show-properties": w.ShowProperties,
 	}
 
 	w.actions = make(map[string]*glib.SimpleAction)
@@ -137,13 +132,13 @@ func NewWindow(app *Application) (*Window, error) {
 	menuSection1.Append("Properties", "win.show-properties")
 	menuSection2 := glib.MenuNew()
 	menuSection2.Append("Go to Newest Comic", "win.goto-newest")
-	menuSection2.Append("New Window", "win.new-window")
+	menuSection2.Append("New Window", "app.new-window")
 	menuSection3 := glib.MenuNew()
-	menuSection3.Append("what if?", "win.open-what-if")
-	menuSection3.Append("xkcd blog", "win.open-blog")
-	menuSection3.Append("xkcd store", "win.open-store")
+	menuSection3.Append("what if?", "app.open-what-if")
+	menuSection3.Append("xkcd blog", "app.open-blog")
+	menuSection3.Append("xkcd store", "app.open-store")
 	menuSection4 := glib.MenuNew()
-	menuSection4.Append("About "+appName, "win.show-about")
+	menuSection4.Append("About "+appName, "app.show-about")
 	menu := glib.MenuNew()
 	menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
 	menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
@@ -394,36 +389,6 @@ func explainURL(n int) string {
 // OpenLink opens the comic's Link in the user's web browser..
 func (w *Window) OpenLink() {
 	err := open.Start(w.comic.Link)
-	if err != nil {
-		log.Print(err)
-	}
-}
-
-const (
-	whatifLink = "https://what-if.xkcd.com/"
-	blogLink   = "https://blog.xkcd.com/"
-	storeLink  = "https://store.xkcd.com/"
-)
-
-// OpenWhatIf opens whatifLink in the user's web browser.
-func (w *Window) OpenWhatIf() {
-	err := open.Start(whatifLink)
-	if err != nil {
-		log.Print(err)
-	}
-}
-
-// OpenBlog opens blogLink in the user's web browser.
-func (w *Window) OpenBlog() {
-	err := open.Start(blogLink)
-	if err != nil {
-		log.Print(err)
-	}
-}
-
-// OpenStore opens storeLink in the user's web browser.
-func (w *Window) OpenStore() {
-	err := open.Start(storeLink)
 	if err != nil {
 		log.Print(err)
 	}

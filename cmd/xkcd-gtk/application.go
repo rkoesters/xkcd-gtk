@@ -4,6 +4,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xdg/basedir"
+	"github.com/skratchdot/open-golang/open"
 	"log"
 	"path/filepath"
 )
@@ -11,6 +12,8 @@ import (
 // Application holds onto our GTK representation of our application.
 type Application struct {
 	GtkApp *gtk.Application
+
+	actions map[string]*glib.SimpleAction
 }
 
 // NewApplication creates an instance of our GTK Application.
@@ -22,6 +25,24 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	actionFuncs := map[string]interface{}{
+		"new-window":   app.Activate,
+		"open-blog":    app.OpenBlog,
+		"open-store":   app.OpenStore,
+		"open-what-if": app.OpenWhatIf,
+		"show-about":   app.ShowAboutDialog,
+	}
+
+	app.actions = make(map[string]*glib.SimpleAction)
+	for name, function := range actionFuncs {
+		action := glib.SimpleActionNew(name, nil)
+		action.Connect("activate", function)
+
+		app.actions[name] = action
+		app.GtkApp.AddAction(action)
+	}
+
 	app.GtkApp.Connect("startup", app.LoadCSS)
 	app.GtkApp.Connect("startup", app.LoadSearchIndex)
 	app.GtkApp.Connect("activate", app.Activate)
@@ -51,4 +72,34 @@ func ConfigDir() string {
 // DataDir returns the path to our app's user data directory.
 func DataDir() string {
 	return filepath.Join(basedir.DataHome, appID)
+}
+
+const (
+	whatIfLink = "https://what-if.xkcd.com/"
+	blogLink   = "https://blog.xkcd.com/"
+	storeLink  = "https://store.xkcd.com/"
+)
+
+// OpenWhatIf opens whatifLink in the user's web browser.
+func (app *Application) OpenWhatIf() {
+	err := open.Start(whatIfLink)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+// OpenBlog opens blogLink in the user's web browser.
+func (app *Application) OpenBlog() {
+	err := open.Start(blogLink)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+// OpenStore opens storeLink in the user's web browser.
+func (app *Application) OpenStore() {
+	err := open.Start(storeLink)
+	if err != nil {
+		log.Print(err)
+	}
 }
