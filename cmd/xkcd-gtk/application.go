@@ -51,8 +51,8 @@ func NewApplication() (*Application, error) {
 }
 
 // Activate creates and presents a new window to the user.
-func (a *Application) Activate() {
-	window, err := NewWindow(a)
+func (app *Application) Activate() {
+	window, err := NewWindow(app)
 	if err != nil {
 		log.Fatal(err)
 	}

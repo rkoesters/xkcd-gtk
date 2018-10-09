@@ -16,7 +16,7 @@ var searchIndex bleve.Index
 
 // LoadSearchIndex makes sure that every xkcd comic metadata is cached
 // and indexed in the search index.
-func (a *Application) LoadSearchIndex() {
+func (app *Application) LoadSearchIndex() {
 	var err error
 	searchIndexPath := filepath.Join(CacheDir(), "search")
 	searchIndex, err = bleve.Open(searchIndexPath)

@@ -28,7 +28,7 @@ var (
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
-func (a *Application) LoadCSS() {
+func (app *Application) LoadCSS() {
 	provider, err := gtk.CssProviderNew()
 	if err != nil {
 		log.Print(err)
