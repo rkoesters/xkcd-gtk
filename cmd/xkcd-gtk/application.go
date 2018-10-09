@@ -4,7 +4,6 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xdg/basedir"
-	"github.com/skratchdot/open-golang/open"
 	"log"
 	"path/filepath"
 )
@@ -52,13 +51,4 @@ func ConfigDir() string {
 // DataDir returns the path to our app's user data directory.
 func DataDir() string {
 	return filepath.Join(basedir.DataHome, appID)
-}
-
-// OpenURL is a simple function that can be connected to a GTK signal
-// with an arbitrary URL to open that URL in the user's web browser.
-func OpenURL(_ interface{}, url string) {
-	err := open.Start(url)
-	if err != nil {
-		log.Print(err)
-	}
 }

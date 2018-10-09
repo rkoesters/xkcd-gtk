@@ -14,12 +14,6 @@ import (
 	"sync"
 )
 
-const (
-	whatifLink = "https://what-if.xkcd.com/"
-	blogLink   = "https://blog.xkcd.com/"
-	storeLink  = "https://store.xkcd.com/"
-)
-
 // Window is the main application window.
 type Window struct {
 	win   *gtk.ApplicationWindow
@@ -27,6 +21,9 @@ type Window struct {
 
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
+
+	actions     map[string]*glib.SimpleAction
+	actionGroup *glib.SimpleActionGroup
 
 	hdr *gtk.HeaderBar
 	img *gtk.Image
@@ -39,9 +36,6 @@ type Window struct {
 
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
-
-	menuExplain  *gtk.MenuItem
-	menuOpenLink *gtk.MenuItem
 
 	properties *PropertiesDialog
 }
@@ -59,6 +53,29 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	actionFuncs := map[string]interface{}{
+		"open-link":       w.OpenLink,
+		"explain":         w.Explain,
+		"show-properties": w.ShowProperties,
+		"goto-newest":     w.GotoNewest,
+		"new-window":      app.Activate,
+		"open-what-if":    w.OpenWhatIf,
+		"open-blog":       w.OpenBlog,
+		"open-store":      w.OpenStore,
+		"show-about":      app.ShowAboutDialog,
+	}
+
+	w.actions = make(map[string]*glib.SimpleAction)
+	w.actionGroup = glib.SimpleActionGroupNew()
+	for name, function := range actionFuncs {
+		action := glib.SimpleActionNew(name, nil)
+		action.Connect("activate", function)
+
+		w.actions[name] = action
+		w.actionGroup.AddAction(action)
+	}
+	w.win.InsertActionGroup("win", w.actionGroup)
 
 	// If the gtk theme changes, we might want to adjust our styling.
 	w.win.Window.Connect("style-updated", w.StyleUpdated)
@@ -114,89 +131,21 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	w.menu.SetTooltipText("Menu")
 
-	menu, err := gtk.MenuNew()
-	if err != nil {
-		return nil, err
-	}
-	menu.SetHAlign(gtk.ALIGN_END)
+	menu := glib.MenuNew()
+	menu.Append("Open Link", "win.open-link")
+	menu.Append("Explain", "win.explain")
+	menu.Append("Properties", "win.show-properties")
+	menu.Append("Go to Newest Comic", "win.goto-newest")
+	menu.Append("New Window", "win.new-window")
+	menu.Append("what if?", "win.open-what-if")
+	menu.Append("xkcd blog", "win.open-blog")
+	menu.Append("xkcd store", "win.open-store")
+	menu.Append("About "+appName, "win.show-about")
 
-	w.menuOpenLink, err = gtk.MenuItemNewWithLabel("Open Link")
-	if err != nil {
-		return nil, err
-	}
-	w.menuOpenLink.Connect("activate", w.OpenLink)
-	menu.Add(w.menuOpenLink)
-	w.menuExplain, err = gtk.MenuItemNewWithLabel("Explain")
-	if err != nil {
-		return nil, err
-	}
-	w.menuExplain.Connect("activate", w.Explain)
-	menu.Add(w.menuExplain)
-	menuProp, err := gtk.MenuItemNewWithLabel("Properties")
-	if err != nil {
-		return nil, err
-	}
-	menuProp.Connect("activate", w.ShowProperties)
-	menu.Add(menuProp)
-	menuSep, err := gtk.SeparatorMenuItemNew()
-	if err != nil {
-		return nil, err
-	}
-	menu.Add(menuSep)
-	menuGotoNewest, err := gtk.MenuItemNewWithLabel("Go to Newest Comic")
-	if err != nil {
-		return nil, err
-	}
-	menuGotoNewest.Connect("activate", w.GotoNewest)
-	menu.Add(menuGotoNewest)
-	menuNewWindow, err := gtk.MenuItemNewWithLabel("New Window")
-	if err != nil {
-		return nil, err
-	}
-	menuNewWindow.Connect("activate", app.Activate)
-	menu.Add(menuNewWindow)
-	menuSep, err = gtk.SeparatorMenuItemNew()
-	if err != nil {
-		return nil, err
-	}
-	menu.Add(menuSep)
-	menuWebsiteWhatIf, err := gtk.MenuItemNewWithLabel("what if?")
-	if err != nil {
-		return nil, err
-	}
-	menuWebsiteWhatIf.Connect("activate", OpenURL, whatifLink)
-	menuWebsiteWhatIf.SetTooltipText(whatifLink)
-	menu.Add(menuWebsiteWhatIf)
-	menuWebsiteBlog, err := gtk.MenuItemNewWithLabel("xkcd blog")
-	if err != nil {
-		return nil, err
-	}
-	menuWebsiteBlog.Connect("activate", OpenURL, blogLink)
-	menuWebsiteBlog.SetTooltipText(blogLink)
-	menu.Add(menuWebsiteBlog)
-	menuWebsiteStore, err := gtk.MenuItemNewWithLabel("xkcd store")
-	if err != nil {
-		return nil, err
-	}
-	menuWebsiteStore.Connect("activate", OpenURL, storeLink)
-	menuWebsiteStore.SetTooltipText(storeLink)
-	menu.Add(menuWebsiteStore)
-	menuSep, err = gtk.SeparatorMenuItemNew()
-	if err != nil {
-		return nil, err
-	}
-	menu.Add(menuSep)
-	menuAbout, err := gtk.MenuItemNewWithLabel("About " + appName)
-	if err != nil {
-		return nil, err
-	}
-	menuAbout.Connect("activate", app.ShowAboutDialog)
-	menu.Add(menuAbout)
-
-	w.menu.SetPopup(menu)
-	menu.ShowAll()
+	w.menu.SetMenuModel(&menu.MenuModel)
 	w.hdr.PackEnd(w.menu)
 
+	// Create the search menu
 	w.search, err = gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
@@ -363,13 +312,11 @@ func (w *Window) DisplayComic() {
 	w.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
-	w.menuOpenLink.SetTooltipText(w.comic.Link)
 	if w.comic.Link == "" {
-		w.menuOpenLink.SetSensitive(false)
+		w.actions["open-link"].SetEnabled(false)
 	} else {
-		w.menuOpenLink.SetSensitive(true)
+		w.actions["open-link"].SetEnabled(true)
 	}
-	w.menuExplain.SetTooltipText(explainURL(w.comic.Num))
 
 	if w.properties != nil {
 		w.properties.Update()
@@ -439,6 +386,36 @@ func explainURL(n int) string {
 // OpenLink opens the comic's Link in the user's web browser..
 func (w *Window) OpenLink() {
 	err := open.Start(w.comic.Link)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+const (
+	whatifLink = "https://what-if.xkcd.com/"
+	blogLink   = "https://blog.xkcd.com/"
+	storeLink  = "https://store.xkcd.com/"
+)
+
+// OpenWhatIf opens whatifLink in the user's web browser.
+func (w *Window) OpenWhatIf() {
+	err := open.Start(whatifLink)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+// OpenBlog opens blogLink in the user's web browser.
+func (w *Window) OpenBlog() {
+	err := open.Start(blogLink)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+// OpenStore opens storeLink in the user's web browser.
+func (w *Window) OpenStore() {
+	err := open.Start(storeLink)
 	if err != nil {
 		log.Print(err)
 	}
