@@ -120,4 +120,22 @@ func (w *Window) StyleUpdated() {
 	} else {
 		w.menu.SetImage(menuImg)
 	}
+
+	menuPopoverChild, err := w.menu.GetPopover().GetChild()
+	if err != nil {
+		log.Print(err)
+	} else {
+		menuBox := (&gtk.Stack{gtk.Container{*menuPopoverChild}}).GetVisibleChild()
+		if themeName == "elementary" {
+			menuBox.SetMarginTop(3)
+			menuBox.SetMarginBottom(3)
+			menuBox.SetMarginStart(0)
+			menuBox.SetMarginEnd(0)
+		} else {
+			menuBox.SetMarginTop(10)
+			menuBox.SetMarginBottom(10)
+			menuBox.SetMarginStart(10)
+			menuBox.SetMarginEnd(10)
+		}
+	}
 }
