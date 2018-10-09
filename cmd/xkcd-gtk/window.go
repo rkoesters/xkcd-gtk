@@ -16,8 +16,8 @@ import (
 
 // Window is the main application window.
 type Window struct {
-	win   *gtk.ApplicationWindow
-	state WindowState
+	window *gtk.ApplicationWindow
+	state  WindowState
 
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
@@ -49,7 +49,7 @@ func NewWindow(app *Application) (*Window, error) {
 	w.comic = &xkcd.Comic{Title: appName}
 	w.comicMutex = new(sync.Mutex)
 
-	w.win, err = gtk.ApplicationWindowNew(app.application)
+	w.window, err = gtk.ApplicationWindowNew(app.application)
 	if err != nil {
 		return nil, err
 	}
@@ -70,10 +70,10 @@ func NewWindow(app *Application) (*Window, error) {
 		w.actions[name] = action
 		w.actionGroup.AddAction(action)
 	}
-	w.win.InsertActionGroup("win", w.actionGroup)
+	w.window.InsertActionGroup("win", w.actionGroup)
 
 	// If the gtk theme changes, we might want to adjust our styling.
-	w.win.Window.Connect("style-updated", w.StyleUpdated)
+	w.window.Window.Connect("style-updated", w.StyleUpdated)
 
 	// Create HeaderBar
 	w.hdr, err = gtk.HeaderBarNew()
@@ -192,7 +192,7 @@ func NewWindow(app *Application) (*Window, error) {
 	searchPopover.Add(box)
 
 	w.hdr.ShowAll()
-	w.win.SetTitlebar(w.hdr)
+	w.window.SetTitlebar(w.hdr)
 
 	// Create main part of window.
 	imgScroller, err := gtk.ScrolledWindowNew(nil, nil)
@@ -213,16 +213,16 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	imgScroller.Add(w.img)
 	imgScroller.ShowAll()
-	w.win.Add(imgScroller)
+	w.window.Add(imgScroller)
 
 	// Recall our window state.
 	w.state.ReadFile(filepath.Join(CacheDir(), "state"))
 	if w.state.Maximized {
-		w.win.Maximize()
+		w.window.Maximize()
 	} else {
-		w.win.Resize(w.state.Width, w.state.Height)
+		w.window.Resize(w.state.Width, w.state.Height)
 		if w.state.PositionX != 0 && w.state.PositionY != 0 {
-			w.win.Move(w.state.PositionX, w.state.PositionY)
+			w.window.Move(w.state.PositionX, w.state.PositionY)
 		}
 	}
 	if w.state.PropertiesVisible {
@@ -238,11 +238,11 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// If the gtk window state changes, we want to update our internal
 	// window state.
-	w.win.Window.Connect("size-allocate", w.StateChanged)
-	w.win.Window.Connect("window-state-event", w.StateChanged)
+	w.window.Window.Connect("size-allocate", w.StateChanged)
+	w.window.Window.Connect("window-state-event", w.StateChanged)
 
 	// If the window is closed, we want to write our state to disk.
-	w.win.Window.Connect("delete-event", w.SaveState)
+	w.window.Window.Connect("delete-event", w.SaveState)
 
 	return w, nil
 }

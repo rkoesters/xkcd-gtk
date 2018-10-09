@@ -28,7 +28,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	pd.dialog.SetTransientFor(parent.win)
+	pd.dialog.SetTransientFor(parent.window)
 	pd.dialog.SetTitle("Properties")
 	pd.dialog.SetSizeRequest(400, 400)
 	pd.dialog.SetDestroyWithParent(true)

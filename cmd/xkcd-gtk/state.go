@@ -83,10 +83,10 @@ func (ws *WindowState) WriteFile(filename string) error {
 // StateChanged is called when GTK's window state changes and we want to
 // update our internal state to match GTK's changes.
 func (w *Window) StateChanged() {
-	w.state.Maximized = w.win.IsMaximized()
+	w.state.Maximized = w.window.IsMaximized()
 	if !w.state.Maximized {
-		w.state.Width, w.state.Height = w.win.GetSize()
-		w.state.PositionX, w.state.PositionY = w.win.GetPosition()
+		w.state.Width, w.state.Height = w.window.GetSize()
+		w.state.PositionX, w.state.PositionY = w.window.GetPosition()
 	}
 	if w.properties == nil {
 		w.state.PropertiesVisible = false

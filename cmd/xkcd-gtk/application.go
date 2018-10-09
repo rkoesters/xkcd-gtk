@@ -54,7 +54,7 @@ func (app *Application) Activate() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	window.win.Present()
+	window.window.Present()
 }
 
 const (
