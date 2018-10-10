@@ -24,8 +24,8 @@ type Window struct {
 
 	actions map[string]*glib.SimpleAction
 
-	hdr *gtk.HeaderBar
-	img *gtk.Image
+	header *gtk.HeaderBar
+	image  *gtk.Image
 
 	previous *gtk.Button
 	next     *gtk.Button
@@ -75,12 +75,12 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.Window.Connect("style-updated", win.StyleUpdated)
 
 	// Create HeaderBar
-	win.hdr, err = gtk.HeaderBarNew()
+	win.header, err = gtk.HeaderBarNew()
 	if err != nil {
 		return nil, err
 	}
-	win.hdr.SetTitle(appName)
-	win.hdr.SetShowCloseButton(true)
+	win.header.SetTitle(appName)
+	win.header.SetShowCloseButton(true)
 
 	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
@@ -108,7 +108,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.next.SetProperty("action-name", "win.next-comic")
 	navBox.Add(win.next)
 
-	win.hdr.PackStart(navBox)
+	win.header.PackStart(navBox)
 
 	randomButton, err := gtk.ButtonNewWithLabel("Random")
 	if err != nil {
@@ -116,7 +116,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	randomButton.SetTooltipText("Go to a random comic")
 	randomButton.SetProperty("action-name", "win.random-comic")
-	win.hdr.PackStart(randomButton)
+	win.header.PackStart(randomButton)
 
 	// Create the menu
 	win.menu, err = gtk.MenuButtonNew()
@@ -145,7 +145,7 @@ func NewWindow(app *Application) (*Window, error) {
 	menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
 
 	win.menu.SetMenuModel(&menu.MenuModel)
-	win.hdr.PackEnd(win.menu)
+	win.header.PackEnd(win.menu)
 
 	// Create the search menu
 	win.search, err = gtk.MenuButtonNew()
@@ -153,7 +153,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.search.SetTooltipText("Search")
-	win.hdr.PackEnd(win.search)
+	win.header.PackEnd(win.search)
 
 	searchPopover, err := gtk.PopoverNew(win.search)
 	if err != nil {
@@ -190,29 +190,29 @@ func NewWindow(app *Application) (*Window, error) {
 	box.ShowAll()
 	searchPopover.Add(box)
 
-	win.hdr.ShowAll()
-	win.window.SetTitlebar(win.hdr)
+	win.header.ShowAll()
+	win.window.SetTitlebar(win.header)
 
 	// Create main part of window.
-	imgScroller, err := gtk.ScrolledWindowNew(nil, nil)
+	imageScroller, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	imgScroller.SetSizeRequest(400, 300)
+	imageScroller.SetSizeRequest(400, 300)
 
-	imgContext, err := imgScroller.GetStyleContext()
+	imageContext, err := imageScroller.GetStyleContext()
 	if err != nil {
 		return nil, err
 	}
-	imgContext.AddClass("comic-container")
+	imageContext.AddClass("comic-container")
 
-	win.img, err = gtk.ImageNew()
+	win.image, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
 	}
-	imgScroller.Add(win.img)
-	imgScroller.ShowAll()
-	win.window.Add(imgScroller)
+	imageScroller.Add(win.image)
+	imageScroller.ShowAll()
+	win.window.Add(imageScroller)
 
 	// Recall our window state.
 	win.state.ReadFile(filepath.Join(CacheDir(), "state"))
@@ -269,8 +269,8 @@ func (win *Window) RandomComic() {
 // SetComic sets the current comic to the given comic.
 func (win *Window) SetComic(n int) {
 	// Make it clear that we are loading a comic.
-	win.hdr.SetTitle("Loading comic...")
-	win.hdr.SetSubtitle(strconv.Itoa(n))
+	win.header.SetTitle("Loading comic...")
+	win.header.SetSubtitle(strconv.Itoa(n))
 	win.updateNextPreviousButtonStatus()
 	win.state.ComicNumber = n
 
@@ -307,10 +307,10 @@ func (win *Window) SetComic(n int) {
 
 // DisplayComic updates the UI to show the contents of win.comic
 func (win *Window) DisplayComic() {
-	win.hdr.SetTitle(win.comic.SafeTitle)
-	win.hdr.SetSubtitle(strconv.Itoa(win.comic.Num))
-	win.img.SetFromFile(getComicImagePath(win.comic.Num))
-	win.img.SetTooltipText(win.comic.Alt)
+	win.header.SetTitle(win.comic.SafeTitle)
+	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
+	win.image.SetFromFile(getComicImagePath(win.comic.Num))
+	win.image.SetTooltipText(win.comic.Alt)
 	win.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
@@ -360,7 +360,7 @@ func (win *Window) ShowProperties() {
 // the user.
 func (win *Window) GotoNewest() {
 	// Make it clear that we are checking for a new comic.
-	win.hdr.SetTitle("Checking for new comic...")
+	win.header.SetTitle("Checking for new comic...")
 	// Close the menu.
 	win.menu.GetPopup().Popdown()
 
