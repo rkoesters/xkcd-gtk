@@ -190,4 +190,5 @@ func (win *Window) setComicFromSearch(_ interface{}, id string) {
 		return
 	}
 	win.SetComic(number)
+	win.search.GetPopover().Hide()
 }
