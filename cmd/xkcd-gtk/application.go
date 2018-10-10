@@ -41,11 +41,34 @@ func NewApplication() (*Application, error) {
 		app.application.AddAction(action)
 	}
 
+	app.application.Connect("startup", app.SetupAppMenu)
 	app.application.Connect("startup", app.LoadCSS)
 	app.application.Connect("startup", app.LoadSearchIndex)
 	app.application.Connect("activate", app.Activate)
 
 	return &app, nil
+}
+
+func (app *Application) SetupAppMenu() {
+	if app.application.PrefersAppMenu() {
+		menuSection1 := glib.MenuNew()
+		menuSection1.Append("New Window", "app.new-window")
+
+		menuSection2 := glib.MenuNew()
+		menuSection2.Append("what if?", "app.open-what-if")
+		menuSection2.Append("xkcd blog", "app.open-blog")
+		menuSection2.Append("xkcd store", "app.open-store")
+
+		menuSection3 := glib.MenuNew()
+		menuSection3.Append("About "+appName, "app.show-about")
+
+		menu := glib.MenuNew()
+		menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
+		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
+		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
+
+		app.application.SetAppMenu(&menu.MenuModel)
+	}
 }
 
 // Activate creates and presents a new window to the user.
