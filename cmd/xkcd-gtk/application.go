@@ -68,7 +68,7 @@ func (app *Application) SetupAppMenu() {
 		menu := glib.MenuNew()
 		menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
 		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
-		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
+		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
 
 		app.application.SetAppMenu(&menu.MenuModel)
 	}
