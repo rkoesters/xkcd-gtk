@@ -22,8 +22,7 @@ type Window struct {
 	comic      *xkcd.Comic
 	comicMutex *sync.Mutex
 
-	actions     map[string]*glib.SimpleAction
-	actionGroup *glib.SimpleActionGroup
+	actions map[string]*glib.SimpleAction
 
 	hdr *gtk.HeaderBar
 	img *gtk.Image
@@ -62,15 +61,13 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 
 	win.actions = make(map[string]*glib.SimpleAction)
-	win.actionGroup = glib.SimpleActionGroupNew()
 	for name, function := range actionFuncs {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", function)
 
 		win.actions[name] = action
-		win.actionGroup.AddAction(action)
+		win.window.AddAction(action)
 	}
-	win.window.InsertActionGroup("win", win.actionGroup)
 
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Window.Connect("style-updated", win.StyleUpdated)
