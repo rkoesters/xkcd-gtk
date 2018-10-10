@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"log"
@@ -22,9 +21,9 @@ var (
 	// large toolbar buttons.
 	largeToolbarThemes = []string{"elementary", "win32"}
 
-	// symbolicIconThemes is the list of gtk themes for which we should use
-	// symbolic icons.
-	symbolicIconThemes = []string{"Adwaita", "Ambiance", "Radiance"}
+	// nonSymbolicIconThemes is the list of gtk themes for which we
+	// should use non-symbolic icons.
+	nonSymbolicIconThemes = []string{"elementary"}
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
@@ -79,16 +78,16 @@ func (win *Window) StyleUpdated() {
 	}
 
 	// Should we use symbolic icons?
-	useSymbolicIcons := false
-	for _, symbolicIconTheme := range symbolicIconThemes {
-		if themeName == symbolicIconTheme {
-			useSymbolicIcons = true
+	useSymbolicIcons := true
+	for _, nonSymbolicIconTheme := range nonSymbolicIconThemes {
+		if themeName == nonSymbolicIconTheme {
+			useSymbolicIcons = false
 		}
 	}
-	// we will call icon() to automatically add -symbolic if needed.
+	// We will call icon() to automatically add -symbolic if needed.
 	icon := func(s string) string {
 		if useSymbolicIcons {
-			return fmt.Sprint(s, "-symbolic")
+			return s + "-symbolic"
 		}
 		return s
 	}
