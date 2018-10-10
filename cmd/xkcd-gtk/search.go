@@ -155,7 +155,7 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 		labelID.SetXAlign(1)
 		// Set character column width using character width of largest
 		// comic number.
-		labelID.SetWidthChars(len(fmt.Sprint(newest.Num)))
+		labelID.SetWidthChars(len(strconv.Itoa(newest.Num)))
 		box.Add(labelID)
 
 		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["safe_title"]))

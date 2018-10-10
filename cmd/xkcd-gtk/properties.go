@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gotk3/gotk3/gtk"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -128,7 +128,7 @@ func (pd *PropertiesDialog) Present() {
 // Update changes the dialog's contents to match the parent Window's
 // comic.
 func (pd *PropertiesDialog) Update() {
-	pd.labels["Number"].SetText(fmt.Sprint(pd.parent.comic.Num))
+	pd.labels["Number"].SetText(strconv.Itoa(pd.parent.comic.Num))
 	pd.labels["Title"].SetText(pd.parent.comic.Title)
 	pd.labels["Image"].SetText(pd.parent.comic.Img)
 	pd.labels["Alt Text"].SetText(pd.parent.comic.Alt)
