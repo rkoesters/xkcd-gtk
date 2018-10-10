@@ -50,6 +50,7 @@ func NewApplication() (*Application, error) {
 	return &app, nil
 }
 
+// SetupAppMenu creates an AppMenu if the environment wants it.
 func (app *Application) SetupAppMenu() {
 	if app.application.PrefersAppMenu() {
 		menuSection1 := glib.MenuNew()
@@ -82,6 +83,7 @@ func (app *Application) Activate() {
 	win.window.Present()
 }
 
+// Quit closes all windows so the application can close.
 func (app *Application) Quit() {
 	app.application.GetWindows().Foreach(func(win interface{}) {
 		app.application.RemoveWindow(&win.(*gtk.ApplicationWindow).Window)
