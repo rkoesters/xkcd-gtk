@@ -31,13 +31,13 @@ func (ws *WindowState) loadDefaults() {
 	newestComic, _ := GetNewestComicInfo()
 	ws.ComicNumber = newestComic.Num
 	ws.Maximized = false
-	ws.Height = 800
-	ws.Width = 1000
+	ws.Height = 600
+	ws.Width = 800
 	ws.PositionX = 0
 	ws.PositionY = 0
 	ws.PropertiesVisible = false
-	ws.PropertiesHeight = 600
-	ws.PropertiesWidth = 500
+	ws.PropertiesHeight = 400
+	ws.PropertiesWidth = 400
 	ws.PropertiesPositionX = 0
 	ws.PropertiesPositionY = 0
 }
