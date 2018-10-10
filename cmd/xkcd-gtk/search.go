@@ -61,14 +61,26 @@ func (app *Application) LoadSearchIndex() {
 	ca.SetMarginEnd(24)
 	ca.Add(progressBar)
 
-	done := false
+	done := make(chan struct{})
 
-	// Lets only open the dialog if our loading will be longer.
+	// Wait before showing the cache building dialog. If the cache is
+	// already complete, then the caching and indexing operation will be
+	// very fast.
 	go func() {
 		time.Sleep(time.Second)
-		if !done {
+
+		select {
+		case <-done:
+			// Already done, don't bother showing dialog.
+			return
+		default:
 			glib.IdleAdd(loadingDialog.Present)
 		}
+
+		// Wait until we are done.
+		<-done
+
+		glib.IdleAdd(loadingDialog.Close)
 	}()
 
 	// Make sure all comic metadata is cached and indexed.
@@ -80,8 +92,7 @@ func (app *Application) LoadSearchIndex() {
 				progressBar.SetFraction(float64(i) / float64(newest.Num))
 			})
 		}
-		done = true
-		glib.IdleAdd(loadingDialog.Close)
+		done <- struct{}{}
 	}()
 }
 
