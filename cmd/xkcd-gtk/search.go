@@ -6,6 +6,7 @@ import (
 	"github.com/blevesearch/bleve/search/query"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/gotk3/gotk3/pango"
 	"log"
 	"path/filepath"
 	"strconv"
@@ -139,11 +140,13 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 			return
 		}
 		item.Connect("clicked", win.setComicFromSearch, sr.ID)
+
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
 			log.Print(err)
 			return
 		}
+
 		labelID, err := gtk.LabelNew(sr.ID)
 		if err != nil {
 			log.Print(err)
@@ -154,12 +157,15 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 		// comic number.
 		labelID.SetWidthChars(len(fmt.Sprint(newest.Num)))
 		box.Add(labelID)
+
 		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["safe_title"]))
 		if err != nil {
 			log.Print(err)
 			return
 		}
+		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
 		box.Add(labelTitle)
+
 		item.Add(box)
 		item.SetRelief(gtk.RELIEF_NONE)
 		win.searchResults.Add(item)
