@@ -86,7 +86,7 @@ func (app *Application) Activate() {
 // Quit closes all windows so the application can close.
 func (app *Application) Quit() {
 	app.application.GetWindows().Foreach(func(win interface{}) {
-		app.application.RemoveWindow(&win.(*gtk.ApplicationWindow).Window)
+		app.application.RemoveWindow(win.(*gtk.Window))
 	})
 }
 
