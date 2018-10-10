@@ -29,7 +29,6 @@ type Window struct {
 
 	previous *gtk.Button
 	next     *gtk.Button
-	rand     *gtk.Button
 	search   *gtk.MenuButton
 	menu     *gtk.MenuButton
 
@@ -56,7 +55,10 @@ func NewWindow(app *Application) (*Window, error) {
 	actionFuncs := map[string]interface{}{
 		"explain":         win.Explain,
 		"goto-newest":     win.GotoNewest,
+		"next-comic":      win.NextComic,
 		"open-link":       win.OpenLink,
+		"previous-comic":  win.PreviousComic,
+		"random-comic":    win.RandomComic,
 		"show-properties": win.ShowProperties,
 	}
 
@@ -95,7 +97,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.previous.SetTooltipText("Go to the previous comic")
-	win.previous.Connect("clicked", win.PreviousComic)
+	win.previous.SetProperty("action-name", "win.previous-comic")
 	navBox.Add(win.previous)
 
 	win.next, err = gtk.ButtonNew()
@@ -103,18 +105,18 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.next.SetTooltipText("Go to the next comic")
-	win.next.Connect("clicked", win.NextComic)
+	win.next.SetProperty("action-name", "win.next-comic")
 	navBox.Add(win.next)
 
 	win.hdr.PackStart(navBox)
 
-	win.rand, err = gtk.ButtonNewWithLabel("Random")
+	randomButton, err := gtk.ButtonNewWithLabel("Random")
 	if err != nil {
 		return nil, err
 	}
-	win.rand.SetTooltipText("Go to a random comic")
-	win.rand.Connect("clicked", win.RandomComic)
-	win.hdr.PackStart(win.rand)
+	randomButton.SetTooltipText("Go to a random comic")
+	randomButton.SetProperty("action-name", "win.random-comic")
+	win.hdr.PackStart(randomButton)
 
 	// Create the menu
 	win.menu, err = gtk.MenuButtonNew()
@@ -326,17 +328,17 @@ func (win *Window) DisplayComic() {
 func (win *Window) updateNextPreviousButtonStatus() {
 	// Enable/disable previous button.
 	if win.comic.Num > 1 {
-		win.previous.SetSensitive(true)
+		win.actions["previous-comic"].SetEnabled(true)
 	} else {
-		win.previous.SetSensitive(false)
+		win.actions["previous-comic"].SetEnabled(false)
 	}
 
 	// Enable/disable next button.
 	newest, _ := GetNewestComicInfo()
 	if win.comic.Num < newest.Num {
-		win.next.SetSensitive(true)
+		win.actions["next-comic"].SetEnabled(true)
 	} else {
-		win.next.SetSensitive(false)
+		win.actions["next-comic"].SetEnabled(false)
 	}
 }
 
