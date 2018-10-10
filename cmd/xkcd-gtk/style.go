@@ -126,8 +126,8 @@ func (win *Window) StyleUpdated() {
 	} else {
 		menuBox := (&gtk.Stack{gtk.Container{*menuPopoverChild}}).GetVisibleChild()
 		if themeName == "elementary" {
-			menuBox.SetMarginTop(3)
-			menuBox.SetMarginBottom(3)
+			menuBox.SetMarginTop(4)
+			menuBox.SetMarginBottom(4)
 			menuBox.SetMarginStart(0)
 			menuBox.SetMarginEnd(0)
 		} else {
