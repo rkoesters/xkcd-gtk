@@ -367,8 +367,6 @@ func (win *Window) ShowProperties() {
 func (win *Window) GotoNewest() {
 	// Make it clear that we are checking for a new comic.
 	win.header.SetTitle("Checking for new comic...")
-	// Close the menu.
-	win.menu.GetPopup().Popdown()
 
 	// Force GetNewestComicInfo to check for a new comic.
 	cachedNewestComic = nil
