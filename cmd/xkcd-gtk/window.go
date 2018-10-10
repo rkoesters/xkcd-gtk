@@ -125,24 +125,30 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.menu.SetTooltipText("Menu")
 
+	menu := glib.MenuNew()
+
 	menuSection1 := glib.MenuNew()
+	menuSection1.Append("Go to Newest Comic", "win.goto-newest")
 	menuSection1.Append("Open Link", "win.open-link")
 	menuSection1.Append("Explain", "win.explain")
 	menuSection1.Append("Properties", "win.show-properties")
-	menuSection2 := glib.MenuNew()
-	menuSection2.Append("Go to Newest Comic", "win.goto-newest")
-	menuSection2.Append("New Window", "app.new-window")
-	menuSection3 := glib.MenuNew()
-	menuSection3.Append("what if?", "app.open-what-if")
-	menuSection3.Append("xkcd blog", "app.open-blog")
-	menuSection3.Append("xkcd store", "app.open-store")
-	menuSection4 := glib.MenuNew()
-	menuSection4.Append("About "+appName, "app.show-about")
-	menu := glib.MenuNew()
 	menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
-	menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
-	menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
-	menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
+
+	if !app.application.PrefersAppMenu() {
+		menuSection2 := glib.MenuNew()
+		menuSection2.Append("New Window", "app.new-window")
+		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
+
+		menuSection3 := glib.MenuNew()
+		menuSection3.Append("what if?", "app.open-what-if")
+		menuSection3.Append("xkcd blog", "app.open-blog")
+		menuSection3.Append("xkcd store", "app.open-store")
+		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
+
+		menuSection4 := glib.MenuNew()
+		menuSection4.Append("About "+appName, "app.show-about")
+		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
+	}
 
 	win.menu.SetMenuModel(&menu.MenuModel)
 	win.header.PackEnd(win.menu)
