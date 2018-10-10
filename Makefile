@@ -85,4 +85,8 @@ uninstall:
 	      $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
 	      $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
 
-.PHONY: all clean deps install uninstall
+check:
+	$(GO) fmt ./...
+	golint -set_exit_status ./...
+
+.PHONY: all check clean deps install uninstall
