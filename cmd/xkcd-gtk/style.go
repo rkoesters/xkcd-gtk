@@ -24,7 +24,7 @@ var (
 
 	// symbolicIconThemes is the list of gtk themes for which we should use
 	// symbolic icons.
-	symbolicIconThemes = []string{"Adwaita"}
+	symbolicIconThemes = []string{"Adwaita", "Ambiance", "Radiance"}
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
