@@ -75,7 +75,9 @@ func (app *Application) LoadSearchIndex() {
 		newest, _ := GetNewestComicInfo()
 		for i := 1; i <= newest.Num; i++ {
 			GetComicInfo(i)
-			glib.IdleAdd(func() { progressBar.SetFraction(float64(i) / float64(newest.Num)) })
+			glib.IdleAdd(func() {
+				progressBar.SetFraction(float64(i) / float64(newest.Num))
+			})
 		}
 		done = true
 		glib.IdleAdd(loadingDialog.Close)
