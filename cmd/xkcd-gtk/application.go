@@ -29,6 +29,7 @@ func NewApplication() (*Application, error) {
 		"open-blog":    app.OpenBlog,
 		"open-store":   app.OpenStore,
 		"open-what-if": app.OpenWhatIf,
+		"quit":         app.Quit,
 		"show-about":   app.ShowAboutDialog,
 	}
 
@@ -61,6 +62,7 @@ func (app *Application) SetupAppMenu() {
 
 		menuSection3 := glib.MenuNew()
 		menuSection3.Append("About "+appName, "app.show-about")
+		menuSection3.Append("Quit", "app.quit")
 
 		menu := glib.MenuNew()
 		menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
@@ -78,6 +80,12 @@ func (app *Application) Activate() {
 		log.Fatal(err)
 	}
 	win.window.Present()
+}
+
+func (app *Application) Quit() {
+	app.application.GetWindows().Foreach(func(win interface{}) {
+		app.application.RemoveWindow(&win.(*gtk.ApplicationWindow).Window)
+	})
 }
 
 const (
