@@ -62,7 +62,7 @@ const shortcutsWindowUI = ` <?xml version="1.0" encoding="UTF-8"?>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;ctrl&gt;p</property>
                 <property name="visible">1</property>
-                <property name="title">Open Properties Window</property>
+                <property name="title">Open Properties Dialog</property>
               </object>
             </child>
             <child>
