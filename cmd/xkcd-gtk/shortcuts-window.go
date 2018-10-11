@@ -81,6 +81,8 @@ const shortcutsWindowUI = ` <?xml version="1.0" encoding="UTF-8"?>
 </interface>
 `
 
+// NewShortcutsWindow creates a *gtk.ShortcutsWindow populated with our
+// application's keyboard shortcuts.
 func NewShortcutsWindow() (*gtk.ShortcutsWindow, error) {
 	builder, err := gtk.BuilderNew()
 	if err != nil {
@@ -102,6 +104,7 @@ func NewShortcutsWindow() (*gtk.ShortcutsWindow, error) {
 
 var shortcutsWindow *gtk.ShortcutsWindow
 
+// ShowShortcuts shows a shortcuts window to the user.
 func (app *Application) ShowShortcuts() {
 	var err error
 	if shortcutsWindow == nil {
