@@ -22,7 +22,7 @@ type Window struct {
 	state  WindowState
 
 	comic      *xkcd.Comic
-	comicMutex *sync.Mutex
+	comicMutex sync.Mutex
 
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
@@ -51,13 +51,12 @@ func NewWindow(app *Application) (*Window, error) {
 
 	win.app = app
 
-	win.comic = &xkcd.Comic{Title: appName}
-	win.comicMutex = new(sync.Mutex)
-
 	win.window, err = gtk.ApplicationWindowNew(app.application)
 	if err != nil {
 		return nil, err
 	}
+
+	win.comic = &xkcd.Comic{Title: appName}
 
 	// Initialize our window actions.
 	actionFuncs := map[string]interface{}{
