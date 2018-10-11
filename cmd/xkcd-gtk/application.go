@@ -31,7 +31,7 @@ func NewApplication() (*Application, error) {
 		"open-store":     app.OpenStore,
 		"open-what-if":   app.OpenWhatIf,
 		"quit":           app.Quit,
-		"show-about":     app.ShowAboutDialog,
+		"show-about":     app.ShowAbout,
 		"show-shortcuts": app.ShowShortcuts,
 	}
 

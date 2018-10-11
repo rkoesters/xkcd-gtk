@@ -14,8 +14,8 @@ var appVersion = "undefined"
 
 var aboutDialog *gtk.AboutDialog
 
-// ShowAboutDialog shows our application info to the user.
-func (app *Application) ShowAboutDialog() {
+// ShowAbout shows our application info to the user.
+func (app *Application) ShowAbout() {
 	var err error
 	if aboutDialog == nil {
 		aboutDialog, err = gtk.AboutDialogNew()
