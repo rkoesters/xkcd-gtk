@@ -26,12 +26,13 @@ func NewApplication() (*Application, error) {
 
 	// Initialize our application actions.
 	actionFuncs := map[string]interface{}{
-		"new-window":   app.Activate,
-		"open-blog":    app.OpenBlog,
-		"open-store":   app.OpenStore,
-		"open-what-if": app.OpenWhatIf,
-		"quit":         app.Quit,
-		"show-about":   app.ShowAboutDialog,
+		"new-window":     app.Activate,
+		"open-blog":      app.OpenBlog,
+		"open-store":     app.OpenStore,
+		"open-what-if":   app.OpenWhatIf,
+		"quit":           app.Quit,
+		"show-about":     app.ShowAboutDialog,
+		"show-shortcuts": app.ShowShortcuts,
 	}
 
 	app.actions = make(map[string]*glib.SimpleAction)
@@ -68,6 +69,7 @@ func (app *Application) SetupAppMenu() {
 		menuSection2.Append("xkcd store", "app.open-store")
 
 		menuSection3 := glib.MenuNew()
+		menuSection3.Append("Keyboard Shortcuts", "app.show-shortcuts")
 		menuSection3.Append("About "+appName, "app.show-about")
 		menuSection3.Append("Quit", "app.quit")
 
