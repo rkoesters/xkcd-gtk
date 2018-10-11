@@ -8,7 +8,6 @@ import (
 const shortcutsWindowUI = ` <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object class="GtkShortcutsWindow" id="shortcuts-window">
-    <property name="modal">1</property>
     <child>
       <object class="GtkShortcutsSection">
         <property name="visible">1</property>
@@ -128,13 +127,6 @@ func (app *Application) ShowShortcuts() {
 			app.application.RemoveWindow(&shortcutsWindow.Window)
 		})
 
-	}
-
-	// Set our parent window as the active window, but avoid
-	// accidentally setting ourself as the parent window.
-	win := app.application.GetActiveWindow()
-	if win.Native() != shortcutsWindow.Native() {
-		shortcutsWindow.SetTransientFor(win)
 	}
 
 	app.application.AddWindow(&shortcutsWindow.Window)
