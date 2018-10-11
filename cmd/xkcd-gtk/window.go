@@ -23,17 +23,20 @@ type Window struct {
 	comicMutex *sync.Mutex
 
 	actions map[string]*glib.SimpleAction
+	accels  *gtk.AccelGroup
 
 	header *gtk.HeaderBar
 	image  *gtk.Image
 
 	previous *gtk.Button
 	next     *gtk.Button
-	search   *gtk.MenuButton
-	menu     *gtk.MenuButton
+	random   *gtk.Button
 
+	search        *gtk.MenuButton
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
+
+	menu *gtk.MenuButton
 
 	properties *PropertiesDialog
 }
@@ -52,6 +55,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 
+	// Initialize our window actions.
 	actionFuncs := map[string]interface{}{
 		"explain":         win.Explain,
 		"goto-newest":     win.GotoNewest,
@@ -69,6 +73,22 @@ func NewWindow(app *Application) (*Window, error) {
 
 		win.actions[name] = action
 		win.window.AddAction(action)
+	}
+
+	// Initialize our window accelerators.
+	win.accels, err = gtk.AccelGroupNew()
+	if err != nil {
+		return nil, err
+	}
+	win.window.AddAccelGroup(win.accels)
+
+	addAccel := func(widget *gtk.Button, accel string) {
+		key, mods := gtk.AcceleratorParse(accel)
+		if key == 0 || mods == 0 {
+			panic("AddAccel bad accelerator")
+		}
+
+		widget.AddAccelerator("activate", win.accels, key, mods, gtk.ACCEL_VISIBLE)
 	}
 
 	// If the gtk theme changes, we might want to adjust our styling.
@@ -98,6 +118,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.previous.SetTooltipText("Go to the previous comic")
 	win.previous.SetProperty("action-name", "win.previous-comic")
+	addAccel(win.previous, "<Control>p")
 	navBox.Add(win.previous)
 
 	win.next, err = gtk.ButtonNew()
@@ -106,17 +127,19 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.next.SetTooltipText("Go to the next comic")
 	win.next.SetProperty("action-name", "win.next-comic")
+	addAccel(win.next, "<Control>n")
 	navBox.Add(win.next)
 
 	win.header.PackStart(navBox)
 
-	randomButton, err := gtk.ButtonNewWithLabel("Random")
+	win.random, err = gtk.ButtonNewWithLabel("Random")
 	if err != nil {
 		return nil, err
 	}
-	randomButton.SetTooltipText("Go to a random comic")
-	randomButton.SetProperty("action-name", "win.random-comic")
-	win.header.PackStart(randomButton)
+	win.random.SetTooltipText("Go to a random comic")
+	win.random.SetProperty("action-name", "win.random-comic")
+	addAccel(win.random, "<Control>r")
+	win.header.PackStart(win.random)
 
 	// Create the menu
 	win.menu, err = gtk.MenuButtonNew()
@@ -159,6 +182,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.search.SetTooltipText("Search")
+	addAccel(&win.search.Button, "<Control>f")
 	win.header.PackEnd(win.search)
 
 	searchPopover, err := gtk.PopoverNew(win.search)
