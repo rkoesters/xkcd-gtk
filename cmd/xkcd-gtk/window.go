@@ -17,6 +17,7 @@ import (
 
 // Window is the main application window.
 type Window struct {
+	app    *Application
 	window *gtk.ApplicationWindow
 	state  WindowState
 
@@ -47,6 +48,8 @@ func NewWindow(app *Application) (*Window, error) {
 	var err error
 
 	win := new(Window)
+
+	win.app = app
 
 	win.comic = &xkcd.Comic{Title: appName}
 	win.comicMutex = new(sync.Mutex)

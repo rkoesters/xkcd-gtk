@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"strconv"
 	"strings"
@@ -13,6 +14,8 @@ type PropertiesDialog struct {
 	parent *Window
 	dialog *gtk.Dialog
 	labels map[string]*gtk.Label
+
+	accels *gtk.AccelGroup
 }
 
 // NewPropertiesDialog creates and returns a PropertiesDialog for the
@@ -36,6 +39,14 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	if parent.state.PropertiesPositionX != 0 && parent.state.PropertiesPositionY != 0 {
 		pd.dialog.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
 	}
+
+	// Make Control-q to quit the app work in this dialog.
+	pd.accels, err = gtk.AccelGroupNew()
+	if err != nil {
+		return nil, err
+	}
+	pd.dialog.AddAccelGroup(pd.accels)
+	pd.accels.Connect(gdk.KEY_q, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
 
 	pd.dialog.Connect("delete-event", pd.Destroy)
 
