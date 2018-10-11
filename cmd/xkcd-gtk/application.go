@@ -30,7 +30,7 @@ func NewApplication() (*Application, error) {
 		"open-blog":    app.OpenBlog,
 		"open-store":   app.OpenStore,
 		"open-what-if": app.OpenWhatIf,
-		"quit":         app.application.Application.Quit,
+		"quit":         app.Quit,
 		"show-about":   app.ShowAboutDialog,
 	}
 
@@ -86,6 +86,18 @@ func (app *Application) Activate() {
 		log.Fatal(err)
 	}
 	win.window.Present()
+}
+
+// Quit closes all windows so the application can close.
+func (app *Application) Quit() {
+	// Close the active window so that it has a chance to save its state.
+	win := app.application.GetActiveWindow()
+	if win != nil {
+		win.Close()
+	}
+
+	// Quit the application.
+	glib.IdleAdd(app.application.Quit)
 }
 
 const (
