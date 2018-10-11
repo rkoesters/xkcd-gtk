@@ -24,6 +24,7 @@ func NewApplication() (*Application, error) {
 		return nil, err
 	}
 
+	// Initialize our application actions.
 	actionFuncs := map[string]interface{}{
 		"new-window":   app.Activate,
 		"open-blog":    app.OpenBlog,
@@ -42,6 +43,10 @@ func NewApplication() (*Application, error) {
 		app.application.AddAction(action)
 	}
 
+	// Initialize our application accelerators.
+	app.application.SetAccelsForAction("app.quit", []string{"<Control>q"})
+
+	// Connect application signals to our methods.
 	app.application.Connect("startup", app.SetupAppMenu)
 	app.application.Connect("startup", app.LoadCSS)
 	app.application.Connect("startup", app.LoadSearchIndex)
