@@ -53,6 +53,7 @@ func NewApplication() (*Application, error) {
 
 	// Initialize our application accelerators.
 	app.application.SetAccelsForAction("app.new-window", []string{"<Control>n"})
+	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>?"})
 	app.application.SetAccelsForAction("app.quit", []string{"<Control>q"})
 
 	// Connect application signals to our methods.

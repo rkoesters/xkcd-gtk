@@ -68,6 +68,13 @@ const shortcutsWindowUI = ` <?xml version="1.0" encoding="UTF-8"?>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;?</property>
+                <property name="visible">1</property>
+                <property name="title">Open Shortcuts Window</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="visible">1</property>
                 <property name="accelerator">&lt;ctrl&gt;q</property>
                 <property name="title">Quit Application</property>
