@@ -30,7 +30,7 @@ func NewApplication() (*Application, error) {
 		"open-blog":    app.OpenBlog,
 		"open-store":   app.OpenStore,
 		"open-what-if": app.OpenWhatIf,
-		"quit":         app.Quit,
+		"quit":         app.application.Application.Quit,
 		"show-about":   app.ShowAboutDialog,
 	}
 
@@ -86,13 +86,6 @@ func (app *Application) Activate() {
 		log.Fatal(err)
 	}
 	win.window.Present()
-}
-
-// Quit closes all windows so the application can close.
-func (app *Application) Quit() {
-	app.application.GetWindows().Foreach(func(win interface{}) {
-		app.application.RemoveWindow(win.(*gtk.Window))
-	})
 }
 
 const (
