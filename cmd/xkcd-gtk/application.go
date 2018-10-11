@@ -93,6 +93,11 @@ func (app *Application) Quit() {
 	// Close the active window so that it has a chance to save its state.
 	win := app.application.GetActiveWindow()
 	if win != nil {
+		parent, _ := win.GetTransientFor()
+		if parent != nil {
+			win = parent
+		}
+
 		win.Close()
 	}
 

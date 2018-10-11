@@ -42,6 +42,7 @@ func (app *Application) ShowAboutDialog() {
 			app.application.RemoveWindow(&aboutDialog.Window)
 		})
 	}
+	aboutDialog.SetTransientFor(app.application.GetActiveWindow())
 	app.application.AddWindow(&aboutDialog.Window)
 	aboutDialog.Present()
 }
