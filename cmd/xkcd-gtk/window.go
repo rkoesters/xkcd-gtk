@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
@@ -82,15 +83,6 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.window.AddAccelGroup(win.accels)
 
-	addAccel := func(widget *gtk.Button, accel string) {
-		key, mods := gtk.AcceleratorParse(accel)
-		if key == 0 || mods == 0 {
-			panic("AddAccel bad accelerator")
-		}
-
-		widget.AddAccelerator("activate", win.accels, key, mods, gtk.ACCEL_VISIBLE)
-	}
-
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Window.Connect("style-updated", win.StyleUpdated)
 
@@ -126,7 +118,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.previous.SetTooltipText("Go to the previous comic")
 	win.previous.SetProperty("action-name", "win.previous-comic")
-	addAccel(win.previous, "<Control>p")
+	win.previous.AddAccelerator("activate", win.accels, gdk.KEY_p, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.previous)
 
 	win.next, err = gtk.ButtonNew()
@@ -135,7 +127,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.next.SetTooltipText("Go to the next comic")
 	win.next.SetProperty("action-name", "win.next-comic")
-	addAccel(win.next, "<Control>n")
+	win.next.AddAccelerator("activate", win.accels, gdk.KEY_n, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.next)
 
 	win.header.PackStart(navBox)
@@ -146,7 +138,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.random.SetTooltipText("Go to a random comic")
 	win.random.SetProperty("action-name", "win.random-comic")
-	addAccel(win.random, "<Control>r")
+	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackStart(win.random)
 
 	// Create the menu
@@ -190,7 +182,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.search.SetTooltipText("Search")
-	addAccel(&win.search.Button, "<Control>f")
+	win.search.AddAccelerator("activate", win.accels, gdk.KEY_f, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackEnd(win.search)
 
 	searchPopover, err := gtk.PopoverNew(win.search)
