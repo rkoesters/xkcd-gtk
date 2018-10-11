@@ -74,7 +74,10 @@ func (app *Application) LoadSearchIndex() {
 			// Already done, don't bother showing dialog.
 			return
 		default:
-			glib.IdleAdd(loadingDialog.Present)
+			glib.IdleAdd(func() {
+				loadingDialog.SetTransientFor(app.application.GetActiveWindow())
+				loadingDialog.Present()
+			})
 		}
 
 		// Wait until we are done.
