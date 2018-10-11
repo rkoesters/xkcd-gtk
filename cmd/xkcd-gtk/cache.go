@@ -11,6 +11,42 @@ import (
 	"strconv"
 )
 
+var (
+	getCachedNewestComic <-chan *xkcd.Comic
+	setCachedNewestComic chan<- *xkcd.Comic
+)
+
+func init() {
+	cachedNewestComicOut := make(chan *xkcd.Comic)
+	cachedNewestComicIn := make(chan *xkcd.Comic)
+
+	getCachedNewestComic = cachedNewestComicOut
+	setCachedNewestComic = cachedNewestComicIn
+
+	// Start cachedNewestComic manager.
+	go func() {
+		var cachedNewestComic *xkcd.Comic
+
+		for {
+			select {
+			case newest := <-cachedNewestComicIn:
+				cachedNewestComic = newest
+			case cachedNewestComicOut <- cachedNewestComic:
+				// Sending the comic was all we wanted to do.
+			}
+		}
+	}()
+}
+
+var (
+	// ErrCache means that there was an error while trying to access the
+	// local cache.
+	ErrCache = errors.New("error accessing local xkcd cache")
+	// ErrOffline means that there was an error trying to access the
+	// xkcd server.
+	ErrOffline = errors.New("error accessing xkcd server")
+)
+
 func getComicPath(n int) string {
 	return filepath.Join(CacheDir(), strconv.Itoa(n))
 }
@@ -74,58 +110,89 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 	return c, nil
 }
 
-var cachedNewestComic *xkcd.Comic
-
-var (
-	// ErrCache means that there was an error while trying to access the
-	// local cache.
-	ErrCache = errors.New("error accessing local xkcd cache")
-	// ErrOffline means that there was an error trying to access the
-	// xkcd server.
-	ErrOffline = errors.New("error accessing xkcd server")
-)
-
 // GetNewestComicInfo always returns a valid *xkcd.Comic that appears to
 // be newest, and err will be set if any errors were encountered,
 // however these errors can be ignored safely.
 func GetNewestComicInfo() (*xkcd.Comic, error) {
 	var err error
-	if cachedNewestComic == nil {
-		cachedNewestComic, err = xkcd.GetCurrent()
+
+	newest := <-getCachedNewestComic
+
+	if newest == nil {
+		newest, err = xkcd.GetCurrent()
 		if err != nil {
-			newestAvaliable := &xkcd.Comic{
-				Num:   0,
-				Title: "Connect to the internet to download some comics!",
-			}
-
-			d, err := os.Open(CacheDir())
+			newest, err = getNewestComicInfoFromCache()
 			if err != nil {
-				return newestAvaliable, ErrCache
+				return newest, err
 			}
-			defer d.Close()
+			return newest, ErrOffline
+		}
 
-			cachedirs, err := d.Readdirnames(0)
-			if err != nil {
-				return newestAvaliable, ErrCache
+		setCachedNewestComic <- newest
+	}
+	return newest, nil
+}
+
+// GetNewestComicInfoAsync always returns a valid *xkcd.Comic that
+// appears to be newest, and err will be set if any errors were
+// encountered, however these errors can be ignored safely. This
+// function will return the newest comic info based on the cache, but
+// then asynchronously checks for the newest comic from the internet and
+// calls callback when the asynchronous call completes.
+func GetNewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error) {
+	newest := <-getCachedNewestComic
+
+	if newest == nil {
+		newestFromCache, err := getNewestComicInfoFromCache()
+
+		go func() {
+			newestFromInternet, err := xkcd.GetCurrent()
+
+			if newestFromInternet != nil && err == nil {
+				setCachedNewestComic <- newestFromInternet
+			} else {
+				setCachedNewestComic <- newestFromCache
 			}
 
-			for _, f := range cachedirs {
-				comicID, err := strconv.Atoi(f)
-				if err != nil {
-					continue
-				}
-				comic, err := GetComicInfo(comicID)
-				if err != nil {
-					continue
-				}
-				if comicID > newestAvaliable.Num {
-					newestAvaliable = comic
-				}
-			}
-			return newestAvaliable, ErrOffline
+			callback(<-getCachedNewestComic, err)
+		}()
+
+		return newestFromCache, err
+	}
+	return newest, nil
+}
+
+func getNewestComicInfoFromCache() (*xkcd.Comic, error) {
+	newest := &xkcd.Comic{
+		Title: "Connect to the internet to download some comics!",
+	}
+
+	d, err := os.Open(CacheDir())
+	if err != nil {
+		return newest, ErrCache
+	}
+	defer d.Close()
+
+	cachedirs, err := d.Readdirnames(0)
+	if err != nil {
+		return newest, ErrCache
+	}
+
+	for _, f := range cachedirs {
+		comicID, err := strconv.Atoi(f)
+		if err != nil {
+			continue
+		}
+		comic, err := GetComicInfo(comicID)
+		if err != nil {
+			continue
+		}
+		if comicID > newest.Num {
+			newest = comic
 		}
 	}
-	return cachedNewestComic, nil
+
+	return newest, nil
 }
 
 func downloadComicInfo(n int) error {

@@ -359,7 +359,19 @@ func (win *Window) updateNextPreviousButtonStatus() {
 	}
 
 	// Enable/disable next button.
-	newest, _ := GetNewestComicInfo()
+	newest, _ := GetNewestComicInfoAsync(func(c *xkcd.Comic, _ error) {
+		if c != nil {
+			if win.comic.Num < c.Num {
+				glib.IdleAdd(func() {
+					win.actions["next-comic"].SetEnabled(true)
+				})
+			} else {
+				glib.IdleAdd(func() {
+					win.actions["next-comic"].SetEnabled(false)
+				})
+			}
+		}
+	})
 	if win.comic.Num < newest.Num {
 		win.actions["next-comic"].SetEnabled(true)
 	} else {
@@ -388,7 +400,7 @@ func (win *Window) GotoNewest() {
 	win.header.SetTitle("Checking for new comic...")
 
 	// Force GetNewestComicInfo to check for a new comic.
-	cachedNewestComic = nil
+	setCachedNewestComic <- nil
 	newestComic, err := GetNewestComicInfo()
 	if err != nil {
 		log.Print(err)
