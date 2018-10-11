@@ -7,6 +7,13 @@ import (
 	"log"
 )
 
+const (
+	appID   = "com.github.rkoesters.xkcd-gtk"
+	appName = "Comic Sticks"
+)
+
+var appVersion = "undefined"
+
 // Application holds onto our GTK representation of our application.
 type Application struct {
 	application *gtk.Application

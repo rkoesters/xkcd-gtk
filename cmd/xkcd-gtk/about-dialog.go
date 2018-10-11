@@ -5,13 +5,6 @@ import (
 	"log"
 )
 
-const (
-	appID   = "com.github.rkoesters.xkcd-gtk"
-	appName = "Comic Sticks"
-)
-
-var appVersion = "undefined"
-
 var aboutDialog *gtk.AboutDialog
 
 // ShowAbout shows our application info to the user.
