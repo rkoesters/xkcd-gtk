@@ -87,7 +87,7 @@ const shortcutsWindowUI = ` <?xml version="1.0" encoding="UTF-8"?>
 </interface>
 `
 
-// NewShortcutsWindow creates a *gtk.ShortcutsWindow populated with our
+// NewShortcutsWindow creates a gtk.ShortcutsWindow populated with our
 // application's keyboard shortcuts.
 func NewShortcutsWindow() (*gtk.ShortcutsWindow, error) {
 	builder, err := gtk.BuilderNew()
@@ -126,7 +126,6 @@ func (app *Application) ShowShortcuts() {
 		shortcutsWindow.Connect("hide", func() {
 			app.application.RemoveWindow(&shortcutsWindow.Window)
 		})
-
 	}
 
 	app.application.AddWindow(&shortcutsWindow.Window)
