@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-const shortcutsWindowUI = ` <?xml version="1.0" encoding="UTF-8"?>
+const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object class="GtkShortcutsWindow" id="shortcuts-window">
     <child>
