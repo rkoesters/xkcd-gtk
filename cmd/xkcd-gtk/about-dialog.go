@@ -5,27 +5,37 @@ import (
 	"log"
 )
 
+// NewAboutDialog creates our about dialog.
+func NewAboutDialog() (*gtk.AboutDialog, error) {
+	dialog, err := gtk.AboutDialogNew()
+	if err != nil {
+		return nil, err
+	}
+
+	dialog.SetLogoIconName(appID)
+	dialog.SetProgramName(appName)
+	dialog.SetVersion(appVersion)
+	dialog.SetComments("A simple xkcd viewer written in Go using GTK+3")
+	dialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
+	dialog.SetAuthors([]string{"Ryan Koesters"})
+	dialog.SetCopyright("Copyright © 2015-2018 Ryan Koesters")
+	dialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
+
+	return dialog, nil
+}
+
 var aboutDialog *gtk.AboutDialog
 
 // ShowAbout shows our application info to the user.
 func (app *Application) ShowAbout() {
 	var err error
+
 	if aboutDialog == nil {
 		aboutDialog, err = gtk.AboutDialogNew()
 		if err != nil {
 			log.Print(err)
 			return
 		}
-
-		aboutDialog.SetLogoIconName(appID)
-		aboutDialog.SetProgramName(appName)
-		aboutDialog.SetVersion(appVersion)
-		aboutDialog.SetComments("A simple xkcd viewer written in Go using GTK+3")
-		aboutDialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
-		aboutDialog.SetCopyright("Copyright © 2015-2018 Ryan Koesters")
-		aboutDialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
-
-		aboutDialog.SetAuthors([]string{"Ryan Koesters"})
 
 		// We want to keep the about dialog around in case we want to
 		// show it again.
