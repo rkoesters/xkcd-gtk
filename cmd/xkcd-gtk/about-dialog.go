@@ -31,7 +31,7 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if aboutDialog == nil {
-		aboutDialog, err = gtk.AboutDialogNew()
+		aboutDialog, err = NewAboutDialog()
 		if err != nil {
 			log.Print(err)
 			return
