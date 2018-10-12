@@ -90,9 +90,10 @@ func (app *Application) LoadSearchIndex() {
 	go func() {
 		newest, _ := GetNewestComicInfo()
 		for i := 1; i <= newest.Num; i++ {
-			GetComicInfo(i)
+			n := i
+			GetComicInfo(n)
 			glib.IdleAdd(func() {
-				progressBar.SetFraction(float64(i) / float64(newest.Num))
+				progressBar.SetFraction(float64(n) / float64(newest.Num))
 			})
 		}
 		done <- struct{}{}
