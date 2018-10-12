@@ -8,7 +8,7 @@ using GTK+3.
 ## Requirements
 
 To build this program, you will need [Go](https://golang.org/) (>= 1.7)
-and GTK+ (>= 3.14) development files (something like `libgtk-3-dev` or
+and GTK+ (>= 3.20) development files (something like `libgtk-3-dev` or
 `gtk3-devel`).
 
 ## Installing
