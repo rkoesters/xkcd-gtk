@@ -63,10 +63,24 @@ func (app *Application) LoadSearchIndex() {
 
 	done := make(chan struct{})
 
-	// Wait before showing the cache building dialog. If the cache is
-	// already complete, then the caching and indexing operation will be
-	// very fast.
+	// Make sure all comic metadata is cached and indexed.
 	go func() {
+		newest, _ := GetNewestComicInfo()
+		for i := 1; i <= newest.Num; i++ {
+			n := i
+			GetComicInfo(n)
+			glib.IdleAdd(func() {
+				progressBar.SetFraction(float64(n) / float64(newest.Num))
+			})
+		}
+		done <- struct{}{}
+	}()
+
+	// Show cache progress dialog.
+	go func() {
+		// Wait before showing the cache progress dialog. If the cache
+		// is already complete, then the caching and indexing operation
+		// will be very fast.
 		time.Sleep(time.Second)
 
 		select {
@@ -84,19 +98,6 @@ func (app *Application) LoadSearchIndex() {
 		<-done
 
 		glib.IdleAdd(loadingDialog.Close)
-	}()
-
-	// Make sure all comic metadata is cached and indexed.
-	go func() {
-		newest, _ := GetNewestComicInfo()
-		for i := 1; i <= newest.Num; i++ {
-			n := i
-			GetComicInfo(n)
-			glib.IdleAdd(func() {
-				progressBar.SetFraction(float64(n) / float64(newest.Num))
-			})
-		}
-		done <- struct{}{}
 	}()
 }
 
