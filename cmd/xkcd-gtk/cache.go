@@ -91,8 +91,8 @@ func initComicCache() error {
 	return nil
 }
 
-func closeComicCache() {
-	cacheDB.Close()
+func closeComicCache() error {
+	return cacheDB.Close()
 }
 
 // GetComicInfo always returns a valid *xkcd.Comic that can be used, and

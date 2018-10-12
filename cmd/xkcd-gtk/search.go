@@ -15,23 +15,33 @@ import (
 
 var searchIndex bleve.Index
 
-// LoadSearchIndex makes sure that every xkcd comic metadata is cached
-// and indexed in the search index.
-func (app *Application) LoadSearchIndex() {
+func initSearchIndex() error {
 	var err error
+
 	searchIndexPath := filepath.Join(CacheDir(), "search")
+
 	searchIndex, err = bleve.Open(searchIndexPath)
 	if err == bleve.ErrorIndexPathDoesNotExist {
 		// searchIndex doesn't exist yet, lets make it.
 		mapping := bleve.NewIndexMapping()
 		searchIndex, err = bleve.New(searchIndexPath, mapping)
 		if err != nil {
-			log.Print(err)
+			return err
 		}
 	} else if err != nil {
-		log.Print(err)
+		return err
 	}
 
+	return nil
+}
+
+func closeSearchIndex() error {
+	return searchIndex.Close()
+}
+
+// LoadSearchIndex makes sure that every xkcd comic metadata is cached
+// and indexed in the search index.
+func (app *Application) LoadSearchIndex() {
 	loadingDialog, err := gtk.DialogNew()
 	if err != nil {
 		log.Print(err)

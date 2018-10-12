@@ -25,6 +25,12 @@ func main() {
 		log.Fatalf("failed to initialize comic cache: %v", err)
 	}
 
+	// Initialize the search index.
+	err = initSearchIndex()
+	if err != nil {
+		log.Fatalf("failed to initialize search index: %v", err)
+	}
+
 	// Let glib and gtk know who we are.
 	glib.SetApplicationName(appName)
 	gtk.WindowSetDefaultIconName(appID)
@@ -39,6 +45,9 @@ func main() {
 
 	// Run the event loop.
 	ret := app.application.Run(os.Args)
+
+	// Close the search index.
+	closeSearchIndex()
 
 	// Close the comic cache.
 	closeComicCache()
