@@ -15,7 +15,9 @@ import (
 )
 
 const (
-	comicCacheName = "comics"
+	comicCacheName         = "comics"
+	comicCacheMetadataName = "comic_metadata"
+	comicCacheImageName    = "comic_image"
 )
 
 var (
@@ -31,8 +33,8 @@ var (
 
 	cacheDB *bolt.DB
 
-	comicCacheMetadataBucketName = []byte("comic_metadata")
-	comicCacheImageBucketName    = []byte("comic_image")
+	comicCacheMetadataBucketName = []byte(comicCacheMetadataName)
+	comicCacheImageBucketName    = []byte(comicCacheImageName)
 
 	getCachedNewestComic <-chan *xkcd.Comic
 	setCachedNewestComic chan<- *xkcd.Comic
@@ -66,7 +68,7 @@ func initComicCache() error {
 		return err
 	}
 
-	err = os.MkdirAll(filepath.Join(CacheDir(), "comic_image"), 0755)
+	err = os.MkdirAll(filepath.Join(CacheDir(), comicCacheImageName), 0755)
 	if err != nil {
 		return err
 	}
@@ -296,7 +298,7 @@ func getComicCachePath() string {
 }
 
 func getComicImagePath(n int) string {
-	return filepath.Join(CacheDir(), "comic_image", strconv.Itoa(n))
+	return filepath.Join(CacheDir(), comicCacheImageName, strconv.Itoa(n))
 }
 
 func intToBytes(i int) []byte {
