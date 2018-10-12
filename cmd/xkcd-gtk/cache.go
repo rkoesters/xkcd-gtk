@@ -62,6 +62,9 @@ func initComicCache() error {
 
 		return nil
 	})
+	if err != nil {
+		return err
+	}
 
 	err = os.MkdirAll(filepath.Join(CacheDir(), "comic_image"), 0755)
 	if err != nil {
