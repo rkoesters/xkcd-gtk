@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bytes"
+	"encoding/binary"
 	"encoding/json"
 	"errors"
+	"github.com/boltdb/bolt"
 	"github.com/rkoesters/xkcd"
 	"io"
 	"net/http"
@@ -11,12 +14,65 @@ import (
 	"strconv"
 )
 
+const (
+	comicCacheName         = "comics"
+	comicCacheMetadataName = "comic_metadata"
+	comicCacheImageName    = "comic_image"
+)
+
 var (
+	// ErrCacheMiss means that value we are looking for wasn't in
+	// the cache.
+	ErrCacheMiss = errors.New("cache miss")
+	// ErrCache means that there was an error while trying to access
+	// the local cache.
+	ErrCache = errors.New("error accessing local xkcd cache")
+	// ErrOffline means that there was an error trying to access the
+	// xkcd server.
+	ErrOffline = errors.New("error accessing xkcd server")
+
+	cacheDB *bolt.DB
+
+	comicCacheMetadataBucketName = []byte(comicCacheMetadataName)
+	comicCacheImageBucketName    = []byte(comicCacheImageName)
+
 	getCachedNewestComic <-chan *xkcd.Comic
 	setCachedNewestComic chan<- *xkcd.Comic
 )
 
-func init() {
+func initComicCache() error {
+	err := os.MkdirAll(CacheDir(), 0755)
+	if err != nil {
+		return err
+	}
+
+	cacheDB, err = bolt.Open(getComicCachePath(), 0644, nil)
+	if err != nil {
+		return err
+	}
+
+	err = cacheDB.Update(func(tx *bolt.Tx) error {
+		_, err = tx.CreateBucketIfNotExists(comicCacheMetadataBucketName)
+		if err != nil {
+			return err
+		}
+
+		_, err = tx.CreateBucketIfNotExists(comicCacheImageBucketName)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+
+	err = os.MkdirAll(filepath.Join(CacheDir(), comicCacheImageName), 0755)
+	if err != nil {
+		return err
+	}
+
 	cachedNewestComicOut := make(chan *xkcd.Comic)
 	cachedNewestComicIn := make(chan *xkcd.Comic)
 
@@ -36,78 +92,67 @@ func init() {
 			}
 		}
 	}()
+
+	return nil
 }
 
-var (
-	// ErrCache means that there was an error while trying to access the
-	// local cache.
-	ErrCache = errors.New("error accessing local xkcd cache")
-	// ErrOffline means that there was an error trying to access the
-	// xkcd server.
-	ErrOffline = errors.New("error accessing xkcd server")
-)
-
-func getComicPath(n int) string {
-	return filepath.Join(CacheDir(), strconv.Itoa(n))
-}
-
-func getComicInfoPath(n int) string {
-	return filepath.Join(getComicPath(n), "info")
-}
-
-func getComicImagePath(n int) string {
-	return filepath.Join(getComicPath(n), "image")
+func closeComicCache() error {
+	return cacheDB.Close()
 }
 
 // GetComicInfo always returns a valid *xkcd.Comic that can be used, and
 // err will be set if any errors were encountered, however these errors
 // can be ignored safely.
 func GetComicInfo(n int) (*xkcd.Comic, error) {
-	infoPath := getComicInfoPath(n)
+	var c *xkcd.Comic
 
 	// First, check if we have the file.
-	_, err := os.Stat(infoPath)
-	if os.IsNotExist(err) {
-		err = downloadComicInfo(n)
+	err := cacheDB.View(func(tx *bolt.Tx) error {
+		var err error
+
+		bucket := tx.Bucket(comicCacheMetadataBucketName)
+		if bucket == nil {
+			c = &xkcd.Comic{
+				Num:       n,
+				SafeTitle: "Error trying to access metadata cache",
+			}
+			return ErrCache
+		}
+
+		data := bucket.Get(intToBytes(n))
+		if data == nil {
+			// The comic metadata isn't in our cache yet, we
+			// will try to download it.
+			return ErrCacheMiss
+		}
+
+		c, err = xkcd.New(bytes.NewReader(data))
+		if err != nil {
+			c = &xkcd.Comic{
+				Num:       n,
+				SafeTitle: "Error parsing comic metadata from cache",
+			}
+			return err
+		}
+
+		return nil
+	})
+	if err == ErrCacheMiss {
+		c, err = downloadComicInfo(n)
 		if err == xkcd.ErrNotFound {
 			return &xkcd.Comic{
 				Num:       n,
-				Title:     "Comic Not Found",
 				SafeTitle: "Comic Not Found",
 			}, err
 		} else if err != nil {
 			return &xkcd.Comic{
 				Num:       n,
-				Title:     "Couldn't Get Comic",
 				SafeTitle: "Couldn't Get Comic",
 			}, err
 		}
-	} else if err != nil {
-		return &xkcd.Comic{
-			Num:       n,
-			Title:     "I guess we can't access our cache",
-			SafeTitle: "I guess we can't access our cache",
-		}, err
 	}
 
-	f, err := os.Open(infoPath)
-	if err != nil {
-		return &xkcd.Comic{
-			Num:       n,
-			Title:     "Error trying to read comic info from cache",
-			SafeTitle: "Error trying to read comic info from cache",
-		}, err
-	}
-	defer f.Close()
-	c, err := xkcd.New(f)
-	if err != nil {
-		return &xkcd.Comic{
-			Num:       n,
-			Title:     "I guess the cached comic info is invalid",
-			SafeTitle: "I guess the cached comic info is invalid",
-		}, err
-	}
-	return c, nil
+	return c, err
 }
 
 // GetNewestComicInfo always returns a valid *xkcd.Comic that appears to
@@ -164,62 +209,61 @@ func GetNewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, er
 
 func getNewestComicInfoFromCache() (*xkcd.Comic, error) {
 	newest := &xkcd.Comic{
-		Title: "Connect to the internet to download some comics!",
+		SafeTitle: "Connect to the internet to download some comics!",
 	}
 
-	d, err := os.Open(CacheDir())
-	if err != nil {
-		return newest, ErrCache
-	}
-	defer d.Close()
-
-	cachedirs, err := d.Readdirnames(0)
-	if err != nil {
-		return newest, ErrCache
-	}
-
-	for _, f := range cachedirs {
-		comicID, err := strconv.Atoi(f)
-		if err != nil {
-			continue
+	err := cacheDB.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket(comicCacheMetadataBucketName)
+		if bucket == nil {
+			return ErrCache
 		}
-		comic, err := GetComicInfo(comicID)
-		if err != nil {
-			continue
-		}
-		if comicID > newest.Num {
-			newest = comic
-		}
-	}
 
-	return newest, nil
+		return bucket.ForEach(func(k, v []byte) error {
+			c, err := xkcd.New(bytes.NewReader(v))
+			if err != nil {
+				return err
+			}
+
+			if c.Num > newest.Num {
+				newest = c
+			}
+
+			return nil
+		})
+	})
+
+	return newest, err
 }
 
-func downloadComicInfo(n int) error {
+func downloadComicInfo(n int) (*xkcd.Comic, error) {
 	comic, err := xkcd.Get(n)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	err = os.MkdirAll(getComicPath(n), 0777)
-	if err != nil {
-		return err
-	}
+	err = cacheDB.Update(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket(comicCacheMetadataBucketName)
+		if bucket == nil {
+			return ErrCache
+		}
 
-	f, err := os.Create(getComicInfoPath(n))
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+		var buf bytes.Buffer
+		e := json.NewEncoder(&buf)
+		err = e.Encode(comic)
+		if err != nil {
+			return err
+		}
 
-	e := json.NewEncoder(f)
-	err = e.Encode(comic)
+		return bucket.Put(intToBytes(n), buf.Bytes())
+	})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// Now add the new file to the searchIndex.
-	return searchIndex.Index(strconv.Itoa(comic.Num), comic)
+	err = searchIndex.Index(strconv.Itoa(comic.Num), comic)
+
+	return comic, err
 }
 
 // DownloadComicImage tries to add a comic image to our local cache. Any
@@ -247,4 +291,20 @@ func DownloadComicImage(n int) error {
 		return err
 	}
 	return nil
+}
+
+func getComicCachePath() string {
+	return filepath.Join(CacheDir(), comicCacheName)
+}
+
+func getComicImagePath(n int) string {
+	return filepath.Join(CacheDir(), comicCacheImageName, strconv.Itoa(n))
+}
+
+func intToBytes(i int) []byte {
+	buf := make([]byte, binary.MaxVarintLen64)
+
+	n := binary.PutVarint(buf, int64(i))
+
+	return buf[:n]
 }
