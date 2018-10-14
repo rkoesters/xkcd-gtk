@@ -36,7 +36,7 @@
   </screenshots>
 
   <custom>
-    <value key="x-appcenter-color-primary">#96A8C8</value>
-    <value key="x-appcenter-color-primary-text">#000000</value>
+    <value key="x-appcenter-color-primary">#96a8c8</value>
+    <value key="x-appcenter-color-primary-text">#1a1a1a</value>
   </custom>
 </component>
