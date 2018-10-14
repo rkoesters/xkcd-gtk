@@ -88,7 +88,8 @@ func initComicCache() error {
 			case newest := <-cachedNewestComicIn:
 				cachedNewestComic = newest
 			case cachedNewestComicOut <- cachedNewestComic:
-				// Sending the comic was all we wanted to do.
+				// Sending the comic was all we wanted
+				// to do.
 			}
 		}
 	}()
@@ -105,6 +106,16 @@ func closeComicCache() error {
 // can be ignored safely.
 func GetComicInfo(n int) (*xkcd.Comic, error) {
 	var c *xkcd.Comic
+
+	// Don't bother asking the server for comic 404, it will always
+	// return a 404 error.
+	if n == 404 {
+		return &xkcd.Comic{
+			Num:       n,
+			SafeTitle: "Comic Not Found",
+			Title:     "Comic Not Found",
+		}, xkcd.ErrNotFound
+	}
 
 	// First, check if we have the file.
 	err := cacheDB.View(func(tx *bolt.Tx) error {
