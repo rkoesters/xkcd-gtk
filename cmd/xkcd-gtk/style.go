@@ -19,11 +19,16 @@ const css = `
 var (
 	// largeToolbarThemes is the list of gtk themes for which we should use
 	// large toolbar buttons.
-	largeToolbarThemes = []string{"elementary", "win32"}
+	largeToolbarThemes = []string{
+		"elementary",
+		"win32",
+	}
 
 	// nonSymbolicIconThemes is the list of gtk themes for which we
 	// should use non-symbolic icons.
-	nonSymbolicIconThemes = []string{"elementary"}
+	nonSymbolicIconThemes = []string{
+		"elementary",
+	}
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
@@ -74,6 +79,7 @@ func (win *Window) StyleUpdated() {
 	for _, largeToolbarTheme := range largeToolbarThemes {
 		if themeName == largeToolbarTheme {
 			headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
+			break
 		}
 	}
 
@@ -82,6 +88,7 @@ func (win *Window) StyleUpdated() {
 	for _, nonSymbolicIconTheme := range nonSymbolicIconThemes {
 		if themeName == nonSymbolicIconTheme {
 			useSymbolicIcons = false
+			break
 		}
 	}
 	// We will call icon() to automatically add -symbolic if needed.
