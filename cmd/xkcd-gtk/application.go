@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/skratchdot/open-golang/open"
+	"github.com/rkoesters/xdg"
 	"log"
 )
 
@@ -114,7 +114,7 @@ const (
 
 // OpenWhatIf opens whatifLink in the user's web browser.
 func (app *Application) OpenWhatIf() {
-	err := open.Start(whatIfLink)
+	err := xdg.Open(whatIfLink)
 	if err != nil {
 		log.Print(err)
 	}
@@ -122,7 +122,7 @@ func (app *Application) OpenWhatIf() {
 
 // OpenBlog opens blogLink in the user's web browser.
 func (app *Application) OpenBlog() {
-	err := open.Start(blogLink)
+	err := xdg.Open(blogLink)
 	if err != nil {
 		log.Print(err)
 	}
@@ -130,7 +130,7 @@ func (app *Application) OpenBlog() {
 
 // OpenStore opens storeLink in the user's web browser.
 func (app *Application) OpenStore() {
-	err := open.Start(storeLink)
+	err := xdg.Open(storeLink)
 	if err != nil {
 		log.Print(err)
 	}

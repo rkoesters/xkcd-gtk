@@ -5,8 +5,8 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xdg"
 	"github.com/rkoesters/xkcd"
-	"github.com/skratchdot/open-golang/open"
 	"log"
 	"math/rand"
 	"os"
@@ -410,7 +410,7 @@ func (win *Window) GotoNewest() {
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
 func (win *Window) Explain() {
-	err := open.Start(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comic.Num))
+	err := xdg.Open(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comic.Num))
 	if err != nil {
 		log.Print(err)
 	}
@@ -418,7 +418,7 @@ func (win *Window) Explain() {
 
 // OpenLink opens the comic's Link in the user's web browser.
 func (win *Window) OpenLink() {
-	err := open.Start(win.comic.Link)
+	err := xdg.Open(win.comic.Link)
 	if err != nil {
 		log.Print(err)
 	}
