@@ -91,9 +91,7 @@ func (app *Application) LoadSearchIndex() {
 		select {
 		case <-done:
 			// Already done, don't bother showing the window.
-			glib.IdleAdd(func() {
-				loadingWindow.Close()
-			})
+			glib.IdleAdd(loadingWindow.Destroy)
 			return
 		default:
 			glib.IdleAdd(func() {
