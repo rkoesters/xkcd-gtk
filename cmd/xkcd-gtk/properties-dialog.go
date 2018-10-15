@@ -48,6 +48,8 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	pd.dialog.AddAccelGroup(pd.accels)
 	pd.accels.Connect(gdk.KEY_q, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
 
+	pd.dialog.Connect("destroy", pd.Destroy)
+
 	// The parent keeps track of our state, so we want to tell the
 	// parent when our state changes.
 	pd.dialog.Connect("delete-event", parent.StateChanged)
@@ -140,6 +142,15 @@ func (pd *PropertiesDialog) Update() {
 	pd.labels["News"].SetText(pd.parent.comic.News)
 	pd.labels["Link"].SetText(pd.parent.comic.Link)
 	pd.labels["Transcript"].SetText(pd.parent.comic.Transcript)
+}
+
+// Destroy removes our references to the dialog so the garbage collector
+// can take care of it.
+func (pd *PropertiesDialog) Destroy() {
+	pd.labels = nil
+	pd.dialog = nil
+	pd.parent.properties = nil
+	pd.parent = nil
 }
 
 // formatDate takes a year, month, and date as strings and turns them
