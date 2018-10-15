@@ -374,22 +374,6 @@ func (win *Window) updateNextPreviousButtonStatus() {
 	}
 }
 
-// ShowProperties presents the properties dialog to the user. If the
-// dialog doesn't exist yet, we create it.
-func (win *Window) ShowProperties() {
-	var err error
-	if win.properties == nil {
-		win.properties, err = NewPropertiesDialog(win)
-		if err != nil {
-			log.Print(err)
-			return
-		}
-	}
-
-	win.app.application.AddWindow(&win.properties.dialog.Window)
-	win.properties.dialog.Present()
-}
-
 // GotoNewest checks for a new comic and then shows the newest comic to
 // the user.
 func (win *Window) GotoNewest() {

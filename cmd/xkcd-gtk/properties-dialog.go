@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"log"
 	"strconv"
 	"strings"
 	"time"
@@ -103,6 +104,22 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	box.ShowAll()
 
 	return pd, nil
+}
+
+// ShowProperties presents the properties dialog to the user. If the
+// dialog doesn't exist yet, we create it.
+func (win *Window) ShowProperties() {
+	var err error
+	if win.properties == nil {
+		win.properties, err = NewPropertiesDialog(win)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+	}
+
+	win.app.application.AddWindow(&win.properties.dialog.Window)
+	win.properties.dialog.Present()
 }
 
 func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) error {
