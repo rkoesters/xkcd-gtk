@@ -37,8 +37,8 @@
   </screenshots>
 
   <content_rating type="oars-1.0">
-    <content_attribute id="language-profanity">mild</content_attribute>
     <content_attribute id="language-humor">mild</content_attribute>
+    <content_attribute id="language-profanity">mild</content_attribute>
     <content_attribute id="violence-cartoon">mild</content_attribute>
     <content_attribute id="violence-fantasy">mild</content_attribute>
   </content_rating>
