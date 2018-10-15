@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/blevesearch/bleve"
 	"github.com/blevesearch/bleve/search/query"
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
@@ -42,12 +43,13 @@ func closeSearchIndex() error {
 // LoadSearchIndex makes sure that every xkcd comic metadata is cached
 // and indexed in the search index.
 func (app *Application) LoadSearchIndex() {
-	loadingDialog, err := gtk.DialogNew()
+	loadingWindow, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)
 	if err != nil {
 		log.Print(err)
 	}
-	loadingDialog.SetTitle("Search Index Update")
-	loadingDialog.SetResizable(false)
+	loadingWindow.SetTitle("Search Index Update")
+	loadingWindow.SetTypeHint(gdk.WINDOW_TYPE_HINT_DIALOG)
+	loadingWindow.SetResizable(false)
 
 	progressBar, err := gtk.ProgressBarNew()
 	if err != nil {
@@ -55,23 +57,14 @@ func (app *Application) LoadSearchIndex() {
 	}
 	progressBar.SetText("Updating comic search index...")
 	progressBar.SetShowText(true)
-	progressBar.SetFraction(0)
+	progressBar.SetMarginTop(24)
+	progressBar.SetMarginBottom(24)
+	progressBar.SetMarginStart(24)
+	progressBar.SetMarginEnd(24)
 	progressBar.SetSizeRequest(300, -1)
+	progressBar.SetFraction(0)
 	progressBar.Show()
-	ca, err := loadingDialog.GetContentArea()
-	if err != nil {
-		log.Print(err)
-	}
-	// A gtk.Dialog content area has some children by default, we want
-	// to remove those children so the only child is progressBar.
-	ca.GetChildren().Foreach(func(child interface{}) {
-		ca.Remove(child.(gtk.IWidget))
-	})
-	ca.SetMarginTop(24)
-	ca.SetMarginBottom(24)
-	ca.SetMarginStart(24)
-	ca.SetMarginEnd(24)
-	ca.Add(progressBar)
+	loadingWindow.Add(progressBar)
 
 	done := make(chan struct{})
 
@@ -99,14 +92,13 @@ func (app *Application) LoadSearchIndex() {
 		case <-done:
 			// Already done, don't bother showing dialog.
 			glib.IdleAdd(func() {
-				loadingDialog.Close()
+				loadingWindow.Close()
 			})
 			return
 		default:
 			glib.IdleAdd(func() {
-				loadingDialog.SetTransientFor(app.application.GetActiveWindow())
-				app.application.AddWindow(&loadingDialog.Window)
-				loadingDialog.Present()
+				app.application.AddWindow(loadingWindow)
+				loadingWindow.Present()
 			})
 		}
 
@@ -114,8 +106,8 @@ func (app *Application) LoadSearchIndex() {
 		<-done
 
 		glib.IdleAdd(func() {
-			app.application.RemoveWindow(&loadingDialog.Window)
-			loadingDialog.Close()
+			app.application.RemoveWindow(loadingWindow)
+			loadingWindow.Close()
 		})
 	}()
 }
