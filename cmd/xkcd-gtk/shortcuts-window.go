@@ -10,8 +10,8 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
   <object class="GtkShortcutsWindow" id="shortcuts-window">
     <child>
       <object class="GtkShortcutsSection">
-        <property name="visible">1</property>
         <property name="section-name">shortcuts</property>
+        <property name="visible">1</property>
         <child>
           <object class="GtkShortcutsGroup">
             <property name="title">Comic Navigation</property>
