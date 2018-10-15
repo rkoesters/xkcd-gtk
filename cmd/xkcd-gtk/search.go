@@ -48,6 +48,7 @@ func (app *Application) LoadSearchIndex() {
 	}
 	loadingDialog.SetTitle("Search Index Update")
 	loadingDialog.SetResizable(false)
+
 	progressBar, err := gtk.ProgressBarNew()
 	if err != nil {
 		log.Print(err)
@@ -97,10 +98,14 @@ func (app *Application) LoadSearchIndex() {
 		select {
 		case <-done:
 			// Already done, don't bother showing dialog.
+			glib.IdleAdd(func() {
+				loadingDialog.Close()
+			})
 			return
 		default:
 			glib.IdleAdd(func() {
 				loadingDialog.SetTransientFor(app.application.GetActiveWindow())
+				app.application.AddWindow(&loadingDialog.Window)
 				loadingDialog.Present()
 			})
 		}
@@ -108,7 +113,10 @@ func (app *Application) LoadSearchIndex() {
 		// Wait until we are done.
 		<-done
 
-		glib.IdleAdd(loadingDialog.Close)
+		glib.IdleAdd(func() {
+			app.application.RemoveWindow(&loadingDialog.Window)
+			loadingDialog.Close()
+		})
 	}()
 }
 
