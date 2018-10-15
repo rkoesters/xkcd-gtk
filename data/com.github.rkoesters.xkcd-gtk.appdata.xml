@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>com.github.rkoesters.xkcd-gtk</id>
-  <metadata_license>CC0</metadata_license>
-  <project_license>GPL-3.0+</project_license>
 
   <provides>
     <binary>com.github.rkoesters.xkcd-gtk</binary>
@@ -21,7 +19,10 @@
   </description>
   <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
   <url type="bugtracker">https://github.com/rkoesters/xkcd-gtk/issues</url>
+
   <developer_name>Ryan Koesters</developer_name>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
 
   <screenshots>
     <screenshot type="default">
@@ -36,7 +37,7 @@
   </screenshots>
 
   <custom>
-    <value key="x-appcenter-color-primary">#96A8C8</value>
-    <value key="x-appcenter-color-primary-text">#000000</value>
+    <value key="x-appcenter-color-primary">#96a8c8</value>
+    <value key="x-appcenter-color-primary-text">#1a1a1a</value>
   </custom>
 </component>
