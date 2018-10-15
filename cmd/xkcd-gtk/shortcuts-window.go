@@ -8,6 +8,7 @@ import (
 const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object class="GtkShortcutsWindow" id="shortcuts-window">
+    <property name="title">Keyboard Shortcuts</property>
     <child>
       <object class="GtkShortcutsSection">
         <property name="section-name">shortcuts</property>
