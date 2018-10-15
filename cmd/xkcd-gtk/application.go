@@ -57,9 +57,10 @@ func NewApplication() (*Application, error) {
 	app.application.SetAccelsForAction("app.quit", []string{"<Control>q"})
 
 	// Connect application signals to our methods.
-	app.application.Connect("startup", app.SetupAppMenu)
 	app.application.Connect("startup", app.LoadCSS)
-	app.application.Connect("startup", app.LoadSearchIndex)
+	app.application.Connect("startup", app.SetupAppMenu)
+	app.application.Connect("startup", app.SetupCache)
+	app.application.Connect("shutdown", app.CloseCache)
 	app.application.Connect("activate", app.Activate)
 
 	return &app, nil
@@ -88,6 +89,29 @@ func (app *Application) SetupAppMenu() {
 
 		app.application.SetAppMenu(&menu.MenuModel)
 	}
+}
+
+// SetupCache initializes the comic cache and the search index.
+func (app *Application) SetupCache() {
+	err := initComicCache()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	err = initSearchIndex()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	app.LoadSearchIndex()
+}
+
+// CloseCache closes the search index and comic cache.
+func (app *Application) CloseCache() {
+	closeSearchIndex()
+	closeComicCache()
 }
 
 // Activate creates and presents a new window to the user.

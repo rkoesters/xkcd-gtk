@@ -19,18 +19,6 @@ func main() {
 	// Make sure the random number generator is seeded.
 	rand.Seed(time.Now().Unix())
 
-	// Initialize the comic cache.
-	err := initComicCache()
-	if err != nil {
-		log.Fatalf("failed to initialize comic cache: %v", err)
-	}
-
-	// Initialize the search index.
-	err = initSearchIndex()
-	if err != nil {
-		log.Fatalf("failed to initialize search index: %v", err)
-	}
-
 	// Let glib and gtk know who we are.
 	glib.SetApplicationName(appName)
 	gtk.WindowSetDefaultIconName(appID)
@@ -44,14 +32,5 @@ func main() {
 	app.application.SetDefault()
 
 	// Run the event loop.
-	ret := app.application.Run(os.Args)
-
-	// Close the search index.
-	closeSearchIndex()
-
-	// Close the comic cache.
-	closeComicCache()
-
-	// Exit with the status code given by gtk.
-	os.Exit(ret)
+	os.Exit(app.application.Run(os.Args))
 }
