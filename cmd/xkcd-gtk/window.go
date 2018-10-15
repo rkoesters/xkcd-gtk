@@ -384,12 +384,6 @@ func (win *Window) ShowProperties() {
 			log.Print(err)
 			return
 		}
-
-		win.properties.dialog.HideOnDelete()
-		win.properties.dialog.Connect("response", win.properties.dialog.Hide)
-		win.properties.dialog.Connect("hide", func() {
-			win.app.application.RemoveWindow(&win.properties.dialog.Window)
-		})
 	}
 
 	win.app.application.AddWindow(&win.properties.dialog.Window)
