@@ -14,68 +14,68 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
         <property name="section-name">shortcuts</property>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="visible">1</property>
             <property name="title">Comic Navigation</property>
+            <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;Left</property>
                 <property name="title">Previous Comic</property>
+                <property name="accelerator">&lt;ctrl&gt;Left</property>
+                <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;Right</property>
                 <property name="title">Next Comic</property>
+                <property name="accelerator">&lt;ctrl&gt;Right</property>
+                <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;r</property>
                 <property name="title">Random Comic</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;r</property>
                 <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;f</property>
-                <property name="title">Search Comics</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title">Search Comics</property>
+                <property name="accelerator">&lt;ctrl&gt;f</property>
+                <property name="visible">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title">Show Comic Properties</property>
                 <property name="accelerator">&lt;ctrl&gt;p</property>
                 <property name="visible">1</property>
-                <property name="title">Show Comic Properties</property>
               </object>
             </child>
           </object>
         </child>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="visible">1</property>
             <property name="title">Application Actions</property>
+            <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;n</property>
                 <property name="title">Open New Window</property>
+                <property name="accelerator">&lt;ctrl&gt;n</property>
+                <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title">Open Shortcuts Window</property>
                 <property name="accelerator">&lt;ctrl&gt;question</property>
                 <property name="visible">1</property>
-                <property name="title">Open Shortcuts Window</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
-                <property name="accelerator">&lt;ctrl&gt;q</property>
                 <property name="title">Quit Application</property>
+                <property name="accelerator">&lt;ctrl&gt;q</property>
+                <property name="visible">1</property>
               </object>
             </child>
           </object>
