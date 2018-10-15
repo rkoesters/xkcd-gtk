@@ -55,6 +55,7 @@ func (app *Application) LoadSearchIndex() {
 	progressBar.SetText("Updating comic search index...")
 	progressBar.SetShowText(true)
 	progressBar.SetFraction(0)
+	progressBar.SetSizeRequest(300, -1)
 	progressBar.Show()
 	ca, err := loadingDialog.GetContentArea()
 	if err != nil {
