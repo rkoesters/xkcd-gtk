@@ -36,7 +36,12 @@
     </screenshot>
   </screenshots>
 
-  <content_rating type="oars-1.0" />
+  <content_rating type="oars-1.0">
+    <content_attribute id="language-profanity">mild</content_attribute>
+    <content_attribute id="language-humor">mild</content_attribute>
+    <content_attribute id="violence-cartoon">mild</content_attribute>
+    <content_attribute id="violence-fantasy">mild</content_attribute>
+  </content_rating>
 
   <custom>
     <value key="x-appcenter-color-primary">#96a8c8</value>
