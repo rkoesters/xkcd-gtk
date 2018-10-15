@@ -44,6 +44,13 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
                 <property name="title">Search Comics</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;ctrl&gt;p</property>
+                <property name="visible">1</property>
+                <property name="title">Show Comic Properties</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
@@ -55,13 +62,6 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
                 <property name="visible">1</property>
                 <property name="accelerator">&lt;ctrl&gt;n</property>
                 <property name="title">Open New Window</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;p</property>
-                <property name="visible">1</property>
-                <property name="title">Open Properties Dialog</property>
               </object>
             </child>
             <child>
