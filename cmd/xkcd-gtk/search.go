@@ -81,16 +81,16 @@ func (app *Application) LoadSearchIndex() {
 		done <- struct{}{}
 	}()
 
-	// Show cache progress dialog.
+	// Show cache progress window.
 	go func() {
-		// Wait before showing the cache progress dialog. If the cache
+		// Wait before showing the cache progress window. If the cache
 		// is already complete, then the caching and indexing operation
 		// will be very fast.
 		time.Sleep(time.Second)
 
 		select {
 		case <-done:
-			// Already done, don't bother showing dialog.
+			// Already done, don't bother showing the window.
 			glib.IdleAdd(func() {
 				loadingWindow.Close()
 			})
