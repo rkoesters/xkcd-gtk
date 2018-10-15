@@ -259,13 +259,7 @@ func NewWindow(app *Application) (*Window, error) {
 		}
 	}
 	if win.state.PropertiesVisible {
-		if win.properties == nil {
-			win.properties, err = NewPropertiesDialog(win)
-			if err != nil {
-				return nil, err
-			}
-		}
-		win.properties.Present()
+		win.ShowProperties()
 	}
 	win.SetComic(win.state.ComicNumber)
 
@@ -390,8 +384,16 @@ func (win *Window) ShowProperties() {
 			log.Print(err)
 			return
 		}
+
+		win.properties.dialog.HideOnDelete()
+		win.properties.dialog.Connect("response", win.properties.dialog.Hide)
+		win.properties.dialog.Connect("hide", func() {
+			win.app.application.RemoveWindow(&win.properties.dialog.Window)
+		})
 	}
-	win.properties.Present()
+
+	win.app.application.AddWindow(&win.properties.dialog.Window)
+	win.properties.dialog.Present()
 }
 
 // GotoNewest checks for a new comic and then shows the newest comic to
