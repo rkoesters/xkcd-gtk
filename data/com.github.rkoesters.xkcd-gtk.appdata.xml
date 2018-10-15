@@ -36,6 +36,8 @@
     </screenshot>
   </screenshots>
 
+  <content_rating type="oars-1.0" />
+
   <custom>
     <value key="x-appcenter-color-primary">#96a8c8</value>
     <value key="x-appcenter-color-primary-text">#1a1a1a</value>
