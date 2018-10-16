@@ -2,12 +2,6 @@
 # Build Variables
 ################################################################################
 
-GO           = go
-RM           = rm -f
-MKDIR        = mkdir -p
-INSTALL_EXE  = install
-INSTALL_DATA = cp
-
 BUILDFLAGS = -tags $(GTK_VERSION)
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 
@@ -46,10 +40,10 @@ APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
 
 # If GOPATH isn't set, then just use the current directory.
-ifeq "$(shell $(GO) env GOPATH)" ""
+ifeq "$(shell go env GOPATH)" ""
 export GOPATH = $(shell pwd)
 endif
-ifeq "$(shell $(GO) env GOPATH)" "/nonexistent/go"
+ifeq "$(shell go env GOPATH)" "/nonexistent/go"
 export GOPATH = $(shell pwd)
 endif
 
@@ -60,27 +54,27 @@ endif
 all: $(EXE_PATH)
 
 deps:
-	$(GO) get -u $(BUILDFLAGS) $(DEPS)
+	go get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	$(GO) build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
+	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
 clean:
-	-$(GO) clean ./...
-	-$(RM) $(EXE_PATH)
+	-go clean ./...
+	-rm -f $(EXE_PATH)
 
 install: $(EXE_PATH)
-	$(MKDIR) $(DESTDIR)$(bindir)
-	$(INSTALL_EXE) $(EXE_PATH) $(DESTDIR)$(bindir)
-	$(MKDIR) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
-	$(INSTALL_DATA) $(ICON_PATH) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
-	$(MKDIR) $(DESTDIR)$(datadir)/applications
-	$(INSTALL_DATA) $(DESKTOP_PATH) $(DESTDIR)$(datadir)/applications
-	$(MKDIR) $(DESTDIR)$(datadir)/metainfo
-	$(INSTALL_DATA) $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
+	mkdir -p $(DESTDIR)$(bindir)
+	install $(EXE_PATH) $(DESTDIR)$(bindir)
+	mkdir -p $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
+	cp $(ICON_PATH) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
+	mkdir -p $(DESTDIR)$(datadir)/applications
+	cp $(DESKTOP_PATH) $(DESTDIR)$(datadir)/applications
+	mkdir -p $(DESTDIR)$(datadir)/metainfo
+	cp $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
 
 uninstall:
-	$(RM) $(DESTDIR)$(bindir)/$(EXE_NAME) \
+	rm -f $(DESTDIR)$(bindir)/$(EXE_NAME) \
 	      $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME) \
 	      $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
 	      $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
