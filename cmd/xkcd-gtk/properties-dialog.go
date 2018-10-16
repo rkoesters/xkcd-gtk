@@ -14,6 +14,7 @@ import (
 type PropertiesDialog struct {
 	parent *Window
 	dialog *gtk.Dialog
+
 	labels map[string]*gtk.Label
 
 	accels *gtk.AccelGroup
