@@ -40,7 +40,7 @@ APPDATA_PATH = data/$(APPDATA_NAME)
 ################################################################################
 
 SOURCES = $(shell find . -type f -name '*.go')
-DEPS    = $(shell tools/list-deps.sh ./...)
+DEPS    = $(shell tools/list-imports.sh ./...)
 
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
