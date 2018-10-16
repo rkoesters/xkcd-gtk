@@ -96,13 +96,11 @@ func (app *Application) SetupCache() {
 	err := initComicCache()
 	if err != nil {
 		log.Print(err)
-		return
 	}
 
 	err = initSearchIndex()
 	if err != nil {
 		log.Print(err)
-		return
 	}
 
 	app.LoadSearchIndex()
@@ -110,15 +108,23 @@ func (app *Application) SetupCache() {
 
 // CloseCache closes the search index and comic cache.
 func (app *Application) CloseCache() {
-	closeSearchIndex()
-	closeComicCache()
+	err := closeSearchIndex()
+	if err != nil {
+		log.Print(err)
+	}
+
+	err = closeComicCache()
+	if err != nil {
+		log.Print(err)
+	}
 }
 
 // Activate creates and presents a new window to the user.
 func (app *Application) Activate() {
 	win, err := NewWindow(app)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return
 	}
 	win.window.Present()
 }
