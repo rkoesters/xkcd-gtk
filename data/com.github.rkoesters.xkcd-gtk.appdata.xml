@@ -48,4 +48,16 @@
     <value key="x-appcenter-color-primary">#96a8c8</value>
     <value key="x-appcenter-color-primary-text">#1a1a1a</value>
   </custom>
+
+  <releases>
+    <release version="1.0.0">
+      <description>
+        <p>First stable release</p>
+        <ul>
+          <li>Improve startup time</li>
+          <li>Add keyboard shortcuts for faster navigation</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
 </component>
