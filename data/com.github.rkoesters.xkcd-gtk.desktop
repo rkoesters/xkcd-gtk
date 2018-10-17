@@ -9,7 +9,7 @@ Exec=com.github.rkoesters.xkcd-gtk
 Icon=com.github.rkoesters.xkcd-gtk
 StartupNotify=true
 Terminal=false
-Categories=Network;GTK;
+Categories=Network;Amusement;Viewer;GTK;
 Keywords=xkcd;Comic;
 Actions=new-window;
 
