@@ -13,8 +13,9 @@
     <p>Features include:</p>
     <ul>
       <li>Search for comics</li>
-      <li>View comic metadata</li>
       <li>Cache comics for later offline viewing</li>
+      <li>View comic metadata</li>
+      <li>Quickly access comic explainations via the explain xkcd wiki</li>
     </ul>
   </description>
   <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
