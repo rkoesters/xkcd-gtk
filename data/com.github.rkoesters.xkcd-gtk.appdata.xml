@@ -51,6 +51,11 @@
   </custom>
 
   <releases>
+    <release version="1.0.1">
+      <description>
+        <p>Update OARS metadata.</p>
+      </description>
+    </release>
     <release version="1.0.0">
       <description>
         <p>First stable release</p>
