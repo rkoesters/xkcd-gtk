@@ -3,46 +3,51 @@
 Comic Sticks (`xkcd-gtk`) is a simple xkcd comic viewer written in Go
 using GTK+3.
 
+<a href="https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Get it on AppCenter" src="https://appcenter.elementary.io/badge.svg"/></a>
+<a href="https://flathub.org/apps/details/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.svg"/></a>
+
 ![screenshot](screenshots/screenshot-1.png)
 
-## Requirements
+## Building from source
 
-To build this program, you will need [Go](https://golang.org/) (>= 1.7)
-and GTK+ (>= 3.20) development files (something like `libgtk-3-dev` or
-`gtk3-devel`).
+### Requirements
 
-## Installing
+To build this program, you will need Go (version >= 1.7, something like
+`golang` or `go`) and GTK+ development files (version >= 3.20, something
+like `libgtk-3-dev` or `gtk3-devel`).
 
-### On elementaryOS
+### Compiling
 
-[![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk)
-
-### On Debian-based distros
-
-Download the .deb file from
-[releases](https://github.com/rkoesters/xkcd-gtk/releases) and install
-it using your preferred installation tool.
-
-### From source
-
-To install for current user:
+First, you need to pull in the Go dependencies:
 
 	make deps
-	make prefix=$HOME/.local install
 
-To uninstall for current user:
+Next, you are ready to build the application:
 
-	make prefix=$HOME/.local uninstall
+	make
+
+### Installing
+
+After you have compiled the application, you can install it.
 
 To install for all users:
 
-	make deps
-	make
 	sudo make install
+
+To install for the current user only (you may need to add
+`$HOME/.local/bin` to your `$PATH`):
+
+	make prefix=$HOME/.local install
+
+### Uninstalling
 
 To uninstall for all users:
 
 	sudo make uninstall
+
+To uninstall for the current user :
+
+	make prefix=$HOME/.local uninstall
 
 ## License
 
