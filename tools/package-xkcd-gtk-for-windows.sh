@@ -1,16 +1,12 @@
-#!/bin/sh -e
-# Go package directory.
-godir="$GOPATH/src/github.com/rkoesters/xkcd-gtk"
+#!/bin/sh -eu
 # Location we are putting files.
 target="$HOME/xkcd-gtk-win"
 
-exe="$godir/xkcd-gtk.exe"
-icon="$godir/xkcd-gtk.svg"
-
-cd "$godir"
+exe="com.github.rkoesters.xkcd-gtk.exe"
+icon="data/com.github.rkoesters.xkcd-gtk.svg"
 
 make clean
-make BUILDFLAGS="-ldflags -H=windowsgui -tags gtk_3_18" xkcd-gtk
+make LDFLAGS="-ldflags='-H=windowsgui -X main.appVersion=$(tools/app-version.sh)'"
 
 # Made sure our target exists.
 mkdir -p "$target"
