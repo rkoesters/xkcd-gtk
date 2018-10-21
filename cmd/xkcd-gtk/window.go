@@ -244,6 +244,9 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	win.image.SetHAlign(gtk.ALIGN_CENTER)
+	win.image.SetVAlign(gtk.ALIGN_CENTER)
+
 	imageScroller.Add(win.image)
 	imageScroller.ShowAll()
 	win.window.Add(imageScroller)
