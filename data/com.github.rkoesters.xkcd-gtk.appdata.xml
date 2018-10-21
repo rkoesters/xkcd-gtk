@@ -51,6 +51,15 @@
   </custom>
 
   <releases>
+    <release version="1.0.2">
+      <description>
+        <p>Minor fixes</p>
+        <ul>
+          <li>Use fuzzy searching</li>
+          <li>Only show alt text when hovering directly over the comic image</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1">
       <description>
         <p>Update OARS metadata.</p>
