@@ -122,7 +122,7 @@ func (win *Window) Search() {
 		win.loadSearchResults(nil)
 		return
 	}
-	query := query.NewFuzzyQuery(userQuery)
+	query := query.NewQueryStringQuery(userQuery)
 	searchRequest := bleve.NewSearchRequest(query)
 	searchRequest.Size = 50
 	searchRequest.Fields = []string{"*"}
