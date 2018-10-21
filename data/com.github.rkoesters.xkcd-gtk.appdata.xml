@@ -51,6 +51,11 @@
   </custom>
 
   <releases>
+    <release version="1.0.3">
+      <description>
+        <p>Revert fuzzy searching due to regressions</p>
+      </description>
+    </release>
     <release version="1.0.2">
       <description>
         <p>Minor fixes</p>
