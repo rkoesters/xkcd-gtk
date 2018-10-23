@@ -51,12 +51,12 @@
   </custom>
 
   <releases>
-    <release version="1.0.3">
+    <release version="1.0.3" date="2018-10-21">
       <description>
         <p>Revert fuzzy searching due to regressions</p>
       </description>
     </release>
-    <release version="1.0.2">
+    <release version="1.0.2" date="2018-10-21">
       <description>
         <p>Minor fixes</p>
         <ul>
@@ -65,12 +65,12 @@
         </ul>
       </description>
     </release>
-    <release version="1.0.1">
+    <release version="1.0.1" date="2018-10-19">
       <description>
         <p>Update OARS metadata.</p>
       </description>
     </release>
-    <release version="1.0.0">
+    <release version="1.0.0" date="2018-10-18">
       <description>
         <p>First stable release</p>
         <ul>
