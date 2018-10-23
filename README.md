@@ -20,11 +20,11 @@ like `libgtk-3-dev` or `gtk3-devel`).
 
 First, you need to pull in the Go dependencies:
 
-	make deps
+	$ make deps
 
 Next, you are ready to build the application:
 
-	make
+	$ make
 
 ### Installing
 
@@ -32,22 +32,22 @@ After you have compiled the application, you can install it.
 
 To install for all users:
 
-	sudo make install
+	$ sudo make install
 
 To install for the current user only (you may need to add
 `$HOME/.local/bin` to your `$PATH`):
 
-	make prefix=$HOME/.local install
+	$ make prefix=$HOME/.local install
 
 ### Uninstalling
 
 To uninstall for all users:
 
-	sudo make uninstall
+	$ sudo make uninstall
 
 To uninstall for the current user :
 
-	make prefix=$HOME/.local uninstall
+	$ make prefix=$HOME/.local uninstall
 
 ## License
 
