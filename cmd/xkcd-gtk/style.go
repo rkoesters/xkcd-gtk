@@ -21,6 +21,7 @@ var (
 	// large toolbar buttons.
 	largeToolbarThemes = []string{
 		"elementary",
+		"elementary-x",
 		"win32",
 	}
 
@@ -28,12 +29,14 @@ var (
 	// should use non-symbolic icons.
 	nonSymbolicIconThemes = []string{
 		"elementary",
+		"elementary-x",
 	}
 
 	// skinnyMenuThemes is the list of gtk themes for which we should
 	// use skinny popover menus.
 	skinnyMenuThemes = []string{
 		"elementary",
+		"elementary-x",
 	}
 )
 
