@@ -32,7 +32,7 @@ After you have compiled the application, you can install it.
 
 To install for all users:
 
-	$ sudo make install
+	$ sudo make prefix=/usr/local install
 
 To install for the current user only (you may need to add
 `$HOME/.local/bin` to your `$PATH`):
@@ -43,7 +43,7 @@ To install for the current user only (you may need to add
 
 To uninstall for all users:
 
-	$ sudo make uninstall
+	$ sudo make prefix=/usr/local uninstall
 
 To uninstall for the current user :
 
