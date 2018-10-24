@@ -74,9 +74,9 @@ install: $(EXE_PATH)
 	cp $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
 
 uninstall:
-	rm -f $(DESTDIR)$(bindir)/$(EXE_NAME) \
-	      $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME) \
-	      $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
-	      $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
+	rm $(DESTDIR)$(bindir)/$(EXE_NAME) \
+	   $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME) \
+	   $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
+	   $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
 
 .PHONY: all clean deps install uninstall
