@@ -29,6 +29,12 @@ var (
 	nonSymbolicIconThemes = []string{
 		"elementary",
 	}
+
+	// skinnyMenuThemes is the list of gtk themes for which we should
+	// use skinny popover menus.
+	skinnyMenuThemes = []string{
+		"elementary",
+	}
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
@@ -91,6 +97,7 @@ func (win *Window) StyleUpdated() {
 			break
 		}
 	}
+
 	// We will call icon() to automatically add -symbolic if needed.
 	icon := func(s string) string {
 		if useSymbolicIcons {
@@ -127,12 +134,21 @@ func (win *Window) StyleUpdated() {
 		win.menu.SetImage(menuImg)
 	}
 
+	// Should we use skinny popover menus?
+	useSkinnyMenus := false
+	for _, skinnyMenuTheme := range skinnyMenuThemes {
+		if themeName == skinnyMenuTheme {
+			useSkinnyMenus = true
+			break
+		}
+	}
+
 	menuPopoverChild, err := win.menu.GetPopover().GetChild()
 	if err != nil {
 		log.Print(err)
 	} else {
 		menuBox := (&gtk.Stack{gtk.Container{*menuPopoverChild}}).GetVisibleChild()
-		if themeName == "elementary" {
+		if useSkinnyMenus {
 			menuBox.SetMarginTop(4)
 			menuBox.SetMarginBottom(4)
 			menuBox.SetMarginStart(0)
