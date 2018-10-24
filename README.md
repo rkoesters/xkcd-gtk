@@ -32,22 +32,22 @@ After you have compiled the application, you can install it.
 
 To install for all users:
 
-	$ sudo make prefix=/usr/local install
+	$ sudo make install prefix=/usr/local
 
 To install for the current user only (you may need to add
 `$HOME/.local/bin` to your `$PATH`):
 
-	$ make prefix=$HOME/.local install
+	$ make install prefix="$HOME/.local"
 
 ### Uninstalling
 
 To uninstall for all users:
 
-	$ sudo make prefix=/usr/local uninstall
+	$ sudo make uninstall prefix=/usr/local
 
 To uninstall for the current user :
 
-	$ make prefix=$HOME/.local uninstall
+	$ make uninstall prefix="$HOME/.local"
 
 ## License
 
