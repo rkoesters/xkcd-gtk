@@ -19,6 +19,13 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title">First Comic</property>
+                <property name="accelerator">&lt;ctrl&gt;Home</property>
+                <property name="visible">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title">Previous Comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Left</property>
                 <property name="visible">1</property>
@@ -28,6 +35,13 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
               <object class="GtkShortcutsShortcut">
                 <property name="title">Next Comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Right</property>
+                <property name="visible">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title">Newest Comic</property>
+                <property name="accelerator">&lt;ctrl&gt;End</property>
                 <property name="visible">1</property>
               </object>
             </child>

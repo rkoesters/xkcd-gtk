@@ -30,10 +30,12 @@ type Window struct {
 	header *gtk.HeaderBar
 	image  *gtk.Image
 
+	first    *gtk.Button
 	previous *gtk.Button
 	next     *gtk.Button
-	random   *gtk.Button
+	newest   *gtk.Button
 
+	random        *gtk.Button
 	search        *gtk.MenuButton
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
@@ -60,12 +62,13 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// Initialize our window actions.
 	actionFuncs := map[string]interface{}{
-		"explain":         win.Explain,
-		"goto-newest":     win.GotoNewest,
-		"next-comic":      win.NextComic,
-		"open-link":       win.OpenLink,
+		"first-comic":     win.FirstComic,
 		"previous-comic":  win.PreviousComic,
+		"next-comic":      win.NextComic,
+		"newest-comic":    win.NewestComic,
 		"random-comic":    win.RandomComic,
+		"open-link":       win.OpenLink,
+		"explain":         win.Explain,
 		"show-properties": win.ShowProperties,
 	}
 
@@ -104,6 +107,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.header.SetTitle(appName)
 	win.header.SetShowCloseButton(true)
 
+	// Create navigation buttons
 	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
 		return nil, err
@@ -113,6 +117,15 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	navBoxStyleContext.AddClass("linked")
+
+	win.first, err = gtk.ButtonNew()
+	if err != nil {
+		return nil, err
+	}
+	win.first.SetTooltipText("Go to the first comic")
+	win.first.SetProperty("action-name", "win.first-comic")
+	win.first.AddAccelerator("activate", win.accels, gdk.KEY_Home, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	navBox.Add(win.first)
 
 	win.previous, err = gtk.ButtonNew()
 	if err != nil {
@@ -132,16 +145,16 @@ func NewWindow(app *Application) (*Window, error) {
 	win.next.AddAccelerator("activate", win.accels, gdk.KEY_Right, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.next)
 
-	win.header.PackStart(navBox)
-
-	win.random, err = gtk.ButtonNewWithLabel("Random")
+	win.newest, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	win.random.SetTooltipText("Go to a random comic")
-	win.random.SetProperty("action-name", "win.random-comic")
-	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	win.header.PackStart(win.random)
+	win.newest.SetTooltipText("Go to the newest comic")
+	win.newest.SetProperty("action-name", "win.newest-comic")
+	win.newest.AddAccelerator("activate", win.accels, gdk.KEY_End, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	navBox.Add(win.newest)
+
+	win.header.PackStart(navBox)
 
 	// Create the menu
 	win.menu, err = gtk.MenuButtonNew()
@@ -153,7 +166,6 @@ func NewWindow(app *Application) (*Window, error) {
 	menu := glib.MenuNew()
 
 	menuSection1 := glib.MenuNew()
-	menuSection1.Append("Go to Newest Comic", "win.goto-newest")
 	menuSection1.Append("Open Link", "win.open-link")
 	menuSection1.Append("Explain", "win.explain")
 	menuSection1.Append("Properties", "win.show-properties")
@@ -224,6 +236,16 @@ func NewWindow(app *Application) (*Window, error) {
 	box.ShowAll()
 	searchPopover.Add(box)
 
+	// Create the random button
+	win.random, err = gtk.ButtonNewWithLabel("Random")
+	if err != nil {
+		return nil, err
+	}
+	win.random.SetTooltipText("Go to a random comic")
+	win.random.SetProperty("action-name", "win.random-comic")
+	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.header.PackEnd(win.random)
+
 	win.header.ShowAll()
 	win.window.SetTitlebar(win.header)
 
@@ -269,6 +291,11 @@ func NewWindow(app *Application) (*Window, error) {
 	return win, nil
 }
 
+// FirstComic goes to the first comic.
+func (win *Window) FirstComic() {
+	win.SetComic(1)
+}
+
 // PreviousComic sets the current comic to the previous comic.
 func (win *Window) PreviousComic() {
 	win.SetComic(win.comic.Num - 1)
@@ -277,6 +304,22 @@ func (win *Window) PreviousComic() {
 // NextComic sets the current comic to the next comic.
 func (win *Window) NextComic() {
 	win.SetComic(win.comic.Num + 1)
+}
+
+// NewestComic checks for a new comic and then shows the newest comic to
+// the user.
+func (win *Window) NewestComic() {
+	// Make it clear that we are checking for a new comic.
+	win.header.SetTitle("Checking for new comic...")
+
+	// Force GetNewestComicInfo to check for a new comic.
+	setCachedNewestComic <- nil
+	newestComic, err := GetNewestComicInfo()
+	if err != nil {
+		log.Print(err)
+	}
+
+	win.SetComic(newestComic.Num)
 }
 
 // RandomComic sets the current comic to a random comic.
@@ -375,21 +418,6 @@ func (win *Window) updateNextPreviousButtonStatus() {
 	} else {
 		win.actions["next-comic"].SetEnabled(false)
 	}
-}
-
-// GotoNewest checks for a new comic and then shows the newest comic to
-// the user.
-func (win *Window) GotoNewest() {
-	// Make it clear that we are checking for a new comic.
-	win.header.SetTitle("Checking for new comic...")
-
-	// Force GetNewestComicInfo to check for a new comic.
-	setCachedNewestComic <- nil
-	newestComic, err := GetNewestComicInfo()
-	if err != nil {
-		log.Print(err)
-	}
-	win.SetComic(newestComic.Num)
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.

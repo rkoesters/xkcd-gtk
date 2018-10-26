@@ -109,11 +109,11 @@ func (win *Window) StyleUpdated() {
 		return s
 	}
 
-	nextImg, err := gtk.ImageNewFromIconName(icon("go-next"), headerBarIconSize)
+	firstImg, err := gtk.ImageNewFromIconName(icon("go-first"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.next.SetImage(nextImg)
+		win.first.SetImage(firstImg)
 	}
 
 	previousImg, err := gtk.ImageNewFromIconName(icon("go-previous"), headerBarIconSize)
@@ -121,6 +121,20 @@ func (win *Window) StyleUpdated() {
 		log.Print(err)
 	} else {
 		win.previous.SetImage(previousImg)
+	}
+
+	nextImg, err := gtk.ImageNewFromIconName(icon("go-next"), headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		win.next.SetImage(nextImg)
+	}
+
+	newestImg, err := gtk.ImageNewFromIconName(icon("go-last"), headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		win.newest.SetImage(newestImg)
 	}
 
 	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
