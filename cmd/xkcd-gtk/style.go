@@ -64,24 +64,25 @@ func (app *Application) LoadCSS() {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *Window) StyleUpdated() {
-	settings, err := gtk.SettingsGetDefault()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
 	// First, lets find out what GTK theme we are using.
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
-		// settings.GetProperty returns an interface{}, we will convert
-		// it to a string in a moment.
-		themeNameIface, err := settings.GetProperty("gtk-theme-name")
+		// The theme is not being set by the environment, so lets ask
+		// GTK what theme it is going to use.
+		settings, err := gtk.SettingsGetDefault()
 		if err != nil {
 			log.Print(err)
 		} else {
-			themeNameStr, ok := themeNameIface.(string)
-			if ok {
-				themeName = themeNameStr
+			// settings.GetProperty returns an interface{}, we will convert
+			// it to a string in a moment.
+			themeNameIface, err := settings.GetProperty("gtk-theme-name")
+			if err != nil {
+				log.Print(err)
+			} else {
+				themeNameStr, ok := themeNameIface.(string)
+				if ok {
+					themeName = themeNameStr
+				}
 			}
 		}
 	}
