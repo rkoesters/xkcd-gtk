@@ -27,8 +27,9 @@ type Window struct {
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
 
-	header *gtk.HeaderBar
-	image  *gtk.Image
+	header         *gtk.HeaderBar
+	comicContainer *gtk.ScrolledWindow
+	image          *gtk.Image
 
 	first    *gtk.Button
 	previous *gtk.Button
@@ -250,13 +251,13 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.SetTitlebar(win.header)
 
 	// Create main part of window.
-	imageScroller, err := gtk.ScrolledWindowNew(nil, nil)
+	win.comicContainer, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	imageScroller.SetSizeRequest(400, 300)
+	win.comicContainer.SetSizeRequest(400, 300)
 
-	imageContext, err := imageScroller.GetStyleContext()
+	imageContext, err := win.comicContainer.GetStyleContext()
 	if err != nil {
 		return nil, err
 	}
@@ -269,9 +270,9 @@ func NewWindow(app *Application) (*Window, error) {
 	win.image.SetHAlign(gtk.ALIGN_CENTER)
 	win.image.SetVAlign(gtk.ALIGN_CENTER)
 
-	imageScroller.Add(win.image)
-	imageScroller.ShowAll()
-	win.window.Add(imageScroller)
+	win.comicContainer.Add(win.image)
+	win.comicContainer.ShowAll()
+	win.window.Add(win.comicContainer)
 
 	// Recall our window state.
 	win.state.ReadFile(filepath.Join(CacheDir(), "state"))
@@ -389,6 +390,8 @@ func (win *Window) DisplayComic() {
 	if win.properties != nil {
 		win.properties.Update()
 	}
+
+	win.UpdateDisplayMode()
 }
 
 func (win *Window) updateNextPreviousButtonStatus() {

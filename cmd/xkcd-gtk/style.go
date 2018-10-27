@@ -14,6 +14,10 @@ const css = `
 .comic-container > .frame {
 	background-color: #ffffff;
 }
+
+.comic-container.dark > .frame {
+	background-color: #000000;
+}
 `
 
 var (
@@ -60,25 +64,24 @@ func (app *Application) LoadCSS() {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *Window) StyleUpdated() {
+	settings, err := gtk.SettingsGetDefault()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
 	// First, lets find out what GTK theme we are using.
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
-		// The theme is not being set by the environment, so lets ask
-		// GTK what theme it is going to use.
-		settings, err := gtk.SettingsGetDefault()
+		// settings.GetProperty returns an interface{}, we will convert
+		// it to a string in a moment.
+		themeNameIface, err := settings.GetProperty("gtk-theme-name")
 		if err != nil {
 			log.Print(err)
 		} else {
-			// settings.GetProperty returns an interface{}, we will convert
-			// it to a string in a moment.
-			themeNameIface, err := settings.GetProperty("gtk-theme-name")
-			if err != nil {
-				log.Print(err)
-			} else {
-				themeNameStr, ok := themeNameIface.(string)
-				if ok {
-					themeName = themeNameStr
-				}
+			themeNameStr, ok := themeNameIface.(string)
+			if ok {
+				themeName = themeNameStr
 			}
 		}
 	}
@@ -176,5 +179,50 @@ func (win *Window) StyleUpdated() {
 			menuBox.SetMarginStart(10)
 			menuBox.SetMarginEnd(10)
 		}
+	}
+
+	win.UpdateDisplayMode()
+}
+
+// UpdateDisplayMode updates the win.comicContainer contents based on
+// whether dark mode is enabled.
+func (win *Window) UpdateDisplayMode() {
+	settings, err := gtk.SettingsGetDefault()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	// Are we using a dark theme?
+	darkModeIface, err := settings.GetProperty("gtk-application-prefer-dark-theme")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	darkMode, ok := darkModeIface.(bool)
+	if !ok {
+		log.Print("failed to convert darkModeIface to bool")
+		return
+	}
+
+	containerContext, err := win.comicContainer.GetStyleContext()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	if darkMode {
+		containerContext.AddClass("dark")
+
+		pixbuf := win.image.GetPixbuf()
+		pixels := pixbuf.GetPixels()
+		for i := 0; i < len(pixels); i++ {
+			pixels[i] = 255 - pixels[i]
+		}
+	} else {
+		containerContext.RemoveClass("dark")
+
+		win.image.SetFromFile(getComicImagePath(win.comic.Num))
 	}
 }
