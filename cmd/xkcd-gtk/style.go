@@ -4,6 +4,7 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"log"
+	"math"
 	"os"
 )
 
@@ -219,7 +220,7 @@ func (win *Window) UpdateDisplayMode() {
 		pixbuf := win.image.GetPixbuf()
 		pixels := pixbuf.GetPixels()
 		for i := 0; i < len(pixels); i++ {
-			pixels[i] = 255 - pixels[i]
+			pixels[i] = math.MaxUint8 - pixels[i]
 		}
 	} else {
 		containerContext.RemoveClass("dark")
