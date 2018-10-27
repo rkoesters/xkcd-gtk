@@ -34,13 +34,14 @@ func NewApplication() (*Application, error) {
 
 	// Initialize our application actions.
 	actionFuncs := map[string]interface{}{
-		"new-window":     app.Activate,
-		"open-blog":      app.OpenBlog,
-		"open-store":     app.OpenStore,
-		"open-what-if":   app.OpenWhatIf,
-		"quit":           app.Quit,
-		"show-about":     app.ShowAbout,
-		"show-shortcuts": app.ShowShortcuts,
+		"new-window":       app.Activate,
+		"toggle-dark-mode": app.ToggleDarkMode,
+		"open-blog":        app.OpenBlog,
+		"open-store":       app.OpenStore,
+		"open-what-if":     app.OpenWhatIf,
+		"quit":             app.Quit,
+		"show-about":       app.ShowAbout,
+		"show-shortcuts":   app.ShowShortcuts,
 	}
 
 	app.actions = make(map[string]*glib.SimpleAction)
@@ -74,6 +75,7 @@ func (app *Application) SetupAppMenu() {
 	if app.application.PrefersAppMenu() {
 		menuSection1 := glib.MenuNew()
 		menuSection1.Append("New Window", "app.new-window")
+		menuSection1.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 
 		menuSection2 := glib.MenuNew()
 		menuSection2.Append("what if?", "app.open-what-if")
@@ -130,6 +132,34 @@ func (app *Application) Activate() {
 		return
 	}
 	win.window.Present()
+}
+
+// ToggleDarkMode toggles the value of
+// "gtk-application-prefer-dark-theme".
+func (app *Application) ToggleDarkMode() {
+	gsettings, err := gtk.SettingsGetDefault()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	darkModeIface, err := gsettings.GetProperty("gtk-application-prefer-dark-theme")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	darkMode, ok := darkModeIface.(bool)
+	if !ok {
+		log.Print("failed to convert darkModeIface to bool")
+		return
+	}
+
+	err = gsettings.SetProperty("gtk-application-prefer-dark-theme", !darkMode)
+	if err != nil {
+		log.Print(err)
+		return
+	}
 }
 
 // Quit closes all windows so the application can close.

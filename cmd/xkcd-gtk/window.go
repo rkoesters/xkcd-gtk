@@ -176,6 +176,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if !app.application.PrefersAppMenu() {
 		menuSection2 := glib.MenuNew()
 		menuSection2.Append("New Window", "app.new-window")
+		menuSection2.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
 
 		menuSection3 := glib.MenuNew()
