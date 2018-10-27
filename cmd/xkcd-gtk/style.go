@@ -186,7 +186,7 @@ func (win *Window) StyleUpdated() {
 	win.DrawComic()
 }
 
-// DrawComic draws the comic and inverts it if we are in a dark mode.
+// DrawComic draws the comic and inverts it if we are in dark mode.
 func (win *Window) DrawComic() {
 	settings, err := gtk.SettingsGetDefault()
 	if err != nil {
