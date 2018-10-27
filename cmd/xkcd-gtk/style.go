@@ -207,6 +207,8 @@ func (win *Window) DrawComic() {
 		return
 	}
 
+	win.app.settings.DarkMode = darkMode
+
 	containerContext, err := win.comicContainer.GetStyleContext()
 	if err != nil {
 		log.Print(err)

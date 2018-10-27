@@ -17,8 +17,9 @@ var appVersion = "undefined"
 // Application holds onto our GTK representation of our application.
 type Application struct {
 	application *gtk.Application
+	actions     map[string]*glib.SimpleAction
 
-	actions map[string]*glib.SimpleAction
+	settings Settings
 }
 
 // NewApplication creates an instance of our GTK Application.
@@ -58,8 +59,10 @@ func NewApplication() (*Application, error) {
 
 	// Connect application signals to our methods.
 	app.application.Connect("startup", app.LoadCSS)
+	app.application.Connect("startup", app.LoadSettings)
 	app.application.Connect("startup", app.SetupAppMenu)
 	app.application.Connect("startup", app.SetupCache)
+	app.application.Connect("shutdown", app.SaveSettings)
 	app.application.Connect("shutdown", app.CloseCache)
 	app.application.Connect("activate", app.Activate)
 
