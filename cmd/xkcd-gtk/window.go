@@ -176,19 +176,22 @@ func NewWindow(app *Application) (*Window, error) {
 	if !app.application.PrefersAppMenu() {
 		menuSection2 := glib.MenuNew()
 		menuSection2.Append("New Window", "app.new-window")
-		menuSection2.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
 
 		menuSection3 := glib.MenuNew()
-		menuSection3.Append("what if?", "app.open-what-if")
-		menuSection3.Append("xkcd blog", "app.open-blog")
-		menuSection3.Append("xkcd store", "app.open-store")
+		menuSection3.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
 
 		menuSection4 := glib.MenuNew()
-		menuSection4.Append("Keyboard Shortcuts", "app.show-shortcuts")
-		menuSection4.Append("About "+appName, "app.show-about")
+		menuSection4.Append("what if?", "app.open-what-if")
+		menuSection4.Append("xkcd blog", "app.open-blog")
+		menuSection4.Append("xkcd store", "app.open-store")
 		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
+
+		menuSection5 := glib.MenuNew()
+		menuSection5.Append("Keyboard Shortcuts", "app.show-shortcuts")
+		menuSection5.Append("About "+appName, "app.show-about")
+		menu.AppendSectionWithoutLabel(&menuSection5.MenuModel)
 	}
 
 	win.menu.SetMenuModel(&menu.MenuModel)

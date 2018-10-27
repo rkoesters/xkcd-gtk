@@ -75,22 +75,25 @@ func (app *Application) SetupAppMenu() {
 	if app.application.PrefersAppMenu() {
 		menuSection1 := glib.MenuNew()
 		menuSection1.Append("New Window", "app.new-window")
-		menuSection1.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 
 		menuSection2 := glib.MenuNew()
-		menuSection2.Append("what if?", "app.open-what-if")
-		menuSection2.Append("xkcd blog", "app.open-blog")
-		menuSection2.Append("xkcd store", "app.open-store")
+		menuSection2.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 
 		menuSection3 := glib.MenuNew()
-		menuSection3.Append("Keyboard Shortcuts", "app.show-shortcuts")
-		menuSection3.Append("About "+appName, "app.show-about")
-		menuSection3.Append("Quit", "app.quit")
+		menuSection3.Append("what if?", "app.open-what-if")
+		menuSection3.Append("xkcd blog", "app.open-blog")
+		menuSection3.Append("xkcd store", "app.open-store")
+
+		menuSection4 := glib.MenuNew()
+		menuSection4.Append("Keyboard Shortcuts", "app.show-shortcuts")
+		menuSection4.Append("About "+appName, "app.show-about")
+		menuSection4.Append("Quit", "app.quit")
 
 		menu := glib.MenuNew()
 		menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
 		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
 		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
+		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
 
 		app.application.SetAppMenu(&menu.MenuModel)
 	}
