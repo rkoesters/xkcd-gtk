@@ -376,7 +376,6 @@ func (win *Window) SetComic(n int) {
 func (win *Window) DisplayComic() {
 	win.header.SetTitle(win.comic.SafeTitle)
 	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
-	win.image.SetFromFile(getComicImagePath(win.comic.Num))
 	win.image.SetTooltipText(win.comic.Alt)
 	win.updateNextPreviousButtonStatus()
 
@@ -391,7 +390,7 @@ func (win *Window) DisplayComic() {
 		win.properties.Update()
 	}
 
-	win.UpdateDisplayMode()
+	win.DrawComic()
 }
 
 func (win *Window) updateNextPreviousButtonStatus() {

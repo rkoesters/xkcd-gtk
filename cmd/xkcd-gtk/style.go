@@ -183,12 +183,11 @@ func (win *Window) StyleUpdated() {
 		}
 	}
 
-	win.UpdateDisplayMode()
+	win.DrawComic()
 }
 
-// UpdateDisplayMode updates the win.comicContainer contents based on
-// whether dark mode is enabled.
-func (win *Window) UpdateDisplayMode() {
+// DrawComic draws the comic and inverts it if we are in a dark mode.
+func (win *Window) DrawComic() {
 	settings, err := gtk.SettingsGetDefault()
 	if err != nil {
 		log.Print(err)
@@ -214,17 +213,21 @@ func (win *Window) UpdateDisplayMode() {
 		return
 	}
 
+	win.image.SetFromFile(getComicImagePath(win.comic.Num))
+
 	if darkMode {
 		containerContext.AddClass("dark")
 
 		pixbuf := win.image.GetPixbuf()
+		if pixbuf == nil {
+			return
+		}
+
 		pixels := pixbuf.GetPixels()
 		for i := 0; i < len(pixels); i++ {
 			pixels[i] = math.MaxUint8 - pixels[i]
 		}
 	} else {
 		containerContext.RemoveClass("dark")
-
-		win.image.SetFromFile(getComicImagePath(win.comic.Num))
 	}
 }
