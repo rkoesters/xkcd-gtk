@@ -10,10 +10,11 @@
   <summary>Read xkcd: a webcomic of romance, sarcasm, math, and language</summary>
   <description>
     <p>Comic Sticks brings xkcd comics to your desktop with quick comic searching, offline browsing, and intuitive keyboard shortcuts.</p>
-    <p>Features include:</p>
+    <p>Features:</p>
     <ul>
       <li>Search for comics</li>
       <li>Cache comics for later offline viewing</li>
+      <li>Dark mode for late night reading</li>
       <li>View comic metadata</li>
       <li>Quickly access comic explainations via the explain xkcd wiki</li>
     </ul>
