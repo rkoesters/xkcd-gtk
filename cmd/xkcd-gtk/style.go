@@ -14,6 +14,7 @@ const css = `
 
 .comic-container > .frame {
 	background-color: #ffffff;
+	border-radius: 0px;
 }
 
 .comic-container.dark > .frame {
