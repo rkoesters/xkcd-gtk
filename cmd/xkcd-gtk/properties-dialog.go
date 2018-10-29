@@ -160,6 +160,7 @@ func (pd *PropertiesDialog) Update() {
 // Close is called when the dialog is closed. It tells the parent to
 // save its window state.
 func (pd *PropertiesDialog) Close() {
+	pd.parent.properties = nil
 	pd.parent.SaveState()
 }
 
@@ -168,7 +169,6 @@ func (pd *PropertiesDialog) Close() {
 func (pd *PropertiesDialog) Destroy() {
 	pd.labels = nil
 	pd.dialog = nil
-	pd.parent.properties = nil
 	pd.parent = nil
 }
 
