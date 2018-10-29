@@ -96,7 +96,13 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
+	darkModeSignal, err := gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
+	if err != nil {
+		return nil, err
+	}
+	win.window.Connect("delete-event", func() {
+		gtkSettings.HandlerDisconnect(darkModeSignal)
+	})
 
 	// If the gtk window state changes, we want to update our internal
 	// window state.
