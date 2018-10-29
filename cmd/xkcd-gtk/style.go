@@ -76,21 +76,13 @@ func (win *Window) StyleUpdated() {
 	if themeName == "" {
 		// The theme is not being set by the environment, so
 		// lets ask GTK what theme it is going to use.
-		gtkSettings, err := gtk.SettingsGetDefault()
+		themeNameIface, err := win.app.gtkSettings.GetProperty("gtk-theme-name")
 		if err != nil {
 			log.Print(err)
 		} else {
-			// gtkSettings.GetProperty returns an
-			// interface{}, we will convert it to a string
-			// in a moment.
-			themeNameIface, err := gtkSettings.GetProperty("gtk-theme-name")
-			if err != nil {
-				log.Print(err)
-			} else {
-				themeNameStr, ok := themeNameIface.(string)
-				if ok {
-					themeName = themeNameStr
-				}
+			themeNameStr, ok := themeNameIface.(string)
+			if ok {
+				themeName = themeNameStr
 			}
 		}
 	}

@@ -19,7 +19,8 @@ type Application struct {
 	application *gtk.Application
 	actions     map[string]*glib.SimpleAction
 
-	settings Settings
+	settings    Settings
+	gtkSettings *gtk.Settings
 }
 
 // NewApplication creates an instance of our GTK Application.
@@ -28,6 +29,11 @@ func NewApplication() (*Application, error) {
 	var err error
 
 	app.application, err = gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
+	if err != nil {
+		return nil, err
+	}
+
+	app.gtkSettings, err = gtk.SettingsGetDefault()
 	if err != nil {
 		return nil, err
 	}
@@ -140,13 +146,7 @@ func (app *Application) Activate() {
 // ToggleDarkMode toggles the value of
 // "gtk-application-prefer-dark-theme".
 func (app *Application) ToggleDarkMode() {
-	gtkSettings, err := gtk.SettingsGetDefault()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	darkModeIface, err := gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
+	darkModeIface, err := app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
 		log.Print(err)
 		return
@@ -158,7 +158,7 @@ func (app *Application) ToggleDarkMode() {
 		return
 	}
 
-	err = gtkSettings.SetProperty("gtk-application-prefer-dark-theme", !darkMode)
+	err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", !darkMode)
 	if err != nil {
 		log.Print(err)
 		return

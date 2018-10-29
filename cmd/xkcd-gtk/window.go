@@ -93,16 +93,12 @@ func NewWindow(app *Application) (*Window, error) {
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Connect("style-updated", win.StyleUpdated)
 
-	gtkSettings, err := gtk.SettingsGetDefault()
-	if err != nil {
-		return nil, err
-	}
-	darkModeSignal, err := gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
+	darkModeSignal, err := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
 	if err != nil {
 		return nil, err
 	}
 	win.window.Connect("delete-event", func() {
-		gtkSettings.HandlerDisconnect(darkModeSignal)
+		app.gtkSettings.HandlerDisconnect(darkModeSignal)
 	})
 
 	// If the gtk window state changes, we want to update our internal
@@ -412,14 +408,8 @@ func (win *Window) DisplayComic() {
 
 // DrawComic draws the comic and inverts it if we are in dark mode.
 func (win *Window) DrawComic() {
-	gtkSettings, err := gtk.SettingsGetDefault()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
 	// Are we using a dark theme?
-	darkModeIface, err := gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
+	darkModeIface, err := win.app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
 		log.Print(err)
 		return
