@@ -25,6 +25,7 @@ const css = `
 const (
 	styleClassComicContainer = "comic-container"
 	styleClassDark           = "dark"
+	styleClassLinked         = "linked"
 )
 
 var (

@@ -121,7 +121,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	navBoxStyleContext.AddClass("linked")
+	navBoxStyleContext.AddClass(styleClassLinked)
 
 	win.first, err = gtk.ButtonNew()
 	if err != nil {
