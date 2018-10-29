@@ -80,9 +80,9 @@ func (ws *WindowState) WriteFile(filename string) error {
 	return ws.Write(f)
 }
 
-// StateChanged is called when GTK's window state changes and we want to
-// update our internal state to match GTK's changes.
-func (win *Window) StateChanged() {
+// SaveState writes win.state to disk so it can be loaded next time we
+// open a window.
+func (win *Window) SaveState() {
 	win.state.Maximized = win.window.IsMaximized()
 	if !win.state.Maximized {
 		win.state.Width, win.state.Height = win.window.GetSize()
@@ -95,11 +95,7 @@ func (win *Window) StateChanged() {
 		win.state.PropertiesWidth, win.state.PropertiesHeight = win.properties.dialog.GetSize()
 		win.state.PropertiesPositionX, win.state.PropertiesPositionY = win.properties.dialog.GetPosition()
 	}
-}
 
-// SaveState writes win.state to disk so it can be loaded next time we
-// open a window.
-func (win *Window) SaveState() {
 	err := win.state.WriteFile(filepath.Join(CacheDir(), "state"))
 	if err != nil {
 		log.Printf("error saving window state: %v", err)

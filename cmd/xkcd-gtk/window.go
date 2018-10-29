@@ -101,11 +101,6 @@ func NewWindow(app *Application) (*Window, error) {
 		app.gtkSettings.HandlerDisconnect(darkModeSignal)
 	})
 
-	// If the gtk window state changes, we want to update our
-	// internal window state.
-	win.window.Connect("size-allocate", win.StateChanged)
-	win.window.Connect("window-state-event", win.StateChanged)
-
 	// If the window is closed, we want to write our state to disk.
 	win.window.Connect("delete-event", win.SaveState)
 

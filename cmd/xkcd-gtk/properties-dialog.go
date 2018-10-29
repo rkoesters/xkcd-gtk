@@ -52,12 +52,6 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 
 	pd.dialog.Connect("destroy", pd.Destroy)
 
-	// The parent keeps track of our state, so we want to tell the
-	// parent when our state changes.
-	pd.dialog.Connect("delete-event", parent.StateChanged)
-	pd.dialog.Connect("size-allocate", parent.StateChanged)
-	pd.dialog.Connect("window-state-event", parent.StateChanged)
-
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
