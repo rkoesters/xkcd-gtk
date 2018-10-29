@@ -183,8 +183,6 @@ func (win *Window) StyleUpdated() {
 			menuBox.SetMarginEnd(10)
 		}
 	}
-
-	win.DrawComic()
 }
 
 // DrawComic draws the comic and inverts it if we are in dark mode.

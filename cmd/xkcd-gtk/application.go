@@ -163,13 +163,6 @@ func (app *Application) ToggleDarkMode() {
 		log.Print(err)
 		return
 	}
-
-	app.application.GetWindows().Foreach(func(item interface{}) {
-		window, ok := item.(*gtk.Window)
-		if ok {
-			window.Emit("style-updated")
-		}
-	})
 }
 
 // Quit closes all windows so the application can close.
