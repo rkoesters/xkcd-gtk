@@ -277,7 +277,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	imageContext.AddClass("comic-container")
+	imageContext.AddClass(styleClassComicContainer)
 
 	win.image, err = gtk.ImageNew()
 	if err != nil {

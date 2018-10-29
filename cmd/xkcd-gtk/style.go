@@ -23,6 +23,11 @@ const css = `
 }
 `
 
+const (
+	styleClassComicContainer = "comic-container"
+	styleClassDark           = "dark"
+)
+
 var (
 	// largeToolbarThemes is the list of gtk themes for which we
 	// should use large toolbar buttons.
@@ -219,7 +224,7 @@ func (win *Window) DrawComic() {
 	win.image.SetFromFile(getComicImagePath(win.comic.Num))
 
 	if darkMode {
-		containerContext.AddClass("dark")
+		containerContext.AddClass(styleClassDark)
 
 		pixbuf := win.image.GetPixbuf()
 		if pixbuf == nil {
@@ -231,6 +236,6 @@ func (win *Window) DrawComic() {
 			pixels[i] = math.MaxUint8 - pixels[i]
 		}
 	} else {
-		containerContext.RemoveClass("dark")
+		containerContext.RemoveClass(styleClassDark)
 	}
 }
