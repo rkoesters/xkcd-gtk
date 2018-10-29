@@ -28,21 +28,20 @@ type Window struct {
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
 
-	header         *gtk.HeaderBar
-	comicContainer *gtk.ScrolledWindow
-	image          *gtk.Image
-
+	header   *gtk.HeaderBar
 	first    *gtk.Button
 	previous *gtk.Button
 	next     *gtk.Button
 	newest   *gtk.Button
+	random   *gtk.Button
+	search   *gtk.MenuButton
+	menu     *gtk.MenuButton
 
-	random        *gtk.Button
-	search        *gtk.MenuButton
 	searchEntry   *gtk.SearchEntry
 	searchResults *gtk.Box
 
-	menu *gtk.MenuButton
+	comicContainer *gtk.ScrolledWindow
+	image          *gtk.Image
 
 	properties *PropertiesDialog
 }
