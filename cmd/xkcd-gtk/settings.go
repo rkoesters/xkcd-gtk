@@ -59,12 +59,12 @@ func (settings *Settings) WriteFile(filename string) error {
 // LoadSettings tries to load our settings from disk.
 func (app *Application) LoadSettings() {
 	app.settings.ReadFile(filepath.Join(ConfigDir(), "settings"))
-	gsettings, err := gtk.SettingsGetDefault()
+	gtkSettings, err := gtk.SettingsGetDefault()
 	if err != nil {
 		log.Print(err)
 		return
 	}
-	err = gsettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
+	err = gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
 	if err != nil {
 		log.Print(err)
 		return

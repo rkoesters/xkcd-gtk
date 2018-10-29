@@ -23,8 +23,8 @@ const css = `
 `
 
 var (
-	// largeToolbarThemes is the list of gtk themes for which we should use
-	// large toolbar buttons.
+	// largeToolbarThemes is the list of gtk themes for which we
+	// should use large toolbar buttons.
 	largeToolbarThemes = []string{
 		"elementary",
 		"elementary-x",
@@ -38,8 +38,8 @@ var (
 		"elementary-x",
 	}
 
-	// skinnyMenuThemes is the list of gtk themes for which we should
-	// use skinny popover menus.
+	// skinnyMenuThemes is the list of gtk themes for which we
+	// should use skinny popover menus.
 	skinnyMenuThemes = []string{
 		"elementary",
 		"elementary-x",
@@ -69,15 +69,16 @@ func (win *Window) StyleUpdated() {
 	// First, lets find out what GTK theme we are using.
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
-		// The theme is not being set by the environment, so lets ask
-		// GTK what theme it is going to use.
-		settings, err := gtk.SettingsGetDefault()
+		// The theme is not being set by the environment, so
+		// lets ask GTK what theme it is going to use.
+		gtkSettings, err := gtk.SettingsGetDefault()
 		if err != nil {
 			log.Print(err)
 		} else {
-			// settings.GetProperty returns an interface{}, we will convert
-			// it to a string in a moment.
-			themeNameIface, err := settings.GetProperty("gtk-theme-name")
+			// gtkSettings.GetProperty returns an
+			// interface{}, we will convert it to a string
+			// in a moment.
+			themeNameIface, err := gtkSettings.GetProperty("gtk-theme-name")
 			if err != nil {
 				log.Print(err)
 			} else {
@@ -187,14 +188,14 @@ func (win *Window) StyleUpdated() {
 
 // DrawComic draws the comic and inverts it if we are in dark mode.
 func (win *Window) DrawComic() {
-	settings, err := gtk.SettingsGetDefault()
+	gtkSettings, err := gtk.SettingsGetDefault()
 	if err != nil {
 		log.Print(err)
 		return
 	}
 
 	// Are we using a dark theme?
-	darkModeIface, err := settings.GetProperty("gtk-application-prefer-dark-theme")
+	darkModeIface, err := gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
 		log.Print(err)
 		return

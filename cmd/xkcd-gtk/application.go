@@ -140,13 +140,13 @@ func (app *Application) Activate() {
 // ToggleDarkMode toggles the value of
 // "gtk-application-prefer-dark-theme".
 func (app *Application) ToggleDarkMode() {
-	gsettings, err := gtk.SettingsGetDefault()
+	gtkSettings, err := gtk.SettingsGetDefault()
 	if err != nil {
 		log.Print(err)
 		return
 	}
 
-	darkModeIface, err := gsettings.GetProperty("gtk-application-prefer-dark-theme")
+	darkModeIface, err := gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
 		log.Print(err)
 		return
@@ -158,7 +158,7 @@ func (app *Application) ToggleDarkMode() {
 		return
 	}
 
-	err = gsettings.SetProperty("gtk-application-prefer-dark-theme", !darkMode)
+	err = gtkSettings.SetProperty("gtk-application-prefer-dark-theme", !darkMode)
 	if err != nil {
 		log.Print(err)
 		return

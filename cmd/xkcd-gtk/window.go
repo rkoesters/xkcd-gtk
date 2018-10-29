@@ -92,11 +92,11 @@ func NewWindow(app *Application) (*Window, error) {
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Window.Connect("style-updated", win.StyleUpdated)
 
-	gsettings, err := gtk.SettingsGetDefault()
+	gtkSettings, err := gtk.SettingsGetDefault()
 	if err != nil {
 		return nil, err
 	}
-	gsettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
+	gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
 
 	// If the gtk window state changes, we want to update our internal
 	// window state.
