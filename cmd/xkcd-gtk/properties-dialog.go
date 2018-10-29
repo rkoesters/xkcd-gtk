@@ -50,6 +50,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	pd.dialog.AddAccelGroup(pd.accels)
 	pd.accels.Connect(gdk.KEY_q, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
 
+	pd.dialog.Connect("delete-event", pd.Close)
 	pd.dialog.Connect("destroy", pd.Destroy)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
@@ -154,6 +155,12 @@ func (pd *PropertiesDialog) Update() {
 	pd.labels["News"].SetText(pd.parent.comic.News)
 	pd.labels["Link"].SetText(pd.parent.comic.Link)
 	pd.labels["Transcript"].SetText(pd.parent.comic.Transcript)
+}
+
+// Close is called when the dialog is closed. It tells the parent to
+// save its window state.
+func (pd *PropertiesDialog) Close() {
+	pd.parent.SaveState()
 }
 
 // Destroy removes our references to the dialog so the garbage collector
