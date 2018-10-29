@@ -12,6 +12,7 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"sync"
 )
@@ -517,4 +518,6 @@ func (win *Window) Destroy() {
 	win.comicContainer = nil
 	win.image = nil
 	win.properties = nil
+
+	runtime.GC()
 }
