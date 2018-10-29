@@ -104,6 +104,9 @@ func NewWindow(app *Application) (*Window, error) {
 	// If the window is closed, we want to write our state to disk.
 	win.window.Connect("delete-event", win.SaveState)
 
+	// When gtk destroys the window, we want to clean up.
+	win.window.Connect("destroy", win.Destroy)
+
 	// Create HeaderBar
 	win.header, err = gtk.HeaderBarNew()
 	if err != nil {
@@ -492,4 +495,26 @@ func (win *Window) OpenLink() {
 	if err != nil {
 		log.Print(err)
 	}
+}
+
+// Destroy releases all references in the Window struct.
+func (win *Window) Destroy() {
+	win.app = nil
+	win.window = nil
+	win.comic = nil
+	win.actions = nil
+	win.accels = nil
+	win.header = nil
+	win.first = nil
+	win.previous = nil
+	win.next = nil
+	win.newest = nil
+	win.random = nil
+	win.search = nil
+	win.menu = nil
+	win.searchEntry = nil
+	win.searchResults = nil
+	win.comicContainer = nil
+	win.image = nil
+	win.properties = nil
 }
