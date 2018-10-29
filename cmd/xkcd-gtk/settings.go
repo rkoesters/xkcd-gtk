@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/gotk3/gotk3/gtk"
 	"io"
 	"log"
 	"os"
@@ -57,8 +58,16 @@ func (settings *Settings) WriteFile(filename string) error {
 
 // LoadSettings tries to load our settings from disk.
 func (app *Application) LoadSettings() {
+	var err error
+
+	app.gtkSettings, err = gtk.SettingsGetDefault()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
 	app.settings.ReadFile(filepath.Join(ConfigDir(), "settings"))
-	err := app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
+	err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
 	if err != nil {
 		log.Print(err)
 		return

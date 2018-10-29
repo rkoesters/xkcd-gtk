@@ -33,11 +33,6 @@ func NewApplication() (*Application, error) {
 		return nil, err
 	}
 
-	app.gtkSettings, err = gtk.SettingsGetDefault()
-	if err != nil {
-		return nil, err
-	}
-
 	// Initialize our application actions.
 	actionFuncs := map[string]interface{}{
 		"new-window":       app.Activate,
