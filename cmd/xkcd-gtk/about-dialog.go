@@ -37,8 +37,8 @@ func (app *Application) ShowAbout() {
 			return
 		}
 
-		// We want to keep the about dialog around in case we want to
-		// show it again.
+		// We want to keep the about dialog around in case we
+		// want to show it again.
 		aboutDialog.HideOnDelete()
 		aboutDialog.Connect("response", aboutDialog.Hide)
 		aboutDialog.Connect("hide", func() {

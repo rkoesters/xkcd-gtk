@@ -134,8 +134,8 @@ func (app *Application) ShowShortcuts() {
 			return
 		}
 
-		// We want to keep the shortcuts window around in case we want
-		// to show it again.
+		// We want to keep the shortcuts window around in case
+		// we want to show it again.
 		shortcutsWindow.HideOnDelete()
 		shortcutsWindow.Connect("hide", func() {
 			app.application.RemoveWindow(&shortcutsWindow.Window)
