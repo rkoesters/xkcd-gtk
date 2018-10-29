@@ -63,13 +63,13 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// Initialize our window actions.
 	actionFuncs := map[string]interface{}{
-		"first-comic":     win.FirstComic,
-		"previous-comic":  win.PreviousComic,
-		"next-comic":      win.NextComic,
-		"newest-comic":    win.NewestComic,
-		"random-comic":    win.RandomComic,
-		"open-link":       win.OpenLink,
 		"explain":         win.Explain,
+		"first-comic":     win.FirstComic,
+		"newest-comic":    win.NewestComic,
+		"next-comic":      win.NextComic,
+		"open-link":       win.OpenLink,
+		"previous-comic":  win.PreviousComic,
+		"random-comic":    win.RandomComic,
 		"show-properties": win.ShowProperties,
 	}
 

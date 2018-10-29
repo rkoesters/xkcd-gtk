@@ -36,13 +36,13 @@ func NewApplication() (*Application, error) {
 	// Initialize our application actions.
 	actionFuncs := map[string]interface{}{
 		"new-window":       app.Activate,
-		"toggle-dark-mode": app.ToggleDarkMode,
 		"open-blog":        app.OpenBlog,
 		"open-store":       app.OpenStore,
 		"open-what-if":     app.OpenWhatIf,
 		"quit":             app.Quit,
 		"show-about":       app.ShowAbout,
 		"show-shortcuts":   app.ShowShortcuts,
+		"toggle-dark-mode": app.ToggleDarkMode,
 	}
 
 	app.actions = make(map[string]*glib.SimpleAction)
