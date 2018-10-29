@@ -411,13 +411,14 @@ func (win *Window) DrawComic() {
 		log.Print(err)
 		return
 	}
-
 	darkMode, ok := darkModeIface.(bool)
 	if !ok {
 		log.Print("failed to convert darkModeIface to bool")
 		return
 	}
 
+	// Sync app.settings.DarkMode with the value of
+	// 'gtk-application-prefer-dark-theme'.
 	win.app.settings.DarkMode = darkMode
 
 	containerContext, err := win.comicContainer.GetStyleContext()
@@ -426,21 +427,24 @@ func (win *Window) DrawComic() {
 		return
 	}
 
+	// Load the comic image.
 	win.image.SetFromFile(getComicImagePath(win.comic.Num))
 
 	if darkMode {
+		// Apply the dark style class to the comic container.
 		containerContext.AddClass(styleClassDark)
 
+		// Invert the pixels of the comic image.
 		pixbuf := win.image.GetPixbuf()
 		if pixbuf == nil {
 			return
 		}
-
 		pixels := pixbuf.GetPixels()
 		for i := 0; i < len(pixels); i++ {
 			pixels[i] = math.MaxUint8 - pixels[i]
 		}
 	} else {
+		// Remove the dark style class from the comic container.
 		containerContext.RemoveClass(styleClassDark)
 	}
 }
