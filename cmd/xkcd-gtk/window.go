@@ -8,6 +8,7 @@ import (
 	"github.com/rkoesters/xdg"
 	"github.com/rkoesters/xkcd"
 	"log"
+	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -407,6 +408,54 @@ func (win *Window) DisplayComic() {
 	}
 
 	win.DrawComic()
+}
+
+// DrawComic draws the comic and inverts it if we are in dark mode.
+func (win *Window) DrawComic() {
+	gtkSettings, err := gtk.SettingsGetDefault()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	// Are we using a dark theme?
+	darkModeIface, err := gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	darkMode, ok := darkModeIface.(bool)
+	if !ok {
+		log.Print("failed to convert darkModeIface to bool")
+		return
+	}
+
+	win.app.settings.DarkMode = darkMode
+
+	containerContext, err := win.comicContainer.GetStyleContext()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	win.image.SetFromFile(getComicImagePath(win.comic.Num))
+
+	if darkMode {
+		containerContext.AddClass(styleClassDark)
+
+		pixbuf := win.image.GetPixbuf()
+		if pixbuf == nil {
+			return
+		}
+
+		pixels := pixbuf.GetPixels()
+		for i := 0; i < len(pixels); i++ {
+			pixels[i] = math.MaxUint8 - pixels[i]
+		}
+	} else {
+		containerContext.RemoveClass(styleClassDark)
+	}
 }
 
 func (win *Window) updateNextPreviousButtonStatus() {

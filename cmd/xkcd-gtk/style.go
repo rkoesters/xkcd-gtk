@@ -4,7 +4,6 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"log"
-	"math"
 	"os"
 )
 
@@ -189,53 +188,5 @@ func (win *Window) StyleUpdated() {
 			menuBox.SetMarginStart(10)
 			menuBox.SetMarginEnd(10)
 		}
-	}
-}
-
-// DrawComic draws the comic and inverts it if we are in dark mode.
-func (win *Window) DrawComic() {
-	gtkSettings, err := gtk.SettingsGetDefault()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	// Are we using a dark theme?
-	darkModeIface, err := gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	darkMode, ok := darkModeIface.(bool)
-	if !ok {
-		log.Print("failed to convert darkModeIface to bool")
-		return
-	}
-
-	win.app.settings.DarkMode = darkMode
-
-	containerContext, err := win.comicContainer.GetStyleContext()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	win.image.SetFromFile(getComicImagePath(win.comic.Num))
-
-	if darkMode {
-		containerContext.AddClass(styleClassDark)
-
-		pixbuf := win.image.GetPixbuf()
-		if pixbuf == nil {
-			return
-		}
-
-		pixels := pixbuf.GetPixels()
-		for i := 0; i < len(pixels); i++ {
-			pixels[i] = math.MaxUint8 - pixels[i]
-		}
-	} else {
-		containerContext.RemoveClass(styleClassDark)
 	}
 }
