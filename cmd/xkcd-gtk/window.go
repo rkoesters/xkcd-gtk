@@ -90,7 +90,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.AddAccelGroup(win.accels)
 
 	// If the gtk theme changes, we might want to adjust our styling.
-	win.window.Window.Connect("style-updated", win.StyleUpdated)
+	win.window.Connect("style-updated", win.StyleUpdated)
 
 	gtkSettings, err := gtk.SettingsGetDefault()
 	if err != nil {
@@ -106,11 +106,11 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// If the gtk window state changes, we want to update our internal
 	// window state.
-	win.window.Window.Connect("size-allocate", win.StateChanged)
-	win.window.Window.Connect("window-state-event", win.StateChanged)
+	win.window.Connect("size-allocate", win.StateChanged)
+	win.window.Connect("window-state-event", win.StateChanged)
 
 	// If the window is closed, we want to write our state to disk.
-	win.window.Window.Connect("delete-event", win.SaveState)
+	win.window.Connect("delete-event", win.SaveState)
 
 	// Create HeaderBar
 	win.header, err = gtk.HeaderBarNew()
