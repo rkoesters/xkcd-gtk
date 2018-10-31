@@ -58,7 +58,8 @@ func initComicCache() error {
 	}
 
 	// If the user's cache isn't compatible with our binary's cache
-	// implementation, then we need to remove it and start over.
+	// implementation, then we need to start over (we will move the
+	// old cache to .bak just in case).
 	if getExistingCacheVersion() != getCurrentCacheVersion() {
 		os.Rename(getComicCacheDBPath(), getComicCacheDBPath()+".bak")
 	}
