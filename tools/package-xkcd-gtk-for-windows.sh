@@ -1,27 +1,55 @@
 #!/bin/sh -eu
-# Location we are putting files.
-target="$HOME/xkcd-gtk-win"
-
 exe="com.github.rkoesters.xkcd-gtk.exe"
 icon="data/com.github.rkoesters.xkcd-gtk.svg"
+app_version=$(tools/app-version.sh)
 
-make clean
-make LDFLAGS="-ldflags='-H=windowsgui -X main.appVersion=$(tools/app-version.sh)'"
+tmp_target="/tmp/xkcd-gtk-$app_version"
+archive_target="xkcd-gtk-$app_version-windows-$MSYSTEM_CARCH.zip"
 
-# Made sure our target exists.
-mkdir -p "$target"
+echo "Building executable..."
+make clean EXE_PATH="$exe"
+make EXE_PATH="$exe" LDFLAGS="-ldflags='-H=windowsgui -X main.appVersion=$app_version'"
 
-echo "Copying xkcd-gtk.exe to $target"
-install -t "$target" "$exe"
+mkdir -p "$tmp_target"
 
-echo "Copying DLLs to $target"
-ldd "$exe" | grep mingw64 | cut -d ' ' -f 3 | xargs install -t "$target"
+echo "Copying executable..."
+install -t "$tmp_target" "$exe"
 
-echo "Copying icons to $target"
-mkdir -p "$target/share/icons/"
-cp -R "/mingw64/share/icons/Adwaita" "$target/share/icons/"
-cp "$icon" "$target/share/icons/Adwaita/scalable/apps/"
+echo "Copying DLLs..."
+ldd "$exe" |
+grep "$MINGW_PREFIX" |
+cut -d ' ' -f 3 |
+sort |
+uniq |
+xargs install -t "$tmp_target"
 
-echo "Creating settings.ini in $target"
-mkdir -p "$target/etc/gtk-3.0"
-printf "[Settings]\ngtk-theme-name=win32" >"$target/etc/gtk-3.0/settings.ini"
+echo "Copying pixbuf loaders..."
+mkdir -p "$tmp_target/lib/gdk-pixbuf-2.0/2.10.0/loaders"
+install -t "$tmp_target/lib/gdk-pixbuf-2.0/2.10.0/loaders" "$MINGW_PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders"/*.dll
+cp "$MINGW_PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache" "$tmp_target/lib/gdk-pixbuf-2.0/2.10.0"
+
+echo "Copying icons..."
+mkdir -p "$tmp_target/share/icons/"
+cp -R "$MINGW_PREFIX/share/icons/hicolor" "$tmp_target/share/icons/"
+cp -R "$MINGW_PREFIX/share/icons/Adwaita"/*/ "$tmp_target/share/icons/hicolor"
+cp "$icon" "$tmp_target/share/icons/hicolor/scalable/apps/"
+gtk-update-icon-cache-3.0 -f "$tmp_target/share/icons/hicolor"
+
+echo "Creating gtk settings..."
+mkdir -p "$tmp_target/etc/gtk-3.0"
+{
+	echo "[Settings]"
+	echo "gtk-theme-name=win32"
+	echo "gtk-icon-theme-name=hicolor"
+} >"$tmp_target/etc/gtk-3.0/settings.ini"
+
+echo "Creating zip package..."
+rm -f "$archive_target"
+output=$(readlink -f $archive_target)
+(
+	dirname=$(dirname "$tmp_target")
+	basename=$(basename "$tmp_target")
+	cd "$dirname"
+	zip -r "$output" "$basename"
+)
+rm -r "$tmp_target"
