@@ -15,6 +15,7 @@ import (
 	"runtime"
 	"strconv"
 	"sync"
+	"time"
 )
 
 // Window is the main application window.
@@ -337,6 +338,12 @@ func (win *Window) NewestComic() {
 
 // RandomComic sets the current comic to a random comic.
 func (win *Window) RandomComic() {
+	today := time.Now()
+	if today.Month() == time.April && today.Day() == 1 {
+		win.SetComic(4) // chosen by fair dice roll.
+		return          // guaranteed to be random.
+	}
+
 	newestComic, _ := GetNewestComicInfo()
 	if newestComic.Num <= 0 {
 		win.SetComic(newestComic.Num)
