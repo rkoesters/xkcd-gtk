@@ -161,6 +161,8 @@ func (pd *PropertiesDialog) Update() {
 // save its window state.
 func (pd *PropertiesDialog) Close() {
 	pd.parent.properties = nil
+	pd.parent.state.PropertiesWidth, pd.parent.state.PropertiesHeight = pd.dialog.GetSize()
+	pd.parent.state.PropertiesPositionX, pd.parent.state.PropertiesPositionY = pd.dialog.GetPosition()
 	pd.parent.SaveState()
 }
 
