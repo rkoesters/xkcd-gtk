@@ -5,16 +5,22 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/boltdb/bolt"
 	"github.com/rkoesters/xkcd"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 )
 
 const (
+	cacheVersionName    = "cache_version"
+	cacheVersionCurrent = 2
+
 	comicCacheName         = "comics"
 	comicCacheMetadataName = "comic_metadata"
 	comicCacheImageName    = "comic_image"
@@ -44,6 +50,12 @@ func initComicCache() error {
 	err := os.MkdirAll(CacheDir(), 0755)
 	if err != nil {
 		return err
+	}
+
+	// If the user's cache isn't compatible with our binary's cache
+	// implementation, then we need to remove it and start over.
+	if getExistingCacheVersion() != getCurrentCacheVersion() {
+		os.Remove(getComicCachePath())
 	}
 
 	cacheDB, err = bolt.Open(getComicCachePath(), 0644, nil)
@@ -98,7 +110,19 @@ func initComicCache() error {
 }
 
 func closeComicCache() error {
-	return cacheDB.Close()
+	err := cacheDB.Close()
+	if err != nil {
+		return err
+	}
+
+	f, err := os.Create(getCacheVersionPath())
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	_, err = fmt.Fprintln(f, getCurrentCacheVersion())
+	return err
 }
 
 // GetComicInfo always returns a valid *xkcd.Comic that can be used, and
@@ -302,6 +326,30 @@ func DownloadComicImage(n int) error {
 		return err
 	}
 	return nil
+}
+
+// getCurrentCacheVersion returns the cache version for this binary.
+func getCurrentCacheVersion() int {
+	return cacheVersionCurrent
+}
+
+// getExistingCacheVersion returns the cache version for the user's
+// existing cache.
+func getExistingCacheVersion() int {
+	b, err := ioutil.ReadFile(getCacheVersionPath())
+	if err != nil {
+		return 0
+	}
+
+	num, err := strconv.Atoi(strings.TrimSpace(string(b)))
+	if err != nil {
+		return 0
+	}
+	return num
+}
+
+func getCacheVersionPath() string {
+	return filepath.Join(CacheDir(), cacheVersionName)
 }
 
 func getComicCachePath() string {
