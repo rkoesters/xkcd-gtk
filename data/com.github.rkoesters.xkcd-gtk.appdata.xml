@@ -52,6 +52,17 @@
   </custom>
 
   <releases>
+    <release version="1.1.0" date="2018-10-30">
+      <description>
+        <p>The dark mode update!</p>
+        <ul>
+          <li>Add dark mode that inverts the comic image to improve readability in the dark</li>
+          <li>Add buttons to titlebar for jumping to the first comic and the newest comic</li>
+          <li>Fix issue with encoding of comic metadata (fixes display of special characters and emojis)</li>
+          <li>Fix memory leak when closing additional comic windows</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.4" date="2018-10-22">
       <description>
         <p>Update app metadata to pass appstream-util validate-relax</p>
