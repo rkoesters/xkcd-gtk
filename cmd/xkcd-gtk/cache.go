@@ -26,7 +26,7 @@ const (
 	// cache (although breaking compatibility should be avoided).
 	cacheVersionCurrent = 2
 
-	comicCacheName         = "comics"
+	comicCacheDBName       = "comics"
 	comicCacheMetadataName = "comic_metadata"
 	comicCacheImageName    = "comic_image"
 )
@@ -60,10 +60,10 @@ func initComicCache() error {
 	// If the user's cache isn't compatible with our binary's cache
 	// implementation, then we need to remove it and start over.
 	if getExistingCacheVersion() != getCurrentCacheVersion() {
-		os.Remove(getComicCachePath())
+		os.Remove(getComicCacheDBPath())
 	}
 
-	cacheDB, err = bolt.Open(getComicCachePath(), 0644, nil)
+	cacheDB, err = bolt.Open(getComicCacheDBPath(), 0644, nil)
 	if err != nil {
 		return err
 	}
@@ -357,8 +357,8 @@ func getCacheVersionPath() string {
 	return filepath.Join(CacheDir(), cacheVersionName)
 }
 
-func getComicCachePath() string {
-	return filepath.Join(CacheDir(), comicCacheName)
+func getComicCacheDBPath() string {
+	return filepath.Join(CacheDir(), comicCacheDBName)
 }
 
 func getComicImagePath(n int) string {
