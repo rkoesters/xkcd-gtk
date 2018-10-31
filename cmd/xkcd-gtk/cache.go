@@ -18,7 +18,12 @@ import (
 )
 
 const (
-	cacheVersionName    = "cache_version"
+	// cacheVersionName is the name of the file where we store the
+	// cache version.
+	cacheVersionName = "cache_version"
+	// cacheVersionCurrent should be incremented every time a
+	// release breaks compatibility with the previous release's
+	// cache (although breaking compatibility should be avoided).
 	cacheVersionCurrent = 2
 
 	comicCacheName         = "comics"
