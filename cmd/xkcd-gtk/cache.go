@@ -60,7 +60,7 @@ func initComicCache() error {
 	// If the user's cache isn't compatible with our binary's cache
 	// implementation, then we need to remove it and start over.
 	if getExistingCacheVersion() != getCurrentCacheVersion() {
-		os.Remove(getComicCacheDBPath())
+		os.Rename(getComicCacheDBPath(), getComicCacheDBPath() + ".bak")
 	}
 
 	cacheDB, err = bolt.Open(getComicCacheDBPath(), 0644, nil)
