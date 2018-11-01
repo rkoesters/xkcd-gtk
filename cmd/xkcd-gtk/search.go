@@ -19,13 +19,11 @@ var searchIndex bleve.Index
 func initSearchIndex() error {
 	var err error
 
-	searchIndexPath := filepath.Join(CacheDir(), "search")
-
-	searchIndex, err = bleve.Open(searchIndexPath)
+	searchIndex, err = bleve.Open(getSearchIndexPath())
 	if err == bleve.ErrorIndexPathDoesNotExist {
 		// searchIndex doesn't exist yet, lets make it.
 		mapping := bleve.NewIndexMapping()
-		searchIndex, err = bleve.New(searchIndexPath, mapping)
+		searchIndex, err = bleve.New(getSearchIndexPath(), mapping)
 		if err != nil {
 			return err
 		}
@@ -218,4 +216,8 @@ func (win *Window) setComicFromSearch(_ interface{}, id string) {
 	}
 	win.SetComic(number)
 	win.search.GetPopover().Hide()
+}
+
+func getSearchIndexPath() string {
+	return filepath.Join(CacheDir(), "search")
 }
