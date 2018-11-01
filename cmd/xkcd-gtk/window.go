@@ -11,7 +11,6 @@ import (
 	"math"
 	"math/rand"
 	"os"
-	"path/filepath"
 	"runtime"
 	"strconv"
 	"sync"
@@ -288,7 +287,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.Add(win.comicContainer)
 
 	// Recall our window state.
-	win.state.ReadFile(filepath.Join(CacheDir(), "state"))
+	win.state.ReadFile(getWindowStatePath())
 	if win.state.Maximized {
 		win.window.Maximize()
 	} else {

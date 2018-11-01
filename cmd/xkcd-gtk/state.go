@@ -96,8 +96,12 @@ func (win *Window) SaveState() {
 		win.state.PropertiesPositionX, win.state.PropertiesPositionY = win.properties.dialog.GetPosition()
 	}
 
-	err := win.state.WriteFile(filepath.Join(CacheDir(), "state"))
+	err := win.state.WriteFile(getWindowStatePath())
 	if err != nil {
 		log.Printf("error saving window state: %v", err)
 	}
+}
+
+func getWindowStatePath() string {
+	return filepath.Join(CacheDir(), "state")
 }
