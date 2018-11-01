@@ -7,7 +7,6 @@ tmp_target="/tmp/xkcd-gtk-$app_version"
 archive_target="xkcd-gtk-$app_version-windows-$MSYSTEM_CARCH.zip"
 
 echo "Building executable..."
-make clean EXE_PATH="$exe"
 make EXE_PATH="$exe" LDFLAGS="-ldflags='-H=windowsgui -X main.appVersion=$app_version'"
 
 mkdir -p "$tmp_target"
@@ -39,7 +38,7 @@ uniq |
 xargs install -t "$tmp_target"
 
 echo "Copying icons..."
-mkdir -p "$tmp_target/share/icons/"
+mkdir -p "$tmp_target/share/icons"
 cp -R "$MINGW_PREFIX/share/icons/hicolor" "$tmp_target/share/icons/"
 cp "$icon" "$tmp_target/share/icons/hicolor/scalable/apps/"
 gtk-update-icon-cache-3.0 -f "$tmp_target/share/icons/hicolor"
@@ -70,4 +69,7 @@ output=$(readlink -f $archive_target)
 	cd "$dirname"
 	zip -r "$output" "$basename"
 )
+
+echo "Cleaning up..."
 rm -r "$tmp_target"
+rm "$exe"
