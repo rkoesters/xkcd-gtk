@@ -66,7 +66,7 @@ func (app *Application) LoadSettings() {
 		return
 	}
 
-	app.settings.ReadFile(filepath.Join(ConfigDir(), "settings"))
+	app.settings.ReadFile(getSettingsPath())
 	err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
 	if err != nil {
 		log.Print(err)
@@ -81,8 +81,12 @@ func (app *Application) SaveSettings() {
 		log.Printf("error saving settings: %v", err)
 	}
 
-	err = app.settings.WriteFile(filepath.Join(ConfigDir(), "settings"))
+	err = app.settings.WriteFile(getSettingsPath())
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
 	}
+}
+
+func getSettingsPath() string {
+	return filepath.Join(ConfigDir(), "settings")
 }
