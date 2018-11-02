@@ -81,6 +81,13 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title">Toggle Dark Mode</property>
+                <property name="accelerator">&lt;ctrl&gt;d</property>
+                <property name="visible">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title">Open Shortcuts Window</property>
                 <property name="accelerator">&lt;ctrl&gt;question</property>
                 <property name="visible">1</property>

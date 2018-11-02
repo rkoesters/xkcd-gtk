@@ -56,8 +56,9 @@ func NewApplication() (*Application, error) {
 
 	// Initialize our application accelerators.
 	app.application.SetAccelsForAction("app.new-window", []string{"<Control>n"})
-	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
 	app.application.SetAccelsForAction("app.quit", []string{"<Control>q"})
+	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
+	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
 
 	// Connect application signals to our methods.
 	app.application.Connect("startup", app.LoadCSS)
