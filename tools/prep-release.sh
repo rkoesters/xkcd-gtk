@@ -1,5 +1,5 @@
 #!/bin/sh -eu
-appdata_xml=$(echo data/*.appdata.xml)
+appdata_xml="data/com.github.rkoesters.xkcd-gtk.appdata.xml"
 
 appstream-util validate-relax "$appdata_xml"
 
