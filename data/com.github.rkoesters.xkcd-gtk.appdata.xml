@@ -52,6 +52,14 @@
   </custom>
 
   <releases>
+    <release version="1.1.1">
+      <description>
+        <ul>
+          <li>Add keyboard shortcut for dark mode</li>
+          <li>Fix saving of properties window state</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2018-10-30">
       <description>
         <p>The dark mode update!</p>
