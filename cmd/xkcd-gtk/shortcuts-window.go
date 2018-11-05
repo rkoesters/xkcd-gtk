@@ -59,6 +59,12 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
                 <property name="visible">1</property>
               </object>
             </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title">Comic Viewing</property>
+            <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title">Show Comic Properties</property>
