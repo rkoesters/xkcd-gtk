@@ -19,42 +19,42 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">First Comic</property>
+                <property name="title">Go to the first comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Home</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Previous Comic</property>
+                <property name="title">Go to the previous comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Left</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Next Comic</property>
+                <property name="title">Go to the next comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Right</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Newest Comic</property>
+                <property name="title">Go to the newest comic</property>
                 <property name="accelerator">&lt;ctrl&gt;End</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Random Comic</property>
+                <property name="title">Go to a random comic</property>
                 <property name="accelerator">&lt;ctrl&gt;r</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Search Comics</property>
+                <property name="title">Search comics</property>
                 <property name="accelerator">&lt;ctrl&gt;f</property>
                 <property name="visible">1</property>
               </object>
@@ -67,7 +67,7 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Show Comic Properties</property>
+                <property name="title">Show comic properties</property>
                 <property name="accelerator">&lt;ctrl&gt;p</property>
                 <property name="visible">1</property>
               </object>
@@ -80,28 +80,28 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Open New Window</property>
+                <property name="title">Open new window</property>
                 <property name="accelerator">&lt;ctrl&gt;n</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Toggle Dark Mode</property>
+                <property name="title">Toggle dark mode</property>
                 <property name="accelerator">&lt;ctrl&gt;d</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Open Shortcuts Window</property>
+                <property name="title">Open shortcuts window</property>
                 <property name="accelerator">&lt;ctrl&gt;question</property>
                 <property name="visible">1</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title">Quit Application</property>
+                <property name="title">Quit application</property>
                 <property name="accelerator">&lt;ctrl&gt;q</property>
                 <property name="visible">1</property>
               </object>
