@@ -288,13 +288,12 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// Recall our window state.
 	win.state.ReadFile(getWindowStatePath())
+	win.window.Resize(win.state.Width, win.state.Height)
+	if win.state.PositionX != 0 && win.state.PositionY != 0 {
+		win.window.Move(win.state.PositionX, win.state.PositionY)
+	}
 	if win.state.Maximized {
 		win.window.Maximize()
-	} else {
-		win.window.Resize(win.state.Width, win.state.Height)
-		if win.state.PositionX != 0 && win.state.PositionY != 0 {
-			win.window.Move(win.state.PositionX, win.state.PositionY)
-		}
 	}
 	if win.state.PropertiesVisible {
 		win.ShowProperties()
