@@ -12,13 +12,14 @@ make EXE_PATH="$exe" LDFLAGS="-ldflags='-H=windowsgui -X main.appVersion=$app_ve
 mkdir -p "$tmp_target"
 
 echo "Copying executable..."
+strip "$exe"
 install -t "$tmp_target" "$exe"
 
 echo "Copying DLLs..."
 ldd "$exe" |
 grep "=>" |
-grep "$MINGW_PREFIX" |
 cut -d ' ' -f 3 |
+grep "$MINGW_PREFIX" |
 sort |
 uniq |
 xargs install -t "$tmp_target"
@@ -31,8 +32,8 @@ cp "$MINGW_PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache" "$tmp_target/lib/gdk-
 echo "Copying gdk-pixbuf DLLs..."
 ldd "$MINGW_PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders"/*.dll |
 grep "=>" |
-grep "$MINGW_PREFIX" |
 cut -d ' ' -f 3 |
+grep "$MINGW_PREFIX" |
 sort |
 uniq |
 xargs install -t "$tmp_target"
