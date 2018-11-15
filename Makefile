@@ -59,6 +59,11 @@ deps:
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
+check:
+	go fmt ./...
+	go vet ./...
+	golint -set_exit_status ./...
+
 clean:
 	-go clean ./...
 	-rm -f $(EXE_PATH)
@@ -79,4 +84,4 @@ uninstall:
 	   $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
 	   $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
 
-.PHONY: all clean deps install uninstall
+.PHONY: all check clean deps install uninstall
