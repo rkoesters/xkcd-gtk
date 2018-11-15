@@ -169,7 +169,7 @@ func (win *Window) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		menuBox := (&gtk.Stack{gtk.Container{*menuPopoverChild}}).GetVisibleChild()
+		menuBox := (&gtk.Stack{Container: gtk.Container{Widget: *menuPopoverChild}}).GetVisibleChild()
 		if useSkinnyMenus {
 			menuBox.SetMarginTop(4)
 			menuBox.SetMarginBottom(4)
