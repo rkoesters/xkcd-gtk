@@ -15,7 +15,7 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
         <property name="visible">1</property>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="title">Comic Navigation</property>
+            <property name="title">Navigation</property>
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
@@ -63,7 +63,7 @@ const shortcutsWindowUI = `<?xml version="1.0" encoding="UTF-8"?>
         </child>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="title">Comic Viewing</property>
+            <property name="title">Viewing</property>
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
