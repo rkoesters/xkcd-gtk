@@ -39,6 +39,7 @@ func NewApplication() (*Application, error) {
 		"open-blog":        app.OpenBlog,
 		"open-store":       app.OpenStore,
 		"open-what-if":     app.OpenWhatIf,
+		"open-about-xkcd":  app.OpenAboutXKCD,
 		"quit":             app.Quit,
 		"show-about":       app.ShowAbout,
 		"show-shortcuts":   app.ShowShortcuts,
@@ -82,9 +83,10 @@ func (app *Application) SetupAppMenu() {
 		menuSection2.Append("Toggle Dark Mode", "app.toggle-dark-mode")
 
 		menuSection3 := glib.MenuNew()
-		menuSection3.Append("what if?", "app.open-what-if")
-		menuSection3.Append("xkcd blog", "app.open-blog")
-		menuSection3.Append("xkcd store", "app.open-store")
+		menuSection3.Append("What If?", "app.open-what-if")
+		menuSection3.Append("XKCD Blog", "app.open-blog")
+		menuSection3.Append("XKCD Store", "app.open-store")
+		menuSection3.Append("About XKCD", "app.open-about-xkcd")
 
 		menuSection4 := glib.MenuNew()
 		menuSection4.Append("Keyboard Shortcuts", "app.show-shortcuts")
@@ -183,6 +185,7 @@ const (
 	whatIfLink = "https://what-if.xkcd.com/"
 	blogLink   = "https://blog.xkcd.com/"
 	storeLink  = "https://store.xkcd.com/"
+	aboutLink  = "https://xkcd.com/about/"
 )
 
 // OpenWhatIf opens whatifLink in the user's web browser.
@@ -204,6 +207,14 @@ func (app *Application) OpenBlog() {
 // OpenStore opens storeLink in the user's web browser.
 func (app *Application) OpenStore() {
 	err := xdg.Open(storeLink)
+	if err != nil {
+		log.Print(err)
+	}
+}
+
+// OpenAboutXKCD opens aboutLink in the user's web browser.
+func (app *Application) OpenAboutXKCD() {
+	err := xdg.Open(aboutLink)
 	if err != nil {
 		log.Print(err)
 	}

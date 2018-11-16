@@ -191,9 +191,10 @@ func NewWindow(app *Application) (*Window, error) {
 		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
 
 		menuSection4 := glib.MenuNew()
-		menuSection4.Append("what if?", "app.open-what-if")
-		menuSection4.Append("xkcd blog", "app.open-blog")
-		menuSection4.Append("xkcd store", "app.open-store")
+		menuSection4.Append("What If?", "app.open-what-if")
+		menuSection4.Append("XKCD Blog", "app.open-blog")
+		menuSection4.Append("XKCD Store", "app.open-store")
+		menuSection4.Append("About XKCD", "app.open-about-xkcd")
 		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
 
 		menuSection5 := glib.MenuNew()
