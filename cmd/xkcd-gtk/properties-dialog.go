@@ -34,7 +34,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	pd.dialog.SetTransientFor(parent.window)
-	pd.dialog.SetTitle("Properties")
+	pd.dialog.SetTitle(gt("Properties"))
 	pd.dialog.SetSizeRequest(400, 400)
 	pd.dialog.SetDestroyWithParent(true)
 	pd.dialog.Resize(parent.state.PropertiesWidth, parent.state.PropertiesHeight)
@@ -75,14 +75,14 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	grid.SetMarginStart(12)
 	grid.SetMarginEnd(12)
 
-	pd.addRowToGrid(grid, 0, "Number")
-	pd.addRowToGrid(grid, 1, "Title")
-	pd.addRowToGrid(grid, 2, "Date")
-	pd.addRowToGrid(grid, 3, "Image")
-	pd.addRowToGrid(grid, 4, "Alt Text")
-	pd.addRowToGrid(grid, 5, "News")
-	pd.addRowToGrid(grid, 6, "Link")
-	pd.addRowToGrid(grid, 7, "Transcript")
+	pd.addRowToGrid(grid, 0, gt("Number"))
+	pd.addRowToGrid(grid, 1, gt("Title"))
+	pd.addRowToGrid(grid, 2, gt("Date"))
+	pd.addRowToGrid(grid, 3, gt("Image"))
+	pd.addRowToGrid(grid, 4, gt("Alt Text"))
+	pd.addRowToGrid(grid, 5, gt("News"))
+	pd.addRowToGrid(grid, 6, gt("Link"))
+	pd.addRowToGrid(grid, 7, gt("Transcript"))
 	pd.Update()
 
 	scwin.Add(grid)
@@ -147,14 +147,14 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) er
 // Update changes the dialog's contents to match the parent Window's
 // comic.
 func (pd *PropertiesDialog) Update() {
-	pd.labels["Number"].SetText(strconv.Itoa(pd.parent.comic.Num))
-	pd.labels["Title"].SetText(pd.parent.comic.Title)
-	pd.labels["Image"].SetText(pd.parent.comic.Img)
-	pd.labels["Alt Text"].SetText(pd.parent.comic.Alt)
-	pd.labels["Date"].SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
-	pd.labels["News"].SetText(pd.parent.comic.News)
-	pd.labels["Link"].SetText(pd.parent.comic.Link)
-	pd.labels["Transcript"].SetText(pd.parent.comic.Transcript)
+	pd.labels[gt("Number")].SetText(strconv.Itoa(pd.parent.comic.Num))
+	pd.labels[gt("Title")].SetText(pd.parent.comic.Title)
+	pd.labels[gt("Image")].SetText(pd.parent.comic.Img)
+	pd.labels[gt("Alt Text")].SetText(pd.parent.comic.Alt)
+	pd.labels[gt("Date")].SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
+	pd.labels[gt("News")].SetText(pd.parent.comic.News)
+	pd.labels[gt("Link")].SetText(pd.parent.comic.Link)
+	pd.labels[gt("Transcript")].SetText(pd.parent.comic.Transcript)
 }
 
 // Close is called when the dialog is closed. It tells the parent to

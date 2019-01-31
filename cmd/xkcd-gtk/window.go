@@ -131,7 +131,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.first.SetTooltipText("Go to the first comic")
+	win.first.SetTooltipText(gt("Go to the first comic"))
 	win.first.SetProperty("action-name", "win.first-comic")
 	win.first.AddAccelerator("activate", win.accels, gdk.KEY_Home, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.first)
@@ -140,7 +140,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.previous.SetTooltipText("Go to the previous comic")
+	win.previous.SetTooltipText(gt("Go to the previous comic"))
 	win.previous.SetProperty("action-name", "win.previous-comic")
 	win.previous.AddAccelerator("activate", win.accels, gdk.KEY_Left, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.previous)
@@ -149,7 +149,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.next.SetTooltipText("Go to the next comic")
+	win.next.SetTooltipText(gt("Go to the next comic"))
 	win.next.SetProperty("action-name", "win.next-comic")
 	win.next.AddAccelerator("activate", win.accels, gdk.KEY_Right, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.next)
@@ -158,7 +158,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.newest.SetTooltipText("Go to the newest comic")
+	win.newest.SetTooltipText(gt("Go to the newest comic"))
 	win.newest.SetProperty("action-name", "win.newest-comic")
 	win.newest.AddAccelerator("activate", win.accels, gdk.KEY_End, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.newest)
@@ -170,36 +170,36 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.menu.SetTooltipText("Menu")
+	win.menu.SetTooltipText(gt("Menu"))
 
 	menu := glib.MenuNew()
 
 	menuSection1 := glib.MenuNew()
-	menuSection1.Append("Open Link", "win.open-link")
-	menuSection1.Append("Explain", "win.explain")
-	menuSection1.Append("Properties", "win.show-properties")
+	menuSection1.Append(gt("Open Link"), "win.open-link")
+	menuSection1.Append(gt("Explain"), "win.explain")
+	menuSection1.Append(gt("Properties"), "win.show-properties")
 	menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
 	win.accels.Connect(gdk.KEY_p, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 
 	if !app.application.PrefersAppMenu() {
 		menuSection2 := glib.MenuNew()
-		menuSection2.Append("New Window", "app.new-window")
+		menuSection2.Append(gt("New Window"), "app.new-window")
 		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
 
 		menuSection3 := glib.MenuNew()
-		menuSection3.Append("Toggle Dark Mode", "app.toggle-dark-mode")
+		menuSection3.Append(gt("Toggle Dark Mode"), "app.toggle-dark-mode")
 		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
 
 		menuSection4 := glib.MenuNew()
-		menuSection4.Append("What If?", "app.open-what-if")
-		menuSection4.Append("XKCD Blog", "app.open-blog")
-		menuSection4.Append("XKCD Store", "app.open-store")
-		menuSection4.Append("About XKCD", "app.open-about-xkcd")
+		menuSection4.Append(gt("What If?"), "app.open-what-if")
+		menuSection4.Append(gt("XKCD Blog"), "app.open-blog")
+		menuSection4.Append(gt("XKCD Store"), "app.open-store")
+		menuSection4.Append(gt("About XKCD"), "app.open-about-xkcd")
 		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
 
 		menuSection5 := glib.MenuNew()
-		menuSection5.Append("Keyboard Shortcuts", "app.show-shortcuts")
-		menuSection5.Append("About "+appName, "app.show-about")
+		menuSection5.Append(gt("Keyboard Shortcuts"), "app.show-shortcuts")
+		menuSection5.Append(gt("About")+" "+appName, "app.show-about")
 		menu.AppendSectionWithoutLabel(&menuSection5.MenuModel)
 	}
 
@@ -211,7 +211,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.search.SetTooltipText("Search")
+	win.search.SetTooltipText(gt("Search"))
 	win.search.AddAccelerator("activate", win.accels, gdk.KEY_f, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackEnd(win.search)
 
@@ -251,11 +251,11 @@ func NewWindow(app *Application) (*Window, error) {
 	searchPopover.Add(box)
 
 	// Create the random button
-	win.random, err = gtk.ButtonNewWithLabel("Random")
+	win.random, err = gtk.ButtonNewWithLabel(gt("Random"))
 	if err != nil {
 		return nil, err
 	}
-	win.random.SetTooltipText("Go to a random comic")
+	win.random.SetTooltipText(gt("Go to a random comic"))
 	win.random.SetProperty("action-name", "win.random-comic")
 	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackEnd(win.random)
@@ -323,7 +323,7 @@ func (win *Window) NextComic() {
 // the user.
 func (win *Window) NewestComic() {
 	// Make it clear that we are checking for a new comic.
-	win.header.SetTitle("Checking for new comic...")
+	win.header.SetTitle(gt("Checking for new comic..."))
 
 	// Force GetNewestComicInfo to check for a new comic.
 	setCachedNewestComic <- nil
@@ -354,7 +354,7 @@ func (win *Window) RandomComic() {
 // SetComic sets the current comic to the given comic.
 func (win *Window) SetComic(n int) {
 	// Make it clear that we are loading a comic.
-	win.header.SetTitle("Loading comic...")
+	win.header.SetTitle(gt("Loading comic..."))
 	win.header.SetSubtitle(strconv.Itoa(n))
 	win.updateNextPreviousButtonStatus()
 	win.state.ComicNumber = n
@@ -379,7 +379,7 @@ func (win *Window) SetComic(n int) {
 					// but we can leave Title alone
 					// so the properties dialog can
 					// still be correct.
-					win.comic.SafeTitle = "Connect to the internet to download comic image"
+					win.comic.SafeTitle = gt("Connect to the internet to download comic image")
 				}
 			} else if err != nil {
 				log.Print(err)

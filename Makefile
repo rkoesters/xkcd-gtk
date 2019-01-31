@@ -4,6 +4,9 @@
 
 BUILDFLAGS = -tags $(GTK_VERSION)
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
+POTFLAGS   = --from-code=utf-8 \
+             -kgt -kgtn \
+             --package-name="$(APP)"
 
 ################################################################################
 # Install Variables
@@ -23,11 +26,13 @@ EXE_NAME     = $(APP)
 ICON_NAME    = $(APP).svg
 DESKTOP_NAME = $(APP).desktop
 APPDATA_NAME = $(APP).appdata.xml
+POT_NAME     = $(APP).pot
 
 EXE_PATH     = $(EXE_NAME)
 ICON_PATH    = data/$(ICON_NAME)
 DESKTOP_PATH = data/$(DESKTOP_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
+POT_PATH     = po/$(APP).pot
 
 ################################################################################
 # Automatic Variables
@@ -51,13 +56,16 @@ endif
 # Targets
 ################################################################################
 
-all: $(EXE_PATH)
+all: $(EXE_PATH) $(POT_PATH)
 
 deps:
 	go get -u $(BUILDFLAGS) $(DEPS)
 
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
+
+$(POT_PATH): $(SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH)
+	xgettext -o $@ $(POTFLAGS) $^
 
 check:
 	-go fmt ./...

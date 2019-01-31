@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-31 13:52-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: cmd/xkcd-gtk/cache.go:145 cmd/xkcd-gtk/cache.go:146
+#: cmd/xkcd-gtk/cache.go:186
+msgid "Comic Not Found"
+msgstr ""
+
+#: cmd/xkcd-gtk/cache.go:158
+msgid "Error trying to access metadata cache"
+msgstr ""
+
+#: cmd/xkcd-gtk/cache.go:174
+msgid "Error parsing comic metadata from cache"
+msgstr ""
+
+#: cmd/xkcd-gtk/cache.go:191
+msgid "Couldn't Get Comic"
+msgstr ""
+
+#: cmd/xkcd-gtk/cache.go:253
+msgid "Connect to the internet to download some comics!"
+msgstr ""
+
+#: cmd/xkcd-gtk/search.go:48
+msgid "Search Index Update"
+msgstr ""
+
+#: cmd/xkcd-gtk/search.go:56
+msgid "Updating comic search index..."
+msgstr ""
+
+#: cmd/xkcd-gtk/search.go:149
+msgid "Whatcha lookin' for?"
+msgstr ""
+
+#: cmd/xkcd-gtk/search.go:199
+msgid "0 search results"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:13 data/com.github.rkoesters.xkcd-gtk.desktop:5
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:9
+msgid "Comic Sticks"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:80 cmd/xkcd-gtk/window.go:186
+#: data/com.github.rkoesters.xkcd-gtk.desktop:18
+msgid "New Window"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:83 cmd/xkcd-gtk/window.go:190
+msgid "Toggle Dark Mode"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:86 cmd/xkcd-gtk/window.go:194
+msgid "What If?"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:87 cmd/xkcd-gtk/window.go:195
+msgid "XKCD Blog"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:88 cmd/xkcd-gtk/window.go:196
+msgid "XKCD Store"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:89 cmd/xkcd-gtk/window.go:197
+msgid "About XKCD"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:92 cmd/xkcd-gtk/window.go:201
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:93 cmd/xkcd-gtk/window.go:202
+msgid "About"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:94
+msgid "Quit"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:134
+msgid "Go to the first comic"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:143
+msgid "Go to the previous comic"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:152
+msgid "Go to the next comic"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:161
+msgid "Go to the newest comic"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:173
+msgid "Menu"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:178
+msgid "Open Link"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:179
+msgid "Explain"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:180 cmd/xkcd-gtk/properties-dialog.go:37
+msgid "Properties"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:214
+msgid "Search"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:254
+msgid "Random"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:258
+msgid "Go to a random comic"
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:326
+msgid "Checking for new comic..."
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:357
+msgid "Loading comic..."
+msgstr ""
+
+#: cmd/xkcd-gtk/window.go:382
+msgid "Connect to the internet to download comic image"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:150
+msgid "Number"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:151
+msgid "Title"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:154
+msgid "Date"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:152
+msgid "Image"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:153
+msgid "Alt Text"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:155
+msgid "News"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:156
+msgid "Link"
+msgstr ""
+
+#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:157
+msgid "Transcript"
+msgstr ""
+
+#: cmd/xkcd-gtk/about-dialog.go:18
+msgid "A simple xkcd viewer written in Go using GTK+3"
+msgstr ""
+
+#: cmd/xkcd-gtk/about-dialog.go:21
+msgid "Copyright © 2015-2018 Ryan Koesters"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop:6
+msgid "XKCD Viewer"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop:7
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:10
+msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop:10
+msgid "com.github.rkoesters.xkcd-gtk"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop:14
+msgid "webcomic;romance;sarcasm;math;language;"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:12
+msgid ""
+"Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
+"offline browsing, and intuitive keyboard shortcuts."
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:13
+msgid "Features:"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:15
+msgid "Search for comics"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:16
+msgid "Cache comics for later offline viewing"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:17
+msgid "Dark mode for late night reading"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:18
+msgid "View comic metadata"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:19
+msgid "Quickly access comic explainations via the explain xkcd wiki"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml:25
+msgid "Ryan Koesters"
+msgstr ""

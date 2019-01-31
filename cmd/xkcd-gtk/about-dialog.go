@@ -15,10 +15,10 @@ func NewAboutDialog() (*gtk.AboutDialog, error) {
 	dialog.SetLogoIconName(appID)
 	dialog.SetProgramName(appName)
 	dialog.SetVersion(appVersion)
-	dialog.SetComments("A simple xkcd viewer written in Go using GTK+3")
+	dialog.SetComments(gt("A simple xkcd viewer written in Go using GTK+3"))
 	dialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
 	dialog.SetAuthors([]string{"Ryan Koesters"})
-	dialog.SetCopyright("Copyright © 2015-2018 Ryan Koesters")
+	dialog.SetCopyright(gt("Copyright © 2015-2018 Ryan Koesters"))
 	dialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
 
 	return dialog, nil

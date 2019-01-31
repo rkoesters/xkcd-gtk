@@ -45,7 +45,7 @@ func (app *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
-	loadingWindow.SetTitle("Search Index Update")
+	loadingWindow.SetTitle(gt("Search Index Update"))
 	loadingWindow.SetTypeHint(gdk.WINDOW_TYPE_HINT_DIALOG)
 	loadingWindow.SetResizable(false)
 
@@ -53,7 +53,7 @@ func (app *Application) LoadSearchIndex() {
 	if err != nil {
 		log.Print(err)
 	}
-	progressBar.SetText("Updating comic search index...")
+	progressBar.SetText(gt("Updating comic search index..."))
 	progressBar.SetShowText(true)
 	progressBar.SetMarginTop(24)
 	progressBar.SetMarginBottom(24)
@@ -146,7 +146,7 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 	if result == nil {
 		// If there are no results to display, show a friendly
 		// message.
-		label, err := gtk.LabelNew("Whatcha lookin' for?")
+		label, err := gtk.LabelNew(gt("Whatcha lookin' for?"))
 		if err != nil {
 			log.Print(err)
 			return
@@ -196,7 +196,7 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 		win.searchResults.Add(item)
 	}
 	if result.Hits.Len() == 0 {
-		label, err := gtk.LabelNew("0 search results")
+		label, err := gtk.LabelNew(gt("0 search results"))
 		if err != nil {
 			log.Print(err)
 			return

@@ -7,12 +7,12 @@ import (
 	"log"
 )
 
-const (
-	appID   = "com.github.rkoesters.xkcd-gtk"
-	appName = "Comic Sticks"
-)
+const appID = "com.github.rkoesters.xkcd-gtk"
 
-var appVersion = "undefined"
+var (
+	appName    = gt("Comic Sticks")
+	appVersion = "undefined"
+)
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
@@ -77,21 +77,21 @@ func NewApplication() (*Application, error) {
 func (app *Application) SetupAppMenu() {
 	if app.application.PrefersAppMenu() {
 		menuSection1 := glib.MenuNew()
-		menuSection1.Append("New Window", "app.new-window")
+		menuSection1.Append(gt("New Window"), "app.new-window")
 
 		menuSection2 := glib.MenuNew()
-		menuSection2.Append("Toggle Dark Mode", "app.toggle-dark-mode")
+		menuSection2.Append(gt("Toggle Dark Mode"), "app.toggle-dark-mode")
 
 		menuSection3 := glib.MenuNew()
-		menuSection3.Append("What If?", "app.open-what-if")
-		menuSection3.Append("XKCD Blog", "app.open-blog")
-		menuSection3.Append("XKCD Store", "app.open-store")
-		menuSection3.Append("About XKCD", "app.open-about-xkcd")
+		menuSection3.Append(gt("What If?"), "app.open-what-if")
+		menuSection3.Append(gt("XKCD Blog"), "app.open-blog")
+		menuSection3.Append(gt("XKCD Store"), "app.open-store")
+		menuSection3.Append(gt("About XKCD"), "app.open-about-xkcd")
 
 		menuSection4 := glib.MenuNew()
-		menuSection4.Append("Keyboard Shortcuts", "app.show-shortcuts")
-		menuSection4.Append("About "+appName, "app.show-about")
-		menuSection4.Append("Quit", "app.quit")
+		menuSection4.Append(gt("Keyboard Shortcuts"), "app.show-shortcuts")
+		menuSection4.Append(gt("About")+" "+appName, "app.show-about")
+		menuSection4.Append(gt("Quit"), "app.quit")
 
 		menu := glib.MenuNew()
 		menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
