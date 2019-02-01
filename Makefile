@@ -79,7 +79,7 @@ check:
 
 clean:
 	-go clean ./...
-	-rm -f $(EXE_PATH)
+	-rm -f $(EXE_PATH) $(MO)
 
 install: $(EXE_PATH)
 	mkdir -p $(DESTDIR)$(bindir)
