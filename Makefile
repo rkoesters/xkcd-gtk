@@ -40,6 +40,8 @@ POT_PATH     = po/$(APP).pot
 
 SOURCES = $(shell find . -type f -name '*.go')
 DEPS    = $(shell tools/list-imports.sh ./...)
+PO      = $(shell find po -type f -name '*.po')
+MO      = $(patsubst %.po,%.mo,$(PO))
 
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
@@ -56,7 +58,7 @@ endif
 # Targets
 ################################################################################
 
-all: $(EXE_PATH) $(POT_PATH)
+all: $(EXE_PATH) $(POT_PATH) $(MO)
 
 deps:
 	go get -u $(BUILDFLAGS) $(DEPS)
@@ -66,6 +68,9 @@ $(EXE_PATH): Makefile $(SOURCES)
 
 $(POT_PATH): $(SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH)
 	xgettext -o $@ $(POTFLAGS) $^
+
+%.mo: %.po
+	msgfmt -o $@ $<
 
 check:
 	-go fmt ./...
