@@ -38,10 +38,13 @@ POT_PATH     = po/$(APP).pot
 # Automatic Variables
 ################################################################################
 
-SOURCES = $(shell find . -type f -name '*.go')
-DEPS    = $(shell tools/list-imports.sh ./...)
-PO      = $(shell find po -type f -name '*.po')
-MO      = $(patsubst %.po,%.mo,$(PO))
+GO_SOURCES  = $(shell find . -name '*.go' -type f)
+IN_SOURCES  = $(shell find . -name '*.ui' -type f)
+GEN_SOURCES = $(patsubst %,%.go,$(IN_SOURCES))
+SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
+DEPS        = $(shell tools/list-imports.sh ./...)
+PO          = $(shell find po -name '*.po' -type f)
+MO          = $(patsubst %.po,%.mo,$(PO))
 
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
@@ -69,6 +72,9 @@ $(EXE_PATH): Makefile $(SOURCES)
 $(POT_PATH): $(shell cat po/POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
 
+%.ui.go: %.ui
+	tools/go-wrap.sh $< >$@
+
 %.desktop: %.desktop.in
 	msgfmt -o $@ --desktop -d po --template $<
 
@@ -84,8 +90,7 @@ check:
 	-golint ./...
 
 clean:
-	-go clean ./...
-	-rm -f $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	-rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
 install: $(EXE_PATH)
 	mkdir -p $(DESTDIR)$(bindir)
