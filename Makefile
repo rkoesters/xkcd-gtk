@@ -43,8 +43,11 @@ IN_SOURCES  = $(shell find . -name '*.ui' -type f)
 GEN_SOURCES = $(patsubst %,%.go,$(IN_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
 DEPS        = $(shell tools/list-imports.sh ./...)
-PO          = $(shell find po -name '*.po' -type f)
-MO          = $(patsubst %.po,%.mo,$(PO))
+
+POTFILES = $(shell cat po/POTFILES)
+LINGUAS  = $(shell cat po/LINGUAS)
+PO       = $(shell find po -name '*.po' -type f)
+MO       = $(patsubst %.po,%.mo,$(PO))
 
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
@@ -69,7 +72,7 @@ deps:
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
-$(POT_PATH): $(shell cat po/POTFILES)
+$(POT_PATH): $(POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
 
 %.ui.go: %.ui
@@ -92,7 +95,7 @@ check:
 clean:
 	-rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
-install: $(EXE_PATH)
+install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	mkdir -p $(DESTDIR)$(bindir)
 	install $(EXE_PATH) $(DESTDIR)$(bindir)
 	mkdir -p $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
@@ -101,6 +104,10 @@ install: $(EXE_PATH)
 	cp $(DESKTOP_PATH) $(DESTDIR)$(datadir)/applications
 	mkdir -p $(DESTDIR)$(datadir)/metainfo
 	cp $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
+	for lang in $(LINGUAS); do \
+		mkdir -p "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES" || exit 1; \
+		cp "po/$$lang.mo" "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
+	done
 
 uninstall:
 	rm $(DESTDIR)$(bindir)/$(EXE_NAME) \
