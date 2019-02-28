@@ -114,5 +114,8 @@ uninstall:
 	   $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME) \
 	   $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
 	   $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
+	for lang in $(LINGUAS); do \
+		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
+	done
 
 .PHONY: all check clean deps install uninstall
