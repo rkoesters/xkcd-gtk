@@ -58,7 +58,7 @@ endif
 # Targets
 ################################################################################
 
-all: $(EXE_PATH) $(POT_PATH) $(MO)
+all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 deps:
 	go get -u $(BUILDFLAGS) $(DEPS)
@@ -66,8 +66,14 @@ deps:
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
-$(POT_PATH): $(SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH)
+$(POT_PATH): $(shell cat po/POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
+
+%.desktop: %.desktop.in
+	msgfmt -o $@ --desktop -d po --template $<
+
+%.xml: %.xml.in
+	msgfmt -o $@ --xml -d po --template $<
 
 %.mo: %.po
 	msgfmt -o $@ $<
@@ -79,7 +85,7 @@ check:
 
 clean:
 	-go clean ./...
-	-rm -f $(EXE_PATH) $(MO)
+	-rm -f $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
 install: $(EXE_PATH)
 	mkdir -p $(DESTDIR)$(bindir)
