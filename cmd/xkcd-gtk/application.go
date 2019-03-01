@@ -73,36 +73,6 @@ func NewApplication() (*Application, error) {
 	return &app, nil
 }
 
-// SetupAppMenu creates an AppMenu if the environment wants it.
-func (app *Application) SetupAppMenu() {
-	if app.application.PrefersAppMenu() {
-		menuSection1 := glib.MenuNew()
-		menuSection1.Append(gt("New Window"), "app.new-window")
-
-		menuSection2 := glib.MenuNew()
-		menuSection2.Append(gt("Toggle Dark Mode"), "app.toggle-dark-mode")
-
-		menuSection3 := glib.MenuNew()
-		menuSection3.Append(gt("What If?"), "app.open-what-if")
-		menuSection3.Append(gt("XKCD Blog"), "app.open-blog")
-		menuSection3.Append(gt("XKCD Store"), "app.open-store")
-		menuSection3.Append(gt("About XKCD"), "app.open-about-xkcd")
-
-		menuSection4 := glib.MenuNew()
-		menuSection4.Append(gt("Keyboard Shortcuts"), "app.show-shortcuts")
-		menuSection4.Append(gt("About")+" "+appName, "app.show-about")
-		menuSection4.Append(gt("Quit"), "app.quit")
-
-		menu := glib.MenuNew()
-		menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
-		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
-		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
-		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
-
-		app.application.SetAppMenu(&menu.MenuModel)
-	}
-}
-
 // SetupCache initializes the comic cache and the search index.
 func (app *Application) SetupCache() {
 	err := initComicCache()

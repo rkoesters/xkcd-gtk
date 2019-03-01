@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <menu id="app-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">New Window</attribute>
+        <attribute name="action">app.new-window</attribute>
+      </item>
+    </section>
+      <item>
+        <attribute name="label" translatable="yes">Toggle Dark Mode</attribute>
+        <attribute name="action">app.toggle-dark-mode</attribute>
+      </item>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">What If?</attribute>
+        <attribute name="action">app.open-what-if</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">XKCD Blog</attribute>
+        <attribute name="action">app.open-blog</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">XKCD Store</attribute>
+        <attribute name="action">app.open-store</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">About XKCD</attribute>
+        <attribute name="action">app.open-store</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="action">app.show-shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">About Comic Sticks</attribute>
+        <attribute name="action">app.show-about</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

@@ -13,7 +13,7 @@ func NewShortcutsWindow() (*gtk.ShortcutsWindow, error) {
 		return nil, err
 	}
 
-	err = builder.AddFromString(shortcuts_window_ui)
+	err = builder.AddFromString(shortcutsWindowUI)
 	if err != nil {
 		return nil, err
 	}

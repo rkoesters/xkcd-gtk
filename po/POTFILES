@@ -1,4 +1,6 @@
 cmd/xkcd-gtk/about-dialog.go
+cmd/xkcd-gtk/app-menu.go
+cmd/xkcd-gtk/app-menu.ui
 cmd/xkcd-gtk/application.go
 cmd/xkcd-gtk/cache.go
 cmd/xkcd-gtk/gettext.go

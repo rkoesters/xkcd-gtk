@@ -199,7 +199,7 @@ func NewWindow(app *Application) (*Window, error) {
 
 		menuSection5 := glib.MenuNew()
 		menuSection5.Append(gt("Keyboard Shortcuts"), "app.show-shortcuts")
-		menuSection5.Append(gt("About")+" "+appName, "app.show-about")
+		menuSection5.Append(gt("About Comic Sticks"), "app.show-about")
 		menu.AppendSectionWithoutLabel(&menuSection5.MenuModel)
 	}
 

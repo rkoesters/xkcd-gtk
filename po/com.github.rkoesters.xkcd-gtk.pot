@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 16:10-0600\n"
+"POT-Creation-Date: 2019-02-28 22:39-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,48 +25,48 @@ msgstr ""
 msgid "Copyright © 2015-2018 Ryan Koesters"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:13
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
-msgid "Comic Sticks"
-msgstr ""
-
-#: cmd/xkcd-gtk/application.go:80 cmd/xkcd-gtk/window.go:186
+#: cmd/xkcd-gtk/app-menu.ui:6 cmd/xkcd-gtk/window.go:186
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New Window"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:83 cmd/xkcd-gtk/window.go:190
+#: cmd/xkcd-gtk/app-menu.ui:11 cmd/xkcd-gtk/window.go:190
 msgid "Toggle Dark Mode"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:86 cmd/xkcd-gtk/window.go:194
+#: cmd/xkcd-gtk/app-menu.ui:16 cmd/xkcd-gtk/window.go:194
 msgid "What If?"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:87 cmd/xkcd-gtk/window.go:195
+#: cmd/xkcd-gtk/app-menu.ui:20 cmd/xkcd-gtk/window.go:195
 msgid "XKCD Blog"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:88 cmd/xkcd-gtk/window.go:196
+#: cmd/xkcd-gtk/app-menu.ui:24 cmd/xkcd-gtk/window.go:196
 msgid "XKCD Store"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:89 cmd/xkcd-gtk/window.go:197
+#: cmd/xkcd-gtk/app-menu.ui:28 cmd/xkcd-gtk/window.go:197
 msgid "About XKCD"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:92 cmd/xkcd-gtk/shortcuts-window.ui:4
+#: cmd/xkcd-gtk/app-menu.ui:34 cmd/xkcd-gtk/shortcuts-window.ui:4
 #: cmd/xkcd-gtk/window.go:201
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:93 cmd/xkcd-gtk/window.go:202
-msgid "About"
+#: cmd/xkcd-gtk/app-menu.ui:38 cmd/xkcd-gtk/window.go:202
+msgid "About Comic Sticks"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:94
+#: cmd/xkcd-gtk/app-menu.ui:42
 msgid "Quit"
+msgstr ""
+
+#: cmd/xkcd-gtk/application.go:13
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
+msgid "Comic Sticks"
 msgstr ""
 
 #: cmd/xkcd-gtk/cache.go:145 cmd/xkcd-gtk/cache.go:146
