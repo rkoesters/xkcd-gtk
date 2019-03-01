@@ -25,8 +25,7 @@ func localeDir() string {
 			return path
 		}
 	}
-	// What's a better fallback?
-	return "/"
+	return "."
 }
 
 func defaultLocale() string {
