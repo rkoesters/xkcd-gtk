@@ -5,51 +5,51 @@
     <child>
       <object class="GtkShortcutsSection">
         <property name="section-name">shortcuts</property>
-        <property name="visible">1</property>
+        <property name="visible">yes</property>
         <child>
           <object class="GtkShortcutsGroup">
             <property name="title" translatable="yes">Navigation</property>
-            <property name="visible">1</property>
+            <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Go to the first comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Home</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Go to the previous comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Left</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Go to the next comic</property>
                 <property name="accelerator">&lt;ctrl&gt;Right</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Go to the newest comic</property>
                 <property name="accelerator">&lt;ctrl&gt;End</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Go to a random comic</property>
                 <property name="accelerator">&lt;ctrl&gt;r</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Search comics</property>
                 <property name="accelerator">&lt;ctrl&gt;f</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
           </object>
@@ -57,12 +57,12 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="title" translatable="yes">Viewing</property>
-            <property name="visible">1</property>
+            <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Show comic properties</property>
                 <property name="accelerator">&lt;ctrl&gt;p</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
           </object>
@@ -70,33 +70,33 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="title" translatable="yes">Application Actions</property>
-            <property name="visible">1</property>
+            <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Open new window</property>
                 <property name="accelerator">&lt;ctrl&gt;n</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Toggle dark mode</property>
                 <property name="accelerator">&lt;ctrl&gt;d</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Open shortcuts window</property>
                 <property name="accelerator">&lt;ctrl&gt;question</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Quit application</property>
                 <property name="accelerator">&lt;ctrl&gt;q</property>
-                <property name="visible">1</property>
+                <property name="visible">yes</property>
               </object>
             </child>
           </object>
