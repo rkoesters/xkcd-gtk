@@ -2,25 +2,17 @@ package main
 
 import (
 	"github.com/gotk3/gotk3/glib"
-	"github.com/leonelquinteros/gotext"
 	"github.com/rkoesters/xdg/basedir"
-	"github.com/rkoesters/xdg/keyfile"
 	"os"
 	"path/filepath"
 )
 
 var (
-	gt  = gotext.Get
-	gtn = gotext.GetN
+	gt = glib.Local
 )
 
 func init() {
-	dir := localeDir()
-	locale := defaultLocale()
-	domain := appID
-
-	gotext.Configure(dir, locale, domain)
-	glib.InitI18n(domain, dir)
+	glib.InitI18n(appID, localeDir())
 }
 
 func localeDir() string {
@@ -32,8 +24,4 @@ func localeDir() string {
 		}
 	}
 	return "."
-}
-
-func defaultLocale() string {
-	return keyfile.DefaultLocale().String()
 }
