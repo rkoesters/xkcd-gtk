@@ -39,8 +39,8 @@ POT_PATH     = po/$(APP).pot
 ################################################################################
 
 GO_SOURCES  = $(shell find . -name '*.go' -type f)
-IN_SOURCES  = $(shell find . -name '*.ui' -type f)
-GEN_SOURCES = $(patsubst %,%.go,$(IN_SOURCES))
+UI_SOURCES  = $(shell find . -name '*.ui' -type f)
+GEN_SOURCES = $(patsubst %,%.go,$(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
 DEPS        = $(shell tools/list-imports.sh ./...)
 
