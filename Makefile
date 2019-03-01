@@ -79,13 +79,13 @@ $(POT_PATH): $(POTFILES)
 	tools/go-wrap.sh $< >$@
 
 %.desktop: %.desktop.in
-	msgfmt -o $@ --desktop -d po --template $<
+	msgfmt --desktop -d po -c -o $@ --template $<
 
 %.xml: %.xml.in
-	msgfmt -o $@ --xml -d po --template $<
+	msgfmt --xml -d po -c -o $@ --template $<
 
 %.mo: %.po
-	msgfmt -o $@ $<
+	msgfmt -c -o $@ $<
 
 check:
 	-go fmt ./...
