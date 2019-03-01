@@ -10,7 +10,7 @@ import (
 const appID = "com.github.rkoesters.xkcd-gtk"
 
 var (
-	appName    = gt("Comic Sticks")
+	appName    = l("Comic Sticks")
 	appVersion = "undefined"
 )
 

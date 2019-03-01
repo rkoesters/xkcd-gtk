@@ -7,9 +7,7 @@ import (
 	"path/filepath"
 )
 
-var (
-	gt = glib.Local
-)
+var l = glib.Local
 
 func init() {
 	glib.InitI18n(appID, localeDir())

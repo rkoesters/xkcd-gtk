@@ -5,7 +5,7 @@
 BUILDFLAGS = -tags $(GTK_VERSION)
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --from-code=utf-8 \
-             -kgt -kgtn \
+             -kl \
              --package-name="$(APP)"
 
 ################################################################################

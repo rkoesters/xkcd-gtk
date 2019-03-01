@@ -142,8 +142,8 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 	if n == 404 {
 		return &xkcd.Comic{
 			Num:       n,
-			SafeTitle: gt("Comic Not Found"),
-			Title:     gt("Comic Not Found"),
+			SafeTitle: l("Comic Not Found"),
+			Title:     l("Comic Not Found"),
 		}, xkcd.ErrNotFound
 	}
 
@@ -155,7 +155,7 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 		if bucket == nil {
 			c = &xkcd.Comic{
 				Num:       n,
-				SafeTitle: gt("Error trying to access metadata cache"),
+				SafeTitle: l("Error trying to access metadata cache"),
 			}
 			return ErrCache
 		}
@@ -171,7 +171,7 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 		if err != nil {
 			c = &xkcd.Comic{
 				Num:       n,
-				SafeTitle: gt("Error parsing comic metadata from cache"),
+				SafeTitle: l("Error parsing comic metadata from cache"),
 			}
 			return err
 		}
@@ -183,12 +183,12 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 		if err == xkcd.ErrNotFound {
 			return &xkcd.Comic{
 				Num:       n,
-				SafeTitle: gt("Comic Not Found"),
+				SafeTitle: l("Comic Not Found"),
 			}, err
 		} else if err != nil {
 			return &xkcd.Comic{
 				Num:       n,
-				SafeTitle: gt("Couldn't Get Comic"),
+				SafeTitle: l("Couldn't Get Comic"),
 			}, err
 		}
 	}
@@ -250,7 +250,7 @@ func GetNewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, er
 
 func getNewestComicInfoFromCache() (*xkcd.Comic, error) {
 	newest := &xkcd.Comic{
-		SafeTitle: gt("Connect to the internet to download some comics!"),
+		SafeTitle: l("Connect to the internet to download some comics!"),
 	}
 
 	err := cacheDB.View(func(tx *bolt.Tx) error {
