@@ -63,10 +63,10 @@ mkdir -p "$tmp_target/etc/gtk-3.0"
 
 echo "Creating zip package..."
 rm -f "$archive_target"
-output=$(readlink -f $archive_target)
+output="$(readlink -f "$archive_target")"
 (
-	dirname=$(dirname "$tmp_target")
-	basename=$(basename "$tmp_target")
+	dirname="$(dirname "$tmp_target")"
+	basename="$(basename "$tmp_target")"
 	cd "$dirname"
 	zip -r "$output" "$basename"
 )
