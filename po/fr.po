@@ -22,8 +22,8 @@ msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Une simple visionneuse pour XKCD écrite en Go avec GTK+3"
 
 #: cmd/xkcd-gtk/about-dialog.go:21
-msgid "Copyright © 2015-2018 Ryan Koesters"
-msgstr "Copyright © 2015-2018 Ryan Koesters"
+msgid "Copyright © 2015-2019 Ryan Koesters"
+msgstr "Copyright © 2015-2019 Ryan Koesters"
 
 #: cmd/xkcd-gtk/app-menu.ui:6 cmd/xkcd-gtk/window.go:186
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
