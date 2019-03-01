@@ -105,7 +105,7 @@ install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	mkdir -p $(DESTDIR)$(datadir)/metainfo
 	cp $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
 	for lang in $(LINGUAS); do \
-		mkdir -p "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES" || exit 1; \
+		mkdir -p "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES"; \
 		cp "po/$$lang.mo" "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
