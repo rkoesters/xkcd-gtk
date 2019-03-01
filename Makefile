@@ -78,10 +78,10 @@ $(POT_PATH): $(POTFILES)
 %.ui.go: %.ui
 	tools/go-wrap.sh $< >$@
 
-%.desktop: %.desktop.in
+%.desktop: %.desktop.in $(PO)
 	msgfmt --desktop -d po -c -o $@ --template $<
 
-%.xml: %.xml.in
+%.xml: %.xml.in $(PO)
 	msgfmt --xml -d po -c -o $@ --template $<
 
 %.mo: %.po
