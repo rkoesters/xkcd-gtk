@@ -31,7 +31,7 @@ func (bookmarks *Bookmarks) Contains(n int) bool {
 	return bookmarks.set.Contains(n)
 }
 
-// Read reads bookmarks from r.
+// Read reads bookmarks from r as a newline separated list of comic numbers.
 func (bookmarks *Bookmarks) Read(r io.Reader) error {
 	sc := bufio.NewScanner(r)
 	for sc.Scan() {
@@ -54,7 +54,7 @@ func (bookmarks *Bookmarks) ReadFile(filename string) error {
 	return bookmarks.Read(f)
 }
 
-// Write writes bookmarks to w.
+// Write writes bookmarks to w as a newline separated list of comic numbers.
 func (bookmarks *Bookmarks) Write(w io.Writer) error {
 	iter := bookmarks.set.Iterator()
 	for iter.Next() {
