@@ -1,5 +1,6 @@
 #!/bin/sh
 go list -f '{{ join .Deps "\n" }}' "$@" | # List all of our dependencies.
-grep '^[^/]\+\.[^/]\+/[^/]\+/[^/]\+$' | # Filter to repos (e.g. github.com/*/*).
+grep '\.' | # Filter out all dependencies that don't appear to be URLs.
+sed 's#^\([^/]\+\.[^/]\+/[^/]\+/[^/]\+\).*$#\1#g' | # Trim URLs to repo root (e.g. github.com/*/*).
 sort | # Sort dependencies so 'uniq' can work properly.
 uniq # Filter out repeated dependencies.
