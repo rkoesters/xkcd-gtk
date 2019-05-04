@@ -40,7 +40,7 @@ GO_SOURCES  = $(shell find . -name '*.go' -type f)
 UI_SOURCES  = $(shell find . -name '*.ui' -type f)
 GEN_SOURCES = $(patsubst %,%.go,$(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
-DEPS        = $(shell tools/list-imports.sh ./...)
+IMPORTS     = $(shell tools/list-imports.sh ./...)
 
 POTFILES = $(shell cat po/POTFILES)
 LINGUAS  = $(shell cat po/LINGUAS)
@@ -65,7 +65,7 @@ endif
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 deps:
-	go get -u $(BUILDFLAGS) $(DEPS)
+	go get -u $(BUILDFLAGS) $(IMPORTS)
 
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
