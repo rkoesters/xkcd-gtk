@@ -58,17 +58,19 @@ func (settings *Settings) WriteFile(filename string) error {
 func (app *Application) LoadSettings() {
 	var err error
 
-	app.gtkSettings, err = gtk.SettingsGetDefault()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
+	// Read settings from disk.
 	app.settings.ReadFile(getSettingsPath())
-	err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
-	if err != nil {
+
+	// Get reference to Gtk's settings.
+	app.gtkSettings, err = gtk.SettingsGetDefault()
+	if err == nil {
+		// Apply Dark Mode setting.
+		err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
+		if err != nil {
+			log.Print(err)
+		}
+	} else {
 		log.Print(err)
-		return
 	}
 }
 
