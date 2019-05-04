@@ -17,10 +17,11 @@ var (
 // Application holds onto our GTK representation of our application.
 type Application struct {
 	application *gtk.Application
+	gtkSettings *gtk.Settings
 	actions     map[string]*glib.SimpleAction
 
-	settings    Settings
-	gtkSettings *gtk.Settings
+	settings  Settings
+	bookmarks Bookmarks
 }
 
 // NewApplication creates an instance of our GTK Application.
@@ -61,13 +62,19 @@ func NewApplication() (*Application, error) {
 	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
 	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
 
-	// Connect application signals to our methods.
+	// Connect startup signal to our methods.
 	app.application.Connect("startup", app.LoadCSS)
-	app.application.Connect("startup", app.LoadSettings)
 	app.application.Connect("startup", app.SetupAppMenu)
+	app.application.Connect("startup", app.LoadSettings)
+	app.application.Connect("startup", app.LoadBookmarks)
 	app.application.Connect("startup", app.SetupCache)
+
+	// Connect shutdown signal to our methods.
 	app.application.Connect("shutdown", app.SaveSettings)
+	app.application.Connect("shutdown", app.SaveBookmarks)
 	app.application.Connect("shutdown", app.CloseCache)
+
+	// Connect activate signal to our methods.
 	app.application.Connect("activate", app.Activate)
 
 	return &app, nil
