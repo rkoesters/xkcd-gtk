@@ -38,8 +38,8 @@ func closeSearchIndex() error {
 	return searchIndex.Close()
 }
 
-// LoadSearchIndex makes sure that every xkcd comic metadata is cached
-// and indexed in the search index.
+// LoadSearchIndex makes sure that every xkcd comic metadata is cached and
+// indexed in the search index.
 func (app *Application) LoadSearchIndex() {
 	loadingWindow, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)
 	if err != nil {
@@ -81,15 +81,14 @@ func (app *Application) LoadSearchIndex() {
 
 	// Show cache progress window.
 	go func() {
-		// Wait before showing the cache progress window. If the
-		// cache is already complete, then the caching and
-		// indexing operation will be very fast.
+		// Wait before showing the cache progress window. If the cache
+		// is already complete, then the caching and indexing operation
+		// will be very fast.
 		time.Sleep(time.Second)
 
 		select {
 		case <-done:
-			// Already done, don't bother showing the
-			// window.
+			// Already done, don't bother showing the window.
 			glib.IdleAdd(loadingWindow.Destroy)
 			return
 		default:
@@ -109,8 +108,8 @@ func (app *Application) LoadSearchIndex() {
 	}()
 }
 
-// Search preforms a search with win.searchEntry.GetText() and puts the
-// results into win.searchResults.
+// Search preforms a search with win.searchEntry.GetText() and puts the results
+// into win.searchResults.
 func (win *Window) Search() {
 	userQuery, err := win.searchEntry.GetText()
 	if err != nil {
@@ -144,8 +143,7 @@ func (win *Window) clearSearchResults() {
 func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 	defer win.searchResults.ShowAll()
 	if result == nil {
-		// If there are no results to display, show a friendly
-		// message.
+		// If there are no results to display, show a friendly message.
 		label, err := gtk.LabelNew(l("Whatcha lookin' for?"))
 		if err != nil {
 			log.Print(err)
@@ -155,8 +153,8 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 		win.searchResults.Add(label)
 		return
 	}
-	// We are grabbing the newest comic so we can figure out how
-	// wide to make comic Id column.
+	// We are grabbing the newest comic so we can figure out how wide to
+	// make comic Id column.
 	newest, _ := GetNewestComicInfo()
 	for _, sr := range result.Hits {
 		item, err := gtk.ButtonNew()
@@ -178,8 +176,8 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 			return
 		}
 		labelID.SetXAlign(1)
-		// Set character column width using character width of
-		// largest comic number.
+		// Set character column width using character width of largest
+		// comic number.
 		labelID.SetWidthChars(len(strconv.Itoa(newest.Num)))
 		box.Add(labelID)
 
@@ -206,8 +204,8 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 	}
 }
 
-// setComicFromSearch is a wrapper around win.SetComic to work with
-// search result buttons.
+// setComicFromSearch is a wrapper around win.SetComic to work with search
+// result buttons.
 func (win *Window) setComicFromSearch(_ interface{}, id string) {
 	number, err := strconv.Atoi(id)
 	if err != nil {

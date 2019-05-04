@@ -18,8 +18,7 @@ func (settings *Settings) loadDefaults() {
 	settings.DarkMode = false
 }
 
-// Read takes the given io.Reader and tries to parse json encoded state
-// from it.
+// Read takes the given io.Reader and tries to parse json encoded state from it.
 func (settings *Settings) Read(r io.Reader) {
 	dec := json.NewDecoder(r)
 	err := dec.Decode(settings)
@@ -39,8 +38,7 @@ func (settings *Settings) ReadFile(filename string) {
 	settings.Read(f)
 }
 
-// Write takes the given io.Writer and writes the Settings struct to it
-// in json.
+// Write takes the given io.Writer and writes the Settings struct to it in json.
 func (settings *Settings) Write(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	return enc.Encode(settings)

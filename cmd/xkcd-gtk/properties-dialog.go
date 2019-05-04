@@ -9,8 +9,8 @@ import (
 	"time"
 )
 
-// PropertiesDialog holds a gtk dialog that shows the comic information
-// for the parent window's comic.
+// PropertiesDialog holds a gtk dialog that shows the comic information for the
+// parent window's comic.
 type PropertiesDialog struct {
 	parent *Window
 	dialog *gtk.Dialog
@@ -20,8 +20,8 @@ type PropertiesDialog struct {
 	accels *gtk.AccelGroup
 }
 
-// NewPropertiesDialog creates and returns a PropertiesDialog for the
-// given parent Window.
+// NewPropertiesDialog creates and returns a PropertiesDialog for the given
+// parent Window.
 func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	var err error
 
@@ -91,8 +91,8 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	// A gtk.Dialog content area has some children by default, we
-	// want to remove those children so the only child is scwin.
+	// A gtk.Dialog content area has some children by default, we want to
+	// remove those children so the only child is scwin.
 	box.GetChildren().Foreach(func(child interface{}) {
 		box.Remove(child.(gtk.IWidget))
 	})
@@ -102,8 +102,8 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	return pd, nil
 }
 
-// ShowProperties presents the properties dialog to the user. If the
-// dialog doesn't exist yet, we create it.
+// ShowProperties presents the properties dialog to the user. If the dialog
+// doesn't exist yet, we create it.
 func (win *Window) ShowProperties() {
 	var err error
 	if win.properties == nil {
@@ -144,8 +144,7 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) er
 	return nil
 }
 
-// Update changes the dialog's contents to match the parent Window's
-// comic.
+// Update changes the dialog's contents to match the parent Window's comic.
 func (pd *PropertiesDialog) Update() {
 	pd.labels[l("Number")].SetText(strconv.Itoa(pd.parent.comic.Num))
 	pd.labels[l("Title")].SetText(pd.parent.comic.Title)
@@ -157,8 +156,8 @@ func (pd *PropertiesDialog) Update() {
 	pd.labels[l("Transcript")].SetText(pd.parent.comic.Transcript)
 }
 
-// Close is called when the dialog is closed. It tells the parent to
-// save its window state.
+// Close is called when the dialog is closed. It tells the parent to save its
+// window state.
 func (pd *PropertiesDialog) Close() {
 	pd.parent.properties = nil
 	pd.parent.state.PropertiesWidth, pd.parent.state.PropertiesHeight = pd.dialog.GetSize()
@@ -166,16 +165,16 @@ func (pd *PropertiesDialog) Close() {
 	pd.parent.SaveState()
 }
 
-// Destroy removes our references to the dialog so the garbage collector
-// can take care of it.
+// Destroy removes our references to the dialog so the garbage collector can
+// take care of it.
 func (pd *PropertiesDialog) Destroy() {
 	pd.labels = nil
 	pd.dialog = nil
 	pd.parent = nil
 }
 
-// formatDate takes a year, month, and date as strings and turns them
-// into a pretty date.
+// formatDate takes a year, month, and date as strings and turns them into a
+// pretty date.
 func formatDate(year, month, day string) string {
 	date := strings.Join([]string{year, month, day}, "-")
 	t, err := time.Parse("2006-1-2", date)

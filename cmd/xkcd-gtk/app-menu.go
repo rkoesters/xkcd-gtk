@@ -6,8 +6,8 @@ import (
 	"log"
 )
 
-// NewAppMenu creates a glib.MenuModel populated with our application's
-// app menu.
+// NewAppMenu creates a glib.MenuModel populated with our application's app
+// menu.
 func NewAppMenu() (*glib.MenuModel, error) {
 	builder, err := gtk.BuilderNew()
 	if err != nil {

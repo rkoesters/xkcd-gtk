@@ -90,8 +90,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.window.AddAccelGroup(win.accels)
 
-	// If the gtk theme changes, we might want to adjust our
-	// styling.
+	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Connect("style-updated", win.StyleUpdated)
 
 	darkModeSignal, err := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
@@ -319,8 +318,8 @@ func (win *Window) NextComic() {
 	win.SetComic(win.comic.Num + 1)
 }
 
-// NewestComic checks for a new comic and then shows the newest comic to
-// the user.
+// NewestComic checks for a new comic and then shows the newest comic to the
+// user.
 func (win *Window) NewestComic() {
 	// Make it clear that we are checking for a new comic.
 	win.header.SetTitle(l("Checking for new comic..."))
@@ -374,11 +373,10 @@ func (win *Window) SetComic(n int) {
 			if os.IsNotExist(err) {
 				err = DownloadComicImage(n)
 				if err != nil {
-					// We can be sneaky, we use
-					// SafeTitle for window title,
-					// but we can leave Title alone
-					// so the properties dialog can
-					// still be correct.
+					// We can be sneaky, we use SafeTitle
+					// for window title, but we can leave
+					// Title alone so the properties dialog
+					// can still be correct.
 					win.comic.SafeTitle = l("Connect to the internet to download comic image")
 				}
 			} else if err != nil {
@@ -386,8 +384,8 @@ func (win *Window) SetComic(n int) {
 			}
 		}
 
-		// Add the DisplayComic function to the event loop so
-		// our UI gets updated with the new comic.
+		// Add the DisplayComic function to the event loop so our UI
+		// gets updated with the new comic.
 		glib.IdleAdd(win.DisplayComic)
 	}()
 }

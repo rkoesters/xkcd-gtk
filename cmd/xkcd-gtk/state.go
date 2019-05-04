@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 )
 
-// WindowState is a struct that holds the information about the state of
-// a Window. This struct is meant to be stored so we can restore the
-// state of a Window.
+// WindowState is a struct that holds the information about the state of a
+// Window. This struct is meant to be stored so we can restore the state of a
+// Window.
 type WindowState struct {
 	ComicNumber int
 
@@ -42,8 +42,7 @@ func (ws *WindowState) loadDefaults() {
 	ws.PropertiesPositionY = 0
 }
 
-// Read takes the given io.Reader and tries to parse json encoded state
-// from it.
+// Read takes the given io.Reader and tries to parse json encoded state from it.
 func (ws *WindowState) Read(r io.Reader) {
 	dec := json.NewDecoder(r)
 	err := dec.Decode(ws)
@@ -63,8 +62,8 @@ func (ws *WindowState) ReadFile(filename string) {
 	ws.Read(f)
 }
 
-// Write takes the given io.Writer and writes the WindowState struct to
-// it in json.
+// Write takes the given io.Writer and writes the WindowState struct to it in
+// json.
 func (ws *WindowState) Write(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	return enc.Encode(ws)
@@ -80,8 +79,8 @@ func (ws *WindowState) WriteFile(filename string) error {
 	return ws.Write(f)
 }
 
-// SaveState writes win.state to disk so it can be loaded next time we
-// open a window.
+// SaveState writes win.state to disk so it can be loaded next time we open a
+// window.
 func (win *Window) SaveState() {
 	win.state.Maximized = win.window.IsMaximized()
 	if !win.state.Maximized {

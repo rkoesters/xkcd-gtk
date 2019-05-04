@@ -111,8 +111,7 @@ func (app *Application) Activate() {
 	win.window.Present()
 }
 
-// ToggleDarkMode toggles the value of
-// "gtk-application-prefer-dark-theme".
+// ToggleDarkMode toggles the value of "gtk-application-prefer-dark-theme".
 func (app *Application) ToggleDarkMode() {
 	darkModeIface, err := app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
@@ -135,8 +134,7 @@ func (app *Application) ToggleDarkMode() {
 
 // Quit closes all windows so the application can close.
 func (app *Application) Quit() {
-	// Close the active window so that it has a chance to save its
-	// state.
+	// Close the active window so that it has a chance to save its state.
 	win := app.application.GetActiveWindow()
 	if win != nil {
 		parent, _ := win.GetTransientFor()

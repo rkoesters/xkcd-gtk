@@ -37,8 +37,8 @@ func (app *Application) ShowAbout() {
 			return
 		}
 
-		// We want to keep the about dialog around in case we
-		// want to show it again.
+		// We want to keep the about dialog around in case we want to
+		// show it again.
 		aboutDialog.HideOnDelete()
 		aboutDialog.Connect("response", aboutDialog.Hide)
 		aboutDialog.Connect("hide", func() {
@@ -46,8 +46,8 @@ func (app *Application) ShowAbout() {
 		})
 	}
 
-	// Set our parent window as the active window, but avoid
-	// accidentally setting ourself as the parent window.
+	// Set our parent window as the active window, but avoid accidentally
+	// setting ourself as the parent window.
 	win := app.application.GetActiveWindow()
 	if win.Native() != aboutDialog.Native() {
 		aboutDialog.SetTransientFor(win)

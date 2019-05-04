@@ -18,12 +18,12 @@ import (
 )
 
 const (
-	// cacheVersionName is the name of the file where we store the
-	// cache version.
+	// cacheVersionName is the name of the file where we store the cache
+	// version.
 	cacheVersionName = "cache_version"
-	// cacheVersionCurrent should be incremented every time a
-	// release breaks compatibility with the previous release's
-	// cache (although breaking compatibility should be avoided).
+	// cacheVersionCurrent should be incremented every time a release breaks
+	// compatibility with the previous release's cache (although breaking
+	// compatibility should be avoided).
 	cacheVersionCurrent = 2
 
 	comicCacheDBName       = "comics"
@@ -32,14 +32,13 @@ const (
 )
 
 var (
-	// ErrCacheMiss means that value we are looking for wasn't in
-	// the cache.
+	// ErrCacheMiss means that value we are looking for wasn't in the cache.
 	ErrCacheMiss = errors.New("cache miss")
-	// ErrCache means that there was an error while trying to access
-	// the local cache.
+	// ErrCache means that there was an error while trying to access the
+	// local cache.
 	ErrCache = errors.New("error accessing local xkcd cache")
-	// ErrOffline means that there was an error trying to access the
-	// xkcd server.
+	// ErrOffline means that there was an error trying to access the xkcd
+	// server.
 	ErrOffline = errors.New("error accessing xkcd server")
 
 	cacheDB *bolt.DB
@@ -58,8 +57,8 @@ func initComicCache() error {
 	}
 
 	// If the user's cache isn't compatible with our binary's cache
-	// implementation, then we need to start over (we will move the
-	// old cache to .bak just in case).
+	// implementation, then we need to start over (we will move the old
+	// cache to .bak just in case).
 	if getExistingCacheVersion() != getCurrentCacheVersion() {
 		os.Rename(getComicCacheDBPath(), getComicCacheDBPath()+".bak")
 	}
@@ -106,8 +105,7 @@ func initComicCache() error {
 			case newest := <-cachedNewestComicIn:
 				cachedNewestComic = newest
 			case cachedNewestComicOut <- cachedNewestComic:
-				// Sending the comic was all we wanted
-				// to do.
+				// Sending the comic was all we wanted to do.
 			}
 		}
 	}()
@@ -131,14 +129,14 @@ func closeComicCache() error {
 	return err
 }
 
-// GetComicInfo always returns a valid *xkcd.Comic that can be used, and
-// err will be set if any errors were encountered, however these errors
-// can be ignored safely.
+// GetComicInfo always returns a valid *xkcd.Comic that can be used, and err
+// will be set if any errors were encountered, however these errors can be
+// ignored safely.
 func GetComicInfo(n int) (*xkcd.Comic, error) {
 	var c *xkcd.Comic
 
-	// Don't bother asking the server for comic 404, it will always
-	// return a 404 error.
+	// Don't bother asking the server for comic 404, it will always return a
+	// 404 error.
 	if n == 404 {
 		return &xkcd.Comic{
 			Num:       n,
@@ -162,8 +160,8 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 
 		data := bucket.Get(intToBytes(n))
 		if data == nil {
-			// The comic metadata isn't in our cache yet, we
-			// will try to download it.
+			// The comic metadata isn't in our cache yet, we will
+			// try to download it.
 			return ErrCacheMiss
 		}
 
@@ -196,9 +194,9 @@ func GetComicInfo(n int) (*xkcd.Comic, error) {
 	return c, err
 }
 
-// GetNewestComicInfo always returns a valid *xkcd.Comic that appears to
-// be newest, and err will be set if any errors were encountered,
-// however these errors can be ignored safely.
+// GetNewestComicInfo always returns a valid *xkcd.Comic that appears to be
+// newest, and err will be set if any errors were encountered, however these
+// errors can be ignored safely.
 func GetNewestComicInfo() (*xkcd.Comic, error) {
 	var err error
 
@@ -219,12 +217,11 @@ func GetNewestComicInfo() (*xkcd.Comic, error) {
 	return newest, nil
 }
 
-// GetNewestComicInfoAsync always returns a valid *xkcd.Comic that
-// appears to be newest, and err will be set if any errors were
-// encountered, however these errors can be ignored safely. This
-// function will return the newest comic info based on the cache, but
-// then asynchronously checks for the newest comic from the internet and
-// calls callback when the asynchronous call completes.
+// GetNewestComicInfoAsync always returns a valid *xkcd.Comic that appears to be
+// newest, and err will be set if any errors were encountered, however these
+// errors can be ignored safely. This function will return the newest comic info
+// based on the cache, but then asynchronously checks for the newest comic from
+// the internet and calls callback when the asynchronous call completes.
 func GetNewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error) {
 	newest := <-getCachedNewestComic
 
@@ -307,8 +304,8 @@ func downloadComicInfo(n int) (*xkcd.Comic, error) {
 	return comic, err
 }
 
-// DownloadComicImage tries to add a comic image to our local cache. Any
-// errors are indicated by err.
+// DownloadComicImage tries to add a comic image to our local cache. Any errors
+// are indicated by err.
 func DownloadComicImage(n int) error {
 	c, err := GetComicInfo(n)
 	if err != nil {
@@ -339,8 +336,8 @@ func getCurrentCacheVersion() int {
 	return cacheVersionCurrent
 }
 
-// getExistingCacheVersion returns the cache version for the user's
-// existing cache.
+// getExistingCacheVersion returns the cache version for the user's existing
+// cache.
 func getExistingCacheVersion() int {
 	b, err := ioutil.ReadFile(getCacheVersionPath())
 	if err != nil {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 16:16-0700\n"
+"POT-Creation-Date: 2019-05-03 20:11-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,37 +25,37 @@ msgstr ""
 msgid "Copyright © 2015-2019 Ryan Koesters"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:6 cmd/xkcd-gtk/window.go:186
+#: cmd/xkcd-gtk/app-menu.ui:6 cmd/xkcd-gtk/window.go:185
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New Window"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:11 cmd/xkcd-gtk/window.go:190
+#: cmd/xkcd-gtk/app-menu.ui:11 cmd/xkcd-gtk/window.go:189
 msgid "Toggle Dark Mode"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:16 cmd/xkcd-gtk/window.go:194
+#: cmd/xkcd-gtk/app-menu.ui:16 cmd/xkcd-gtk/window.go:193
 msgid "What If?"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:20 cmd/xkcd-gtk/window.go:195
+#: cmd/xkcd-gtk/app-menu.ui:20 cmd/xkcd-gtk/window.go:194
 msgid "XKCD Blog"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:24 cmd/xkcd-gtk/window.go:196
+#: cmd/xkcd-gtk/app-menu.ui:24 cmd/xkcd-gtk/window.go:195
 msgid "XKCD Store"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:28 cmd/xkcd-gtk/window.go:197
+#: cmd/xkcd-gtk/app-menu.ui:28 cmd/xkcd-gtk/window.go:196
 msgid "About XKCD"
 msgstr ""
 
 #: cmd/xkcd-gtk/app-menu.ui:34 cmd/xkcd-gtk/shortcuts-window.ui:4
-#: cmd/xkcd-gtk/window.go:201
+#: cmd/xkcd-gtk/window.go:200
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: cmd/xkcd-gtk/app-menu.ui:38 cmd/xkcd-gtk/window.go:202
+#: cmd/xkcd-gtk/app-menu.ui:38 cmd/xkcd-gtk/window.go:201
 msgid "About Comic Sticks"
 msgstr ""
 
@@ -69,60 +69,60 @@ msgstr ""
 msgid "Comic Sticks"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:145 cmd/xkcd-gtk/cache.go:146
-#: cmd/xkcd-gtk/cache.go:186
+#: cmd/xkcd-gtk/cache.go:143 cmd/xkcd-gtk/cache.go:144
+#: cmd/xkcd-gtk/cache.go:184
 msgid "Comic Not Found"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:158
+#: cmd/xkcd-gtk/cache.go:156
 msgid "Error trying to access metadata cache"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:174
+#: cmd/xkcd-gtk/cache.go:172
 msgid "Error parsing comic metadata from cache"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:191
+#: cmd/xkcd-gtk/cache.go:189
 msgid "Couldn't Get Comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:253
+#: cmd/xkcd-gtk/cache.go:250
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/window.go:180
+#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/window.go:179
 msgid "Properties"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:150
+#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:149
 msgid "Number"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:151
+#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:150
 msgid "Title"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:154
+#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:153
 msgid "Date"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:152
+#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:151
 msgid "Image"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:153
+#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:152
 msgid "Alt Text"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:155
+#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:154
 msgid "News"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:156
+#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:155
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:157
+#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:156
 msgid "Transcript"
 msgstr ""
 
@@ -134,11 +134,11 @@ msgstr ""
 msgid "Updating comic search index..."
 msgstr ""
 
-#: cmd/xkcd-gtk/search.go:149
+#: cmd/xkcd-gtk/search.go:147
 msgid "Whatcha lookin' for?"
 msgstr ""
 
-#: cmd/xkcd-gtk/search.go:199
+#: cmd/xkcd-gtk/search.go:197
 msgid "0 search results"
 msgstr ""
 
@@ -146,23 +146,23 @@ msgstr ""
 msgid "Navigation"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:15 cmd/xkcd-gtk/window.go:134
+#: cmd/xkcd-gtk/shortcuts-window.ui:15 cmd/xkcd-gtk/window.go:133
 msgid "Go to the first comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:22 cmd/xkcd-gtk/window.go:143
+#: cmd/xkcd-gtk/shortcuts-window.ui:22 cmd/xkcd-gtk/window.go:142
 msgid "Go to the previous comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:29 cmd/xkcd-gtk/window.go:152
+#: cmd/xkcd-gtk/shortcuts-window.ui:29 cmd/xkcd-gtk/window.go:151
 msgid "Go to the next comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:36 cmd/xkcd-gtk/window.go:161
+#: cmd/xkcd-gtk/shortcuts-window.ui:36 cmd/xkcd-gtk/window.go:160
 msgid "Go to the newest comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:43 cmd/xkcd-gtk/window.go:258
+#: cmd/xkcd-gtk/shortcuts-window.ui:43 cmd/xkcd-gtk/window.go:257
 msgid "Go to a random comic"
 msgstr ""
 
@@ -198,35 +198,35 @@ msgstr ""
 msgid "Quit application"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:173
+#: cmd/xkcd-gtk/window.go:172
 msgid "Menu"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:178
+#: cmd/xkcd-gtk/window.go:177
 msgid "Open Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:179
+#: cmd/xkcd-gtk/window.go:178
 msgid "Explain"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:214
+#: cmd/xkcd-gtk/window.go:213
 msgid "Search"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:254
+#: cmd/xkcd-gtk/window.go:253
 msgid "Random"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:326
+#: cmd/xkcd-gtk/window.go:325
 msgid "Checking for new comic..."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:357
+#: cmd/xkcd-gtk/window.go:356
 msgid "Loading comic..."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:382
+#: cmd/xkcd-gtk/window.go:380
 msgid "Connect to the internet to download comic image"
 msgstr ""
 

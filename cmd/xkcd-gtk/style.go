@@ -29,23 +29,23 @@ const (
 )
 
 var (
-	// largeToolbarThemes is the list of gtk themes for which we
-	// should use large toolbar buttons.
+	// largeToolbarThemes is the list of gtk themes for which we should use
+	// large toolbar buttons.
 	largeToolbarThemes = []string{
 		"elementary",
 		"elementary-x",
 		"win32",
 	}
 
-	// nonSymbolicIconThemes is the list of gtk themes for which we
-	// should use non-symbolic icons.
+	// nonSymbolicIconThemes is the list of gtk themes for which we should
+	// use non-symbolic icons.
 	nonSymbolicIconThemes = []string{
 		"elementary",
 		"elementary-x",
 	}
 
-	// skinnyMenuThemes is the list of gtk themes for which we
-	// should use skinny popover menus.
+	// skinnyMenuThemes is the list of gtk themes for which we should use
+	// skinny popover menus.
 	skinnyMenuThemes = []string{
 		"elementary",
 		"elementary-x",
@@ -75,8 +75,8 @@ func (win *Window) StyleUpdated() {
 	// First, lets find out what GTK theme we are using.
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
-		// The theme is not being set by the environment, so
-		// lets ask GTK what theme it is going to use.
+		// The theme is not being set by the environment, so lets ask
+		// GTK what theme it is going to use.
 		themeNameIface, err := win.app.gtkSettings.GetProperty("gtk-theme-name")
 		if err != nil {
 			log.Print(err)

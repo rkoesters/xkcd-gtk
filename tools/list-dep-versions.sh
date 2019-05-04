@@ -13,8 +13,8 @@ print_package_version () {
 # Run all our tools/* before we change directory.
 deps="$(tools/list-deps.sh "$@")"
 
-# Change directory to $GOPATH/src so that package names work as relative
-# paths to the respective package.
+# Change directory to $GOPATH/src so that package names work as relative paths
+# to the respective package.
 cd "$(go env GOPATH)/src"
 
 for package in $deps; do
