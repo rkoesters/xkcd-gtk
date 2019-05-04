@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"github.com/emirpasic/gods/sets/treeset"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 // Bookmarks holds the user's comic bookmarks.
@@ -31,11 +33,15 @@ func (bookmarks *Bookmarks) Contains(n int) bool {
 
 // Read reads bookmarks from r.
 func (bookmarks *Bookmarks) Read(r io.Reader) error {
-	bytes, err := ioutil.ReadAll(r)
-	if err != nil {
-		return err
+	sc := bufio.NewScanner(r)
+	for sc.Scan() {
+		n, err := strconv.Atoi(sc.Text())
+		if err != nil {
+			return err
+		}
+		bookmarks.Add(n)
 	}
-	return bookmarks.set.FromJSON(bytes)
+	return nil
 }
 
 // ReadFile opens the given file and calls Read on the contents.
@@ -50,13 +56,14 @@ func (bookmarks *Bookmarks) ReadFile(filename string) error {
 
 // Write writes bookmarks to w.
 func (bookmarks *Bookmarks) Write(w io.Writer) error {
-	bytes, err := bookmarks.set.ToJSON()
-	if err != nil {
-		return err
+	iter := bookmarks.set.Iterator()
+	for iter.Next() {
+		_, err := fmt.Fprintln(w, iter.Value().(int))
+		if err != nil {
+			return err
+		}
 	}
-
-	_, err = w.Write(bytes)
-	return err
+	return nil
 }
 
 // WriteFile creates or truncates the given file and calls Write on it.
