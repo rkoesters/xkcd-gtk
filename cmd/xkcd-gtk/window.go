@@ -239,7 +239,6 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.bookmarkActionNew.SetProperty("action-name", "win.bookmark-new")
-	win.bookmarkActionNew.SetRelief(gtk.RELIEF_NONE)
 	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
@@ -253,7 +252,6 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.bookmarkActionRemove.SetProperty("action-name", "win.bookmark-remove")
-	win.bookmarkActionRemove.SetRelief(gtk.RELIEF_NONE)
 	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
@@ -273,7 +271,9 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.bookmarkScroller.SetProperty("propagate-natural-height", true)
+	win.bookmarkScroller.SetProperty("propagate-natural-width", true)
 	win.bookmarkScroller.SetProperty("max-content-height", 350)
+	win.bookmarkScroller.SetProperty("max-content-width", 350)
 	box.Add(win.bookmarkScroller)
 	win.bookmarkList, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
@@ -321,7 +321,9 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.searchScroller.SetProperty("propagate-natural-height", true)
+	win.searchScroller.SetProperty("propagate-natural-width", true)
 	win.searchScroller.SetProperty("max-content-height", 350)
+	win.searchScroller.SetProperty("max-content-width", 350)
 	box.Add(win.searchScroller)
 	win.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
