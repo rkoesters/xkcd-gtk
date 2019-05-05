@@ -275,7 +275,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.bookmarkScroller.SetProperty("propagate-natural-height", true)
-	win.bookmarkScroller.SetProperty("max-content-height", 500)
+	win.bookmarkScroller.SetProperty("max-content-height", 350)
 	box.Add(win.bookmarkScroller)
 	win.bookmarkList, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
@@ -323,7 +323,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.searchScroller.SetProperty("propagate-natural-height", true)
-	win.searchScroller.SetProperty("max-content-height", 500)
+	win.searchScroller.SetProperty("max-content-height", 350)
 	box.Add(win.searchScroller)
 	win.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
