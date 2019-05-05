@@ -24,10 +24,14 @@ func (win *Window) updateBookmarksMenu() {
 
 	if win.app.bookmarks.Contains(win.state.ComicNumber) {
 		win.actions["bookmark-new"].SetEnabled(false)
+		win.bookmarkActionNew.SetVisible(false)
 		win.actions["bookmark-remove"].SetEnabled(true)
+		win.bookmarkActionRemove.SetVisible(true)
 	} else {
 		win.actions["bookmark-new"].SetEnabled(true)
+		win.bookmarkActionNew.SetVisible(true)
 		win.actions["bookmark-remove"].SetEnabled(false)
+		win.bookmarkActionRemove.SetVisible(false)
 	}
 }
 
