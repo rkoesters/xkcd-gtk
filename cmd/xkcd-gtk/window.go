@@ -272,6 +272,8 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.bookmarkScroller.SetProperty("propagate-natural-height", true)
 	win.bookmarkScroller.SetProperty("propagate-natural-width", true)
+	win.bookmarkScroller.SetProperty("min-content-height", 100)
+	win.bookmarkScroller.SetProperty("min-content-width", 100)
 	win.bookmarkScroller.SetProperty("max-content-height", 350)
 	win.bookmarkScroller.SetProperty("max-content-width", 350)
 	box.Add(win.bookmarkScroller)
@@ -322,6 +324,8 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.searchScroller.SetProperty("propagate-natural-height", true)
 	win.searchScroller.SetProperty("propagate-natural-width", true)
+	win.searchScroller.SetProperty("min-content-height", 100)
+	win.searchScroller.SetProperty("min-content-width", 100)
 	win.searchScroller.SetProperty("max-content-height", 350)
 	win.searchScroller.SetProperty("max-content-width", 350)
 	box.Add(win.searchScroller)
