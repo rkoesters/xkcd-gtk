@@ -270,6 +270,12 @@ func NewWindow(app *Application) (*Window, error) {
 
 	box.Add(bookmarkActionBox)
 
+	sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	box.Add(sep)
+
 	win.bookmarkScroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err

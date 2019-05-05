@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-04 20:38-0700\n"
+"POT-Creation-Date: 2019-05-04 22:54-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,11 +155,11 @@ msgstr ""
 msgid "Go to the newest comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:43 cmd/xkcd-gtk/window.go:343
+#: cmd/xkcd-gtk/shortcuts-window.ui:43 cmd/xkcd-gtk/window.go:349
 msgid "Go to a random comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:52 cmd/xkcd-gtk/window.go:295
+#: cmd/xkcd-gtk/shortcuts-window.ui:52 cmd/xkcd-gtk/window.go:301
 msgid "Search"
 msgstr ""
 
@@ -227,19 +227,19 @@ msgstr ""
 msgid "Removes the current comic from your bookmarks"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:339
+#: cmd/xkcd-gtk/window.go:345
 msgid "Random"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:411
+#: cmd/xkcd-gtk/window.go:417
 msgid "Checking for new comic..."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:444
+#: cmd/xkcd-gtk/window.go:450
 msgid "Loading comic..."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:470
+#: cmd/xkcd-gtk/window.go:476
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
