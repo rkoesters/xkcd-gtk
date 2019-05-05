@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-04 20:01-0700\n"
+"POT-Creation-Date: 2019-05-04 20:18-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,7 +90,8 @@ msgstr ""
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/window.go:184
+#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/shortcuts-window.ui:52
+#: cmd/xkcd-gtk/window.go:184
 msgid "Properties"
 msgstr ""
 
@@ -135,7 +136,7 @@ msgid "Updating comic search index..."
 msgstr ""
 
 #: cmd/xkcd-gtk/shortcuts-window.ui:11
-msgid "Navigation"
+msgid "Navigate"
 msgstr ""
 
 #: cmd/xkcd-gtk/shortcuts-window.ui:15 cmd/xkcd-gtk/window.go:138
@@ -158,39 +159,43 @@ msgstr ""
 msgid "Go to a random comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:50
-msgid "Show bookmarks menu"
-msgstr ""
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:57
-msgid "Search comics"
-msgstr ""
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:66
-msgid "Viewing"
-msgstr ""
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:70
+#: cmd/xkcd-gtk/shortcuts-window.ui:56
 msgid "Show comic properties"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:79
+#: cmd/xkcd-gtk/shortcuts-window.ui:65 cmd/xkcd-gtk/window.go:295
+msgid "Search"
+msgstr ""
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:69
+msgid "Search comics"
+msgstr ""
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:78 cmd/xkcd-gtk/window.go:218
+msgid "Bookmarks"
+msgstr ""
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:82
+msgid "Show bookmarks menu"
+msgstr ""
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:91
 msgid "Application Actions"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:83
+#: cmd/xkcd-gtk/shortcuts-window.ui:95
 msgid "Open new window"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:90
+#: cmd/xkcd-gtk/shortcuts-window.ui:102
 msgid "Toggle dark mode"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:97
+#: cmd/xkcd-gtk/shortcuts-window.ui:109
 msgid "Open shortcuts window"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:104
+#: cmd/xkcd-gtk/shortcuts-window.ui:116
 msgid "Quit application"
 msgstr ""
 
@@ -204,10 +209,6 @@ msgstr ""
 
 #: cmd/xkcd-gtk/window.go:183
 msgid "Explain"
-msgstr ""
-
-#: cmd/xkcd-gtk/window.go:218
-msgid "Bookmarks"
 msgstr ""
 
 #: cmd/xkcd-gtk/window.go:243
@@ -224,10 +225,6 @@ msgstr ""
 
 #: cmd/xkcd-gtk/window.go:261
 msgid "Removes the current comic from your bookmarks"
-msgstr ""
-
-#: cmd/xkcd-gtk/window.go:295
-msgid "Search"
 msgstr ""
 
 #: cmd/xkcd-gtk/window.go:339
