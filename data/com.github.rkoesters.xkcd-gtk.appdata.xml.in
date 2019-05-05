@@ -13,6 +13,7 @@
     <p>Features:</p>
     <ul>
       <li>Search for comics</li>
+      <li>Keep track of comics with bookmarks</li>
       <li>Cache comics for later offline viewing</li>
       <li>Dark mode for late night reading</li>
       <li>View comic metadata</li>
@@ -52,6 +53,13 @@
   </custom>
 
   <releases>
+    <release version="1.3.0" date="2019-05-04">
+      <description>
+        <ul>
+          <li>Add bookmarks for keeping track of comics</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.2.0" date="2019-04-21">
       <description>
         <ul>
