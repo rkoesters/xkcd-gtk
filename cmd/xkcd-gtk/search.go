@@ -116,7 +116,6 @@ func (win *Window) Search() {
 		log.Print(err)
 	}
 	if userQuery == "" {
-		win.clearSearchResults()
 		win.loadSearchResults(nil)
 		return
 	}
@@ -128,34 +127,27 @@ func (win *Window) Search() {
 	if err != nil {
 		log.Print(err)
 	}
-	win.clearSearchResults()
 	win.loadSearchResults(result)
-}
-
-// Remove all widgets from the search results area.
-func (win *Window) clearSearchResults() {
-	win.searchResults.GetChildren().Foreach(func(child interface{}) {
-		win.searchResults.Remove(child.(gtk.IWidget))
-	})
 }
 
 // Show the user the given search results.
 func (win *Window) loadSearchResults(result *bleve.SearchResult) {
-	defer win.searchResults.ShowAll()
-	if result == nil {
-		// If there are no results to display, show a friendly message.
-		label, err := gtk.LabelNew(l("Whatcha lookin' for?"))
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		label.SetVExpand(true)
-		win.searchResults.Add(label)
+	win.searchResults.GetChildren().Foreach(func(child interface{}) {
+		win.searchResults.Remove(child.(gtk.IWidget))
+	})
+
+	if result == nil || result.Hits.Len() == 0 {
+		win.searchScroller.SetVisible(false)
 		return
 	}
+
+	defer win.searchResults.ShowAll()
+	defer win.searchScroller.SetVisible(true)
+
 	// We are grabbing the newest comic so we can figure out how wide to
 	// make comic Id column.
 	newest, _ := GetNewestComicInfo()
+
 	for _, sr := range result.Hits {
 		item, err := gtk.ButtonNew()
 		if err != nil {
@@ -192,15 +184,6 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 		item.Add(box)
 		item.SetRelief(gtk.RELIEF_NONE)
 		win.searchResults.Add(item)
-	}
-	if result.Hits.Len() == 0 {
-		label, err := gtk.LabelNew(l("0 search results"))
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		label.SetVExpand(true)
-		win.searchResults.Add(label)
 	}
 }
 

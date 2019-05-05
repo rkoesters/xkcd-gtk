@@ -31,6 +31,16 @@ func (bookmarks *Bookmarks) Contains(n int) bool {
 	return bookmarks.set.Contains(n)
 }
 
+// Empty returns true if there are exactly 0 bookmarks.
+func (bookmarks *Bookmarks) Empty() bool {
+	return bookmarks.set.Empty()
+}
+
+// Iterator returns a treeset.Iterator for iterating through the bookmarks.
+func (bookmarks *Bookmarks) Iterator() treeset.Iterator {
+	return bookmarks.set.Iterator()
+}
+
 // Read reads bookmarks from r as a newline separated list of comic numbers.
 func (bookmarks *Bookmarks) Read(r io.Reader) error {
 	sc := bufio.NewScanner(r)

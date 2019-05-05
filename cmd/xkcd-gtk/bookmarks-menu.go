@@ -20,7 +20,6 @@ func (win *Window) RemoveBookmark() {
 }
 
 func (win *Window) updateBookmarksMenu() {
-	win.clearBookmarkList()
 	win.loadBookmarkList()
 
 	if win.app.bookmarks.Contains(win.state.ComicNumber) {
@@ -32,66 +31,64 @@ func (win *Window) updateBookmarksMenu() {
 	}
 }
 
-func (win *Window) clearBookmarkList() {
+func (win *Window) loadBookmarkList() {
 	win.bookmarkList.GetChildren().Foreach(func(child interface{}) {
 		win.bookmarkList.Remove(child.(gtk.IWidget))
 	})
-}
-
-func (win *Window) loadBookmarkList() {
-	defer win.bookmarkList.ShowAll()
 
 	if win.app.bookmarks.Empty() {
 		win.bookmarkScroller.SetVisible(false)
-	} else {
-		win.bookmarkScroller.SetVisible(true)
+		return
+	}
 
-		// We are grabbing the newest comic so we can figure out how
-		// wide to make the comic number column.
-		newest, _ := GetNewestComicInfo()
+	defer win.bookmarkList.ShowAll()
+	defer win.bookmarkScroller.SetVisible(true)
 
-		iter := win.app.bookmarks.Iterator()
-		for iter.Next() {
-			comic, err := GetComicInfo(iter.Value().(int))
-			if err != nil {
-				log.Print(err)
-				continue
-			}
+	// We are grabbing the newest comic so we can figure out how
+	// wide to make the comic number column.
+	newest, _ := GetNewestComicInfo()
 
-			item, err := gtk.ButtonNew()
-			if err != nil {
-				log.Print(err)
-				return
-			}
-			item.Connect("clicked", win.setComicFromBookmark, comic.Num)
-
-			box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
-			if err != nil {
-				log.Print(err)
-				return
-			}
-
-			labelID, err := gtk.LabelNew(strconv.Itoa(comic.Num))
-			if err != nil {
-				log.Print(err)
-				return
-			}
-			labelID.SetXAlign(1)
-			labelID.SetWidthChars(len(strconv.Itoa(newest.Num)))
-			box.Add(labelID)
-
-			labelTitle, err := gtk.LabelNew(comic.SafeTitle)
-			if err != nil {
-				log.Print(err)
-				return
-			}
-			labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
-			box.Add(labelTitle)
-
-			item.Add(box)
-			item.SetRelief(gtk.RELIEF_NONE)
-			win.bookmarkList.Add(item)
+	iter := win.app.bookmarks.Iterator()
+	for iter.Next() {
+		comic, err := GetComicInfo(iter.Value().(int))
+		if err != nil {
+			log.Print(err)
+			continue
 		}
+
+		item, err := gtk.ButtonNew()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		item.Connect("clicked", win.setComicFromBookmark, comic.Num)
+
+		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+
+		labelID, err := gtk.LabelNew(strconv.Itoa(comic.Num))
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		labelID.SetXAlign(1)
+		labelID.SetWidthChars(len(strconv.Itoa(newest.Num)))
+		box.Add(labelID)
+
+		labelTitle, err := gtk.LabelNew(comic.SafeTitle)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
+		box.Add(labelTitle)
+
+		item.Add(box)
+		item.SetRelief(gtk.RELIEF_NONE)
+		win.bookmarkList.Add(item)
 	}
 }
 

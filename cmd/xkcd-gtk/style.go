@@ -142,6 +142,13 @@ func (win *Window) StyleUpdated() {
 		win.newest.SetImage(newestImg)
 	}
 
+	bookmarksImg, err := gtk.ImageNewFromIconName(icon("user-bookmarks"), headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		win.bookmarks.SetImage(bookmarksImg)
+	}
+
 	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)

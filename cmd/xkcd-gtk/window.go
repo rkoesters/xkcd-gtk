@@ -29,17 +29,24 @@ type Window struct {
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
 
-	header   *gtk.HeaderBar
-	first    *gtk.Button
-	previous *gtk.Button
-	next     *gtk.Button
-	newest   *gtk.Button
-	random   *gtk.Button
-	search   *gtk.MenuButton
-	menu     *gtk.MenuButton
+	header    *gtk.HeaderBar
+	first     *gtk.Button
+	previous  *gtk.Button
+	next      *gtk.Button
+	newest    *gtk.Button
+	random    *gtk.Button
+	search    *gtk.MenuButton
+	bookmarks *gtk.MenuButton
+	menu      *gtk.MenuButton
 
-	searchEntry   *gtk.SearchEntry
-	searchResults *gtk.Box
+	searchEntry    *gtk.SearchEntry
+	searchScroller *gtk.ScrolledWindow
+	searchResults  *gtk.Box
+
+	bookmarkActionNew    *gtk.Button
+	bookmarkActionRemove *gtk.Button
+	bookmarkScroller     *gtk.ScrolledWindow
+	bookmarkList         *gtk.Box
 
 	comicContainer *gtk.ScrolledWindow
 	image          *gtk.Image
@@ -64,6 +71,8 @@ func NewWindow(app *Application) (*Window, error) {
 
 	// Initialize our window actions.
 	actionFuncs := map[string]interface{}{
+		"bookmark-new":    win.AddBookmark,
+		"bookmark-remove": win.RemoveBookmark,
 		"explain":         win.Explain,
 		"first-comic":     win.FirstComic,
 		"newest-comic":    win.NewestComic,
@@ -205,6 +214,83 @@ func NewWindow(app *Application) (*Window, error) {
 	win.menu.SetMenuModel(&menu.MenuModel)
 	win.header.PackEnd(win.menu)
 
+	// Create the bookmark menu
+	win.bookmarks, err = gtk.MenuButtonNew()
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarks.SetTooltipText(l("Bookmarks"))
+	win.bookmarks.AddAccelerator("activate", win.accels, gdk.KEY_b, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.header.PackEnd(win.bookmarks)
+
+	bookmarksPopover, err := gtk.PopoverNew(win.bookmarks)
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarks.SetPopover(bookmarksPopover)
+
+	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	if err != nil {
+		return nil, err
+	}
+	box.SetMarginTop(12)
+	box.SetMarginBottom(12)
+	box.SetMarginStart(12)
+	box.SetMarginEnd(12)
+
+	bookmarkActionBox, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	bookmarkActionBox.SetLayout(gtk.BUTTONBOX_EXPAND)
+
+	win.bookmarkActionNew, err = gtk.ButtonNewWithLabel(l("Add bookmark"))
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarkActionNew.SetTooltipText(l("Adds the current comic to your bookmarks"))
+	win.bookmarkActionNew.SetProperty("action-name", "win.bookmark-new")
+	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarkActionNew.SetImage(bookmarkNewImage)
+	win.bookmarkActionNew.SetAlwaysShowImage(true)
+	bookmarkActionBox.Add(win.bookmarkActionNew)
+
+	win.bookmarkActionRemove, err = gtk.ButtonNewWithLabel(l("Remove bookmark"))
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarkActionRemove.SetTooltipText(l("Removes the current comic from your bookmarks"))
+	win.bookmarkActionRemove.SetProperty("action-name", "win.bookmark-remove")
+	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("list-remove-symbolic", gtk.ICON_SIZE_BUTTON)
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarkActionRemove.SetImage(bookmarkRemoveImage)
+	win.bookmarkActionRemove.SetAlwaysShowImage(true)
+	bookmarkActionBox.Add(win.bookmarkActionRemove)
+
+	box.Add(bookmarkActionBox)
+
+	win.bookmarkScroller, err = gtk.ScrolledWindowNew(nil, nil)
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarkScroller.SetProperty("propagate-natural-height", true)
+	win.bookmarkScroller.SetProperty("max-content-height", 500)
+	box.Add(win.bookmarkScroller)
+	win.bookmarkList, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	if err != nil {
+		return nil, err
+	}
+	win.bookmarkScroller.Add(win.bookmarkList)
+	defer win.loadBookmarkList()
+
+	box.ShowAll()
+	bookmarksPopover.Add(box)
+
 	// Create the search menu
 	win.search, err = gtk.MenuButtonNew()
 	if err != nil {
@@ -220,7 +306,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.search.SetPopover(searchPopover)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	box, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
 	if err != nil {
 		return nil, err
 	}
@@ -232,20 +318,24 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	win.searchEntry.SetSizeRequest(350, -1)
 	win.searchEntry.Connect("search-changed", win.Search)
 	box.Add(win.searchEntry)
-	scwin, err := gtk.ScrolledWindowNew(nil, nil)
+
+	win.searchScroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	box.Add(scwin)
+	win.searchScroller.SetProperty("propagate-natural-height", true)
+	win.searchScroller.SetProperty("max-content-height", 500)
+	box.Add(win.searchScroller)
 	win.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
 	}
-	scwin.Add(win.searchResults)
-	scwin.SetSizeRequest(375, 250)
-	win.loadSearchResults(nil)
+	win.searchScroller.Add(win.searchResults)
+	defer win.loadSearchResults(nil)
+
 	box.ShowAll()
 	searchPopover.Add(box)
 
@@ -352,11 +442,15 @@ func (win *Window) RandomComic() {
 
 // SetComic sets the current comic to the given comic.
 func (win *Window) SetComic(n int) {
+	win.state.ComicNumber = n
+
 	// Make it clear that we are loading a comic.
 	win.header.SetTitle(l("Loading comic..."))
 	win.header.SetSubtitle(strconv.Itoa(n))
+
+	// Update UI to reflect new current comic.
 	win.updateNextPreviousButtonStatus()
-	win.state.ComicNumber = n
+	win.updateBookmarksMenu()
 
 	go func() {
 		var err error
@@ -506,9 +600,12 @@ func (win *Window) OpenLink() {
 func (win *Window) Destroy() {
 	win.app = nil
 	win.window = nil
+
 	win.comic = nil
+
 	win.actions = nil
 	win.accels = nil
+
 	win.header = nil
 	win.first = nil
 	win.previous = nil
@@ -516,11 +613,19 @@ func (win *Window) Destroy() {
 	win.newest = nil
 	win.random = nil
 	win.search = nil
+	win.bookmarks = nil
 	win.menu = nil
+
 	win.searchEntry = nil
 	win.searchResults = nil
+
+	win.bookmarkActionNew = nil
+	win.bookmarkActionRemove = nil
+	win.bookmarkList = nil
+
 	win.comicContainer = nil
 	win.image = nil
+
 	win.properties = nil
 
 	runtime.GC()
