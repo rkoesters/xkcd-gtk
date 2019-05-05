@@ -234,41 +234,33 @@ func NewWindow(app *Application) (*Window, error) {
 	box.SetMarginStart(12)
 	box.SetMarginEnd(12)
 
-	bookmarkActionBox, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
+	win.bookmarkActionNew, err = gtk.ButtonNewWithLabel(l("Bookmark this comic"))
 	if err != nil {
 		return nil, err
 	}
-	bookmarkActionBox.SetLayout(gtk.BUTTONBOX_EXPAND)
-
-	win.bookmarkActionNew, err = gtk.ButtonNewWithLabel(l("Add bookmark"))
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkActionNew.SetTooltipText(l("Adds the current comic to your bookmarks"))
 	win.bookmarkActionNew.SetProperty("action-name", "win.bookmark-new")
+	win.bookmarkActionNew.SetRelief(gtk.RELIEF_NONE)
 	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
 	win.bookmarkActionNew.SetImage(bookmarkNewImage)
 	win.bookmarkActionNew.SetAlwaysShowImage(true)
-	bookmarkActionBox.Add(win.bookmarkActionNew)
+	box.Add(win.bookmarkActionNew)
 
-	win.bookmarkActionRemove, err = gtk.ButtonNewWithLabel(l("Remove bookmark"))
+	win.bookmarkActionRemove, err = gtk.ButtonNewWithLabel(l("Remove this comic from bookmarks"))
 	if err != nil {
 		return nil, err
 	}
-	win.bookmarkActionRemove.SetTooltipText(l("Removes the current comic from your bookmarks"))
 	win.bookmarkActionRemove.SetProperty("action-name", "win.bookmark-remove")
+	win.bookmarkActionRemove.SetRelief(gtk.RELIEF_NONE)
 	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
 	win.bookmarkActionRemove.SetImage(bookmarkRemoveImage)
 	win.bookmarkActionRemove.SetAlwaysShowImage(true)
-	bookmarkActionBox.Add(win.bookmarkActionRemove)
-
-	box.Add(bookmarkActionBox)
+	box.Add(win.bookmarkActionRemove)
 
 	sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
