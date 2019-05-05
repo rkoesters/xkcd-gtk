@@ -260,7 +260,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.bookmarkActionRemove.SetTooltipText(l("Removes the current comic from your bookmarks"))
 	win.bookmarkActionRemove.SetProperty("action-name", "win.bookmark-remove")
-	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("list-remove-symbolic", gtk.ICON_SIZE_BUTTON)
+	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
