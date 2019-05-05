@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-04 20:25-0700\n"
+"POT-Creation-Date: 2019-05-04 20:38-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,7 +90,7 @@ msgstr ""
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/shortcuts-window.ui:52
+#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/shortcuts-window.ui:78
 #: cmd/xkcd-gtk/window.go:184
 msgid "Properties"
 msgstr ""
@@ -159,24 +159,24 @@ msgstr ""
 msgid "Go to a random comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:56
-msgid "Show comic properties"
-msgstr ""
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:65 cmd/xkcd-gtk/window.go:295
+#: cmd/xkcd-gtk/shortcuts-window.ui:52 cmd/xkcd-gtk/window.go:295
 msgid "Search"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:69
+#: cmd/xkcd-gtk/shortcuts-window.ui:56
 msgid "Search comics"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:78 cmd/xkcd-gtk/window.go:218
+#: cmd/xkcd-gtk/shortcuts-window.ui:65 cmd/xkcd-gtk/window.go:218
 msgid "Bookmarks"
 msgstr ""
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:82
+#: cmd/xkcd-gtk/shortcuts-window.ui:69
 msgid "Show bookmarks menu"
+msgstr ""
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:82
+msgid "Show comic properties"
 msgstr ""
 
 #: cmd/xkcd-gtk/shortcuts-window.ui:91
