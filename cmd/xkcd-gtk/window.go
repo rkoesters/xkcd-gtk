@@ -125,15 +125,11 @@ func NewWindow(app *Application) (*Window, error) {
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
-	navBox, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
+	navBox, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
 	}
-	navBoxStyleContext, err := navBox.GetStyleContext()
-	if err != nil {
-		return nil, err
-	}
-	navBoxStyleContext.AddClass(styleClassLinked)
+	navBox.SetLayout(gtk.BUTTONBOX_EXPAND)
 
 	win.first, err = gtk.ButtonNew()
 	if err != nil {
