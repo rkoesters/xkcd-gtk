@@ -42,11 +42,13 @@ func (win *Window) loadBookmarkList() {
 
 	if win.app.bookmarks.Empty() {
 		win.bookmarkScroller.SetVisible(false)
+		win.bookmarkSeparator.SetVisible(false)
 		return
 	}
 
 	defer win.bookmarkList.ShowAll()
 	defer win.bookmarkScroller.SetVisible(true)
+	defer win.bookmarkSeparator.SetVisible(true)
 
 	// We are grabbing the newest comic so we can figure out how
 	// wide to make the comic number column.

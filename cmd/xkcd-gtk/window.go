@@ -45,6 +45,7 @@ type Window struct {
 
 	bookmarkActionNew    *gtk.Button
 	bookmarkActionRemove *gtk.Button
+	bookmarkSeparator    *gtk.Separator
 	bookmarkScroller     *gtk.ScrolledWindow
 	bookmarkList         *gtk.Box
 
@@ -260,11 +261,11 @@ func NewWindow(app *Application) (*Window, error) {
 	win.bookmarkActionRemove.SetAlwaysShowImage(true)
 	box.Add(win.bookmarkActionRemove)
 
-	sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	win.bookmarkSeparator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
 	}
-	box.Add(sep)
+	box.Add(win.bookmarkSeparator)
 
 	win.bookmarkScroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
