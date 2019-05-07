@@ -27,11 +27,15 @@ func (win *Window) updateBookmarksMenu() {
 		win.bookmarkActionNew.SetVisible(false)
 		win.actions["bookmark-remove"].SetEnabled(true)
 		win.bookmarkActionRemove.SetVisible(true)
+
+		win.bookmarkActionRemove.GrabFocus()
 	} else {
 		win.actions["bookmark-new"].SetEnabled(true)
 		win.bookmarkActionNew.SetVisible(true)
 		win.actions["bookmark-remove"].SetEnabled(false)
 		win.bookmarkActionRemove.SetVisible(false)
+
+		win.bookmarkActionNew.GrabFocus()
 	}
 }
 
