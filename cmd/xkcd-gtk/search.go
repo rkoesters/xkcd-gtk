@@ -136,13 +136,20 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 		win.searchResults.Remove(child.(gtk.IWidget))
 	})
 
-	if result == nil || result.Hits.Len() == 0 {
+	if result == nil {
 		win.searchScroller.SetVisible(false)
+		win.searchNoResults.SetVisible(false)
+		return
+	}
+	if result.Hits.Len() == 0 {
+		win.searchScroller.SetVisible(false)
+		win.searchNoResults.SetVisible(true)
 		return
 	}
 
 	defer win.searchResults.ShowAll()
 	defer win.searchScroller.SetVisible(true)
+	defer win.searchNoResults.SetVisible(false)
 
 	// We are grabbing the newest comic so we can figure out how wide to
 	// make comic Id column.

@@ -39,9 +39,10 @@ type Window struct {
 	bookmarks *gtk.MenuButton
 	menu      *gtk.MenuButton
 
-	searchEntry    *gtk.SearchEntry
-	searchScroller *gtk.ScrolledWindow
-	searchResults  *gtk.Box
+	searchEntry     *gtk.SearchEntry
+	searchNoResults *gtk.Label
+	searchScroller  *gtk.ScrolledWindow
+	searchResults   *gtk.Box
 
 	bookmarkActionNew    *gtk.Button
 	bookmarkActionRemove *gtk.Button
@@ -318,6 +319,12 @@ func NewWindow(app *Application) (*Window, error) {
 	win.searchEntry.SetSizeRequest(350, -1)
 	win.searchEntry.Connect("search-changed", win.Search)
 	box.Add(win.searchEntry)
+
+	win.searchNoResults, err = gtk.LabelNew(l("No results found"))
+	if err != nil {
+		return nil, err
+	}
+	box.Add(win.searchNoResults)
 
 	win.searchScroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
@@ -618,6 +625,8 @@ func (win *Window) Destroy() {
 	win.menu = nil
 
 	win.searchEntry = nil
+	win.searchNoResults = nil
+	win.searchScroller = nil
 	win.searchResults = nil
 
 	win.bookmarkActionNew = nil
