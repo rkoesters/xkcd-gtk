@@ -316,7 +316,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.searchEntry.SetSizeRequest(350, -1)
+	win.searchEntry.SetSizeRequest(300, -1)
 	win.searchEntry.Connect("search-changed", win.Search)
 	box.Add(win.searchEntry)
 
@@ -365,7 +365,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.comicContainer.SetSizeRequest(400, 300)
+	win.comicContainer.SetSizeRequest(500, 400)
 
 	imageContext, err := win.comicContainer.GetStyleContext()
 	if err != nil {
@@ -631,6 +631,8 @@ func (win *Window) Destroy() {
 
 	win.bookmarkActionNew = nil
 	win.bookmarkActionRemove = nil
+	win.bookmarkSeparator = nil
+	win.bookmarkScroller = nil
 	win.bookmarkList = nil
 
 	win.comicContainer = nil
