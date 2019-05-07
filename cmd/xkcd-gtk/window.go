@@ -604,7 +604,8 @@ func (win *Window) OpenLink() {
 	}
 }
 
-// Destroy releases all references in the Window struct.
+// Destroy releases all references in the Window struct. This is needed to
+// mitigate a memory leak when closing windows.
 func (win *Window) Destroy() {
 	win.app = nil
 	win.window = nil
