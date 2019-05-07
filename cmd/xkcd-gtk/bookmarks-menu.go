@@ -11,12 +11,14 @@ import (
 func (win *Window) AddBookmark() {
 	win.app.bookmarks.Add(win.state.ComicNumber)
 	win.updateBookmarksMenu()
+	win.bookmarkActionRemove.GrabFocus()
 }
 
 // RemoveBookmark removes win's current comic from the user's bookmarks.
 func (win *Window) RemoveBookmark() {
 	win.app.bookmarks.Remove(win.state.ComicNumber)
 	win.updateBookmarksMenu()
+	win.bookmarkActionNew.GrabFocus()
 }
 
 func (win *Window) updateBookmarksMenu() {
@@ -27,15 +29,11 @@ func (win *Window) updateBookmarksMenu() {
 		win.bookmarkActionNew.SetVisible(false)
 		win.actions["bookmark-remove"].SetEnabled(true)
 		win.bookmarkActionRemove.SetVisible(true)
-
-		win.bookmarkActionRemove.GrabFocus()
 	} else {
 		win.actions["bookmark-new"].SetEnabled(true)
 		win.bookmarkActionNew.SetVisible(true)
 		win.actions["bookmark-remove"].SetEnabled(false)
 		win.bookmarkActionRemove.SetVisible(false)
-
-		win.bookmarkActionNew.GrabFocus()
 	}
 }
 
