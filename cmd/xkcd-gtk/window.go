@@ -492,7 +492,7 @@ func (win *Window) SetComic(n int) {
 	}()
 }
 
-// DisplayComic updates the UI to show the contents of win.comic
+// DisplayComic updates the UI to show the contents of win.comic.
 func (win *Window) DisplayComic() {
 	win.header.SetTitle(win.comic.SafeTitle)
 	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
@@ -547,6 +547,7 @@ func (win *Window) DrawComic() {
 		// Invert the pixels of the comic image.
 		pixbuf := win.image.GetPixbuf()
 		if pixbuf == nil {
+			log.Print("pixbuf == nil")
 			return
 		}
 		pixels := pixbuf.GetPixels()
