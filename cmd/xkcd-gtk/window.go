@@ -49,6 +49,7 @@ type Window struct {
 	bookmarkSeparator    *gtk.Separator
 	bookmarkScroller     *gtk.ScrolledWindow
 	bookmarkList         *gtk.Box
+	bookmarkObserverID   int
 
 	comicContainer *gtk.ScrolledWindow
 	image          *gtk.Image
@@ -284,6 +285,10 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.bookmarkScroller.Add(win.bookmarkList)
+	win.registerBookmarkObserver()
+	win.window.Connect("delete-event", func() {
+		win.unregisterBookmarkObserver()
+	})
 	defer win.loadBookmarkList()
 
 	box.ShowAll()

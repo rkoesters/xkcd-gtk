@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
 	"log"
@@ -10,31 +11,53 @@ import (
 // AddBookmark adds win's current comic to the user's bookmarks.
 func (win *Window) AddBookmark() {
 	win.app.bookmarks.Add(win.state.ComicNumber)
-	win.updateBookmarksMenu()
-	win.bookmarkActionRemove.GrabFocus()
 }
 
 // RemoveBookmark removes win's current comic from the user's bookmarks.
 func (win *Window) RemoveBookmark() {
 	win.app.bookmarks.Remove(win.state.ComicNumber)
-	win.updateBookmarksMenu()
-	win.bookmarkActionNew.GrabFocus()
+}
+
+func (win *Window) registerBookmarkObserver() {
+	ch := make(chan string)
+
+	win.bookmarkObserverID = win.app.bookmarks.AddObserver(ch)
+
+	go func() {
+		for range ch {
+			glib.IdleAdd(win.updateBookmarksMenu)
+		}
+	}()
+}
+
+func (win *Window) unregisterBookmarkObserver() {
+	win.app.bookmarks.RemoveObserver(win.bookmarkObserverID)
 }
 
 func (win *Window) updateBookmarksMenu() {
-	win.loadBookmarkList()
-
 	if win.app.bookmarks.Contains(win.state.ComicNumber) {
+		hasFocus := win.bookmarkActionNew.HasFocus()
 		win.actions["bookmark-new"].SetEnabled(false)
 		win.bookmarkActionNew.SetVisible(false)
+
 		win.actions["bookmark-remove"].SetEnabled(true)
 		win.bookmarkActionRemove.SetVisible(true)
+		if hasFocus {
+			win.bookmarkActionRemove.GrabFocus()
+		}
 	} else {
-		win.actions["bookmark-new"].SetEnabled(true)
-		win.bookmarkActionNew.SetVisible(true)
+		hasFocus := win.bookmarkActionRemove.HasFocus()
 		win.actions["bookmark-remove"].SetEnabled(false)
 		win.bookmarkActionRemove.SetVisible(false)
+
+		win.actions["bookmark-new"].SetEnabled(true)
+		win.bookmarkActionNew.SetVisible(true)
+		if hasFocus {
+			win.bookmarkActionNew.GrabFocus()
+		}
 	}
+
+	win.loadBookmarkList()
 }
 
 func (win *Window) loadBookmarkList() {

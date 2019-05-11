@@ -9,21 +9,28 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"sync"
 )
 
 // Bookmarks holds the user's comic bookmarks.
 type Bookmarks struct {
 	set *treeset.Set
+
+	observerMutex   sync.Mutex
+	observerCounter int
+	observers       map[int]chan string
 }
 
 // Add adds the comic number to the bookmarks set.
 func (bookmarks *Bookmarks) Add(n int) {
 	bookmarks.set.Add(n)
+	bookmarks.notifyObservers("added bookmark " + strconv.Itoa(n))
 }
 
 // Remove removes the comic number from the bookmarks set.
 func (bookmarks *Bookmarks) Remove(n int) {
 	bookmarks.set.Remove(n)
+	bookmarks.notifyObservers("removed bookmark " + strconv.Itoa(n))
 }
 
 // Contains indicates whether the comic specified by n is bookmarked.
@@ -84,6 +91,44 @@ func (bookmarks *Bookmarks) WriteFile(filename string) error {
 	}
 	defer f.Close()
 	return bookmarks.Write(f)
+}
+
+// AddObserver adds ch to the list of observers that will be notified when
+// changes are made to bookmarks. The returned int can be used to remove the
+// added channel from the list of observers using RemoveObserver.
+func (bookmarks *Bookmarks) AddObserver(ch chan string) int {
+	bookmarks.observerMutex.Lock()
+	defer bookmarks.observerMutex.Unlock()
+
+	if bookmarks.observers == nil {
+		bookmarks.observers = make(map[int]chan string)
+	}
+
+	id := bookmarks.observerCounter
+	bookmarks.observerCounter++
+
+	bookmarks.observers[id] = ch
+
+	return id
+}
+
+// RemoveObserver removes the observer specified by id from the list of
+// observers. The channel will be closed after calling this method.
+func (bookmarks *Bookmarks) RemoveObserver(id int) {
+	bookmarks.observerMutex.Lock()
+	defer bookmarks.observerMutex.Unlock()
+
+	close(bookmarks.observers[id])
+	delete(bookmarks.observers, id)
+}
+
+func (bookmarks *Bookmarks) notifyObservers(msg string) {
+	bookmarks.observerMutex.Lock()
+	defer bookmarks.observerMutex.Unlock()
+
+	for _, ch := range bookmarks.observers {
+		ch <- msg
+	}
 }
 
 // LoadBookmarks tries to load our bookmarks from disk.
