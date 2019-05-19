@@ -15,20 +15,20 @@ if ! appstream-util validate-relax "$appdata_xml"; then
 fi
 
 echo "Checking for tag matching current commit"
-version=$(git describe --exact-match --tags)
+tag=$(git describe --exact-match --tags)
 if [ $? != 0 ]; then
 	failure "could not find tag for current commit"
 fi
 
-echo "Checking for tag in changelog"
-if ! grep -q "<release version=\"$version\"" "$appdata_xml"; then
-	failure "version $version not found in appdata changelog"
+echo "Checking for tag $tag in changelog"
+if ! grep -q "<release version=\"$tag\"" "$appdata_xml"; then
+	failure "version $tag not found in appdata changelog"
 fi
 
-echo "Checking for date for tag in changelog"
-date=$(git log -1 --format='%ad' --date=short "$version")
-if ! grep -q "<release version=\"$version\" date=\"$date\"" "$appdata_xml"; then
-	failure "date $date not found in appdata changelog for version $version"
+echo "Checking for date for tag $tag in changelog"
+date=$(git log -1 --format='%ad' --date=short "$tag")
+if ! grep -q "<release version=\"$tag\" date=\"$date\"" "$appdata_xml"; then
+	failure "date $date not found in appdata changelog for version $tag"
 fi
 
 success "checks passed!"
