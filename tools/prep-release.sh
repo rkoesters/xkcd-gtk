@@ -1,10 +1,10 @@
 #!/bin/sh -u
 failure () {
-	echo "FAILURE $@"
+	echo "FAILURE $*"
 	exit 1
 }
 success () {
-	echo "SUCCESS $@"
+	echo "SUCCESS $*"
 }
 
 appdata_xml="data/com.github.rkoesters.xkcd-gtk.appdata.xml.in"
@@ -26,7 +26,7 @@ if ! grep -q "<release version=\"$version\"" "$appdata_xml"; then
 fi
 
 echo "Checking for date for tag in changelog"
-date=$(git log -1 --format='%ad' --date=short $version)
+date=$(git log -1 --format='%ad' --date=short "$version")
 if ! grep -q "<release version=\"$version\" date=\"$date\"" "$appdata_xml"; then
 	failure "date $date not found in appdata changelog for version $version"
 fi
