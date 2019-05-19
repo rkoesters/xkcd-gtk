@@ -61,7 +61,7 @@
         </ul>
       </description>
     </release>
-    <release version="1.2.0" date="2019-04-21">
+    <release version="1.2.0" date="2019-05-03">
       <description>
         <ul>
           <li>Add support for translations (user interface only, comics will remain in their original language)</li>
