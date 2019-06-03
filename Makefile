@@ -30,7 +30,7 @@ EXE_PATH     = $(EXE_NAME)
 ICON_PATH    = data/$(ICON_NAME)
 DESKTOP_PATH = data/$(DESKTOP_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
-POT_PATH     = po/$(APP).pot
+POT_PATH     = po/$(POT_NAME)
 
 ################################################################################
 # Automatic Variables
