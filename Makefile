@@ -2,7 +2,7 @@
 # Build Variables
 ################################################################################
 
-BUILDFLAGS = -tags $(GTK_VERSION)
+BUILDFLAGS =
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --from-code=utf-8 -kl --package-name="$(APP)"
 
