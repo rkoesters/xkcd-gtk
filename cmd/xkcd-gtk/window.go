@@ -478,6 +478,7 @@ func (win *Window) SetComic(n int) {
 		} else {
 			_, err = os.Stat(getComicImagePath(n))
 			if os.IsNotExist(err) {
+				win.image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
 				err = DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle

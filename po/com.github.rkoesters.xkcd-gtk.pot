@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 12:04-0700\n"
+"POT-Creation-Date: 2019-06-08 15:07-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,7 +235,7 @@ msgstr ""
 msgid "Loading comic..."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:487
+#: cmd/xkcd-gtk/window.go:488
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
