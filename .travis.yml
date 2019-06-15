@@ -4,6 +4,7 @@ matrix:
       go:
         - "1.10.x"
         - "1.x"
+      dist: xenial
       addons:
         apt:
           packages:
