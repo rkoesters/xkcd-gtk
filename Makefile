@@ -95,6 +95,7 @@ clean:
 	-rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
 install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	strip $(EXE_PATH)
 	mkdir -p $(DESTDIR)$(bindir)
 	install $(EXE_PATH) $(DESTDIR)$(bindir)
 	mkdir -p $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
