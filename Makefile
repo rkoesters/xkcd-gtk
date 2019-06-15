@@ -94,8 +94,10 @@ check: $(GEN_SOURCES)
 clean:
 	-rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
-install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+strip: $(EXE_PATH)
 	strip $(EXE_PATH)
+
+install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	mkdir -p $(DESTDIR)$(bindir)
 	install $(EXE_PATH) $(DESTDIR)$(bindir)
 	mkdir -p $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
@@ -118,4 +120,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean deps install uninstall
+.PHONY: all check clean deps install strip uninstall
