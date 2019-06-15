@@ -5,7 +5,6 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xdg"
 	"github.com/rkoesters/xkcd"
 	"log"
 	"math"
@@ -431,7 +430,7 @@ func (win *Window) NewestComic() {
 	setCachedNewestComic <- nil
 	newestComic, err := GetNewestComicInfo()
 	if err != nil {
-		log.Print(err)
+		log.Print("error jumping to newest comic: ", err)
 	}
 
 	win.SetComic(newestComic.Num)
@@ -488,7 +487,7 @@ func (win *Window) SetComic(n int) {
 					win.comic.SafeTitle = l("Connect to the internet to download comic image")
 				}
 			} else if err != nil {
-				log.Print(err)
+				log.Print("error finding comic image in cache: ", err)
 			}
 		}
 
@@ -524,12 +523,12 @@ func (win *Window) DrawComic() {
 	// Are we using a dark theme?
 	darkModeIface, err := win.app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
-		log.Print(err)
+		log.Print("error getting dark mode state: ", err)
 		return
 	}
 	darkMode, ok := darkModeIface.(bool)
 	if !ok {
-		log.Print("failed to convert darkModeIface to bool")
+		log.Print("failed to interpret dark mode state")
 		return
 	}
 
@@ -539,7 +538,7 @@ func (win *Window) DrawComic() {
 
 	containerContext, err := win.comicContainer.GetStyleContext()
 	if err != nil {
-		log.Print(err)
+		log.Print("error getting style context: ", err)
 		return
 	}
 
@@ -597,18 +596,12 @@ func (win *Window) updateNextPreviousButtonStatus() {
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
 func (win *Window) Explain() {
-	err := xdg.Open(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comic.Num))
-	if err != nil {
-		log.Print(err)
-	}
+	openURL(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comic.Num))
 }
 
 // OpenLink opens the comic's Link in the user's web browser.
 func (win *Window) OpenLink() {
-	err := xdg.Open(win.comic.Link)
-	if err != nil {
-		log.Print(err)
-	}
+	openURL(win.comic.Link)
 }
 
 // Destroy releases all references in the Window struct. This is needed to

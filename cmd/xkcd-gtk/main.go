@@ -29,7 +29,7 @@ func main() {
 	// Create the application.
 	app, err := NewApplication()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("error creating application: ", err)
 	}
 	// Tell glib that this is the process's main application.
 	app.application.SetDefault()

@@ -113,7 +113,7 @@ func (app *Application) LoadSearchIndex() {
 func (win *Window) Search() {
 	userQuery, err := win.searchEntry.GetText()
 	if err != nil {
-		log.Print(err)
+		log.Print("error getting search text: ", err)
 	}
 	if userQuery == "" {
 		win.loadSearchResults(nil)
@@ -125,7 +125,7 @@ func (win *Window) Search() {
 	searchRequest.Fields = []string{"*"}
 	result, err := searchIndex.Search(searchRequest)
 	if err != nil {
-		log.Print(err)
+		log.Print("error getting search results: ", err)
 	}
 	win.loadSearchResults(result)
 }
@@ -199,7 +199,7 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 func (win *Window) setComicFromSearch(_ interface{}, id string) {
 	number, err := strconv.Atoi(id)
 	if err != nil {
-		log.Print(err)
+		log.Print("error setting comic from search result: ", err)
 		return
 	}
 	win.SetComic(number)

@@ -33,7 +33,7 @@ func (app *Application) ShowAbout() {
 	if aboutDialog == nil {
 		aboutDialog, err = NewAboutDialog()
 		if err != nil {
-			log.Print(err)
+			log.Print("error creating about dialog: ", err)
 			return
 		}
 

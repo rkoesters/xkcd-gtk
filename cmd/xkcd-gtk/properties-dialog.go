@@ -109,7 +109,7 @@ func (win *Window) ShowProperties() {
 	if win.properties == nil {
 		win.properties, err = NewPropertiesDialog(win)
 		if err != nil {
-			log.Print(err)
+			log.Print("error creating properties dialog: ", err)
 			return
 		}
 	}

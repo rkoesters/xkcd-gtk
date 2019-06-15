@@ -32,7 +32,7 @@ func (app *Application) SetupAppMenu() {
 	if app.application.PrefersAppMenu() {
 		menu, err := NewAppMenu()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("error creating app menu: ", err)
 		}
 		app.application.SetAppMenu(menu)
 	}

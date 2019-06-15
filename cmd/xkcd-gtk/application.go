@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xdg"
 	"log"
 )
 
@@ -84,12 +83,12 @@ func NewApplication() (*Application, error) {
 func (app *Application) SetupCache() {
 	err := initComicCache()
 	if err != nil {
-		log.Print(err)
+		log.Print("error initializing comic cache: ", err)
 	}
 
 	err = initSearchIndex()
 	if err != nil {
-		log.Print(err)
+		log.Print("error initializing search index: ", err)
 	}
 
 	app.LoadSearchIndex()
@@ -99,12 +98,12 @@ func (app *Application) SetupCache() {
 func (app *Application) CloseCache() {
 	err := closeSearchIndex()
 	if err != nil {
-		log.Print(err)
+		log.Print("error closing search index: ", err)
 	}
 
 	err = closeComicCache()
 	if err != nil {
-		log.Print(err)
+		log.Print("error closing comic cache: ", err)
 	}
 }
 
@@ -112,7 +111,7 @@ func (app *Application) CloseCache() {
 func (app *Application) Activate() {
 	win, err := NewWindow(app)
 	if err != nil {
-		log.Print(err)
+		log.Print("error creating window: ", err)
 		return
 	}
 	win.window.Present()
@@ -122,19 +121,19 @@ func (app *Application) Activate() {
 func (app *Application) ToggleDarkMode() {
 	darkModeIface, err := app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
 	if err != nil {
-		log.Print(err)
+		log.Print("error getting dark mode state: ", err)
 		return
 	}
 
 	darkMode, ok := darkModeIface.(bool)
 	if !ok {
-		log.Print("failed to convert darkModeIface to bool")
+		log.Print("failed to interpret dark mode state")
 		return
 	}
 
 	err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", !darkMode)
 	if err != nil {
-		log.Print(err)
+		log.Print("error setting dark mode state: ", err)
 		return
 	}
 }
@@ -165,32 +164,20 @@ const (
 
 // OpenWhatIf opens whatifLink in the user's web browser.
 func (app *Application) OpenWhatIf() {
-	err := xdg.Open(whatIfLink)
-	if err != nil {
-		log.Print(err)
-	}
+	openURL(whatIfLink)
 }
 
 // OpenBlog opens blogLink in the user's web browser.
 func (app *Application) OpenBlog() {
-	err := xdg.Open(blogLink)
-	if err != nil {
-		log.Print(err)
-	}
+	openURL(blogLink)
 }
 
 // OpenStore opens storeLink in the user's web browser.
 func (app *Application) OpenStore() {
-	err := xdg.Open(storeLink)
-	if err != nil {
-		log.Print(err)
-	}
+	openURL(storeLink)
 }
 
 // OpenAboutXKCD opens aboutLink in the user's web browser.
 func (app *Application) OpenAboutXKCD() {
-	err := xdg.Open(aboutLink)
-	if err != nil {
-		log.Print(err)
-	}
+	openURL(aboutLink)
 }

@@ -34,7 +34,7 @@ func (app *Application) ShowShortcuts() {
 	if shortcutsWindow == nil {
 		shortcutsWindow, err = NewShortcutsWindow()
 		if err != nil {
-			log.Print(err)
+			log.Print("error creating shortcuts window: ", err)
 			return
 		}
 

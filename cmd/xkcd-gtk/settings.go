@@ -67,10 +67,10 @@ func (app *Application) LoadSettings() {
 		// Apply Dark Mode setting.
 		err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
 		if err != nil {
-			log.Print(err)
+			log.Print("error setting dark mode state: ", err)
 		}
 	} else {
-		log.Print(err)
+		log.Print("error querying gtk settings: ", err)
 	}
 }
 

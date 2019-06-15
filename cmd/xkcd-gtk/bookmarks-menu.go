@@ -81,9 +81,10 @@ func (win *Window) loadBookmarkList() {
 
 	iter := win.app.bookmarks.Iterator()
 	for iter.Next() {
-		comic, err := GetComicInfo(iter.Value().(int))
+		id := iter.Value().(int)
+		comic, err := GetComicInfo(id)
 		if err != nil {
-			log.Print(err)
+			log.Print("error retrieving comic ", id, ": ", err)
 			continue
 		}
 
