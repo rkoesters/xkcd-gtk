@@ -1,23 +1,32 @@
-language: node_js
-
-node_js:
-  - lts/*
-
-sudo: required
-
-services:
-  - docker
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - libstdc++-5-dev
-
-install:
-  - npm i -g @elementaryos/houston
-
-script:
-  - houston ci
-
+matrix:
+  include:
+    - language: go
+      go:
+        - "1.10.x"
+        - "1.x"
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - libgtk-3-dev
+      install:
+        - make deps
+      script:
+        - make check
+        - make
+    - language: node_js
+      node_js:
+        - lts/*
+      sudo: required
+      services:
+        - docker
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - libstdc++-5-dev
+      install:
+        - npm i -g @elementaryos/houston
+      script:
+        - houston ci
