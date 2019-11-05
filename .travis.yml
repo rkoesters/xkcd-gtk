@@ -25,7 +25,8 @@ jobs:
     - language: node_js
 
   include:
-    - language: node_js
+    - name: "Houston CI"
+      language: node_js
       node_js:
         - lts/*
       sudo: required
