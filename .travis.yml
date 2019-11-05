@@ -1,4 +1,7 @@
 jobs:
+  allow_failures:
+    - language: node_js
+
   include:
     - language: go
       go: "1.10.x" # ubuntu 18.04
@@ -13,6 +16,7 @@ jobs:
       script:
         - make check
         - make
+
     - language: go
       go: "1.11.x" # debian buster
       dist: bionic
@@ -39,6 +43,7 @@ jobs:
       script:
         - make check
         - make
+
     - language: node_js
       node_js:
         - lts/*
