@@ -1,4 +1,6 @@
-#!/bin/sh -u
+#!/bin/sh
+set -eu
+
 failure () {
 	echo "FAILURE $*"
 	exit 1

@@ -1,6 +1,7 @@
-#!/bin/sh -eu
+#!/bin/sh
 # Find and print versions (or commits) of the dependencies of the given Go
 # packages.
+set -eu
 
 get_package_version () {
 	git -C "$1" describe --always --tags --dirty

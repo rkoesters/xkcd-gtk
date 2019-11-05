@@ -1,5 +1,6 @@
-#!/bin/sh -eu
+#!/bin/sh
 # Simple script to wrap a plain text file as go const string.
+set -eu
 
 if [ $# != 1 ]; then
 	echo "usage: $0 FILE"
