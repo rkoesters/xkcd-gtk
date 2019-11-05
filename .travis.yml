@@ -10,6 +10,7 @@ jobs:
         apt:
           packages:
             - appstream-util
+            - golint
             - libgtk-3-dev
       install:
         - make deps
@@ -24,6 +25,7 @@ jobs:
         apt:
           packages:
             - appstream-util
+            - golint
             - libgtk-3-dev
       install:
         - make deps
@@ -37,6 +39,7 @@ jobs:
         apt:
           packages:
             - appstream-util
+            - golint
             - libgtk-3-dev
       install:
         - make deps
