@@ -1,52 +1,30 @@
+language: go
+go:
+  - "1.10.x" # ubuntu 18.04
+  - "1.11.x" # debian buster
+  - "1.x" # latest
+
+dist: bionic
+
+addons:
+  apt:
+    packages:
+      - appstream-util
+      - golint
+      - libgtk-3-dev
+
+install:
+  - make deps
+
+script:
+  - make check
+  - make
+
 jobs:
   allow_failures:
     - language: node_js
 
   include:
-    - language: go
-      go: "1.10.x" # ubuntu 18.04
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - appstream-util
-            - golint
-            - libgtk-3-dev
-      install:
-        - make deps
-      script:
-        - make check
-        - make
-
-    - language: go
-      go: "1.11.x" # debian buster
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - appstream-util
-            - golint
-            - libgtk-3-dev
-      install:
-        - make deps
-      script:
-        - make check
-        - make
-    - language: go
-      go: "1.x" # latest
-      dist: bionic
-      addons:
-        apt:
-          packages:
-            - appstream-util
-            - golint
-            - libgtk-3-dev
-      install:
-        - make deps
-      script:
-        - make check
-        - make
-
     - language: node_js
       node_js:
         - lts/*
