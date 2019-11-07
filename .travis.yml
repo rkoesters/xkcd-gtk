@@ -19,6 +19,10 @@ install:
 script:
   - make check
   - make
+  - mkdir out
+  - make prefix=out install
+  - make prefix=out uninstall
+  - rmdir out/*/*/*/*/* out/*/*/*/* out/*/*/* out/*/* out/* out
 
 jobs:
   allow_failures:
