@@ -1,4 +1,5 @@
 #!/bin/sh
+# Comfirms that `make uninstall` removes everything that `make install` creates.
 set -eu
 
 echo "mkdir out"
