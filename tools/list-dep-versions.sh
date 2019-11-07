@@ -3,12 +3,8 @@
 # packages.
 set -eu
 
-get_package_version () {
+version () {
 	git -C "$1" describe --always --tags --dirty
-}
-
-print_package_version () {
-	printf '%s\t%s\n' "$1" "$(get_package_version "$1")"
 }
 
 # Run all our tools/* before we change directory.
@@ -18,6 +14,4 @@ deps="$(tools/list-deps.sh "$@")"
 # to the respective package.
 cd "$(go env GOPATH)/src"
 
-for package in $deps; do
-	print_package_version "$package"
-done
+(for pkg in $deps; do echo "$pkg" "$(version "$pkg")"; done) | column -t -s ' '
