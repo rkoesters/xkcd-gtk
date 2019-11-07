@@ -14,11 +14,11 @@ addons:
       - libgtk-3-dev
 
 install:
-  - make deps
+  - make BUILDFLAGS=-v deps
 
 script:
   - make check
-  - make
+  - make BUILDFLAGS=-v
   - tools/test-install.sh
 
 jobs:
