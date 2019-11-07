@@ -1,8 +1,10 @@
+---
+
 language: go
 go:
-  - "1.10.x" # ubuntu 18.04
-  - "1.11.x" # debian buster
-  - "1.x" # latest
+  - "1.10.x"  # ubuntu 18.04
+  - "1.11.x"  # debian buster
+  - "1.x"     # latest
 
 dist: bionic
 
@@ -12,9 +14,11 @@ addons:
       - appstream-util
       - golint
       - libgtk-3-dev
+      - libxml2-utils
+      - yamllint
 
 install:
-  - make BUILDFLAGS=-v deps
+  - make deps BUILDFLAGS=-v
 
 script:
   - make check
