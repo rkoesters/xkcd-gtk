@@ -29,6 +29,7 @@ jobs:
       language: node_js
       node_js:
         - lts/*
+      dist: trusty
       sudo: required
       services:
         - docker
