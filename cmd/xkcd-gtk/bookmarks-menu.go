@@ -35,6 +35,11 @@ func (win *Window) unregisterBookmarkObserver() {
 }
 
 func (win *Window) updateBookmarksMenu() {
+	win.updateBookmarkButton()
+	win.loadBookmarkList()
+}
+
+func (win *Window) updateBookmarkButton() {
 	if win.app.bookmarks.Contains(win.state.ComicNumber) {
 		hasFocus := win.bookmarkActionNew.HasFocus()
 		win.actions["bookmark-new"].SetEnabled(false)
@@ -56,8 +61,6 @@ func (win *Window) updateBookmarksMenu() {
 			win.bookmarkActionNew.GrabFocus()
 		}
 	}
-
-	win.loadBookmarkList()
 }
 
 func (win *Window) loadBookmarkList() {

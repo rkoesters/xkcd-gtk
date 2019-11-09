@@ -460,7 +460,7 @@ func (win *Window) SetComic(n int) {
 
 	// Update UI to reflect new current comic.
 	win.updateNextPreviousButtonStatus()
-	win.updateBookmarksMenu()
+	win.updateBookmarkButton()
 
 	go func() {
 		var err error
