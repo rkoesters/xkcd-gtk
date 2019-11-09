@@ -37,8 +37,9 @@ POT_PATH     = po/$(POT_NAME)
 ################################################################################
 
 GO_SOURCES  = $(shell find . -name '*.go' -type f)
+CSS_SOURCES = $(shell find . -name '*.css' -type f)
 UI_SOURCES  = $(shell find . -name '*.ui' -type f)
-GEN_SOURCES = $(patsubst %,%.go,$(UI_SOURCES))
+GEN_SOURCES = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
 IMPORTS     = $(shell tools/list-imports.sh ./...)
 
@@ -72,6 +73,9 @@ $(EXE_PATH): Makefile $(SOURCES)
 
 $(POT_PATH): $(POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
+
+%.css.go: %.css
+	tools/go-wrap.sh $< >$@
 
 %.ui.go: %.ui
 	tools/go-wrap.sh $< >$@

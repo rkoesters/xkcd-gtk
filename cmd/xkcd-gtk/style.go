@@ -7,21 +7,6 @@ import (
 	"os"
 )
 
-const css = `
-@define-color colorPrimary #96a8c8;
-@define-color textColorPrimary #1a1a1a;
-@define-color textColorPrimaryShadow alpha(shade(@colorPrimary, 1.4), 0.4);
-
-.comic-container > .frame {
-	background-color: #ffffff;
-	border-radius: 0px;
-}
-
-.comic-container.dark > .frame {
-	background-color: #000000;
-}
-`
-
 const (
 	styleClassComicContainer = "comic-container"
 	styleClassDark           = "dark"
@@ -59,7 +44,7 @@ func (app *Application) LoadCSS() {
 		log.Print(err)
 		return
 	}
-	provider.LoadFromData(css)
+	provider.LoadFromData(styleCSS)
 
 	screen, err := gdk.ScreenGetDefault()
 	if err != nil {
