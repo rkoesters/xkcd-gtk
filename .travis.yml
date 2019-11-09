@@ -2,7 +2,6 @@
 
 language: go
 go:
-  - "1.7.x"   # debian stretch
   - "1.10.x"  # ubuntu bionic
   - "1.11.x"  # debian buster
   - "1.x"     # latest
