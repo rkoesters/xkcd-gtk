@@ -72,27 +72,25 @@ func NewWindow(app *Application) (*Window, error) {
 	win.comic = &xkcd.Comic{Title: appName}
 
 	// Initialize our window actions.
-	actionFuncs := map[string]interface{}{
-		"bookmark-new":    win.AddBookmark,
-		"bookmark-remove": win.RemoveBookmark,
-		"explain":         win.Explain,
-		"first-comic":     win.FirstComic,
-		"newest-comic":    win.NewestComic,
-		"next-comic":      win.NextComic,
-		"open-link":       win.OpenLink,
-		"previous-comic":  win.PreviousComic,
-		"random-comic":    win.RandomComic,
-		"show-properties": win.ShowProperties,
-	}
-
 	win.actions = make(map[string]*glib.SimpleAction)
-	for name, function := range actionFuncs {
+	registerAction := func(name string, fn interface{}) {
 		action := glib.SimpleActionNew(name, nil)
-		action.Connect("activate", function)
+		action.Connect("activate", fn)
 
 		win.actions[name] = action
 		win.window.AddAction(action)
 	}
+
+	registerAction("bookmark-new", win.AddBookmark)
+	registerAction("bookmark-remove", win.RemoveBookmark)
+	registerAction("explain", win.Explain)
+	registerAction("first-comic", win.FirstComic)
+	registerAction("newest-comic", win.NewestComic)
+	registerAction("next-comic", win.NextComic)
+	registerAction("open-link", win.OpenLink)
+	registerAction("previous-comic", win.PreviousComic)
+	registerAction("random-comic", win.RandomComic)
+	registerAction("show-properties", win.ShowProperties)
 
 	// Initialize our window accelerators.
 	win.accels, err = gtk.AccelGroupNew()

@@ -34,26 +34,24 @@ func NewApplication() (*Application, error) {
 	}
 
 	// Initialize our application actions.
-	actionFuncs := map[string]interface{}{
-		"new-window":       app.Activate,
-		"open-blog":        app.OpenBlog,
-		"open-store":       app.OpenStore,
-		"open-what-if":     app.OpenWhatIf,
-		"open-about-xkcd":  app.OpenAboutXKCD,
-		"quit":             app.Quit,
-		"show-about":       app.ShowAbout,
-		"show-shortcuts":   app.ShowShortcuts,
-		"toggle-dark-mode": app.ToggleDarkMode,
-	}
-
 	app.actions = make(map[string]*glib.SimpleAction)
-	for name, function := range actionFuncs {
+	registerAction := func(name string, fn interface{}) {
 		action := glib.SimpleActionNew(name, nil)
-		action.Connect("activate", function)
+		action.Connect("activate", fn)
 
 		app.actions[name] = action
 		app.application.AddAction(action)
 	}
+
+	registerAction("new-window", app.Activate)
+	registerAction("open-about-xkcd", app.OpenAboutXKCD)
+	registerAction("open-blog", app.OpenBlog)
+	registerAction("open-store", app.OpenStore)
+	registerAction("open-what-if", app.OpenWhatIf)
+	registerAction("quit", app.Quit)
+	registerAction("show-about", app.ShowAbout)
+	registerAction("show-shortcuts", app.ShowShortcuts)
+	registerAction("toggle-dark-mode", app.ToggleDarkMode)
 
 	// Initialize our application accelerators.
 	app.application.SetAccelsForAction("app.new-window", []string{"<Control>n"})
