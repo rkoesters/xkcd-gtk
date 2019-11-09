@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 11:53-0700\n"
+"POT-Creation-Date: 2019-11-08 20:11-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -283,96 +283,104 @@ msgid "Ryan Koesters"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:61
-msgid "Add bookmarks for keeping track of comics"
+msgid "Add loading icon while fetching comic"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:62
-msgid "Update search menu to not waste space"
+msgid "Add Dutch translations (Thanks to Vistaus)"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:69
+msgid "Add bookmarks for keeping track of comics"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:70
+msgid "Update search menu to not waste space"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:77
 msgid ""
 "Add support for translations (user interface only, comics will remain in "
 "their original language)"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:70
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:78
 msgid "Add French translations (Thanks to @NathanBnm)"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:76
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:84
 msgid "Fix for changes to xkcd API encoding."
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:82
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:90
 msgid "Fix restoring of window state when maximized"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:89
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:97
 msgid "Add keyboard shortcut for dark mode"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:90
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:98
 msgid "Fix saving of properties window state"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:96
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:104
 msgid "The dark mode update!"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:98
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:106
 msgid ""
 "Add dark mode that inverts the comic image to improve readability in the dark"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:99
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:107
 msgid ""
 "Add buttons to titlebar for jumping to the first comic and the newest comic"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:100
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:108
 msgid ""
 "Fix issue with encoding of comic metadata (fixes display of special "
 "characters and emojis)"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:101
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:109
 msgid "Fix memory leak when closing additional comic windows"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:107
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:115
 msgid "Update app metadata to pass appstream-util validate-relax"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:112
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:120
 msgid "Revert fuzzy searching due to regressions"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:117
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:125
 msgid "Minor fixes"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:119
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:127
 msgid "Use fuzzy searching"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:120
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:128
 msgid "Only show alt text when hovering directly over the comic image"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:126
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:134
 msgid "Update OARS metadata."
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:131
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:139
 msgid "First stable release"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:133
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:141
 msgid "Improve startup time"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:134
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:142
 msgid "Add keyboard shortcuts for faster navigation"
 msgstr ""
 
