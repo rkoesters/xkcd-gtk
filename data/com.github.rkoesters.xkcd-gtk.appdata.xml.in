@@ -55,6 +55,14 @@
   </custom>
 
   <releases>
+    <release version="1.3.1" date="2019-11-08">
+      <description>
+        <ul>
+          <li>Add loading icon while fetching comic</li>
+          <li>Add Dutch translations (Thanks to Vistaus)</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.3.0" date="2019-05-11">
       <description>
         <ul>
