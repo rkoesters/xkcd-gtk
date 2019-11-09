@@ -33,7 +33,7 @@ jobs:
     - name: "Houston CI"
       language: node_js
       node_js:
-        - lts/*
+        - 10/*
       sudo: required
       services:
         - docker
