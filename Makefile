@@ -97,6 +97,13 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	-yamllint .
 	-appstream-util validate-relax $(APPDATA_PATH)
 
+# No go tests yet. Also, when using current directory as GOPATH (see above), the
+# 'go test' command would run tests for every package in GOPATH which might take
+# a long time or fail.
+test:
+	go test -cover $(BUILDFLAGS) ./...
+	tools/test-install.sh
+
 clean:
 	-rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
@@ -126,4 +133,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean deps install strip uninstall
+.PHONY: all check clean deps install strip test uninstall

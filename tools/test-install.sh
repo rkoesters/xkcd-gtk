@@ -4,7 +4,7 @@ set -eu
 
 echo "mkdir out"
 mkdir out
-make install prefix=out
-make uninstall prefix=out
+make --no-print-directory install prefix=out
+make --no-print-directory uninstall prefix=out
 echo "rmdir out/..."
 rmdir out/*/*/*/*/* out/*/*/*/* out/*/*/* out/*/* out/* out
