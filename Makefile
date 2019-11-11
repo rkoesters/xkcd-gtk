@@ -51,7 +51,8 @@ MO       = $(patsubst %.po,%.mo,$(PO))
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
 
-# If GOPATH isn't set, then just use the current directory.
+# If GOPATH isn't set, then use the current directory. NOTE: Calling 'make test'
+# while using the current directory will run the tests for everything in GOPATH.
 ifeq "$(shell go env GOPATH)" ""
 export GOPATH = $(shell pwd)
 endif
@@ -97,9 +98,6 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	-yamllint .
 	-appstream-util validate-relax $(APPDATA_PATH)
 
-# No go tests yet. Also, when using current directory as GOPATH (see above), the
-# 'go test' command would run tests for every package in GOPATH which might take
-# a long time or fail.
 test:
 	go test -cover $(BUILDFLAGS) ./...
 	tools/test-install.sh
