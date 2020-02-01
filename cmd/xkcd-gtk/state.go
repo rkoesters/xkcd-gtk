@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
 	"log"
 	"os"
@@ -102,5 +103,5 @@ func (win *Window) SaveState() {
 }
 
 func getWindowStatePath() string {
-	return filepath.Join(CacheDir(), "state")
+	return filepath.Join(paths.CacheDir(), "state")
 }

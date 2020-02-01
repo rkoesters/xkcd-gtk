@@ -8,6 +8,7 @@ import (
 	"fmt"
 	bolt "github.com/etcd-io/bbolt"
 	"github.com/rkoesters/xkcd"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -51,7 +52,7 @@ var (
 )
 
 func initComicCache() error {
-	err := os.MkdirAll(CacheDir(), 0755)
+	err := os.MkdirAll(paths.CacheDir(), 0755)
 	if err != nil {
 		return err
 	}
@@ -85,7 +86,7 @@ func initComicCache() error {
 		return err
 	}
 
-	err = os.MkdirAll(filepath.Join(CacheDir(), comicCacheImageName), 0755)
+	err = os.MkdirAll(filepath.Join(paths.CacheDir(), comicCacheImageName), 0755)
 	if err != nil {
 		return err
 	}
@@ -352,15 +353,15 @@ func getExistingCacheVersion() int {
 }
 
 func getCacheVersionPath() string {
-	return filepath.Join(CacheDir(), cacheVersionName)
+	return filepath.Join(paths.CacheDir(), cacheVersionName)
 }
 
 func getComicCacheDBPath() string {
-	return filepath.Join(CacheDir(), comicCacheDBName)
+	return filepath.Join(paths.CacheDir(), comicCacheDBName)
 }
 
 func getComicImagePath(n int) string {
-	return filepath.Join(CacheDir(), comicCacheImageName, strconv.Itoa(n))
+	return filepath.Join(paths.CacheDir(), comicCacheImageName, strconv.Itoa(n))
 }
 
 func intToBytes(i int) []byte {

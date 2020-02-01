@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
 	"log"
 	"os"
@@ -76,7 +77,7 @@ func (app *Application) LoadSettings() {
 
 // SaveSettings tries to save our settings to disk.
 func (app *Application) SaveSettings() {
-	err := os.MkdirAll(ConfigDir(), 0755)
+	err := os.MkdirAll(paths.ConfigDir(), 0755)
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
 	}
@@ -88,5 +89,5 @@ func (app *Application) SaveSettings() {
 }
 
 func getSettingsPath() string {
-	return filepath.Join(ConfigDir(), "settings")
+	return filepath.Join(paths.ConfigDir(), "settings")
 }

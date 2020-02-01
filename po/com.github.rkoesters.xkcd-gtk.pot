@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-09 13:35-0800\n"
+"POT-Creation-Date: 2020-02-01 14:01-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,24 +69,24 @@ msgstr ""
 msgid "Comic Sticks"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:143 cmd/xkcd-gtk/cache.go:144
-#: cmd/xkcd-gtk/cache.go:184
+#: cmd/xkcd-gtk/cache.go:144 cmd/xkcd-gtk/cache.go:145
+#: cmd/xkcd-gtk/cache.go:185
 msgid "Comic Not Found"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:156
+#: cmd/xkcd-gtk/cache.go:157
 msgid "Error trying to access metadata cache"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:172
+#: cmd/xkcd-gtk/cache.go:173
 msgid "Error parsing comic metadata from cache"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:189
+#: cmd/xkcd-gtk/cache.go:190
 msgid "Couldn't Get Comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/cache.go:250
+#: cmd/xkcd-gtk/cache.go:251
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
@@ -127,11 +127,11 @@ msgstr ""
 msgid "Transcript"
 msgstr ""
 
-#: cmd/xkcd-gtk/search.go:48
+#: cmd/xkcd-gtk/search.go:49
 msgid "Search Index Update"
 msgstr ""
 
-#: cmd/xkcd-gtk/search.go:56
+#: cmd/xkcd-gtk/search.go:57
 msgid "Updating comic search index..."
 msgstr ""
 

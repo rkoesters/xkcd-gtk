@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/emirpasic/gods/sets/treeset"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
 	"log"
 	"os"
@@ -139,7 +140,7 @@ func (app *Application) LoadBookmarks() {
 
 // SaveBookmarks tries to save our bookmarks to disk.
 func (app *Application) SaveBookmarks() {
-	err := os.MkdirAll(DataDir(), 0755)
+	err := os.MkdirAll(paths.DataDir(), 0755)
 	if err != nil {
 		log.Printf("error saving bookmarks: %v", err)
 	}
@@ -151,5 +152,5 @@ func (app *Application) SaveBookmarks() {
 }
 
 func getBookmarksPath() string {
-	return filepath.Join(DataDir(), "bookmarks")
+	return filepath.Join(paths.DataDir(), "bookmarks")
 }

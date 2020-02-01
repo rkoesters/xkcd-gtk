@@ -8,6 +8,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"log"
 	"path/filepath"
 	"strconv"
@@ -207,5 +208,5 @@ func (win *Window) setComicFromSearch(_ interface{}, id string) {
 }
 
 func getSearchIndexPath() string {
-	return filepath.Join(CacheDir(), "search")
+	return filepath.Join(paths.CacheDir(), "search")
 }
