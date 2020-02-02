@@ -51,15 +51,6 @@ MO       = $(patsubst %.po,%.mo,$(PO))
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
 
-# If GOPATH isn't set, then use the current directory. NOTE: Calling 'make test'
-# while using the current directory will run the tests for everything in GOPATH.
-ifeq "$(shell go env GOPATH)" ""
-export GOPATH = $(shell pwd)
-endif
-ifeq "$(shell go env GOPATH)" "/nonexistent/go"
-export GOPATH = $(shell pwd)
-endif
-
 ################################################################################
 # Targets
 ################################################################################
