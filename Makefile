@@ -90,8 +90,11 @@ $(POT_PATH): $(POTFILES)
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
+fix: $(GEN_SOURCES)
+	go fix ./...
+	go fmt ./...
+
 check: $(GEN_SOURCES) $(APPDATA_PATH)
-	-go fmt ./...
 	-go vet ./...
 	-golint ./...
 	-xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
@@ -131,4 +134,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean deps install strip test uninstall
+.PHONY: all check clean deps fix install strip test uninstall
