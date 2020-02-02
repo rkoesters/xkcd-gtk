@@ -181,7 +181,7 @@ msgstr "Mostra proprietà fumetto"
 
 #: cmd/xkcd-gtk/shortcuts-window.ui:91
 msgid "Application Actions"
-msgstr ""
+msgstr "Azioni Applicazione"
 
 #: cmd/xkcd-gtk/shortcuts-window.ui:95
 msgid "Open new window"
