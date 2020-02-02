@@ -21,8 +21,8 @@ install:
   - make deps BUILDFLAGS=-v
 
 script:
-  - make check
   - make BUILDFLAGS=-v
+  - make check
   - make test BUILDFLAGS=-v
 
 jobs:
