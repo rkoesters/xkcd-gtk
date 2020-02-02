@@ -1,3 +1,4 @@
+// Package paths provides information on where to find and store files.
 package paths
 
 var b builder
