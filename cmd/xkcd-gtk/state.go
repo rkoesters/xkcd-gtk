@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
 	"log"
@@ -29,7 +30,7 @@ type WindowState struct {
 }
 
 func (ws *WindowState) loadDefaults() {
-	newestComic, _ := GetNewestComicInfo()
+	newestComic, _ := cache.NewestComicInfo()
 	ws.ComicNumber = newestComic.Num
 	ws.Maximized = false
 	ws.Height = 500

@@ -4,6 +4,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
+	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"log"
 	"strconv"
 )
@@ -80,12 +81,12 @@ func (win *Window) loadBookmarkList() {
 
 	// We are grabbing the newest comic so we can figure out how
 	// wide to make the comic number column.
-	newest, _ := GetNewestComicInfo()
+	newest, _ := cache.NewestComicInfo()
 
 	iter := win.app.bookmarks.Iterator()
 	for iter.Next() {
 		id := iter.Value().(int)
-		comic, err := GetComicInfo(id)
+		comic, err := cache.ComicInfo(id)
 		if err != nil {
 			log.Print("error retrieving comic ", id, ": ", err)
 			continue

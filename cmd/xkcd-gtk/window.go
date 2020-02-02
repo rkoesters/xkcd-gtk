@@ -6,6 +6,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
+	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"log"
 	"math"
 	"math/rand"
@@ -424,9 +425,7 @@ func (win *Window) NewestComic() {
 	// Make it clear that we are checking for a new comic.
 	win.header.SetTitle(l("Checking for new comic..."))
 
-	// Force GetNewestComicInfo to check for a new comic.
-	setCachedNewestComic <- nil
-	newestComic, err := GetNewestComicInfo()
+	newestComic, err := cache.NewestComicInfoSkipCache()
 	if err != nil {
 		log.Print("error jumping to newest comic: ", err)
 	}
@@ -442,7 +441,7 @@ func (win *Window) RandomComic() {
 		return          // guaranteed to be random.
 	}
 
-	newestComic, _ := GetNewestComicInfo()
+	newestComic, _ := cache.NewestComicInfo()
 	if newestComic.Num <= 0 {
 		win.SetComic(newestComic.Num)
 	} else {
@@ -469,14 +468,14 @@ func (win *Window) SetComic(n int) {
 		win.comicMutex.Lock()
 		defer win.comicMutex.Unlock()
 
-		win.comic, err = GetComicInfo(n)
+		win.comic, err = cache.ComicInfo(n)
 		if err != nil {
 			log.Printf("error downloading comic info: %v", n)
 		} else {
-			_, err = os.Stat(getComicImagePath(n))
+			_, err = os.Stat(cache.ComicImagePath(n))
 			if os.IsNotExist(err) {
 				win.image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
-				err = DownloadComicImage(n)
+				err = cache.DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle
 					// for window title, but we can leave
@@ -541,7 +540,7 @@ func (win *Window) DrawComic() {
 	}
 
 	// Load the comic image.
-	win.image.SetFromFile(getComicImagePath(win.comic.Num))
+	win.image.SetFromFile(cache.ComicImagePath(win.comic.Num))
 
 	if darkMode {
 		// Apply the dark style class to the comic container.
@@ -572,7 +571,7 @@ func (win *Window) updateNextPreviousButtonStatus() {
 	}
 
 	// Enable/disable next button.
-	newest, _ := GetNewestComicInfoAsync(func(c *xkcd.Comic, _ error) {
+	newest, _ := cache.NewestComicInfoAsync(func(c *xkcd.Comic, _ error) {
 		if c != nil {
 			if win.comic.Num < c.Num {
 				glib.IdleAdd(func() {
