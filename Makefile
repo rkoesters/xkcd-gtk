@@ -106,7 +106,7 @@ test:
 	tools/test-install.sh
 
 clean:
-	-rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
