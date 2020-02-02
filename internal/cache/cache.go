@@ -31,8 +31,8 @@ var (
 	comicCacheMetadataBucketName = []byte("comic_metadata")
 	comicCacheImageBucketName    = []byte("comic_image")
 
-	getCachedNewestComic <-chan *xkcd.Comic
-	setCachedNewestComic chan<- *xkcd.Comic
+	recvCachedNewestComic <-chan *xkcd.Comic
+	sendCachedNewestComic chan<- *xkcd.Comic
 
 	// addToSearchIndex is a callback to insert the given comic into the
 	// search index.
@@ -52,7 +52,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	// If the user's cache isn't compatible with our binary's cache
 	// implementation, then we need to start over (we will move the old
 	// cache to .bak just in case).
-	if getExistingCacheVersion() != getCurrentCacheVersion() {
+	if existingCacheVersion() != currentCacheVersion() {
 		os.Rename(comicCacheDBPath(), comicCacheDBPath()+".bak")
 	}
 
@@ -86,8 +86,8 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	cachedNewestComicOut := make(chan *xkcd.Comic)
 	cachedNewestComicIn := make(chan *xkcd.Comic)
 
-	getCachedNewestComic = cachedNewestComicOut
-	setCachedNewestComic = cachedNewestComicIn
+	recvCachedNewestComic = cachedNewestComicOut
+	sendCachedNewestComic = cachedNewestComicIn
 
 	// Start cachedNewestComic manager.
 	go func() {
@@ -119,7 +119,7 @@ func Close() error {
 	}
 	defer f.Close()
 
-	_, err = fmt.Fprintln(f, getCurrentCacheVersion())
+	_, err = fmt.Fprintln(f, currentCacheVersion())
 	return err
 }
 
@@ -194,19 +194,19 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 func NewestComicInfo() (*xkcd.Comic, error) {
 	var err error
 
-	newest := <-getCachedNewestComic
+	newest := <-recvCachedNewestComic
 
 	if newest == nil {
 		newest, err = xkcd.GetCurrent()
 		if err != nil {
-			newest, err = getNewestComicInfoFromCache()
+			newest, err = newestComicInfoFromCache()
 			if err != nil {
 				return newest, err
 			}
 			return newest, ErrOffline
 		}
 
-		setCachedNewestComic <- newest
+		sendCachedNewestComic <- newest
 	}
 	return newest, nil
 }
@@ -214,7 +214,7 @@ func NewestComicInfo() (*xkcd.Comic, error) {
 // NewestComicInfoSkipCache is equivalent to NewestComicInfo except it always
 // queries the internet to check for a new comic.
 func NewestComicInfoSkipCache() (*xkcd.Comic, error) {
-	setCachedNewestComic <- nil
+	sendCachedNewestComic <- nil
 	return NewestComicInfo()
 }
 
@@ -224,21 +224,21 @@ func NewestComicInfoSkipCache() (*xkcd.Comic, error) {
 // based on the cache, but then asynchronously checks for the newest comic from
 // the internet and calls callback when the asynchronous call completes.
 func NewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error) {
-	newest := <-getCachedNewestComic
+	newest := <-recvCachedNewestComic
 
 	if newest == nil {
-		newestFromCache, err := getNewestComicInfoFromCache()
+		newestFromCache, err := newestComicInfoFromCache()
 
 		go func() {
 			newestFromInternet, err := xkcd.GetCurrent()
 
 			if newestFromInternet != nil && err == nil {
-				setCachedNewestComic <- newestFromInternet
+				sendCachedNewestComic <- newestFromInternet
 			} else {
-				setCachedNewestComic <- newestFromCache
+				sendCachedNewestComic <- newestFromCache
 			}
 
-			callback(<-getCachedNewestComic, err)
+			callback(<-recvCachedNewestComic, err)
 		}()
 
 		return newestFromCache, err
@@ -246,7 +246,7 @@ func NewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error
 	return newest, nil
 }
 
-func getNewestComicInfoFromCache() (*xkcd.Comic, error) {
+func newestComicInfoFromCache() (*xkcd.Comic, error) {
 	newest := &xkcd.Comic{
 		SafeTitle: l("Connect to the internet to download some comics!"),
 	}
@@ -331,14 +331,11 @@ func DownloadComicImage(n int) error {
 	return nil
 }
 
-// getCurrentCacheVersion returns the cache version for this binary.
-func getCurrentCacheVersion() int {
-	return cacheVersionCurrent
-}
+// currentCacheVersion returns the cache version for this binary.
+func currentCacheVersion() int { return cacheVersionCurrent }
 
-// getExistingCacheVersion returns the cache version for the user's existing
-// cache.
-func getExistingCacheVersion() int {
+// existingCacheVersion returns the cache version for the user's existing cache.
+func existingCacheVersion() int {
 	b, err := ioutil.ReadFile(cacheVersionPath())
 	if err != nil {
 		return 0
