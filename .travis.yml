@@ -15,7 +15,6 @@ addons:
       - golint
       - libgtk-3-dev
       - libxml2-utils
-      - yamllint
 
 install:
   - make deps BUILDFLAGS=-v
