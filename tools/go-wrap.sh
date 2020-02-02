@@ -3,7 +3,7 @@
 set -eu
 
 if [ $# != 1 ]; then
-	echo "usage: $0 FILE"
+	echo "usage: $0 FILE" >&2
 	exit 1
 fi
 
