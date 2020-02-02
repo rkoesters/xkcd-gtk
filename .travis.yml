@@ -32,9 +32,7 @@ jobs:
   include:
     - name: "Houston CI"
       language: node_js
-      node_js:
-        - 10/*
-      sudo: required
+      node_js: 10/*
       services:
         - docker
       addons:
