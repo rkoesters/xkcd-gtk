@@ -1,0 +1,405 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
+# ALBANO BATTISTELLA <albano_battistella@hotmail.com>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-09 13:35-0800\n"
+"PO-Revision-Date: 2020-02-02 12:00+0100\n"
+"Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
+"Language-Team:Italian <LL@li.org>\n"
+"Language:it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: cmd/xkcd-gtk/about-dialog.go:18
+msgid "A simple xkcd viewer written in Go using GTK+3"
+msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
+
+#: cmd/xkcd-gtk/about-dialog.go:21
+msgid "Copyright © 2015-2019 Ryan Koesters"
+msgstr "Copyright © 2015-2019 Ryan Koesters"
+
+#: cmd/xkcd-gtk/app-menu.ui:6 cmd/xkcd-gtk/window.go:190
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
+msgid "New Window"
+msgstr "Nuova Finestra"
+
+#: cmd/xkcd-gtk/app-menu.ui:11 cmd/xkcd-gtk/window.go:194
+msgid "Toggle Dark Mode"
+msgstr "Attiva modalità scura"
+
+#: cmd/xkcd-gtk/app-menu.ui:16 cmd/xkcd-gtk/window.go:198
+msgid "What If?"
+msgstr "E se?"
+
+#: cmd/xkcd-gtk/app-menu.ui:20 cmd/xkcd-gtk/window.go:199
+msgid "XKCD Blog"
+msgstr "XKCD Blog"
+
+#: cmd/xkcd-gtk/app-menu.ui:24 cmd/xkcd-gtk/window.go:200
+msgid "XKCD Store"
+msgstr "XKCD Store"
+
+#: cmd/xkcd-gtk/app-menu.ui:28 cmd/xkcd-gtk/window.go:201
+msgid "About XKCD"
+msgstr "Informazioni su XKCD"
+
+#: cmd/xkcd-gtk/app-menu.ui:34 cmd/xkcd-gtk/shortcuts-window.ui:4
+#: cmd/xkcd-gtk/window.go:205
+msgid "Keyboard Shortcuts"
+msgstr "Tasti Rapidi"
+
+#: cmd/xkcd-gtk/app-menu.ui:38 cmd/xkcd-gtk/window.go:206
+msgid "About Comic Sticks"
+msgstr "A proposito di Sticks Comic"
+
+#: cmd/xkcd-gtk/app-menu.ui:42
+msgid "Quit"
+msgstr "Esci"
+
+#: cmd/xkcd-gtk/application.go:12
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
+msgid "Comic Sticks"
+msgstr "Comic Sticks"
+
+#: cmd/xkcd-gtk/cache.go:143 cmd/xkcd-gtk/cache.go:144
+#: cmd/xkcd-gtk/cache.go:184
+msgid "Comic Not Found"
+msgstr "Fumetto non trovato"
+
+#: cmd/xkcd-gtk/cache.go:156
+msgid "Error trying to access metadata cache"
+msgstr "Errore durante il tentativo di accedere alla cache dei metadati"
+
+#: cmd/xkcd-gtk/cache.go:172
+msgid "Error parsing comic metadata from cache"
+msgstr "Errore durante l'analisi dei metadati del fumetto dalla cache"
+
+#: cmd/xkcd-gtk/cache.go:189
+msgid "Couldn't Get Comic"
+msgstr "Impossibile ottenere fumetto"
+
+#: cmd/xkcd-gtk/cache.go:250
+msgid "Connect to the internet to download some comics!"
+msgstr "Collegati a Internet per scaricare alcuni fumetti!"
+
+#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/shortcuts-window.ui:78
+#: cmd/xkcd-gtk/window.go:184
+msgid "Properties"
+msgstr "Proprietà"
+
+#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:149
+msgid "Number"
+msgstr "Numero"
+
+#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:150
+msgid "Title"
+msgstr "Titolo"
+
+#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:153
+msgid "Date"
+msgstr "Data"
+
+#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:151
+msgid "Image"
+msgstr "Immagine"
+
+#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:152
+msgid "Alt Text"
+msgstr "Ferma Testo"
+
+#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:154
+msgid "News"
+msgstr "Novità"
+
+#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:155
+msgid "Link"
+msgstr "Link"
+
+#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:156
+msgid "Transcript"
+msgstr "Trascrizione"
+
+#: cmd/xkcd-gtk/search.go:48
+msgid "Search Index Update"
+msgstr "Cerca aggiornamento indice"
+
+#: cmd/xkcd-gtk/search.go:56
+msgid "Updating comic search index..."
+msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:11
+msgid "Navigate"
+msgstr "Naviga"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:15 cmd/xkcd-gtk/window.go:138
+msgid "Go to the first comic"
+msgstr "Vai al primo fumetto"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:22 cmd/xkcd-gtk/window.go:147
+msgid "Go to the previous comic"
+msgstr "Vai al fumetto precedente"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:29 cmd/xkcd-gtk/window.go:156
+msgid "Go to the next comic"
+msgstr "Vai al prossimo fumetto"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:36 cmd/xkcd-gtk/window.go:165
+msgid "Go to the newest comic"
+msgstr "Vai al fumetto più recente"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:43 cmd/xkcd-gtk/window.go:357
+msgid "Go to a random comic"
+msgstr "Vai ad un fumetto a caso"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:52 cmd/xkcd-gtk/window.go:299
+msgid "Search"
+msgstr "Cerca"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:56
+msgid "Search comics"
+msgstr "Cerca fumetti"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:65 cmd/xkcd-gtk/window.go:218
+msgid "Bookmarks"
+msgstr "Segnalibri"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:69
+msgid "Show bookmarks menu"
+msgstr "Mostra menu segnalibri"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:82
+msgid "Show comic properties"
+msgstr "Mostra proprietà fumetto"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:91
+msgid "Application Actions"
+msgstr ""
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:95
+msgid "Open new window"
+msgstr "Apri nuova finestra"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:102
+msgid "Toggle dark mode"
+msgstr "Abilità modalità scura"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:109
+msgid "Open shortcuts window"
+msgstr "Apri la finestra delle scorciatoie"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:116
+msgid "Quit application"
+msgstr "Esci dall'applicazione"
+
+#: cmd/xkcd-gtk/window.go:177
+msgid "Menu"
+msgstr "Menu"
+
+#: cmd/xkcd-gtk/window.go:182
+msgid "Open Link"
+msgstr "Apri Link"
+
+#: cmd/xkcd-gtk/window.go:183
+msgid "Explain"
+msgstr "Spiega"
+
+#: cmd/xkcd-gtk/window.go:237
+msgid "Bookmark this comic"
+msgstr "Aggiungi questo fumetto ai preferiti"
+
+#: cmd/xkcd-gtk/window.go:250
+msgid "Remove this comic from bookmarks"
+msgstr "Rimuovi questo fumetto dai preferiti"
+
+#: cmd/xkcd-gtk/window.go:325
+msgid "No results found"
+msgstr "Nessun risultato trovato"
+
+#: cmd/xkcd-gtk/window.go:353
+msgid "Random"
+msgstr "Casuale"
+
+#: cmd/xkcd-gtk/window.go:425
+msgid "Checking for new comic..."
+msgstr "Verifica di nuovi fumetti..."
+
+#: cmd/xkcd-gtk/window.go:458
+msgid "Loading comic..."
+msgstr "Caricamento fumetto..."
+
+#: cmd/xkcd-gtk/window.go:485
+msgid "Connect to the internet to download comic image"
+msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
+msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
+msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
+msgid ""
+"Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
+"offline browsing, and intuitive keyboard shortcuts."
+msgstr ""
+"Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei fumetti",
+"navigazione offline e scorciatoie da tastiera intuitive."
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
+msgid "Features:"
+msgstr "Caratteristiche:"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
+msgid "Search for comics"
+msgstr "Cerca fumetti"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+msgid "Keep track of comics with bookmarks"
+msgstr "Tieni traccia dei fumetti con i segnalibri"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+msgid "Cache comics for later offline viewing"
+msgstr "Fumetti della cache per una successiva visualizzazione offline"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+msgid "Dark mode for late night reading"
+msgstr "Modalità scura per la lettura a tarda notte"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+msgid "View comic metadata"
+msgstr "Visualizza metadati fumetto"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+msgid "Quickly access comic explainations via the explain xkcd wiki"
+msgstr "Accedi rapidamente alle spiegazioni dei fumetti tramite il wiki esplicativo di xkcd"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:26
+msgid "Ryan Koesters"
+msgstr "Ryan Koesters"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:61
+msgid "Add loading icon while fetching comic"
+msgstr "Aggiunta icona di caricamento durante il recupero del fumetto"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:62
+msgid "Add Dutch translations (Thanks to Vistaus)"
+msgstr "Aggiunta traduzione in olandese (Grazie a Vistaus)"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:69
+msgid "Add bookmarks for keeping track of comics"
+msgstr "Aggiunto segnalibri per tenere traccia dei fumetti"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:70
+msgid "Update search menu to not waste space"
+msgstr "Aggiornato il menu di ricerca per non sprecare spazio"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:77
+msgid ""
+"Add support for translations (user interface only, comics will remain in "
+"their original language)"
+msgstr ""
+"Aggiunto supporto per le traduzioni (solo interfaccia utente, i fumetti rimarranno"
+"nella loro lingua originale)"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:78
+msgid "Add French translations (Thanks to @NathanBnm)"
+msgstr "Aggiunta traduzione in francese (grazie a @NathanBnm)"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:84
+msgid "Fix for changes to xkcd API encoding."
+msgstr "Correzione di modifiche alla codifica dell'API xkcd."
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:90
+msgid "Fix restoring of window state when maximized"
+msgstr "Corretto ripristino stato della finestra quando ingrandita"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:97
+msgid "Add keyboard shortcut for dark mode"
+msgstr "Aggiungi scorciatoia da tastiera per la modalità scura"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:98
+msgid "Fix saving of properties window state"
+msgstr "Corretto salvataggio stato della finestra delle proprietà"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:104
+msgid "The dark mode update!"
+msgstr "Aggiornato modalità scura!"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:106
+msgid ""
+"Add dark mode that inverts the comic image to improve readability in the dark"
+msgstr ""
+"Aggiunta modalità scura che inverte l'immagine del fumetto per migliorare la leggibilità al buio"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:107
+msgid ""
+"Add buttons to titlebar for jumping to the first comic and the newest comic"
+msgstr ""
+"Aggiunti pulsanti alla barra del titolo per saltare al primo fumetto e al fumetto più recente"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:108
+msgid ""
+"Fix issue with encoding of comic metadata (fixes display of special "
+"characters and emojis)"
+msgstr ""
+"Risolto il problema con la codifica dei metadati fumetto (corregge la visualizzazione di speciali"
+"caratteri ed emoji)"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:109
+msgid "Fix memory leak when closing additional comic windows"
+msgstr "Risolto il problema con la perdita di memoria durante la chiusura di ulteriori finestre dei fumetti"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:115
+msgid "Update app metadata to pass appstream-util validate-relax"
+msgstr "Aggiornato i metadati dell'app per passare in appstream-util validate-relax"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:120
+msgid "Revert fuzzy searching due to regressions"
+msgstr "Ripristina la ricerca fuzzy a causa di regressioni"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:125
+msgid "Minor fixes"
+msgstr "Correzioni minori"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:127
+msgid "Use fuzzy searching"
+msgstr "Usa la ricerca fuzzy"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:128
+msgid "Only show alt text when hovering directly over the comic image"
+msgstr "Mostra il testo alternativo solo quando passi con il mouse sopra l'immagine del fumetto"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:134
+msgid "Update OARS metadata."
+msgstr "Aggiornati i metadati OARS."
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:139
+msgid "First stable release"
+msgstr "Prima versione stabile"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:141
+msgid "Improve startup time"
+msgstr "Migliorati i tempi di avvio"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:142
+msgid "Add keyboard shortcuts for faster navigation"
+msgstr "Aggiunte scorciatoie da tastiera per una navigazione più veloce"
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
+msgid "XKCD Viewer"
+msgstr "Visualizzatore XKCD"
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:10
+msgid "com.github.rkoesters.xkcd-gtk"
+msgstr "com.github.rkoesters.xkcd-gtk"
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
+msgid "webcomic;romance;sarcasm;math;language;"
+msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"
