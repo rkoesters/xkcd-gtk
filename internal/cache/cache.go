@@ -304,8 +304,8 @@ func downloadComicInfo(n int) (*xkcd.Comic, error) {
 	return comic, err
 }
 
-// DownloadComicImage tries to add a comic image to our local cache. Any errors
-// are indicated by err.
+// DownloadComicImage tries to add a comic image to our local cache. If
+// successful, the image can be found at the path returned by ComicImagePath.
 func DownloadComicImage(n int) error {
 	comic, err := ComicInfo(n)
 	if err != nil {

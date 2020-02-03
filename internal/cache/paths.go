@@ -20,7 +20,7 @@ func comicImageDirPath() string {
 
 // ComicImagePath returns the path to the specified comic image within the
 // cache. The file at the returned path may or may not exist. If it does not
-// exist, call DownloadComicImage fetch the file from the internet.
+// exist, call DownloadComicImage to fetch the file from the internet.
 func ComicImagePath(n int) string {
 	return filepath.Join(comicImageDirPath(), strconv.Itoa(n))
 }
