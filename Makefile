@@ -3,7 +3,8 @@
 ################################################################################
 
 BUILDFLAGS =
-TESTFLAGS  = -cover -race
+DEVFLAGS   = -race
+TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --from-code=utf-8 -kl --package-name="$(APP)"
 
@@ -64,6 +65,9 @@ deps:
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
+dev:
+	go build -o $(EXE_PATH) $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
+
 $(POT_PATH): $(POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
 
@@ -94,7 +98,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
-	go test $(BUILDFLAGS) $(TESTFLAGS) ./...
+	go test $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) ./...
 	tools/test-install.sh
 
 clean:
@@ -126,4 +130,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean deps fix install strip test uninstall
+.PHONY: all check clean deps dev fix install strip test uninstall
