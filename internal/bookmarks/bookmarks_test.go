@@ -31,17 +31,26 @@ func TestReadWrite(t *testing.T) {
 	var buf bytes.Buffer
 	bookmarks := bookmarks.New()
 
+	if !bookmarks.Empty() {
+		t.Error("New List not empty")
+	}
+
 	err := bookmarks.Read(strings.NewReader(sortedBookmarkFile))
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	if bookmarks.Empty() {
+		t.Error("List empty after Read")
+	}
+
 	err = bookmarks.Write(&buf)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if sortedBookmarkFile != buf.String() {
-		t.Fail()
+	if buf.String() != sortedBookmarkFile {
+		t.Error("Write != Read")
 	}
 }
 
@@ -49,17 +58,26 @@ func TestReadWriteUnsorted(t *testing.T) {
 	var buf bytes.Buffer
 	bookmarks := bookmarks.New()
 
+	if !bookmarks.Empty() {
+		t.Error("New List not empty")
+	}
+
 	err := bookmarks.Read(strings.NewReader(unsortedBookmarkFile))
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	if bookmarks.Empty() {
+		t.Error("List empty after Read")
+	}
+
 	err = bookmarks.Write(&buf)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if sortedBookmarkFile != buf.String() {
-		t.Fail()
+	if buf.String() != sortedBookmarkFile {
+		t.Error("Write != Read")
 	}
 }
 
@@ -77,18 +95,31 @@ func TestAddObserver(t *testing.T) {
 	bookmarks := bookmarks.New()
 	bookmarks.AddObserver(ch)
 
+	if !bookmarks.Empty() {
+		t.Error("New List not empty")
+	}
+
 	for i := 0; i < 10; i++ {
 		bookmarks.Add(i)
 	}
+
+	if bookmarks.Empty() {
+		t.Error("List empty after 10x Add")
+	}
+
 	for i := 0; i < 10; i++ {
 		bookmarks.Remove(i)
+	}
+
+	if !bookmarks.Empty() {
+		t.Error("List not empty after 10x Remove")
 	}
 
 	close(ch)
 	<-done
 
 	if notifyCount != 20 {
-		t.Fail()
+		t.Error("Incorrect notification count")
 	}
 }
 
@@ -99,7 +130,7 @@ func TestRemoveObserver(t *testing.T) {
 		for {
 			select {
 			case <-ch:
-				t.Fail()
+				t.Error("Received on ch")
 			case <-done:
 				return
 			}
@@ -109,8 +140,16 @@ func TestRemoveObserver(t *testing.T) {
 	bookmarks := bookmarks.New()
 	bookmarks.RemoveObserver(bookmarks.AddObserver(ch))
 
+	if !bookmarks.Empty() {
+		t.Error("New List not empty")
+	}
+
 	for i := 0; i < 10; i++ {
 		bookmarks.Add(i)
+	}
+
+	if bookmarks.Empty() {
+		t.Error("List empty after Add")
 	}
 
 	done <- struct{}{}
