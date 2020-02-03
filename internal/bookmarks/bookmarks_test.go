@@ -27,6 +27,32 @@ const unsortedBookmarkFile = `1
 32
 `
 
+func TestAddRemove(t *testing.T) {
+	bookmarks := bookmarks.New()
+
+	if !bookmarks.Empty() {
+		t.Error("New List not empty")
+	}
+
+	bookmarks.Add(1)
+
+	if bookmarks.Empty() {
+		t.Error("List empty after Add")
+	}
+	if !bookmarks.Contains(1) {
+		t.Error("List does not contain newly added value")
+	}
+
+	bookmarks.Remove(1)
+
+	if !bookmarks.Empty() {
+		t.Error("List not empty after Remove")
+	}
+	if bookmarks.Contains(1) {
+		t.Error("List Contains removed value")
+	}
+}
+
 func TestReadWrite(t *testing.T) {
 	var buf bytes.Buffer
 	bookmarks := bookmarks.New()
