@@ -10,8 +10,8 @@ import (
 	"sync"
 )
 
-// Bookmarks holds the user's comic bookmarks.
-type Bookmarks struct {
+// List holds the user's comic bookmarks.
+type List struct {
 	set *treeset.Set
 
 	observerMutex   sync.Mutex
@@ -19,66 +19,66 @@ type Bookmarks struct {
 	observers       map[int]chan string
 }
 
-// New returns an initialized Bookmarks struct.
-func New() Bookmarks {
-	return Bookmarks{
+// New returns an initialized List struct.
+func New() List {
+	return List{
 		set: treeset.NewWithIntComparator(),
 	}
 }
 
 // Add adds the comic number to the bookmarks set.
-func (bookmarks *Bookmarks) Add(n int) {
-	bookmarks.set.Add(n)
-	bookmarks.notifyObservers("added bookmark " + strconv.Itoa(n))
+func (list *List) Add(n int) {
+	list.set.Add(n)
+	list.notifyObservers("added bookmark " + strconv.Itoa(n))
 }
 
 // Remove removes the comic number from the bookmarks set.
-func (bookmarks *Bookmarks) Remove(n int) {
-	bookmarks.set.Remove(n)
-	bookmarks.notifyObservers("removed bookmark " + strconv.Itoa(n))
+func (list *List) Remove(n int) {
+	list.set.Remove(n)
+	list.notifyObservers("removed bookmark " + strconv.Itoa(n))
 }
 
 // Contains indicates whether the comic specified by n is bookmarked.
-func (bookmarks *Bookmarks) Contains(n int) bool {
-	return bookmarks.set.Contains(n)
+func (list *List) Contains(n int) bool {
+	return list.set.Contains(n)
 }
 
 // Empty returns true if there are exactly 0 bookmarks.
-func (bookmarks *Bookmarks) Empty() bool {
-	return bookmarks.set.Empty()
+func (list *List) Empty() bool {
+	return list.set.Empty()
 }
 
 // Iterator returns a treeset.Iterator for iterating through the bookmarks.
-func (bookmarks *Bookmarks) Iterator() treeset.Iterator {
-	return bookmarks.set.Iterator()
+func (list *List) Iterator() treeset.Iterator {
+	return list.set.Iterator()
 }
 
 // Read reads bookmarks from r as a newline separated list of comic numbers.
-func (bookmarks *Bookmarks) Read(r io.Reader) error {
+func (list *List) Read(r io.Reader) error {
 	sc := bufio.NewScanner(r)
 	for sc.Scan() {
 		n, err := strconv.Atoi(sc.Text())
 		if err != nil {
 			return err
 		}
-		bookmarks.Add(n)
+		list.Add(n)
 	}
 	return nil
 }
 
 // ReadFile opens the given file and calls Read on the contents.
-func (bookmarks *Bookmarks) ReadFile(filename string) error {
+func (list *List) ReadFile(filename string) error {
 	f, err := os.Open(filename)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
-	return bookmarks.Read(f)
+	return list.Read(f)
 }
 
 // Write writes bookmarks to w as a newline separated list of comic numbers.
-func (bookmarks *Bookmarks) Write(w io.Writer) error {
-	iter := bookmarks.set.Iterator()
+func (list *List) Write(w io.Writer) error {
+	iter := list.set.Iterator()
 	for iter.Next() {
 		_, err := fmt.Fprintln(w, iter.Value().(int))
 		if err != nil {
@@ -89,49 +89,49 @@ func (bookmarks *Bookmarks) Write(w io.Writer) error {
 }
 
 // WriteFile creates or truncates the given file and calls Write on it.
-func (bookmarks *Bookmarks) WriteFile(filename string) error {
+func (list *List) WriteFile(filename string) error {
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
-	return bookmarks.Write(f)
+	return list.Write(f)
 }
 
 // AddObserver adds ch to the list of observers that will be notified when
 // changes are made to bookmarks. The returned int can be used to remove the
 // added channel from the list of observers using RemoveObserver.
-func (bookmarks *Bookmarks) AddObserver(ch chan string) int {
-	bookmarks.observerMutex.Lock()
-	defer bookmarks.observerMutex.Unlock()
+func (list *List) AddObserver(ch chan string) int {
+	list.observerMutex.Lock()
+	defer list.observerMutex.Unlock()
 
-	if bookmarks.observers == nil {
-		bookmarks.observers = make(map[int]chan string)
+	if list.observers == nil {
+		list.observers = make(map[int]chan string)
 	}
 
-	id := bookmarks.observerCounter
-	bookmarks.observerCounter++
+	id := list.observerCounter
+	list.observerCounter++
 
-	bookmarks.observers[id] = ch
+	list.observers[id] = ch
 
 	return id
 }
 
 // RemoveObserver removes the observer specified by id from the list of
 // observers. The channel will be closed after calling this method.
-func (bookmarks *Bookmarks) RemoveObserver(id int) {
-	bookmarks.observerMutex.Lock()
-	defer bookmarks.observerMutex.Unlock()
+func (list *List) RemoveObserver(id int) {
+	list.observerMutex.Lock()
+	defer list.observerMutex.Unlock()
 
-	close(bookmarks.observers[id])
-	delete(bookmarks.observers, id)
+	close(list.observers[id])
+	delete(list.observers, id)
 }
 
-func (bookmarks *Bookmarks) notifyObservers(msg string) {
-	bookmarks.observerMutex.Lock()
-	defer bookmarks.observerMutex.Unlock()
+func (list *List) notifyObservers(msg string) {
+	list.observerMutex.Lock()
+	defer list.observerMutex.Unlock()
 
-	for _, ch := range bookmarks.observers {
+	for _, ch := range list.observers {
 		ch <- msg
 	}
 }

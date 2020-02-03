@@ -23,7 +23,7 @@ type Application struct {
 	actions     map[string]*glib.SimpleAction
 
 	settings  Settings
-	bookmarks bookmarks.Bookmarks
+	bookmarks bookmarks.List
 }
 
 // NewApplication creates an instance of our GTK Application.
