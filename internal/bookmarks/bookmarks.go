@@ -1,3 +1,5 @@
+// Package bookmarks implements an efficient list for holding a numerically
+// sorted list of user bookmarks.
 package bookmarks
 
 import (
