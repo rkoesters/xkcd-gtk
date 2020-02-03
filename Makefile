@@ -92,7 +92,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	yamllint .
 	appstream-util validate-relax $(APPDATA_PATH)
 
-test:
+test: $(GEN_SOURCES)
 	go test -cover $(BUILDFLAGS) ./...
 	tools/test-install.sh
 
