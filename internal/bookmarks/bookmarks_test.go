@@ -62,3 +62,56 @@ func TestReadWriteUnsorted(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestAddObserver(t *testing.T) {
+	notifyCount := 0
+	ch := make(chan string)
+	done := make(chan struct{})
+	go func() {
+		for range ch {
+			notifyCount++
+		}
+		done <- struct{}{}
+	}()
+
+	bookmarks := bookmarks.New()
+	bookmarks.AddObserver(ch)
+
+	for i := 0; i < 10; i++ {
+		bookmarks.Add(i)
+	}
+	for i := 0; i < 10; i++ {
+		bookmarks.Remove(i)
+	}
+
+	close(ch)
+	<-done
+
+	if notifyCount != 20 {
+		t.Fail()
+	}
+}
+
+func TestRemoveObserver(t *testing.T) {
+	ch := make(chan string)
+	done := make(chan struct{})
+	go func() {
+		for {
+			select {
+			case <-ch:
+				t.Fail()
+			case <-done:
+				return
+			}
+		}
+	}()
+
+	bookmarks := bookmarks.New()
+	bookmarks.RemoveObserver(bookmarks.AddObserver(ch))
+
+	for i := 0; i < 10; i++ {
+		bookmarks.Add(i)
+	}
+
+	done <- struct{}{}
+}
