@@ -146,6 +146,9 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) er
 
 // Update changes the dialog's contents to match the parent Window's comic.
 func (pd *PropertiesDialog) Update() {
+	pd.parent.comicMutex.RLock()
+	defer pd.parent.comicMutex.RUnlock()
+
 	pd.labels[l("Number")].SetText(strconv.Itoa(pd.parent.comic.Num))
 	pd.labels[l("Title")].SetText(pd.parent.comic.Title)
 	pd.labels[l("Image")].SetText(pd.parent.comic.Img)
