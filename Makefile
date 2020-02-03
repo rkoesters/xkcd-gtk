@@ -65,7 +65,7 @@ deps:
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
-dev:
+dev: $(GEN_SOURCES)
 	go build -o $(EXE_PATH) $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
 
 $(POT_PATH): $(POTFILES)
