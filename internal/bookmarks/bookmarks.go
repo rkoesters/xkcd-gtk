@@ -16,7 +16,7 @@ import (
 type List struct {
 	set *treeset.Set
 
-	observerMutex   sync.Mutex
+	observerMutex   sync.RWMutex
 	observerCounter int
 	observers       map[int]chan string
 }
@@ -130,8 +130,8 @@ func (list *List) RemoveObserver(id int) {
 }
 
 func (list *List) notifyObservers(msg string) {
-	list.observerMutex.Lock()
-	defer list.observerMutex.Unlock()
+	list.observerMutex.RLock()
+	defer list.observerMutex.RUnlock()
 
 	for _, ch := range list.observers {
 		ch <- msg
