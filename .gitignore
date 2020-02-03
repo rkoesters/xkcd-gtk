@@ -1,7 +1,6 @@
 /xkcd-gtk
-/xkcd-gtk.exe
 /com.github.rkoesters.xkcd-gtk
-/com.github.rkoesters.xkcd-gtk.exe
+/com.github.rkoesters.xkcd-gtk-dev
 /bin/
 /pkg/
 /src/

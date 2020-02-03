@@ -66,7 +66,7 @@ $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(EXE_PATH) $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
+	go build -o $(EXE_PATH)-dev $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
 
 $(POT_PATH): $(POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
@@ -102,7 +102,7 @@ test: $(GEN_SOURCES)
 	tools/test-install.sh
 
 clean:
-	rm -f $(EXE_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	rm -f $(EXE_PATH) $(EXE_PATH)-dev $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
