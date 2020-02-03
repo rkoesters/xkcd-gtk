@@ -60,7 +60,7 @@ func (app *Application) LoadSettings() {
 	var err error
 
 	// Read settings from disk.
-	app.settings.ReadFile(getSettingsPath())
+	app.settings.ReadFile(settingsPath())
 
 	// Get reference to Gtk's settings.
 	app.gtkSettings, err = gtk.SettingsGetDefault()
@@ -82,12 +82,12 @@ func (app *Application) SaveSettings() {
 		log.Printf("error saving settings: %v", err)
 	}
 
-	err = app.settings.WriteFile(getSettingsPath())
+	err = app.settings.WriteFile(settingsPath())
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
 	}
 }
 
-func getSettingsPath() string {
+func settingsPath() string {
 	return filepath.Join(paths.ConfigDir(), "settings")
 }

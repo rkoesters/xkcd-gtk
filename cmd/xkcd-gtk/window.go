@@ -390,7 +390,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.Add(win.comicContainer)
 
 	// Recall our window state.
-	win.state.ReadFile(getWindowStatePath())
+	win.state.ReadFile(windowStatePath())
 	win.window.Resize(win.state.Width, win.state.Height)
 	if win.state.PositionX != 0 && win.state.PositionY != 0 {
 		win.window.Move(win.state.PositionX, win.state.PositionY)

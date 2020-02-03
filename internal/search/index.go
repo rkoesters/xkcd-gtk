@@ -21,11 +21,11 @@ var index bleve.Index
 
 // Init initializes the search index.
 func Init() (err error) {
-	index, err = bleve.Open(getSearchIndexPath())
+	index, err = bleve.Open(searchIndexPath())
 	if err == bleve.ErrorIndexPathDoesNotExist {
 		// The search index doesn't exist yet, lets make it.
 		mapping := bleve.NewIndexMapping()
-		index, err = bleve.New(getSearchIndexPath(), mapping)
+		index, err = bleve.New(searchIndexPath(), mapping)
 	}
 	return
 }
@@ -119,6 +119,6 @@ func Load(app *gtk.Application) {
 	}()
 }
 
-func getSearchIndexPath() string {
+func searchIndexPath() string {
 	return filepath.Join(paths.CacheDir(), "search")
 }

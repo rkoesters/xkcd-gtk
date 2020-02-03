@@ -135,7 +135,7 @@ func (bookmarks *Bookmarks) notifyObservers(msg string) {
 // LoadBookmarks tries to load our bookmarks from disk.
 func (app *Application) LoadBookmarks() {
 	app.bookmarks.set = treeset.NewWithIntComparator()
-	app.bookmarks.ReadFile(getBookmarksPath())
+	app.bookmarks.ReadFile(bookmarksPath())
 }
 
 // SaveBookmarks tries to save our bookmarks to disk.
@@ -145,12 +145,12 @@ func (app *Application) SaveBookmarks() {
 		log.Printf("error saving bookmarks: %v", err)
 	}
 
-	err = app.bookmarks.WriteFile(getBookmarksPath())
+	err = app.bookmarks.WriteFile(bookmarksPath())
 	if err != nil {
 		log.Printf("error saving bookmarks: %v", err)
 	}
 }
 
-func getBookmarksPath() string {
+func bookmarksPath() string {
 	return filepath.Join(paths.DataDir(), "bookmarks")
 }
