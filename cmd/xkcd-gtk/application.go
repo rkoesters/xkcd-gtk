@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"log"
@@ -22,7 +23,7 @@ type Application struct {
 	actions     map[string]*glib.SimpleAction
 
 	settings  Settings
-	bookmarks Bookmarks
+	bookmarks bookmarks.Bookmarks
 }
 
 // NewApplication creates an instance of our GTK Application.
