@@ -23,7 +23,7 @@ install:
 script:
   - make BUILDFLAGS=-v
   - make check
-  - make test BUILDFLAGS=-v
+  - make test
 
 jobs:
   allow_failures:
