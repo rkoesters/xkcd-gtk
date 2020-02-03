@@ -129,8 +129,10 @@ func TestRemoveObserver(t *testing.T) {
 	go func() {
 		for {
 			select {
-			case <-ch:
-				t.Error("Received on ch")
+			case _, ok := <-ch:
+				if ok {
+					t.Error("Received on ch")
+				}
 			case <-done:
 				return
 			}
