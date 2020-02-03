@@ -3,6 +3,7 @@
 ################################################################################
 
 BUILDFLAGS =
+TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --from-code=utf-8 -kl --package-name="$(APP)"
 
@@ -102,7 +103,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
-	go test -cover $(BUILDFLAGS) ./...
+	go test $(BUILDFLAGS) $(TESTFLAGS) ./...
 	tools/test-install.sh
 
 clean:
