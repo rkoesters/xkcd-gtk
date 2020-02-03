@@ -3,7 +3,7 @@
 ################################################################################
 
 BUILDFLAGS =
-TESTFLAGS  = -cover
+TESTFLAGS  = -cover -race
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --from-code=utf-8 -kl --package-name="$(APP)"
 
