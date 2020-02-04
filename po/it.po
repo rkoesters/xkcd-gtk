@@ -249,7 +249,7 @@ msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
-"Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei fumetti",
+"Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei fumetti,"
 "navigazione offline e scorciatoie da tastiera intuitive."
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
