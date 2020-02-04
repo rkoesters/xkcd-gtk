@@ -45,6 +45,8 @@ GEN_SOURCES = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
 IMPORTS     = $(shell tools/list-imports.sh ./...)
 
+DEV_PATH = $(EXE_PATH)-dev
+
 POTFILES = $(shell cat po/POTFILES)
 LINGUAS  = $(shell cat po/LINGUAS)
 PO       = $(shell find po -name '*.po' -type f)
@@ -66,7 +68,7 @@ $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(EXE_PATH)-dev $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
+	go build -o $(DEV_PATH) $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
 
 $(POT_PATH): $(POTFILES)
 	xgettext -o $@ $(POTFLAGS) $^
@@ -102,7 +104,7 @@ test: $(GEN_SOURCES)
 	tools/test-install.sh
 
 clean:
-	rm -f $(EXE_PATH) $(EXE_PATH)-dev $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
