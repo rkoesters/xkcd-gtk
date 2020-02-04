@@ -19,7 +19,7 @@ addons:
 
 cache:
   directories:
-    - "$HOME/.cache/go-build"
+    - $HOME/.cache/go-build
 
 install:
   - make deps BUILDFLAGS="-v -d"
@@ -34,7 +34,7 @@ jobs:
     - language: node_js
 
   include:
-    - name: "Houston CI"
+    - name: Houston CI
       language: node_js
       node_js: 10/*
       services:
