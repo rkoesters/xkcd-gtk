@@ -20,11 +20,15 @@ or `go`) and GTK+ development files (version >= 3.20, something like
 
 First, you need to pull in the Go dependencies:
 
-	$ make deps
+```shell
+$ make deps
+```
 
 Next, you are ready to build the application:
 
-	$ make
+```shell
+$ make
+```
 
 ### Installing
 
@@ -32,22 +36,30 @@ After you have compiled the application, you can install it.
 
 To install for all users:
 
-	$ sudo make install prefix=/usr/local
+```shell
+$ sudo make install prefix=/usr/local
+```
 
 To install for the current user only (you may need to add `$HOME/.local/bin` to
 your `$PATH`):
 
-	$ make install prefix="$HOME/.local"
+```shell
+$ make install prefix="$HOME/.local"
+```
 
 ### Uninstalling
 
 To uninstall for all users:
 
-	$ sudo make uninstall prefix=/usr/local
+```shell
+$ sudo make uninstall prefix=/usr/local
+```
 
 To uninstall for the current user :
 
-	$ make uninstall prefix="$HOME/.local"
+```shell
+$ make uninstall prefix="$HOME/.local"
+```
 
 ## License
 
