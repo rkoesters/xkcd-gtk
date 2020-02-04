@@ -17,8 +17,12 @@ addons:
       - libxml2-utils
       - yamllint
 
+cache:
+  directories:
+    - "$HOME/.cache/go-build"
+
 install:
-  - make deps BUILDFLAGS=-v
+  - make deps BUILDFLAGS="-v -d"
 
 script:
   - make BUILDFLAGS=-v
