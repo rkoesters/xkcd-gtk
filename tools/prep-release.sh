@@ -16,6 +16,11 @@ if ! appstream-util validate-relax "$appdata_xml"; then
 	failure "invalid appdata"
 fi
 
+echo "Checking for correct attribution in $appdata_xml"
+if grep -q '@' "$appdata_xml"; then
+	failure "appdata includes '@' symbol which doesn't work outside GitHub"
+fi
+
 echo "Checking for tag matching current commit"
 tag=$(git describe --exact-match --tags)
 if [ $? != 0 ]; then
