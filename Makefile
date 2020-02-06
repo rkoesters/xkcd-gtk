@@ -105,7 +105,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	golint -set_exit_status ./...
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .
-	appstream-util validate-relax $(APPDATA_PATH)
+	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
 	go test $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) ./...
