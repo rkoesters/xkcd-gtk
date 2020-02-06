@@ -81,7 +81,7 @@ dev: $(GEN_SOURCES)
 %.ui.go: %.ui
 	tools/go-wrap.sh $< >$@
 
-$(POT_PATH): $(POTFILES)
+$(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 	xgettext -o $@ -LC -kl $(POTFLAGS) $(POTFILES_GO)
 	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_UI)
 	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(POTFILES_DESKTOP)
