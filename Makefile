@@ -6,7 +6,7 @@ BUILDFLAGS =
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
-POTFLAGS   = --from-code=utf-8 -kl --package-name="$(APP)"
+POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 
 ################################################################################
 # Install Variables
@@ -47,10 +47,15 @@ IMPORTS     = $(shell tools/list-imports.sh ./...)
 
 DEV_PATH = $(EXE_PATH)-dev
 
-POTFILES = $(shell cat po/POTFILES)
-LINGUAS  = $(shell cat po/LINGUAS)
-PO       = $(shell find po -name '*.po' -type f)
-MO       = $(patsubst %.po,%.mo,$(PO))
+POTFILES         = $(shell cat po/POTFILES)
+POTFILES_GO      = $(filter %.go,$(POTFILES))
+POTFILES_UI      = $(filter %.ui,$(POTFILES))
+POTFILES_DESKTOP = $(filter %.desktop.in,$(POTFILES))
+POTFILES_APPDATA = $(filter %.xml.in,$(POTFILES))
+
+LINGUAS = $(shell cat po/LINGUAS)
+PO      = $(shell find po -name '*.po' -type f)
+MO      = $(patsubst %.po,%.mo,$(PO))
 
 APP_VERSION = $(shell tools/app-version.sh)
 GTK_VERSION = $(shell tools/gtk-version.sh)
@@ -70,14 +75,17 @@ $(EXE_PATH): Makefile $(SOURCES)
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
 
-$(POT_PATH): $(POTFILES)
-	xgettext -o $@ $(POTFLAGS) $^
-
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
 
 %.ui.go: %.ui
 	tools/go-wrap.sh $< >$@
+
+$(POT_PATH): $(POTFILES)
+	xgettext -o $@ -LC -kl $(POTFLAGS) $(POTFILES_GO)
+	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_UI)
+	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_DESKTOP)
+	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(POTFILES_APPDATA)
 
 %.desktop: %.desktop.in $(PO)
 	msgfmt --desktop -d po -c -o $@ --template $<

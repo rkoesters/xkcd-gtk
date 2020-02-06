@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<its:rules xmlns:its="http://www.w3.org/2005/11/its" version="1.0">
+  <its:translateRule translate="no" selector="/component"/>
+  <its:translateRule translate="yes" selector="/component/name"/>
+  <its:translateRule translate="yes" selector="/component/summary"/>
+  <its:translateRule translate="yes" selector="/component/description"/>
+  <its:translateRule translate="yes" selector="/component/screenshots/screenshot/caption"/>
+</its:rules>
