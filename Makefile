@@ -86,6 +86,8 @@ $(POT_PATH): $(POTFILES)
 	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_UI)
 	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(POTFILES_DESKTOP)
 	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(POTFILES_APPDATA)
+	tools/fill-pot-header.sh <$@ >$@.out
+	mv $@.out $@
 
 %.desktop: %.desktop.in $(PO)
 	msgfmt --desktop -d po -c -o $@ --template $<
