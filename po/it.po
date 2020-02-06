@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 01:54-0800\n"
+"POT-Creation-Date: 2020-02-06 04:22-0800\n"
 "PO-Revision-Date: 2020-02-02 12:00+0100\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team:Italian <LL@li.org>\n"
@@ -79,10 +79,6 @@ msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 #: internal/cache/cache.go:251
 msgid "Connect to the internet to download some comics!"
 msgstr "Collegati a Internet per scaricare alcuni fumetti!"
-
-#: cmd/xkcd-gtk/about-dialog.go:21
-msgid "Copyright © 2015-2019 Ryan Koesters"
-msgstr "Copyright © 2015-2019 Ryan Koesters"
 
 #: internal/cache/cache.go:183
 msgid "Couldn't Get Comic"
