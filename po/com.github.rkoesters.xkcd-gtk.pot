@@ -1,5 +1,5 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Comic Sticks (xkcd-gtk)
+# Copyright (C) 2015-2020 Ryan Koesters
 # This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 01:54-0800\n"
+"POT-Creation-Date: 2020-02-06 04:21-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,7 @@ msgid "Connect to the internet to download some comics!"
 msgstr ""
 
 #: cmd/xkcd-gtk/about-dialog.go:21
-msgid "Copyright © 2015-2019 Ryan Koesters"
+msgid "Copyright © 2015-2020 Ryan Koesters"
 msgstr ""
 
 #: internal/cache/cache.go:183
