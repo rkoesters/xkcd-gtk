@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-15 11:53-0700\n"
+"POT-Creation-Date: 2020-02-06 01:30-0800\n"
 "PO-Revision-Date: 2019-11-03 13:51+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.4\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl\n"
 
 #: cmd/xkcd-gtk/about-dialog.go:18
 msgid "A simple xkcd viewer written in Go using GTK+3"
@@ -24,228 +24,48 @@ msgstr ""
 "Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
 "+3"
 
-#: cmd/xkcd-gtk/about-dialog.go:21
-msgid "Copyright © 2015-2019 Ryan Koesters"
-msgstr "Copyright © 2015-2019 Ryan Koesters"
-
-#: cmd/xkcd-gtk/app-menu.ui:6 cmd/xkcd-gtk/window.go:192
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
-msgid "New Window"
-msgstr "Nieuw venster"
-
-#: cmd/xkcd-gtk/app-menu.ui:11 cmd/xkcd-gtk/window.go:196
-msgid "Toggle Dark Mode"
-msgstr "Donker thema aan/uit"
-
-#: cmd/xkcd-gtk/app-menu.ui:16 cmd/xkcd-gtk/window.go:200
-msgid "What If?"
-msgstr "Wat als...?"
-
-#: cmd/xkcd-gtk/app-menu.ui:20 cmd/xkcd-gtk/window.go:201
-msgid "XKCD Blog"
-msgstr "XKCD-blog"
-
-#: cmd/xkcd-gtk/app-menu.ui:24 cmd/xkcd-gtk/window.go:202
-msgid "XKCD Store"
-msgstr "XKCD-winkel"
-
-#: cmd/xkcd-gtk/app-menu.ui:28 cmd/xkcd-gtk/window.go:203
-msgid "About XKCD"
-msgstr "Over XKCD"
-
-#: cmd/xkcd-gtk/app-menu.ui:34 cmd/xkcd-gtk/shortcuts-window.ui:4
-#: cmd/xkcd-gtk/window.go:207
-msgid "Keyboard Shortcuts"
-msgstr "Sneltoetsen"
-
-#: cmd/xkcd-gtk/app-menu.ui:38 cmd/xkcd-gtk/window.go:208
+#: cmd/xkcd-gtk/window.go:209 cmd/xkcd-gtk/app-menu.ui:38
 msgid "About Comic Sticks"
 msgstr "Over Comic Sticks"
 
-#: cmd/xkcd-gtk/app-menu.ui:42
-msgid "Quit"
-msgstr "Afsluiten"
+#: cmd/xkcd-gtk/window.go:204 cmd/xkcd-gtk/app-menu.ui:28
+msgid "About XKCD"
+msgstr "Over XKCD"
 
-#: cmd/xkcd-gtk/application.go:12
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
-msgid "Comic Sticks"
-msgstr "Comic Sticks"
-
-#: cmd/xkcd-gtk/cache.go:143 cmd/xkcd-gtk/cache.go:144
-#: cmd/xkcd-gtk/cache.go:184
-msgid "Comic Not Found"
-msgstr "Verhaal niet gevonden"
-
-#: cmd/xkcd-gtk/cache.go:156
-msgid "Error trying to access metadata cache"
-msgstr "Fout tijdens opvragen van metagegevenscache"
-
-#: cmd/xkcd-gtk/cache.go:172
-msgid "Error parsing comic metadata from cache"
-msgstr "Fout tijdens verwerken van stripmetagegevens uit cache"
-
-#: cmd/xkcd-gtk/cache.go:189
-msgid "Couldn't Get Comic"
-msgstr "Kan stripverhaal niet ophalen"
-
-#: cmd/xkcd-gtk/cache.go:250
-msgid "Connect to the internet to download some comics!"
-msgstr "Maak verbinding met internet om verhalen op te halen!"
-
-#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/shortcuts-window.ui:78
-#: cmd/xkcd-gtk/window.go:186
-msgid "Properties"
-msgstr "Eigenschappen"
-
-#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:149
-msgid "Number"
-msgstr "Nummer"
-
-#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:150
-msgid "Title"
-msgstr "Titel"
-
-#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:153
-msgid "Date"
-msgstr "Datum"
-
-#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:151
-msgid "Image"
-msgstr "Afbeelding"
-
-#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:152
+#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:155
 msgid "Alt Text"
 msgstr "Alt-tekst"
-
-#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:154
-msgid "News"
-msgstr "Nieuws"
-
-#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:155
-msgid "Link"
-msgstr "Link"
-
-#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:156
-msgid "Transcript"
-msgstr "Transcriptie"
-
-#: cmd/xkcd-gtk/search.go:48
-msgid "Search Index Update"
-msgstr "Zoekindex bijwerken"
-
-#: cmd/xkcd-gtk/search.go:56
-msgid "Updating comic search index..."
-msgstr "Bezig met bijwerken van zoekindex..."
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:11
-msgid "Navigate"
-msgstr "Navigatie"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:15 cmd/xkcd-gtk/window.go:140
-msgid "Go to the first comic"
-msgstr "Ga naar het eerste verhaal"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:22 cmd/xkcd-gtk/window.go:149
-msgid "Go to the previous comic"
-msgstr "Ga naar het vorige verhaal"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:29 cmd/xkcd-gtk/window.go:158
-msgid "Go to the next comic"
-msgstr "Ga naar het volgende verhaal"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:36 cmd/xkcd-gtk/window.go:167
-msgid "Go to the newest comic"
-msgstr "Ga naar het nieuwste verhaal"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:43 cmd/xkcd-gtk/window.go:359
-msgid "Go to a random comic"
-msgstr "Toon een willekeurig verhaal"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:52 cmd/xkcd-gtk/window.go:301
-msgid "Search"
-msgstr "Zoeken"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:56
-msgid "Search comics"
-msgstr "Verhalen doorzoeken"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:65 cmd/xkcd-gtk/window.go:220
-msgid "Bookmarks"
-msgstr "Bladwijzers"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:69
-msgid "Show bookmarks menu"
-msgstr "Bladwijzermenu tonen"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:82
-msgid "Show comic properties"
-msgstr "Eigenschappen tonen"
 
 #: cmd/xkcd-gtk/shortcuts-window.ui:91
 msgid "Application Actions"
 msgstr "Toepassingsacties"
 
-#: cmd/xkcd-gtk/shortcuts-window.ui:95
-msgid "Open new window"
-msgstr "Nieuw venster openen"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:102
-msgid "Toggle dark mode"
-msgstr "Donker thema aan/uit"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:109
-msgid "Open shortcuts window"
-msgstr "Sneltoetsvenster openen"
-
-#: cmd/xkcd-gtk/shortcuts-window.ui:116
-msgid "Quit application"
-msgstr "Afsluiten"
-
-#: cmd/xkcd-gtk/window.go:179
-msgid "Menu"
-msgstr "Menu"
-
-#: cmd/xkcd-gtk/window.go:184
-msgid "Open Link"
-msgstr "Link openen"
-
-#: cmd/xkcd-gtk/window.go:185
-msgid "Explain"
-msgstr "Uitleg tonen"
-
-#: cmd/xkcd-gtk/window.go:239
+#: cmd/xkcd-gtk/window.go:240
 msgid "Bookmark this comic"
 msgstr "Toevoegen aan bladwijzers"
 
-#: cmd/xkcd-gtk/window.go:252
-msgid "Remove this comic from bookmarks"
-msgstr "Verwijderen uit bladwijzers"
+#: cmd/xkcd-gtk/window.go:221 cmd/xkcd-gtk/shortcuts-window.ui:65
+msgid "Bookmarks"
+msgstr "Bladwijzers"
 
-#: cmd/xkcd-gtk/window.go:327
-msgid "No results found"
-msgstr "Geen resultaten"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+msgid "Cache comics for later offline viewing"
+msgstr "Sla verhalen op voor offline weergave"
 
-#: cmd/xkcd-gtk/window.go:355
-msgid "Random"
-msgstr "Willekeurig"
-
-#: cmd/xkcd-gtk/window.go:427
+#: cmd/xkcd-gtk/window.go:428
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal..."
 
-#: cmd/xkcd-gtk/window.go:460
-msgid "Loading comic..."
-msgstr "Bezig met laden..."
+#: internal/cache/cache.go:137 internal/cache/cache.go:138
+#: internal/cache/cache.go:178
+msgid "Comic Not Found"
+msgstr "Verhaal niet gevonden"
 
-#: cmd/xkcd-gtk/window.go:487
-msgid "Connect to the internet to download comic image"
-msgstr "Maak verbinding met internet om het verhaal op te halen"
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
-msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
+#: cmd/xkcd-gtk/application.go:15
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+msgid "Comic Sticks"
+msgstr "Comic Sticks"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
 msgid ""
@@ -255,140 +75,213 @@ msgstr ""
 "Met Comic Sticks kun je xkcd-stripverhalen lezen. De toepassing bevat "
 "snelzoeken, offline-lezen en intuïtieve sneltoetsen."
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
-msgid "Features:"
-msgstr "Mogelijkheden:"
+#: cmd/xkcd-gtk/window.go:486
+msgid "Connect to the internet to download comic image"
+msgstr "Maak verbinding met internet om het verhaal op te halen"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
-msgid "Search for comics"
-msgstr "Zoek naar specifieke verhalen"
+#: internal/cache/cache.go:251
+msgid "Connect to the internet to download some comics!"
+msgstr "Maak verbinding met internet om verhalen op te halen!"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
-msgid "Keep track of comics with bookmarks"
-msgstr "Organiseer verhalen middels bladwijzers"
+#: cmd/xkcd-gtk/about-dialog.go:21
+msgid "Copyright © 2015-2019 Ryan Koesters"
+msgstr "Copyright © 2015-2019 Ryan Koesters"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
-msgid "Cache comics for later offline viewing"
-msgstr "Sla verhalen op voor offline weergave"
+#: internal/cache/cache.go:183
+msgid "Couldn't Get Comic"
+msgstr "Kan stripverhaal niet ophalen"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Dark mode for late night reading"
 msgstr "Donker thema voor de late avonduurtjes"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
-msgid "View comic metadata"
-msgstr "Toon de metagegevens"
+#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:156
+msgid "Date"
+msgstr "Datum"
+
+#: internal/cache/cache.go:166
+msgid "Error parsing comic metadata from cache"
+msgstr "Fout tijdens verwerken van stripmetagegevens uit cache"
+
+#: internal/cache/cache.go:150
+msgid "Error trying to access metadata cache"
+msgstr "Fout tijdens opvragen van metagegevenscache"
+
+#: cmd/xkcd-gtk/window.go:186
+msgid "Explain"
+msgstr "Uitleg tonen"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
+msgid "Features:"
+msgstr "Mogelijkheden:"
+
+#: cmd/xkcd-gtk/window.go:360 cmd/xkcd-gtk/shortcuts-window.ui:43
+msgid "Go to a random comic"
+msgstr "Toon een willekeurig verhaal"
+
+#: cmd/xkcd-gtk/window.go:141 cmd/xkcd-gtk/shortcuts-window.ui:15
+msgid "Go to the first comic"
+msgstr "Ga naar het eerste verhaal"
+
+#: cmd/xkcd-gtk/window.go:168 cmd/xkcd-gtk/shortcuts-window.ui:36
+msgid "Go to the newest comic"
+msgstr "Ga naar het nieuwste verhaal"
+
+#: cmd/xkcd-gtk/window.go:159 cmd/xkcd-gtk/shortcuts-window.ui:29
+msgid "Go to the next comic"
+msgstr "Ga naar het volgende verhaal"
+
+#: cmd/xkcd-gtk/window.go:150 cmd/xkcd-gtk/shortcuts-window.ui:22
+msgid "Go to the previous comic"
+msgstr "Ga naar het vorige verhaal"
+
+#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:154
+msgid "Image"
+msgstr "Afbeelding"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+msgid "Keep track of comics with bookmarks"
+msgstr "Organiseer verhalen middels bladwijzers"
+
+#: cmd/xkcd-gtk/window.go:208 cmd/xkcd-gtk/app-menu.ui:34
+#: cmd/xkcd-gtk/shortcuts-window.ui:4
+msgid "Keyboard Shortcuts"
+msgstr "Sneltoetsen"
+
+#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:158
+msgid "Link"
+msgstr "Link"
+
+#: cmd/xkcd-gtk/window.go:459
+msgid "Loading comic..."
+msgstr "Bezig met laden..."
+
+#: cmd/xkcd-gtk/window.go:180
+msgid "Menu"
+msgstr "Menu"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:11
+msgid "Navigate"
+msgstr "Navigatie"
+
+#: cmd/xkcd-gtk/window.go:193 cmd/xkcd-gtk/app-menu.ui:6
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
+msgid "New Window"
+msgstr "Nieuw venster"
+
+#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:157
+msgid "News"
+msgstr "Nieuws"
+
+#: cmd/xkcd-gtk/window.go:328
+msgid "No results found"
+msgstr "Geen resultaten"
+
+#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:152
+msgid "Number"
+msgstr "Nummer"
+
+#: cmd/xkcd-gtk/window.go:185
+msgid "Open Link"
+msgstr "Link openen"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:95
+msgid "Open new window"
+msgstr "Nieuw venster openen"
+
+#: cmd/xkcd-gtk/shortcuts-window.ui:109
+msgid "Open shortcuts window"
+msgstr "Sneltoetsvenster openen"
+
+#: cmd/xkcd-gtk/properties-dialog.go:37 cmd/xkcd-gtk/window.go:187
+#: cmd/xkcd-gtk/shortcuts-window.ui:78
+msgid "Properties"
+msgstr "Eigenschappen"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr "Toon de uitleg van verhalen middels de 'explain xkcd'-wiki"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:26
-msgid "Ryan Koesters"
-msgstr "Ryan Koesters"
+#: cmd/xkcd-gtk/app-menu.ui:42
+msgid "Quit"
+msgstr "Afsluiten"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:61
-msgid "Add bookmarks for keeping track of comics"
-msgstr "Bladwijzerbeheer toegevoegd"
+#: cmd/xkcd-gtk/shortcuts-window.ui:116
+msgid "Quit application"
+msgstr "Afsluiten"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:62
-msgid "Update search menu to not waste space"
-msgstr "Zoekmenu bijgewerkt om geen ruimte te verspillen"
+#: cmd/xkcd-gtk/window.go:356
+msgid "Random"
+msgstr "Willekeurig"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:69
-msgid ""
-"Add support for translations (user interface only, comics will remain in "
-"their original language)"
-msgstr ""
-"Ondersteuning toegevoegd voor vertalingen (alleen in de toepassing - de "
-"verhalen worden getoond in de oorspronkelijke taal)"
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
+msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:70
-msgid "Add French translations (Thanks to @NathanBnm)"
-msgstr "Franse vertaling, met dank aan @NathanBnm"
+#: cmd/xkcd-gtk/window.go:253
+msgid "Remove this comic from bookmarks"
+msgstr "Verwijderen uit bladwijzers"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:76
-msgid "Fix for changes to xkcd API encoding."
-msgstr "Oplossing voor wijzigingen aan de xkcd-API."
+#: cmd/xkcd-gtk/window.go:302 cmd/xkcd-gtk/shortcuts-window.ui:52
+msgid "Search"
+msgstr "Zoeken"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:82
-msgid "Fix restoring of window state when maximized"
-msgstr "Opslossing voor het herstellen van de vensterstatus bij maximaliseren"
+#: internal/search/index.go:59
+msgid "Search Index Update"
+msgstr "Zoekindex bijwerken"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:89
-msgid "Add keyboard shortcut for dark mode"
-msgstr "Sneltoets toegevoegd voor het aan- en uitzetten van het donkere thema"
+#: cmd/xkcd-gtk/shortcuts-window.ui:56
+msgid "Search comics"
+msgstr "Verhalen doorzoeken"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:90
-msgid "Fix saving of properties window state"
-msgstr "Opslossing voor het opslaan van de vensterstatus"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
+msgid "Search for comics"
+msgstr "Zoek naar specifieke verhalen"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:96
-msgid "The dark mode update!"
-msgstr "De donkere update!"
+#: cmd/xkcd-gtk/shortcuts-window.ui:69
+msgid "Show bookmarks menu"
+msgstr "Bladwijzermenu tonen"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:98
-msgid ""
-"Add dark mode that inverts the comic image to improve readability in the dark"
-msgstr ""
-"Donker thema toegevoegd: dit keert de kleuren van stripverhalen om voor "
-"verbeterde leesbaarheid in het donker"
+#: cmd/xkcd-gtk/shortcuts-window.ui:82
+msgid "Show comic properties"
+msgstr "Eigenschappen tonen"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:99
-msgid ""
-"Add buttons to titlebar for jumping to the first comic and the newest comic"
-msgstr ""
-"Knoppen toegevoegd aan titelbalk om naar het eerste en nieuwste verhaal te "
-"gaan"
+#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:153
+msgid "Title"
+msgstr "Titel"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:100
-msgid ""
-"Fix issue with encoding of comic metadata (fixes display of special "
-"characters and emojis)"
-msgstr ""
-"Probleem opgelost omtrent het ophalen van metagegevens (speciale tekens en "
-"emoji's worden nu correct getoond)"
+#: cmd/xkcd-gtk/window.go:197 cmd/xkcd-gtk/app-menu.ui:11
+msgid "Toggle Dark Mode"
+msgstr "Donker thema aan/uit"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:101
-msgid "Fix memory leak when closing additional comic windows"
-msgstr "Geheugenprobleem opgelost bij het sluiten van meerdere stripvensters"
+#: cmd/xkcd-gtk/shortcuts-window.ui:102
+msgid "Toggle dark mode"
+msgstr "Donker thema aan/uit"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:107
-msgid "Update app metadata to pass appstream-util validate-relax"
-msgstr "Toepassingsgegevens bijgewerkt voor explain xkcd wiki"
+#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:159
+msgid "Transcript"
+msgstr "Transcriptie"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:112
-msgid "Revert fuzzy searching due to regressions"
-msgstr "Vaag zoeken teruggedraaid wegens problemen"
+#: internal/search/index.go:67
+msgid "Updating comic search index..."
+msgstr "Bezig met bijwerken van zoekindex..."
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:117
-msgid "Minor fixes"
-msgstr "Kleine foutoplossingen"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+msgid "View comic metadata"
+msgstr "Toon de metagegevens"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:119
-msgid "Use fuzzy searching"
-msgstr "Gebruik vaag zoeken"
+#: cmd/xkcd-gtk/window.go:201 cmd/xkcd-gtk/app-menu.ui:16
+msgid "What If?"
+msgstr "Wat als...?"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:120
-msgid "Only show alt text when hovering directly over the comic image"
-msgstr ""
-"Alt-tekst wordt alleen getoond als je de cursor boven het verhaal houdt"
+#: cmd/xkcd-gtk/window.go:202 cmd/xkcd-gtk/app-menu.ui:20
+msgid "XKCD Blog"
+msgstr "XKCD-blog"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:126
-msgid "Update OARS metadata."
-msgstr "OARS-metagegevens bijgewerkt."
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:131
-msgid "First stable release"
-msgstr "Eerste stabiele uitgave"
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:133
-msgid "Improve startup time"
-msgstr "Opstarttijd verbeterd"
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:134
-msgid "Add keyboard shortcuts for faster navigation"
-msgstr "Sneltoetsen toegevoegd voor snellere navigatie"
+#: cmd/xkcd-gtk/window.go:203 cmd/xkcd-gtk/app-menu.ui:24
+msgid "XKCD Store"
+msgstr "XKCD-winkel"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
