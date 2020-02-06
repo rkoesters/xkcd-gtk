@@ -55,6 +55,15 @@
   </custom>
 
   <releases>
+    <release version="1.3.2">
+      <description>
+        <ul>
+          <li>Add Italian translations (Thanks to albanobattistella)</li>
+          <li>Minor performance improvement to bookmarks menu</li>
+          <li>Fix a bug (race condition)</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.3.1" date="2019-11-08">
       <description>
         <ul>
