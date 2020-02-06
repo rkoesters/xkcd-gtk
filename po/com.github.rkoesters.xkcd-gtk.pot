@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 01:30-0800\n"
+"POT-Creation-Date: 2020-02-06 01:54-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -280,10 +280,6 @@ msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:10
-msgid "com.github.rkoesters.xkcd-gtk"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:14

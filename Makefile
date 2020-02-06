@@ -84,7 +84,7 @@ dev: $(GEN_SOURCES)
 $(POT_PATH): $(POTFILES)
 	xgettext -o $@ -LC -kl $(POTFLAGS) $(POTFILES_GO)
 	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_UI)
-	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_DESKTOP)
+	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(POTFILES_DESKTOP)
 	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(POTFILES_APPDATA)
 
 %.desktop: %.desktop.in $(PO)
