@@ -55,7 +55,7 @@
   </custom>
 
   <releases>
-    <release version="1.3.2">
+    <release version="1.3.2" date="2020-02-08">
       <description>
         <ul>
           <li>Add Italian translations (Thanks to albanobattistella)</li>
