@@ -6,9 +6,6 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	bolt "github.com/etcd-io/bbolt"
-	"github.com/rkoesters/xkcd"
-	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -16,6 +13,10 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"github.com/rkoesters/xkcd"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
+	bolt "go.etcd.io/bbolt"
 )
 
 const (

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/gotk3/gotk3/gdk"
-	"github.com/gotk3/gotk3/gtk"
 	"log"
 	"os"
+
+	"github.com/gotk3/gotk3/gdk"
+	"github.com/gotk3/gotk3/gtk"
 )
 
 const (
@@ -157,11 +158,11 @@ func (win *Window) StyleUpdated() {
 		}
 	}
 
-	menuPopoverChild, err := win.menu.GetPopover().GetChild()
+	c, err := win.menu.GetPopover().GetChild()
 	if err != nil {
 		log.Print(err)
 	} else {
-		menuBox := (&gtk.Stack{Container: gtk.Container{Widget: *menuPopoverChild}}).GetVisibleChild()
+		menuBox := c.ToWidget()
 		if useSkinnyMenus {
 			menuBox.SetMarginTop(4)
 			menuBox.SetMarginBottom(4)
