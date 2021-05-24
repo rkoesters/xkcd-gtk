@@ -6,7 +6,7 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	bolt "github.com/etcd-io/bbolt"
+	bolt "go.etcd.io/bbolt"
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
