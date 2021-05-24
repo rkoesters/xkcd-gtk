@@ -140,7 +140,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.first.SetTooltipText(l("Go to the first comic"))
 	win.first.SetProperty("action-name", "win.first-comic")
-	win.first.AddAccelerator("activate", win.accels, gdk.KEY_Home, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.first.AddAccelerator("activate", win.accels, gdk.KEY_Home, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.first)
 
 	win.previous, err = gtk.ButtonNew()
@@ -149,7 +149,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.previous.SetTooltipText(l("Go to the previous comic"))
 	win.previous.SetProperty("action-name", "win.previous-comic")
-	win.previous.AddAccelerator("activate", win.accels, gdk.KEY_Left, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.previous.AddAccelerator("activate", win.accels, gdk.KEY_Left, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.previous)
 
 	win.next, err = gtk.ButtonNew()
@@ -158,7 +158,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.next.SetTooltipText(l("Go to the next comic"))
 	win.next.SetProperty("action-name", "win.next-comic")
-	win.next.AddAccelerator("activate", win.accels, gdk.KEY_Right, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.next.AddAccelerator("activate", win.accels, gdk.KEY_Right, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.next)
 
 	win.newest, err = gtk.ButtonNew()
@@ -167,7 +167,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.newest.SetTooltipText(l("Go to the newest comic"))
 	win.newest.SetProperty("action-name", "win.newest-comic")
-	win.newest.AddAccelerator("activate", win.accels, gdk.KEY_End, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.newest.AddAccelerator("activate", win.accels, gdk.KEY_End, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.newest)
 
 	win.header.PackStart(navBox)
@@ -186,7 +186,7 @@ func NewWindow(app *Application) (*Window, error) {
 	menuSection1.Append(l("Explain"), "win.explain")
 	menuSection1.Append(l("Properties"), "win.show-properties")
 	menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
-	win.accels.Connect(gdk.KEY_p, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
+	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 
 	if !app.application.PrefersAppMenu() {
 		menuSection2 := glib.MenuNew()
@@ -219,7 +219,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.bookmarks.SetTooltipText(l("Bookmarks"))
-	win.bookmarks.AddAccelerator("activate", win.accels, gdk.KEY_b, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.bookmarks.AddAccelerator("activate", win.accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackEnd(win.bookmarks)
 
 	bookmarksPopover, err := gtk.PopoverNew(win.bookmarks)
@@ -300,7 +300,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.search.SetTooltipText(l("Search"))
-	win.search.AddAccelerator("activate", win.accels, gdk.KEY_f, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.search.AddAccelerator("activate", win.accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackEnd(win.search)
 
 	searchPopover, err := gtk.PopoverNew(win.search)
@@ -359,7 +359,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.random.SetTooltipText(l("Go to a random comic"))
 	win.random.SetProperty("action-name", "win.random-comic")
-	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	win.header.PackEnd(win.random)
 
 	win.header.ShowAll()

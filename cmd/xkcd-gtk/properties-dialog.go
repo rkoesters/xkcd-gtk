@@ -48,7 +48,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	pd.dialog.AddAccelGroup(pd.accels)
-	pd.accels.Connect(gdk.KEY_q, gdk.GDK_CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
+	pd.accels.Connect(gdk.KEY_q, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
 
 	pd.dialog.Connect("delete-event", pd.Close)
 	pd.dialog.Connect("destroy", pd.Destroy)
