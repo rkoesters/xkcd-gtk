@@ -31,15 +31,6 @@ var (
 		"elementary-x",
 		"io\\.elementary\\.stylesheet\\..*",
 	}, "|"))
-
-	// skinnyMenuThemes is the list of gtk themes for which we should use
-	// skinny popover menus.
-	skinnyMenuThemesRegexp = regexp.MustCompile(strings.Join([]string{
-		"CrosAdapta",
-		"elementary",
-		"elementary-x",
-		"io\\.elementary\\.stylesheet\\..*",
-	}, "|"))
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
@@ -142,26 +133,5 @@ func (win *Window) StyleUpdated() {
 		log.Print(err)
 	} else {
 		win.menu.SetImage(menuImg)
-	}
-
-	// Should we use skinny popover menus?
-	useSkinnyMenus := skinnyMenuThemesRegexp.MatchString(themeName)
-
-	menuPopoverChild, err := win.menu.GetPopover().GetChild()
-	if err != nil {
-		log.Print(err)
-	} else {
-		menuBox := (&gtk.Stack{Container: gtk.Container{Widget: *menuPopoverChild}}).GetVisibleChild()
-		if useSkinnyMenus {
-			menuBox.SetMarginTop(4)
-			menuBox.SetMarginBottom(4)
-			menuBox.SetMarginStart(0)
-			menuBox.SetMarginEnd(0)
-		} else {
-			menuBox.SetMarginTop(10)
-			menuBox.SetMarginBottom(10)
-			menuBox.SetMarginStart(10)
-			menuBox.SetMarginEnd(10)
-		}
 	}
 }
