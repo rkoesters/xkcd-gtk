@@ -21,7 +21,7 @@ cache:
     - $HOME/.cache/go-build
 
 script:
-  - make BUILDFLAGS=-v
+  - make
   - make check
   - make test
 

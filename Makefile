@@ -67,10 +67,10 @@ GTK_VERSION = $(shell tools/gtk-version.sh)
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
+	go build -o $@ -v $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(DEV_PATH) $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(LDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
