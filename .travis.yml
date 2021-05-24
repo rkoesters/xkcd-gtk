@@ -2,11 +2,10 @@
 
 language: go
 go:
-  - "1.10.x"  # ubuntu bionic
-  - "1.11.x"  # debian buster
+  - "1.13.x"  # ubuntu focal
   - "1.x"     # latest
 
-dist: bionic
+dist: focal
 
 addons:
   apt:
