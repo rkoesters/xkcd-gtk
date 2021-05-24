@@ -20,9 +20,6 @@ cache:
   directories:
     - $HOME/.cache/go-build
 
-install:
-  - make deps BUILDFLAGS="-v -d"
-
 script:
   - make BUILDFLAGS=-v
   - make check
