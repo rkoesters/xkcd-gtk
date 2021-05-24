@@ -19,17 +19,16 @@ var (
 	// largeToolbarThemes is the list of gtk themes for which we should use
 	// large toolbar buttons.
 	largeToolbarThemesRegexp = regexp.MustCompile(strings.Join([]string{
-		"elementary",
-		"elementary-x",
+		"elementary(-x)?",
+		"io\\.elementary\\.stylesheet.*",
 		"win32",
 	}, "|"))
 
 	// nonSymbolicIconThemes is the list of gtk themes for which we should
 	// use non-symbolic icons.
 	nonSymbolicIconThemesRegexp = regexp.MustCompile(strings.Join([]string{
-		"elementary",
-		"elementary-x",
-		"io\\.elementary\\.stylesheet\\..*",
+		"elementary(-x)?",
+		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
 )
 
