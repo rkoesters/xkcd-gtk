@@ -5,6 +5,8 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"log"
 	"os"
+	"regexp"
+	"strings"
 )
 
 const (
@@ -16,25 +18,28 @@ const (
 var (
 	// largeToolbarThemes is the list of gtk themes for which we should use
 	// large toolbar buttons.
-	largeToolbarThemes = []string{
+	largeToolbarThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"elementary",
 		"elementary-x",
 		"win32",
-	}
+	}, "|"))
 
 	// nonSymbolicIconThemes is the list of gtk themes for which we should
 	// use non-symbolic icons.
-	nonSymbolicIconThemes = []string{
+	nonSymbolicIconThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"elementary",
 		"elementary-x",
-	}
+		"io\\.elementary\\.stylesheet\\..*",
+	}, "|"))
 
 	// skinnyMenuThemes is the list of gtk themes for which we should use
 	// skinny popover menus.
-	skinnyMenuThemes = []string{
+	skinnyMenuThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"CrosAdapta",
 		"elementary",
 		"elementary-x",
-	}
+		"io\\.elementary\\.stylesheet\\..*",
+	}, "|"))
 )
 
 // LoadCSS provides the application's custom CSS to GTK.
@@ -75,21 +80,12 @@ func (win *Window) StyleUpdated() {
 
 	// The default size for our headerbar buttons is small.
 	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
-	for _, largeToolbarTheme := range largeToolbarThemes {
-		if themeName == largeToolbarTheme {
-			headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
-			break
-		}
+	if largeToolbarThemesRegexp.MatchString(themeName) {
+		headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
 	}
 
 	// Should we use symbolic icons?
-	useSymbolicIcons := true
-	for _, nonSymbolicIconTheme := range nonSymbolicIconThemes {
-		if themeName == nonSymbolicIconTheme {
-			useSymbolicIcons = false
-			break
-		}
-	}
+	useSymbolicIcons := !nonSymbolicIconThemesRegexp.MatchString(themeName)
 
 	// We will call icon() to automatically add -symbolic if needed.
 	icon := func(s string) string {
@@ -149,13 +145,7 @@ func (win *Window) StyleUpdated() {
 	}
 
 	// Should we use skinny popover menus?
-	useSkinnyMenus := false
-	for _, skinnyMenuTheme := range skinnyMenuThemes {
-		if themeName == skinnyMenuTheme {
-			useSkinnyMenus = true
-			break
-		}
-	}
+	useSkinnyMenus := skinnyMenuThemesRegexp.MatchString(themeName)
 
 	menuPopoverChild, err := win.menu.GetPopover().GetChild()
 	if err != nil {
