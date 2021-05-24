@@ -35,12 +35,10 @@ jobs:
       node_js: "10.17.0"
       services:
         - docker
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - libstdc++-5-dev
+      before_install:
+        - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        - sudo apt-get -q update
+        - sudo apt-get -y libstdc++-5-dev
       install:
         - npm i -g @elementaryos/houston
       script:
