@@ -85,8 +85,12 @@ github.com/rcrowley/go-metrics v0.0.0-20190826022208-cac0b30c2563/go.mod h1:bCqn
 github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/rkoesters/xdg v0.0.0-20181125232953-edd15b846f9b h1:8NiY6v9/IlFU8osj1L7kqzRbrG6e3izRQQjGze1Q1R0=
 github.com/rkoesters/xdg v0.0.0-20181125232953-edd15b846f9b/go.mod h1:T1HolqzmdHnJIH6p7A9LDuvYGQgEHx9ijX3vKgDKU60=
+github.com/rkoesters/xdg v0.0.0-20210524053652-d96cb8efba75 h1:dO+9Mm7hoHOgIp+HK1RqVPJORHTkcXxRHLBO4r6+ciw=
+github.com/rkoesters/xdg v0.0.0-20210524053652-d96cb8efba75/go.mod h1:5DcbjvJkY00fIOKkaBnylbC/rmc1NNJP5dmUcnlcm7U=
 github.com/rkoesters/xkcd v0.0.0-20190819160201-54a1b8a5d798 h1:cKUjcOfU7tpJdVNLr6ggSfvqzuJ6zMxyeqETsBEQMJ4=
 github.com/rkoesters/xkcd v0.0.0-20190819160201-54a1b8a5d798/go.mod h1:njPKW6CGsjuOxJSwUI3fIKiQz8zPQY/ybQibOflWPgc=
+github.com/rkoesters/xkcd v0.0.0-20210524020914-cc65d8897e4a h1:UXrSWUW3aqoryUV12iVuXBHiYbhkTGSVBzHH0Fh82E0=
+github.com/rkoesters/xkcd v0.0.0-20210524020914-cc65d8897e4a/go.mod h1:5iEOeKErxx2ZR+6IImYYknaG9a+yNj8ATS4rBoghrNQ=
 github.com/russross/blackfriday v1.5.2/go.mod h1:JO/DiYxRf+HjHt06OyowR9PTA263kcR/rfWxYHBV53g=
 github.com/spf13/afero v1.1.2/go.mod h1:j4pytiNVoe2o6bmDsKpLACNPDBIoEAkihy7loJ1B0CQ=
 github.com/spf13/cast v1.3.0/go.mod h1:Qx5cxh0v+4UWYiBimWS+eyWzqEqokIECu5etghLkUJE=
