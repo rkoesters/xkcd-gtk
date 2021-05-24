@@ -2,7 +2,7 @@
 # Build Variables
 ################################################################################
 
-BUILDFLAGS =
+BUILDFLAGS = -v
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
@@ -65,9 +65,6 @@ GTK_VERSION = $(shell tools/gtk-version.sh)
 ################################################################################
 
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
-
-deps:
-	go get -u $(BUILDFLAGS) $(IMPORTS)
 
 $(EXE_PATH): Makefile $(SOURCES)
 	go build -o $@ $(BUILDFLAGS) $(LDFLAGS) ./cmd/xkcd-gtk
@@ -142,4 +139,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean deps dev fix install strip test uninstall
+.PHONY: all check clean dev fix install strip test uninstall
