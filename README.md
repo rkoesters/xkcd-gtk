@@ -12,19 +12,13 @@ GTK+3.
 
 ### Requirements
 
-To build this program, you will need Go (version >= 1.9, something like `golang`
-or `go`) and GTK+ development files (version >= 3.20, something like
+To build this program, you will need Go (version >= 1.13, something like
+`golang` or `go`) and GTK+ development files (version >= 3.20, something like
 `libgtk-3-dev` or `gtk3-devel`).
 
 ### Compiling
 
-First, you need to pull in the Go dependencies:
-
-```shell
-$ make deps
-```
-
-Next, you are ready to build the application:
+Just run `make` from the root of the repo:
 
 ```shell
 $ make
