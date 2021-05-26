@@ -2,7 +2,7 @@
 # Build Variables
 ################################################################################
 
-BUILDFLAGS = -tags $(GTK_VERSION),$(PANGO_VERSION)
+BUILDFLAGS = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
