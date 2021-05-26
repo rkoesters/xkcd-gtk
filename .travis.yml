@@ -1,11 +1,11 @@
 ---
 
+dist: bionic
+
 language: go
 go:
   - "1.13.x"  # ubuntu focal
   - "1.x"     # latest
-
-dist: focal
 
 addons:
   apt:
