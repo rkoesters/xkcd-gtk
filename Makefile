@@ -2,7 +2,7 @@
 # Build Variables
 ################################################################################
 
-BUILDFLAGS =
+BUILDFLAGS = -tags $(GTK_VERSION),$(PANGO_VERSION)
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
@@ -57,8 +57,9 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
-APP_VERSION = $(shell tools/app-version.sh)
-GTK_VERSION = $(shell tools/gtk-version.sh)
+APP_VERSION   = $(shell tools/app-version.sh)
+GTK_VERSION   = $(shell tools/gtk-version.sh)
+PANGO_VERSION = $(shell tools/pango-version.sh)
 
 ################################################################################
 # Targets
