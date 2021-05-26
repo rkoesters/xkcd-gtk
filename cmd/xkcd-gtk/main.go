@@ -5,6 +5,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"log"
 	"math/rand"
 	"os"
@@ -21,6 +22,9 @@ func main() {
 
 	// Make sure the random number generator is seeded.
 	rand.Seed(time.Now().Unix())
+
+	// Initialize the paths under which we will store app files.
+	paths.Init(appID)
 
 	// Let glib and gtk know who we are.
 	glib.SetApplicationName(appName)
