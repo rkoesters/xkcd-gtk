@@ -23,7 +23,7 @@ func ConfigDir() string {
 
 // DataDir returns the path to our app's user data directory.
 func DataDir() string {
-	return b.ConfigDir()
+	return b.DataDir()
 }
 
 // LocaleDir returns the path to the system locale directory.
