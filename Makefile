@@ -20,7 +20,8 @@ datadir = $(prefix)/share
 # Application Variables
 ################################################################################
 
-APP = com.github.rkoesters.xkcd-gtk
+APP    = com.github.rkoesters.xkcd-gtk
+MODULE = github.com/rkoesters/xkcd-gtk
 
 EXE_NAME     = $(APP)
 ICON_NAME    = $(APP).svg
@@ -68,10 +69,10 @@ PANGO_VERSION = $(shell tools/pango-version.sh)
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	go build -o $@ -v $(LDFLAGS) $(BUILDFLAGS) ./cmd/xkcd-gtk
+	go build -o $@ -v $(LDFLAGS) $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(DEV_PATH) -v $(LDFLAGS) $(BUILDFLAGS) $(DEVFLAGS) ./cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v $(LDFLAGS) $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
@@ -97,18 +98,18 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 	msgfmt -c -o $@ $<
 
 fix: $(GEN_SOURCES)
-	go fix ./...
-	go fmt ./...
+	go fix $(MODULE)/...
+	go fmt $(MODULE)/...
 
 check: $(GEN_SOURCES) $(APPDATA_PATH)
-	go vet $(BUILDFLAGS) ./...
-	golint -set_exit_status ./...
+	go vet $(BUILDFLAGS) $(MODULE)/...
+	golint -set_exit_status $(MODULE)/...
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
-	go test $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) ./...
+	go test $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE)/...
 	tools/test-install.sh
 
 clean:
