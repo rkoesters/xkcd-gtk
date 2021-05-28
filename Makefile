@@ -109,7 +109,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	go vet $(BUILDFLAGS) $(MODULE)/...
 	golint -set_exit_status $(MODULE)/...
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	yamllint .
+	yamllint .*.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
