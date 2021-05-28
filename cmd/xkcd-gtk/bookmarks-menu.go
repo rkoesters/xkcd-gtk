@@ -97,7 +97,7 @@ func (win *Window) loadBookmarkList() {
 			log.Print(err)
 			return
 		}
-		item.Connect("clicked", win.setComicFromBookmark, comic.Num)
+		item.Connect("clicked", func() { win.setComicFromBookmark(comic.Num) })
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
@@ -128,7 +128,7 @@ func (win *Window) loadBookmarkList() {
 	}
 }
 
-func (win *Window) setComicFromBookmark(_ interface{}, id int) {
+func (win *Window) setComicFromBookmark(id int) {
 	win.SetComic(id)
 	win.bookmarks.GetPopover().Hide()
 }
