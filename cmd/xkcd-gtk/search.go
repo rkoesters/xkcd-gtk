@@ -60,7 +60,7 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 			log.Print(err)
 			return
 		}
-		item.Connect("clicked", win.setComicFromSearch, sr.ID)
+		item.Connect("clicked", func() { win.setComicFromSearch(sr.ID) })
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
@@ -95,7 +95,7 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 
 // setComicFromSearch is a wrapper around win.SetComic to work with search
 // result buttons.
-func (win *Window) setComicFromSearch(_ interface{}, id string) {
+func (win *Window) setComicFromSearch(id string) {
 	number, err := strconv.Atoi(id)
 	if err != nil {
 		log.Print("error setting comic from search result: ", err)
