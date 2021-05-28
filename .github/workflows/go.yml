@@ -25,20 +25,24 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
+      - name: Set up Go environment variables
+        run: >
+          go version |
+          sed 's/^go version /GOVERSION=/'|
+          tr ' /' '-' >>$GITHUB_ENV
+
       - name: Set up Go module cache
         uses: actions/cache@v2
         with:
           path: ~/go/pkg/mod
-          key: |
-            ${{ runner.os }}-go-${{ matrix.go }}-module-cache-${{
-            hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-go-${{ matrix.go }}-module-cache-
+          key: ${{ env.GOVERSION }}-module-cache-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ env.GOVERSION }}-module-cache-
 
       - name: Set up Go build cache
         uses: actions/cache@v2
         with:
           path: ~/.cache/go-build
-          key: ${{ runner.os }}-go-${{ matrix.go }}-build-cache
+          key: ${{ env.GOVERSION }}-build-cache
 
       - name: Set up build dependencies
         run: |
