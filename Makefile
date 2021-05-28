@@ -2,7 +2,7 @@
 # Build Variables
 ################################################################################
 
-BUILDFLAGS = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
+BUILDFLAGS = -tags "$(GTK_VERSION) $(PANGO_VERSION)" -mod=vendor
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
@@ -74,6 +74,10 @@ $(EXE_PATH): Makefile $(SOURCES)
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v $(LDFLAGS) $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
+vendor:
+	go mod vendor
+	rm vendor/github.com/gotk3/gotk3/gtk/gtk_since_3_24.go
+
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
 
@@ -141,4 +145,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean dev fix install strip test uninstall
+.PHONY: all check clean dev fix install strip test uninstall vendor
