@@ -35,15 +35,15 @@ print_and_make () {
 
 tmpdir=$(mktemp -d /run/shm/xkcd-gtk.XXXXXXXX)
 
-print_and_make install DESTDIR=$tmpdir
-print_and_make uninstall DESTDIR=$tmpdir
+print_and_make install DESTDIR="$tmpdir"
+print_and_make uninstall DESTDIR="$tmpdir"
 print_and_run rmdir \
-	$tmpdir/*/*/*/*/*/* \
-	$tmpdir/*/*/*/*/* \
-	$tmpdir/*/*/*/* \
-	$tmpdir/*/*/* \
-	$tmpdir/*/* \
-	$tmpdir/* \
-	$tmpdir
+	"$tmpdir"/*/*/*/*/*/* \
+	"$tmpdir"/*/*/*/*/* \
+	"$tmpdir"/*/*/*/* \
+	"$tmpdir"/*/*/* \
+	"$tmpdir"/*/* \
+	"$tmpdir"/* \
+	"$tmpdir"
 
 echo "$0 PASSED"
