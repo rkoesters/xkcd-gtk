@@ -1,0 +1,41 @@
+---
+
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        go:
+          - 1.11.x  # debian buster
+          - 1.13.x  # ubuntu focal
+          - 1.x     # latest
+
+    name: Go ${{ matrix.go }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Set up build dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y -q \
+          appstream-util \
+          gettext \
+          golint \
+          libgtk-3-dev \
+          libxml2-utils \
+          yamllint
+
+      - run: make
+      - run: make dev
+      - run: make check
+      - run: make test
