@@ -25,7 +25,7 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Set up Go environment variables
+      - name: Set up GITHUB_ENV
         run: >
           go version |
           sed 's/^go version /GOVERSION=/'|
