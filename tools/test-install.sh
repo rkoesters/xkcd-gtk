@@ -4,7 +4,6 @@ set -eEu
 trap 'echo "$0 FAILED"' ERR
 
 verbose=false
-tmpdir=$(mktemp -d /run/shm/xkcd-gtk.XXXXXXXX)
 
 while [[ $# > 0 ]]; do
 	case "$1" in
@@ -33,6 +32,8 @@ print_and_make () {
 		print_and_run make -s "$@"
 	fi
 }
+
+tmpdir=$(mktemp -d /run/shm/xkcd-gtk.XXXXXXXX)
 
 print_and_make install DESTDIR=$tmpdir
 print_and_make uninstall DESTDIR=$tmpdir
