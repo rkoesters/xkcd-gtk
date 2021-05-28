@@ -36,6 +36,5 @@ jobs:
           yamllint
 
       - run: make
-      - run: make dev
       - run: make check
       - run: make test
