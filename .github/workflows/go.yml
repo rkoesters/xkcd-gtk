@@ -17,7 +17,7 @@ jobs:
           - 1.15.x  # debian bullseye
           - 1.x     # latest
 
-    name: Go ${{ matrix.go }}
+    name: Go ${{ matrix.go }} (${{ matrix.os }})
 
     runs-on: ubuntu-latest
 
