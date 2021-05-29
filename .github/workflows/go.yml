@@ -49,9 +49,7 @@ jobs:
             ${{ matrix.os }}-${{ env.GOVERSION }}-cache-${{
               hashFiles('**/go.sum')
             }}
-          restore-keys:
-            - ${{ env.GOVERSION }}-cache-
-            - ${{ matrix.os }}-${{ env.GOVERSION }}-cache-
+          restore-keys: ${{ matrix.os }}-${{ env.GOVERSION }}-cache-
 
       - name: Set up build dependencies
         run: |
