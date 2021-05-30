@@ -76,7 +76,7 @@ jobs:
           path: .flatpak-builder
           key: >
             flatpak-builder-${{
-            hashFiles('com.github.rkoesters.xkcd-gtk.yaml')
+            hashFiles('com.github.rkoesters.xkcd-gtk.yml')
             }}
           restore-keys: flatpak-builder-
 
