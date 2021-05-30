@@ -70,7 +70,7 @@ jobs:
           sudo apt-get update -q
           sudo apt-get install -y -q flatpak flatpak-builder
 
-      - name: Set up Go cache
+      - name: Set up flatpak-builder cache
         uses: actions/cache@v2
         with:
           path: .flatpak-builder
