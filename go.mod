@@ -7,6 +7,6 @@ require (
 	github.com/emirpasic/gods v1.12.0
 	github.com/gotk3/gotk3 v0.5.3-0.20210514043925-3f44af595c5e
 	github.com/rkoesters/xdg v0.0.0-20210524053652-d96cb8efba75
-	github.com/rkoesters/xkcd v0.0.0-20210524020914-cc65d8897e4a
+	github.com/rkoesters/xkcd v1.4.0
 	go.etcd.io/bbolt v1.3.5
 )

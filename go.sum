@@ -97,8 +97,8 @@ github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 h1:OdAsTTz6O
 github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/rkoesters/xdg v0.0.0-20210524053652-d96cb8efba75 h1:dO+9Mm7hoHOgIp+HK1RqVPJORHTkcXxRHLBO4r6+ciw=
 github.com/rkoesters/xdg v0.0.0-20210524053652-d96cb8efba75/go.mod h1:5DcbjvJkY00fIOKkaBnylbC/rmc1NNJP5dmUcnlcm7U=
-github.com/rkoesters/xkcd v0.0.0-20210524020914-cc65d8897e4a h1:UXrSWUW3aqoryUV12iVuXBHiYbhkTGSVBzHH0Fh82E0=
-github.com/rkoesters/xkcd v0.0.0-20210524020914-cc65d8897e4a/go.mod h1:5iEOeKErxx2ZR+6IImYYknaG9a+yNj8ATS4rBoghrNQ=
+github.com/rkoesters/xkcd v1.4.0 h1:jwsSyQ10Nf1DXMglpxp6zit96fYJfRtCnfRi+Z5buHw=
+github.com/rkoesters/xkcd v1.4.0/go.mod h1:5iEOeKErxx2ZR+6IImYYknaG9a+yNj8ATS4rBoghrNQ=
 github.com/russross/blackfriday v1.5.2/go.mod h1:JO/DiYxRf+HjHt06OyowR9PTA263kcR/rfWxYHBV53g=
 github.com/spf13/afero v1.1.2/go.mod h1:j4pytiNVoe2o6bmDsKpLACNPDBIoEAkihy7loJ1B0CQ=
 github.com/spf13/cast v1.3.0/go.mod h1:Qx5cxh0v+4UWYiBimWS+eyWzqEqokIECu5etghLkUJE=
