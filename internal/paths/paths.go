@@ -1,6 +1,11 @@
 // Package paths provides information on where to find and store files.
 package paths
 
+import (
+	"os"
+	"path/filepath"
+)
+
 var b builder
 
 // Init initializes the paths package. Must be called before calling other
@@ -8,6 +13,12 @@ var b builder
 func Init(appID string) {
 	b = builder{
 		appID: appID,
+	}
+
+	// Fix for a bug where we called `b.ConfigDir()` in `DataDir()`.
+	old := filepath.Join(ConfigDir(), "bookmarks")
+	if _, err := os.Stat(old); !os.IsNotExist(err) {
+		os.Rename(old, filepath.Join(DataDir(), "bookmarks"))
 	}
 }
 
