@@ -55,6 +55,15 @@
   </custom>
 
   <releases>
+    <release version="1.3.3" date="2021-05-30">
+      <description>
+        <ul>
+          <li>Add Portuguese translations (Thanks to rottenpants466)</li>
+          <li>Fix bug where app would dump app files in the root of the config and cache directories. The app will now put those files in an app-specific subdirectory.</li>
+          <li>Bump dependency versions.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.3.2" date="2020-02-08">
       <description>
         <ul>
