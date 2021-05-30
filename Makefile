@@ -7,6 +7,11 @@ DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
+TAGS       = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
+
+APP_VERSION   = $(shell tools/app-version.sh)
+GTK_VERSION   = $(shell tools/gtk-version.sh)
+PANGO_VERSION = $(shell tools/pango-version.sh)
 
 ################################################################################
 # Install Variables
@@ -30,22 +35,17 @@ APPDATA_NAME = $(APP).appdata.xml
 POT_NAME     = $(APP).pot
 
 EXE_PATH     = $(EXE_NAME)
+DEV_PATH     = $(EXE_PATH)-dev
 ICON_PATH    = data/$(ICON_NAME)
 DESKTOP_PATH = data/$(DESKTOP_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
 POT_PATH     = po/$(POT_NAME)
-
-################################################################################
-# Automatic Variables
-################################################################################
 
 GO_SOURCES  = $(shell find . -name '*.go' -type f)
 CSS_SOURCES = $(shell find . -name '*.css' -type f)
 UI_SOURCES  = $(shell find . -name '*.ui' -type f)
 GEN_SOURCES = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
-
-DEV_PATH = $(EXE_PATH)-dev
 
 POTFILES         = $(shell cat po/POTFILES)
 POTFILES_GO      = $(filter %.go,$(POTFILES))
@@ -56,11 +56,6 @@ POTFILES_APPDATA = $(filter %.xml.in,$(POTFILES))
 LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
-
-APP_VERSION   = $(shell tools/app-version.sh)
-GTK_VERSION   = $(shell tools/gtk-version.sh)
-PANGO_VERSION = $(shell tools/pango-version.sh)
-TAGS          = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
 
 ################################################################################
 # Targets
