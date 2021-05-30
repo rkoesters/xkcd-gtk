@@ -42,11 +42,8 @@ jobs:
           path: |
             ${{ env.GOCACHE }}
             ${{ env.GOPATH }}/pkg/mod
-          key: >
-            ${{ runner.os }}-${{ env.GOVERSION }}-cache-${{
-              hashFiles('**/go.sum')
-            }}
-          restore-keys: ${{ runner.os }}-${{ env.GOVERSION }}-cache-
+          key: ${{ env.GOVERSION }}-cache-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ env.GOVERSION }}-cache-
 
       - name: Set up build dependencies
         run: |
