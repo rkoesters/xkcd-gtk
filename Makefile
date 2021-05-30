@@ -77,7 +77,6 @@ dev: $(GEN_SOURCES)
 
 vendor:
 	go mod vendor
-	rm vendor/github.com/gotk3/gotk3/gtk/gtk_since_3_24.go
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
