@@ -41,9 +41,9 @@ DESKTOP_PATH = data/$(DESKTOP_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
 POT_PATH     = po/$(POT_NAME)
 
-GO_SOURCES  = $(shell find . -name '*.go' -type f)
-CSS_SOURCES = $(shell find . -name '*.css' -type f)
-UI_SOURCES  = $(shell find . -name '*.ui' -type f)
+GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
+CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
+UI_SOURCES  = $(shell find cmd internal -name '*.ui' -type f)
 GEN_SOURCES = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
 
