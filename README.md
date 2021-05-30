@@ -49,7 +49,7 @@ To uninstall for all users:
 $ sudo make uninstall prefix=/usr/local
 ```
 
-To uninstall for the current user :
+To uninstall for the current user:
 
 ```shell
 $ make uninstall prefix="$HOME/.local"
