@@ -57,6 +57,9 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
+FLATPAK_BUILD = build/
+FLATPAK_YML   = $(APP).yml
+
 ################################################################################
 # Targets
 ################################################################################
@@ -71,7 +74,7 @@ dev: $(GEN_SOURCES)
 
 flatpak:
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
-	build com.github.rkoesters.xkcd-gtk.yml
+	$(FLATPAK_BUILD) $(FLATPAK_YML)
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
@@ -114,6 +117,7 @@ test: $(GEN_SOURCES)
 
 clean:
 	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	rm -rf $(FLATPAK_BUILD)
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
