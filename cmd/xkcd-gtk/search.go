@@ -60,7 +60,8 @@ func (win *Window) loadSearchResults(result *bleve.SearchResult) {
 			log.Print(err)
 			return
 		}
-		item.Connect("clicked", func() { win.setComicFromSearch(sr.ID) })
+		srID := sr.ID
+		item.Connect("clicked", func() { win.setComicFromSearch(srID) })
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
