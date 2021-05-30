@@ -84,6 +84,4 @@ jobs:
           flatpak --user remote-add --if-not-exists
           flathub https://flathub.org/repo/flathub.flatpakrepo
 
-      - run: >
-          flatpak-builder --user --install-deps-from=flathub
-          build com.github.rkoesters.xkcd-gtk.yaml
+      - run: make flatpak
