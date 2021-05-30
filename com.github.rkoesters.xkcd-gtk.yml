@@ -1,0 +1,214 @@
+---
+
+app-id: com.github.rkoesters.xkcd-gtk
+
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
+
+command: com.github.rkoesters.xkcd-gtk
+
+finish-args:
+  - '--socket=x11'
+  - '--socket=wayland'
+  - '--share=ipc'
+  - '--share=network'
+
+modules:
+  - name: com.github.rkoesters.xkcd-gtk
+    buildsystem: simple
+    build-commands:
+      - '. /usr/lib/sdk/golang/enable.sh; make BUILDFLAGS=-mod=vendor'
+      - '. /usr/lib/sdk/golang/enable.sh; make install prefix=/app'
+
+    sources:
+      - type: dir
+        path: '.'
+
+      - type: git
+        url: https://github.com/RoaringBitmap/roaring.git
+        tag: v0.4.23
+        dest: vendor/github.com/RoaringBitmap/roaring
+
+      - type: git
+        url: https://github.com/blevesearch/bleve.git
+        tag: v1.0.14
+        dest: vendor/github.com/blevesearch/bleve
+
+      - type: git
+        url: https://github.com/blevesearch/blevex.git
+        tag: v1.0.0
+        dest: vendor/github.com/blevesearch/blevex
+
+      - type: git
+        url: https://github.com/blevesearch/go-porterstemmer.git
+        tag: v1.0.3
+        dest: vendor/github.com/blevesearch/go-porterstemmer
+
+      - type: git
+        url: https://github.com/blevesearch/mmap-go.git
+        tag: v1.0.2
+        dest: vendor/github.com/blevesearch/mmap-go
+
+      - type: git
+        url: https://github.com/blevesearch/segment.git
+        tag: v0.9.0
+        dest: vendor/github.com/blevesearch/segment
+
+      - type: git
+        url: https://github.com/blevesearch/snowballstem.git
+        tag: v0.9.0
+        dest: vendor/github.com/blevesearch/snowballstem
+
+      - type: git
+        url: https://github.com/blevesearch/zap.git
+        tag: v11.0.14
+        dest: vendor/github.com/blevesearch/zap/v11
+
+      - type: git
+        url: https://github.com/blevesearch/zap.git
+        tag: v12.0.14
+        dest: vendor/github.com/blevesearch/zap/v12
+
+      - type: git
+        url: https://github.com/blevesearch/zap.git
+        tag: v13.0.6
+        dest: vendor/github.com/blevesearch/zap/v13
+
+      - type: git
+        url: https://github.com/blevesearch/zap.git
+        tag: v14.0.5
+        dest: vendor/github.com/blevesearch/zap/v14
+
+      - type: git
+        url: https://github.com/blevesearch/zap.git
+        tag: v15.0.3
+        dest: vendor/github.com/blevesearch/zap/v15
+
+      - type: git
+        url: https://github.com/couchbase/moss.git
+        tag: v0.1.0
+        dest: vendor/github.com/couchbase/moss
+
+      - type: git
+        url: https://github.com/couchbase/vellum.git
+        tag: v1.0.2
+        dest: vendor/github.com/couchbase/vellum
+
+      - type: git
+        url: https://github.com/emirpasic/gods.git
+        tag: v1.12.0
+        dest: vendor/github.com/emirpasic/gods
+
+      - type: git
+        url: https://github.com/glycerine/go-unsnap-stream.git
+        commit: f9677308dec2b35e76737f9713df328ad11b1fea
+        dest: vendor/github.com/glycerine/go-unsnap-stream
+
+      - type: git
+        url: https://github.com/glycerine/goconvey.git
+        commit: 58a59202ab311a28f6cf05b95753256576781273
+        dest: vendor/github.com/glycerine/goconvey
+
+      - type: git
+        url: https://github.com/golang/protobuf.git
+        tag: v1.3.2
+        dest: vendor/github.com/golang/protobuf
+
+      - type: git
+        url: https://github.com/golang/snappy.git
+        tag: v0.0.1
+        dest: vendor/github.com/golang/snappy
+
+      - type: git
+        url: https://github.com/gopherjs/gopherjs.git
+        commit: 9d188e94fb998051e72e8726cd5f7d168658e529
+        dest: vendor/github.com/gopherjs/gopherjs
+
+      - type: git
+        url: https://github.com/gotk3/gotk3.git
+        commit: 3f44af595c5e644e3889a1a7471fcce8c9d66325
+        dest: vendor/github.com/gotk3/gotk3
+
+      - type: git
+        url: https://github.com/jtolds/gls.git
+        tag: v4.20.0
+        dest: vendor/github.com/jtolds/gls
+
+      - type: git
+        url: https://github.com/kljensen/snowball.git
+        tag: v0.6.0
+        dest: vendor/github.com/kljensen/snowball
+
+      - type: git
+        url: https://github.com/mschoch/smat.git
+        commit: 90eadee771aeab36e8bf796039b8c261bebebe4f
+        dest: vendor/github.com/mschoch/smat
+
+      - type: git
+        url: https://github.com/philhofer/fwd.git
+        tag: v1.0.0
+        dest: vendor/github.com/philhofer/fwd
+
+      - type: git
+        url: https://github.com/rcrowley/go-metrics.git
+        commit: cac0b30c2563378d434b5af411844adff8e32960
+        dest: vendor/github.com/rcrowley/go-metrics
+
+      - type: git
+        url: https://github.com/rkoesters/xdg.git
+        tag: v0.0.1
+        dest: vendor/github.com/rkoesters/xdg
+
+      - type: git
+        url: https://github.com/rkoesters/xkcd.git
+        tag: v1.4.0
+        dest: vendor/github.com/rkoesters/xkcd
+
+      - type: git
+        url: https://github.com/spf13/cobra.git
+        tag: v0.0.5
+        dest: vendor/github.com/spf13/cobra
+
+      - type: git
+        url: https://github.com/steveyen/gtreap.git
+        tag: v0.1.0
+        dest: vendor/github.com/steveyen/gtreap
+
+      - type: git
+        url: https://github.com/stretchr/testify.git
+        tag: v1.4.0
+        dest: vendor/github.com/stretchr/testify
+
+      - type: git
+        url: https://github.com/syndtr/goleveldb.git
+        tag: v1.0.0
+        dest: vendor/github.com/syndtr/goleveldb
+
+      - type: git
+        url: https://github.com/tinylib/msgp.git
+        tag: v1.1.0
+        dest: vendor/github.com/tinylib/msgp
+
+      - type: git
+        url: https://github.com/willf/bitset.git
+        tag: v1.1.10
+        dest: vendor/github.com/willf/bitset
+
+      - type: git
+        url: https://github.com/etcd-io/bbolt.git
+        tag: v1.3.5
+        dest: vendor/go.etcd.io/bbolt
+
+      - type: git
+        url: https://go.googlesource.com/sys.git
+        commit: c1f44814a5cd81a6d1cb589ef1e528bc5d305e07
+        dest: vendor/golang.org/x/sys
+
+      - type: git
+        url: https://go.googlesource.com/text.git
+        tag: v0.3.0
+        dest: vendor/golang.org/x/text

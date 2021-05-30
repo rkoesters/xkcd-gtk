@@ -6,3 +6,5 @@
 /src/
 /out/
 /vendor/
+/.flatpak-builder/
+/build/

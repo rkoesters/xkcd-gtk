@@ -74,8 +74,9 @@ $(EXE_PATH): Makefile $(SOURCES)
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v $(LDFLAGS) $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-vendor:
-	go mod vendor
+flatpak:
+	flatpak-builder --user --install-deps-from=flathub --force-clean \
+	build com.github.rkoesters.xkcd-gtk.yml
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
@@ -109,7 +110,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	go vet $(TAGS) $(BUILDFLAGS) $(MODULE)/...
 	golint -set_exit_status $(MODULE)/...
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	yamllint .github/workflows/*.yml
+	yamllint .github/workflows/*.yml *.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
