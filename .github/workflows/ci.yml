@@ -80,8 +80,10 @@ jobs:
             }}
           restore-keys: flatpak-builder-
 
-      - run: >
+      - name: Configure flathub
+        run: >
           flatpak --user remote-add --if-not-exists
           flathub https://flathub.org/repo/flathub.flatpakrepo
 
-      - run: make flatpak
+      - name: Build flatpak
+        run: make flatpak
