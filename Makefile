@@ -44,7 +44,6 @@ CSS_SOURCES = $(shell find . -name '*.css' -type f)
 UI_SOURCES  = $(shell find . -name '*.ui' -type f)
 GEN_SOURCES = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
 SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
-IMPORTS     = $(shell tools/list-imports.sh ./...)
 
 DEV_PATH = $(EXE_PATH)-dev
 
