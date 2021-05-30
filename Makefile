@@ -2,7 +2,7 @@
 # Build Variables
 ################################################################################
 
-BUILDFLAGS = -tags "$(GTK_VERSION) $(PANGO_VERSION)" -mod=vendor
+BUILDFLAGS = -mod=vendor
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
 LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
@@ -61,6 +61,7 @@ MO      = $(patsubst %.po,%.mo,$(PO))
 APP_VERSION   = $(shell tools/app-version.sh)
 GTK_VERSION   = $(shell tools/gtk-version.sh)
 PANGO_VERSION = $(shell tools/pango-version.sh)
+TAGS          = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
 
 ################################################################################
 # Targets
@@ -69,10 +70,10 @@ PANGO_VERSION = $(shell tools/pango-version.sh)
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	go build -o $@ -v $(LDFLAGS) $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $@ -v $(LDFLAGS) $(TAGS) $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(DEV_PATH) -v $(LDFLAGS) $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v $(LDFLAGS) $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 vendor:
 	go mod vendor
@@ -107,14 +108,14 @@ fix: $(GEN_SOURCES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
 check: $(GEN_SOURCES) $(APPDATA_PATH)
-	go vet $(BUILDFLAGS) $(MODULE)/...
+	go vet $(TAGS) $(BUILDFLAGS) $(MODULE)/...
 	golint -set_exit_status $(MODULE)/...
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
-	go test $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE)/...
+	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE)/...
 	tools/test-install.sh
 
 clean:
