@@ -1,6 +1,6 @@
 #!/bin/sh
-# Find and print versions of the dependencies of all go.mod files in the current
-# directory. Run `make vendor` before running to get versions of all
+# Find and print versions of the dependencies of all go.mod files under the
+# current directory. Run `make vendor` before running to get versions of all
 # dependencies.
 set -eu
 
