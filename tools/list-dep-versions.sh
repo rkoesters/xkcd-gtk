@@ -1,17 +1,11 @@
 #!/bin/sh
-# Find and print versions (or commits) of the dependencies of the given Go
-# packages.
+# Find and print versions of the dependencies of all go.mod files in the current
+# directory. Run `make vendor` before running to get versions of all
+# dependencies.
 set -eu
 
-version () {
-	git -C "$1" describe --always --tags --dirty
-}
-
-# Run all our tools/* before we change directory.
-deps="$(tools/list-deps.sh "$@")"
-
-# Change directory to $GOPATH/src so that package names work as relative paths
-# to the respective package.
-cd "$(go env GOPATH)/src"
-
-(for pkg in $deps; do echo "$pkg" "$(version "$pkg")"; done) | column -t -s ' '
+cat $(find . -name 'go.mod' -type f) |
+grep '	' |
+tr -d '\t' |
+sort |
+uniq
