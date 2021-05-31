@@ -1,10 +1,10 @@
 /xkcd-gtk
 /com.github.rkoesters.xkcd-gtk
 /com.github.rkoesters.xkcd-gtk-dev
-/bin/
-/pkg/
-/src/
-/out/
+
 /vendor/
 /.flatpak-builder/
 /build/
+
+*.css.go
+*.ui.go
