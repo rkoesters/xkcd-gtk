@@ -7,13 +7,20 @@ if [ $# != 1 ]; then
 	exit 1
 fi
 
-printf 'package main\n\nconst '
+file="$1"
+dir="$(dirname "$file")"
+case "$dir" in
+	*cmd/*) package="main" ;;
+	*) package="$(basename "$dir")" ;;
+esac
 
-basename "$1" | tr '.-' '_' | tr -d '\n' |
+printf 'package %s\n\nconst ' "$package"
+
+basename "$file" | tr '.-' '_' | tr -d '\n' |
 sed -e 's/_\([^_]*\)$/\U\1/g' -e 's/_\([a-z]\)/\U\1/g'
 
 printf ' = `'
 
-cat "$1"
+cat "$file"
 
 printf '`\n'
