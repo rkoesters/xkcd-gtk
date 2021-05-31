@@ -1,3 +1,5 @@
+// Package style provides custom application CSS as well as other styling
+// utilities.
 package style
 
 import (
