@@ -8,6 +8,7 @@ import (
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
+	"github.com/rkoesters/xkcd-gtk/internal/widget"
 	"log"
 	"math"
 	"math/rand"
@@ -52,8 +53,7 @@ type Window struct {
 	bookmarkList         *gtk.Box
 	bookmarkObserverID   int
 
-	comicContainer *gtk.ScrolledWindow
-	image          *gtk.Image
+	comicContainer *widget.ImageViewer
 
 	properties *PropertiesDialog
 }
@@ -364,28 +364,12 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.SetTitlebar(win.header)
 
 	// Create main part of window.
-	win.comicContainer, err = gtk.ScrolledWindowNew(nil, nil)
+	win.comicContainer, err = widget.NewImageViewer()
 	if err != nil {
 		return nil, err
 	}
-	win.comicContainer.SetSizeRequest(500, 400)
-
-	imageContext, err := win.comicContainer.GetStyleContext()
-	if err != nil {
-		return nil, err
-	}
-	imageContext.AddClass(style.ClassComicContainer)
-
-	win.image, err = gtk.ImageNew()
-	if err != nil {
-		return nil, err
-	}
-	win.image.SetHAlign(gtk.ALIGN_CENTER)
-	win.image.SetVAlign(gtk.ALIGN_CENTER)
-
-	win.comicContainer.Add(win.image)
-	win.comicContainer.ShowAll()
-	win.window.Add(win.comicContainer)
+	win.comicContainer.Show()
+	win.window.Add(win.comicContainer.ScrolledWindow)
 
 	// Recall our window state.
 	win.state.ReadFile(windowStatePath())
@@ -474,7 +458,7 @@ func (win *Window) SetComic(n int) {
 		} else {
 			_, err = os.Stat(cache.ComicImagePath(n))
 			if os.IsNotExist(err) {
-				win.image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
+				win.comicContainer.Image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
 				err = cache.DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle
@@ -501,7 +485,7 @@ func (win *Window) DisplayComic() {
 
 	win.header.SetTitle(win.comic.SafeTitle)
 	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
-	win.image.SetTooltipText(win.comic.Alt)
+	win.comicContainer.Image.SetTooltipText(win.comic.Alt)
 	win.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
@@ -536,21 +520,15 @@ func (win *Window) DrawComic() {
 	// 'gtk-application-prefer-dark-theme'.
 	win.app.settings.DarkMode = darkMode
 
-	containerContext, err := win.comicContainer.GetStyleContext()
-	if err != nil {
-		log.Print("error getting style context: ", err)
-		return
-	}
-
 	// Load the comic image.
-	win.image.SetFromFile(cache.ComicImagePath(win.comicNumber()))
+	win.comicContainer.Image.SetFromFile(cache.ComicImagePath(win.comicNumber()))
 
 	if darkMode {
 		// Apply the dark style class to the comic container.
-		containerContext.AddClass(style.ClassDark)
+		win.comicContainer.ScrolledWindowCtx.AddClass(style.ClassDark)
 
 		// Invert the pixels of the comic image.
-		pixbuf := win.image.GetPixbuf()
+		pixbuf := win.comicContainer.Image.GetPixbuf()
 		if pixbuf == nil {
 			log.Print("pixbuf == nil")
 			return
@@ -561,7 +539,7 @@ func (win *Window) DrawComic() {
 		}
 	} else {
 		// Remove the dark style class from the comic container.
-		containerContext.RemoveClass(style.ClassDark)
+		win.comicContainer.ScrolledWindowCtx.RemoveClass(style.ClassDark)
 	}
 }
 
@@ -651,8 +629,8 @@ func (win *Window) Destroy() {
 	win.bookmarkScroller = nil
 	win.bookmarkList = nil
 
+	win.comicContainer.Destroy()
 	win.comicContainer = nil
-	win.image = nil
 
 	win.properties = nil
 
