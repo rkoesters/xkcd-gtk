@@ -7,6 +7,7 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"log"
 	"math"
 	"math/rand"
@@ -373,7 +374,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	imageContext.AddClass(styleClassComicContainer)
+	imageContext.AddClass(style.ClassComicContainer)
 
 	win.image, err = gtk.ImageNew()
 	if err != nil {
@@ -546,7 +547,7 @@ func (win *Window) DrawComic() {
 
 	if darkMode {
 		// Apply the dark style class to the comic container.
-		containerContext.AddClass(styleClassDark)
+		containerContext.AddClass(style.ClassDark)
 
 		// Invert the pixels of the comic image.
 		pixbuf := win.image.GetPixbuf()
@@ -560,7 +561,7 @@ func (win *Window) DrawComic() {
 		}
 	} else {
 		// Remove the dark style class from the comic container.
-		containerContext.RemoveClass(styleClassDark)
+		containerContext.RemoveClass(style.ClassDark)
 	}
 }
 

@@ -1,54 +1,11 @@
 package main
 
 import (
-	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"log"
 	"os"
-	"regexp"
-	"strings"
 )
-
-const (
-	styleClassComicContainer = "comic-container"
-	styleClassDark           = "dark"
-	styleClassLinked         = "linked"
-)
-
-var (
-	// largeToolbarThemes is the list of gtk themes for which we should use
-	// large toolbar buttons.
-	largeToolbarThemesRegexp = regexp.MustCompile(strings.Join([]string{
-		"elementary(-x)?",
-		"io\\.elementary\\.stylesheet.*",
-		"win32",
-	}, "|"))
-
-	// nonSymbolicIconThemes is the list of gtk themes for which we should
-	// use non-symbolic icons.
-	nonSymbolicIconThemesRegexp = regexp.MustCompile(strings.Join([]string{
-		"elementary(-x)?",
-		"io\\.elementary\\.stylesheet.*",
-	}, "|"))
-)
-
-// LoadCSS provides the application's custom CSS to GTK.
-func (app *Application) LoadCSS() {
-	provider, err := gtk.CssProviderNew()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-	provider.LoadFromData(styleCSS)
-
-	screen, err := gdk.ScreenGetDefault()
-	if err != nil {
-		log.Print(err)
-		return
-	}
-
-	gtk.AddProviderForScreen(screen, provider, gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-}
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *Window) StyleUpdated() {
@@ -70,12 +27,11 @@ func (win *Window) StyleUpdated() {
 
 	// The default size for our headerbar buttons is small.
 	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
-	if largeToolbarThemesRegexp.MatchString(themeName) {
+	if style.IsLargeToolbarTheme(themeName) {
 		headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
 	}
 
-	// Should we use symbolic icons?
-	useSymbolicIcons := !nonSymbolicIconThemesRegexp.MatchString(themeName)
+	useSymbolicIcons := style.IsSymbolicIconTheme(themeName)
 
 	// We will call icon() to automatically add -symbolic if needed.
 	icon := func(s string) string {
