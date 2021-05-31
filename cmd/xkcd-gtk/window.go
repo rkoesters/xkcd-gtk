@@ -7,10 +7,8 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
-	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"github.com/rkoesters/xkcd-gtk/internal/widget"
 	"log"
-	"math"
 	"math/rand"
 	"os"
 	"runtime"
@@ -369,7 +367,7 @@ func NewWindow(app *Application) (*Window, error) {
 		return nil, err
 	}
 	win.comicContainer.Show()
-	win.window.Add(win.comicContainer.ScrolledWindow)
+	win.window.Add(win.comicContainer.IWidget())
 
 	// Recall our window state.
 	win.state.ReadFile(windowStatePath())
@@ -458,7 +456,7 @@ func (win *Window) SetComic(n int) {
 		} else {
 			_, err = os.Stat(cache.ComicImagePath(n))
 			if os.IsNotExist(err) {
-				win.comicContainer.Image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
+				win.comicContainer.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
 				err = cache.DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle
@@ -485,7 +483,7 @@ func (win *Window) DisplayComic() {
 
 	win.header.SetTitle(win.comic.SafeTitle)
 	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
-	win.comicContainer.Image.SetTooltipText(win.comic.Alt)
+	win.comicContainer.SetTooltipText(win.comic.Alt)
 	win.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
@@ -521,26 +519,9 @@ func (win *Window) DrawComic() {
 	win.app.settings.DarkMode = darkMode
 
 	// Load the comic image.
-	win.comicContainer.Image.SetFromFile(cache.ComicImagePath(win.comicNumber()))
+	win.comicContainer.SetFromFile(cache.ComicImagePath(win.comicNumber()))
 
-	if darkMode {
-		// Apply the dark style class to the comic container.
-		win.comicContainer.ScrolledWindowCtx.AddClass(style.ClassDark)
-
-		// Invert the pixels of the comic image.
-		pixbuf := win.comicContainer.Image.GetPixbuf()
-		if pixbuf == nil {
-			log.Print("pixbuf == nil")
-			return
-		}
-		pixels := pixbuf.GetPixels()
-		for i := 0; i < len(pixels); i++ {
-			pixels[i] = math.MaxUint8 - pixels[i]
-		}
-	} else {
-		// Remove the dark style class from the comic container.
-		win.comicContainer.ScrolledWindowCtx.RemoveClass(style.ClassDark)
-	}
+	win.comicContainer.SetDarkMode(darkMode)
 }
 
 func (win *Window) updateNextPreviousButtonStatus() {

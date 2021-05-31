@@ -3,12 +3,14 @@ package widget
 import (
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
+	"log"
+	"math"
 )
 
 type ImageViewer struct {
-	ScrolledWindow    *gtk.ScrolledWindow
-	ScrolledWindowCtx *gtk.StyleContext
-	Image             *gtk.Image
+	scrolledWindow    *gtk.ScrolledWindow
+	scrolledWindowCtx *gtk.StyleContext
+	image             *gtk.Image
 }
 
 func NewImageViewer() (*ImageViewer, error) {
@@ -16,37 +18,75 @@ func NewImageViewer() (*ImageViewer, error) {
 
 	iv := new(ImageViewer)
 
-	iv.ScrolledWindow, err = gtk.ScrolledWindowNew(nil, nil)
+	iv.scrolledWindow, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	iv.ScrolledWindow.SetSizeRequest(500, 400)
+	iv.scrolledWindow.SetSizeRequest(500, 400)
 
-	iv.ScrolledWindowCtx, err = iv.ScrolledWindow.GetStyleContext()
+	iv.scrolledWindowCtx, err = iv.scrolledWindow.GetStyleContext()
 	if err != nil {
 		return nil, err
 	}
-	iv.ScrolledWindowCtx.AddClass(style.ClassComicContainer)
+	iv.scrolledWindowCtx.AddClass(style.ClassComicContainer)
 
-	iv.Image, err = gtk.ImageNew()
+	iv.image, err = gtk.ImageNew()
 	if err != nil {
 		return nil, err
 	}
-	iv.Image.SetHAlign(gtk.ALIGN_CENTER)
-	iv.Image.SetVAlign(gtk.ALIGN_CENTER)
+	iv.image.SetHAlign(gtk.ALIGN_CENTER)
+	iv.image.SetVAlign(gtk.ALIGN_CENTER)
 
-	iv.ScrolledWindow.Add(iv.Image)
+	iv.scrolledWindow.Add(iv.image)
 
 	return iv, nil
 }
 
+func (iv *ImageViewer) IWidget() gtk.IWidget {
+	// Return the top-level widget.
+	return iv.scrolledWindow
+}
+
 func (iv *ImageViewer) Destroy() {
-	iv.ScrolledWindow = nil
-	iv.ScrolledWindowCtx = nil
-	iv.Image = nil
+	iv.scrolledWindow = nil
+	iv.scrolledWindowCtx = nil
+	iv.image = nil
 }
 
 func (iv *ImageViewer) Show() {
-	iv.ScrolledWindow.ShowAll()
+	iv.scrolledWindow.ShowAll()
+}
+
+func (iv *ImageViewer) SetFromIconName(name string, size gtk.IconSize) {
+	iv.image.SetFromIconName(name, size)
+}
+
+func (iv *ImageViewer) SetFromFile(path string) {
+	iv.image.SetFromFile(path)
+}
+
+func (iv *ImageViewer) SetTooltipText(s string) {
+	iv.image.SetTooltipText(s)
+}
+
+func (iv *ImageViewer) SetDarkMode(enabled bool) {
+	if enabled {
+		// Apply the dark style class to the comic container.
+		iv.scrolledWindowCtx.AddClass(style.ClassDark)
+
+		// Invert the pixels of the comic image.
+		pixbuf := iv.image.GetPixbuf()
+		if pixbuf == nil {
+			log.Print("pixbuf == nil")
+			return
+		}
+		pixels := pixbuf.GetPixels()
+		for i := 0; i < len(pixels); i++ {
+			pixels[i] = math.MaxUint8 - pixels[i]
+		}
+	} else {
+		// Remove the dark style class from the comic container.
+		iv.scrolledWindowCtx.RemoveClass(style.ClassDark)
+	}
 }
