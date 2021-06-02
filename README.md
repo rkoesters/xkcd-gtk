@@ -16,12 +16,26 @@ To build this program, you will need Go (version >= 1.11, something like
 `golang` or `go`) and GTK+ development files (version >= 3.20, something like
 `libgtk-3-dev` or `gtk3-devel`).
 
-### Compiling
+### Building
 
 Just run `make` from the root of the repo:
 
 ```shell
 $ make
+```
+
+#### Testing
+
+Run static analysis with:
+
+```shell
+$ make check
+```
+
+Run tests with:
+
+```shell
+$ make test
 ```
 
 ### Installing
