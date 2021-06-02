@@ -148,6 +148,15 @@ func NewWindow(app *Application) (*Window, error) {
 	win.previous.AddAccelerator("activate", win.accels, gdk.KEY_Left, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	navBox.Add(win.previous)
 
+	win.random, err = gtk.ButtonNew()
+	if err != nil {
+		return nil, err
+	}
+	win.random.SetTooltipText(l("Go to a random comic"))
+	win.random.SetProperty("action-name", "win.random-comic")
+	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	navBox.Add(win.random)
+
 	win.next, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
@@ -347,16 +356,6 @@ func NewWindow(app *Application) (*Window, error) {
 
 	box.ShowAll()
 	searchPopover.Add(box)
-
-	// Create the random button
-	win.random, err = gtk.ButtonNewWithLabel(l("Random"))
-	if err != nil {
-		return nil, err
-	}
-	win.random.SetTooltipText(l("Go to a random comic"))
-	win.random.SetProperty("action-name", "win.random-comic")
-	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	win.header.PackEnd(win.random)
 
 	win.header.ShowAll()
 	win.window.SetTitlebar(win.header)

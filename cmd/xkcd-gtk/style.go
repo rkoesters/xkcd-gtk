@@ -55,6 +55,13 @@ func (win *Window) StyleUpdated() {
 		win.previous.SetImage(previousImg)
 	}
 
+	randomImg, err := gtk.ImageNewFromIconName(icon("media-playlist-shuffle"), headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		win.random.SetImage(randomImg)
+	}
+
 	nextImg, err := gtk.ImageNewFromIconName(icon("go-next"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
