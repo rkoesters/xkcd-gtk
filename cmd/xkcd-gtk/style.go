@@ -45,35 +45,35 @@ func (win *Window) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.first.SetImage(firstImg)
+		win.navigationBar.SetFirstButtonImage(firstImg)
 	}
 
 	previousImg, err := gtk.ImageNewFromIconName(icon("go-previous"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.previous.SetImage(previousImg)
+		win.navigationBar.SetPreviousButtonImage(previousImg)
 	}
 
 	randomImg, err := gtk.ImageNewFromIconName(icon("media-playlist-shuffle"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.random.SetImage(randomImg)
+		win.navigationBar.SetRandomButtonImage(randomImg)
 	}
 
 	nextImg, err := gtk.ImageNewFromIconName(icon("go-next"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.next.SetImage(nextImg)
+		win.navigationBar.SetNextButtonImage(nextImg)
 	}
 
 	newestImg, err := gtk.ImageNewFromIconName(icon("go-last"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.newest.SetImage(newestImg)
+		win.navigationBar.SetNewestButtonImage(newestImg)
 	}
 
 	bookmarksImg, err := gtk.ImageNewFromIconName(icon("user-bookmarks"), headerBarIconSize)

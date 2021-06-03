@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
@@ -29,13 +28,9 @@ type Window struct {
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
 
-	header   *gtk.HeaderBar
-	first    *gtk.Button
-	previous *gtk.Button
-	next     *gtk.Button
-	newest   *gtk.Button
-	random   *gtk.Button
+	header *gtk.HeaderBar
 
+	navigationBar *widget.NavigationBar
 	searchMenu    *widget.SearchMenu
 	bookmarksMenu *widget.BookmarksMenu
 	windowMenu    *widget.WindowMenu
@@ -119,58 +114,12 @@ func NewWindow(app *Application) (*Window, error) {
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
-	navBox, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
+	win.navigationBar, err = widget.NewNavigationBar(win.actions, win.accels)
 	if err != nil {
 		return nil, err
 	}
-	navBox.SetLayout(gtk.BUTTONBOX_EXPAND)
-
-	win.first, err = gtk.ButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	win.first.SetTooltipText(l("Go to the first comic"))
-	win.first.SetProperty("action-name", "win.first-comic")
-	win.first.AddAccelerator("activate", win.accels, gdk.KEY_Home, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	navBox.Add(win.first)
-
-	win.previous, err = gtk.ButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	win.previous.SetTooltipText(l("Go to the previous comic"))
-	win.previous.SetProperty("action-name", "win.previous-comic")
-	win.previous.AddAccelerator("activate", win.accels, gdk.KEY_Left, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	navBox.Add(win.previous)
-
-	win.random, err = gtk.ButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	win.random.SetTooltipText(l("Go to a random comic"))
-	win.random.SetProperty("action-name", "win.random-comic")
-	win.random.AddAccelerator("activate", win.accels, gdk.KEY_r, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	navBox.Add(win.random)
-
-	win.next, err = gtk.ButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	win.next.SetTooltipText(l("Go to the next comic"))
-	win.next.SetProperty("action-name", "win.next-comic")
-	win.next.AddAccelerator("activate", win.accels, gdk.KEY_Right, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	navBox.Add(win.next)
-
-	win.newest, err = gtk.ButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	win.newest.SetTooltipText(l("Go to the newest comic"))
-	win.newest.SetProperty("action-name", "win.newest-comic")
-	win.newest.AddAccelerator("activate", win.accels, gdk.KEY_End, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	navBox.Add(win.newest)
-
-	win.header.PackStart(navBox)
+	win.navigationBar.Show()
+	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
 	win.windowMenu, err = widget.NewWindowMenu(app.application.PrefersAppMenu(), win.actions, win.accels, win.ShowProperties)
@@ -428,11 +377,9 @@ func (win *Window) Destroy() {
 	win.accels = nil
 
 	win.header = nil
-	win.first = nil
-	win.previous = nil
-	win.next = nil
-	win.newest = nil
-	win.random = nil
+
+	win.navigationBar.Destroy()
+	win.navigationBar = nil
 
 	win.searchMenu.Destroy()
 	win.searchMenu = nil
