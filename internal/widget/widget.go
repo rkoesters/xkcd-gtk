@@ -10,9 +10,6 @@ type Widget interface {
 	// IWidget returns the Widget's top-level gtk.Widget.
 	IWidget() gtk.IWidget
 
-	// Show marks a widget to be displayed.
-	Show()
-
 	// Destroy performs clean up to aid garbage collection.
 	Destroy()
 }

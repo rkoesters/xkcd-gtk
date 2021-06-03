@@ -111,10 +111,6 @@ func (sm *SearchMenu) IWidget() gtk.IWidget {
 	return sm.menuButton
 }
 
-func (sm *SearchMenu) Show() {
-	sm.menuButton.Show()
-}
-
 // Search preforms a search with win.searchEntry.GetText() and puts the results
 // into win.searchResults.
 func (sm *SearchMenu) Search() {

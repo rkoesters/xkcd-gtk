@@ -100,10 +100,6 @@ func (nb *NavigationBar) IWidget() gtk.IWidget {
 	return nb.box
 }
 
-func (nb *NavigationBar) Show() {
-	nb.box.ShowAll()
-}
-
 func (nb *NavigationBar) SetFirstButtonImage(image *gtk.Image) {
 	nb.firstButton.SetImage(image)
 }

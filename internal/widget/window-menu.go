@@ -79,7 +79,3 @@ func (wm *WindowMenu) Destroy() {
 func (wm *WindowMenu) IWidget() gtk.IWidget {
 	return wm.menuButton
 }
-
-func (wm *WindowMenu) Show() {
-	wm.menuButton.Show()
-}

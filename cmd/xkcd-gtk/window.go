@@ -118,7 +118,6 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.navigationBar.Show()
 	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
@@ -126,7 +125,6 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.windowMenu.Show()
 	win.header.PackEnd(win.windowMenu.IWidget())
 
 	// Create the bookmarks menu.
@@ -134,7 +132,6 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.bookmarksMenu.Show()
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
 	// Create the search menu.
@@ -142,7 +139,6 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.searchMenu.Show()
 	win.header.PackEnd(win.searchMenu.IWidget())
 
 	win.header.ShowAll()
