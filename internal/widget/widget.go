@@ -6,6 +6,6 @@ import (
 )
 
 type Widget interface {
-	// Return the Widget's top-level gtk.Widget.
+	// IWidget returns the Widget's top-level gtk.Widget.
 	IWidget() gtk.IWidget
 }
