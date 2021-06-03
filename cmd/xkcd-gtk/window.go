@@ -49,9 +49,9 @@ type Window struct {
 func NewWindow(app *Application) (*Window, error) {
 	var err error
 
-	win := new(Window)
-
-	win.app = app
+	win := &Window{
+		app: app,
+	}
 
 	win.window, err = gtk.ApplicationWindowNew(app.application)
 	if err != nil {
