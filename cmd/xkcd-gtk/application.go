@@ -82,6 +82,17 @@ func NewApplication() (*Application, error) {
 	return &app, nil
 }
 
+// SetupAppMenu creates an AppMenu if the environment wants it.
+func (app *Application) SetupAppMenu() {
+	if app.application.PrefersAppMenu() {
+		menu, err := widget.NewAppMenu()
+		if err != nil {
+			log.Fatal("error creating app menu: ", err)
+		}
+		app.application.SetAppMenu(menu)
+	}
+}
+
 // SetupCache initializes the comic cache and the search index.
 func (app *Application) SetupCache() {
 	err := cache.Init(search.Index)

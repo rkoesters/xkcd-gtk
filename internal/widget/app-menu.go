@@ -1,9 +1,8 @@
-package main
+package widget
 
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"log"
 )
 
 // NewAppMenu creates a glib.MenuModel populated with our application's app
@@ -25,15 +24,4 @@ func NewAppMenu() (*glib.MenuModel, error) {
 	}
 
 	return obj.(*glib.MenuModel), nil
-}
-
-// SetupAppMenu creates an AppMenu if the environment wants it.
-func (app *Application) SetupAppMenu() {
-	if app.application.PrefersAppMenu() {
-		menu, err := NewAppMenu()
-		if err != nil {
-			log.Fatal("error creating app menu: ", err)
-		}
-		app.application.SetAppMenu(menu)
-	}
 }
