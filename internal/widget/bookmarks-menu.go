@@ -12,12 +12,12 @@ import (
 )
 
 type BookmarksMenu struct {
-	bookmarks   *bookmarks.List // ptr to app.bookmarks
-	windowState *WindowState    // ptr to win.state
-	observerID  int
+	bookmarks  *bookmarks.List // ptr to app.bookmarks
+	observerID int
 
-	actions map[string]*glib.SimpleAction // ptr to win.actions
-	accels  *gtk.AccelGroup               // ptr to win.accels
+	windowState *WindowState                  // ptr to win.state
+	actions     map[string]*glib.SimpleAction // ptr to win.actions
+	accels      *gtk.AccelGroup               // ptr to win.accels
 
 	menuButton   *gtk.MenuButton
 	addButton    *gtk.Button
@@ -32,13 +32,13 @@ type BookmarksMenu struct {
 func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
 	var err error
 
-	bm := new(BookmarksMenu)
-
-	bm.bookmarks = b
-	bm.windowState = ws
-
-	bm.actions = actions
-	bm.accels = accels
+	bm := &BookmarksMenu{
+		bookmarks:   b,
+		windowState: ws,
+		actions:     actions,
+		accels:      accels,
+		setComic:    comicSetter,
+	}
 
 	// Create the bookmark menu
 	bm.menuButton, err = gtk.MenuButtonNew()
@@ -119,8 +119,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 
 	box.ShowAll()
 	popover.Add(box)
-
-	bm.setComic = comicSetter
 
 	return bm, nil
 }
