@@ -21,7 +21,7 @@ import (
 type Window struct {
 	app    *Application
 	window *gtk.ApplicationWindow
-	state  WindowState
+	state  widget.WindowState
 
 	comic      *xkcd.Comic
 	comicMutex sync.RWMutex
@@ -29,27 +29,21 @@ type Window struct {
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
 
-	header    *gtk.HeaderBar
-	first     *gtk.Button
-	previous  *gtk.Button
-	next      *gtk.Button
-	newest    *gtk.Button
-	random    *gtk.Button
-	search    *gtk.MenuButton
-	bookmarks *gtk.MenuButton
-	menu      *gtk.MenuButton
+	header   *gtk.HeaderBar
+	first    *gtk.Button
+	previous *gtk.Button
+	next     *gtk.Button
+	newest   *gtk.Button
+	random   *gtk.Button
+	search   *gtk.MenuButton
+	menu     *gtk.MenuButton
 
 	searchEntry     *gtk.SearchEntry
 	searchNoResults *gtk.Label
 	searchScroller  *gtk.ScrolledWindow
 	searchResults   *gtk.Box
 
-	bookmarkActionNew    *gtk.Button
-	bookmarkActionRemove *gtk.Button
-	bookmarkSeparator    *gtk.Separator
-	bookmarkScroller     *gtk.ScrolledWindow
-	bookmarkList         *gtk.Box
-	bookmarkObserverID   int
+	bookmarksMenu *widget.BookmarksMenu
 
 	comicContainer *widget.ImageViewer
 
@@ -83,8 +77,8 @@ func NewWindow(app *Application) (*Window, error) {
 		win.window.AddAction(action)
 	}
 
-	registerAction("bookmark-new", win.AddBookmark)
-	registerAction("bookmark-remove", win.RemoveBookmark)
+	registerAction("bookmark-new", func() { win.bookmarksMenu.AddBookmark() })
+	registerAction("bookmark-remove", func() { win.bookmarksMenu.RemoveBookmark() })
 	registerAction("explain", win.Explain)
 	registerAction("first-comic", win.FirstComic)
 	registerAction("newest-comic", win.NewestComic)
@@ -110,7 +104,13 @@ func NewWindow(app *Application) (*Window, error) {
 	})
 
 	// If the window is closed, we want to write our state to disk.
-	win.window.Connect("delete-event", win.SaveState)
+	win.window.Connect("delete-event", func() {
+		if win.properties == nil {
+			win.state.SaveState(win.window, nil)
+		} else {
+			win.state.SaveState(win.window, win.properties.dialog)
+		}
+	})
 
 	// When gtk destroys the window, we want to clean up.
 	win.window.Connect("destroy", win.Destroy)
@@ -218,86 +218,11 @@ func NewWindow(app *Application) (*Window, error) {
 	win.menu.SetMenuModel(&menu.MenuModel)
 	win.header.PackEnd(win.menu)
 
-	// Create the bookmark menu
-	win.bookmarks, err = gtk.MenuButtonNew()
+	win.bookmarksMenu, err = widget.NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
-	win.bookmarks.SetTooltipText(l("Bookmarks"))
-	win.bookmarks.AddAccelerator("activate", win.accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	win.header.PackEnd(win.bookmarks)
-
-	bookmarksPopover, err := gtk.PopoverNew(win.bookmarks)
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarks.SetPopover(bookmarksPopover)
-
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
-	if err != nil {
-		return nil, err
-	}
-	box.SetMarginTop(12)
-	box.SetMarginBottom(12)
-	box.SetMarginStart(12)
-	box.SetMarginEnd(12)
-
-	win.bookmarkActionNew, err = gtk.ButtonNewWithLabel(l("Bookmark this comic"))
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkActionNew.SetProperty("action-name", "win.bookmark-new")
-	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkActionNew.SetImage(bookmarkNewImage)
-	win.bookmarkActionNew.SetAlwaysShowImage(true)
-	box.Add(win.bookmarkActionNew)
-
-	win.bookmarkActionRemove, err = gtk.ButtonNewWithLabel(l("Remove this comic from bookmarks"))
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkActionRemove.SetProperty("action-name", "win.bookmark-remove")
-	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkActionRemove.SetImage(bookmarkRemoveImage)
-	win.bookmarkActionRemove.SetAlwaysShowImage(true)
-	box.Add(win.bookmarkActionRemove)
-
-	win.bookmarkSeparator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
-	if err != nil {
-		return nil, err
-	}
-	box.Add(win.bookmarkSeparator)
-
-	win.bookmarkScroller, err = gtk.ScrolledWindowNew(nil, nil)
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkScroller.SetProperty("propagate-natural-height", true)
-	win.bookmarkScroller.SetProperty("propagate-natural-width", true)
-	win.bookmarkScroller.SetProperty("min-content-height", 0)
-	win.bookmarkScroller.SetProperty("min-content-width", 200)
-	win.bookmarkScroller.SetProperty("max-content-height", 350)
-	win.bookmarkScroller.SetProperty("max-content-width", 350)
-	box.Add(win.bookmarkScroller)
-	win.bookmarkList, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
-	if err != nil {
-		return nil, err
-	}
-	win.bookmarkScroller.Add(win.bookmarkList)
-	win.registerBookmarkObserver()
-	win.window.Connect("delete-event", func() {
-		win.unregisterBookmarkObserver()
-	})
-	defer win.loadBookmarkList()
-
-	box.ShowAll()
-	bookmarksPopover.Add(box)
+	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
 	// Create the search menu
 	win.search, err = gtk.MenuButtonNew()
@@ -314,7 +239,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 	win.search.SetPopover(searchPopover)
 
-	box, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
 	if err != nil {
 		return nil, err
 	}
@@ -369,7 +294,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.Add(win.comicContainer.IWidget())
 
 	// Recall our window state.
-	win.state.ReadFile(windowStatePath())
+	win.state.LoadState()
 	win.window.Resize(win.state.Width, win.state.Height)
 	if win.state.PositionX != 0 && win.state.PositionY != 0 {
 		win.window.Move(win.state.PositionX, win.state.PositionY)
@@ -440,7 +365,7 @@ func (win *Window) SetComic(n int) {
 
 	// Update UI to reflect new current comic.
 	win.updateNextPreviousButtonStatus()
-	win.updateBookmarkButton()
+	win.bookmarksMenu.UpdateBookmarkButton()
 
 	go func() {
 		var err error
@@ -595,7 +520,6 @@ func (win *Window) Destroy() {
 	win.newest = nil
 	win.random = nil
 	win.search = nil
-	win.bookmarks = nil
 	win.menu = nil
 
 	win.searchEntry = nil
@@ -603,11 +527,8 @@ func (win *Window) Destroy() {
 	win.searchScroller = nil
 	win.searchResults = nil
 
-	win.bookmarkActionNew = nil
-	win.bookmarkActionRemove = nil
-	win.bookmarkSeparator = nil
-	win.bookmarkScroller = nil
-	win.bookmarkList = nil
+	win.bookmarksMenu.Destroy()
+	win.bookmarksMenu = nil
 
 	win.comicContainer.Destroy()
 	win.comicContainer = nil

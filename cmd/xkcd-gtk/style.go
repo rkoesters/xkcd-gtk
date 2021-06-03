@@ -80,7 +80,7 @@ func (win *Window) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.bookmarks.SetImage(bookmarksImg)
+		win.bookmarksMenu.IWidget().(*gtk.MenuButton).SetImage(bookmarksImg)
 	}
 
 	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)

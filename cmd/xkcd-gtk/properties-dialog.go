@@ -165,7 +165,7 @@ func (pd *PropertiesDialog) Close() {
 	pd.parent.properties = nil
 	pd.parent.state.PropertiesWidth, pd.parent.state.PropertiesHeight = pd.dialog.GetSize()
 	pd.parent.state.PropertiesPositionX, pd.parent.state.PropertiesPositionY = pd.dialog.GetPosition()
-	pd.parent.SaveState()
+	pd.parent.state.SaveState(pd.parent.window, pd.dialog)
 }
 
 // Destroy removes our references to the dialog so the garbage collector can
