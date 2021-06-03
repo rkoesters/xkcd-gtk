@@ -94,6 +94,6 @@ func (win *Window) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.menu.SetImage(menuImg)
+		win.windowMenu.IWidget().(*gtk.MenuButton).SetImage(menuImg)
 	}
 }

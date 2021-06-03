@@ -35,10 +35,10 @@ type Window struct {
 	next     *gtk.Button
 	newest   *gtk.Button
 	random   *gtk.Button
-	menu     *gtk.MenuButton
 
 	searchMenu    *widget.SearchMenu
 	bookmarksMenu *widget.BookmarksMenu
+	windowMenu    *widget.WindowMenu
 
 	comicContainer *widget.ImageViewer
 
@@ -172,46 +172,13 @@ func NewWindow(app *Application) (*Window, error) {
 
 	win.header.PackStart(navBox)
 
-	// Create the menu
-	win.menu, err = gtk.MenuButtonNew()
+	// Create the window menu.
+	win.windowMenu, err = widget.NewWindowMenu(app.application.PrefersAppMenu(), win.actions, win.accels, win.ShowProperties)
 	if err != nil {
 		return nil, err
 	}
-	win.menu.SetTooltipText(l("Menu"))
-
-	menu := glib.MenuNew()
-
-	menuSection1 := glib.MenuNew()
-	menuSection1.Append(l("Open Link"), "win.open-link")
-	menuSection1.Append(l("Explain"), "win.explain")
-	menuSection1.Append(l("Properties"), "win.show-properties")
-	menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
-	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
-
-	if !app.application.PrefersAppMenu() {
-		menuSection2 := glib.MenuNew()
-		menuSection2.Append(l("New Window"), "app.new-window")
-		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
-
-		menuSection3 := glib.MenuNew()
-		menuSection3.Append(l("Toggle Dark Mode"), "app.toggle-dark-mode")
-		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
-
-		menuSection4 := glib.MenuNew()
-		menuSection4.Append(l("What If?"), "app.open-what-if")
-		menuSection4.Append(l("XKCD Blog"), "app.open-blog")
-		menuSection4.Append(l("XKCD Store"), "app.open-store")
-		menuSection4.Append(l("About XKCD"), "app.open-about-xkcd")
-		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
-
-		menuSection5 := glib.MenuNew()
-		menuSection5.Append(l("Keyboard Shortcuts"), "app.show-shortcuts")
-		menuSection5.Append(l("About Comic Sticks"), "app.show-about")
-		menu.AppendSectionWithoutLabel(&menuSection5.MenuModel)
-	}
-
-	win.menu.SetMenuModel(&menu.MenuModel)
-	win.header.PackEnd(win.menu)
+	win.windowMenu.Show()
+	win.header.PackEnd(win.windowMenu.IWidget())
 
 	// Create the bookmarks menu.
 	win.bookmarksMenu, err = widget.NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
@@ -466,13 +433,15 @@ func (win *Window) Destroy() {
 	win.next = nil
 	win.newest = nil
 	win.random = nil
-	win.menu = nil
 
 	win.searchMenu.Destroy()
 	win.searchMenu = nil
 
 	win.bookmarksMenu.Destroy()
 	win.bookmarksMenu = nil
+
+	win.windowMenu.Destroy()
+	win.windowMenu = nil
 
 	win.comicContainer.Destroy()
 	win.comicContainer = nil
