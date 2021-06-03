@@ -13,6 +13,8 @@ type ImageViewer struct {
 	image             *gtk.Image
 }
 
+var _ Widget = &ImageViewer{}
+
 func NewImageViewer() (*ImageViewer, error) {
 	var err error
 

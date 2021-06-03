@@ -29,6 +29,8 @@ type BookmarksMenu struct {
 	setComic func(int) // win.SetComic
 }
 
+var _ Widget = &BookmarksMenu{}
+
 func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
 	var err error
 
