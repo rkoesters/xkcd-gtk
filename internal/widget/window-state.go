@@ -1,7 +1,8 @@
-package main
+package widget
 
 import (
 	"encoding/json"
+	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"io"
@@ -81,23 +82,27 @@ func (ws *WindowState) WriteFile(filename string) error {
 	return ws.Write(f)
 }
 
+func (ws *WindowState) LoadState() {
+	ws.ReadFile(windowStatePath())
+}
+
 // SaveState writes win.state to disk so it can be loaded next time we open a
 // window.
-func (win *Window) SaveState() {
-	win.state.Maximized = win.window.IsMaximized()
-	if !win.state.Maximized {
-		win.state.Width, win.state.Height = win.window.GetSize()
-		win.state.PositionX, win.state.PositionY = win.window.GetPosition()
+func (ws *WindowState) SaveState(window *gtk.ApplicationWindow, propertiesDialog *gtk.Dialog) {
+	ws.Maximized = window.IsMaximized()
+	if !ws.Maximized {
+		ws.Width, ws.Height = window.GetSize()
+		ws.PositionX, ws.PositionY = window.GetPosition()
 	}
-	if win.properties == nil {
-		win.state.PropertiesVisible = false
+	if propertiesDialog == nil {
+		ws.PropertiesVisible = false
 	} else {
-		win.state.PropertiesVisible = true
-		win.state.PropertiesWidth, win.state.PropertiesHeight = win.properties.dialog.GetSize()
-		win.state.PropertiesPositionX, win.state.PropertiesPositionY = win.properties.dialog.GetPosition()
+		ws.PropertiesVisible = true
+		ws.PropertiesWidth, ws.PropertiesHeight = propertiesDialog.GetSize()
+		ws.PropertiesPositionX, ws.PropertiesPositionY = propertiesDialog.GetPosition()
 	}
 
-	err := win.state.WriteFile(windowStatePath())
+	err := ws.WriteFile(windowStatePath())
 	if err != nil {
 		log.Printf("error saving window state: %v", err)
 	}
