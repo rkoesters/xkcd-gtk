@@ -87,7 +87,7 @@ func (win *Window) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.search.SetImage(searchImg)
+		win.searchMenu.IWidget().(*gtk.MenuButton).SetImage(searchImg)
 	}
 
 	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)

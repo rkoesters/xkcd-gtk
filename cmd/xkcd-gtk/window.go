@@ -35,14 +35,9 @@ type Window struct {
 	next     *gtk.Button
 	newest   *gtk.Button
 	random   *gtk.Button
-	search   *gtk.MenuButton
 	menu     *gtk.MenuButton
 
-	searchEntry     *gtk.SearchEntry
-	searchNoResults *gtk.Label
-	searchScroller  *gtk.ScrolledWindow
-	searchResults   *gtk.Box
-
+	searchMenu    *widget.SearchMenu
 	bookmarksMenu *widget.BookmarksMenu
 
 	comicContainer *widget.ImageViewer
@@ -222,65 +217,15 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	win.bookmarksMenu.Show()
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
-	// Create the search menu
-	win.search, err = gtk.MenuButtonNew()
+	win.searchMenu, err = widget.NewSearchMenu(win.actions, win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
-	win.search.SetTooltipText(l("Search"))
-	win.search.AddAccelerator("activate", win.accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	win.header.PackEnd(win.search)
-
-	searchPopover, err := gtk.PopoverNew(win.search)
-	if err != nil {
-		return nil, err
-	}
-	win.search.SetPopover(searchPopover)
-
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
-	if err != nil {
-		return nil, err
-	}
-	box.SetMarginTop(12)
-	box.SetMarginBottom(12)
-	box.SetMarginStart(12)
-	box.SetMarginEnd(12)
-	win.searchEntry, err = gtk.SearchEntryNew()
-	if err != nil {
-		return nil, err
-	}
-	win.searchEntry.SetSizeRequest(300, -1)
-	win.searchEntry.Connect("search-changed", win.Search)
-	box.Add(win.searchEntry)
-
-	win.searchNoResults, err = gtk.LabelNew(l("No results found"))
-	if err != nil {
-		return nil, err
-	}
-	box.Add(win.searchNoResults)
-
-	win.searchScroller, err = gtk.ScrolledWindowNew(nil, nil)
-	if err != nil {
-		return nil, err
-	}
-	win.searchScroller.SetProperty("propagate-natural-height", true)
-	win.searchScroller.SetProperty("propagate-natural-width", true)
-	win.searchScroller.SetProperty("min-content-height", 0)
-	win.searchScroller.SetProperty("min-content-width", 200)
-	win.searchScroller.SetProperty("max-content-height", 350)
-	win.searchScroller.SetProperty("max-content-width", 350)
-	box.Add(win.searchScroller)
-	win.searchResults, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
-	if err != nil {
-		return nil, err
-	}
-	win.searchScroller.Add(win.searchResults)
-	defer win.loadSearchResults(nil)
-
-	box.ShowAll()
-	searchPopover.Add(box)
+	win.searchMenu.Show()
+	win.header.PackEnd(win.searchMenu.IWidget())
 
 	win.header.ShowAll()
 	win.window.SetTitlebar(win.header)
@@ -519,13 +464,10 @@ func (win *Window) Destroy() {
 	win.next = nil
 	win.newest = nil
 	win.random = nil
-	win.search = nil
 	win.menu = nil
 
-	win.searchEntry = nil
-	win.searchNoResults = nil
-	win.searchScroller = nil
-	win.searchResults = nil
+	win.searchMenu.Destroy()
+	win.searchMenu = nil
 
 	win.bookmarksMenu.Destroy()
 	win.bookmarksMenu = nil
