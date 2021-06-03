@@ -213,6 +213,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.menu.SetMenuModel(&menu.MenuModel)
 	win.header.PackEnd(win.menu)
 
+	// Create the bookmarks menu.
 	win.bookmarksMenu, err = widget.NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
@@ -220,6 +221,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.bookmarksMenu.Show()
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
+	// Create the search menu.
 	win.searchMenu, err = widget.NewSearchMenu(win.actions, win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
