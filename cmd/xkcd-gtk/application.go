@@ -153,6 +153,30 @@ func (app *Application) ToggleDarkMode() {
 	}
 }
 
+// DarkMode returns whether the application has dark mode enabled.
+func (app *Application) DarkMode() bool {
+	darkMode := app.settings.DarkMode
+
+	// Ask GTK whether it is using a dark theme.
+	darkModeIface, err := app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
+	if err == nil {
+		var ok bool
+		darkMode, ok = darkModeIface.(bool)
+		if !ok {
+			log.Print("failed to interpret dark mode state")
+			darkMode = app.settings.DarkMode
+		}
+	} else {
+		log.Print("error getting dark mode state: ", err)
+	}
+
+	// Sync app.settings.DarkMode with the value of
+	// 'gtk-application-prefer-dark-theme'.
+	app.settings.DarkMode = darkMode
+
+	return darkMode
+}
+
 // Quit closes all windows so the application can close.
 func (app *Application) Quit() {
 	// Close the active window so that it has a chance to save its state.

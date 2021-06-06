@@ -60,19 +60,17 @@ func (iv *ImageViewer) Show() {
 	iv.scrolledWindow.ShowAll()
 }
 
-func (iv *ImageViewer) SetFromIconName(name string, size gtk.IconSize) {
+func (iv *ImageViewer) SetFromIconName(name string, size gtk.IconSize, darkMode bool) {
 	iv.image.SetFromIconName(name, size)
+	iv.applyDarkMode(darkMode)
 }
 
-func (iv *ImageViewer) SetFromFile(path string) {
+func (iv *ImageViewer) SetFromFile(path string, darkMode bool) {
 	iv.image.SetFromFile(path)
+	iv.applyDarkMode(darkMode)
 }
 
-func (iv *ImageViewer) SetTooltipText(s string) {
-	iv.image.SetTooltipText(s)
-}
-
-func (iv *ImageViewer) SetDarkMode(enabled bool) {
+func (iv *ImageViewer) applyDarkMode(enabled bool) {
 	if enabled {
 		// Apply the dark style class to the comic container.
 		iv.scrolledWindowCtx.AddClass(style.ClassDark)
@@ -91,4 +89,8 @@ func (iv *ImageViewer) SetDarkMode(enabled bool) {
 		// Remove the dark style class from the comic container.
 		iv.scrolledWindowCtx.RemoveClass(style.ClassDark)
 	}
+}
+
+func (iv *ImageViewer) SetTooltipText(s string) {
+	iv.image.SetTooltipText(s)
 }

@@ -331,7 +331,7 @@ func (win *Window) SetComic(n int) {
 		} else {
 			_, err = os.Stat(cache.ComicImagePath(n))
 			if os.IsNotExist(err) {
-				win.comicContainer.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
+				win.comicContainer.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG, win.app.DarkMode())
 				err = cache.DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle
@@ -377,26 +377,7 @@ func (win *Window) DisplayComic() {
 
 // DrawComic draws the comic and inverts it if we are in dark mode.
 func (win *Window) DrawComic() {
-	// Are we using a dark theme?
-	darkModeIface, err := win.app.gtkSettings.GetProperty("gtk-application-prefer-dark-theme")
-	if err != nil {
-		log.Print("error getting dark mode state: ", err)
-		return
-	}
-	darkMode, ok := darkModeIface.(bool)
-	if !ok {
-		log.Print("failed to interpret dark mode state")
-		return
-	}
-
-	// Sync app.settings.DarkMode with the value of
-	// 'gtk-application-prefer-dark-theme'.
-	win.app.settings.DarkMode = darkMode
-
-	// Load the comic image.
-	win.comicContainer.SetFromFile(cache.ComicImagePath(win.comicNumber()))
-
-	win.comicContainer.SetDarkMode(darkMode)
+	win.comicContainer.SetFromFile(cache.ComicImagePath(win.comicNumber()), win.app.DarkMode())
 }
 
 func (win *Window) updateNextPreviousButtonStatus() {
