@@ -77,7 +77,7 @@ func (app *Application) LoadSettings() {
 
 // SaveSettings tries to save our settings to disk.
 func (app *Application) SaveSettings() {
-	err := os.MkdirAll(paths.ConfigDir(), 0755)
+	err := paths.EnsureConfigDir()
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
 	}

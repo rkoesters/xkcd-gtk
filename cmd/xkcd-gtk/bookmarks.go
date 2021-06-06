@@ -4,7 +4,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"log"
-	"os"
 	"path/filepath"
 )
 
@@ -16,7 +15,7 @@ func (app *Application) LoadBookmarks() {
 
 // SaveBookmarks tries to save our bookmarks to disk.
 func (app *Application) SaveBookmarks() {
-	err := os.MkdirAll(paths.DataDir(), 0755)
+	err := paths.EnsureDataDir()
 	if err != nil {
 		log.Printf("error saving bookmarks: %v", err)
 	}

@@ -44,7 +44,7 @@ var (
 func Init(index func(comic *xkcd.Comic) error) error {
 	addToSearchIndex = index
 
-	err := os.MkdirAll(paths.CacheDir(), 0755)
+	err := paths.EnsureCacheDir()
 	if err != nil {
 		return err
 	}
