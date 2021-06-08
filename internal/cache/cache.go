@@ -205,7 +205,7 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 // CheckForNewestComicInfo fetches the latest comic info from the internet. If
 // it can not connect, then it fetches the latest comic from the cache. The
-// returned error can be safely ignored.
+// returned error can be safely ignored. Should not be used on UI event loop.
 func CheckForNewestComicInfo() (*xkcd.Comic, error) {
 	c, err := NewestComicInfoFromInternet()
 	if err == nil {
@@ -225,7 +225,7 @@ func CheckForNewestComicInfo() (*xkcd.Comic, error) {
 
 // NewestComicInfoFromCache returns the newest comic info available in the
 // cache. The function will not use the internet. The returned error can be
-// safely ignored.
+// safely ignored. Can be used on UI event loop.
 func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 	// Check in-memory cache.
 	newest := <-recvCachedNewestComic
@@ -269,7 +269,8 @@ func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 }
 
 // NewestComicInfoFromInternet fetches the latest comic info from the internet.
-// May return nil, the returned error should be checked.
+// May return nil, the returned error should be checked. Should not be used on
+// UI event loop.
 func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
 	c, err := xkcd.GetCurrent()
 	if err != nil {
