@@ -199,7 +199,7 @@ func NewestComicInfo() (*xkcd.Comic, error) {
 	if newest == nil {
 		newest, err = xkcd.GetCurrent()
 		if err != nil {
-			newest, err = newestComicInfoFromCache()
+			newest, err = NewestComicInfoFromCache()
 			if err != nil {
 				return newest, err
 			}
@@ -227,7 +227,7 @@ func NewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error
 	newest := <-recvCachedNewestComic
 
 	if newest == nil {
-		newestFromCache, err := newestComicInfoFromCache()
+		newestFromCache, err := NewestComicInfoFromCache()
 
 		go func() {
 			newestFromInternet, err := xkcd.GetCurrent()
@@ -246,7 +246,9 @@ func NewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error
 	return newest, nil
 }
 
-func newestComicInfoFromCache() (*xkcd.Comic, error) {
+// NewestComicInfoFromCache returns the newest comic info available in the
+// cache. The function will not use the internet.
+func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 	newest := &xkcd.Comic{
 		SafeTitle: l("Connect to the internet to download some comics!"),
 	}
