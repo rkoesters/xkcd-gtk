@@ -216,7 +216,12 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 
 	// We are grabbing the newest comic so we can figure out how
 	// wide to make the comic number column.
-	newest, _ := cache.NewestComicInfo()
+	newest, err := cache.NewestComicInfoFromCache()
+	idWidth := len(strconv.Itoa(newest.Num))
+	if err != nil {
+		// For the time being, its probably 4 characters.
+		idWidth = 4
+	}
 
 	iter := bm.bookmarks.Iterator()
 	for iter.Next() {
@@ -246,7 +251,7 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 			return
 		}
 		labelID.SetXAlign(1)
-		labelID.SetWidthChars(len(strconv.Itoa(newest.Num)))
+		labelID.SetWidthChars(idWidth)
 		box.Add(labelID)
 
 		labelTitle, err := gtk.LabelNew(comic.SafeTitle)
