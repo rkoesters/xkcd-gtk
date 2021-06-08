@@ -218,34 +218,6 @@ func NewestComicInfoSkipCache() (*xkcd.Comic, error) {
 	return NewestComicInfo()
 }
 
-// NewestComicInfoAsync always returns a valid *xkcd.Comic that appears to be
-// newest, and err will be set if any errors were encountered, however these
-// errors can be ignored safely. This function will return the newest comic info
-// based on the cache, but then asynchronously checks for the newest comic from
-// the internet and calls callback when the asynchronous call completes.
-func NewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error) {
-	newest := <-recvCachedNewestComic
-
-	if newest == nil {
-		newestFromCache, err := NewestComicInfoFromCache()
-
-		go func() {
-			newestFromInternet, err := xkcd.GetCurrent()
-
-			if newestFromInternet != nil && err == nil {
-				sendCachedNewestComic <- newestFromInternet
-			} else {
-				sendCachedNewestComic <- newestFromCache
-			}
-
-			callback(<-recvCachedNewestComic, err)
-		}()
-
-		return newestFromCache, err
-	}
-	return newest, nil
-}
-
 // NewestComicInfoFromCache returns the newest comic info available in the
 // cache. The function will not use the internet.
 func NewestComicInfoFromCache() (*xkcd.Comic, error) {

@@ -397,25 +397,27 @@ func (win *Window) updateNextPreviousButtonStatus() {
 		win.actions["previous-comic"].SetEnabled(false)
 	}
 
-	// Enable/disable next button.
-	newest, _ := cache.NewestComicInfoAsync(func(c *xkcd.Comic, _ error) {
-		if c != nil {
-			if win.comicNumber() < c.Num {
-				glib.IdleAdd(func() {
-					win.actions["next-comic"].SetEnabled(true)
-				})
-			} else {
-				glib.IdleAdd(func() {
-					win.actions["next-comic"].SetEnabled(false)
-				})
-			}
-		}
-	})
+	// Enable/disable next button with data from cache.
+	newest, _ := cache.NewestComicInfoFromCache()
 	if n < newest.Num {
 		win.actions["next-comic"].SetEnabled(true)
 	} else {
 		win.actions["next-comic"].SetEnabled(false)
 	}
+
+	// Asynchronously enable/disable next button with data from internet.
+	go func() {
+		newest, _ := cache.NewestComicInfoSkipCache()
+		if win.comicNumber() < newest.Num {
+			glib.IdleAdd(func() {
+				win.actions["next-comic"].SetEnabled(true)
+			})
+		} else {
+			glib.IdleAdd(func() {
+				win.actions["next-comic"].SetEnabled(false)
+			})
+		}
+	}()
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
