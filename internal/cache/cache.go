@@ -203,56 +203,18 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 	return comic, err
 }
 
-// NewestComicInfo always returns a valid *xkcd.Comic that appears to be newest,
-// and err will be set if any errors were encountered, however these errors can
-// be ignored safely.
-func NewestComicInfo() (*xkcd.Comic, error) {
-	var err error
-
-	// Check in-memory cache.
-	newest := <-recvCachedNewestComic
-	if newest != nil {
-		return newest, nil
-	}
-
-	// Check on-disk cache.
-	newest, err = NewestComicInfoFromCache()
-	if err == nil {
-		return newest, nil
-	}
-
-	// Check internet.
-	newest, err = NewestComicInfoFromInternet()
-	if err == nil {
-		return newest, nil
-	}
-
-	return &xkcd.Comic{
-		Num:       1,
-		SafeTitle: noComicsFound,
-	}, ErrNoComicsFound
-}
-
 // CheckForNewestComicInfo fetches the latest comic info from the internet. If
 // it can not connect, then it fetches the latest comic from the cache. The
 // returned error can be safely ignored.
 func CheckForNewestComicInfo() (*xkcd.Comic, error) {
-	// Check internet.
 	c, err := NewestComicInfoFromInternet()
 	if err == nil {
 		return c, nil
 	}
 
-	// Check in-memory cache.
-	newest := <-recvCachedNewestComic
-	if newest != nil {
-		return newest, nil
-	}
-
-	// Check on-disk cache.
-	newest, err = NewestComicInfoFromCache()
+	c, err = NewestComicInfoFromCache()
 	if err == nil {
-		return newest, nil
+		return c, nil
 	}
 
 	return &xkcd.Comic{
@@ -265,8 +227,14 @@ func CheckForNewestComicInfo() (*xkcd.Comic, error) {
 // cache. The function will not use the internet. The returned error can be
 // safely ignored.
 func NewestComicInfoFromCache() (*xkcd.Comic, error) {
-	newest := &xkcd.Comic{}
+	// Check in-memory cache.
+	newest := <-recvCachedNewestComic
+	if newest != nil {
+		return newest, nil
+	}
 
+	// Check on-disk cache.
+	newest = &xkcd.Comic{}
 	err := cacheDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket(comicCacheMetadataBucketName)
 		if bucket == nil {

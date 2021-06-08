@@ -300,7 +300,7 @@ func (win *Window) RandomComic() {
 	}
 
 	win.ShowLoading()
-	newestComic, _ := cache.NewestComicInfo()
+	newestComic, _ := cache.NewestComicInfoFromCache()
 	if newestComic.Num <= 0 {
 		win.SetComic(newestComic.Num)
 	} else {
