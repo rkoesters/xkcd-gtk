@@ -1,7 +1,7 @@
 *.css.go
 *.ui.go
+/.config.mk
 /.flatpak-builder/
-/config.mk
 /build/
 /com.github.rkoesters.xkcd-gtk
 /com.github.rkoesters.xkcd-gtk-dev

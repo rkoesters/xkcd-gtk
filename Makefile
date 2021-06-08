@@ -64,7 +64,7 @@ FLATPAK_YML   = $(APP).yml
 # Local Customizations (not tracked by source control)
 ################################################################################
 
--include config.mk
+-include .config.mk
 
 ################################################################################
 # Targets
