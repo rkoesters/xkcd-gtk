@@ -62,19 +62,27 @@ func (iv *ImageViewer) Show() {
 
 func (iv *ImageViewer) SetFromIconName(name string, size gtk.IconSize, darkMode bool) {
 	iv.image.SetFromIconName(name, size)
-	iv.applyDarkMode(darkMode)
+	iv.applyDarkModeClass(darkMode)
 }
 
 func (iv *ImageViewer) SetFromFile(path string, darkMode bool) {
 	iv.image.SetFromFile(path)
-	iv.applyDarkMode(darkMode)
+	iv.applyDarkModeClass(darkMode)
+	iv.applyDarkModeImageInversion(darkMode)
 }
 
-func (iv *ImageViewer) applyDarkMode(enabled bool) {
+func (iv *ImageViewer) applyDarkModeClass(enabled bool) {
 	if enabled {
 		// Apply the dark style class to the comic container.
 		iv.scrolledWindowCtx.AddClass(style.ClassDark)
+	} else {
+		// Remove the dark style class from the comic container.
+		iv.scrolledWindowCtx.RemoveClass(style.ClassDark)
+	}
+}
 
+func (iv *ImageViewer) applyDarkModeImageInversion(enabled bool) {
+	if enabled {
 		// Invert the pixels of the comic image.
 		pixbuf := iv.image.GetPixbuf()
 		if pixbuf == nil {
@@ -85,9 +93,6 @@ func (iv *ImageViewer) applyDarkMode(enabled bool) {
 		for i := 0; i < len(pixels); i++ {
 			pixels[i] = math.MaxUint8 - pixels[i]
 		}
-	} else {
-		// Remove the dark style class from the comic container.
-		iv.scrolledWindowCtx.RemoveClass(style.ClassDark)
 	}
 }
 
