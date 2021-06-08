@@ -52,7 +52,7 @@ var (
 func Init(index func(comic *xkcd.Comic) error) error {
 	addToSearchIndex = index
 
-	cacheDatabaseError = l("Error reading cache database")
+	cacheDatabaseError = l("Error reading local comic database")
 	comicNotFound = l("Comic Not Found")
 	couldNotDownloadComic = l("Couldn't Get Comic")
 	noComicsFound = l("Connect to the internet to download some comics!")
