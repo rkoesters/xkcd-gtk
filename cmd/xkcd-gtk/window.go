@@ -331,7 +331,7 @@ func (win *Window) SetComic(n int) {
 		} else {
 			_, err = os.Stat(cache.ComicImagePath(n))
 			if os.IsNotExist(err) {
-				win.comicContainer.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG, win.app.DarkMode())
+				win.comicContainer.ShowLoadingScreen(win.app.DarkMode())
 				err = cache.DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle

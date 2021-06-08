@@ -60,8 +60,8 @@ func (iv *ImageViewer) Show() {
 	iv.scrolledWindow.ShowAll()
 }
 
-func (iv *ImageViewer) SetFromIconName(name string, size gtk.IconSize, darkMode bool) {
-	iv.image.SetFromIconName(name, size)
+func (iv *ImageViewer) ShowLoadingScreen(darkMode bool) {
+	iv.image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
 	iv.applyDarkModeClass(darkMode)
 }
 
