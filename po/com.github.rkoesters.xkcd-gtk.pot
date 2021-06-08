@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-03 01:14-0500\n"
+"POT-Creation-Date: 2021-06-08 01:40-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,8 +53,7 @@ msgstr ""
 msgid "Checking for new comic..."
 msgstr ""
 
-#: internal/cache/cache.go:137 internal/cache/cache.go:138
-#: internal/cache/cache.go:178
+#: internal/cache/cache.go:56
 msgid "Comic Not Found"
 msgstr ""
 
@@ -70,15 +69,15 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:341
+#: cmd/xkcd-gtk/window.go:342
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
-#: internal/cache/cache.go:251
+#: internal/cache/cache.go:58
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
-#: internal/cache/cache.go:183
+#: internal/cache/cache.go:57
 msgid "Couldn't Get Comic"
 msgstr ""
 
@@ -90,12 +89,8 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: internal/cache/cache.go:166
-msgid "Error parsing comic metadata from cache"
-msgstr ""
-
-#: internal/cache/cache.go:150
-msgid "Error trying to access metadata cache"
+#: internal/cache/cache.go:55
+msgid "Error reading local comic database"
 msgstr ""
 
 #: internal/widget/window-menu.go:40
@@ -143,7 +138,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:314
+#: cmd/xkcd-gtk/window.go:357
 msgid "Loading comic..."
 msgstr ""
 
