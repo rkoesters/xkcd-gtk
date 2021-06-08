@@ -250,6 +250,7 @@ func NewestComicInfoAsync(callback func(*xkcd.Comic, error)) (*xkcd.Comic, error
 // cache. The function will not use the internet.
 func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 	newest := &xkcd.Comic{
+		Num: 1,
 		SafeTitle: l("Connect to the internet to download some comics!"),
 	}
 
