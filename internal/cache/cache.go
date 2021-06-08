@@ -11,6 +11,7 @@ import (
 	bolt "go.etcd.io/bbolt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -37,12 +38,24 @@ var (
 	// addToSearchIndex is a callback to insert the given comic into the
 	// search index.
 	addToSearchIndex func(comic *xkcd.Comic) error
+
+	// Error messages to be shown in the window title. Initialized in Init
+	// to provide translations to system language.
+	cacheDatabaseError    string
+	comicNotFound         string
+	couldNotDownloadComic string
+	noComicsFound         string
 )
 
 // Init initializes the comic cache. Function index is called each time a comic
 // is inserted into the comic cache.
 func Init(index func(comic *xkcd.Comic) error) error {
 	addToSearchIndex = index
+
+	cacheDatabaseError = l("Error reading cache database")
+	comicNotFound = l("Comic Not Found")
+	couldNotDownloadComic = l("Couldn't Get Comic")
+	noComicsFound = l("Connect to the internet to download some comics!")
 
 	err := paths.EnsureCacheDir()
 	if err != nil {
@@ -134,8 +147,8 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 	if n == 404 {
 		return &xkcd.Comic{
 			Num:       n,
-			SafeTitle: l("Comic Not Found"),
-			Title:     l("Comic Not Found"),
+			SafeTitle: comicNotFound,
+			Title:     comicNotFound,
 		}, xkcd.ErrNotFound
 	}
 
@@ -145,9 +158,10 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 		bucket := tx.Bucket(comicCacheMetadataBucketName)
 		if bucket == nil {
+			log.Print("error trying to access metadata cache")
 			comic = &xkcd.Comic{
 				Num:       n,
-				SafeTitle: l("Error trying to access metadata cache"),
+				SafeTitle: cacheDatabaseError,
 			}
 			return ErrLocalFailure
 		}
@@ -161,9 +175,10 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 		comic, err = xkcd.New(bytes.NewReader(data))
 		if err != nil {
+			log.Print("error parsing comic metadata from cache: ", err)
 			comic = &xkcd.Comic{
 				Num:       n,
-				SafeTitle: l("Error parsing comic metadata from cache"),
+				SafeTitle: cacheDatabaseError,
 			}
 			return err
 		}
@@ -175,12 +190,12 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 		if err == xkcd.ErrNotFound {
 			return &xkcd.Comic{
 				Num:       n,
-				SafeTitle: l("Comic Not Found"),
+				SafeTitle: comicNotFound,
 			}, err
 		} else if err != nil {
 			return &xkcd.Comic{
 				Num:       n,
-				SafeTitle: l("Couldn't Get Comic"),
+				SafeTitle: couldNotDownloadComic,
 			}, err
 		}
 	}
@@ -194,37 +209,63 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 func NewestComicInfo() (*xkcd.Comic, error) {
 	var err error
 
+	// Check in-memory cache.
 	newest := <-recvCachedNewestComic
-
-	if newest == nil {
-		newest, err = xkcd.GetCurrent()
-		if err != nil {
-			newest, err = NewestComicInfoFromCache()
-			if err != nil {
-				return newest, err
-			}
-			return newest, ErrOffline
-		}
-
-		sendCachedNewestComic <- newest
+	if newest != nil {
+		return newest, nil
 	}
-	return newest, nil
+
+	// Check on-disk cache.
+	newest, err = NewestComicInfoFromCache()
+	if err == nil {
+		return newest, nil
+	}
+
+	// Check internet.
+	newest, err = NewestComicInfoFromInternet()
+	if err == nil {
+		return newest, nil
+	}
+
+	return &xkcd.Comic{
+		Num:       1,
+		SafeTitle: noComicsFound,
+	}, ErrNoComicsFound
 }
 
-// NewestComicInfoSkipCache is equivalent to NewestComicInfo except it always
-// queries the internet to check for a new comic.
-func NewestComicInfoSkipCache() (*xkcd.Comic, error) {
-	sendCachedNewestComic <- nil
-	return NewestComicInfo()
+// CheckForNewestComicInfo fetches the latest comic info from the internet. If
+// it can not connect, then it fetches the latest comic from the cache. The
+// returned error can be safely ignored.
+func CheckForNewestComicInfo() (*xkcd.Comic, error) {
+	// Check internet.
+	c, err := NewestComicInfoFromInternet()
+	if err == nil {
+		return c, nil
+	}
+
+	// Check in-memory cache.
+	newest := <-recvCachedNewestComic
+	if newest != nil {
+		return newest, nil
+	}
+
+	// Check on-disk cache.
+	newest, err = NewestComicInfoFromCache()
+	if err == nil {
+		return newest, nil
+	}
+
+	return &xkcd.Comic{
+		Num:       1,
+		SafeTitle: noComicsFound,
+	}, ErrNoComicsFound
 }
 
 // NewestComicInfoFromCache returns the newest comic info available in the
-// cache. The function will not use the internet.
+// cache. The function will not use the internet. The returned error can be
+// safely ignored.
 func NewestComicInfoFromCache() (*xkcd.Comic, error) {
-	newest := &xkcd.Comic{
-		Num:       1,
-		SafeTitle: l("Connect to the internet to download some comics!"),
-	}
+	newest := &xkcd.Comic{}
 
 	err := cacheDB.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket(comicCacheMetadataBucketName)
@@ -245,8 +286,30 @@ func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 			return nil
 		})
 	})
+	if err != nil {
+		log.Print("error reading comic from cache: ", err)
+	}
+	if newest.Num <= 0 {
+		return &xkcd.Comic{
+			Num:       1,
+			SafeTitle: noComicsFound,
+		}, ErrNoComicsFound
+	}
 
-	return newest, err
+	sendCachedNewestComic <- newest
+	return newest, nil
+}
+
+// NewestComicInfoFromInternet fetches the latest comic info from the internet.
+// May return nil, the returned error should be checked.
+func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
+	c, err := xkcd.GetCurrent()
+	if err != nil {
+		return nil, ErrOffline
+	}
+
+	sendCachedNewestComic <- c
+	return c, nil
 }
 
 func downloadComicInfo(n int) (*xkcd.Comic, error) {

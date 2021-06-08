@@ -283,7 +283,7 @@ func (win *Window) NewestComic() {
 	win.header.SetTitle(l("Checking for new comic..."))
 
 	win.ShowLoading()
-	newestComic, err := cache.NewestComicInfoSkipCache()
+	newestComic, err := cache.CheckForNewestComicInfo()
 	if err != nil {
 		log.Print("error jumping to newest comic: ", err)
 	}
@@ -407,7 +407,7 @@ func (win *Window) updateNextPreviousButtonStatus() {
 
 	// Asynchronously enable/disable next button with data from internet.
 	go func() {
-		newest, _ := cache.NewestComicInfoSkipCache()
+		newest, _ := cache.CheckForNewestComicInfo()
 		if win.comicNumber() < newest.Num {
 			glib.IdleAdd(func() {
 				win.actions["next-comic"].SetEnabled(true)

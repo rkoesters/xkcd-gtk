@@ -79,7 +79,12 @@ func Load(app *gtk.Application) {
 
 	// Make sure all comic metadata is cached and indexed.
 	go func() {
-		newest, _ := cache.NewestComicInfo()
+		defer func() { done <- struct{}{} }()
+
+		newest, err := cache.NewestComicInfoFromInternet()
+		if err != nil {
+			return
+		}
 		for i := 1; i <= newest.Num; i++ {
 			n := i
 			cache.ComicInfo(n)
@@ -87,7 +92,6 @@ func Load(app *gtk.Application) {
 				progressBar.SetFraction(float64(n) / float64(newest.Num))
 			})
 		}
-		done <- struct{}{}
 	}()
 
 	// Show cache progress window.
