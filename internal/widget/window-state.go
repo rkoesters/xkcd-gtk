@@ -31,7 +31,7 @@ type WindowState struct {
 }
 
 func (ws *WindowState) loadDefaults() {
-	newestComic, _ := cache.NewestComicInfo()
+	newestComic, _ := cache.NewestComicInfoFromCache()
 	ws.ComicNumber = newestComic.Num
 	ws.Maximized = false
 	ws.Height = 500
