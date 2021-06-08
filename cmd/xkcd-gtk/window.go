@@ -282,6 +282,7 @@ func (win *Window) NewestComic() {
 	// Make it clear that we are checking for a new comic.
 	win.header.SetTitle(l("Checking for new comic..."))
 
+	win.ShowLoading()
 	newestComic, err := cache.NewestComicInfoSkipCache()
 	if err != nil {
 		log.Print("error jumping to newest comic: ", err)
@@ -298,6 +299,7 @@ func (win *Window) RandomComic() {
 		return          // guaranteed to be random.
 	}
 
+	win.ShowLoading()
 	newestComic, _ := cache.NewestComicInfo()
 	if newestComic.Num <= 0 {
 		win.SetComic(newestComic.Num)
@@ -311,7 +313,7 @@ func (win *Window) SetComic(n int) {
 	win.state.ComicNumber = n
 
 	// Make it clear that we are loading a comic.
-	win.header.SetTitle(l("Loading comic..."))
+	win.ShowLoading()
 	win.header.SetSubtitle(strconv.Itoa(n))
 
 	// Update UI to reflect new current comic.
@@ -331,7 +333,6 @@ func (win *Window) SetComic(n int) {
 		} else {
 			_, err = os.Stat(cache.ComicImagePath(n))
 			if os.IsNotExist(err) {
-				win.comicContainer.ShowLoadingScreen(win.app.DarkMode())
 				err = cache.DownloadComicImage(n)
 				if err != nil {
 					// We can be sneaky, we use SafeTitle
@@ -349,6 +350,12 @@ func (win *Window) SetComic(n int) {
 		// gets updated with the new comic.
 		glib.IdleAdd(win.DisplayComic)
 	}()
+}
+
+// ShowLoading makes the window indicate that it is loading.
+func (win *Window) ShowLoading() {
+	win.header.SetTitle(l("Loading comic..."))
+	win.comicContainer.ShowLoadingScreen(win.app.DarkMode())
 }
 
 // DisplayComic updates the UI to show the contents of win.comic.
