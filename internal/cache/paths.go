@@ -2,9 +2,26 @@ package cache
 
 import (
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
+	"log"
+	"os"
 	"path/filepath"
 	"strconv"
 )
+
+func checkForMisplacedCacheFiles() {
+	// map[misplacedFile]correctPath
+	misplacedCacheFiles := make(map[string]string)
+	misplacedCacheFiles[filepath.Join(paths.Builder{}.CacheDir(), "cache_version")] = cacheVersionPath()
+	misplacedCacheFiles[filepath.Join(paths.Builder{}.CacheDir(), "comics")] = comicCacheDBPath()
+	misplacedCacheFiles[filepath.Join(paths.Builder{}.CacheDir(), "comic_image")] = comicImageDirPath()
+
+	for misplaced, correct := range misplacedCacheFiles {
+		_, err := os.Stat(misplaced)
+		if !os.IsNotExist(err) {
+			log.Printf("WARNING: Potentially misplaced cache file '%v'. Should be '%v'.", misplaced, correct)
+		}
+	}
+}
 
 func cacheVersionPath() string {
 	return filepath.Join(paths.CacheDir(), "cache_version")

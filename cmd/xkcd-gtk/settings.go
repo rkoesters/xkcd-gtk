@@ -59,6 +59,8 @@ func (settings *Settings) WriteFile(filename string) error {
 func (app *Application) LoadSettings() {
 	var err error
 
+	checkForMisplacedSettings()
+
 	// Read settings from disk.
 	app.settings.ReadFile(settingsPath())
 
@@ -85,6 +87,15 @@ func (app *Application) SaveSettings() {
 	err = app.settings.WriteFile(settingsPath())
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
+	}
+}
+
+func checkForMisplacedSettings() {
+	misplacedSettings := filepath.Join(paths.Builder{}.ConfigDir(), "settings")
+
+	_, err := os.Stat(misplacedSettings)
+	if !os.IsNotExist(err) {
+		log.Printf("WARNING: Potentially misplaced settings file '%v'. Should be '%v'.", misplacedSettings, settingsPath())
 	}
 }
 

@@ -12,6 +12,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"log"
+	"os"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -21,6 +22,8 @@ var index bleve.Index
 
 // Init initializes the search index.
 func Init() (err error) {
+	checkForMisplacedSearchIndex()
+
 	index, err = bleve.Open(searchIndexPath())
 	if err == bleve.ErrorIndexPathDoesNotExist {
 		// The search index doesn't exist yet, lets make it.
@@ -121,6 +124,15 @@ func Load(app *gtk.Application) {
 			loadingWindow.Close()
 		})
 	}()
+}
+
+func checkForMisplacedSearchIndex() {
+	misplacedSearchIndex := filepath.Join(paths.Builder{}.CacheDir(), "search")
+
+	_, err := os.Stat(misplacedSearchIndex)
+	if !os.IsNotExist(err) {
+		log.Printf("WARNING: Potentially misplaced search index '%v'. Should be '%v'.", misplacedSearchIndex, searchIndexPath())
+	}
 }
 
 func searchIndexPath() string {

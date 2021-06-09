@@ -83,6 +83,8 @@ func (ws *WindowState) WriteFile(filename string) error {
 }
 
 func (ws *WindowState) LoadState() {
+	checkForMisplacedWindowState()
+
 	ws.ReadFile(windowStatePath())
 }
 
@@ -105,6 +107,15 @@ func (ws *WindowState) SaveState(window *gtk.ApplicationWindow, propertiesDialog
 	err := ws.WriteFile(windowStatePath())
 	if err != nil {
 		log.Printf("error saving window state: %v", err)
+	}
+}
+
+func checkForMisplacedWindowState() {
+	misplacedWindowState := filepath.Join(paths.Builder{}.CacheDir(), "state")
+
+	_, err := os.Stat(misplacedWindowState)
+	if !os.IsNotExist(err) {
+		log.Printf("WARNING: Potentially misplaced window state file '%v'. Should be '%v'.", misplacedWindowState, windowStatePath())
 	}
 }
 

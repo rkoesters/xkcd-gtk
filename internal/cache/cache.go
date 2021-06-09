@@ -50,6 +50,8 @@ var (
 // Init initializes the comic cache. Function index is called each time a comic
 // is inserted into the comic cache.
 func Init(index func(comic *xkcd.Comic) error) error {
+	checkForMisplacedCacheFiles()
+
 	addToSearchIndex = index
 
 	// Initialize localized error strings.
