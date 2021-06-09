@@ -55,7 +55,7 @@
   </custom>
 
   <releases>
-    <release version="1.4.0">
+    <release version="1.4.0" date="2021-06-09">
       <description>
         <ul>
           <li>Move the random comic button to sit between the other navigation buttons.</li>
