@@ -204,35 +204,35 @@ func (win *Window) StyleUpdated() {
 		return s
 	}
 
-	firstImg, err := gtk.ImageNewFromIconName(icon("go-first"), headerBarIconSize)
+	firstImg, err := gtk.ImageNewFromIconName("go-first-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		win.navigationBar.SetFirstButtonImage(firstImg)
 	}
 
-	previousImg, err := gtk.ImageNewFromIconName(icon("go-previous"), headerBarIconSize)
+	previousImg, err := gtk.ImageNewFromIconName("go-previous-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		win.navigationBar.SetPreviousButtonImage(previousImg)
 	}
 
-	randomImg, err := gtk.ImageNewFromIconName(icon("media-playlist-shuffle"), headerBarIconSize)
+	randomImg, err := gtk.ImageNewFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		win.navigationBar.SetRandomButtonImage(randomImg)
 	}
 
-	nextImg, err := gtk.ImageNewFromIconName(icon("go-next"), headerBarIconSize)
+	nextImg, err := gtk.ImageNewFromIconName("go-next-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
 		win.navigationBar.SetNextButtonImage(nextImg)
 	}
 
-	newestImg, err := gtk.ImageNewFromIconName(icon("go-last"), headerBarIconSize)
+	newestImg, err := gtk.ImageNewFromIconName("go-last-symbolic", headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
