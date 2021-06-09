@@ -55,6 +55,16 @@
   </custom>
 
   <releases>
+    <release version="1.4.0">
+      <description>
+        <ul>
+          <li>Move the random comic button to sit between the other navigation buttons.</li>
+          <li>Signicantly reduce app start up time when not connected to the internet.</li>
+          <li>Improve usage of cached data.</li>
+          <li>Add warning log message if there are app files that may have been misplaced due to a bug in version 1.3.2.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.3.4" date="2021-05-30">
       <description>
         <ul>
