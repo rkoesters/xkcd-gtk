@@ -52,6 +52,7 @@ var (
 func Init(index func(comic *xkcd.Comic) error) error {
 	addToSearchIndex = index
 
+	// Initialize localized error strings.
 	cacheDatabaseError = l("Error reading local comic database")
 	comicNotFound = l("Comic Not Found")
 	couldNotDownloadComic = l("Couldn't Get Comic")
@@ -69,11 +70,13 @@ func Init(index func(comic *xkcd.Comic) error) error {
 		os.Rename(comicCacheDBPath(), comicCacheDBPath()+".bak")
 	}
 
+	// Open comic cache database.
 	cacheDB, err = bolt.Open(comicCacheDBPath(), 0644, nil)
 	if err != nil {
 		return err
 	}
 
+	// Create comic cache buckets, if they do not exist.
 	err = cacheDB.Update(func(tx *bolt.Tx) error {
 		_, err = tx.CreateBucketIfNotExists(comicCacheMetadataBucketName)
 		if err != nil {
@@ -91,6 +94,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 		return err
 	}
 
+	// Create comic image cache directory, if it does not exist.
 	err = os.MkdirAll(filepath.Join(comicImageDirPath()), 0755)
 	if err != nil {
 		return err
