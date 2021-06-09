@@ -17,7 +17,7 @@ if ! appstream-util validate-relax "$appdata_xml"; then
 fi
 
 echo "Checking for correct attribution in $appdata_xml"
-if grep -q '@' "$appdata_xml"; then
+if grep -v '@2x.png' "$appdata_xml" | grep -q '@'; then
 	failure "appdata includes '@' symbol which doesn't work outside GitHub"
 fi
 
