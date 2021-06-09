@@ -9,7 +9,7 @@ import (
 const testAppID = "com.example.test"
 
 func TestCacheDir(t *testing.T) {
-	paths := builder{testAppID}
+	paths := Builder{testAppID}
 
 	dir := paths.CacheDir()
 
@@ -22,7 +22,7 @@ func TestCacheDir(t *testing.T) {
 }
 
 func TestConfigDir(t *testing.T) {
-	paths := builder{testAppID}
+	paths := Builder{testAppID}
 
 	dir := paths.ConfigDir()
 
@@ -35,7 +35,7 @@ func TestConfigDir(t *testing.T) {
 }
 
 func TestDataDir(t *testing.T) {
-	paths := builder{testAppID}
+	paths := Builder{testAppID}
 
 	dir := paths.DataDir()
 
@@ -48,7 +48,7 @@ func TestDataDir(t *testing.T) {
 }
 
 func TestLocaleDir(t *testing.T) {
-	paths := builder{testAppID}
+	paths := Builder{testAppID}
 
 	dir := paths.LocaleDir()
 

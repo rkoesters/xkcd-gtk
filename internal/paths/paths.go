@@ -1,12 +1,12 @@
 // Package paths provides information on where to find and store files.
 package paths
 
-var b builder
+var b Builder
 
 // Init initializes the paths package. Must be called before calling other
 // package functions.
 func Init(appID string) {
-	b = builder{
+	b = Builder{
 		appID: appID,
 	}
 }
