@@ -282,7 +282,7 @@ func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
 	}
 
 	sendCachedNewestComic <- c
-	return c, nil
+	return c, putComicInfo(c)
 }
 
 func downloadComicInfo(n int) (*xkcd.Comic, error) {
@@ -290,8 +290,12 @@ func downloadComicInfo(n int) (*xkcd.Comic, error) {
 	if err != nil {
 		return nil, err
 	}
+	return comic, putComicInfo(comic)
+}
 
-	err = cacheDB.Update(func(tx *bolt.Tx) error {
+// putComicInfo adds the given xkcd.Comic to the cache database.
+func putComicInfo(comic *xkcd.Comic) error {
+	err := cacheDB.Update(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket(comicCacheMetadataBucketName)
 		if bucket == nil {
 			return ErrLocalFailure
@@ -299,20 +303,18 @@ func downloadComicInfo(n int) (*xkcd.Comic, error) {
 
 		var buf bytes.Buffer
 		e := json.NewEncoder(&buf)
-		err = e.Encode(comic)
+		err := e.Encode(comic)
 		if err != nil {
 			return err
 		}
 
-		return bucket.Put(intToBytes(n), buf.Bytes())
+		return bucket.Put(intToBytes(comic.Num), buf.Bytes())
 	})
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	err = addToSearchIndex(comic)
-
-	return comic, err
+	return addToSearchIndex(comic)
 }
 
 // DownloadComicImage tries to add a comic image to our local cache. If
