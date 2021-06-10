@@ -41,6 +41,8 @@ DESKTOP_PATH = data/$(DESKTOP_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
 POT_PATH     = po/$(POT_NAME)
 
+MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
+
 GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
 CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
 UI_SOURCES  = $(shell find cmd internal -name '*.ui' -type f)
@@ -106,19 +108,19 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 	msgfmt -c -o $@ $<
 
 fix: $(GEN_SOURCES)
-	go fix $(MODULE)/cmd/... $(MODULE)/internal/...
-	go fmt $(MODULE)/cmd/... $(MODULE)/internal/...
+	go fix $(MODULE_PACKAGES)
+	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
 check: $(GEN_SOURCES) $(APPDATA_PATH)
-	go vet $(TAGS) $(BUILDFLAGS) $(MODULE)/cmd/... $(MODULE)/internal/...
-	golint -set_exit_status $(MODULE)/cmd/... $(MODULE)/internal/...
+	go vet $(TAGS) $(BUILDFLAGS) $(MODULE_PACKAGES)
+	golint -set_exit_status $(MODULE_PACKAGES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml *.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
-	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE)/cmd/... $(MODULE)/internal/...
+	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-install.sh
 
 clean:
