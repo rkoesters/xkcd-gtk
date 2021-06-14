@@ -4,6 +4,6 @@ set -eu
 
 go mod graph |
 cut -d ' ' -f 2 |
-grep -F "$(tools/list-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)" |
+grep -F "$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)" |
 sort |
 uniq
