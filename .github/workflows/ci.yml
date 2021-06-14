@@ -58,6 +58,8 @@ jobs:
       - run: make test
 
   flatpak-builder:
+    name: Flatpak
+
     runs-on: ubuntu-latest
 
     steps:
