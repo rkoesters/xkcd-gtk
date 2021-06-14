@@ -3,7 +3,7 @@
 set -eu
 
 go mod graph |
-grep '^github.com/rkoesters/xkcd-gtk' |
 cut -d ' ' -f 2 |
+grep -F "$(tools/list-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)" |
 sort |
 uniq
