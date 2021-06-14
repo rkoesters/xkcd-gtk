@@ -36,7 +36,9 @@ jobs:
       - name: Set up Go cache
         uses: actions/cache@v2
         with:
-          path: ${{ env.GOCACHE }} ${{ env.GOPATH }}/pkg/mod
+          path: |
+            ${{ env.GOCACHE }}
+            ${{ env.GOPATH }}/pkg/mod
           key: >
             ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-${{
             hashFiles('**/go.sum') }}
