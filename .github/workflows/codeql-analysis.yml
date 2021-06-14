@@ -56,8 +56,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.GOCACHE }} ${{ env.GOPATH }}/pkg/mod
-          key: ${{ env.GOVERSION }}-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ env.GOVERSION }}-
+          key: >
+            ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-${{
+            hashFiles('**/go.sum') }}
+          restore-keys: >
+            ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-
 
       - run: make
 
