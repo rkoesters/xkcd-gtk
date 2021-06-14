@@ -136,7 +136,7 @@ modules:
 
       - type: git
         url: https://github.com/gotk3/gotk3.git
-        commit: 3f44af595c5e644e3889a1a7471fcce8c9d66325
+        tag: v0.6.0
         dest: vendor/github.com/gotk3/gotk3
 
       - type: git
@@ -206,7 +206,7 @@ modules:
 
       - type: git
         url: https://github.com/etcd-io/bbolt.git
-        tag: v1.3.5
+        tag: v1.3.6
         dest: vendor/go.etcd.io/bbolt
 
       - type: git
