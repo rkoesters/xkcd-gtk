@@ -58,8 +58,8 @@ jobs:
           path: |
             ${{ env.GOCACHE }}
             ${{ env.GOPATH }}/pkg/mod
-          key: ${{ env.GOVERSION }}-codeql-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ env.GOVERSION }}-codeql-
+          key: ${{ env.GOVERSION }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ env.GOVERSION }}-
 
       - run: make
 
