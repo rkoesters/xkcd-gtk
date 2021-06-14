@@ -4,7 +4,7 @@
 # dependencies.
 set -eu
 
-cat $(find . -name 'go.mod' -type f) |
+cat 'go.mod' |
 grep '	' |
 tr -d '\t' |
 cut -d ' ' -f 1 |
