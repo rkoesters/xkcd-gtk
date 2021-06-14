@@ -3,6 +3,6 @@
 set -eu
 
 go mod graph |
-sed 's/^.* //g' |
+cut -d ' ' -f 2 |
 sort |
 uniq
