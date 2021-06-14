@@ -55,9 +55,7 @@ jobs:
       - name: Set up Go cache
         uses: actions/cache@v2
         with:
-          path: |
-            ${{ env.GOCACHE }}
-            ${{ env.GOPATH }}/pkg/mod
+          path: ${{ env.GOCACHE }} ${{ env.GOPATH }}/pkg/mod
           key: ${{ env.GOVERSION }}-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ env.GOVERSION }}-
 
