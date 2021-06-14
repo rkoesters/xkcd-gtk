@@ -1,12 +1,8 @@
 #!/bin/sh
-# Find and print the dependencies of all go.mod files under the current
-# directory. Run `go mod vendor` before running to get versions of all
-# dependencies.
+# Find and print the dependencies of this go module.
 set -eu
 
-cat 'go.mod' |
-grep '	' |
-tr -d '\t' |
-cut -d ' ' -f 1 |
+go mod graph |
+sed 's/^.* //g' |
 sort |
 uniq
