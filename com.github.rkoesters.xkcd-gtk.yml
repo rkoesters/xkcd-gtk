@@ -30,6 +30,8 @@ modules:
         path: '.'
         skip:
           - .config.mk
+          - com.github.rkoesters.xkcd-gtk
+          - com.github.rkoesters.xkcd-gtk-dev
           - debian/
           - vendor/
         dest: src
