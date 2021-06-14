@@ -40,6 +40,11 @@ jobs:
           # these queries and those in the config file.
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
 
+      - name: Set up build dependencies
+        run: |
+          sudo apt-get update && \
+          sudo apt-get install -y -q gettext libgtk-3-dev
+
       - run: make
 
       - name: Perform CodeQL Analysis
