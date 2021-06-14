@@ -114,7 +114,6 @@ fix: $(GEN_SOURCES)
 
 check: $(GEN_SOURCES) $(APPDATA_PATH)
 	go vet $(TAGS) $(BUILDFLAGS) $(MODULE_PACKAGES)
-	golint -set_exit_status $(MODULE_PACKAGES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml *.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
