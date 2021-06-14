@@ -1,0 +1,34 @@
+---
+
+name: Flatpak
+
+"on": [push, pull_request]
+
+jobs:
+  flatpak-builder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up flatpak-builder
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q flatpak flatpak-builder
+
+      - name: Set up flatpak-builder cache
+        uses: actions/cache@v2
+        with:
+          path: .flatpak-builder
+          key: >
+            ${{ github.workflow }}-${{ runner.os }}-flatpak-builder-${{
+            hashFiles('com.github.rkoesters.xkcd-gtk.yml') }}
+          restore-keys: ${{ github.workflow }}-${{ runner.os }}-flatpak-builder-
+
+      - name: Configure flathub
+        run: >
+          flatpak --user remote-add --if-not-exists
+          flathub https://flathub.org/repo/flathub.flatpakrepo
+
+      - name: Build flatpak
+        run: make flatpak
