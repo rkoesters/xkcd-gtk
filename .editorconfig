@@ -9,6 +9,6 @@ trim_trailing_whitespace = true
 [{Makefile,*.go,go.mod,*.md}]
 indent_style = tab
 
-[*.{xml,xml.in,svg,yml,ui}]
+[*.{md,svg,ui,xml,xml.in,yml}]
 indent_style = space
 indent_size = 2
