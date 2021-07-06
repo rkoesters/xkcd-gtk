@@ -6,7 +6,7 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{Makefile,*.go,*.md}]
+[{Makefile,*.go,go.mod,*.md}]
 indent_style = tab
 
 [*.{xml,xml.in,svg,yml,ui}]
