@@ -25,6 +25,9 @@ type Application struct {
 	gtkSettings *gtk.Settings
 	actions     map[string]*glib.SimpleAction
 
+	aboutDialog     *gtk.AboutDialog
+	shortcutsWindow *gtk.ShortcutsWindow
+
 	settings  settings.Settings
 	bookmarks bookmarks.List
 }
@@ -188,13 +191,11 @@ func (app *Application) Quit() {
 	glib.IdleAdd(app.application.Quit)
 }
 
-var shortcutsWindow *gtk.ShortcutsWindow
-
 // ShowShortcuts shows a shortcuts window to the user.
 func (app *Application) ShowShortcuts() {
 	var err error
-	if shortcutsWindow == nil {
-		shortcutsWindow, err = widget.NewShortcutsWindow()
+	if app.shortcutsWindow == nil {
+		app.shortcutsWindow, err = widget.NewShortcutsWindow()
 		if err != nil {
 			log.Print("error creating shortcuts window: ", err)
 			return
@@ -202,24 +203,22 @@ func (app *Application) ShowShortcuts() {
 
 		// We want to keep the shortcuts window around in case we want
 		// to show it again.
-		shortcutsWindow.HideOnDelete()
-		shortcutsWindow.Connect("hide", func() {
-			app.application.RemoveWindow(&shortcutsWindow.Window)
+		app.shortcutsWindow.HideOnDelete()
+		app.shortcutsWindow.Connect("hide", func() {
+			app.application.RemoveWindow(&app.shortcutsWindow.Window)
 		})
 	}
 
-	app.application.AddWindow(&shortcutsWindow.Window)
-	shortcutsWindow.Present()
+	app.application.AddWindow(&app.shortcutsWindow.Window)
+	app.shortcutsWindow.Present()
 }
-
-var aboutDialog *gtk.AboutDialog
 
 // ShowAbout shows our application info to the user.
 func (app *Application) ShowAbout() {
 	var err error
 
-	if aboutDialog == nil {
-		aboutDialog, err = widget.NewAboutDialog(appID, appName, appVersion)
+	if app.aboutDialog == nil {
+		app.aboutDialog, err = widget.NewAboutDialog(appID, appName, appVersion)
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return
@@ -227,22 +226,22 @@ func (app *Application) ShowAbout() {
 
 		// We want to keep the about dialog around in case we want to
 		// show it again.
-		aboutDialog.HideOnDelete()
-		aboutDialog.Connect("response", aboutDialog.Hide)
-		aboutDialog.Connect("hide", func() {
-			app.application.RemoveWindow(&aboutDialog.Window)
+		app.aboutDialog.HideOnDelete()
+		app.aboutDialog.Connect("response", app.aboutDialog.Hide)
+		app.aboutDialog.Connect("hide", func() {
+			app.application.RemoveWindow(&app.aboutDialog.Window)
 		})
 	}
 
 	// Set our parent window as the active window, but avoid accidentally
 	// setting ourself as the parent window.
 	win := app.application.GetActiveWindow()
-	if win.Native() != aboutDialog.Native() {
-		aboutDialog.SetTransientFor(win)
+	if win.Native() != app.aboutDialog.Native() {
+		app.aboutDialog.SetTransientFor(win)
 	}
 
-	app.application.AddWindow(&aboutDialog.Window)
-	aboutDialog.Present()
+	app.application.AddWindow(&app.aboutDialog.Window)
+	app.aboutDialog.Present()
 }
 
 const (
