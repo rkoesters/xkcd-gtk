@@ -14,7 +14,7 @@ name_to_remote () {
 
 IFS='
 '
-for dep in $(tools/list-mod-deps.sh); do
+for dep in $(tools/list-all-mod-deps.sh); do
 	name=$(echo "${dep:?}" | cut -d '@' -f 1)
 	version=$(echo "${dep:?}" | cut -d '@' -f 2)
 	remote="$(name_to_remote "${name:?}")"
