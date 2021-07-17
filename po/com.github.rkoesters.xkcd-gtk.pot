@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-08 01:40-0700\n"
+"POT-Creation-Date: 2021-07-17 00:41-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,11 +49,11 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:283
+#: cmd/xkcd-gtk/window.go:290
 msgid "Checking for new comic..."
 msgstr ""
 
-#: internal/cache/cache.go:56
+#: internal/cache/cache.go:59
 msgid "Comic Not Found"
 msgstr ""
 
@@ -69,15 +69,15 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:342
+#: cmd/xkcd-gtk/window.go:349
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
-#: internal/cache/cache.go:58
+#: internal/cache/cache.go:61
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
-#: internal/cache/cache.go:57
+#: internal/cache/cache.go:60
 msgid "Couldn't Get Comic"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: internal/cache/cache.go:55
+#: internal/cache/cache.go:58
 msgid "Error reading local comic database"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:357
+#: cmd/xkcd-gtk/window.go:364
 msgid "Loading comic..."
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: internal/search/index.go:59
+#: internal/search/index.go:62
 msgid "Search Index Update"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Transcript"
 msgstr ""
 
-#: internal/search/index.go:67
+#: internal/search/index.go:70
 msgid "Updating comic search index..."
 msgstr ""
 
