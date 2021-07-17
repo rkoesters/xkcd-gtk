@@ -6,15 +6,15 @@ import (
 )
 
 // NewAboutDialog creates our about dialog.
-func NewAboutDialog() (*gtk.AboutDialog, error) {
+func NewAboutDialog(icon, name, version string) (*gtk.AboutDialog, error) {
 	dialog, err := gtk.AboutDialogNew()
 	if err != nil {
 		return nil, err
 	}
 
-	dialog.SetLogoIconName(appID)
-	dialog.SetProgramName(appName)
-	dialog.SetVersion(appVersion)
+	dialog.SetLogoIconName(icon)
+	dialog.SetProgramName(name)
+	dialog.SetVersion(version)
 	dialog.SetComments(l("A simple xkcd viewer written in Go using GTK+3"))
 	dialog.SetWebsite("https://github.com/rkoesters/xkcd-gtk")
 	dialog.SetAuthors([]string{"Ryan Koesters"})
@@ -31,7 +31,7 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if aboutDialog == nil {
-		aboutDialog, err = NewAboutDialog()
+		aboutDialog, err = NewAboutDialog(appID, appName, appVersion)
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return
