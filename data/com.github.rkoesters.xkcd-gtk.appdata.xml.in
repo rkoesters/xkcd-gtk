@@ -55,6 +55,13 @@
   </custom>
 
   <releases>
+    <release version="1.4.1">
+      <description>
+        <ul>
+          <li>Improve dark mode on elementary OS by making the title bar dark instead of pastel blue.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.4.0" date="2021-06-09">
       <description>
         <ul>
