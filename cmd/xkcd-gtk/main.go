@@ -17,9 +17,6 @@ func main() {
 	// Make log messages include date, time, filename, and line number.
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	// Tell the go runtime to use as many CPUs as are available.
-	runtime.GOMAXPROCS(runtime.NumCPU())
-
 	// Make sure the random number generator is seeded.
 	rand.Seed(time.Now().Unix())
 
