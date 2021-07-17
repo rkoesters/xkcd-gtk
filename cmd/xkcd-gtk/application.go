@@ -4,6 +4,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
+	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
@@ -14,10 +15,7 @@ import (
 
 const appID = "com.github.rkoesters.xkcd-gtk"
 
-var (
-	appName    = l("Comic Sticks")
-	appVersion = "undefined"
-)
+var appName = l("Comic Sticks")
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
@@ -218,7 +216,7 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if app.aboutDialog == nil {
-		app.aboutDialog, err = widget.NewAboutDialog(appID, appName, appVersion)
+		app.aboutDialog, err = widget.NewAboutDialog(appID, appName, build.Version())
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return

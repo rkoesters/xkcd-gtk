@@ -5,6 +5,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"log"
 	"math/rand"
@@ -21,6 +22,9 @@ func main() {
 
 	// Initialize the paths under which we will store app files.
 	paths.Init(appID)
+
+	// Initial compile-time information provided by the build package.
+	build.Parse()
 
 	// Let glib and gtk know who we are.
 	glib.SetApplicationName(appName)

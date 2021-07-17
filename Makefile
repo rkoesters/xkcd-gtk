@@ -5,13 +5,14 @@
 BUILDFLAGS =
 DEVFLAGS   = -race
 TESTFLAGS  = -cover
-LDFLAGS    = -ldflags="-X main.appVersion=$(APP_VERSION)"
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
-TAGS       = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
 
 APP_VERSION   = $(shell tools/app-version.sh)
 GTK_VERSION   = $(shell tools/gtk-version.sh)
 PANGO_VERSION = $(shell tools/pango-version.sh)
+
+BUILD_DATA = version=$(APP_VERSION)
+TAGS       = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
 
 ################################################################################
 # Install Variables
@@ -75,10 +76,10 @@ FLATPAK_YML   = $(APP).yml
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	go build -o $@ -v $(LDFLAGS) $(TAGS) $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $@ -v $(BUILDFLAGS) -ldflags="-X $(MODULE)/internal/build.data=$(BUILD_DATA)" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(DEV_PATH) -v $(LDFLAGS) $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(DEVFLAGS) -ldflags="-X $(MODULE)/internal/build.data=$(BUILD_DATA),debug=on" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
 flatpak:
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
