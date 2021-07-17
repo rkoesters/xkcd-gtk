@@ -120,6 +120,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 
 test: $(GEN_SOURCES)
 	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
+	tools/test-flatpak-config.sh
 	tools/test-install.sh
 
 clean:
