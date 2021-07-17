@@ -97,11 +97,6 @@ modules:
         dest: vendor/github.com/blevesearch/zap/v15
 
       - type: git
-        url: https://github.com/couchbase/moss.git
-        tag: v0.1.0
-        dest: vendor/github.com/couchbase/moss
-
-      - type: git
         url: https://github.com/couchbase/vellum.git
         tag: v1.0.2
         dest: vendor/github.com/couchbase/vellum
@@ -113,13 +108,9 @@ modules:
 
       - type: git
         url: https://github.com/glycerine/go-unsnap-stream.git
-        commit: f9677308dec2b35e76737f9713df328ad11b1fea
+        # v0.0.0-20181221182339-f9677308dec2
+        commit: f9677308dec2
         dest: vendor/github.com/glycerine/go-unsnap-stream
-
-      - type: git
-        url: https://github.com/glycerine/goconvey.git
-        commit: 58a59202ab311a28f6cf05b95753256576781273
-        dest: vendor/github.com/glycerine/goconvey
 
       - type: git
         url: https://github.com/golang/protobuf.git
@@ -132,39 +123,14 @@ modules:
         dest: vendor/github.com/golang/snappy
 
       - type: git
-        url: https://github.com/gopherjs/gopherjs.git
-        commit: 9d188e94fb998051e72e8726cd5f7d168658e529
-        dest: vendor/github.com/gopherjs/gopherjs
-
-      - type: git
         url: https://github.com/gotk3/gotk3.git
         tag: v0.6.0
         dest: vendor/github.com/gotk3/gotk3
 
       - type: git
-        url: https://github.com/jtolds/gls.git
-        tag: v4.20.0
-        dest: vendor/github.com/jtolds/gls
-
-      - type: git
-        url: https://github.com/kljensen/snowball.git
-        tag: v0.6.0
-        dest: vendor/github.com/kljensen/snowball
-
-      - type: git
-        url: https://github.com/mschoch/smat.git
-        commit: 90eadee771aeab36e8bf796039b8c261bebebe4f
-        dest: vendor/github.com/mschoch/smat
-
-      - type: git
         url: https://github.com/philhofer/fwd.git
         tag: v1.0.0
         dest: vendor/github.com/philhofer/fwd
-
-      - type: git
-        url: https://github.com/rcrowley/go-metrics.git
-        commit: cac0b30c2563378d434b5af411844adff8e32960
-        dest: vendor/github.com/rcrowley/go-metrics
 
       - type: git
         url: https://github.com/rkoesters/xdg.git
@@ -177,24 +143,9 @@ modules:
         dest: vendor/github.com/rkoesters/xkcd
 
       - type: git
-        url: https://github.com/spf13/cobra.git
-        tag: v0.0.5
-        dest: vendor/github.com/spf13/cobra
-
-      - type: git
         url: https://github.com/steveyen/gtreap.git
         tag: v0.1.0
         dest: vendor/github.com/steveyen/gtreap
-
-      - type: git
-        url: https://github.com/stretchr/testify.git
-        tag: v1.4.0
-        dest: vendor/github.com/stretchr/testify
-
-      - type: git
-        url: https://github.com/syndtr/goleveldb.git
-        tag: v1.0.0
-        dest: vendor/github.com/syndtr/goleveldb
 
       - type: git
         url: https://github.com/tinylib/msgp.git
@@ -213,10 +164,6 @@ modules:
 
       - type: git
         url: https://go.googlesource.com/sys.git
-        commit: c1f44814a5cd81a6d1cb589ef1e528bc5d305e07
+        # v0.0.0-20210611083646-a4fc73990273
+        commit: a4fc73990273
         dest: vendor/golang.org/x/sys
-
-      - type: git
-        url: https://go.googlesource.com/text.git
-        tag: v0.3.0
-        dest: vendor/golang.org/x/text
