@@ -7,6 +7,7 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"regexp"
 	"strings"
+	"sync"
 )
 
 const (
@@ -15,22 +16,70 @@ const (
 	ClassLinked         = "linked"
 )
 
-// LoadCSS provides the application's custom CSS to GTK.
-func LoadCSS() error {
-	provider, err := gtk.CssProviderNew()
+var (
+	cssDataMutex      sync.RWMutex
+	cssProvider       *gtk.CssProvider // Protected by cssDataMutex
+	loadedCSSDarkMode bool             // Protected by cssDataMutex
+)
+
+// InitCSS initializes the application's custom CSS.
+func InitCSS() error {
+	var err error
+
+	cssDataMutex.Lock()
+	defer cssDataMutex.Unlock()
+
+	cssProvider, err = gtk.CssProviderNew()
 	if err != nil {
 		return err
 	}
-	provider.LoadFromData(styleCSS)
+
+	// loadedCSSDarkMode defaults to false, and InitCSS is usually called
+	// before it is set to anything else.
+	err = loadCSS(cssProvider, loadedCSSDarkMode)
+	if err != nil {
+		return err
+	}
 
 	screen, err := gdk.ScreenGetDefault()
 	if err != nil {
 		return err
 	}
 
-	gtk.AddProviderForScreen(screen, provider, gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+	gtk.AddProviderForScreen(screen, cssProvider, gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 	return nil
+}
+
+// UpdateCSS reloads the application CSS if darkMode does not match the
+// currently loaded CSS.
+func UpdateCSS(darkMode bool) error {
+	cssDataMutex.RLock()
+	if darkMode == loadedCSSDarkMode {
+		cssDataMutex.RUnlock()
+		return nil
+	}
+	cssDataMutex.RUnlock()
+
+	cssDataMutex.Lock()
+	defer cssDataMutex.Unlock()
+
+	err := loadCSS(cssProvider, darkMode)
+	if err != nil {
+		return err
+	}
+
+	loadedCSSDarkMode = darkMode
+
+	return nil
+}
+
+func loadCSS(p *gtk.CssProvider, darkMode bool) error {
+	if darkMode {
+		return p.LoadFromData(styleDarkCSS)
+	} else {
+		return p.LoadFromData(styleCSS)
+	}
 }
 
 var (

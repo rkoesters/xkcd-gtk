@@ -65,7 +65,7 @@ func NewApplication() (*Application, error) {
 	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
 
 	// Connect startup signal to our methods.
-	app.application.Connect("startup", style.LoadCSS)
+	app.application.Connect("startup", style.InitCSS)
 	app.application.Connect("startup", app.SetupAppMenu)
 	app.application.Connect("startup", app.LoadSettings)
 	app.application.Connect("startup", app.LoadBookmarks)

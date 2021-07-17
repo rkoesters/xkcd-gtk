@@ -172,7 +172,14 @@ func NewWindow(app *Application) (*Window, error) {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *Window) StyleUpdated() {
-	// First, lets find out what GTK theme we are using.
+	// Reload app CSS, if needed.
+	darkMode := win.app.DarkMode()
+	err := style.UpdateCSS(darkMode)
+	if err != nil {
+		log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
+	}
+
+	// What GTK theme we are using?
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
 		// The theme is not being set by the environment, so lets ask
