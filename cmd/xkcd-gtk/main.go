@@ -38,6 +38,15 @@ func main() {
 	// Tell glib that this is the process's main application.
 	app.application.SetDefault()
 
+	// Show gtk's interactive debugging window if this is a debugging build.
+	args := os.Args
+	if build.Debug() {
+		// Insert --gtk-debug=interactive as first flag after args[0].
+		args = append(args, "")
+		copy(args[2:], args[1:])
+		args[1] = "--gtk-debug=interactive"
+	}
+
 	// Run the event loop.
-	os.Exit(app.application.Run(os.Args))
+	os.Exit(app.application.Run(args))
 }
