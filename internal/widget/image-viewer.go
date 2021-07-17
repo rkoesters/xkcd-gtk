@@ -60,25 +60,13 @@ func (iv *ImageViewer) Show() {
 	iv.scrolledWindow.ShowAll()
 }
 
-func (iv *ImageViewer) ShowLoadingScreen(darkMode bool) {
+func (iv *ImageViewer) ShowLoadingScreen() {
 	iv.image.SetFromIconName("image-loading-symbolic", gtk.ICON_SIZE_DIALOG)
-	iv.applyDarkModeClass(darkMode)
 }
 
 func (iv *ImageViewer) SetFromFile(path string, darkMode bool) {
 	iv.image.SetFromFile(path)
-	iv.applyDarkModeClass(darkMode)
 	iv.applyDarkModeImageInversion(darkMode)
-}
-
-func (iv *ImageViewer) applyDarkModeClass(enabled bool) {
-	if enabled {
-		// Apply the dark style class to the comic container.
-		iv.scrolledWindowCtx.AddClass(style.ClassDark)
-	} else {
-		// Remove the dark style class from the comic container.
-		iv.scrolledWindowCtx.RemoveClass(style.ClassDark)
-	}
 }
 
 func (iv *ImageViewer) applyDarkModeImageInversion(enabled bool) {

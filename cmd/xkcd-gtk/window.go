@@ -362,7 +362,7 @@ func (win *Window) SetComic(n int) {
 // ShowLoading makes the window indicate that it is loading.
 func (win *Window) ShowLoading() {
 	win.header.SetTitle(l("Loading comic..."))
-	win.comicContainer.ShowLoadingScreen(win.app.DarkMode())
+	win.comicContainer.ShowLoadingScreen()
 }
 
 // DisplayComic updates the UI to show the contents of win.comic.

@@ -12,7 +12,6 @@ import (
 
 const (
 	ClassComicContainer = "comic-container"
-	ClassDark           = "dark"
 	ClassLinked         = "linked"
 )
 
