@@ -1,4 +1,3 @@
-cmd/xkcd-gtk/about-dialog.go
 cmd/xkcd-gtk/application.go
 cmd/xkcd-gtk/properties-dialog.go
 cmd/xkcd-gtk/window.go
@@ -6,6 +5,7 @@ data/com.github.rkoesters.xkcd-gtk.appdata.xml.in
 data/com.github.rkoesters.xkcd-gtk.desktop.in
 internal/cache/cache.go
 internal/search/index.go
+internal/widget/about-dialog.go
 internal/widget/app-menu.ui
 internal/widget/bookmarks-menu.go
 internal/widget/navigation-bar.go

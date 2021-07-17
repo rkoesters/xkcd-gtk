@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-17 00:41-0700\n"
+"POT-Creation-Date: 2021-07-17 01:09-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cmd/xkcd-gtk/about-dialog.go:18
+#: internal/widget/about-dialog.go:17
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Comic Not Found"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:17
+#: cmd/xkcd-gtk/application.go:18
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
