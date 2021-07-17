@@ -33,13 +33,6 @@ func InitCSS() error {
 		return err
 	}
 
-	// loadedCSSDarkMode defaults to false, and InitCSS is usually called
-	// before it is set to anything else.
-	err = loadCSS(cssProvider, loadedCSSDarkMode)
-	if err != nil {
-		return err
-	}
-
 	screen, err := gdk.ScreenGetDefault()
 	if err != nil {
 		return err
@@ -47,7 +40,9 @@ func InitCSS() error {
 
 	gtk.AddProviderForScreen(screen, cssProvider, gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-	return nil
+	// loadedCSSDarkMode defaults to false, and InitCSS is usually called
+	// before it is set to anything else.
+	return loadCSS(cssProvider, loadedCSSDarkMode)
 }
 
 // UpdateCSS reloads the application CSS if darkMode does not match the
