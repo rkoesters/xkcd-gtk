@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/rkoesters/xkcd"
+	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	bolt "go.etcd.io/bbolt"
 	"io"
@@ -69,6 +70,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	// implementation, then we need to start over (we will move the old
 	// cache to .bak just in case).
 	if existingCacheVersion() != currentCacheVersion() {
+		build.DebugPrint("incompatible cache database found, backing up and rebuilding cache database...")
 		os.Rename(comicCacheDBPath(), comicCacheDBPath()+".bak")
 	}
 
@@ -115,6 +117,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 		for {
 			select {
 			case newest := <-cachedNewestComicIn:
+				build.DebugPrint("new newest cached comic: ", newest)
 				cachedNewestComic = newest
 			case cachedNewestComicOut <- cachedNewestComic:
 				// Sending the comic was all we wanted to do.
@@ -278,6 +281,9 @@ func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 // May return nil, the returned error should be checked. Should not be used on
 // UI event loop.
 func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
+	build.DebugPrint("NewestComicInfoFromInternet start")
+	defer build.DebugPrint("NewestComicInfoFromInternet end")
+
 	c, err := xkcd.GetCurrent()
 	if err != nil {
 		return nil, ErrOffline
@@ -288,6 +294,9 @@ func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
 }
 
 func downloadComicInfo(n int) (*xkcd.Comic, error) {
+	build.DebugPrint("downloadComicInfo start")
+	defer build.DebugPrint("downloadComicInfo end")
+
 	comic, err := xkcd.Get(n)
 	if err != nil {
 		return nil, err
@@ -322,6 +331,9 @@ func putComicInfo(comic *xkcd.Comic) error {
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
 func DownloadComicImage(n int) error {
+	build.DebugPrint("DownloadComicImage start")
+	defer build.DebugPrint("DownloadComicImage end")
+
 	comic, err := ComicInfo(n)
 	if err != nil {
 		return err
