@@ -57,7 +57,10 @@
   <releases>
     <release version="1.4.2">
       <description>
-        <p>Improve UI contrast in dark mode by always using symbolic icons while in dark mode.</p>
+        <ul>
+          <li>Improve UI contrast in dark mode by always using symbolic icons while in dark mode.</li>
+          <li>Improve comic metadata cache usage, lowering app's internet usage.</li>
+        </ul>
       </description>
     </release>
     <release version="1.4.1" date="2021-07-17">
