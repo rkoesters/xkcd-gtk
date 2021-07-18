@@ -7,6 +7,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
@@ -187,6 +188,62 @@ func (app *Application) Quit() {
 
 	// Quit the application.
 	glib.IdleAdd(app.application.Quit)
+}
+
+// LoadSettings tries to load our settings from disk.
+func (app *Application) LoadSettings() {
+	var err error
+
+	checkForMisplacedSettings()
+
+	// Read settings from disk.
+	app.settings.ReadFile(settingsPath())
+
+	// Get reference to Gtk's settings.
+	app.gtkSettings, err = gtk.SettingsGetDefault()
+	if err == nil {
+		// Apply Dark Mode setting.
+		err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
+		if err != nil {
+			log.Print("error setting dark mode state: ", err)
+		}
+	} else {
+		log.Print("error querying gtk settings: ", err)
+	}
+}
+
+// SaveSettings tries to save our settings to disk.
+func (app *Application) SaveSettings() {
+	err := paths.EnsureConfigDir()
+	if err != nil {
+		log.Printf("error saving settings: %v", err)
+	}
+
+	err = app.settings.WriteFile(settingsPath())
+	if err != nil {
+		log.Printf("error saving settings: %v", err)
+	}
+}
+
+// LoadBookmarks tries to load our bookmarks from disk.
+func (app *Application) LoadBookmarks() {
+	checkForMisplacedBookmarks()
+
+	app.bookmarks = bookmarks.New()
+	app.bookmarks.ReadFile(bookmarksPath())
+}
+
+// SaveBookmarks tries to save our bookmarks to disk.
+func (app *Application) SaveBookmarks() {
+	err := paths.EnsureDataDir()
+	if err != nil {
+		log.Printf("error saving bookmarks: %v", err)
+	}
+
+	err = app.bookmarks.WriteFile(bookmarksPath())
+	if err != nil {
+		log.Printf("error saving bookmarks: %v", err)
+	}
 }
 
 // ShowShortcuts shows a shortcuts window to the user.
