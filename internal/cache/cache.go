@@ -18,6 +18,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 )
 
 const (
@@ -33,8 +34,9 @@ var (
 	comicCacheMetadataBucketName = []byte("comic_metadata")
 	comicCacheImageBucketName    = []byte("comic_image")
 
-	recvCachedNewestComic <-chan *xkcd.Comic
-	sendCachedNewestComic chan<- *xkcd.Comic
+	recvCachedNewestComic          <-chan *xkcd.Comic
+	sendCachedNewestComic          chan<- *xkcd.Comic
+	recvCachedNewestComicUpdatedAt <-chan time.Time
 
 	// addToSearchIndex is a callback to insert the given comic into the
 	// search index.
@@ -106,21 +108,30 @@ func Init(index func(comic *xkcd.Comic) error) error {
 
 	cachedNewestComicOut := make(chan *xkcd.Comic)
 	cachedNewestComicIn := make(chan *xkcd.Comic)
+	cachedNewestComicUpdatedAtOut := make(chan time.Time)
 
 	recvCachedNewestComic = cachedNewestComicOut
 	sendCachedNewestComic = cachedNewestComicIn
+	recvCachedNewestComicUpdatedAt = cachedNewestComicUpdatedAtOut
 
 	// Start cachedNewestComic manager.
 	go func() {
-		var cachedNewestComic *xkcd.Comic
+		var (
+			cachedNewestComic          *xkcd.Comic
+			cachedNewestComicUpdatedAt time.Time
+		)
 
 		for {
 			select {
 			case newest := <-cachedNewestComicIn:
-				build.DebugPrint("new newest cached comic: ", newest)
+				cachedNewestComicUpdatedAt = time.Now()
 				cachedNewestComic = newest
+				build.DebugPrint("new newest cached comic: ", newest)
 			case cachedNewestComicOut <- cachedNewestComic:
 				// Sending the comic was all we wanted to do.
+			case cachedNewestComicUpdatedAtOut <- cachedNewestComicUpdatedAt:
+				// Sending the time stamp was all we wanted to
+				// do.
 			}
 		}
 	}()
@@ -216,6 +227,11 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 // it can not connect, then it fetches the latest comic from the cache. The
 // returned error can be safely ignored. Should not be used on UI event loop.
 func CheckForNewestComicInfo() (*xkcd.Comic, error) {
+	const threshold = 5 * time.Minute
+	if time.Since(<-recvCachedNewestComicUpdatedAt) < threshold {
+		return NewestComicInfoFromCache()
+	}
+
 	c, err := NewestComicInfoFromInternet()
 	if err == nil {
 		return c, nil
