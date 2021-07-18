@@ -97,6 +97,6 @@ func IsLargeToolbarTheme(theme string) bool {
 	return largeToolbarThemesRegexp.MatchString(theme)
 }
 
-func IsSymbolicIconTheme(theme string) bool {
-	return !nonSymbolicIconThemesRegexp.MatchString(theme)
+func IsSymbolicIconTheme(theme string, darkMode bool) bool {
+	return darkMode || !nonSymbolicIconThemesRegexp.MatchString(theme)
 }

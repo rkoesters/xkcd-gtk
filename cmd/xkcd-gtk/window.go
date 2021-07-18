@@ -201,7 +201,7 @@ func (win *Window) StyleUpdated() {
 		headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
 	}
 
-	useSymbolicIcons := style.IsSymbolicIconTheme(themeName)
+	useSymbolicIcons := style.IsSymbolicIconTheme(themeName, darkMode)
 
 	// We will call icon() to automatically add -symbolic if needed.
 	icon := func(s string) string {
