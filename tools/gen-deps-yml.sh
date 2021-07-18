@@ -12,9 +12,20 @@ name_to_remote () {
   printf '.git\n'
 }
 
+list_deps () {
+  tools/list-all-mod-deps.sh |
+  sort -r |
+  tr '@' ' ' |
+  rev |
+  uniq -f 1 |
+  rev |
+  tr ' ' '@' |
+  sort
+}
+
 IFS='
 '
-for dep in $(tools/list-all-mod-deps.sh); do
+for dep in $(list_deps); do
   name=$(echo "${dep:?}" | cut -d '@' -f 1)
   version=$(echo "${dep:?}" | cut -d '@' -f 2)
   remote="$(name_to_remote "${name:?}")"
