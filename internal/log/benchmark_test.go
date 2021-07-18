@@ -27,6 +27,8 @@ func BenchmarkLogDebugMapOff(b *testing.B) {
 		}
 	}
 
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		logDebug("test log message")
 	}
@@ -41,6 +43,8 @@ func BenchmarkLogDebugMapOn(b *testing.B) {
 			logger.Print(v...)
 		}
 	}
+
+	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		logDebug("test log message")
@@ -58,6 +62,8 @@ func BenchmarkLogDebugBoolOff(b *testing.B) {
 		}
 	}
 
+	b.ResetTimer()
+
 	for i := 0; i < b.N; i++ {
 		logDebug("test log message")
 	}
@@ -74,6 +80,8 @@ func BenchmarkLogDebugBoolOn(b *testing.B) {
 			logger.Print(v...)
 		}
 	}
+
+	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		logDebug("test log message")
