@@ -89,7 +89,7 @@ flatpak: $(FLATPAK_YML)
 
 $(FLATPAK_YML): $(FLATPAK_YML).in go.mod go.sum
 	cp $< $@
-	tools/gen-deps-yml.sh >>$@
+	tools/gen-flatpak-deps.sh >>$@
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
