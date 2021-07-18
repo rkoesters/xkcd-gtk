@@ -1,0 +1,37 @@
+---
+
+app-id: com.github.rkoesters.xkcd-gtk
+
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
+
+command: com.github.rkoesters.xkcd-gtk
+
+finish-args:
+  - '--socket=x11'
+  - '--socket=wayland'
+  - '--share=ipc'
+  - '--share=network'
+
+modules:
+  - name: com.github.rkoesters.xkcd-gtk
+    buildsystem: simple
+    build-commands:
+      - 'ln -s "$(pwd)/vendor" src/'
+      - 'cd src; . /usr/lib/sdk/golang/enable.sh; make BUILDFLAGS=-mod=vendor'
+      - 'cd src; . /usr/lib/sdk/golang/enable.sh; make install prefix=/app'
+
+    sources:
+      - type: dir
+        path: '.'
+        skip:
+          - .config.mk
+          - com.github.rkoesters.xkcd-gtk
+          - com.github.rkoesters.xkcd-gtk-dev
+          - debian/
+          - vendor/
+        dest: src

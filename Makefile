@@ -83,9 +83,13 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES)
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(DEVFLAGS) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
-flatpak:
+flatpak: $(FLATPAK_YML)
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
 	$(FLATPAK_BUILD) $(FLATPAK_YML)
+
+$(FLATPAK_YML): $(FLATPAK_YML).in
+	cat $< >$@
+	tools/gen-deps-yml.sh >>$@
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
@@ -122,7 +126,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH)
 	yamllint .github/workflows/*.yml *.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
 
-test: $(GEN_SOURCES)
+test: $(GEN_SOURCES) $(FLATPAK_YML)
 	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh
 	tools/test-install.sh
