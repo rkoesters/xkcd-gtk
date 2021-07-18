@@ -55,6 +55,11 @@
   </custom>
 
   <releases>
+    <release version="1.4.2">
+      <description>
+        <p>Improve UI contrast in dark mode by always using symbolic icons while in dark mode.</p>
+      </description>
+    </release>
     <release version="1.4.1" date="2021-07-17">
       <description>
         <p>Improve dark mode on elementary OS by making the title bar dark instead of pastel blue.</p>
