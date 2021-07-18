@@ -55,11 +55,11 @@
   </custom>
 
   <releases>
-    <release version="1.4.2">
+    <release version="1.4.2" date="2021-07-18">
       <description>
         <ul>
           <li>Improve UI contrast in dark mode by always using symbolic icons while in dark mode.</li>
-          <li>Improve comic metadata cache usage, lowering app's internet usage.</li>
+          <li>Improve comic metadata cache usage, decreasing app's internet usage.</li>
         </ul>
       </description>
     </release>
