@@ -7,7 +7,7 @@ import (
 	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
-	"log"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"strconv"
 )
 

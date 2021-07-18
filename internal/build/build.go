@@ -19,7 +19,9 @@ var Options map[string]string
 func Parse() {
 	Options = parse(data)
 
-	DebugPrint("build data: ", data)
+	if Debug() {
+		log.Print("build data: ", data)
+	}
 }
 
 func parse(data string) map[string]string {

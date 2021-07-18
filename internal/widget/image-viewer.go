@@ -2,8 +2,8 @@ package widget
 
 import (
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"log"
 	"math"
 )
 

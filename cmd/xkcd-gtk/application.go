@@ -6,11 +6,11 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"github.com/rkoesters/xkcd-gtk/internal/widget"
-	"log"
 )
 
 const appID = "com.github.rkoesters.xkcd-gtk"

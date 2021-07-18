@@ -7,12 +7,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/rkoesters/xkcd"
-	"github.com/rkoesters/xkcd-gtk/internal/build"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	bolt "go.etcd.io/bbolt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -72,12 +71,12 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	// implementation, then we need to start over (we will move the old
 	// cache to .bak just in case).
 	if existingCacheVersion() != currentCacheVersion() {
-		build.DebugPrint("incompatible cache database found, backing up and rebuilding cache database...")
+		log.Debug("incompatible cache database found, backing up and rebuilding cache database...")
 		os.Rename(comicCacheDBPath(), comicCacheDBPath()+".bak")
 	}
 
 	// Open comic cache database.
-	build.DebugPrint("openning cache database: ", comicCacheDBPath())
+	log.Debug("openning cache database: ", comicCacheDBPath())
 	cacheDB, err = bolt.Open(comicCacheDBPath(), 0644, nil)
 	if err != nil {
 		return err
@@ -127,7 +126,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 			case newest := <-cachedNewestComicIn:
 				cachedNewestComicUpdatedAt = time.Now()
 				cachedNewestComic = newest
-				build.DebugPrint("new newest cached comic: ", newest)
+				log.Debug("new newest cached comic: ", newest)
 			case cachedNewestComicOut <- cachedNewestComic:
 				// Sending the comic was all we wanted to do.
 			case cachedNewestComicUpdatedAtOut <- cachedNewestComicUpdatedAt:
@@ -298,8 +297,8 @@ func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 // May return nil, the returned error should be checked. Should not be used on
 // UI event loop.
 func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
-	build.DebugPrint("NewestComicInfoFromInternet start")
-	defer build.DebugPrint("NewestComicInfoFromInternet end")
+	log.Debug("NewestComicInfoFromInternet start")
+	defer log.Debug("NewestComicInfoFromInternet end")
 
 	c, err := xkcd.GetCurrent()
 	if err != nil {
@@ -311,8 +310,8 @@ func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
 }
 
 func downloadComicInfo(n int) (*xkcd.Comic, error) {
-	build.DebugPrintf("downloadComicInfo(%v) start", n)
-	defer build.DebugPrintf("downloadComicInfo(%v) end", n)
+	log.Debugf("downloadComicInfo(%v) start", n)
+	defer log.Debugf("downloadComicInfo(%v) end", n)
 
 	comic, err := xkcd.Get(n)
 	if err != nil {
@@ -348,8 +347,8 @@ func putComicInfo(comic *xkcd.Comic) error {
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
 func DownloadComicImage(n int) error {
-	build.DebugPrintf("DownloadComicImage(%v) start", n)
-	defer build.DebugPrintf("DownloadComicImage(%v) end", n)
+	log.Debugf("DownloadComicImage(%v) start", n)
+	defer log.Debugf("DownloadComicImage(%v) end", n)
 
 	comic, err := ComicInfo(n)
 	if err != nil {

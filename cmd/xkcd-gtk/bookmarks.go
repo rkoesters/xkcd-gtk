@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	"log"
 	"os"
 	"path/filepath"
 )

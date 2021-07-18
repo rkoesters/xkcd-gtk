@@ -6,25 +6,25 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	"log"
 	"math/rand"
 	"os"
 	"time"
 )
 
 func main() {
-	// Make log messages include date, time, filename, and line number.
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	// Initialize internal log package.
+	log.Init()
 
 	// Make sure the random number generator is seeded.
 	rand.Seed(time.Now().Unix())
 
+	// Initialize compile-time information provided by the build package.
+	build.Parse()
+
 	// Initialize the paths under which we will store app files.
 	paths.Init(appID)
-
-	// Initial compile-time information provided by the build package.
-	build.Parse()
 
 	// Let glib and gtk know who we are.
 	glib.SetApplicationName(appName)

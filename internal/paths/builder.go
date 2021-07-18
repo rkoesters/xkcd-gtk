@@ -2,7 +2,7 @@ package paths
 
 import (
 	"github.com/rkoesters/xdg/basedir"
-	"github.com/rkoesters/xkcd-gtk/internal/build"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"os"
 	"path/filepath"
 )
@@ -23,7 +23,7 @@ func (b Builder) CacheDir() string {
 // EnsureCacheDir creates the CacheDir() directory, if it doesn't exist. It does
 // not return an error if it already exists.
 func (b Builder) EnsureCacheDir() error {
-	build.DebugPrint("EnsureCacheDir: ", b.CacheDir())
+	log.Debug("EnsureCacheDir: ", b.CacheDir())
 	return os.MkdirAll(b.CacheDir(), defaultDirMode)
 }
 
@@ -35,7 +35,7 @@ func (b Builder) ConfigDir() string {
 // EnsureConfigDir creates the ConfigDir() directory, if it doesn't exist. It
 // does not return an error if it already exists.
 func (b Builder) EnsureConfigDir() error {
-	build.DebugPrint("EnsureConfigDir: ", b.ConfigDir())
+	log.Debug("EnsureConfigDir: ", b.ConfigDir())
 	return os.MkdirAll(b.ConfigDir(), defaultDirMode)
 }
 
@@ -47,7 +47,7 @@ func (b Builder) DataDir() string {
 // EnsureDataDir creates the DataDir() directory, if it doesn't exist. It does
 // not return an error if it already exists.
 func (b Builder) EnsureDataDir() error {
-	build.DebugPrint("EnsureDataDir: ", b.DataDir())
+	log.Debug("EnsureDataDir: ", b.DataDir())
 	return os.MkdirAll(b.DataDir(), defaultDirMode)
 }
 

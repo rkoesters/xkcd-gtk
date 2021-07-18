@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
-	"log"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"strconv"
 	"strings"
 	"time"
