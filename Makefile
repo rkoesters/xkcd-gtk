@@ -88,7 +88,7 @@ flatpak: $(FLATPAK_YML)
 	$(FLATPAK_BUILD) $(FLATPAK_YML)
 
 $(FLATPAK_YML): $(FLATPAK_YML).in
-	cat $< >$@
+	cp $< $@
 	tools/gen-deps-yml.sh >>$@
 
 %.css.go: %.css
