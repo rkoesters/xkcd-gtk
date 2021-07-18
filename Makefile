@@ -161,4 +161,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean dev flatpak fix install strip test uninstall vendor
+.PHONY: all check clean dev flatpak fix install strip test uninstall
