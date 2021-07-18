@@ -13,11 +13,18 @@ var data = ""
 // before using Options.
 var Options map[string]string
 
+// Cached result of Options["debug"] == "on" to speed up Debug which can
+// potentially be called in very quick succession.
+var debugMode bool
+
 // Parse initializes the build package by parsing the data provided to it at
 // compile time. Parse must be called before using Options or calling any other
 // function provided by this package.
 func Parse() {
 	Options = parse(data)
+
+	// Cache this comparison to speed up Debug.
+	debugMode = Options["debug"] == "on"
 
 	if Debug() {
 		log.Print("build data: ", data)
@@ -45,7 +52,7 @@ func parse(data string) map[string]string {
 
 // Debug returns whether this binary is a debugging build.
 func Debug() bool {
-	return Options["debug"] == "on"
+	return debugMode
 }
 
 // Version returns the version string of this binary.
