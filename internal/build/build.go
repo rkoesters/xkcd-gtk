@@ -50,5 +50,10 @@ func Debug() bool {
 
 // Version returns the version string of this binary.
 func Version() string {
-	return Options["version"]
+	v, ok := Options["version"]
+	if ok {
+		return v
+	} else {
+		return "undefined"
+	}
 }
