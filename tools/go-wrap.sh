@@ -3,15 +3,15 @@
 set -eu
 
 if [ $# != 1 ]; then
-	echo "usage: $0 FILE" >&2
-	exit 1
+  echo "usage: $0 FILE" >&2
+  exit 1
 fi
 
 file="$1"
 dir="$(dirname "$file")"
 case "$dir" in
-	*cmd/*) package="main" ;;
-	*) package="$(basename "$dir")" ;;
+  *cmd/*) package="main" ;;
+  *) package="$(basename "$dir")" ;;
 esac
 
 printf 'package %s\n\nconst ' "$package"
