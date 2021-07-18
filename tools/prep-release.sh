@@ -22,8 +22,7 @@ if grep -v '@2x.png' "$appdata_xml" | grep -q '@'; then
 fi
 
 echo "Checking for tag matching current commit"
-tag=$(git describe --exact-match --tags)
-if [ $? != 0 ]; then
+if ! tag=$(git describe --exact-match --tags); then
   failure "could not find tag for current commit"
 fi
 
