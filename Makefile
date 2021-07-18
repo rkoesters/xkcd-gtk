@@ -114,7 +114,7 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
-fix: $(GEN_SOURCES)
+fix: $(GEN_SOURCES) $(POT_PATH) $(PO)
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
