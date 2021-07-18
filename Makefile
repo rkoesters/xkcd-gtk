@@ -78,7 +78,7 @@ FLATPAK_YML   = $(APP).yml
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(ALL_GO_SOURCES)
-	go build -o $@ -v $(BUILDFLAGS) -ldflags="-s -w -X $(BUILD_PACKAGE).data=$(BUILD_DATA)" $(TAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $@ -v $(BUILDFLAGS) -ldflags="-s -w -X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(DEVFLAGS) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" $(TAGS) $(MODULE)/cmd/xkcd-gtk
