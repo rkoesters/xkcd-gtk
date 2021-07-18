@@ -3,6 +3,8 @@
 set -eEu
 trap 'echo "$0 FAILED"' ERR
 
+export MAKEFLAGS=""
+
 verbose=false
 
 while [ $# -gt 0 ]; do
