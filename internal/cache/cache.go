@@ -310,8 +310,8 @@ func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
 }
 
 func downloadComicInfo(n int) (*xkcd.Comic, error) {
-	build.DebugPrint("downloadComicInfo start")
-	defer build.DebugPrint("downloadComicInfo end")
+	build.DebugPrintf("downloadComicInfo(%v) start", n)
+	defer build.DebugPrintf("downloadComicInfo(%v) end", n)
 
 	comic, err := xkcd.Get(n)
 	if err != nil {
@@ -347,8 +347,8 @@ func putComicInfo(comic *xkcd.Comic) error {
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
 func DownloadComicImage(n int) error {
-	build.DebugPrint("DownloadComicImage start")
-	defer build.DebugPrint("DownloadComicImage end")
+	build.DebugPrintf("DownloadComicImage(%v) start", n)
+	defer build.DebugPrintf("DownloadComicImage(%v) end", n)
 
 	comic, err := ComicInfo(n)
 	if err != nil {
