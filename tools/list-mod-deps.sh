@@ -3,7 +3,7 @@
 set -eu
 
 go mod graph |
-egrep '^github.com/rkoesters/xkcd-gtk ' |
+grep -E '^github.com/rkoesters/xkcd-gtk ' |
 cut -d ' ' -f 2 |
 grep -F "$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)" |
 sort |
