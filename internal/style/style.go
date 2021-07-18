@@ -5,6 +5,7 @@ package style
 import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"regexp"
 	"strings"
 	"sync"
@@ -70,8 +71,10 @@ func UpdateCSS(darkMode bool) error {
 
 func loadCSS(p *gtk.CssProvider, darkMode bool) error {
 	if darkMode {
+		build.DebugPrint("loading style-dark.css")
 		return p.LoadFromData(styleDarkCSS)
 	} else {
+		build.DebugPrint("loading style.css")
 		return p.LoadFromData(styleCSS)
 	}
 }
