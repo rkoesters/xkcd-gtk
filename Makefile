@@ -119,11 +119,11 @@ fix: $(GEN_SOURCES)
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
-check: $(GEN_SOURCES) $(APPDATA_PATH)
+check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet $(TAGS) $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	yamllint .github/workflows/*.yml *.yml
+	yamllint .github/workflows/*.yml *.yml *.yml.in
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES) $(FLATPAK_YML)
