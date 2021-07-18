@@ -9,6 +9,7 @@ import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
+	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"log"
@@ -24,9 +25,10 @@ var index bleve.Index
 func Init() (err error) {
 	checkForMisplacedSearchIndex()
 
+	build.DebugPrint("opening search index: ", searchIndexPath())
 	index, err = bleve.Open(searchIndexPath())
 	if err == bleve.ErrorIndexPathDoesNotExist {
-		// The search index doesn't exist yet, lets make it.
+		build.DebugPrint("search index not found, creating new search index")
 		mapping := bleve.NewIndexMapping()
 		index, err = bleve.New(searchIndexPath(), mapping)
 	}
@@ -40,6 +42,7 @@ func Close() error {
 
 // Index adds comic to the search index.
 func Index(comic *xkcd.Comic) error {
+	build.DebugPrint("indexing: ", comic)
 	return index.Index(strconv.Itoa(comic.Num), comic)
 }
 
