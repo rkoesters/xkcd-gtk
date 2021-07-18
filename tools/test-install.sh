@@ -5,7 +5,7 @@ trap 'echo "$0 FAILED"' ERR
 
 verbose=false
 
-while [[ $# > 0 ]]; do
+while [ $# -gt 0 ]; do
   case "$1" in
     -v|--verbose)
       verbose=true
