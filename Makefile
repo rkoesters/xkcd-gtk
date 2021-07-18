@@ -43,6 +43,7 @@ APPDATA_PATH = data/$(APPDATA_NAME)
 POT_PATH     = po/$(POT_NAME)
 
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
+BUILD_PACKAGE   = $(MODULE)/internal/build
 
 GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
 CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
@@ -76,10 +77,10 @@ FLATPAK_YML   = $(APP).yml
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(SOURCES)
-	go build -o $@ -v $(BUILDFLAGS) -ldflags="-X $(MODULE)/internal/build.data=$(BUILD_DATA)" $(TAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $@ -v $(BUILDFLAGS) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(DEVFLAGS) -ldflags="-X $(MODULE)/internal/build.data=$(BUILD_DATA),debug=on" $(TAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(DEVFLAGS) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
 flatpak:
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
