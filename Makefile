@@ -87,7 +87,7 @@ flatpak: $(FLATPAK_YML)
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
 	$(FLATPAK_BUILD) $(FLATPAK_YML)
 
-$(FLATPAK_YML): $(FLATPAK_YML).in
+$(FLATPAK_YML): $(FLATPAK_YML).in go.mod go.sum
 	cp $< $@
 	tools/gen-deps-yml.sh >>$@
 
