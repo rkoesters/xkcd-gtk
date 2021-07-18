@@ -131,6 +131,9 @@ test: $(GEN_SOURCES) $(FLATPAK_YML)
 	tools/test-flatpak-config.sh
 	tools/test-install.sh
 
+# Shorthand for all the targets that CI covers.
+ci: all check test
+
 clean:
 	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	rm -rf $(FLATPAK_BUILD)
@@ -161,4 +164,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check clean dev flatpak fix install strip test uninstall
+.PHONY: all check ci clean dev fix flatpak install strip test uninstall
