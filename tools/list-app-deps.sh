@@ -1,6 +1,6 @@
 #!/bin/sh
-# Find and print modules that are direct and indirect dependencies of the
-# current module.
+# Find and print modules that are direct and indirect dependencies of the this
+# application.
 set -eu
 
 go mod graph |

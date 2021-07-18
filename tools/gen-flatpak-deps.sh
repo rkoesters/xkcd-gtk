@@ -13,7 +13,7 @@ name_to_remote () {
 }
 
 list_deps () {
-  tools/list-all-mod-deps.sh |
+  tools/list-app-deps.sh |
   sort -r |
   tr '@' ' ' |
   rev |
