@@ -45,11 +45,12 @@ POT_PATH     = po/$(POT_NAME)
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
 
-GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
-CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
-UI_SOURCES  = $(shell find cmd internal -name '*.ui' -type f)
-GEN_SOURCES = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
-SOURCES     = $(GO_SOURCES) $(GEN_SOURCES)
+GO_SOURCES     = $(shell find cmd internal -name '*.go' -type f)
+CSS_SOURCES    = $(shell find cmd internal -name '*.css' -type f)
+UI_SOURCES     = $(shell find cmd internal -name '*.ui' -type f)
+GEN_SOURCES    = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
+ALL_GO_SOURCES = $(GO_SOURCES) $(GEN_SOURCES)
+SH_SOURCES     = $(shell find tools -name '*.sh' -type f)
 
 POTFILES         = $(shell cat po/POTFILES)
 POTFILES_GO      = $(filter %.go,$(POTFILES))
@@ -76,7 +77,7 @@ FLATPAK_YML   = $(APP).yml
 
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
-$(EXE_PATH): Makefile $(SOURCES)
+$(EXE_PATH): Makefile $(ALL_GO_SOURCES)
 	go build -o $@ -v $(BUILDFLAGS) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" $(TAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
@@ -116,6 +117,7 @@ fix: $(GEN_SOURCES)
 
 check: $(GEN_SOURCES) $(APPDATA_PATH)
 	go vet $(TAGS) $(BUILDFLAGS) $(MODULE_PACKAGES)
+	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml *.yml
 	-appstream-util validate-relax $(APPDATA_PATH)
