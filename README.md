@@ -5,8 +5,8 @@ GTK+3.
 
 <a href="https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Get it on AppCenter" src="https://appcenter.elementary.io/badge.svg"/></a>
 <a href="https://flathub.org/apps/details/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.svg"/></a>
-<a href="https://aur.archlinux.org/packages/xkcd-gtk/"><img height="51" alit="Availabe in AUR" 
-src="https://archlinux.org/static/logos/archlinux-logo-light-scalable.1ae4cc2e2469.svg"/></a>
+<a href="https://aur.archlinux.org/packages/xkcd-gtk/"><img height="51" alt="Available in AUR" 
+src="https://img.shields.io/aur/version/xkcd-gtk"/></a>
 
 ![screenshot](screenshots/screenshot-1@2x.png)
 
