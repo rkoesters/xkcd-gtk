@@ -18,6 +18,10 @@ TAGS       = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
 # Install Variables
 ################################################################################
 
+# The `DESTDIR` variable is supported by the `install`/`uninstall` targets and
+# should be overridden instead of `prefix` when building packages unless a
+# custom install location, e.g. `/app` for flatpaks, is required.
+
 prefix  = /usr
 bindir  = $(prefix)/bin
 datadir = $(prefix)/share
