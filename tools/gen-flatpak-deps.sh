@@ -14,20 +14,19 @@ name_to_remote () {
 
 list_deps () {
   tools/list-app-deps.sh |
-  sort -r |
   tr '@' ' ' |
+  sort -r |
   rev |
   uniq -f 1 |
   rev |
-  tr ' ' '@' |
   sort
 }
 
 IFS='
 '
 for dep in $(list_deps); do
-  name=$(echo "${dep:?}" | cut -d '@' -f 1)
-  version=$(echo "${dep:?}" | cut -d '@' -f 2)
+  name=$(echo "${dep:?}" | cut -d ' ' -f 1)
+  version=$(echo "${dep:?}" | cut -d ' ' -f 2)
   remote="$(name_to_remote "${name:?}")"
 
   echo
