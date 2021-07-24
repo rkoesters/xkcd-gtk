@@ -27,7 +27,7 @@ modules:
 
     sources:
       - type: dir
-        path: '.'
+        path: '..'
         skip:
           - .config.mk
           - com.github.rkoesters.xkcd-gtk

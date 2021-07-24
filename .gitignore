@@ -5,7 +5,6 @@
 /build/
 /com.github.rkoesters.xkcd-gtk
 /com.github.rkoesters.xkcd-gtk-dev
-/com.github.rkoesters.xkcd-gtk.yml
 /debian
 /vendor/
 /xkcd-gtk

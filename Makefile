@@ -67,7 +67,7 @@ PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
 FLATPAK_BUILD = build/
-FLATPAK_YML   = $(APP).yml
+FLATPAK_YML   = flatpak/$(APP).yml
 
 ################################################################################
 # Local Customizations (not tracked by source control)
@@ -91,7 +91,7 @@ flatpak: $(FLATPAK_YML)
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
 	$(FLATPAK_BUILD) $(FLATPAK_YML)
 
-$(FLATPAK_YML): $(FLATPAK_YML).in go.mod go.sum
+flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
 	tools/gen-flatpak-deps.sh >>$@
 
@@ -127,12 +127,12 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet $(TAGS) $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	yamllint .github/workflows/*.yml *.yml *.yml.in
+	yamllint .github/workflows/*.yml flatpak/*.yml flatpak/*.yml.in
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES) $(FLATPAK_YML)
 	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
-	tools/test-flatpak-config.sh
+	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 
 # Shorthand for all the targets that CI covers.

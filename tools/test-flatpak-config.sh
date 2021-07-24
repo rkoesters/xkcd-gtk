@@ -1,7 +1,11 @@
 #!/bin/sh
 # Confirm that there are no conflicting source directories in the flatpak
 # config.
-yml=com.github.rkoesters.xkcd-gtk.yml
+if [ $# != 1 ]; then
+  echo "usage: $0 flatpak-yml-file" >&2
+  exit 2
+fi
+yml="${1:?}"
 
 if [ "$(grep dest: "${yml:?}" | uniq -D)" != "" ]; then
   echo "ERROR: duplicate 'dest:' in flatpak config:" >&2
@@ -18,4 +22,4 @@ if [ "$(grep dest: "${yml:?}" | uniq -D)" != "" ]; then
   exit 1
 fi
 
-echo "$0 PASSED"
+echo "$0 $yml PASSED"
