@@ -140,7 +140,7 @@ ci: all check test
 
 clean:
 	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO) $(FLATPAK_YML)
-	rm -rf $(FLATPAK_BUILD)
+	rm -rf $(FLATPAK_BUILD) .flatpak-builder/
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
