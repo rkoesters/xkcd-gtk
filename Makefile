@@ -139,7 +139,7 @@ test: $(GEN_SOURCES) $(FLATPAK_YML)
 ci: all check test
 
 clean:
-	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO) $(FLATPAK_YML)
 	rm -rf $(FLATPAK_BUILD)
 
 strip: $(EXE_PATH)
