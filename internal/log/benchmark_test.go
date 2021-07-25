@@ -18,7 +18,7 @@ func init() {
 	logger = log.New(ioutil.Discard, "", log.LstdFlags|log.Lshortfile)
 }
 
-func BenchmarkLogDebugMapOff(b *testing.B) {
+func BenchmarkLogDebugOffMap(b *testing.B) {
 	options := make(map[string]string)
 
 	logDebug := func(v ...interface{}) {
@@ -34,24 +34,7 @@ func BenchmarkLogDebugMapOff(b *testing.B) {
 	}
 }
 
-func BenchmarkLogDebugMapOn(b *testing.B) {
-	options := make(map[string]string)
-	options["debug"] = "on"
-
-	logDebug := func(v ...interface{}) {
-		if options["debug"] == "on" {
-			logger.Print(v...)
-		}
-	}
-
-	b.ResetTimer()
-
-	for i := 0; i < b.N; i++ {
-		logDebug("test log message")
-	}
-}
-
-func BenchmarkLogDebugBoolOff(b *testing.B) {
+func BenchmarkLogDebugOffBool(b *testing.B) {
 	options := make(map[string]string)
 
 	debug := options["debug"] == "on"
@@ -69,7 +52,24 @@ func BenchmarkLogDebugBoolOff(b *testing.B) {
 	}
 }
 
-func BenchmarkLogDebugBoolOn(b *testing.B) {
+func BenchmarkLogDebugOnMap(b *testing.B) {
+	options := make(map[string]string)
+	options["debug"] = "on"
+
+	logDebug := func(v ...interface{}) {
+		if options["debug"] == "on" {
+			logger.Print(v...)
+		}
+	}
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		logDebug("test log message")
+	}
+}
+
+func BenchmarkLogDebugOnBool(b *testing.B) {
 	options := make(map[string]string)
 	options["debug"] = "on"
 
