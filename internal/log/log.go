@@ -3,8 +3,6 @@
 package log
 
 import (
-	"fmt"
-	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"log"
 )
 
@@ -25,25 +23,4 @@ var (
 // Init performs initialization required for the log package.
 func Init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-}
-
-// Debug calls log.Print if Debug returns true.
-func Debug(v ...interface{}) {
-	if build.Debug() {
-		log.Output(2, fmt.Sprint(v...))
-	}
-}
-
-// Debugf calls log.Printf if Debug returns true.
-func Debugf(format string, v ...interface{}) {
-	if build.Debug() {
-		log.Output(2, fmt.Sprintf(format, v...))
-	}
-}
-
-// Debugln calls log.Println if Debug returns true.
-func Debugln(v ...interface{}) {
-	if build.Debug() {
-		log.Output(2, fmt.Sprintln(v...))
-	}
 }

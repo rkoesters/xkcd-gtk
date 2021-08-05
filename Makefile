@@ -12,7 +12,8 @@ GTK_VERSION   = $(shell tools/gtk-version.sh)
 PANGO_VERSION = $(shell tools/pango-version.sh)
 
 BUILD_DATA = version=$(APP_VERSION)
-TAGS       = -tags "$(GTK_VERSION) $(PANGO_VERSION)"
+TAGS       = $(GTK_VERSION) $(PANGO_VERSION)
+DEV_TAGS   = xkcd_gtk_debug
 
 ################################################################################
 # Install Variables
@@ -82,10 +83,10 @@ FLATPAK_YML   = flatpak/$(APP).yml
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
 $(EXE_PATH): Makefile $(ALL_GO_SOURCES)
-	go build -o $@ -v $(BUILDFLAGS) -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" $(TAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES)
-	go build -o $(DEV_PATH) -v $(BUILDFLAGS) $(DEVFLAGS) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" $(TAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 flatpak: $(FLATPAK_YML)
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
@@ -124,14 +125,14 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
 check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
-	go vet $(TAGS) $(BUILDFLAGS) $(MODULE_PACKAGES)
+	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml flatpak/*.yml flatpak/*.yml.in
 	-appstream-util validate-relax $(APPDATA_PATH)
 
 test: $(GEN_SOURCES) $(FLATPAK_YML)
-	go test $(TAGS) $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
+	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 
