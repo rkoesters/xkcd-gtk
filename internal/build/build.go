@@ -2,7 +2,7 @@
 package build
 
 import (
-	"log"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"strings"
 )
 
@@ -26,9 +26,7 @@ func Parse() {
 	// Cache this comparison to speed up Debug.
 	debugMode = Options["debug"] == "on"
 
-	if Debug() {
-		log.Print("build data: ", data)
-	}
+	log.Debug("build data: ", data)
 }
 
 func parse(data string) map[string]string {
