@@ -52,6 +52,19 @@ func BenchmarkLogDebugOffBool(b *testing.B) {
 	}
 }
 
+func BenchmarkLogDebugOffTag(b *testing.B) {
+	options := make(map[string]string)
+	_ = options["debug"] == "on"
+
+	logDebug := func(v ...interface{}) {}
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		logDebug("test log message")
+	}
+}
+
 func BenchmarkLogDebugOnMap(b *testing.B) {
 	options := make(map[string]string)
 	options["debug"] = "on"
@@ -85,5 +98,29 @@ func BenchmarkLogDebugOnBool(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		logDebug("test log message")
+	}
+}
+
+func BenchmarkLogDebugOnTag(b *testing.B) {
+	options := make(map[string]string)
+	options["debug"] = "on"
+
+	logDebug := logger.Print
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		logDebug("test log message")
+	}
+}
+
+func BenchmarkLogDebugOnTagWithoutIndirection(b *testing.B) {
+	options := make(map[string]string)
+	options["debug"] = "on"
+
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		logger.Print("test log message")
 	}
 }
