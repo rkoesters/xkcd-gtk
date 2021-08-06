@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/emirpasic/gods/sets/treeset"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"io"
 	"os"
 	"strconv"
@@ -133,7 +134,8 @@ func (list *List) notifyObservers(msg string) {
 	list.observerMutex.RLock()
 	defer list.observerMutex.RUnlock()
 
-	for _, ch := range list.observers {
+	for id, ch := range list.observers {
+		log.Debugf("notifying observer #%v: %v", id, msg)
 		ch <- msg
 	}
 }
