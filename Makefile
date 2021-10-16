@@ -95,7 +95,6 @@ flathub: $(FLATHUB_YML)
 appcenter: $(APPCENTER_YML)
 	flatpak-builder --user --install-deps-from=appcenter --force-clean \
 	flatpak-build/appcenter/ $(APPCENTER_YML)
-	cp $(APPCENTER_YML) $(APP).yml
 
 flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
@@ -124,10 +123,11 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
-fix: $(GEN_SOURCES) $(POT_PATH) $(PO)
+fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APPCENTER_YML)
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
+	cp $(APPCENTER_YML) $(APP).yml
 
 check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATHUB_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
