@@ -67,8 +67,8 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
-FLATPAK_BUILD = build/
-FLATPAK_YML   = flatpak/$(APP).yml
+FLATHUB_BUILD = build/
+FLATHUB_YML   = flatpak/flathub.yml
 
 ################################################################################
 # Local Customizations (not tracked by source control)
@@ -88,9 +88,9 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES)
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-flatpak: $(FLATPAK_YML)
+flatpak: $(FLATHUB_YML)
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
-	$(FLATPAK_BUILD) $(FLATPAK_YML)
+	$(FLATHUB_BUILD) $(FLATHUB_YML)
 
 flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
@@ -124,24 +124,24 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO)
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
-check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
+check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATHUB_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml flatpak/*.yml flatpak/*.yml.in
 	-appstream-util validate-relax $(APPDATA_PATH)
 
-test: $(GEN_SOURCES) $(FLATPAK_YML)
+test: $(GEN_SOURCES) $(FLATHUB_YML)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
-	tools/test-flatpak-config.sh $(FLATPAK_YML)
+	tools/test-flatpak-config.sh $(FLATHUB_YML)
 	tools/test-install.sh
 
 # Shorthand for all the targets that CI covers.
 ci: all check test
 
 clean:
-	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO) $(FLATPAK_YML)
-	rm -rf $(FLATPAK_BUILD) .flatpak-builder/
+	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO) $(FLATHUB_YML)
+	rm -rf $(FLATHUB_BUILD) .flatpak-builder/
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
