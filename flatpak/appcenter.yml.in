@@ -1,0 +1,40 @@
+---
+
+app-id: com.github.rkoesters.xkcd-gtk
+
+runtime: io.elementary.Platform
+runtime-version: '6'
+
+sdk: io.elementary.Sdk
+
+command: com.github.rkoesters.xkcd-gtk
+
+finish-args:
+  - '--socket=x11'
+  - '--socket=wayland'
+  - '--share=ipc'
+  - '--share=network'
+
+modules:
+  - name: com.github.rkoesters.xkcd-gtk
+    buildsystem: simple
+    build-commands:
+      - 'ln -s "$(pwd)/vendor" src/'
+      - 'cd src; PATH="$PATH:../goroot/bin" make BUILDFLAGS=-mod=vendor'
+      - 'cd src; PATH="$PATH:../goroot/bin" make install prefix=/app'
+
+    sources:
+      - type: dir
+        path: '..'
+        skip:
+          - .config.mk
+          - com.github.rkoesters.xkcd-gtk
+          - com.github.rkoesters.xkcd-gtk-dev
+          - debian/
+          - vendor/
+        dest: src
+
+      - type: archive
+        url: https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
+        sha256: f242a9db6a0ad1846de7b6d94d507915d14062660616a61ef7c808a76e4f1676
+        dest: goroot

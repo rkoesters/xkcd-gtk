@@ -67,8 +67,8 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
-FLATHUB_BUILD = build/
 FLATHUB_YML   = flatpak/flathub.yml
+APPCENTER_YML = flatpak/appcenter.yml
 
 ################################################################################
 # Local Customizations (not tracked by source control)
@@ -88,9 +88,14 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES)
 dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-flatpak: $(FLATHUB_YML)
+flathub: $(FLATHUB_YML)
 	flatpak-builder --user --install-deps-from=flathub --force-clean \
-	$(FLATHUB_BUILD) $(FLATHUB_YML)
+	flatpak-build/flathub/ $(FLATHUB_YML)
+
+appcenter: $(APPCENTER_YML)
+	flatpak-builder --user --install-deps-from=appcenter --force-clean \
+	flatpak-build/appcenter/ $(APPCENTER_YML)
+	cp $(APPCENTER_YML) $(APP).yml
 
 flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
@@ -141,7 +146,7 @@ ci: all check test
 
 clean:
 	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO) $(FLATHUB_YML)
-	rm -rf $(FLATHUB_BUILD) .flatpak-builder/
+	rm -rf flatpak-build/ .flatpak-builder/
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
@@ -169,4 +174,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all check ci clean dev fix flatpak install strip test uninstall
+.PHONY: all appcenter check ci clean dev fix flathub install strip test uninstall

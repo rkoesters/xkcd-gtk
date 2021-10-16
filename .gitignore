@@ -2,9 +2,9 @@
 *.ui.go
 /.config.mk
 /.flatpak-builder/
-/build/
 /com.github.rkoesters.xkcd-gtk
 /com.github.rkoesters.xkcd-gtk-dev
 /debian
+/flatpak-build/
 /vendor/
 /xkcd-gtk
