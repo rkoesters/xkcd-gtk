@@ -127,7 +127,7 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APPCENTER_YML)
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
-	cp $(APPCENTER_YML) $(APP).yml
+	sed "s/path: '..'/path: '.'/" $(APPCENTER_YML) >$(APP).yml
 
 check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATHUB_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
