@@ -90,12 +90,10 @@ dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 flathub: $(FLATHUB_YML)
-	flatpak-builder --user --install-deps-from=flathub --force-clean --install \
-	flatpak-build/flathub/ $<
+	flatpak-builder --user --install-deps-from=flathub --force-clean $(FPFLAGS) flatpak-build/flathub/ $<
 
 appcenter: $(APPCENTER_YML)
-	flatpak-builder --user --install-deps-from=appcenter --force-clean --install \
-	flatpak-build/appcenter/ $<
+	flatpak-builder --user --install-deps-from=appcenter --force-clean $(FPFLAGS) flatpak-build/appcenter/ $<
 
 flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
