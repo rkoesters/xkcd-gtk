@@ -139,6 +139,8 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATHUB_YML)
 test: $(GEN_SOURCES) $(FLATHUB_YML)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATHUB_YML)
+	tools/test-flatpak-config.sh $(APPCENTER_YML)
+	tools/test-flatpak-config.sh $(APP).yml
 	tools/test-install.sh
 
 # Shorthand for all the targets that CI covers.
