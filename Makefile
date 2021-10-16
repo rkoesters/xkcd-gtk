@@ -67,8 +67,9 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
-FLATHUB_YML   = flatpak/flathub.yml
-APPCENTER_YML = flatpak/appcenter.yml
+FLATHUB_YML     = flatpak/flathub.yml
+APPCENTER_YML   = flatpak/appcenter.yml
+ALL_FLATPAK_YML = $(FLATHUB_YML) $(APPCENTER_YML) $(APP).yml
 
 ################################################################################
 # Local Customizations (not tracked by source control)
@@ -89,12 +90,12 @@ dev: $(GEN_SOURCES)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 flathub: $(FLATHUB_YML)
-	flatpak-builder --user --install-deps-from=flathub --force-clean \
-	flatpak-build/flathub/ $(FLATHUB_YML)
+	flatpak-builder --user --install-deps-from=flathub --force-clean --install \
+	flatpak-build/flathub/ $<
 
 appcenter: $(APPCENTER_YML)
-	flatpak-builder --user --install-deps-from=appcenter --force-clean \
-	flatpak-build/appcenter/ $(APPCENTER_YML)
+	flatpak-builder --user --install-deps-from=appcenter --force-clean --install \
+	flatpak-build/appcenter/ $<
 
 flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
@@ -131,14 +132,14 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
-check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATHUB_YML)
+check: $(GEN_SOURCES) $(APPDATA_PATH) $(ALL_FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	yamllint .github/workflows/*.yml flatpak/*.yml flatpak/*.yml.in
+	yamllint .github/workflows/*.yml $(ALL_FLATPAK_YML)
 	-appstream-util validate-relax $(APPDATA_PATH)
 
-test: $(GEN_SOURCES) $(FLATHUB_YML)
+test: $(GEN_SOURCES) $(ALL_FLATPAK_YML)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATHUB_YML)
 	tools/test-flatpak-config.sh $(APPCENTER_YML)
@@ -149,8 +150,8 @@ test: $(GEN_SOURCES) $(FLATHUB_YML)
 ci: all check test
 
 clean:
-	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO) $(FLATHUB_YML)
-	rm -rf flatpak-build/ .flatpak-builder/
+	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+	rm -rf flatpak/*.yml flatpak-build/ .flatpak-builder/
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
