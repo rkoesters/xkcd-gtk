@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-18 02:09-0700\n"
+"POT-Creation-Date: 2021-10-15 21:58-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Comic Not Found"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:18
+#: cmd/xkcd-gtk/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
