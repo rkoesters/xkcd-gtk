@@ -85,7 +85,7 @@ jobs:
 
       - name: Configure flathub
         run: >
-          flatpak --user remote-add --if-not-exists
+          flatpak --user remote-add --if-not-exists --from
           flathub https://flathub.org/repo/flathub.flatpakrepo
 
       - run: make flathub
@@ -112,7 +112,7 @@ jobs:
 
       - name: Configure appcenter
         run: >
-          flatpak --user remote-add --if-not-exists
-          appcenter https://flatpak.elementary.io/repo
+          flatpak --user remote-add --if-not-exists --from
+          appcenter https://flatpak.elementary.io/repo.flatpakrepo
 
       - run: make appcenter
