@@ -20,8 +20,8 @@ modules:
     buildsystem: simple
     build-commands:
       - 'ln -s "$(pwd)/vendor" src/'
-      - 'cd src; PATH="$PATH:../goroot/bin" make BUILDFLAGS=-mod=vendor'
-      - 'cd src; PATH="$PATH:../goroot/bin" make install prefix=/app'
+      - 'cd src; PATH="$PATH:../go/bin" make BUILDFLAGS=-mod=vendor'
+      - 'cd src; PATH="$PATH:../go/bin" make install prefix=/app'
 
     sources:
       - type: dir
