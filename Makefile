@@ -100,6 +100,9 @@ flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
 	cp $< $@
 	tools/gen-flatpak-deps.sh >>$@
 
+$(APP).yml: $(APPCENTER_YML)
+	sed "s/path: '..'/path: '.'/" $< >$@
+
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
 
@@ -123,11 +126,10 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
-fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APPCENTER_YML)
+fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
-	sed "s/path: '..'/path: '.'/" $(APPCENTER_YML) >$(APP).yml
 
 check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATHUB_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
