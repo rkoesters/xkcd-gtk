@@ -80,7 +80,8 @@ jobs:
           path: .flatpak-builder
           key: >
             ${{ github.workflow }}-${{ runner.os }}-flathub-${{
-            hashFiles('flatpak/flathub.yml') }}
+            hashFiles('**/go.sum') }}-${{
+            hashFiles('flatpak/flathub.yml.in') }}
           restore-keys: ${{ github.workflow }}-${{ runner.os }}-flathub-
 
       - name: Configure flathub
@@ -107,7 +108,8 @@ jobs:
           path: .flatpak-builder
           key: >
             ${{ github.workflow }}-${{ runner.os }}-appcenter-${{
-            hashFiles('flatpak/appcenter.yml') }}
+            hashFiles('**/go.sum') }}-${{
+            hashFiles('flatpak/appcenter.yml.in') }}
           restore-keys: ${{ github.workflow }}-${{ runner.os }}-appcenter-
 
       - name: Configure appcenter
