@@ -60,7 +60,7 @@ jobs:
       - run: make check
       - run: make test
 
-  flathub:
+  flatpak-builder:
     runs-on: ubuntu-latest
 
     strategy:
@@ -68,6 +68,14 @@ jobs:
         arch:
           - aarch64
           - x86_64
+        repo:
+          - appcenter
+          - flathub
+        include:
+          - repo: appcenter
+            reporef: https://flatpak.elementary.io/repo.flatpakrepo
+          - repo: flathub
+            reporef: https://flathub.org/repo/flathub.flatpakrepo
 
     steps:
       - uses: actions/checkout@v2
@@ -82,46 +90,13 @@ jobs:
         with:
           path: .flatpak-builder
           key: >
-            flathub-${{ matrix.arch }}-${{ hashFiles('**/go.sum') }}-${{
-            hashFiles('flatpak/flathub.yml.in') }}
-          restore-keys: flathub-${{ matrix.arch }}-
+            ${{ matrix.repo }}-${{ matrix.arch }}-${{ hashFiles('**/go.sum')
+            }}-${{ hashFiles('flatpak/flathub.yml.in') }}
+          restore-keys: ${{ matrix.repo }}-${{ matrix.arch }}-
 
-      - name: Configure flathub
+      - name: Configure ${{ matrix.repo }}
         run: >
           flatpak --user remote-add --if-not-exists --from
-          flathub https://flathub.org/repo/flathub.flatpakrepo
+          ${{ matrix.repo }} ${{ matrix.reporef }}
 
-      - run: make flathub
-
-  appcenter:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        arch:
-          - aarch64
-          - x86_64
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up flatpak-builder
-        run: |
-          sudo apt-get update -q
-          sudo apt-get install -y -q flatpak flatpak-builder
-
-      - name: Set up flatpak-builder cache
-        uses: actions/cache@v2
-        with:
-          path: .flatpak-builder
-          key: >
-            appcenter-${{ matrix.arch }}-${{ hashFiles('**/go.sum') }}-${{
-            hashFiles('flatpak/appcenter.yml.in') }}
-          restore-keys: appcenter-${{ matrix.arch }}-
-
-      - name: Configure appcenter
-        run: >
-          flatpak --user remote-add --if-not-exists --from
-          appcenter https://flatpak.elementary.io/repo.flatpakrepo
-
-      - run: make appcenter
+      - run: ${{ matrix.repo }}
