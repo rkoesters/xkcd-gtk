@@ -9,7 +9,7 @@ name: CI
     - cron: '29 4 1 * *'
 
 jobs:
-  build:
+  build-and-test:
     strategy:
       matrix:
         go:
@@ -18,7 +18,7 @@ jobs:
           - 1.15.x  # debian bullseye
           - 1.x     # latest
 
-    name: Go ${{ matrix.go }}
+    name: build and test (go ${{ matrix.go }})
 
     runs-on: ubuntu-latest
 
@@ -76,6 +76,8 @@ jobs:
             reporef: https://flatpak.elementary.io/repo.flatpakrepo
           - repo: flathub
             reporef: https://flathub.org/repo/flathub.flatpakrepo
+
+    name: flatpak-builder (${{ matrix.repo }}, ${{ matrix.arch }})
 
     steps:
       - uses: actions/checkout@v2
