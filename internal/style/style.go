@@ -92,6 +92,7 @@ var (
 	}, "|"))
 
 	unlinkedNavButtonsThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
 )
