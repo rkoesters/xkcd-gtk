@@ -99,6 +99,7 @@ jobs:
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
+          bundle: com.github.rkoesters.xkcd-gtk.${{ matrix.repo }}
           manifest-path: flatpak/${{ matrix.repo }}.yml
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
