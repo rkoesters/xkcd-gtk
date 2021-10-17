@@ -85,10 +85,9 @@ jobs:
         with:
           path: .flatpak-builder
           key: >
-            ${{ github.workflow }}-${{ runner.os }}-flathub-${{
-            hashFiles('**/go.sum') }}-${{
+            flathub-${{ matrix.arch }}-${{ hashFiles('**/go.sum') }}-${{
             hashFiles('flatpak/flathub.yml.in') }}
-          restore-keys: ${{ github.workflow }}-${{ runner.os }}-flathub-
+          restore-keys: flathub-${{ matrix.arch }}-
 
       - name: Configure flathub
         run: >
@@ -119,10 +118,9 @@ jobs:
         with:
           path: .flatpak-builder
           key: >
-            ${{ github.workflow }}-${{ runner.os }}-appcenter-${{
-            hashFiles('**/go.sum') }}-${{
+            appcenter-${{ matrix.arch }}-${{ hashFiles('**/go.sum') }}-${{
             hashFiles('flatpak/appcenter.yml.in') }}
-          restore-keys: ${{ github.workflow }}-${{ runner.os }}-appcenter-
+          restore-keys: appcenter-${{ matrix.arch }}-
 
       - name: Configure appcenter
         run: >
