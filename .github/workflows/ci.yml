@@ -97,7 +97,7 @@ jobs:
 
       - run: make flatpak/${{ matrix.repo }}.yml
 
-      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           arch: ${{ matrix.arch }}
           manifest-path: flatpak/${{ matrix.repo }}.yml
