@@ -59,10 +59,9 @@ jobs:
             ${{ env.GOCACHE }}
             ${{ env.GOPATH }}/pkg/mod
           key: >
-            ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-${{
+            ${{ github.workflow }}-${{ env.GOVERSION }}-${{
             hashFiles('**/go.sum') }}
-          restore-keys: >
-            ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-
+          restore-keys: ${{ github.workflow }}-${{ env.GOVERSION }}-
 
       - run: make
 
