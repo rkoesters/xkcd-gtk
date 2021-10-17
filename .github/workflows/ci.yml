@@ -99,7 +99,8 @@ jobs:
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
-          arch: ${{ matrix.arch }}
           manifest-path: flatpak/${{ matrix.repo }}.yml
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
+          cache-key: ${{ matrix.repo }}-${{ hashFiles('flatpak/*.yml') }}
+          arch: ${{ matrix.arch }}
