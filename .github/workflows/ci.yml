@@ -99,4 +99,4 @@ jobs:
           flatpak --user remote-add --if-not-exists --from
           ${{ matrix.repo }} ${{ matrix.reporef }}
 
-      - run: ${{ matrix.repo }}
+      - run: make ${{ matrix.repo }}
