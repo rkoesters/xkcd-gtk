@@ -4,6 +4,8 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
 type NavigationBar struct {
@@ -118,4 +120,20 @@ func (nb *NavigationBar) SetNextButtonImage(image *gtk.Image) {
 
 func (nb *NavigationBar) SetNewestButtonImage(image *gtk.Image) {
 	nb.newestButton.SetImage(image)
+}
+
+func (nb *NavigationBar) SetLinkedButtons(linked bool) {
+	sc, err := nb.box.GetStyleContext()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	if linked {
+		sc.AddClass(style.ClassLinked)
+		nb.box.SetSpacing(0)
+	} else {
+		sc.RemoveClass(style.ClassLinked)
+		nb.box.SetSpacing(6)
+	}
 }

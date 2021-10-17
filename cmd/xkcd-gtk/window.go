@@ -266,6 +266,8 @@ func (win *Window) StyleUpdated() {
 	} else {
 		win.windowMenu.IWidget().(*gtk.MenuButton).SetImage(menuImg)
 	}
+
+	win.navigationBar.SetLinkedButtons(style.IsLinkedNavButtonsTheme(themeName))
 }
 
 // FirstComic goes to the first comic.

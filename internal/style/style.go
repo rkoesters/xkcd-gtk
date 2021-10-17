@@ -80,26 +80,36 @@ func loadCSS(p *gtk.CssProvider, darkMode bool) error {
 }
 
 var (
-	// largeToolbarThemes is the list of gtk themes for which we should use
-	// large toolbar buttons.
 	largeToolbarThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 		"win32",
 	}, "|"))
 
-	// nonSymbolicIconThemes is the list of gtk themes for which we should
-	// use non-symbolic icons.
 	nonSymbolicIconThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
+
+	unlinkedNavButtonsThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"io\\.elementary\\.stylesheet.*",
+	}, "|"))
 )
 
+// IsLargeToolbarTheme returns true if we should use large toolbar buttons with
+// the given theme.
 func IsLargeToolbarTheme(theme string) bool {
 	return largeToolbarThemesRegexp.MatchString(theme)
 }
 
+// IsSymbolicIconTheme returns true if we should use symbolic icons with the
+// given theme.
 func IsSymbolicIconTheme(theme string, darkMode bool) bool {
 	return darkMode || !nonSymbolicIconThemesRegexp.MatchString(theme)
+}
+
+// IsLinkedNavButtonsTheme returns true if we should visually "link" the buttons
+// in the navigation button box for the given theme.
+func IsLinkedNavButtonsTheme(theme string) bool {
+	return !unlinkedNavButtonsThemesRegexp.MatchString(theme)
 }

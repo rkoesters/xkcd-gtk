@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-15 21:58-0700\n"
+"POT-Creation-Date: 2021-10-17 14:56-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:290
+#: cmd/xkcd-gtk/window.go:292
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -69,7 +69,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:349
+#: cmd/xkcd-gtk/window.go:351
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -101,23 +101,23 @@ msgstr ""
 msgid "Features:"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:43
+#: internal/widget/navigation-bar.go:62 internal/widget/shortcuts-window.ui:43
 msgid "Go to a random comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:42 internal/widget/shortcuts-window.ui:15
+#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:15
 msgid "Go to the first comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:78 internal/widget/shortcuts-window.ui:36
+#: internal/widget/navigation-bar.go:80 internal/widget/shortcuts-window.ui:36
 msgid "Go to the newest comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:69 internal/widget/shortcuts-window.ui:29
+#: internal/widget/navigation-bar.go:71 internal/widget/shortcuts-window.ui:29
 msgid "Go to the next comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:51 internal/widget/shortcuts-window.ui:22
+#: internal/widget/navigation-bar.go:53 internal/widget/shortcuts-window.ui:22
 msgid "Go to the previous comic"
 msgstr ""
 
@@ -138,7 +138,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:364
+#: cmd/xkcd-gtk/window.go:366
 msgid "Loading comic..."
 msgstr ""
 
