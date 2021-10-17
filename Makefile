@@ -83,10 +83,10 @@ ALL_FLATPAK_YML = $(FLATHUB_YML) $(APPCENTER_YML) $(APP).yml
 
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
-$(EXE_PATH): Makefile $(ALL_GO_SOURCES)
+$(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-dev: $(GEN_SOURCES)
+dev: $(GEN_SOURCES) $(APPDATA_PATH)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 flathub: $(FLATHUB_YML)
@@ -137,7 +137,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(ALL_FLATPAK_YML)
 	yamllint .github/workflows/*.yml $(ALL_FLATPAK_YML)
 	-appstream-util validate-relax $(APPDATA_PATH)
 
-test: $(GEN_SOURCES) $(ALL_FLATPAK_YML)
+test: $(GEN_SOURCES) $(ALL_FLATPAK_YML) $(APPDATA_PATH)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATHUB_YML)
 	tools/test-flatpak-config.sh $(APPCENTER_YML)
