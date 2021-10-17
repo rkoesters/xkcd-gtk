@@ -55,6 +55,13 @@
   </custom>
 
   <releases>
+    <release version="1.4.4">
+      <description>
+        <ul>
+          <li>Tweak appearance of navigation buttons on elementary OS.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.4.3" date="2021-10-16">
       <description>
         <ul>
