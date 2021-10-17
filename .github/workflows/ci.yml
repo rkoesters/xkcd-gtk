@@ -61,8 +61,6 @@ jobs:
       - run: make test
 
   flatpak-builder:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
         arch:
@@ -73,32 +71,37 @@ jobs:
           - flathub
         include:
           - repo: appcenter
-            reporef: https://flatpak.elementary.io/repo.flatpakrepo
+            repo-url: https://flatpak.elementary.io/repo.flatpakrepo
           - repo: flathub
-            reporef: https://flathub.org/repo/flathub.flatpakrepo
+            repo-url: https://flathub.org/repo/flathub.flatpakrepo
 
     name: flatpak-builder (${{ matrix.repo }}, ${{ matrix.arch }})
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      options: --privileged
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up flatpak-builder
+      - name: Install dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q flatpak flatpak-builder
+          sudo apt-get install -y -q docker
 
-      - name: Set up flatpak-builder cache
-        uses: actions/cache@v2
+      - name: Set up QEMU
+        if: ${{ matrix.arch != 'x86_64' }}
+        uses: docker/setup-qemu-action@v1
         with:
-          path: .flatpak-builder
-          key: >
-            ${{ matrix.repo }}-${{ matrix.arch }}-${{ hashFiles('**/go.sum')
-            }}-${{ hashFiles('flatpak/flathub.yml.in') }}
-          restore-keys: ${{ matrix.repo }}-${{ matrix.arch }}-
+          platforms: arm64
 
-      - name: Configure ${{ matrix.repo }}
-        run: >
-          flatpak --user remote-add --if-not-exists --from
-          ${{ matrix.repo }} ${{ matrix.reporef }}
+      - run: make flatpak/${{ matrix.repo }}.yml
 
-      - run: make ${{ matrix.repo }}
+      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          arch: ${{ matrix.arch }}
+          manifest-path: flatpak/${{ matrix.repo }}.yml
+          repository-name: ${{ matrix.repo }}
+          repository-url: ${{ matrix.repo-url }}
