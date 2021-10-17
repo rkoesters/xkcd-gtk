@@ -13,7 +13,6 @@ import (
 
 const (
 	ClassComicContainer = "comic-container"
-	ClassLinked         = "linked"
 )
 
 var (
