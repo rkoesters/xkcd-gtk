@@ -18,7 +18,7 @@ jobs:
           - 1.15.x  # debian bullseye
           - 1.x     # latest
 
-    name: build and test (go ${{ matrix.go }})
+    name: go${{ matrix.go }}
 
     runs-on: ubuntu-latest
 
@@ -75,7 +75,7 @@ jobs:
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
 
-    name: flatpak-builder (${{ matrix.repo }}, ${{ matrix.arch }})
+    name: ${{ matrix.repo }}-${{ matrix.arch }}
 
     runs-on: ubuntu-latest
 
