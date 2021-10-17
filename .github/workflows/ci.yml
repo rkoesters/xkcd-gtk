@@ -66,6 +66,12 @@ jobs:
   flathub:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        arch:
+          - aarch64
+          - x86_64
+
     steps:
       - uses: actions/checkout@v2
 
@@ -93,6 +99,12 @@ jobs:
 
   appcenter:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        arch:
+          - aarch64
+          - x86_64
 
     steps:
       - uses: actions/checkout@v2
