@@ -43,11 +43,8 @@ jobs:
           path: |
             ${{ env.GOCACHE }}
             ${{ env.GOPATH }}/pkg/mod
-          key: >
-            ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-${{
-            hashFiles('**/go.sum') }}
-          restore-keys: >
-            ${{ github.workflow }}-${{ runner.os }}-${{ env.GOVERSION }}-
+          key: ${{ env.GOVERSION }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ env.GOVERSION }}-
 
       - name: Set up build dependencies
         run: |
