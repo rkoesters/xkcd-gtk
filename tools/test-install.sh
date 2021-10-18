@@ -35,7 +35,7 @@ print_and_make () {
   fi
 }
 
-tmpdir=$(mktemp -d /run/shm/xkcd-gtk.XXXXXXXX)
+tmpdir=$(mktemp -d /dev/shm/xkcd-gtk.XXXXXXXX)
 
 print_and_make install DESTDIR="$tmpdir"
 print_and_make uninstall DESTDIR="$tmpdir"
