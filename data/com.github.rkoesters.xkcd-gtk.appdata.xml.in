@@ -58,6 +58,7 @@
     <release version="1.4.4">
       <description>
         <ul>
+          <li>Add shortcut hints to window menu.</li>
           <li>Tweak appearance of navigation buttons on elementary OS.</li>
         </ul>
       </description>
