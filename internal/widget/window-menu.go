@@ -64,7 +64,12 @@ func NewWindowMenu(prefersAppMenu bool, actions map[string]*glib.SimpleAction, a
 		menu.AppendSectionWithoutLabel(&menuSection5.MenuModel)
 	}
 
-	wm.menuButton.SetMenuModel(&menu.MenuModel)
+	menuWidget, err := gtk.GtkMenuNewFromModel(&menu.MenuModel)
+	if err != nil {
+		return nil, err
+	}
+	menuWidget.SetHAlign(gtk.ALIGN_END)
+	wm.menuButton.SetPopup(menuWidget)
 
 	return wm, nil
 }
