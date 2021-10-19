@@ -55,10 +55,10 @@
   </custom>
 
   <releases>
-    <release version="1.4.4">
+    <release version="1.4.4" date="2021-10-18">
       <description>
         <ul>
-          <li>Add shortcut hints to window menu.</li>
+          <li>Improve appearance of window menu, including shortcut hints where applicable.</li>
           <li>Tweak appearance of navigation buttons on elementary OS.</li>
         </ul>
       </description>
