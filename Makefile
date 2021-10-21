@@ -128,6 +128,7 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
+	go mod tidy
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
 check: $(GEN_SOURCES) $(APPDATA_PATH) $(ALL_FLATPAK_YML)
