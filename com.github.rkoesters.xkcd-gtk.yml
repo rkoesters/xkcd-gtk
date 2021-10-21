@@ -49,18 +49,23 @@ modules:
 
       - type: git
         url: https://github.com/RoaringBitmap/roaring.git
-        tag: v0.4.23
+        tag: v0.9.4
         dest: vendor/github.com/RoaringBitmap/roaring
 
       - type: git
-        url: https://github.com/blevesearch/bleve.git
-        tag: v1.0.14
-        dest: vendor/github.com/blevesearch/bleve
+        url: https://github.com/bits-and-blooms/bitset.git
+        tag: v1.2.0
+        dest: vendor/github.com/bits-and-blooms/bitset
 
       - type: git
-        url: https://github.com/blevesearch/blevex.git
-        tag: v1.0.0
-        dest: vendor/github.com/blevesearch/blevex
+        url: https://github.com/blevesearch/bleve.git
+        tag: v2.2.1
+        dest: vendor/github.com/blevesearch/bleve/v2
+
+      - type: git
+        url: https://github.com/blevesearch/bleve_index_api.git
+        tag: v1.0.1
+        dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git
         url: https://github.com/blevesearch/go-porterstemmer.git
@@ -69,8 +74,13 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/mmap-go.git
-        tag: v1.0.2
+        tag: v1.0.3
         dest: vendor/github.com/blevesearch/mmap-go
+
+      - type: git
+        url: https://github.com/blevesearch/scorch_segment_api.git
+        tag: v2.1.0
+        dest: vendor/github.com/blevesearch/scorch_segment_api/v2
 
       - type: git
         url: https://github.com/blevesearch/segment.git
@@ -83,45 +93,44 @@ modules:
         dest: vendor/github.com/blevesearch/snowballstem
 
       - type: git
-        url: https://github.com/blevesearch/zap.git
-        tag: v11.0.14
-        dest: vendor/github.com/blevesearch/zap/v11
+        url: https://github.com/blevesearch/upsidedown_store_api.git
+        tag: v1.0.1
+        dest: vendor/github.com/blevesearch/upsidedown_store_api
 
       - type: git
-        url: https://github.com/blevesearch/zap.git
-        tag: v12.0.14
-        dest: vendor/github.com/blevesearch/zap/v12
+        url: https://github.com/blevesearch/vellum.git
+        tag: v1.0.7
+        dest: vendor/github.com/blevesearch/vellum
 
       - type: git
-        url: https://github.com/blevesearch/zap.git
-        tag: v13.0.6
-        dest: vendor/github.com/blevesearch/zap/v13
+        url: https://github.com/blevesearch/zapx.git
+        tag: v11.3.1
+        dest: vendor/github.com/blevesearch/zapx/v11
 
       - type: git
-        url: https://github.com/blevesearch/zap.git
-        tag: v14.0.5
-        dest: vendor/github.com/blevesearch/zap/v14
+        url: https://github.com/blevesearch/zapx.git
+        tag: v12.3.1
+        dest: vendor/github.com/blevesearch/zapx/v12
 
       - type: git
-        url: https://github.com/blevesearch/zap.git
-        tag: v15.0.3
-        dest: vendor/github.com/blevesearch/zap/v15
+        url: https://github.com/blevesearch/zapx.git
+        tag: v13.3.1
+        dest: vendor/github.com/blevesearch/zapx/v13
 
       - type: git
-        url: https://github.com/couchbase/vellum.git
-        tag: v1.0.2
-        dest: vendor/github.com/couchbase/vellum
+        url: https://github.com/blevesearch/zapx.git
+        tag: v14.3.1
+        dest: vendor/github.com/blevesearch/zapx/v14
+
+      - type: git
+        url: https://github.com/blevesearch/zapx.git
+        tag: v15.3.1
+        dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
         url: https://github.com/emirpasic/gods.git
         tag: v1.12.0
         dest: vendor/github.com/emirpasic/gods
-
-      - type: git
-        url: https://github.com/glycerine/go-unsnap-stream.git
-        # v0.0.0-20181221182339-f9677308dec2
-        commit: f9677308dec2
-        dest: vendor/github.com/glycerine/go-unsnap-stream
 
       - type: git
         url: https://github.com/golang/protobuf.git
@@ -139,11 +148,6 @@ modules:
         dest: vendor/github.com/gotk3/gotk3
 
       - type: git
-        url: https://github.com/philhofer/fwd.git
-        tag: v1.0.0
-        dest: vendor/github.com/philhofer/fwd
-
-      - type: git
         url: https://github.com/rkoesters/xdg.git
         tag: v0.0.1
         dest: vendor/github.com/rkoesters/xdg
@@ -159,22 +163,12 @@ modules:
         dest: vendor/github.com/steveyen/gtreap
 
       - type: git
-        url: https://github.com/tinylib/msgp.git
-        tag: v1.1.0
-        dest: vendor/github.com/tinylib/msgp
-
-      - type: git
-        url: https://github.com/willf/bitset.git
-        tag: v1.1.10
-        dest: vendor/github.com/willf/bitset
-
-      - type: git
         url: https://github.com/etcd-io/bbolt.git
         tag: v1.3.6
         dest: vendor/go.etcd.io/bbolt
 
       - type: git
         url: https://go.googlesource.com/sys.git
-        # v0.0.0-20210630005230-0f9fa26af87c
-        commit: 0f9fa26af87c
+        # v0.0.0-20200923182605-d9f96fdee20d
+        commit: d9f96fdee20d
         dest: vendor/golang.org/x/sys
