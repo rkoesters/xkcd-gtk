@@ -8,18 +8,14 @@ import (
 
 type ContextMenu struct {
 	menu *gtk.Menu
-
-	imageViewer *ImageViewer
 }
 
 var _ Widget = &ContextMenu{}
 
-func NewContextMenu(window *gtk.ApplicationWindow, iv *ImageViewer) (*ContextMenu, error) {
+func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	var err error
 
-	cm := &ContextMenu{
-		imageViewer: iv,
-	}
+	cm := &ContextMenu{}
 
 	menuModel := glib.MenuNew()
 
@@ -37,7 +33,7 @@ func NewContextMenu(window *gtk.ApplicationWindow, iv *ImageViewer) (*ContextMen
 	cm.menu.SetHAlign(gtk.ALIGN_START)
 	cm.menu.ShowAll()
 
-	cm.menu.InsertActionGroup("win", window.IActionGroup)
+	cm.menu.InsertActionGroup("win", actionGroup)
 	cm.menu.HideOnDelete()
 
 	return cm, nil
@@ -56,7 +52,6 @@ func (cm *ContextMenu) Present(event *gdk.Event) {
 }
 
 func (cm *ContextMenu) Destroy() {
-	cm.imageViewer = nil
 	cm.menu = nil
 }
 

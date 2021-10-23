@@ -44,7 +44,7 @@ func NewImageViewer(parent *gtk.ApplicationWindow) (*ImageViewer, error) {
 	iv.image.SetHAlign(gtk.ALIGN_CENTER)
 	iv.image.SetVAlign(gtk.ALIGN_CENTER)
 
-	iv.contextMenu, err = NewContextMenu(parent, iv)
+	iv.contextMenu, err = NewContextMenu(parent.IActionGroup)
 	if err != nil {
 		return nil, err
 	}

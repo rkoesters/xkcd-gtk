@@ -36,7 +36,7 @@ msgstr ""
 msgid "Application Actions"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:27
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
 msgid "Bookmark this comic"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:49
+#: internal/widget/context-menu.go:45
 msgid "Explain"
 msgstr ""
 
@@ -166,7 +166,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: internal/widget/context-menu.go:48
+#: internal/widget/context-menu.go:44
 msgid "Open Link"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Open shortcuts window"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/properties-dialog.go:50
+#: internal/widget/context-menu.go:46 internal/widget/properties-dialog.go:50
 #: internal/widget/shortcuts-window.ui:78
 msgid "Properties"
 msgstr ""
@@ -200,7 +200,7 @@ msgstr ""
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:28
+#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
 msgid "Remove this comic from bookmarks"
 msgstr ""
 
