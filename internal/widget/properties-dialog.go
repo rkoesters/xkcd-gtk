@@ -127,7 +127,7 @@ func (win *ApplicationWindow) ShowProperties() {
 		}
 	}
 
-	win.app.application.AddWindow(&win.properties.dialog.Window)
+	win.app.application.AddWindow(win.properties.IWindow())
 	win.properties.dialog.Present()
 }
 

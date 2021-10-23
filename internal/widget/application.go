@@ -270,7 +270,7 @@ func (app *Application) ShowShortcuts() {
 		})
 	}
 
-	app.application.AddWindow(&app.shortcutsWindow.Window)
+	app.application.AddWindow(app.shortcutsWindow)
 	app.shortcutsWindow.Present()
 }
 
@@ -301,7 +301,7 @@ func (app *Application) ShowAbout() {
 		app.aboutDialog.SetTransientFor(win)
 	}
 
-	app.application.AddWindow(&app.aboutDialog.Window)
+	app.application.AddWindow(app.aboutDialog)
 	app.aboutDialog.Present()
 }
 
