@@ -20,6 +20,17 @@ type PropertiesDialog struct {
 	accels *gtk.AccelGroup
 }
 
+const (
+	propertiesKeyNumber     = "number"
+	propertiesKeyTitle      = "title"
+	propertiesKeyDate       = "date"
+	propertiesKeyImage      = "image"
+	propertiesKeyAltText    = "alt text"
+	propertiesKeyNews       = "news"
+	propertiesKeyLink       = "link"
+	propertiesKeyTranscript = "transcript"
+)
+
 // NewPropertiesDialog creates and returns a PropertiesDialog for the given
 // parent Window.
 func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
@@ -75,14 +86,14 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 	grid.SetMarginStart(12)
 	grid.SetMarginEnd(12)
 
-	pd.addRowToGrid(grid, 0, l("Number"))
-	pd.addRowToGrid(grid, 1, l("Title"))
-	pd.addRowToGrid(grid, 2, l("Date"))
-	pd.addRowToGrid(grid, 3, l("Image"))
-	pd.addRowToGrid(grid, 4, l("Alt Text"))
-	pd.addRowToGrid(grid, 5, l("News"))
-	pd.addRowToGrid(grid, 6, l("Link"))
-	pd.addRowToGrid(grid, 7, l("Transcript"))
+	pd.addRowToGrid(grid, 0, propertiesKeyNumber, l("Number"))
+	pd.addRowToGrid(grid, 1, propertiesKeyTitle, l("Title"))
+	pd.addRowToGrid(grid, 2, propertiesKeyDate, l("Date"))
+	pd.addRowToGrid(grid, 3, propertiesKeyImage, l("Image"))
+	pd.addRowToGrid(grid, 4, propertiesKeyAltText, l("Alt Text"))
+	pd.addRowToGrid(grid, 5, propertiesKeyNews, l("News"))
+	pd.addRowToGrid(grid, 6, propertiesKeyLink, l("Link"))
+	pd.addRowToGrid(grid, 7, propertiesKeyTranscript, l("Transcript"))
 	pd.Update()
 
 	scwin.Add(grid)
@@ -118,8 +129,8 @@ func (win *Window) ShowProperties() {
 	win.properties.dialog.Present()
 }
 
-func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key string) error {
-	keyLabel, err := gtk.LabelNew(key)
+func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key, label string) error {
+	keyLabel, err := gtk.LabelNew(label)
 	if err != nil {
 		return err
 	}
@@ -149,14 +160,14 @@ func (pd *PropertiesDialog) Update() {
 	pd.parent.comicMutex.RLock()
 	defer pd.parent.comicMutex.RUnlock()
 
-	pd.labels[l("Number")].SetText(strconv.Itoa(pd.parent.comic.Num))
-	pd.labels[l("Title")].SetText(pd.parent.comic.Title)
-	pd.labels[l("Image")].SetText(pd.parent.comic.Img)
-	pd.labels[l("Alt Text")].SetText(pd.parent.comic.Alt)
-	pd.labels[l("Date")].SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
-	pd.labels[l("News")].SetText(pd.parent.comic.News)
-	pd.labels[l("Link")].SetText(pd.parent.comic.Link)
-	pd.labels[l("Transcript")].SetText(pd.parent.comic.Transcript)
+	pd.labels[propertiesKeyNumber].SetText(strconv.Itoa(pd.parent.comic.Num))
+	pd.labels[propertiesKeyTitle].SetText(pd.parent.comic.Title)
+	pd.labels[propertiesKeyImage].SetText(pd.parent.comic.Img)
+	pd.labels[propertiesKeyAltText].SetText(pd.parent.comic.Alt)
+	pd.labels[propertiesKeyDate].SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
+	pd.labels[propertiesKeyNews].SetText(pd.parent.comic.News)
+	pd.labels[propertiesKeyLink].SetText(pd.parent.comic.Link)
+	pd.labels[propertiesKeyTranscript].SetText(pd.parent.comic.Transcript)
 }
 
 // Close is called when the dialog is closed. It tells the parent to save its
