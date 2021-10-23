@@ -200,10 +200,10 @@ func (app *Application) Quit() {
 func (app *Application) LoadSettings() {
 	var err error
 
-	settings.CheckForMisplacedFiles()
+	paths.CheckForMisplacedSettings()
 
 	// Read settings from disk.
-	app.settings.ReadFile(settings.Path())
+	app.settings.ReadFile(paths.Settings())
 
 	// Get reference to Gtk's settings.
 	app.gtkSettings, err = gtk.SettingsGetDefault()
@@ -225,7 +225,7 @@ func (app *Application) SaveSettings() {
 		log.Printf("error saving settings: %v", err)
 	}
 
-	err = app.settings.WriteFile(settings.Path())
+	err = app.settings.WriteFile(paths.Settings())
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
 	}
@@ -233,10 +233,10 @@ func (app *Application) SaveSettings() {
 
 // LoadBookmarks tries to load our bookmarks from disk.
 func (app *Application) LoadBookmarks() {
-	bookmarks.CheckForMisplacedFiles()
+	paths.CheckForMisplacedBookmarks()
 
 	app.bookmarks = bookmarks.New()
-	app.bookmarks.ReadFile(bookmarks.Path())
+	app.bookmarks.ReadFile(paths.Bookmarks())
 }
 
 // SaveBookmarks tries to save our bookmarks to disk.
@@ -246,7 +246,7 @@ func (app *Application) SaveBookmarks() {
 		log.Printf("error saving bookmarks: %v", err)
 	}
 
-	err = app.bookmarks.WriteFile(bookmarks.Path())
+	err = app.bookmarks.WriteFile(paths.Bookmarks())
 	if err != nil {
 		log.Printf("error saving bookmarks: %v", err)
 	}
