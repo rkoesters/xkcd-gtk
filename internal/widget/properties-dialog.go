@@ -20,7 +20,7 @@ type PropertiesDialog struct {
 	accels *gtk.AccelGroup
 }
 
-var _ Widget = &PropertiesDialog{}
+var _ Window = &PropertiesDialog{}
 
 const (
 	propertiesKeyNumber     = "number"
@@ -189,9 +189,8 @@ func (pd *PropertiesDialog) Destroy() {
 	pd.parent = nil
 }
 
-func (pd *PropertiesDialog) IWidget() gtk.IWidget {
-	return pd.dialog
-}
+func (pd *PropertiesDialog) IWidget() gtk.IWidget { return pd.dialog }
+func (pd *PropertiesDialog) IWindow() gtk.IWindow { return pd.dialog }
 
 // formatDate takes a year, month, and date as strings and turns them into a
 // pretty date.

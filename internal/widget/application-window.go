@@ -41,7 +41,7 @@ type ApplicationWindow struct {
 	properties *PropertiesDialog
 }
 
-var _ Widget = &ApplicationWindow{}
+var _ Window = &ApplicationWindow{}
 
 // NewApplicationWindow creates a new xkcd viewer window.
 func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
@@ -490,6 +490,10 @@ func (win *ApplicationWindow) Destroy() {
 	runtime.GC()
 }
 
-func (win *ApplicationWindow) IWidget() gtk.IWidget {
-	return win.window
+// Close requests that the window be closed.
+func (win *ApplicationWindow) Close() {
+	win.window.Close()
 }
+
+func (win *ApplicationWindow) IWidget() gtk.IWidget { return win.window }
+func (win *ApplicationWindow) IWindow() gtk.IWindow { return win.window }
