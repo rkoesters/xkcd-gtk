@@ -67,9 +67,8 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
-FLATHUB_YML     = flatpak/flathub.yml
-APPCENTER_YML   = flatpak/appcenter.yml
-ALL_FLATPAK_YML = $(FLATHUB_YML) $(APPCENTER_YML) $(APP).yml
+FLATPAK_YML_IN = $(shell find flatpak -name '*.yml.in')
+FLATPAK_YML    = $(APP).yml $(patsubst %.in,%,$(FLATPAK_YML_IN))
 
 ################################################################################
 # Local Customizations (not tracked by source control)
@@ -88,19 +87,6 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 
 dev: $(GEN_SOURCES) $(APPDATA_PATH)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
-
-flathub: $(FLATHUB_YML)
-	flatpak-builder --user --install-deps-from=flathub --force-clean $(FPBFLAGS) flatpak-build/flathub/ $<
-
-appcenter: $(APPCENTER_YML)
-	flatpak-builder --user --install-deps-from=appcenter --force-clean $(FPBFLAGS) flatpak-build/appcenter/ $<
-
-flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
-	cp $< $@
-	tools/gen-flatpak-deps.sh >>$@
-
-$(APP).yml: $(APPCENTER_YML)
-	sed "s/path: '..'/path: '.'/" $< >$@
 
 %.css.go: %.css
 	tools/go-wrap.sh $< >$@
@@ -125,24 +111,35 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
+flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
+	cp $< $@
+	tools/gen-flatpak-deps.sh >>$@
+
+flathub: flatpak/flathub.yml
+	flatpak-builder --user --install-deps-from=flathub --force-clean $(FPBFLAGS) flatpak-build/flathub/ $<
+
+appcenter: flatpak/appcenter.yml
+	flatpak-builder --user --install-deps-from=appcenter --force-clean $(FPBFLAGS) flatpak-build/appcenter/ $<
+
+$(APP).yml: flatpak/appcenter.yml
+	sed "s/path: '..'/path: '.'/" $< >$@
+
 fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	go mod tidy
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 
-check: $(GEN_SOURCES) $(APPDATA_PATH) $(ALL_FLATPAK_YML)
+check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	yamllint .github/workflows/*.yml $(ALL_FLATPAK_YML)
+	yamllint .github/workflows/*.yml $(FLATPAK_YML)
 	-appstream-util validate-relax $(APPDATA_PATH)
 
-test: $(GEN_SOURCES) $(ALL_FLATPAK_YML) $(APPDATA_PATH)
+test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
-	tools/test-flatpak-config.sh $(FLATHUB_YML)
-	tools/test-flatpak-config.sh $(APPCENTER_YML)
-	tools/test-flatpak-config.sh $(APP).yml
+	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 
 # Shorthand for all the targets that CI covers.
