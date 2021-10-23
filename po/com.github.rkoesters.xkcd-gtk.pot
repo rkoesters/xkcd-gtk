@@ -28,7 +28,7 @@ msgstr ""
 msgid "About XKCD"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:93
+#: internal/widget/properties-dialog.go:95
 msgid "Alt Text"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/window.go:295
+#: internal/widget/window.go:297
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: internal/widget/window.go:354
+#: internal/widget/window.go:356
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Dark mode for late night reading"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:91
+#: internal/widget/properties-dialog.go:93
 msgid "Date"
 msgstr ""
 
@@ -120,7 +120,7 @@ msgstr ""
 msgid "Go to the previous comic"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:92
+#: internal/widget/properties-dialog.go:94
 msgid "Image"
 msgstr ""
 
@@ -133,11 +133,11 @@ msgstr ""
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:95
+#: internal/widget/properties-dialog.go:97
 msgid "Link"
 msgstr ""
 
-#: internal/widget/window.go:369
+#: internal/widget/window.go:371
 msgid "Loading comic..."
 msgstr ""
 
@@ -154,7 +154,7 @@ msgstr ""
 msgid "New Window"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:94
+#: internal/widget/properties-dialog.go:96
 msgid "News"
 msgstr ""
 
@@ -162,7 +162,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:89
+#: internal/widget/properties-dialog.go:91
 msgid "Number"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Open shortcuts window"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/properties-dialog.go:48
+#: internal/widget/context-menu.go:50 internal/widget/properties-dialog.go:50
 #: internal/widget/shortcuts-window.ui:78
 msgid "Properties"
 msgstr ""
@@ -228,7 +228,7 @@ msgstr ""
 msgid "Show comic properties"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:90
+#: internal/widget/properties-dialog.go:92
 msgid "Title"
 msgstr ""
 
@@ -240,7 +240,7 @@ msgstr ""
 msgid "Toggle dark mode"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:96
+#: internal/widget/properties-dialog.go:98
 msgid "Transcript"
 msgstr ""
 

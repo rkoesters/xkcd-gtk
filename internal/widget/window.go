@@ -41,6 +41,8 @@ type Window struct {
 	properties *PropertiesDialog
 }
 
+var _ Widget = &Window{}
+
 // NewWindow creates a new xkcd viewer window.
 func NewWindow(app *Application) (*Window, error) {
 	var err error
@@ -486,4 +488,8 @@ func (win *Window) Destroy() {
 	win.properties = nil
 
 	runtime.GC()
+}
+
+func (win *Window) IWidget() gtk.IWidget {
+	return win.window
 }
