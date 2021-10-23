@@ -8,6 +8,7 @@ internal/search/index.go
 internal/widget/about-dialog.go
 internal/widget/app-menu.ui
 internal/widget/bookmarks-menu.go
+internal/widget/context-menu.go
 internal/widget/navigation-bar.go
 internal/widget/search-menu.go
 internal/widget/shortcuts-window.ui

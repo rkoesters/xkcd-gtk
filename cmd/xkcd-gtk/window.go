@@ -146,7 +146,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.SetTitlebar(win.header)
 
 	// Create main part of window.
-	win.comicContainer, err = widget.NewImageViewer()
+	win.comicContainer, err = widget.NewImageViewer(win.window)
 	if err != nil {
 		return nil, err
 	}

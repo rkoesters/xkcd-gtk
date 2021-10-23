@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
@@ -11,11 +12,14 @@ type ImageViewer struct {
 	scrolledWindow    *gtk.ScrolledWindow
 	scrolledWindowCtx *gtk.StyleContext
 	image             *gtk.Image
+	eventBox          *gtk.EventBox
+
+	contextMenu *ContextMenu
 }
 
 var _ Widget = &ImageViewer{}
 
-func NewImageViewer() (*ImageViewer, error) {
+func NewImageViewer(parent *gtk.ApplicationWindow) (*ImageViewer, error) {
 	var err error
 
 	iv := new(ImageViewer)
@@ -40,7 +44,27 @@ func NewImageViewer() (*ImageViewer, error) {
 	iv.image.SetHAlign(gtk.ALIGN_CENTER)
 	iv.image.SetVAlign(gtk.ALIGN_CENTER)
 
-	iv.scrolledWindow.Add(iv.image)
+	iv.contextMenu, err = NewContextMenu(parent, iv)
+	if err != nil {
+		return nil, err
+	}
+
+	iv.eventBox, err = gtk.EventBoxNew()
+	if err != nil {
+		return nil, err
+	}
+	iv.eventBox.Add(iv.image)
+	iv.eventBox.Connect("button-press-event", func(eventBox *gtk.EventBox, event *gdk.Event) bool {
+		button := gdk.EventButtonNewFromEvent(event)
+		switch button.Button() {
+		case gdk.BUTTON_SECONDARY:
+			iv.contextMenu.Present(event)
+			return true
+		default:
+			return false
+		}
+	})
+	iv.scrolledWindow.Add(iv.eventBox)
 
 	return iv, nil
 }
@@ -54,6 +78,9 @@ func (iv *ImageViewer) Destroy() {
 	iv.scrolledWindow = nil
 	iv.scrolledWindowCtx = nil
 	iv.image = nil
+
+	iv.contextMenu.Destroy()
+	iv.contextMenu = nil
 }
 
 func (iv *ImageViewer) Show() {

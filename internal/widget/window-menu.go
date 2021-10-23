@@ -35,33 +35,26 @@ func NewWindowMenu(prefersAppMenu bool, actions map[string]*glib.SimpleAction, a
 
 	menu := glib.MenuNew()
 
-	menuSection1 := glib.MenuNew()
-	menuSection1.Append(l("Open Link"), "win.open-link")
-	menuSection1.Append(l("Explain"), "win.explain")
-	menuSection1.Append(l("Properties"), "win.show-properties")
-	menu.AppendSectionWithoutLabel(&menuSection1.MenuModel)
+	menu.AppendSectionWithoutLabel(&NewContextMenuSection().MenuModel)
 	wm.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, wm.showProperties)
 
 	if !prefersAppMenu {
-		menuSection2 := glib.MenuNew()
-		menuSection2.Append(l("New Window"), "app.new-window")
-		menu.AppendSectionWithoutLabel(&menuSection2.MenuModel)
+		appSection := glib.MenuNew()
+		appSection.Append(l("New Window"), "app.new-window")
+		appSection.Append(l("Toggle Dark Mode"), "app.toggle-dark-mode")
+		menu.AppendSectionWithoutLabel(&appSection.MenuModel)
 
-		menuSection3 := glib.MenuNew()
-		menuSection3.Append(l("Toggle Dark Mode"), "app.toggle-dark-mode")
-		menu.AppendSectionWithoutLabel(&menuSection3.MenuModel)
+		websiteSection := glib.MenuNew()
+		websiteSection.Append(l("What If?"), "app.open-what-if")
+		websiteSection.Append(l("XKCD Blog"), "app.open-blog")
+		websiteSection.Append(l("XKCD Store"), "app.open-store")
+		websiteSection.Append(l("About XKCD"), "app.open-about-xkcd")
+		menu.AppendSectionWithoutLabel(&websiteSection.MenuModel)
 
-		menuSection4 := glib.MenuNew()
-		menuSection4.Append(l("What If?"), "app.open-what-if")
-		menuSection4.Append(l("XKCD Blog"), "app.open-blog")
-		menuSection4.Append(l("XKCD Store"), "app.open-store")
-		menuSection4.Append(l("About XKCD"), "app.open-about-xkcd")
-		menu.AppendSectionWithoutLabel(&menuSection4.MenuModel)
-
-		menuSection5 := glib.MenuNew()
-		menuSection5.Append(l("Keyboard Shortcuts"), "app.show-shortcuts")
-		menuSection5.Append(l("About Comic Sticks"), "app.show-about")
-		menu.AppendSectionWithoutLabel(&menuSection5.MenuModel)
+		helpSection := glib.MenuNew()
+		helpSection.Append(l("Keyboard Shortcuts"), "app.show-shortcuts")
+		helpSection.Append(l("About Comic Sticks"), "app.show-about")
+		menu.AppendSectionWithoutLabel(&helpSection.MenuModel)
 	}
 
 	menuWidget, err := gtk.GtkMenuNewFromModel(&menu.MenuModel)
