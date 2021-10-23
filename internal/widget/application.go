@@ -1,4 +1,4 @@
-package main
+package widget
 
 import (
 	"github.com/gotk3/gotk3/glib"
@@ -11,12 +11,10 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"github.com/rkoesters/xkcd-gtk/internal/widget"
 )
 
-const appID = "com.github.rkoesters.xkcd-gtk"
-
-var appName = l("Comic Sticks")
+// AppName is the user-visible name of this application.
+var AppName = l("Comic Sticks")
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
@@ -36,7 +34,7 @@ func NewApplication() (*Application, error) {
 	var app Application
 	var err error
 
-	app.application, err = gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
+	app.application, err = gtk.ApplicationNew(build.AppID, glib.APPLICATION_FLAGS_NONE)
 	if err != nil {
 		return nil, err
 	}
@@ -85,10 +83,18 @@ func NewApplication() (*Application, error) {
 	return &app, nil
 }
 
+// SetDefault is a wrapper around glib.Application.SetDefault().
+func (app *Application) SetDefault() { app.application.SetDefault() }
+
+// Run is a wrapper around glib.Application.Run().
+func (app *Application) Run(args []string) int {
+	return app.application.Run(args)
+}
+
 // SetupAppMenu creates an AppMenu if the environment wants it.
 func (app *Application) SetupAppMenu() {
 	if app.application.PrefersAppMenu() {
-		menu, err := widget.NewAppMenu()
+		menu, err := NewAppMenu()
 		if err != nil {
 			log.Fatal("error creating app menu: ", err)
 		}
@@ -194,10 +200,10 @@ func (app *Application) Quit() {
 func (app *Application) LoadSettings() {
 	var err error
 
-	checkForMisplacedSettings()
+	settings.CheckForMisplacedFiles()
 
 	// Read settings from disk.
-	app.settings.ReadFile(settingsPath())
+	app.settings.ReadFile(settings.Path())
 
 	// Get reference to Gtk's settings.
 	app.gtkSettings, err = gtk.SettingsGetDefault()
@@ -219,7 +225,7 @@ func (app *Application) SaveSettings() {
 		log.Printf("error saving settings: %v", err)
 	}
 
-	err = app.settings.WriteFile(settingsPath())
+	err = app.settings.WriteFile(settings.Path())
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
 	}
@@ -227,10 +233,10 @@ func (app *Application) SaveSettings() {
 
 // LoadBookmarks tries to load our bookmarks from disk.
 func (app *Application) LoadBookmarks() {
-	checkForMisplacedBookmarks()
+	bookmarks.CheckForMisplacedFiles()
 
 	app.bookmarks = bookmarks.New()
-	app.bookmarks.ReadFile(bookmarksPath())
+	app.bookmarks.ReadFile(bookmarks.Path())
 }
 
 // SaveBookmarks tries to save our bookmarks to disk.
@@ -240,7 +246,7 @@ func (app *Application) SaveBookmarks() {
 		log.Printf("error saving bookmarks: %v", err)
 	}
 
-	err = app.bookmarks.WriteFile(bookmarksPath())
+	err = app.bookmarks.WriteFile(bookmarks.Path())
 	if err != nil {
 		log.Printf("error saving bookmarks: %v", err)
 	}
@@ -250,7 +256,7 @@ func (app *Application) SaveBookmarks() {
 func (app *Application) ShowShortcuts() {
 	var err error
 	if app.shortcutsWindow == nil {
-		app.shortcutsWindow, err = widget.NewShortcutsWindow()
+		app.shortcutsWindow, err = NewShortcutsWindow()
 		if err != nil {
 			log.Print("error creating shortcuts window: ", err)
 			return
@@ -273,7 +279,7 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if app.aboutDialog == nil {
-		app.aboutDialog, err = widget.NewAboutDialog(appID, appName, build.Version())
+		app.aboutDialog, err = NewAboutDialog(build.AppID, AppName, build.Version())
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return

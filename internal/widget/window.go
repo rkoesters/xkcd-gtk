@@ -1,4 +1,4 @@
-package main
+package widget
 
 import (
 	"fmt"
@@ -9,7 +9,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"github.com/rkoesters/xkcd-gtk/internal/widget"
 	"math/rand"
 	"os"
 	"runtime"
@@ -22,7 +21,7 @@ import (
 type Window struct {
 	app    *Application
 	window *gtk.ApplicationWindow
-	state  widget.WindowState
+	state  WindowState
 
 	comic      *xkcd.Comic
 	comicMutex sync.RWMutex
@@ -32,12 +31,12 @@ type Window struct {
 
 	header *gtk.HeaderBar
 
-	navigationBar *widget.NavigationBar
-	searchMenu    *widget.SearchMenu
-	bookmarksMenu *widget.BookmarksMenu
-	windowMenu    *widget.WindowMenu
+	navigationBar *NavigationBar
+	searchMenu    *SearchMenu
+	bookmarksMenu *BookmarksMenu
+	windowMenu    *WindowMenu
 
-	comicContainer *widget.ImageViewer
+	comicContainer *ImageViewer
 
 	properties *PropertiesDialog
 }
@@ -56,7 +55,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 
 	win.comicMutex.Lock()
-	win.comic = &xkcd.Comic{Title: appName}
+	win.comic = &xkcd.Comic{Title: AppName}
 	win.comicMutex.Unlock()
 
 	// Initialize our window actions.
@@ -115,32 +114,32 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.header.SetTitle(appName)
+	win.header.SetTitle(AppName)
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
-	win.navigationBar, err = widget.NewNavigationBar(win.actions, win.accels)
+	win.navigationBar, err = NewNavigationBar(win.actions, win.accels)
 	if err != nil {
 		return nil, err
 	}
 	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
-	win.windowMenu, err = widget.NewWindowMenu(app.application.PrefersAppMenu())
+	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu())
 	if err != nil {
 		return nil, err
 	}
 	win.header.PackEnd(win.windowMenu.IWidget())
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = widget.NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
 	// Create the search menu.
-	win.searchMenu, err = widget.NewSearchMenu(win.actions, win.accels, win.SetComic)
+	win.searchMenu, err = NewSearchMenu(win.actions, win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +149,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.window.SetTitlebar(win.header)
 
 	// Create main part of window.
-	win.comicContainer, err = widget.NewImageViewer(win.window)
+	win.comicContainer, err = NewImageViewer(win.window)
 	if err != nil {
 		return nil, err
 	}

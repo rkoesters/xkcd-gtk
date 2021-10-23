@@ -28,7 +28,8 @@ msgstr ""
 msgid "About XKCD"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:82 cmd/xkcd-gtk/properties-dialog.go:155
+#: internal/widget/properties-dialog.go:82
+#: internal/widget/properties-dialog.go:155
 msgid "Alt Text"
 msgstr ""
 
@@ -48,7 +49,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:296
+#: internal/widget/window.go:295
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -56,7 +57,7 @@ msgstr ""
 msgid "Comic Not Found"
 msgstr ""
 
-#: cmd/xkcd-gtk/application.go:19
+#: internal/widget/application.go:17
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -68,7 +69,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:355
+#: internal/widget/window.go:354
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -84,7 +85,8 @@ msgstr ""
 msgid "Dark mode for late night reading"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:80 cmd/xkcd-gtk/properties-dialog.go:156
+#: internal/widget/properties-dialog.go:80
+#: internal/widget/properties-dialog.go:156
 msgid "Date"
 msgstr ""
 
@@ -120,7 +122,8 @@ msgstr ""
 msgid "Go to the previous comic"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:81 cmd/xkcd-gtk/properties-dialog.go:154
+#: internal/widget/properties-dialog.go:81
+#: internal/widget/properties-dialog.go:154
 msgid "Image"
 msgstr ""
 
@@ -133,11 +136,12 @@ msgstr ""
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:84 cmd/xkcd-gtk/properties-dialog.go:158
+#: internal/widget/properties-dialog.go:84
+#: internal/widget/properties-dialog.go:158
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:370
+#: internal/widget/window.go:369
 msgid "Loading comic..."
 msgstr ""
 
@@ -154,7 +158,8 @@ msgstr ""
 msgid "New Window"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:83 cmd/xkcd-gtk/properties-dialog.go:157
+#: internal/widget/properties-dialog.go:83
+#: internal/widget/properties-dialog.go:157
 msgid "News"
 msgstr ""
 
@@ -162,7 +167,8 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:78 cmd/xkcd-gtk/properties-dialog.go:152
+#: internal/widget/properties-dialog.go:78
+#: internal/widget/properties-dialog.go:152
 msgid "Number"
 msgstr ""
 
@@ -178,7 +184,7 @@ msgstr ""
 msgid "Open shortcuts window"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:37 internal/widget/context-menu.go:50
+#: internal/widget/context-menu.go:50 internal/widget/properties-dialog.go:37
 #: internal/widget/shortcuts-window.ui:78
 msgid "Properties"
 msgstr ""
@@ -228,7 +234,8 @@ msgstr ""
 msgid "Show comic properties"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:79 cmd/xkcd-gtk/properties-dialog.go:153
+#: internal/widget/properties-dialog.go:79
+#: internal/widget/properties-dialog.go:153
 msgid "Title"
 msgstr ""
 
@@ -240,7 +247,8 @@ msgstr ""
 msgid "Toggle dark mode"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:85 cmd/xkcd-gtk/properties-dialog.go:159
+#: internal/widget/properties-dialog.go:85
+#: internal/widget/properties-dialog.go:159
 msgid "Transcript"
 msgstr ""
 

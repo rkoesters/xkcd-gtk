@@ -8,6 +8,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
+	"github.com/rkoesters/xkcd-gtk/internal/widget"
 	"math/rand"
 	"os"
 	"time"
@@ -24,19 +25,22 @@ func main() {
 	build.Parse()
 
 	// Initialize the paths under which we will store app files.
-	paths.Init(appID)
+	paths.Init(build.AppID)
+
+	// Initialize localization.
+	glib.InitI18n(build.AppID, paths.LocaleDir())
 
 	// Let glib and gtk know who we are.
-	glib.SetApplicationName(appName)
-	gtk.WindowSetDefaultIconName(appID)
+	glib.SetApplicationName(widget.AppName)
+	gtk.WindowSetDefaultIconName(build.AppID)
 
 	// Create the application.
-	app, err := NewApplication()
+	app, err := widget.NewApplication()
 	if err != nil {
 		log.Fatal("error creating application: ", err)
 	}
 	// Tell glib that this is the process's main application.
-	app.application.SetDefault()
+	app.SetDefault()
 
 	// Show gtk's interactive debugging window if this is a debugging build.
 	args := os.Args
@@ -48,5 +52,5 @@ func main() {
 	}
 
 	// Run the event loop.
-	os.Exit(app.application.Run(args))
+	os.Exit(app.Run(args))
 }
