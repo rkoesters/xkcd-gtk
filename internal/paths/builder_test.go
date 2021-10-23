@@ -56,3 +56,29 @@ func TestLocaleDir(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestBookmarks(t *testing.T) {
+	paths := Builder{testAppID}
+
+	dir := paths.Bookmarks()
+
+	if !filepath.IsAbs(dir) {
+		t.Fail()
+	}
+	if !strings.Contains(dir, testAppID) {
+		t.Fail()
+	}
+}
+
+func TestSettings(t *testing.T) {
+	paths := Builder{testAppID}
+
+	dir := paths.Settings()
+
+	if !filepath.IsAbs(dir) {
+		t.Fail()
+	}
+	if !strings.Contains(dir, testAppID) {
+		t.Fail()
+	}
+}

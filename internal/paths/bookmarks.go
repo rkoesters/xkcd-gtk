@@ -7,8 +7,13 @@ import (
 )
 
 // Bookmarks returns the path to the user's bookmarks file.
+func (b Builder) Bookmarks() string {
+	return filepath.Join(b.DataDir(), "bookmarks")
+}
+
+// Bookmarks returns the path to the user's bookmarks file.
 func Bookmarks() string {
-	return filepath.Join(DataDir(), "bookmarks")
+	return b.Bookmarks()
 }
 
 // CheckForMisplacedBookmarks prints a warning message to standard error if
@@ -17,7 +22,7 @@ func Bookmarks() string {
 func CheckForMisplacedBookmarks() {
 	misplacedBookmarksList := []string{
 		filepath.Join(Builder{}.ConfigDir(), "bookmarks"),
-		filepath.Join(Builder{}.DataDir(), "bookmarks"),
+		filepath.Join(Builder{}.Bookmarks()),
 		filepath.Join(ConfigDir(), "bookmarks"),
 	}
 
