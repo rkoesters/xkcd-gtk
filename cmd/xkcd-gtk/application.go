@@ -66,6 +66,7 @@ func NewApplication() (*Application, error) {
 	app.application.SetAccelsForAction("app.quit", []string{"<Control>q"})
 	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
 	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
+	app.application.SetAccelsForAction("win.show-properties", []string{"<Control>p"})
 
 	// Connect startup signal to our methods.
 	app.application.Connect("startup", style.InitCSS)
