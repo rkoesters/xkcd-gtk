@@ -92,7 +92,7 @@ msgstr ""
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:45
+#: internal/widget/context-menu.go:44
 msgid "Explain"
 msgstr ""
 
@@ -166,7 +166,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: internal/widget/context-menu.go:44
+#: internal/widget/context-menu.go:43
 msgid "Open Link"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Open shortcuts window"
 msgstr ""
 
-#: cmd/xkcd-gtk/properties-dialog.go:37 internal/widget/context-menu.go:46
+#: cmd/xkcd-gtk/properties-dialog.go:37 internal/widget/context-menu.go:45
 #: internal/widget/shortcuts-window.ui:78
 msgid "Properties"
 msgstr ""
