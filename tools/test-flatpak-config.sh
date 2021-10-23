@@ -7,10 +7,12 @@ if [ $# != 1 ]; then
 fi
 yml="${1:?}"
 
-if [ "$(grep dest: "${yml:?}" | grep -v 'dest: go' | uniq -D)" != "" ]; then
+if [ "$(grep dest: "${yml:?}" | grep -v -e 'dest: go$' |
+        sort | uniq -D)" != "" ]; then
   echo "ERROR: duplicate 'dest:' in flatpak config:" >&2
   duplicates=$(
     grep dest: "${yml:?}" |
+    grep -v -e 'dest: go$' |
     sed -e "s/^ *dest: //g" -e "s/ *$//g" |
     sort |
     uniq -d
