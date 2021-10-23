@@ -89,10 +89,10 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 dev: $(GEN_SOURCES) $(APPDATA_PATH)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-%.css.go: %.css
+%.css.go: %.css tools/go-wrap.sh
 	tools/go-wrap.sh $< >$@
 
-%.ui.go: %.ui
+%.ui.go: %.ui tools/go-wrap.sh
 	tools/go-wrap.sh $< >$@
 
 $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
@@ -112,7 +112,7 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
-flatpak/%.yml: flatpak/%.yml.in go.mod go.sum
+flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh
 	cp $< $@
 	tools/gen-flatpak-deps.sh >>$@
 
