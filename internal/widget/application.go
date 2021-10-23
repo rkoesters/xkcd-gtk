@@ -133,7 +133,7 @@ func (app *Application) CloseCache() {
 
 // Activate creates and presents a new window to the user.
 func (app *Application) Activate() {
-	win, err := NewWindow(app)
+	win, err := NewApplicationWindow(app)
 	if err != nil {
 		log.Print("error creating window: ", err)
 		return

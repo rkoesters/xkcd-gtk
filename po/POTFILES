@@ -4,6 +4,7 @@ internal/cache/cache.go
 internal/search/index.go
 internal/widget/about-dialog.go
 internal/widget/app-menu.ui
+internal/widget/application-window.go
 internal/widget/application.go
 internal/widget/bookmarks-menu.go
 internal/widget/context-menu.go
@@ -12,4 +13,3 @@ internal/widget/properties-dialog.go
 internal/widget/search-menu.go
 internal/widget/shortcuts-window.ui
 internal/widget/window-menu.go
-internal/widget/window.go

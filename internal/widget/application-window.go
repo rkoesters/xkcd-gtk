@@ -17,8 +17,8 @@ import (
 	"time"
 )
 
-// Window is the main application window.
-type Window struct {
+// ApplicationWindow is the main application window.
+type ApplicationWindow struct {
 	app    *Application
 	window *gtk.ApplicationWindow
 	state  WindowState
@@ -41,13 +41,13 @@ type Window struct {
 	properties *PropertiesDialog
 }
 
-var _ Widget = &Window{}
+var _ Widget = &ApplicationWindow{}
 
-// NewWindow creates a new xkcd viewer window.
-func NewWindow(app *Application) (*Window, error) {
+// NewApplicationWindow creates a new xkcd viewer window.
+func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	var err error
 
-	win := &Window{
+	win := &ApplicationWindow{
 		app: app,
 	}
 
@@ -176,7 +176,7 @@ func NewWindow(app *Application) (*Window, error) {
 }
 
 // StyleUpdated is called when the style of our gtk window is updated.
-func (win *Window) StyleUpdated() {
+func (win *ApplicationWindow) StyleUpdated() {
 	// Reload app CSS, if needed.
 	darkMode := win.app.DarkMode()
 	err := style.UpdateCSS(darkMode)
@@ -276,23 +276,23 @@ func (win *Window) StyleUpdated() {
 }
 
 // FirstComic goes to the first comic.
-func (win *Window) FirstComic() {
+func (win *ApplicationWindow) FirstComic() {
 	win.SetComic(1)
 }
 
 // PreviousComic sets the current comic to the previous comic.
-func (win *Window) PreviousComic() {
+func (win *ApplicationWindow) PreviousComic() {
 	win.SetComic(win.comicNumber() - 1)
 }
 
 // NextComic sets the current comic to the next comic.
-func (win *Window) NextComic() {
+func (win *ApplicationWindow) NextComic() {
 	win.SetComic(win.comicNumber() + 1)
 }
 
 // NewestComic checks for a new comic and then shows the newest comic to the
 // user.
-func (win *Window) NewestComic() {
+func (win *ApplicationWindow) NewestComic() {
 	// Make it clear that we are checking for a new comic.
 	win.header.SetTitle(l("Checking for new comic..."))
 
@@ -306,7 +306,7 @@ func (win *Window) NewestComic() {
 }
 
 // RandomComic sets the current comic to a random comic.
-func (win *Window) RandomComic() {
+func (win *ApplicationWindow) RandomComic() {
 	today := time.Now()
 	if today.Month() == time.April && today.Day() == 1 {
 		win.SetComic(4) // chosen by fair dice roll.
@@ -323,7 +323,7 @@ func (win *Window) RandomComic() {
 }
 
 // SetComic sets the current comic to the given comic.
-func (win *Window) SetComic(n int) {
+func (win *ApplicationWindow) SetComic(n int) {
 	win.state.ComicNumber = n
 
 	// Make it clear that we are loading a comic.
@@ -367,13 +367,13 @@ func (win *Window) SetComic(n int) {
 }
 
 // ShowLoading makes the window indicate that it is loading.
-func (win *Window) ShowLoading() {
+func (win *ApplicationWindow) ShowLoading() {
 	win.header.SetTitle(l("Loading comic..."))
 	win.comicContainer.ShowLoadingScreen()
 }
 
 // DisplayComic updates the UI to show the contents of win.comic.
-func (win *Window) DisplayComic() {
+func (win *ApplicationWindow) DisplayComic() {
 	win.comicMutex.RLock()
 	defer win.comicMutex.RUnlock()
 
@@ -397,11 +397,11 @@ func (win *Window) DisplayComic() {
 }
 
 // DrawComic draws the comic and inverts it if we are in dark mode.
-func (win *Window) DrawComic() {
+func (win *ApplicationWindow) DrawComic() {
 	win.comicContainer.SetFromFile(cache.ComicImagePath(win.comicNumber()), win.app.DarkMode())
 }
 
-func (win *Window) updateNextPreviousButtonStatus() {
+func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
 	n := win.comicNumber()
 
 	// Enable/disable previous button.
@@ -435,12 +435,12 @@ func (win *Window) updateNextPreviousButtonStatus() {
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
-func (win *Window) Explain() {
+func (win *ApplicationWindow) Explain() {
 	openURL(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comicNumber()))
 }
 
 // OpenLink opens the comic's Link in the user's web browser.
-func (win *Window) OpenLink() {
+func (win *ApplicationWindow) OpenLink() {
 	win.comicMutex.RLock()
 	link := win.comic.Link
 	win.comicMutex.RUnlock()
@@ -450,7 +450,7 @@ func (win *Window) OpenLink() {
 
 // comicNumber returns the number of the current comic in a thread-safe way. Do
 // not call this method if you already hold win.comicMutex.
-func (win *Window) comicNumber() int {
+func (win *ApplicationWindow) comicNumber() int {
 	win.comicMutex.RLock()
 	defer win.comicMutex.RUnlock()
 
@@ -459,7 +459,7 @@ func (win *Window) comicNumber() int {
 
 // Destroy releases all references in the Window struct. This is needed to
 // mitigate a memory leak when closing windows.
-func (win *Window) Destroy() {
+func (win *ApplicationWindow) Destroy() {
 	win.app = nil
 	win.window = nil
 
@@ -490,6 +490,6 @@ func (win *Window) Destroy() {
 	runtime.GC()
 }
 
-func (win *Window) IWidget() gtk.IWidget {
+func (win *ApplicationWindow) IWidget() gtk.IWidget {
 	return win.window
 }

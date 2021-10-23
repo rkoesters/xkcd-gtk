@@ -12,7 +12,7 @@ import (
 // PropertiesDialog holds a gtk dialog that shows the comic information for the
 // parent window's comic.
 type PropertiesDialog struct {
-	parent *Window
+	parent *ApplicationWindow
 	dialog *gtk.Dialog
 
 	labels map[string]*gtk.Label
@@ -35,7 +35,7 @@ const (
 
 // NewPropertiesDialog creates and returns a PropertiesDialog for the given
 // parent Window.
-func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
+func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	var err error
 
 	pd := new(PropertiesDialog)
@@ -117,7 +117,7 @@ func NewPropertiesDialog(parent *Window) (*PropertiesDialog, error) {
 
 // ShowProperties presents the properties dialog to the user. If the dialog
 // doesn't exist yet, we create it.
-func (win *Window) ShowProperties() {
+func (win *ApplicationWindow) ShowProperties() {
 	var err error
 	if win.properties == nil {
 		win.properties, err = NewPropertiesDialog(win)
