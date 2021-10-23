@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:294
+#: cmd/xkcd-gtk/window.go:296
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:353
+#: cmd/xkcd-gtk/window.go:355
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:368
+#: cmd/xkcd-gtk/window.go:370
 msgid "Loading comic..."
 msgstr ""
 
