@@ -232,7 +232,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: internal/widget/window-menu.go:44 internal/widget/app-menu.ui:11
+#: internal/widget/window-menu.go:44 internal/widget/app-menu.ui:10
 msgid "Toggle Dark Mode"
 msgstr ""
 
