@@ -141,7 +141,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
 	// Create the search menu.
-	win.searchMenu, err = NewSearchMenu(win.actions, win.accels, win.SetComic)
+	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}

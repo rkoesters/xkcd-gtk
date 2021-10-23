@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/blevesearch/bleve/v2"
 	"github.com/gotk3/gotk3/gdk"
-	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
@@ -14,8 +13,7 @@ import (
 )
 
 type SearchMenu struct {
-	actions map[string]*glib.SimpleAction // ptr to win.actions
-	accels  *gtk.AccelGroup               // ptr to win.accels
+	accels *gtk.AccelGroup // ptr to win.accels
 
 	menuButton *gtk.MenuButton
 	entry      *gtk.SearchEntry
@@ -28,11 +26,10 @@ type SearchMenu struct {
 
 var _ Widget = &SearchMenu{}
 
-func NewSearchMenu(actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, error) {
+func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, error) {
 	var err error
 
 	sm := &SearchMenu{
-		actions:  actions,
 		accels:   accels,
 		setComic: comicSetter,
 	}
@@ -97,7 +94,6 @@ func NewSearchMenu(actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup
 }
 
 func (sm *SearchMenu) Destroy() {
-	sm.actions = nil
 	sm.accels = nil
 
 	sm.menuButton = nil
