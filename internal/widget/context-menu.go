@@ -23,6 +23,11 @@ func NewContextMenu(window *gtk.ApplicationWindow, iv *ImageViewer) (*ContextMen
 
 	menuModel := glib.MenuNew()
 
+	bookmarkSection := glib.MenuNew()
+	bookmarkSection.Append(l("Bookmark this comic"), "win.bookmark-new")
+	bookmarkSection.Append(l("Remove this comic from bookmarks"), "win.bookmark-remove")
+	menuModel.AppendSectionWithoutLabel(&bookmarkSection.MenuModel)
+
 	menuModel.AppendSectionWithoutLabel(&NewContextMenuSection().MenuModel)
 
 	cm.menu, err = gtk.GtkMenuNewFromModel(&menuModel.MenuModel)
