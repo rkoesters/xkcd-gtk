@@ -14,7 +14,7 @@ import (
 )
 
 // AppName is the user-visible name of this application.
-var AppName = l("Comic Sticks")
+func AppName() string { return l("Comic Sticks") }
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
@@ -279,7 +279,7 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if app.aboutDialog == nil {
-		app.aboutDialog, err = NewAboutDialog(build.AppID, AppName, build.Version())
+		app.aboutDialog, err = NewAboutDialog(build.AppID, AppName(), build.Version())
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return

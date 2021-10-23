@@ -31,7 +31,7 @@ func main() {
 	glib.InitI18n(build.AppID, paths.LocaleDir())
 
 	// Let glib and gtk know who we are.
-	glib.SetApplicationName(widget.AppName)
+	glib.SetApplicationName(widget.AppName())
 	gtk.WindowSetDefaultIconName(build.AppID)
 
 	// Create the application.

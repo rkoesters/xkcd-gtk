@@ -55,7 +55,7 @@ func NewWindow(app *Application) (*Window, error) {
 	}
 
 	win.comicMutex.Lock()
-	win.comic = &xkcd.Comic{Title: AppName}
+	win.comic = &xkcd.Comic{Title: AppName()}
 	win.comicMutex.Unlock()
 
 	// Initialize our window actions.
@@ -114,7 +114,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.header.SetTitle(AppName)
+	win.header.SetTitle(AppName())
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
