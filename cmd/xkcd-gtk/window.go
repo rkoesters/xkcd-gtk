@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
@@ -84,6 +85,7 @@ func NewWindow(app *Application) (*Window, error) {
 	if err != nil {
 		return nil, err
 	}
+	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 	win.window.AddAccelGroup(win.accels)
 
 	// If the gtk theme changes, we might want to adjust our styling.
@@ -122,7 +124,7 @@ func NewWindow(app *Application) (*Window, error) {
 	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
-	win.windowMenu, err = widget.NewWindowMenu(app.application.PrefersAppMenu(), win.actions, win.accels, win.ShowProperties)
+	win.windowMenu, err = widget.NewWindowMenu(app.application.PrefersAppMenu())
 	if err != nil {
 		return nil, err
 	}

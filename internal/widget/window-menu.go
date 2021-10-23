@@ -1,15 +1,11 @@
 package widget
 
 import (
-	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 )
 
 type WindowMenu struct {
-	actions map[string]*glib.SimpleAction // ptr to win.actions
-	accels  *gtk.AccelGroup               // ptr to win.accels
-
 	menuButton *gtk.MenuButton
 
 	showProperties func() // win.ShowProperties
@@ -17,14 +13,10 @@ type WindowMenu struct {
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(prefersAppMenu bool, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, propertiesShower func()) (*WindowMenu, error) {
+func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 	var err error
 
-	wm := &WindowMenu{
-		actions:        actions,
-		accels:         accels,
-		showProperties: propertiesShower,
-	}
+	wm := &WindowMenu{}
 
 	// Create the menu
 	wm.menuButton, err = gtk.MenuButtonNew()
@@ -36,7 +28,6 @@ func NewWindowMenu(prefersAppMenu bool, actions map[string]*glib.SimpleAction, a
 	menu := glib.MenuNew()
 
 	menu.AppendSectionWithoutLabel(&NewContextMenuSection().MenuModel)
-	wm.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, wm.showProperties)
 
 	if !prefersAppMenu {
 		appSection := glib.MenuNew()
@@ -68,9 +59,6 @@ func NewWindowMenu(prefersAppMenu bool, actions map[string]*glib.SimpleAction, a
 }
 
 func (wm *WindowMenu) Destroy() {
-	wm.actions = nil
-	wm.accels = nil
-
 	wm.menuButton = nil
 }
 

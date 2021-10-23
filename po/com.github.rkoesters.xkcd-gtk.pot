@@ -20,11 +20,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 
-#: internal/widget/window-menu.go:56 internal/widget/app-menu.ui:38
+#: internal/widget/window-menu.go:47 internal/widget/app-menu.ui:38
 msgid "About Comic Sticks"
 msgstr ""
 
-#: internal/widget/window-menu.go:51 internal/widget/app-menu.ui:28
+#: internal/widget/window-menu.go:42 internal/widget/app-menu.ui:28
 msgid "About XKCD"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:292
+#: cmd/xkcd-gtk/window.go:294
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:351
+#: cmd/xkcd-gtk/window.go:353
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/window-menu.go:55 internal/widget/app-menu.ui:34
+#: internal/widget/window-menu.go:46 internal/widget/app-menu.ui:34
 #: internal/widget/shortcuts-window.ui:4
 msgid "Keyboard Shortcuts"
 msgstr ""
@@ -137,11 +137,11 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: cmd/xkcd-gtk/window.go:366
+#: cmd/xkcd-gtk/window.go:368
 msgid "Loading comic..."
 msgstr ""
 
-#: internal/widget/window-menu.go:34
+#: internal/widget/window-menu.go:26
 msgid "Menu"
 msgstr ""
 
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Navigate"
 msgstr ""
 
-#: internal/widget/window-menu.go:43 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:34 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New Window"
 msgstr ""
@@ -232,7 +232,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: internal/widget/window-menu.go:44 internal/widget/app-menu.ui:10
+#: internal/widget/window-menu.go:35 internal/widget/app-menu.ui:10
 msgid "Toggle Dark Mode"
 msgstr ""
 
@@ -252,15 +252,15 @@ msgstr ""
 msgid "View comic metadata"
 msgstr ""
 
-#: internal/widget/window-menu.go:48 internal/widget/app-menu.ui:16
+#: internal/widget/window-menu.go:39 internal/widget/app-menu.ui:16
 msgid "What If?"
 msgstr ""
 
-#: internal/widget/window-menu.go:49 internal/widget/app-menu.ui:20
+#: internal/widget/window-menu.go:40 internal/widget/app-menu.ui:20
 msgid "XKCD Blog"
 msgstr ""
 
-#: internal/widget/window-menu.go:50 internal/widget/app-menu.ui:24
+#: internal/widget/window-menu.go:41 internal/widget/app-menu.ui:24
 msgid "XKCD Store"
 msgstr ""
 
