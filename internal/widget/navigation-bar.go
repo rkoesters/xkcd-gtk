@@ -2,15 +2,13 @@ package widget
 
 import (
 	"github.com/gotk3/gotk3/gdk"
-	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
 type NavigationBar struct {
-	actions map[string]*glib.SimpleAction // ptr to win.actions
-	accels  *gtk.AccelGroup               // ptr to win.accels
+	accels *gtk.AccelGroup // ptr to win.accels
 
 	box *gtk.ButtonBox
 
@@ -23,12 +21,11 @@ type NavigationBar struct {
 
 var _ Widget = &NavigationBar{}
 
-func NewNavigationBar(actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup) (*NavigationBar, error) {
+func NewNavigationBar(accels *gtk.AccelGroup) (*NavigationBar, error) {
 	var err error
 
 	nb := &NavigationBar{
-		actions: actions,
-		accels:  accels,
+		accels: accels,
 	}
 
 	nb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
@@ -86,7 +83,6 @@ func NewNavigationBar(actions map[string]*glib.SimpleAction, accels *gtk.AccelGr
 }
 
 func (nb *NavigationBar) Destroy() {
-	nb.actions = nil
 	nb.accels = nil
 
 	nb.box = nil

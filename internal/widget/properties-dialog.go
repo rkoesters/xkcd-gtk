@@ -184,9 +184,12 @@ func (pd *PropertiesDialog) Close() {
 // Destroy removes our references to the dialog so the garbage collector can
 // take care of it.
 func (pd *PropertiesDialog) Destroy() {
-	pd.labels = nil
-	pd.dialog = nil
 	pd.parent = nil
+	pd.dialog = nil
+
+	pd.labels = nil
+
+	pd.accels = nil
 }
 
 func (pd *PropertiesDialog) IWidget() gtk.IWidget { return pd.dialog }

@@ -127,8 +127,8 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 
 func (bm *BookmarksMenu) Destroy() {
 	bm.bookmarks = nil
-	bm.windowState = nil
 
+	bm.windowState = nil
 	bm.actions = nil
 	bm.accels = nil
 

@@ -120,7 +120,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
-	win.navigationBar, err = NewNavigationBar(win.actions, win.accels)
+	win.navigationBar, err = NewNavigationBar(win.accels)
 	if err != nil {
 		return nil, err
 	}
@@ -485,6 +485,7 @@ func (win *ApplicationWindow) Destroy() {
 	win.comicContainer.Destroy()
 	win.comicContainer = nil
 
+	win.properties.Destroy()
 	win.properties = nil
 
 	runtime.GC()

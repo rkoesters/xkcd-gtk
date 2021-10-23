@@ -78,6 +78,7 @@ func (iv *ImageViewer) Destroy() {
 	iv.scrolledWindow = nil
 	iv.scrolledWindowCtx = nil
 	iv.image = nil
+	iv.eventBox = nil
 
 	iv.contextMenu.Destroy()
 	iv.contextMenu = nil
