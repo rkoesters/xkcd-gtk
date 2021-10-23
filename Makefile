@@ -67,8 +67,9 @@ LINGUAS = $(shell cat po/LINGUAS)
 PO      = $(shell find po -name '*.po' -type f)
 MO      = $(patsubst %.po,%.mo,$(PO))
 
-FLATPAK_YML_IN = $(shell find flatpak -name '*.yml.in')
-FLATPAK_YML    = $(APP).yml $(patsubst %.in,%,$(FLATPAK_YML_IN))
+FLATPAK_YML_IN  = $(shell find flatpak -name '*.yml.in')
+GEN_FLATPAK_YML = $(patsubst %.in,%,$(FLATPAK_YML_IN))
+FLATPAK_YML     = $(APP).yml $(GEN_FLATPAK_YML)
 
 ################################################################################
 # Local Customizations (not tracked by source control)
@@ -146,8 +147,15 @@ test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
 ci: all check test
 
 clean:
-	rm -f $(EXE_PATH) $(DEV_PATH) $(GEN_SOURCES) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
-	rm -rf flatpak/*.yml flatpak-build/ .flatpak-builder/
+	rm -f $(EXE_PATH)
+	rm -f $(DEV_PATH)
+	rm -f $(GEN_SOURCES)
+	rm -f $(DESKTOP_PATH)
+	rm -f $(APPDATA_PATH)
+	rm -f $(MO)
+	rm -f $(GEN_FLATPAK_YML)
+	rm -rf flatpak-build/
+	rm -rf .flatpak-builder/
 
 strip: $(EXE_PATH)
 	strip $(EXE_PATH)
@@ -167,10 +175,10 @@ install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	done
 
 uninstall:
-	rm $(DESTDIR)$(bindir)/$(EXE_NAME) \
-	   $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME) \
-	   $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME) \
-	   $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
+	rm $(DESTDIR)$(bindir)/$(EXE_NAME)
+	rm $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME)
+	rm $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME)
+	rm $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
 	for lang in $(LINGUAS); do \
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
