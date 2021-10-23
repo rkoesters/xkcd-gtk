@@ -55,6 +55,16 @@
   </custom>
 
   <releases>
+    <release version="1.5.0" date="2021-10-22">
+      <description>
+        <ul>
+          <li>Add a context menu when right-clicking on a comic.</li>
+          <li>Tweak spacing of navigation buttons on elementary OS.</li>
+          <li>Fix "Show Properties" keyboard shortcut hint in window menu.</li>
+          <li>Bump versions of dependencies.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.4.4" date="2021-10-18">
       <description>
         <ul>
