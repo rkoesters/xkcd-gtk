@@ -15,7 +15,14 @@ type PropertiesDialog struct {
 	parent *ApplicationWindow
 	dialog *gtk.Dialog
 
-	labels map[string]*gtk.Label
+	comicNumber     *gtk.Label
+	comicTitle      *gtk.Label
+	comicDate       *gtk.Label
+	comicImage      *gtk.Label
+	comicAltText    *gtk.Label
+	comicNews       *gtk.Label
+	comicLink       *gtk.Label
+	comicTranscript *gtk.Label
 
 	accels *gtk.AccelGroup
 }
@@ -39,7 +46,6 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	var err error
 
 	pd := new(PropertiesDialog)
-	pd.labels = make(map[string]*gtk.Label)
 	pd.parent = parent
 
 	pd.dialog, err = gtk.DialogNew()
@@ -88,14 +94,38 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	grid.SetMarginStart(12)
 	grid.SetMarginEnd(12)
 
-	pd.addRowToGrid(grid, 0, propertiesKeyNumber, l("Number"))
-	pd.addRowToGrid(grid, 1, propertiesKeyTitle, l("Title"))
-	pd.addRowToGrid(grid, 2, propertiesKeyDate, l("Date"))
-	pd.addRowToGrid(grid, 3, propertiesKeyImage, l("Image"))
-	pd.addRowToGrid(grid, 4, propertiesKeyAltText, l("Alt Text"))
-	pd.addRowToGrid(grid, 5, propertiesKeyNews, l("News"))
-	pd.addRowToGrid(grid, 6, propertiesKeyLink, l("Link"))
-	pd.addRowToGrid(grid, 7, propertiesKeyTranscript, l("Transcript"))
+	pd.comicNumber, err = pd.addRowToGrid(grid, 0, l("Number"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicTitle, err = pd.addRowToGrid(grid, 1, l("Title"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicDate, err = pd.addRowToGrid(grid, 2, l("Date"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicImage, err = pd.addRowToGrid(grid, 3, l("Image"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicAltText, err = pd.addRowToGrid(grid, 4, l("Alt Text"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicNews, err = pd.addRowToGrid(grid, 5, l("News"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicLink, err = pd.addRowToGrid(grid, 6, l("Link"))
+	if err != nil {
+		return nil, err
+	}
+	pd.comicTranscript, err = pd.addRowToGrid(grid, 7, l("Transcript"))
+	if err != nil {
+		return nil, err
+	}
 	pd.Update()
 
 	scwin.Add(grid)
@@ -131,16 +161,16 @@ func (win *ApplicationWindow) ShowProperties() {
 	win.properties.dialog.Present()
 }
 
-func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key, label string) error {
+func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, label string) (*gtk.Label, error) {
 	keyLabel, err := gtk.LabelNew(label)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	keyLabel.SetHAlign(gtk.ALIGN_END)
 	keyLabel.SetVAlign(gtk.ALIGN_START)
 	valLabel, err := gtk.LabelNew("")
 	if err != nil {
-		return err
+		return nil, err
 	}
 	valLabel.SetXAlign(0)
 	valLabel.SetHAlign(gtk.ALIGN_START)
@@ -152,9 +182,7 @@ func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, key, label str
 	grid.Attach(keyLabel, 0, row, 1, 1)
 	grid.Attach(valLabel, 1, row, 1, 1)
 
-	pd.labels[key] = valLabel
-
-	return nil
+	return valLabel, nil
 }
 
 // Update changes the dialog's contents to match the parent Window's comic.
@@ -162,14 +190,14 @@ func (pd *PropertiesDialog) Update() {
 	pd.parent.comicMutex.RLock()
 	defer pd.parent.comicMutex.RUnlock()
 
-	pd.labels[propertiesKeyNumber].SetText(strconv.Itoa(pd.parent.comic.Num))
-	pd.labels[propertiesKeyTitle].SetText(pd.parent.comic.Title)
-	pd.labels[propertiesKeyImage].SetText(pd.parent.comic.Img)
-	pd.labels[propertiesKeyAltText].SetText(pd.parent.comic.Alt)
-	pd.labels[propertiesKeyDate].SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
-	pd.labels[propertiesKeyNews].SetText(pd.parent.comic.News)
-	pd.labels[propertiesKeyLink].SetText(pd.parent.comic.Link)
-	pd.labels[propertiesKeyTranscript].SetText(pd.parent.comic.Transcript)
+	pd.comicNumber.SetText(strconv.Itoa(pd.parent.comic.Num))
+	pd.comicTitle.SetText(pd.parent.comic.Title)
+	pd.comicImage.SetText(pd.parent.comic.Img)
+	pd.comicAltText.SetText(pd.parent.comic.Alt)
+	pd.comicDate.SetText(formatDate(pd.parent.comic.Year, pd.parent.comic.Month, pd.parent.comic.Day))
+	pd.comicNews.SetText(pd.parent.comic.News)
+	pd.comicLink.SetText(pd.parent.comic.Link)
+	pd.comicTranscript.SetText(pd.parent.comic.Transcript)
 }
 
 // Close is called when the dialog is closed. It tells the parent to save its
@@ -187,7 +215,14 @@ func (pd *PropertiesDialog) Destroy() {
 	pd.parent = nil
 	pd.dialog = nil
 
-	pd.labels = nil
+	pd.comicNumber = nil
+	pd.comicTitle = nil
+	pd.comicImage = nil
+	pd.comicAltText = nil
+	pd.comicDate = nil
+	pd.comicNews = nil
+	pd.comicLink = nil
+	pd.comicTranscript = nil
 
 	pd.accels = nil
 }
