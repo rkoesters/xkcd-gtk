@@ -29,17 +29,6 @@ type PropertiesDialog struct {
 
 var _ Window = &PropertiesDialog{}
 
-const (
-	propertiesKeyNumber     = "number"
-	propertiesKeyTitle      = "title"
-	propertiesKeyDate       = "date"
-	propertiesKeyImage      = "image"
-	propertiesKeyAltText    = "alt text"
-	propertiesKeyNews       = "news"
-	propertiesKeyLink       = "link"
-	propertiesKeyTranscript = "transcript"
-)
-
 // NewPropertiesDialog creates and returns a PropertiesDialog for the given
 // parent Window.
 func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
