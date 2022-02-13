@@ -68,7 +68,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: internal/widget/application-window.go:356
+#: internal/widget/application-window.go:357
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:371
+#: internal/widget/application-window.go:372
 msgid "Loading comic..."
 msgstr ""
 
