@@ -55,6 +55,15 @@
   </custom>
 
   <releases>
+    <release version="1.5.2" date="2022-02-13">
+      <description>
+        <ul>
+          <li>Improve caching behavior of "Newest Comic" button.</li>
+          <li>Fix a crash when closing the comic window while the properties dialog is not open.</li>
+          <li>Update dependencies.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.5.1" date="2021-10-23">
       <description>
         <ul>
