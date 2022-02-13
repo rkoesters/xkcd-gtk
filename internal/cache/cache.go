@@ -223,12 +223,13 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 	return comic, err
 }
 
-// CheckForNewestComicInfo fetches the latest comic info from the internet. If
-// it can not connect, then it fetches the latest comic from the cache. The
-// returned error can be safely ignored. Should not be used on UI event loop.
-func CheckForNewestComicInfo() (*xkcd.Comic, error) {
-	const threshold = 5 * time.Minute
-	if time.Since(<-recvCachedNewestComicUpdatedAt) < threshold {
+// CheckForNewestComicInfo fetches the latest comic info from the internet if
+// the latest comic info has not been refreshed in freshnessThreshold. If it can
+// not connect, then it fetches the latest comic from the cache. The returned
+// error can be safely ignored. Should not be used on UI event loop (TODO: stop
+// breaking this rule).
+func CheckForNewestComicInfo(freshnessThreshold time.Duration) (*xkcd.Comic, error) {
+	if time.Since(<-recvCachedNewestComicUpdatedAt) < freshnessThreshold {
 		return NewestComicInfoFromCache()
 	}
 
