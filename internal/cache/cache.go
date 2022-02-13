@@ -126,7 +126,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 			case newest := <-cachedNewestComicIn:
 				cachedNewestComicUpdatedAt = time.Now()
 				cachedNewestComic = newest
-				log.Debug("new newest cached comic: ", newest)
+				log.Debugf("newest cached comic set to %v at %v", newest.Num, cachedNewestComicUpdatedAt)
 			case cachedNewestComicOut <- cachedNewestComic:
 				// Sending the comic was all we wanted to do.
 			case cachedNewestComicUpdatedAtOut <- cachedNewestComicUpdatedAt:
