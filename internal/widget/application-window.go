@@ -38,7 +38,7 @@ type ApplicationWindow struct {
 
 	comicContainer *ImageViewer
 
-	properties *PropertiesDialog
+	properties *PropertiesDialog // May be nil.
 }
 
 var _ Window = &ApplicationWindow{}
@@ -487,7 +487,9 @@ func (win *ApplicationWindow) Destroy() {
 	win.comicContainer.Destroy()
 	win.comicContainer = nil
 
-	win.properties.Destroy()
+	if win.properties != nil {
+		win.properties.Destroy()
+	}
 	win.properties = nil
 
 	runtime.GC()
