@@ -34,11 +34,11 @@ msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
 #: internal/widget/properties-dialog.go:102
-msgid "Alt Text"
+msgid "Alt text"
 msgstr "Ferma Testo"
 
 #: internal/widget/shortcuts-window.ui:91
-msgid "Application Actions"
+msgid "Application actions"
 msgstr "Azioni Applicazione"
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
@@ -52,10 +52,6 @@ msgstr "Fumetti della cache per una successiva visualizzazione offline"
 #: internal/widget/application-window.go:297
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
-
-#: internal/cache/cache.go:61
-msgid "Comic Not Found"
-msgstr "Fumetto non trovato"
 
 #: internal/widget/application.go:17
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -71,6 +67,10 @@ msgstr ""
 "Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei "
 "fumetti, navigazione offline e scorciatoie da tastiera intuitive."
 
+#: internal/cache/cache.go:61
+msgid "Comic not found"
+msgstr "Fumetto non trovato"
+
 #: internal/widget/application-window.go:357
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
@@ -80,7 +80,7 @@ msgid "Connect to the internet to download some comics!"
 msgstr "Collegati a Internet per scaricare alcuni fumetti!"
 
 #: internal/cache/cache.go:62
-msgid "Couldn't Get Comic"
+msgid "Couldn't get comic"
 msgstr "Impossibile ottenere fumetto"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
@@ -132,8 +132,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
 #: internal/widget/window-menu.go:46 internal/widget/app-menu.ui:34
-#: internal/widget/shortcuts-window.ui:4
-msgid "Keyboard Shortcuts"
+msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
 #: internal/widget/properties-dialog.go:110
@@ -154,7 +153,7 @@ msgstr "Naviga"
 
 #: internal/widget/window-menu.go:34 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
-msgid "New Window"
+msgid "New window"
 msgstr "Nuova Finestra"
 
 #: internal/widget/properties-dialog.go:106
@@ -170,7 +169,7 @@ msgid "Number"
 msgstr "Numero"
 
 #: internal/widget/context-menu.go:44
-msgid "Open Link"
+msgid "Open link"
 msgstr "Apri Link"
 
 #: internal/widget/shortcuts-window.ui:95
@@ -225,6 +224,10 @@ msgstr "Cerca fumetti"
 msgid "Search for comics"
 msgstr "Cerca fumetti"
 
+#: internal/widget/shortcuts-window.ui:4
+msgid "Shortcuts"
+msgstr "Tasti Rapidi"
+
 #: internal/widget/shortcuts-window.ui:69
 msgid "Show bookmarks menu"
 msgstr "Mostra menu segnalibri"
@@ -238,9 +241,6 @@ msgid "Title"
 msgstr "Titolo"
 
 #: internal/widget/window-menu.go:35 internal/widget/app-menu.ui:10
-msgid "Toggle Dark Mode"
-msgstr "Attiva modalità scura"
-
 #: internal/widget/shortcuts-window.ui:102
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"

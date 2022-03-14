@@ -37,11 +37,11 @@ msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
 #: internal/widget/properties-dialog.go:102
-msgid "Alt Text"
+msgid "Alt text"
 msgstr "Alt-tekst"
 
 #: internal/widget/shortcuts-window.ui:91
-msgid "Application Actions"
+msgid "Application actions"
 msgstr "Toepassingsacties"
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
@@ -55,10 +55,6 @@ msgstr "Sla verhalen op voor offline weergave"
 #: internal/widget/application-window.go:297
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal..."
-
-#: internal/cache/cache.go:61
-msgid "Comic Not Found"
-msgstr "Verhaal niet gevonden"
 
 #: internal/widget/application.go:17
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -74,6 +70,10 @@ msgstr ""
 "Met Comic Sticks kun je xkcd-stripverhalen lezen. De toepassing bevat "
 "snelzoeken, offline-lezen en intuïtieve sneltoetsen."
 
+#: internal/cache/cache.go:61
+msgid "Comic not found"
+msgstr "Verhaal niet gevonden"
+
 #: internal/widget/application-window.go:357
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
@@ -83,7 +83,7 @@ msgid "Connect to the internet to download some comics!"
 msgstr "Maak verbinding met internet om verhalen op te halen!"
 
 #: internal/cache/cache.go:62
-msgid "Couldn't Get Comic"
+msgid "Couldn't get comic"
 msgstr "Kan stripverhaal niet ophalen"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
@@ -135,8 +135,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Organiseer verhalen middels bladwijzers"
 
 #: internal/widget/window-menu.go:46 internal/widget/app-menu.ui:34
-#: internal/widget/shortcuts-window.ui:4
-msgid "Keyboard Shortcuts"
+msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 
 #: internal/widget/properties-dialog.go:110
@@ -157,7 +156,7 @@ msgstr "Navigatie"
 
 #: internal/widget/window-menu.go:34 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
-msgid "New Window"
+msgid "New window"
 msgstr "Nieuw venster"
 
 #: internal/widget/properties-dialog.go:106
@@ -173,7 +172,7 @@ msgid "Number"
 msgstr "Nummer"
 
 #: internal/widget/context-menu.go:44
-msgid "Open Link"
+msgid "Open link"
 msgstr "Link openen"
 
 #: internal/widget/shortcuts-window.ui:95
@@ -226,6 +225,10 @@ msgstr "Verhalen doorzoeken"
 msgid "Search for comics"
 msgstr "Zoek naar specifieke verhalen"
 
+#: internal/widget/shortcuts-window.ui:4
+msgid "Shortcuts"
+msgstr "Sneltoetsen"
+
 #: internal/widget/shortcuts-window.ui:69
 msgid "Show bookmarks menu"
 msgstr "Bladwijzermenu tonen"
@@ -239,9 +242,6 @@ msgid "Title"
 msgstr "Titel"
 
 #: internal/widget/window-menu.go:35 internal/widget/app-menu.ui:10
-msgid "Toggle Dark Mode"
-msgstr "Donker thema aan/uit"
-
 #: internal/widget/shortcuts-window.ui:102
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"

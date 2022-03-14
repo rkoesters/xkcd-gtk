@@ -35,11 +35,11 @@ msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
 #: internal/widget/properties-dialog.go:102
-msgid "Alt Text"
+msgid "Alt text"
 msgstr "Texto Alternativo"
 
 #: internal/widget/shortcuts-window.ui:91
-msgid "Application Actions"
+msgid "Application actions"
 msgstr "Ações da Aplicação"
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
@@ -56,10 +56,6 @@ msgstr ""
 msgid "Checking for new comic..."
 msgstr "A pesquisar por uma nova banda desenhada..."
 
-#: internal/cache/cache.go:61
-msgid "Comic Not Found"
-msgstr "Banda desenhada não encontrada"
-
 #: internal/widget/application.go:17
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
@@ -75,6 +71,10 @@ msgstr ""
 "pesquisa rápida de banda desenhada, navegação em modo offline e atalhos de "
 "teclado intuitivos."
 
+#: internal/cache/cache.go:61
+msgid "Comic not found"
+msgstr "Banda desenhada não encontrada"
+
 #: internal/widget/application-window.go:357
 msgid "Connect to the internet to download comic image"
 msgstr "Ligue-se à internet para descarregar imagens de banda desenhada"
@@ -84,7 +84,7 @@ msgid "Connect to the internet to download some comics!"
 msgstr "Ligue-se à internet para descarregar banda desenhada!"
 
 #: internal/cache/cache.go:62
-msgid "Couldn't Get Comic"
+msgid "Couldn't get comic"
 msgstr "Não Foi Possível Adquirir a Banda Desenhada"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
@@ -136,8 +136,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 
 #: internal/widget/window-menu.go:46 internal/widget/app-menu.ui:34
-#: internal/widget/shortcuts-window.ui:4
-msgid "Keyboard Shortcuts"
+msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
 
 #: internal/widget/properties-dialog.go:110
@@ -158,7 +157,7 @@ msgstr "Navegar"
 
 #: internal/widget/window-menu.go:34 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
-msgid "New Window"
+msgid "New window"
 msgstr "Nova Janela"
 
 #: internal/widget/properties-dialog.go:106
@@ -174,7 +173,7 @@ msgid "Number"
 msgstr "Número"
 
 #: internal/widget/context-menu.go:44
-msgid "Open Link"
+msgid "Open link"
 msgstr "Abrir Ligação"
 
 #: internal/widget/shortcuts-window.ui:95
@@ -230,6 +229,10 @@ msgstr "Procurar Bandas Desenhadas"
 msgid "Search for comics"
 msgstr "Procurar por Bandas Desenhadas"
 
+#: internal/widget/shortcuts-window.ui:4
+msgid "Shortcuts"
+msgstr "Atalhos de Teclado"
+
 #: internal/widget/shortcuts-window.ui:69
 msgid "Show bookmarks menu"
 msgstr "Mostrar menu de marcadores"
@@ -243,9 +246,6 @@ msgid "Title"
 msgstr "Título"
 
 #: internal/widget/window-menu.go:35 internal/widget/app-menu.ui:10
-msgid "Toggle Dark Mode"
-msgstr "Alternar Modo Escuro"
-
 #: internal/widget/shortcuts-window.ui:102
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
