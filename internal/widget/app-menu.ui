@@ -3,11 +3,11 @@
   <menu id="app-menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">New Window</attribute>
+        <attribute name="label" translatable="yes">New window</attribute>
         <attribute name="action">app.new-window</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Toggle Dark Mode</attribute>
+        <attribute name="label" translatable="yes">Toggle dark mode</attribute>
         <attribute name="action">app.toggle-dark-mode</attribute>
       </item>
     </section>
@@ -31,7 +31,7 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="label" translatable="yes">Keyboard shortcuts</attribute>
         <attribute name="action">app.show-shortcuts</attribute>
       </item>
       <item>

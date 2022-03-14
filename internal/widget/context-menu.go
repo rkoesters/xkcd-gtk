@@ -41,7 +41,7 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 
 func NewContextMenuSection() *glib.Menu {
 	contextSection := glib.MenuNew()
-	contextSection.Append(l("Open Link"), "win.open-link")
+	contextSection.Append(l("Open link"), "win.open-link")
 	contextSection.Append(l("Explain"), "win.explain")
 	contextSection.Append(l("Properties"), "win.show-properties")
 	return contextSection

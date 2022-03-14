@@ -14,5 +14,5 @@ Keywords=webcomic;romance;sarcasm;math;language;
 Actions=new-window;
 
 [Desktop Action new-window]
-Name=New Window
+Name=New window
 Exec=com.github.rkoesters.xkcd-gtk

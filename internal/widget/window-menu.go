@@ -31,8 +31,8 @@ func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 
 	if !prefersAppMenu {
 		appSection := glib.MenuNew()
-		appSection.Append(l("New Window"), "app.new-window")
-		appSection.Append(l("Toggle Dark Mode"), "app.toggle-dark-mode")
+		appSection.Append(l("New window"), "app.new-window")
+		appSection.Append(l("Toggle dark mode"), "app.toggle-dark-mode")
 		menu.AppendSectionWithoutLabel(&appSection.MenuModel)
 
 		websiteSection := glib.MenuNew()
@@ -43,7 +43,7 @@ func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 		menu.AppendSectionWithoutLabel(&websiteSection.MenuModel)
 
 		helpSection := glib.MenuNew()
-		helpSection.Append(l("Keyboard Shortcuts"), "app.show-shortcuts")
+		helpSection.Append(l("Keyboard shortcuts"), "app.show-shortcuts")
 		helpSection.Append(l("About Comic Sticks"), "app.show-about")
 		menu.AppendSectionWithoutLabel(&helpSection.MenuModel)
 	}

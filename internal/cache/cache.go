@@ -58,8 +58,8 @@ func Init(index func(comic *xkcd.Comic) error) error {
 
 	// Initialize localized error strings.
 	cacheDatabaseError = l("Error reading local comic database")
-	comicNotFound = l("Comic Not Found")
-	couldNotDownloadComic = l("Couldn't Get Comic")
+	comicNotFound = l("Comic not found")
+	couldNotDownloadComic = l("Couldn't get comic")
 	noComicsFound = l("Connect to the internet to download some comics!")
 
 	err := paths.EnsureCacheDir()

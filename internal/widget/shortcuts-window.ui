@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object class="GtkShortcutsWindow" id="shortcuts-window">
-    <property name="title" translatable="yes">Keyboard Shortcuts</property>
+    <property name="title" translatable="yes">Shortcuts</property>
     <child>
       <object class="GtkShortcutsSection">
         <property name="section-name">shortcuts</property>
@@ -88,7 +88,7 @@
         </child>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="title" translatable="yes">Application Actions</property>
+            <property name="title" translatable="yes">Application actions</property>
             <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">

@@ -99,7 +99,7 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	pd.comicAltText, err = pd.addRowToGrid(grid, 4, l("Alt Text"))
+	pd.comicAltText, err = pd.addRowToGrid(grid, 4, l("Alt text"))
 	if err != nil {
 		return nil, err
 	}

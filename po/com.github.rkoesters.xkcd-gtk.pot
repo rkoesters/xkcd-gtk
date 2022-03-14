@@ -33,11 +33,11 @@ msgid "Add to bookmarks"
 msgstr ""
 
 #: internal/widget/properties-dialog.go:102
-msgid "Alt Text"
+msgid "Alt text"
 msgstr ""
 
 #: internal/widget/shortcuts-window.ui:91
-msgid "Application Actions"
+msgid "Application actions"
 msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
@@ -52,10 +52,6 @@ msgstr ""
 msgid "Checking for new comic..."
 msgstr ""
 
-#: internal/cache/cache.go:61
-msgid "Comic Not Found"
-msgstr ""
-
 #: internal/widget/application.go:17
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
@@ -68,6 +64,10 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
+#: internal/cache/cache.go:61
+msgid "Comic not found"
+msgstr ""
+
 #: internal/widget/application-window.go:357
 msgid "Connect to the internet to download comic image"
 msgstr ""
@@ -77,7 +77,7 @@ msgid "Connect to the internet to download some comics!"
 msgstr ""
 
 #: internal/cache/cache.go:62
-msgid "Couldn't Get Comic"
+msgid "Couldn't get comic"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
@@ -129,8 +129,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr ""
 
 #: internal/widget/window-menu.go:46 internal/widget/app-menu.ui:34
-#: internal/widget/shortcuts-window.ui:4
-msgid "Keyboard Shortcuts"
+msgid "Keyboard shortcuts"
 msgstr ""
 
 #: internal/widget/properties-dialog.go:110
@@ -151,7 +150,7 @@ msgstr ""
 
 #: internal/widget/window-menu.go:34 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
-msgid "New Window"
+msgid "New window"
 msgstr ""
 
 #: internal/widget/properties-dialog.go:106
@@ -167,7 +166,7 @@ msgid "Number"
 msgstr ""
 
 #: internal/widget/context-menu.go:44
-msgid "Open Link"
+msgid "Open link"
 msgstr ""
 
 #: internal/widget/shortcuts-window.ui:95
@@ -220,6 +219,10 @@ msgstr ""
 msgid "Search for comics"
 msgstr ""
 
+#: internal/widget/shortcuts-window.ui:4
+msgid "Shortcuts"
+msgstr ""
+
 #: internal/widget/shortcuts-window.ui:69
 msgid "Show bookmarks menu"
 msgstr ""
@@ -233,9 +236,6 @@ msgid "Title"
 msgstr ""
 
 #: internal/widget/window-menu.go:35 internal/widget/app-menu.ui:10
-msgid "Toggle Dark Mode"
-msgstr ""
-
 #: internal/widget/shortcuts-window.ui:102
 msgid "Toggle dark mode"
 msgstr ""
