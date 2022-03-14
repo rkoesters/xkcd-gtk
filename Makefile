@@ -131,6 +131,9 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go mod tidy
 	([ -d vendor ] && go mod vendor) || true
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
+	for lang in $(LINGUAS); do \
+		msgmerge -U --backup=none "po/$$lang.po" $(POT_PATH); \
+	done
 
 check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
