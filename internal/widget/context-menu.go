@@ -20,8 +20,8 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	menuModel := glib.MenuNew()
 
 	bookmarkSection := glib.MenuNew()
-	bookmarkSection.Append(l("Bookmark this comic"), "win.bookmark-new")
-	bookmarkSection.Append(l("Remove this comic from bookmarks"), "win.bookmark-remove")
+	bookmarkSection.Append(l("Bookmark"), "win.bookmark-new")
+	bookmarkSection.Append(l("Remove from bookmarks"), "win.bookmark-remove")
 	menuModel.AppendSectionWithoutLabel(&bookmarkSection.MenuModel)
 
 	menuModel.AppendSectionWithoutLabel(&NewContextMenuSection().MenuModel)

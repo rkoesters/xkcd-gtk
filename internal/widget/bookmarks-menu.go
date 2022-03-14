@@ -65,7 +65,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	box.SetMarginStart(12)
 	box.SetMarginEnd(12)
 
-	bm.addButton, err = gtk.ButtonNewWithLabel(l("Bookmark this comic"))
+	bm.addButton, err = gtk.ButtonNewWithLabel(l("Bookmark"))
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.addButton.SetAlwaysShowImage(true)
 	box.Add(bm.addButton)
 
-	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove this comic from bookmarks"))
+	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
 	if err != nil {
 		return nil, err
 	}

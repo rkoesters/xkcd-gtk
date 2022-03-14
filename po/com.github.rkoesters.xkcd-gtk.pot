@@ -37,7 +37,7 @@ msgid "Application Actions"
 msgstr ""
 
 #: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
-msgid "Bookmark this comic"
+msgid "Bookmark"
 msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
@@ -201,7 +201,7 @@ msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
 #: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
-msgid "Remove this comic from bookmarks"
+msgid "Remove from bookmarks"
 msgstr ""
 
 #: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52
