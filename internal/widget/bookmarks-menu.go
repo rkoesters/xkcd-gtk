@@ -65,7 +65,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	box.SetMarginStart(12)
 	box.SetMarginEnd(12)
 
-	bm.addButton, err = gtk.ButtonNewWithLabel(l("Bookmark"))
+	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
 	if err != nil {
 		return nil, err
 	}

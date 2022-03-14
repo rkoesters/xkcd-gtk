@@ -28,16 +28,16 @@ msgstr ""
 msgid "About XKCD"
 msgstr ""
 
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
+msgid "Add to bookmarks"
+msgstr ""
+
 #: internal/widget/properties-dialog.go:102
 msgid "Alt Text"
 msgstr ""
 
 #: internal/widget/shortcuts-window.ui:91
 msgid "Application Actions"
-msgstr ""
-
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
-msgid "Bookmark"
 msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
