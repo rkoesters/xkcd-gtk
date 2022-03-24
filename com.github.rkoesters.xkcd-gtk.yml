@@ -59,7 +59,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.3.1
+        tag: v2.3.2
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
@@ -71,6 +71,11 @@ modules:
         url: https://github.com/blevesearch/go-porterstemmer.git
         tag: v1.0.3
         dest: vendor/github.com/blevesearch/go-porterstemmer
+
+      - type: git
+        url: https://github.com/blevesearch/gtreap.git
+        tag: v0.1.1
+        dest: vendor/github.com/blevesearch/gtreap
 
       - type: git
         url: https://github.com/blevesearch/mmap-go.git
@@ -156,11 +161,6 @@ modules:
         url: https://github.com/rkoesters/xkcd.git
         tag: v1.4.0
         dest: vendor/github.com/rkoesters/xkcd
-
-      - type: git
-        url: https://github.com/steveyen/gtreap.git
-        tag: v0.1.0
-        dest: vendor/github.com/steveyen/gtreap
 
       - type: git
         url: https://github.com/etcd-io/bbolt.git
