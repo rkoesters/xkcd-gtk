@@ -37,12 +37,12 @@ modules:
 
       - type: archive
         only-arches: [x86_64]
-        url: https://go.dev/dl/go1.17.7.linux-amd64.tar.gz
-        sha256: 02b111284bedbfa35a7e5b74a06082d18632eff824fd144312f6063943d49259
+        url: https://go.dev/dl/go1.17.8.linux-amd64.tar.gz
+        sha256: 980e65a863377e69fd9b67df9d8395fd8e93858e7a24c9f55803421e453f4f99
         dest: go
 
       - type: archive
         only-arches: [aarch64]
-        url: https://go.dev/dl/go1.17.7.linux-arm64.tar.gz
-        sha256: a5aa1ed17d45ee1d58b4a4099b12f8942acbd1dd09b2e9a6abb1c4898043c5f5
+        url: https://go.dev/dl/go1.17.8.linux-arm64.tar.gz
+        sha256: 57a9171682e297df1a5bd287be056ed0280195ad079af90af16dcad4f64710cb
         dest: go
