@@ -97,6 +97,8 @@ jobs:
         with:
           platforms: arm64
 
+      - run: ls -la
+      - run: go env
       - run: make flatpak/${{ matrix.repo }}.yml
       - run: cat flatpak/${{ matrix.repo }}.yml
 
