@@ -59,6 +59,7 @@ jobs:
           yamllint
 
       - run: make
+      - run: go mod graph
       - run: make check
       - run: make test
 
@@ -97,9 +98,6 @@ jobs:
         with:
           platforms: arm64
 
-      - run: ls -la
-      - run: go env
-      - run: tools/list-app-deps.sh
       - run: go mod graph
       - run: make flatpak/${{ matrix.repo }}.yml
       - run: cat flatpak/${{ matrix.repo }}.yml
