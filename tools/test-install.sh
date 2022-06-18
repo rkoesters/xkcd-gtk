@@ -21,14 +21,14 @@ while [ $# -gt 0 ]; do
 done
 
 print_and_run () {
-  if [[ $verbose == true ]]; then
+  if [[ ${verbose:?} == true ]]; then
     echo "$*"
   fi
   "$@"
 }
 
 print_and_make () {
-  if [[ $verbose = true ]]; then
+  if [[ ${verbose:?} = true ]]; then
     print_and_run make "$@"
   else
     print_and_run make -s "$@"
@@ -37,14 +37,14 @@ print_and_make () {
 
 tmpdir=$(mktemp -d /dev/shm/xkcd-gtk.XXXXXXXX)
 
-print_and_make install DESTDIR="$tmpdir"
-print_and_make uninstall DESTDIR="$tmpdir"
-print_and_run rmdir "$tmpdir"/*/*/*/*/*/*
-print_and_run rmdir "$tmpdir"/*/*/*/*/*
-print_and_run rmdir "$tmpdir"/*/*/*/*
-print_and_run rmdir "$tmpdir"/*/*/*
-print_and_run rmdir "$tmpdir"/*/*
-print_and_run rmdir "$tmpdir"/*
-print_and_run rmdir "$tmpdir"
+print_and_make install DESTDIR="${tmpdir:?}"
+print_and_make uninstall DESTDIR="${tmpdir:?}"
+print_and_run rmdir "${tmpdir:?}"/*/*/*/*/*/*
+print_and_run rmdir "${tmpdir:?}"/*/*/*/*/*
+print_and_run rmdir "${tmpdir:?}"/*/*/*/*
+print_and_run rmdir "${tmpdir:?}"/*/*/*
+print_and_run rmdir "${tmpdir:?}"/*/*
+print_and_run rmdir "${tmpdir:?}"/*
+print_and_run rmdir "${tmpdir:?}"
 
 echo "$0 PASSED"
