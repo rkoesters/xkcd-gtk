@@ -75,15 +75,17 @@ jobs:
         include:
           - repo: appcenter
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
+            image: bilelmoussaoui/flatpak-github-actions:elementary-juno
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
+            image: bilelmoussaoui/flatpak-github-actions:freedesktop-20.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
 
     runs-on: ubuntu-latest
 
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      image: ${{ matrix.image }}
       options: --privileged
 
     steps:
