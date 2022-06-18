@@ -90,17 +90,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: |
-          dnf -y install \
-          docker \
-          gettext \
-          go \
-          gtk3-devel \
-          libappstream-glib \
-          libxml2 \
-          make \
-          ShellCheck \
-          yamllint
+        run: dnf -y install docker go make
 
       - name: Set up QEMU
         if: ${{ matrix.arch != 'x86_64' }}
@@ -108,10 +98,9 @@ jobs:
         with:
           platforms: arm64
 
-      - run: make check
+      - run: make flatpak/${{ matrix.repo }}.yml
       - run: go mod graph
       - run: tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk
-      - run: make flatpak/${{ matrix.repo }}.yml
       - run: cat flatpak/${{ matrix.repo }}.yml
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
