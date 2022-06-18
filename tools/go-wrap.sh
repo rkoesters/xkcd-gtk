@@ -8,19 +8,19 @@ if [ $# != 1 ]; then
 fi
 
 file="$1"
-dir="$(dirname "$file")"
-case "$dir" in
+dir="$(dirname "${file:?}")"
+case "${dir:?}" in
   *cmd/*) package="main" ;;
-  *) package="$(basename "$dir")" ;;
+  *) package="$(basename "${dir:?}")" ;;
 esac
 
-printf 'package %s\n\nconst ' "$package"
+printf 'package %s\n\nconst ' "${package:?}"
 
-basename "$file" | tr '.-' '_' | tr -d '\n' |
+basename "${file:?}" | tr '.-' '_' | tr -d '\n' |
 sed -e 's/_\([^_]*\)$/\U\1/g' -e 's/_\([a-z]\)/\U\1/g'
 
 printf ' = `'
 
-cat "$file"
+cat "${file:?}"
 
 printf '`\n'
