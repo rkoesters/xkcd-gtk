@@ -92,11 +92,11 @@ jobs:
       - name: Install dependencies
         run: |
           dnf -y install \
-          appstream-glib \
           docker \
           gettext \
           go \
           gtk3-devel \
+          libappstream-glib \
           libxml2 \
           make \
           ShellCheck \
