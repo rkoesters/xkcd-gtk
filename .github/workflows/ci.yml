@@ -99,6 +99,7 @@ jobs:
           platforms: arm64
 
       - run: go mod graph
+      - run: tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk
       - run: make flatpak/${{ matrix.repo }}.yml
       - run: cat flatpak/${{ matrix.repo }}.yml
 
