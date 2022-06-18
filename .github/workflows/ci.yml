@@ -60,6 +60,7 @@ jobs:
 
       - run: make check
       - run: go mod graph
+      - run: tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk
       - run: make
       - run: make test
 
