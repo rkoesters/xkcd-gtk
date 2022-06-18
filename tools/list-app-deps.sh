@@ -3,8 +3,10 @@
 # application.
 set -eu
 
+pkg_deps="$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)"
+
 go mod graph |
 cut -d ' ' -f 2 |
-grep -F "$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)" |
+grep -F "${pkg_deps:?}" |
 sort |
 uniq
