@@ -21,20 +21,20 @@ if grep -v '@2x.png' "${appdata_xml:?}" | grep -q '@'; then
   failure "appdata includes '@' symbol which doesn't work outside GitHub"
 fi
 
-echo "Checking for tag matching current commit"
-if ! tag=$(git describe --exact-match --tags); then
-  failure "could not find tag for current commit"
+echo "Reading most recent release from changelog"
+if ! release=$(grep "<release version=" "${appdata_xml:?}" | head -n 1 | cut -d '"' -f 2); then
+  failure "could not read most recent release from changelog"
 fi
 
-echo "Checking for tag ${tag:?} in changelog"
-if ! grep -q "<release version=\"${tag:?}\"" "${appdata_xml:?}"; then
-  failure "version ${tag:?} not found in appdata changelog"
+echo "Checking if current commit is tagged ${release:?}"
+if [ "${release:?}" != "$(git describe --exact-match --tags)" ]; then
+  failure "current commit not tagged ${release:?}"
 fi
 
-echo "Checking for date for tag ${tag:?} in changelog"
-date=$(git log -1 --format='%ad' --date=short "${tag:?}")
-if ! grep -q "<release version=\"${tag:?}\" date=\"${date:?}\"" "${appdata_xml:?}"; then
-  failure "date ${date:?} not found in appdata changelog for version ${tag:?}"
+echo "Checking for date for release ${release:?} in changelog"
+date=$(git log -1 --format='%ad' --date=short -- "${release:?}")
+if ! grep -q "<release version=\"${release:?}\" date=\"${date:?}\"" "${appdata_xml:?}"; then
+  failure "date ${date:?} not found in appdata changelog for version ${release:?}"
 fi
 
 success "checks passed!"
