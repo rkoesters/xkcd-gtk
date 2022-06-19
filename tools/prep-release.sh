@@ -27,7 +27,7 @@ if ! release=$(grep "<release version=" "${appdata_xml:?}" | head -n 1 | cut -d 
 fi
 
 echo "Checking if current commit is tagged ${release:?}"
-if [ "${release:?}" != "$(git describe --exact-match --tags)" ]; then
+if [ "${release:?}" != "$(git describe --exact-match --tags --match='[0-9].[0-9]*.[0-9]*')" ]; then
   failure "current commit not tagged ${release:?}"
 fi
 
