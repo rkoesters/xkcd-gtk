@@ -78,7 +78,7 @@ jobs:
             image: bilelmoussaoui/flatpak-github-actions:elementary-juno
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
-            image: bilelmoussaoui/flatpak-github-actions:freedesktop-20.08
+            image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
 
