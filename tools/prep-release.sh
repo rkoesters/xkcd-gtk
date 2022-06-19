@@ -32,7 +32,7 @@ if [ "${release:?}" != "$(git describe --exact-match --tags --match='[0-9].[0-9]
 fi
 
 echo "Checking for date for release ${release:?} in changelog"
-date=$(git log -1 --format='%ad' --date=short -- "${release:?}")
+date=$(git log -1 --format='%ad' --date=short "${release:?}" --)
 if ! grep -q "<release version=\"${release:?}\" date=\"${date:?}\"" "${appdata_xml:?}"; then
   failure "date ${date:?} not found in appdata changelog for version ${release:?}"
 fi
