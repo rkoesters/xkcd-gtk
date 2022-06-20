@@ -8,6 +8,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"strconv"
 )
 
@@ -60,10 +61,10 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	if err != nil {
 		return nil, err
 	}
-	box.SetMarginTop(12)
-	box.SetMarginBottom(12)
-	box.SetMarginStart(12)
-	box.SetMarginEnd(12)
+	box.SetMarginTop(style.PopoverMenuPadding)
+	box.SetMarginBottom(style.PopoverMenuPadding)
+	box.SetMarginStart(style.PopoverMenuPadding)
+	box.SetMarginEnd(style.PopoverMenuPadding)
 
 	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
 	if err != nil {

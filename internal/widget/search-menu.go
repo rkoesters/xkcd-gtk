@@ -9,6 +9,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"strconv"
 )
 
@@ -51,10 +52,10 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	if err != nil {
 		return nil, err
 	}
-	box.SetMarginTop(12)
-	box.SetMarginBottom(12)
-	box.SetMarginStart(12)
-	box.SetMarginEnd(12)
+	box.SetMarginTop(style.PopoverMenuPadding)
+	box.SetMarginBottom(style.PopoverMenuPadding)
+	box.SetMarginStart(style.PopoverMenuPadding)
+	box.SetMarginEnd(style.PopoverMenuPadding)
 	sm.entry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err
