@@ -149,6 +149,10 @@ func (bm *BookmarksMenu) IWidget() gtk.IWidget {
 	return bm.menuButton
 }
 
+func (bm *BookmarksMenu) SetButtonImage(image gtk.IWidget) {
+	bm.menuButton.SetImage(image)
+}
+
 // AddBookmark adds win's current comic to the user's bookmarks.
 func (bm *BookmarksMenu) AddBookmark() {
 	bm.bookmarks.Add(bm.windowState.ComicNumber)

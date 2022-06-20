@@ -157,6 +157,10 @@ func (wm *WindowMenu) IWidget() gtk.IWidget {
 	return wm.menuButton
 }
 
+func (wm *WindowMenu) SetButtonImage(image gtk.IWidget) {
+	wm.menuButton.SetImage(image)
+}
+
 func (wm *WindowMenu) SetCompact(compact bool) {
 	if compact {
 		wm.popoverBox.SetMarginTop(style.PopoverPaddingCompact)

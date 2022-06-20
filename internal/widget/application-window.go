@@ -239,9 +239,9 @@ func (win *ApplicationWindow) StyleUpdated() {
 	setButtonImageFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize, win.navigationBar.SetRandomButtonImage)
 	setButtonImageFromIconName("go-next-symbolic", headerBarIconSize, win.navigationBar.SetNextButtonImage)
 	setButtonImageFromIconName("go-last-symbolic", headerBarIconSize, win.navigationBar.SetNewestButtonImage)
-	setButtonImageFromIconName(icon("edit-find"), headerBarIconSize, win.searchMenu.IWidget().(*gtk.MenuButton).SetImage)
-	setButtonImageFromIconName(icon("user-bookmarks"), headerBarIconSize, win.bookmarksMenu.IWidget().(*gtk.MenuButton).SetImage)
-	setButtonImageFromIconName(icon("open-menu"), headerBarIconSize, win.windowMenu.IWidget().(*gtk.MenuButton).SetImage)
+	setButtonImageFromIconName(icon("edit-find"), headerBarIconSize, win.searchMenu.SetButtonImage)
+	setButtonImageFromIconName(icon("user-bookmarks"), headerBarIconSize, win.bookmarksMenu.SetButtonImage)
+	setButtonImageFromIconName(icon("open-menu"), headerBarIconSize, win.windowMenu.SetButtonImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
 	win.navigationBar.SetLinkedButtons(linked)
