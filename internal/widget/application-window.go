@@ -301,7 +301,9 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.windowMenu.IWidget().(*gtk.MenuButton).SetImage(menuImg)
 	}
 
-	win.navigationBar.SetLinkedButtons(style.IsLinkedNavButtonsTheme(themeName))
+	linked := style.IsLinkedNavButtonsTheme(themeName)
+	win.navigationBar.SetLinkedButtons(linked)
+	win.zoomBar.SetLinkedButtons(linked)
 }
 
 // FirstComic goes to the first comic.
