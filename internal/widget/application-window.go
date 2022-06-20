@@ -294,6 +294,14 @@ func (win *ApplicationWindow) StyleUpdated() {
 	}
 
 	win.navigationBar.SetLinkedButtons(style.IsLinkedNavButtonsTheme(themeName))
+
+	if style.IsSkinnyMenuTheme(themeName) {
+		win.windowMenu.popoverBox.SetMarginStart(0)
+		win.windowMenu.popoverBox.SetMarginEnd(0)
+	} else {
+		win.windowMenu.popoverBox.SetMarginStart(style.PopoverMenuPadding)
+		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverMenuPadding)
+	}
 }
 
 // FirstComic goes to the first comic.

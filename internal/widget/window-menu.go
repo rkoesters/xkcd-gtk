@@ -2,10 +2,7 @@ package widget
 
 import (
 	"github.com/gotk3/gotk3/gtk"
-)
-
-const (
-	windowMenuPadding = 8
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
 type WindowMenu struct {
@@ -37,14 +34,14 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	if err != nil {
 		return nil, err
 	}
-	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, windowMenuPadding)
+	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverMenuPadding)
 	if err != nil {
 		return nil, err
 	}
-	wm.popoverBox.SetMarginTop(windowMenuPadding)
-	wm.popoverBox.SetMarginBottom(windowMenuPadding)
-	wm.popoverBox.SetMarginStart(windowMenuPadding)
-	wm.popoverBox.SetMarginEnd(windowMenuPadding)
+	wm.popoverBox.SetMarginTop(style.PopoverMenuPadding)
+	wm.popoverBox.SetMarginBottom(style.PopoverMenuPadding)
+	wm.popoverBox.SetMarginStart(style.PopoverMenuPadding)
+	wm.popoverBox.SetMarginEnd(style.PopoverMenuPadding)
 	wm.popover.Add(wm.popoverBox)
 
 	addMenuSeparator := func(menuBox *gtk.Box) error {

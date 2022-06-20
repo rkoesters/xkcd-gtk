@@ -14,6 +14,8 @@ import (
 const (
 	ClassComicContainer = "comic-container"
 	ClassLinked         = "linked"
+
+	PopoverMenuPadding = 8
 )
 
 var (
@@ -95,6 +97,11 @@ var (
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
+
+	skinnyMenuThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"elementary(-x)?",
+		"io\\.elementary\\.stylesheet.*",
+	}, "|"))
 )
 
 // IsLargeToolbarTheme returns true if we should use large toolbar buttons with
@@ -113,4 +120,10 @@ func IsSymbolicIconTheme(theme string, darkMode bool) bool {
 // in the navigation button box for the given theme.
 func IsLinkedNavButtonsTheme(theme string) bool {
 	return !unlinkedNavButtonsThemesRegexp.MatchString(theme)
+}
+
+// IsSkinnyMenuTheme returns true if we should reduce the left and right margins
+// of popover-style menus.
+func IsSkinnyMenuTheme(theme string) bool {
+	return skinnyMenuThemesRegexp.MatchString(theme)
 }
