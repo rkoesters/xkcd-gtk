@@ -157,6 +157,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	if err != nil {
 		return nil, err
 	}
+	win.updateZoomButtonStatus()
 	win.header.PackEnd(win.windowMenu.IWidget())
 
 	// Create the bookmarks menu.
@@ -458,26 +459,24 @@ func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
 
 func (win *ApplicationWindow) ZoomIn() {
 	win.state.ImageScale = win.comicContainer.ZoomIn()
-	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < ImageScaleMax)
-	win.actions["zoom-out"].SetEnabled(true)
-	win.actions["zoom-reset"].SetEnabled(true)
-	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	win.updateZoomButtonStatus()
 }
 
 func (win *ApplicationWindow) ZoomOut() {
 	win.state.ImageScale = win.comicContainer.ZoomOut()
-	win.actions["zoom-in"].SetEnabled(true)
-	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > ImageScaleMin)
-	win.actions["zoom-reset"].SetEnabled(true)
-	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	win.updateZoomButtonStatus()
 }
 
 func (win *ApplicationWindow) ZoomReset() {
 	win.state.ImageScale = win.comicContainer.SetScale(1)
-	win.actions["zoom-in"].SetEnabled(true)
-	win.actions["zoom-out"].SetEnabled(true)
-	win.actions["zoom-reset"].SetEnabled(false)
+	win.updateZoomButtonStatus()
+}
+
+func (win *ApplicationWindow) updateZoomButtonStatus() {
 	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < ImageScaleMax)
+	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > ImageScaleMin)
+	win.actions["zoom-reset"].SetEnabled(win.state.ImageScale != 1)
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
