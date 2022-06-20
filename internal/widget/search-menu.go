@@ -52,10 +52,10 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	if err != nil {
 		return nil, err
 	}
-	box.SetMarginTop(style.PopoverMenuPadding)
-	box.SetMarginBottom(style.PopoverMenuPadding)
-	box.SetMarginStart(style.PopoverMenuPadding)
-	box.SetMarginEnd(style.PopoverMenuPadding)
+	box.SetMarginTop(style.PopoverPadding)
+	box.SetMarginBottom(style.PopoverPadding)
+	box.SetMarginStart(style.PopoverPadding)
+	box.SetMarginEnd(style.PopoverPadding)
 	sm.entry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err

@@ -289,8 +289,8 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.windowMenu.popoverBox.SetMarginStart(0)
 		win.windowMenu.popoverBox.SetMarginEnd(0)
 	} else {
-		win.windowMenu.popoverBox.SetMarginStart(style.PopoverMenuPadding)
-		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverMenuPadding)
+		win.windowMenu.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
+		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
 	}
 }
 
