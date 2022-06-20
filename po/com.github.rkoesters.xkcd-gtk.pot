@@ -203,7 +203,8 @@ msgstr ""
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internal/widget/context-menu.go:52 internal/widget/shortcuts-window.ui:83
+#: internal/widget/context-menu.go:52 internal/widget/zoom-box.go:52
+#: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
 msgstr ""
 
@@ -276,12 +277,12 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:50
+#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:61
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:41
+#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:43
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
 msgstr ""

@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"fmt"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
@@ -12,8 +13,9 @@ type ZoomBox struct {
 
 	box *gtk.ButtonBox
 
-	zoomInButton  *gtk.Button
-	zoomOutButton *gtk.Button
+	zoomInButton    *gtk.Button
+	zoomOutButton   *gtk.Button
+	zoomResetButton *gtk.Button
 
 	comicContainer *ImageViewer
 }
@@ -43,6 +45,15 @@ func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, 
 	zb.zoomOutButton.AddAccelerator("activate", zb.accels, gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	zb.box.Add(zb.zoomOutButton)
 
+	zb.zoomResetButton, err = gtk.ButtonNew()
+	if err != nil {
+		return nil, err
+	}
+	zb.zoomResetButton.SetTooltipText(l("Reset zoom"))
+	zb.zoomResetButton.SetProperty("action-name", "win.zoom-reset")
+	zb.zoomResetButton.AddAccelerator("activate", zb.accels, gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	zb.box.Add(zb.zoomResetButton)
+
 	zb.zoomInButton, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
@@ -60,8 +71,9 @@ func (zb *ZoomBox) Destroy() {
 
 	zb.box = nil
 
-	zb.zoomOutButton = nil
 	zb.zoomInButton = nil
+	zb.zoomOutButton = nil
+	zb.zoomResetButton = nil
 
 	zb.comicContainer = nil
 }
@@ -74,12 +86,16 @@ func (zb *ZoomBox) SetZoomInButtonImage(image *gtk.Image) {
 	zb.zoomInButton.SetImage(image)
 }
 
-func (nb *ZoomBox) SetZoomOutButtonImage(image *gtk.Image) {
-	nb.zoomOutButton.SetImage(image)
+func (zb *ZoomBox) SetZoomOutButtonImage(image *gtk.Image) {
+	zb.zoomOutButton.SetImage(image)
 }
 
-func (nb *ZoomBox) SetLinkedButtons(linked bool) {
-	sc, err := nb.box.GetStyleContext()
+func (zb *ZoomBox) SetCurrentZoom(scale float64) {
+	zb.zoomResetButton.SetLabel(fmt.Sprintf("%.0f%%", scale*100))
+}
+
+func (zb *ZoomBox) SetLinkedButtons(linked bool) {
+	sc, err := zb.box.GetStyleContext()
 	if err != nil {
 		log.Print(err)
 		return
@@ -87,9 +103,9 @@ func (nb *ZoomBox) SetLinkedButtons(linked bool) {
 
 	if linked {
 		sc.AddClass(style.ClassLinked)
-		nb.box.SetSpacing(0)
+		zb.box.SetSpacing(0)
 	} else {
 		sc.RemoveClass(style.ClassLinked)
-		nb.box.SetSpacing(4)
+		zb.box.SetSpacing(4)
 	}
 }

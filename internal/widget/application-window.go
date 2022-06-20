@@ -94,8 +94,6 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.window.AddAccelGroup(win.accels)
 
 	// Zoom original size.
-	win.accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
-
 	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 	win.app.application.SetAccelsForAction("win.show-properties", []string{"<Control>p"})
 
@@ -167,6 +165,8 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 
 	// Reload saved window state.
 	win.state.LoadState()
+
+	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
 
 	// Create main part of window.
 	win.comicContainer, err = NewImageViewer(win.window, win.state.ImageScale)
@@ -471,18 +471,24 @@ func (win *ApplicationWindow) ZoomIn() {
 	win.state.ImageScale = win.comicContainer.ZoomIn()
 	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < ImageScaleMax)
 	win.actions["zoom-out"].SetEnabled(true)
+	win.actions["zoom-reset"].SetEnabled(true)
+	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
 }
 
 func (win *ApplicationWindow) ZoomOut() {
 	win.state.ImageScale = win.comicContainer.ZoomOut()
 	win.actions["zoom-in"].SetEnabled(true)
 	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > ImageScaleMin)
+	win.actions["zoom-reset"].SetEnabled(true)
+	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
 }
 
 func (win *ApplicationWindow) ZoomReset() {
 	win.state.ImageScale = win.comicContainer.SetScale(1)
 	win.actions["zoom-in"].SetEnabled(true)
 	win.actions["zoom-out"].SetEnabled(true)
+	win.actions["zoom-reset"].SetEnabled(false)
+	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
