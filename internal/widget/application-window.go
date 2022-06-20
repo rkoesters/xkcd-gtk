@@ -225,61 +225,23 @@ func (win *ApplicationWindow) StyleUpdated() {
 		return s
 	}
 
-	firstImg, err := gtk.ImageNewFromIconName("go-first-symbolic", headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.navigationBar.SetFirstButtonImage(firstImg)
+	setButtonImageFromIconName := func(icon string, iconSize gtk.IconSize, imageSetter func(gtk.IWidget)) {
+		img, err := gtk.ImageNewFromIconName(icon, iconSize)
+		if err != nil {
+			log.Print(err)
+		} else {
+			imageSetter(img)
+		}
 	}
 
-	previousImg, err := gtk.ImageNewFromIconName("go-previous-symbolic", headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.navigationBar.SetPreviousButtonImage(previousImg)
-	}
-
-	randomImg, err := gtk.ImageNewFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.navigationBar.SetRandomButtonImage(randomImg)
-	}
-
-	nextImg, err := gtk.ImageNewFromIconName("go-next-symbolic", headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.navigationBar.SetNextButtonImage(nextImg)
-	}
-
-	newestImg, err := gtk.ImageNewFromIconName("go-last-symbolic", headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.navigationBar.SetNewestButtonImage(newestImg)
-	}
-
-	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.searchMenu.IWidget().(*gtk.MenuButton).SetImage(searchImg)
-	}
-
-	bookmarksImg, err := gtk.ImageNewFromIconName(icon("user-bookmarks"), headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.bookmarksMenu.IWidget().(*gtk.MenuButton).SetImage(bookmarksImg)
-	}
-
-	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.windowMenu.IWidget().(*gtk.MenuButton).SetImage(menuImg)
-	}
+	setButtonImageFromIconName("go-first-symbolic", headerBarIconSize, win.navigationBar.SetFirstButtonImage)
+	setButtonImageFromIconName("go-previous-symbolic", headerBarIconSize, win.navigationBar.SetPreviousButtonImage)
+	setButtonImageFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize, win.navigationBar.SetRandomButtonImage)
+	setButtonImageFromIconName("go-next-symbolic", headerBarIconSize, win.navigationBar.SetNextButtonImage)
+	setButtonImageFromIconName("go-last-symbolic", headerBarIconSize, win.navigationBar.SetNewestButtonImage)
+	setButtonImageFromIconName(icon("edit-find"), headerBarIconSize, win.searchMenu.IWidget().(*gtk.MenuButton).SetImage)
+	setButtonImageFromIconName(icon("user-bookmarks"), headerBarIconSize, win.bookmarksMenu.IWidget().(*gtk.MenuButton).SetImage)
+	setButtonImageFromIconName(icon("open-menu"), headerBarIconSize, win.windowMenu.IWidget().(*gtk.MenuButton).SetImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
 	win.navigationBar.SetLinkedButtons(linked)

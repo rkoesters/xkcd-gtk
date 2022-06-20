@@ -98,23 +98,23 @@ func (nb *NavigationBar) IWidget() gtk.IWidget {
 	return nb.box
 }
 
-func (nb *NavigationBar) SetFirstButtonImage(image *gtk.Image) {
+func (nb *NavigationBar) SetFirstButtonImage(image gtk.IWidget) {
 	nb.firstButton.SetImage(image)
 }
 
-func (nb *NavigationBar) SetPreviousButtonImage(image *gtk.Image) {
+func (nb *NavigationBar) SetPreviousButtonImage(image gtk.IWidget) {
 	nb.previousButton.SetImage(image)
 }
 
-func (nb *NavigationBar) SetRandomButtonImage(image *gtk.Image) {
+func (nb *NavigationBar) SetRandomButtonImage(image gtk.IWidget) {
 	nb.randomButton.SetImage(image)
 }
 
-func (nb *NavigationBar) SetNextButtonImage(image *gtk.Image) {
+func (nb *NavigationBar) SetNextButtonImage(image gtk.IWidget) {
 	nb.nextButton.SetImage(image)
 }
 
-func (nb *NavigationBar) SetNewestButtonImage(image *gtk.Image) {
+func (nb *NavigationBar) SetNewestButtonImage(image gtk.IWidget) {
 	nb.newestButton.SetImage(image)
 }
 
