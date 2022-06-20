@@ -35,6 +35,7 @@ func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, 
 		return nil, err
 	}
 	zb.box.SetLayout(gtk.BUTTONBOX_EXPAND)
+	zb.box.SetProperty("homogeneous", false)
 
 	zb.zoomOutButton, err = gtk.ButtonNew()
 	if err != nil {
