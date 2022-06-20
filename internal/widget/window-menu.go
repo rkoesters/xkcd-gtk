@@ -38,10 +38,6 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 	if err != nil {
 		return nil, err
 	}
-	wm.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
-	wm.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
-	wm.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
-	wm.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
 	wm.popover.Add(wm.popoverBox)
 
 	addMenuSeparator := func(menuBox *gtk.Box) error {

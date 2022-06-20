@@ -285,12 +285,16 @@ func (win *ApplicationWindow) StyleUpdated() {
 	win.navigationBar.SetLinkedButtons(linked)
 	win.windowMenu.zoomBox.SetLinkedButtons(linked)
 
-	if style.IsSkinnyMenuTheme(themeName) {
+	if style.IsCompactMenuTheme(themeName) {
+		win.windowMenu.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
+		win.windowMenu.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
 		win.windowMenu.popoverBox.SetMarginStart(0)
 		win.windowMenu.popoverBox.SetMarginEnd(0)
 	} else {
-		win.windowMenu.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
-		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
+		win.windowMenu.popoverBox.SetMarginTop(style.PopoverPadding)
+		win.windowMenu.popoverBox.SetMarginBottom(style.PopoverPadding)
+		win.windowMenu.popoverBox.SetMarginStart(style.PopoverPadding)
+		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverPadding)
 	}
 }
 

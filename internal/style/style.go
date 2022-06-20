@@ -99,7 +99,7 @@ var (
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
 
-	skinnyMenuThemesRegexp = regexp.MustCompile(strings.Join([]string{
+	compactMenuThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
@@ -123,8 +123,8 @@ func IsLinkedNavButtonsTheme(theme string) bool {
 	return !unlinkedNavButtonsThemesRegexp.MatchString(theme)
 }
 
-// IsSkinnyMenuTheme returns true if we should reduce the left and right margins
-// of popover-style menus.
-func IsSkinnyMenuTheme(theme string) bool {
-	return skinnyMenuThemesRegexp.MatchString(theme)
+// IsCompactMenuTheme returns true if we should reduce the left and right
+// margins of popover-style menus.
+func IsCompactMenuTheme(theme string) bool {
+	return compactMenuThemesRegexp.MatchString(theme)
 }
