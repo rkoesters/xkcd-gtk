@@ -21,6 +21,8 @@ type BookmarksMenu struct {
 	accels      *gtk.AccelGroup               // ptr to win.accels
 
 	menuButton   *gtk.MenuButton
+	popover      *gtk.Popover
+	popoverBox   *gtk.Box
 	addButton    *gtk.Button
 	removeButton *gtk.Button
 	separator    *gtk.Separator
@@ -51,52 +53,58 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.menuButton.SetTooltipText(l("Bookmarks"))
 	bm.menuButton.AddAccelerator("activate", bm.accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-	popover, err := gtk.PopoverNew(bm.menuButton)
+	bm.popover, err = gtk.PopoverNew(bm.menuButton)
 	if err != nil {
 		return nil, err
 	}
-	bm.menuButton.SetPopover(popover)
+	bm.menuButton.SetPopover(bm.popover)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPaddingCompact/2)
 	if err != nil {
 		return nil, err
 	}
-	box.SetMarginTop(style.PopoverPadding)
-	box.SetMarginBottom(style.PopoverPadding)
-	box.SetMarginStart(style.PopoverPadding)
-	box.SetMarginEnd(style.PopoverPadding)
+	bm.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
+	bm.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
+	bm.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
+	bm.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
 
-	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
+	bm.addButton, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	bm.addButton.SetProperty("action-name", "win.bookmark-new")
+	bm.addButton.SetActionName("win.bookmark-new")
+	bm.addButton.SetLabel(l("Add to bookmarks"))
 	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
 	bm.addButton.SetImage(bookmarkNewImage)
 	bm.addButton.SetAlwaysShowImage(true)
-	box.Add(bm.addButton)
+	bm.addButton.SetMarginStart(style.PopoverPaddingCompact)
+	bm.addButton.SetMarginEnd(style.PopoverPaddingCompact)
+	bm.popoverBox.Add(bm.addButton)
 
-	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
+	bm.removeButton, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	bm.removeButton.SetProperty("action-name", "win.bookmark-remove")
+	bm.removeButton.SetActionName("win.bookmark-remove")
+	bm.removeButton.SetLabel(l("Remove from bookmarks"))
 	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
 	bm.removeButton.SetImage(bookmarkRemoveImage)
 	bm.removeButton.SetAlwaysShowImage(true)
-	box.Add(bm.removeButton)
+	bm.removeButton.SetMarginStart(style.PopoverPaddingCompact)
+	bm.removeButton.SetMarginEnd(style.PopoverPaddingCompact)
+	bm.popoverBox.Add(bm.removeButton)
 
 	bm.separator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
 	}
-	box.Add(bm.separator)
+	bm.popoverBox.PackStart(bm.separator, false, false, style.PopoverPaddingCompact/2)
 
 	bm.scroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
@@ -108,7 +116,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.scroller.SetProperty("min-content-width", 200)
 	bm.scroller.SetProperty("max-content-height", 350)
 	bm.scroller.SetProperty("max-content-width", 350)
-	box.Add(bm.scroller)
+	bm.popoverBox.Add(bm.scroller)
 	bm.list, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
@@ -120,8 +128,8 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	})
 	defer bm.loadBookmarkList()
 
-	box.ShowAll()
-	popover.Add(box)
+	bm.popoverBox.ShowAll()
+	bm.popover.Add(bm.popoverBox)
 
 	return bm, nil
 }
@@ -134,6 +142,8 @@ func (bm *BookmarksMenu) Destroy() {
 	bm.accels = nil
 
 	bm.menuButton = nil
+	bm.popover = nil
+	bm.popoverBox = nil
 	bm.addButton = nil
 	bm.removeButton = nil
 	bm.separator = nil

@@ -28,7 +28,7 @@ msgstr ""
 msgid "About XKCD"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:76 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Application actions"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:92
+#: internal/widget/bookmarks-menu.go:53 internal/widget/shortcuts-window.ui:92
 msgid "Bookmarks"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:316
+#: internal/widget/application-window.go:322
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:376
+#: internal/widget/application-window.go:382
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:391
+#: internal/widget/application-window.go:397
 msgid "Loading comic..."
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:92 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr ""
 
