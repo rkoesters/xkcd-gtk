@@ -80,14 +80,6 @@ func (zb *ZoomBox) IWidget() gtk.IWidget {
 	return zb.box
 }
 
-func (zb *ZoomBox) SetZoomInButtonImage(image *gtk.Image) {
-	zb.zoomInButton.SetImage(image)
-}
-
-func (zb *ZoomBox) SetZoomOutButtonImage(image *gtk.Image) {
-	zb.zoomOutButton.SetImage(image)
-}
-
 func (zb *ZoomBox) SetCurrentZoom(scale float64) {
 	zb.zoomResetButton.SetLabel(fmt.Sprintf("%.0f%%", scale*100))
 }
