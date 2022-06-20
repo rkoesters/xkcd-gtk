@@ -34,7 +34,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	if err != nil {
 		return nil, err
 	}
-	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverMenuPadding)
+	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 		if err != nil {
 			return err
 		}
-		menuBox.PackStart(sep, false, true, 0)
+		menuBox.PackStart(sep, false, true, style.PopoverMenuPadding)
 		return nil
 	}
 
