@@ -15,7 +15,7 @@ const (
 	ClassComicContainer = "comic-container"
 	ClassLinked         = "linked"
 
-	PopoverPadding        = 12
+	PopoverPadding        = 10
 	PopoverPaddingCompact = 8
 )
 
