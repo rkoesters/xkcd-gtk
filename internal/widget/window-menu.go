@@ -44,12 +44,12 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	wm.popoverBox.SetMarginEnd(style.PopoverMenuPadding)
 	wm.popover.Add(wm.popoverBox)
 
-	addMenuSeparator := func(menuBox *gtk.Box) error {
+	addMenuSeparator := func(menuBox *gtk.Box, padding uint) error {
 		sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 		if err != nil {
 			return err
 		}
-		menuBox.PackStart(sep, false, true, style.PopoverMenuPadding/2)
+		menuBox.PackStart(sep, false, true, padding)
 		return nil
 	}
 
@@ -76,7 +76,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	}
 	wm.zoomBox.SetCurrentZoom(comicContainer.scale)
 	wm.popoverBox.Add(wm.zoomBox.IWidget())
-	err = addMenuSeparator(wm.popoverBox)
+	err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding)
 	if err != nil {
 		return nil, err
 	}
@@ -94,11 +94,12 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	if err != nil {
 		return nil, err
 	}
-	if err = addMenuSeparator(wm.popoverBox); err != nil {
-		return nil, err
-	}
 
 	if !prefersAppMenu {
+		if err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding/2); err != nil {
+			return nil, err
+		}
+
 		err = addMenuEntry(wm.popoverBox, l("New window"), "app.new-window")
 		if err != nil {
 			return nil, err
@@ -107,7 +108,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 		if err != nil {
 			return nil, err
 		}
-		if err = addMenuSeparator(wm.popoverBox); err != nil {
+		if err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding/2); err != nil {
 			return nil, err
 		}
 
@@ -127,7 +128,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 		if err != nil {
 			return nil, err
 		}
-		if err = addMenuSeparator(wm.popoverBox); err != nil {
+		if err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding/2); err != nil {
 			return nil, err
 		}
 
