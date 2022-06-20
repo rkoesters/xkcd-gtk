@@ -285,17 +285,8 @@ func (win *ApplicationWindow) StyleUpdated() {
 	win.navigationBar.SetLinkedButtons(linked)
 	win.windowMenu.zoomBox.SetLinkedButtons(linked)
 
-	if style.IsCompactMenuTheme(themeName) {
-		win.windowMenu.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
-		win.windowMenu.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
-		win.windowMenu.popoverBox.SetMarginStart(0)
-		win.windowMenu.popoverBox.SetMarginEnd(0)
-	} else {
-		win.windowMenu.popoverBox.SetMarginTop(style.PopoverPadding)
-		win.windowMenu.popoverBox.SetMarginBottom(style.PopoverPadding)
-		win.windowMenu.popoverBox.SetMarginStart(style.PopoverPadding)
-		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverPadding)
-	}
+	compact := style.IsCompactMenuTheme(themeName)
+	win.windowMenu.SetCompact(compact)
 }
 
 // FirstComic goes to the first comic.

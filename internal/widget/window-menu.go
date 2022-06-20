@@ -156,3 +156,17 @@ func (wm *WindowMenu) Destroy() {
 func (wm *WindowMenu) IWidget() gtk.IWidget {
 	return wm.menuButton
 }
+
+func (wm *WindowMenu) SetCompact(compact bool) {
+	if compact {
+		wm.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
+		wm.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
+		wm.popoverBox.SetMarginStart(0)
+		wm.popoverBox.SetMarginEnd(0)
+	} else {
+		wm.popoverBox.SetMarginTop(style.PopoverPadding)
+		wm.popoverBox.SetMarginBottom(style.PopoverPadding)
+		wm.popoverBox.SetMarginStart(style.PopoverPadding)
+		wm.popoverBox.SetMarginEnd(style.PopoverPadding)
+	}
+}
