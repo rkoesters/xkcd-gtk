@@ -68,12 +68,11 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.popoverBox.SetMarginStart(style.PopoverPadding)
 	bm.popoverBox.SetMarginEnd(style.PopoverPadding)
 
-	bm.addButton, err = gtk.ButtonNew()
+	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
 	if err != nil {
 		return nil, err
 	}
 	bm.addButton.SetActionName("win.bookmark-new")
-	bm.addButton.SetLabel(l("Add to bookmarks"))
 	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
@@ -82,12 +81,11 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.addButton.SetAlwaysShowImage(true)
 	bm.popoverBox.Add(bm.addButton)
 
-	bm.removeButton, err = gtk.ButtonNew()
+	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
 	if err != nil {
 		return nil, err
 	}
 	bm.removeButton.SetActionName("win.bookmark-remove")
-	bm.removeButton.SetLabel(l("Remove from bookmarks"))
 	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err

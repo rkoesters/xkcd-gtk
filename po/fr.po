@@ -29,7 +29,7 @@ msgstr "À propos de Comic Sticks"
 msgid "About XKCD"
 msgstr "À propos de XKCD"
 
-#: internal/widget/bookmarks-menu.go:76 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:71 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 "Lisez xkcd : une bande dessinée de romance, de sarcasme, de maths et de "
 "langue en ligne"
 
-#: internal/widget/bookmarks-menu.go:90 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:84 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr ""
 
