@@ -18,7 +18,7 @@ type WindowMenu struct {
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMenu, error) {
+func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 	var err error
 
 	wm := &WindowMenu{}
@@ -70,7 +70,6 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 	if err != nil {
 		return nil, err
 	}
-	wm.zoomBox.SetCurrentZoom(comicContainer.scale)
 	wm.zoomBox.box.SetMarginBottom(style.PopoverPaddingCompact / 2)
 	wm.popoverBox.Add(wm.zoomBox.IWidget())
 	err = addMenuSeparator(wm.popoverBox)

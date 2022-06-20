@@ -21,11 +21,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
-#: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:38
+#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:38
 msgid "About Comic Sticks"
 msgstr "A proposito di Sticks Comic"
 
-#: internal/widget/window-menu.go:124 internal/widget/app-menu.ui:28
+#: internal/widget/window-menu.go:123 internal/widget/app-menu.ui:28
 msgid "About XKCD"
 msgstr "Informazioni su XKCD"
 
@@ -95,7 +95,7 @@ msgstr "Data"
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:86
+#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:85
 msgid "Explain"
 msgstr "Spiega"
 
@@ -131,7 +131,7 @@ msgstr "Immagine"
 msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
-#: internal/widget/window-menu.go:132 internal/widget/app-menu.ui:34
+#: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:34
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
@@ -151,7 +151,7 @@ msgstr "Menu"
 msgid "Navigate"
 msgstr "Naviga"
 
-#: internal/widget/window-menu.go:100 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:99 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New window"
 msgstr "Nuova Finestra"
@@ -168,7 +168,7 @@ msgstr "Nessun risultato trovato"
 msgid "Number"
 msgstr "Numero"
 
-#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:82
+#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:81
 msgid "Open link"
 msgstr "Apri Link"
 
@@ -181,7 +181,7 @@ msgid "Open shortcuts window"
 msgstr "Apri la finestra delle scorciatoie"
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
-#: internal/widget/window-menu.go:90 internal/widget/shortcuts-window.ui:105
+#: internal/widget/window-menu.go:89 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Proprietà"
 
@@ -245,7 +245,7 @@ msgstr "Mostra proprietà fumetto"
 msgid "Title"
 msgstr "Titolo"
 
-#: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:10
+#: internal/widget/window-menu.go:103 internal/widget/app-menu.ui:10
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
@@ -262,15 +262,15 @@ msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 msgid "View comic metadata"
 msgstr "Visualizza metadati fumetto"
 
-#: internal/widget/window-menu.go:112 internal/widget/app-menu.ui:16
+#: internal/widget/window-menu.go:111 internal/widget/app-menu.ui:16
 msgid "What If?"
 msgstr "E se?"
 
-#: internal/widget/window-menu.go:116 internal/widget/app-menu.ui:20
+#: internal/widget/window-menu.go:115 internal/widget/app-menu.ui:20
 msgid "XKCD Blog"
 msgstr "XKCD Blog"
 
-#: internal/widget/window-menu.go:120 internal/widget/app-menu.ui:24
+#: internal/widget/window-menu.go:119 internal/widget/app-menu.ui:24
 msgid "XKCD Store"
 msgstr "XKCD Store"
 
