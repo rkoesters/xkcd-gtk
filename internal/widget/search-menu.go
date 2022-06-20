@@ -48,7 +48,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	}
 	sm.menuButton.SetPopover(popover)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 10)
+	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPadding)
 	if err != nil {
 		return nil, err
 	}
