@@ -156,7 +156,7 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 	}
 
 	for _, sr := range result.Hits {
-		item, err := gtk.ButtonNew()
+		item, err := gtk.ModelButtonNew()
 		if err != nil {
 			log.Print(err)
 			return
@@ -189,8 +189,13 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
 		box.Add(labelTitle)
 
+		child, err := item.GetChild()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		item.Remove(child)
 		item.Add(box)
-		item.SetRelief(gtk.RELIEF_NONE)
 		sm.results.Add(item)
 	}
 }

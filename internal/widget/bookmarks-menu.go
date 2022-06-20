@@ -232,7 +232,7 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 			continue
 		}
 
-		item, err := gtk.ButtonNew()
+		item, err := gtk.ModelButtonNew()
 		if err != nil {
 			log.Print(err)
 			return
@@ -262,8 +262,13 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
 		box.Add(labelTitle)
 
+		child, err := item.GetChild()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		item.Remove(child)
 		item.Add(box)
-		item.SetRelief(gtk.RELIEF_NONE)
 		bm.list.Add(item)
 	}
 }
