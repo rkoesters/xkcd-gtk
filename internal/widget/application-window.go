@@ -274,20 +274,6 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.bookmarksMenu.IWidget().(*gtk.MenuButton).SetImage(bookmarksImg)
 	}
 
-	zoomOutImg, err := gtk.ImageNewFromIconName(icon("zoom-out"), headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.windowMenu.zoomBox.zoomOutButton.SetImage(zoomOutImg)
-	}
-
-	zoomInImg, err := gtk.ImageNewFromIconName(icon("zoom-in"), headerBarIconSize)
-	if err != nil {
-		log.Print(err)
-	} else {
-		win.windowMenu.zoomBox.zoomInButton.SetImage(zoomInImg)
-	}
-
 	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)

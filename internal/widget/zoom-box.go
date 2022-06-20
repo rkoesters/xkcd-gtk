@@ -35,6 +35,11 @@ func NewZoomBox() (*ZoomBox, error) {
 	}
 	zb.zoomOutButton.SetTooltipText(l("Zoom out"))
 	zb.zoomOutButton.SetProperty("action-name", "win.zoom-out")
+	zoomOutImg, err := gtk.ImageNewFromIconName("zoom-out-symbolic", gtk.ICON_SIZE_MENU)
+	if err != nil {
+		return nil, err
+	}
+	zb.zoomOutButton.SetImage(zoomOutImg)
 	zb.box.PackStart(zb.zoomOutButton, false, true, 0)
 
 	zb.zoomResetButton, err = gtk.ButtonNew()
@@ -51,6 +56,11 @@ func NewZoomBox() (*ZoomBox, error) {
 	}
 	zb.zoomInButton.SetTooltipText(l("Zoom in"))
 	zb.zoomInButton.SetProperty("action-name", "win.zoom-in")
+	zoomInImg, err := gtk.ImageNewFromIconName("zoom-in-symbolic", gtk.ICON_SIZE_MENU)
+	if err != nil {
+		return nil, err
+	}
+	zb.zoomInButton.SetImage(zoomInImg)
 	zb.box.PackStart(zb.zoomInButton, false, true, 0)
 
 	return zb, nil

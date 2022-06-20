@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:330
+#: internal/widget/application-window.go:316
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:390
+#: internal/widget/application-window.go:376
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:405
+#: internal/widget/application-window.go:391
 msgid "Loading comic..."
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:44
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:49
 #: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
 msgstr ""
@@ -277,7 +277,7 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:52
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:57
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
