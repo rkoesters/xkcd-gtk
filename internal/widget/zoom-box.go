@@ -7,7 +7,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
-type ZoomBar struct {
+type ZoomBox struct {
 	accels *gtk.AccelGroup // ptr to win.accels
 
 	box *gtk.ButtonBox
@@ -18,12 +18,12 @@ type ZoomBar struct {
 	comicContainer *ImageViewer
 }
 
-var _ Widget = &ZoomBar{}
+var _ Widget = &ZoomBox{}
 
-func NewZoomBar(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBar, error) {
+func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, error) {
 	var err error
 
-	zb := &ZoomBar{
+	zb := &ZoomBox{
 		accels:         accels,
 		comicContainer: comicContainer,
 	}
@@ -55,7 +55,7 @@ func NewZoomBar(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBar, 
 	return zb, nil
 }
 
-func (zb *ZoomBar) Destroy() {
+func (zb *ZoomBox) Destroy() {
 	zb.accels = nil
 
 	zb.box = nil
@@ -66,19 +66,19 @@ func (zb *ZoomBar) Destroy() {
 	zb.comicContainer = nil
 }
 
-func (zb *ZoomBar) IWidget() gtk.IWidget {
+func (zb *ZoomBox) IWidget() gtk.IWidget {
 	return zb.box
 }
 
-func (zb *ZoomBar) SetZoomInButtonImage(image *gtk.Image) {
+func (zb *ZoomBox) SetZoomInButtonImage(image *gtk.Image) {
 	zb.zoomInButton.SetImage(image)
 }
 
-func (nb *ZoomBar) SetZoomOutButtonImage(image *gtk.Image) {
+func (nb *ZoomBox) SetZoomOutButtonImage(image *gtk.Image) {
 	nb.zoomOutButton.SetImage(image)
 }
 
-func (nb *ZoomBar) SetLinkedButtons(linked bool) {
+func (nb *ZoomBox) SetLinkedButtons(linked bool) {
 	sc, err := nb.box.GetStyleContext()
 	if err != nil {
 		log.Print(err)

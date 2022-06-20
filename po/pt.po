@@ -286,12 +286,12 @@ msgstr "Visualizador XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/zoom-bar.go:50
+#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:50
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/zoom-bar.go:41
+#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:41
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
 msgstr ""

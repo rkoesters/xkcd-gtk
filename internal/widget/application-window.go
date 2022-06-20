@@ -34,7 +34,7 @@ type ApplicationWindow struct {
 	navigationBar *NavigationBar
 	searchMenu    *SearchMenu
 
-	zoomBar       *ZoomBar
+	zoomBox       *ZoomBox
 	bookmarksMenu *BookmarksMenu
 	windowMenu    *WindowMenu
 
@@ -134,13 +134,6 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	}
 	win.header.PackStart(win.navigationBar.IWidget())
 
-	// Create the search menu.
-	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackStart(win.searchMenu.IWidget())
-
 	// Create the window menu.
 	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu())
 	if err != nil {
@@ -156,11 +149,18 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
 	// Create zoom in and zoom out buttons.
-	win.zoomBar, err = NewZoomBar(win.accels, win.comicContainer)
+	win.zoomBox, err = NewZoomBox(win.accels, win.comicContainer)
 	if err != nil {
 		return nil, err
 	}
-	win.header.PackEnd(win.zoomBar.IWidget())
+	win.header.PackEnd(win.zoomBox.IWidget())
+
+	// Create the search menu.
+	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackEnd(win.searchMenu.IWidget())
 
 	win.header.ShowAll()
 	win.window.SetTitlebar(win.header)
@@ -284,14 +284,14 @@ func (win *ApplicationWindow) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.zoomBar.zoomOutButton.SetImage(zoomOutImg)
+		win.zoomBox.zoomOutButton.SetImage(zoomOutImg)
 	}
 
 	zoomInImg, err := gtk.ImageNewFromIconName(icon("zoom-in"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.zoomBar.zoomInButton.SetImage(zoomInImg)
+		win.zoomBox.zoomInButton.SetImage(zoomInImg)
 	}
 
 	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
@@ -303,7 +303,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
 	win.navigationBar.SetLinkedButtons(linked)
-	win.zoomBar.SetLinkedButtons(linked)
+	win.zoomBox.SetLinkedButtons(linked)
 }
 
 // FirstComic goes to the first comic.
@@ -527,8 +527,8 @@ func (win *ApplicationWindow) Destroy() {
 	win.searchMenu.Destroy()
 	win.searchMenu = nil
 
-	win.zoomBar.Destroy()
-	win.zoomBar = nil
+	win.zoomBox.Destroy()
+	win.zoomBox = nil
 
 	win.bookmarksMenu.Destroy()
 	win.bookmarksMenu = nil
