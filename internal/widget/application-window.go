@@ -34,7 +34,6 @@ type ApplicationWindow struct {
 	navigationBar *NavigationBar
 	searchMenu    *SearchMenu
 
-	zoomBox       *ZoomBox
 	bookmarksMenu *BookmarksMenu
 	windowMenu    *WindowMenu
 
@@ -52,6 +51,9 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win := &ApplicationWindow{
 		app: app,
 	}
+
+	// Reload saved window state.
+	win.state.LoadState()
 
 	win.window, err = gtk.ApplicationWindowNew(app.application)
 	if err != nil {
@@ -117,58 +119,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	// When gtk destroys the window, we want to clean up.
 	win.window.Connect("destroy", win.Destroy)
 
-	// Create HeaderBar
-	win.header, err = gtk.HeaderBarNew()
-	if err != nil {
-		return nil, err
-	}
-	win.header.SetTitle(AppName())
-	win.header.SetShowCloseButton(true)
-
-	// Create navigation buttons
-	win.navigationBar, err = NewNavigationBar(win.accels)
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackStart(win.navigationBar.IWidget())
-
-	// Create the window menu.
-	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu())
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackEnd(win.windowMenu.IWidget())
-
-	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackEnd(win.bookmarksMenu.IWidget())
-
-	// Create zoom in and zoom out buttons.
-	win.zoomBox, err = NewZoomBox(win.accels, win.comicContainer)
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackEnd(win.zoomBox.IWidget())
-
-	// Create the search menu.
-	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackEnd(win.searchMenu.IWidget())
-
-	win.header.ShowAll()
-	win.window.SetTitlebar(win.header)
-
-	// Reload saved window state.
-	win.state.LoadState()
-
-	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
-
-	// Create main part of window.
+	// Create image viewing frame
 	win.comicContainer, err = NewImageViewer(win.window, win.state.ImageScale)
 	if err != nil {
 		return nil, err
@@ -185,6 +136,46 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	if win.state.PropertiesVisible {
 		win.ShowProperties()
 	}
+
+	// Create HeaderBar
+	win.header, err = gtk.HeaderBarNew()
+	if err != nil {
+		return nil, err
+	}
+	win.header.SetTitle(AppName())
+	win.header.SetShowCloseButton(true)
+
+	// Create navigation buttons
+	win.navigationBar, err = NewNavigationBar(win.accels)
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackStart(win.navigationBar.IWidget())
+
+	// Create the window menu.
+	win.windowMenu, err = NewWindowMenu(win.accels, win.comicContainer, app.application.PrefersAppMenu())
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackEnd(win.windowMenu.IWidget())
+
+	// Create the bookmarks menu.
+	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackEnd(win.bookmarksMenu.IWidget())
+
+	// Create the search menu.
+	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackEnd(win.searchMenu.IWidget())
+
+	win.header.ShowAll()
+	win.window.SetTitlebar(win.header)
+
 	win.SetComic(win.state.ComicNumber)
 
 	return win, nil
@@ -284,14 +275,14 @@ func (win *ApplicationWindow) StyleUpdated() {
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.zoomBox.zoomOutButton.SetImage(zoomOutImg)
+		win.windowMenu.zoomBox.zoomOutButton.SetImage(zoomOutImg)
 	}
 
 	zoomInImg, err := gtk.ImageNewFromIconName(icon("zoom-in"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.zoomBox.zoomInButton.SetImage(zoomInImg)
+		win.windowMenu.zoomBox.zoomInButton.SetImage(zoomInImg)
 	}
 
 	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
@@ -301,9 +292,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.windowMenu.IWidget().(*gtk.MenuButton).SetImage(menuImg)
 	}
 
-	linked := style.IsLinkedNavButtonsTheme(themeName)
-	win.navigationBar.SetLinkedButtons(linked)
-	win.zoomBox.SetLinkedButtons(linked)
+	win.navigationBar.SetLinkedButtons(style.IsLinkedNavButtonsTheme(themeName))
 }
 
 // FirstComic goes to the first comic.
@@ -472,7 +461,7 @@ func (win *ApplicationWindow) ZoomIn() {
 	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < ImageScaleMax)
 	win.actions["zoom-out"].SetEnabled(true)
 	win.actions["zoom-reset"].SetEnabled(true)
-	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
 }
 
 func (win *ApplicationWindow) ZoomOut() {
@@ -480,7 +469,7 @@ func (win *ApplicationWindow) ZoomOut() {
 	win.actions["zoom-in"].SetEnabled(true)
 	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > ImageScaleMin)
 	win.actions["zoom-reset"].SetEnabled(true)
-	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
 }
 
 func (win *ApplicationWindow) ZoomReset() {
@@ -488,7 +477,7 @@ func (win *ApplicationWindow) ZoomReset() {
 	win.actions["zoom-in"].SetEnabled(true)
 	win.actions["zoom-out"].SetEnabled(true)
 	win.actions["zoom-reset"].SetEnabled(false)
-	win.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
@@ -532,9 +521,6 @@ func (win *ApplicationWindow) Destroy() {
 
 	win.searchMenu.Destroy()
 	win.searchMenu = nil
-
-	win.zoomBox.Destroy()
-	win.zoomBox = nil
 
 	win.bookmarksMenu.Destroy()
 	win.bookmarksMenu = nil

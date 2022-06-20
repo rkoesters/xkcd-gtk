@@ -1,19 +1,27 @@
 package widget
 
 import (
-	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+)
+
+const (
+	windowMenuPadding = 4
 )
 
 type WindowMenu struct {
 	menuButton *gtk.MenuButton
+
+	popover    *gtk.Popover
+	popoverBox *gtk.Box
+
+	zoomBox *ZoomBox
 
 	showProperties func() // win.ShowProperties
 }
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
+func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMenu, error) {
 	var err error
 
 	wm := &WindowMenu{}
@@ -25,41 +33,130 @@ func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 	}
 	wm.menuButton.SetTooltipText(l("Menu"))
 
-	menu := glib.MenuNew()
-
-	menu.AppendSectionWithoutLabel(&NewComicPropertiesMenuSection().MenuModel)
-
-	if !prefersAppMenu {
-		appSection := glib.MenuNew()
-		appSection.Append(l("New window"), "app.new-window")
-		appSection.Append(l("Toggle dark mode"), "app.toggle-dark-mode")
-		menu.AppendSectionWithoutLabel(&appSection.MenuModel)
-
-		websiteSection := glib.MenuNew()
-		websiteSection.Append(l("What If?"), "app.open-what-if")
-		websiteSection.Append(l("XKCD Blog"), "app.open-blog")
-		websiteSection.Append(l("XKCD Store"), "app.open-store")
-		websiteSection.Append(l("About XKCD"), "app.open-about-xkcd")
-		menu.AppendSectionWithoutLabel(&websiteSection.MenuModel)
-
-		helpSection := glib.MenuNew()
-		helpSection.Append(l("Keyboard shortcuts"), "app.show-shortcuts")
-		helpSection.Append(l("About Comic Sticks"), "app.show-about")
-		menu.AppendSectionWithoutLabel(&helpSection.MenuModel)
-	}
-
-	menuWidget, err := gtk.GtkMenuNewFromModel(&menu.MenuModel)
+	wm.popover, err = gtk.PopoverNew(wm.menuButton)
 	if err != nil {
 		return nil, err
 	}
-	menuWidget.SetHAlign(gtk.ALIGN_END)
-	wm.menuButton.SetPopup(menuWidget)
+	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, windowMenuPadding)
+	if err != nil {
+		return nil, err
+	}
+	wm.popoverBox.SetMarginTop(windowMenuPadding)
+	wm.popoverBox.SetMarginBottom(windowMenuPadding)
+	wm.popoverBox.SetMarginStart(windowMenuPadding)
+	wm.popoverBox.SetMarginEnd(windowMenuPadding)
+	wm.popover.Add(wm.popoverBox)
+
+	addMenuSeparator := func(menuBox *gtk.Box) error {
+		sep, err := gtk.SeparatorMenuItemNew()
+		if err != nil {
+			return err
+		}
+		menuBox.PackStart(sep, false, true, windowMenuPadding)
+		return nil
+	}
+
+	addMenuEntry := func(menuBox *gtk.Box, label, action string) error {
+		mb, err := gtk.ModelButtonNew()
+		if err != nil {
+			return err
+		}
+		mb.SetActionName(action)
+		mb.SetLabel(label)
+		mbl, err := mb.GetChild()
+		if err != nil {
+			return err
+		}
+		mbl.ToWidget().SetHAlign(gtk.ALIGN_START)
+		menuBox.PackStart(mb, false, true, 0)
+		return nil
+	}
+
+	// Zoom section.
+	wm.zoomBox, err = NewZoomBox(accels, comicContainer)
+	if err != nil {
+		return nil, err
+	}
+	wm.zoomBox.SetCurrentZoom(comicContainer.scale)
+	wm.popoverBox.Add(wm.zoomBox.IWidget())
+	err = addMenuSeparator(wm.popoverBox)
+	if err != nil {
+		return nil, err
+	}
+
+	// Comic properties section.
+	err = addMenuEntry(wm.popoverBox, l("Open link"), "win.open-link")
+	if err != nil {
+		return nil, err
+	}
+	err = addMenuEntry(wm.popoverBox, l("Explain"), "win.explain")
+	if err != nil {
+		return nil, err
+	}
+	err = addMenuEntry(wm.popoverBox, l("Properties"), "win.show-properties")
+	if err != nil {
+		return nil, err
+	}
+	if err = addMenuSeparator(wm.popoverBox); err != nil {
+		return nil, err
+	}
+
+	if !prefersAppMenu {
+		err = addMenuEntry(wm.popoverBox, l("New window"), "app.new-window")
+		if err != nil {
+			return nil, err
+		}
+		err = addMenuEntry(wm.popoverBox, l("Toggle dark mode"), "app.toggle-dark-mode")
+		if err != nil {
+			return nil, err
+		}
+		if err = addMenuSeparator(wm.popoverBox); err != nil {
+			return nil, err
+		}
+
+		err = addMenuEntry(wm.popoverBox, l("What If?"), "app.open-what-if")
+		if err != nil {
+			return nil, err
+		}
+		err = addMenuEntry(wm.popoverBox, l("XKCD Blog"), "app.open-blog")
+		if err != nil {
+			return nil, err
+		}
+		err = addMenuEntry(wm.popoverBox, l("XKCD Store"), "app.open-store")
+		if err != nil {
+			return nil, err
+		}
+		err = addMenuEntry(wm.popoverBox, l("About XKCD"), "app.open-about-xkcd")
+		if err != nil {
+			return nil, err
+		}
+		if err = addMenuSeparator(wm.popoverBox); err != nil {
+			return nil, err
+		}
+
+		err = addMenuEntry(wm.popoverBox, l("Keyboard shortcuts"), "app.show-shortcuts")
+		if err != nil {
+			return nil, err
+		}
+		err = addMenuEntry(wm.popoverBox, l("About Comic Sticks"), "app.show-about")
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	wm.popoverBox.ShowAll()
+	wm.menuButton.SetPopover(wm.popover)
+	wm.menuButton.SetUsePopover(true)
 
 	return wm, nil
 }
 
 func (wm *WindowMenu) Destroy() {
 	wm.menuButton = nil
+	wm.popover = nil
+	wm.popoverBox = nil
+	wm.zoomBox.Destroy()
+	wm.zoomBox = nil
 }
 
 func (wm *WindowMenu) IWidget() gtk.IWidget {
