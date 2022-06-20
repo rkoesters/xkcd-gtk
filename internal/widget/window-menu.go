@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	windowMenuPadding = 4
+	windowMenuPadding = 8
 )
 
 type WindowMenu struct {
@@ -52,7 +52,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 		if err != nil {
 			return err
 		}
-		menuBox.PackStart(sep, false, true, windowMenuPadding)
+		menuBox.PackStart(sep, false, true, 0)
 		return nil
 	}
 
