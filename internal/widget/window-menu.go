@@ -70,7 +70,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	}
 
 	// Zoom section.
-	wm.zoomBox, err = NewZoomBox(accels, comicContainer)
+	wm.zoomBox, err = NewZoomBox(accels)
 	if err != nil {
 		return nil, err
 	}

@@ -15,18 +15,15 @@ type ZoomBox struct {
 	zoomInButton    *gtk.Button
 	zoomOutButton   *gtk.Button
 	zoomResetButton *gtk.Button
-
-	comicContainer *ImageViewer
 }
 
 var _ Widget = &ZoomBox{}
 
-func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, error) {
+func NewZoomBox(accels *gtk.AccelGroup) (*ZoomBox, error) {
 	var err error
 
 	zb := &ZoomBox{
-		accels:         accels,
-		comicContainer: comicContainer,
+		accels: accels,
 	}
 
 	zb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
@@ -71,8 +68,6 @@ func (zb *ZoomBox) Destroy() {
 	zb.zoomInButton = nil
 	zb.zoomOutButton = nil
 	zb.zoomResetButton = nil
-
-	zb.comicContainer = nil
 }
 
 func (zb *ZoomBox) IWidget() gtk.IWidget {
