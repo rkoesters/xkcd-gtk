@@ -297,7 +297,9 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.windowMenu.IWidget().(*gtk.MenuButton).SetImage(menuImg)
 	}
 
-	win.navigationBar.SetLinkedButtons(style.IsLinkedNavButtonsTheme(themeName))
+	linked := style.IsLinkedNavButtonsTheme(themeName)
+	win.navigationBar.SetLinkedButtons(linked)
+	win.windowMenu.zoomBox.SetLinkedButtons(linked)
 
 	if style.IsSkinnyMenuTheme(themeName) {
 		win.windowMenu.popoverBox.SetMarginStart(0)

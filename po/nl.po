@@ -52,7 +52,7 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/application-window.go:330
+#: internal/widget/application-window.go:332
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal..."
 
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:390
+#: internal/widget/application-window.go:392
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -142,7 +142,7 @@ msgstr "Sneltoetsen"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:405
+#: internal/widget/application-window.go:407
 msgid "Loading comic..."
 msgstr "Bezig met laden..."
 
