@@ -52,7 +52,7 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/application-window.go:326
+#: internal/widget/application-window.go:328
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal..."
 
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:386
+#: internal/widget/application-window.go:388
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -142,7 +142,7 @@ msgstr "Sneltoetsen"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:401
+#: internal/widget/application-window.go:403
 msgid "Loading comic..."
 msgstr "Bezig met laden..."
 
@@ -209,7 +209,7 @@ msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 msgid "Remove from bookmarks"
 msgstr "Verwijderen uit bladwijzers"
 
-#: internal/widget/context-menu.go:52 internal/widget/zoom-box.go:53
+#: internal/widget/context-menu.go:52 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
 msgstr ""
@@ -283,12 +283,12 @@ msgstr "XKCD lezen"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:62
+#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:44
+#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:43
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
 msgstr ""

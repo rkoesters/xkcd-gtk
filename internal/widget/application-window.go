@@ -95,7 +95,11 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	}
 	win.window.AddAccelGroup(win.accels)
 
-	// Zoom original size.
+	// Zoom keyboard shortcuts
+	win.accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
+	win.accels.Connect(gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomOut)
+	win.accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
+
 	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 	win.app.application.SetAccelsForAction("win.show-properties", []string{"<Control>p"})
 

@@ -2,7 +2,6 @@ package widget
 
 import (
 	"fmt"
-	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
@@ -43,7 +42,6 @@ func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, 
 	}
 	zb.zoomOutButton.SetTooltipText(l("Zoom out"))
 	zb.zoomOutButton.SetProperty("action-name", "win.zoom-out")
-	zb.zoomOutButton.AddAccelerator("activate", zb.accels, gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	zb.box.Add(zb.zoomOutButton)
 
 	zb.zoomResetButton, err = gtk.ButtonNew()
@@ -52,7 +50,6 @@ func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, 
 	}
 	zb.zoomResetButton.SetTooltipText(l("Reset zoom"))
 	zb.zoomResetButton.SetProperty("action-name", "win.zoom-reset")
-	zb.zoomResetButton.AddAccelerator("activate", zb.accels, gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	zb.box.Add(zb.zoomResetButton)
 
 	zb.zoomInButton, err = gtk.ButtonNew()
@@ -61,7 +58,6 @@ func NewZoomBox(accels *gtk.AccelGroup, comicContainer *ImageViewer) (*ZoomBox, 
 	}
 	zb.zoomInButton.SetTooltipText(l("Zoom in"))
 	zb.zoomInButton.SetProperty("action-name", "win.zoom-in")
-	zb.zoomInButton.AddAccelerator("activate", zb.accels, gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	zb.box.Add(zb.zoomInButton)
 
 	return zb, nil

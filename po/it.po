@@ -49,7 +49,7 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
-#: internal/widget/application-window.go:326
+#: internal/widget/application-window.go:328
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
-#: internal/widget/application-window.go:386
+#: internal/widget/application-window.go:388
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
@@ -139,7 +139,7 @@ msgstr "Tasti Rapidi"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:401
+#: internal/widget/application-window.go:403
 msgid "Loading comic..."
 msgstr "Caricamento fumetto..."
 
@@ -208,7 +208,7 @@ msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 msgid "Remove from bookmarks"
 msgstr "Rimuovi questo fumetto dai preferiti"
 
-#: internal/widget/context-menu.go:52 internal/widget/zoom-box.go:53
+#: internal/widget/context-menu.go:52 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
 msgstr ""
@@ -282,12 +282,12 @@ msgstr "Visualizzatore XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:62
+#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:44
+#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:43
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
 msgstr ""
