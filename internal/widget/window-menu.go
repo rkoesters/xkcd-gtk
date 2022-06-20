@@ -45,7 +45,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	wm.popover.Add(wm.popoverBox)
 
 	addMenuSeparator := func(menuBox *gtk.Box) error {
-		sep, err := gtk.SeparatorMenuItemNew()
+		sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 		if err != nil {
 			return err
 		}
