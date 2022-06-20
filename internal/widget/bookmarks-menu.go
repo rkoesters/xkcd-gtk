@@ -59,7 +59,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	}
 	bm.menuButton.SetPopover(bm.popover)
 
-	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPadding/2)
+	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	if err != nil {
 		return nil, err
 	}
-	bm.popoverBox.PackStart(bm.separator, false, false, style.PopoverPadding/2)
+	bm.popoverBox.PackStart(bm.separator, false, false, style.PopoverPadding)
 
 	bm.scroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
