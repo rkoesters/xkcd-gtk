@@ -40,7 +40,7 @@ func NewZoomBox() (*ZoomBox, error) {
 		return nil, err
 	}
 	zb.zoomOutButton.SetImage(zoomOutImg)
-	zb.box.PackStart(zb.zoomOutButton, false, true, 0)
+	zb.box.PackStart(zb.zoomOutButton, true, true, 0)
 
 	zb.zoomResetButton, err = gtk.ButtonNew()
 	if err != nil {
@@ -61,7 +61,7 @@ func NewZoomBox() (*ZoomBox, error) {
 		return nil, err
 	}
 	zb.zoomInButton.SetImage(zoomInImg)
-	zb.box.PackStart(zb.zoomInButton, false, true, 0)
+	zb.box.PackStart(zb.zoomInButton, true, true, 0)
 
 	return zb, nil
 }
