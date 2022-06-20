@@ -49,7 +49,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 		if err != nil {
 			return err
 		}
-		menuBox.PackStart(sep, false, true, style.PopoverMenuPadding)
+		menuBox.PackStart(sep, false, true, style.PopoverMenuPadding/2)
 		return nil
 	}
 
