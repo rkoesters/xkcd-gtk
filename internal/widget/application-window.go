@@ -29,11 +29,9 @@ type ApplicationWindow struct {
 	actions map[string]*glib.SimpleAction
 	accels  *gtk.AccelGroup
 
-	header *gtk.HeaderBar
-
+	header        *gtk.HeaderBar
 	navigationBar *NavigationBar
 	searchMenu    *SearchMenu
-
 	bookmarksMenu *BookmarksMenu
 	windowMenu    *WindowMenu
 
