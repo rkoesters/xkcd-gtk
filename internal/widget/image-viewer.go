@@ -153,7 +153,7 @@ func (iv *ImageViewer) applyImageScaling() error {
 	width = int(float64(unscaledWidth) * iv.scale)
 	height = int(float64(unscaledHeight) * iv.scale)
 	var err error
-	iv.finalPixbuf, err = iv.unscaledPixbuf.ScaleSimple(width, height, gdk.INTERP_HYPER)
+	iv.finalPixbuf, err = iv.unscaledPixbuf.ScaleSimple(width, height, gdk.INTERP_BILINEAR)
 	return err
 }
 
