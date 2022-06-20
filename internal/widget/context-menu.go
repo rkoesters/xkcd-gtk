@@ -19,11 +19,22 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 
 	menuModel := glib.MenuNew()
 
-	menuModel.AppendSectionWithoutLabel(&NewBookmarkMenuSection().MenuModel)
+	bookmarkSection := glib.MenuNew()
+	bookmarkSection.Append(l("Add to bookmarks"), "win.bookmark-new")
+	bookmarkSection.Append(l("Remove from bookmarks"), "win.bookmark-remove")
+	menuModel.AppendSectionWithoutLabel(&bookmarkSection.MenuModel)
 
-	menuModel.AppendSectionWithoutLabel(&NewZoomMenuSection().MenuModel)
+	zoomSection := glib.MenuNew()
+	zoomSection.Append(l("Zoom in"), "win.zoom-in")
+	zoomSection.Append(l("Zoom out"), "win.zoom-out")
+	zoomSection.Append(l("Reset zoom"), "win.zoom-reset")
+	menuModel.AppendSectionWithoutLabel(&zoomSection.MenuModel)
 
-	menuModel.AppendSectionWithoutLabel(&NewComicPropertiesMenuSection().MenuModel)
+	propertiesSection := glib.MenuNew()
+	propertiesSection.Append(l("Open link"), "win.open-link")
+	propertiesSection.Append(l("Explain"), "win.explain")
+	propertiesSection.Append(l("Properties"), "win.show-properties")
+	menuModel.AppendSectionWithoutLabel(&propertiesSection.MenuModel)
 
 	cm.menu, err = gtk.GtkMenuNewFromModel(&menuModel.MenuModel)
 	if err != nil {
@@ -36,29 +47,6 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	cm.menu.HideOnDelete()
 
 	return cm, nil
-}
-
-func NewBookmarkMenuSection() *glib.Menu {
-	bookmarkSection := glib.MenuNew()
-	bookmarkSection.Append(l("Add to bookmarks"), "win.bookmark-new")
-	bookmarkSection.Append(l("Remove from bookmarks"), "win.bookmark-remove")
-	return bookmarkSection
-}
-
-func NewZoomMenuSection() *glib.Menu {
-	zoomSection := glib.MenuNew()
-	zoomSection.Append(l("Zoom in"), "win.zoom-in")
-	zoomSection.Append(l("Zoom out"), "win.zoom-out")
-	zoomSection.Append(l("Reset zoom"), "win.zoom-reset")
-	return zoomSection
-}
-
-func NewComicPropertiesMenuSection() *glib.Menu {
-	propertiesSection := glib.MenuNew()
-	propertiesSection.Append(l("Open link"), "win.open-link")
-	propertiesSection.Append(l("Explain"), "win.explain")
-	propertiesSection.Append(l("Properties"), "win.show-properties")
-	return propertiesSection
 }
 
 func (cm *ContextMenu) Present(event *gdk.Event) {

@@ -29,7 +29,7 @@ msgstr "A proposito di Sticks Comic"
 msgid "About XKCD"
 msgstr "Informazioni su XKCD"
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:43
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
@@ -95,7 +95,7 @@ msgstr "Data"
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:59 internal/widget/window-menu.go:89
+#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:89
 msgid "Explain"
 msgstr "Spiega"
 
@@ -168,7 +168,7 @@ msgstr "Nessun risultato trovato"
 msgid "Number"
 msgstr "Numero"
 
-#: internal/widget/context-menu.go:58 internal/widget/window-menu.go:85
+#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:85
 msgid "Open link"
 msgstr "Apri Link"
 
@@ -180,7 +180,7 @@ msgstr "Apri nuova finestra"
 msgid "Open shortcuts window"
 msgstr "Apri la finestra delle scorciatoie"
 
-#: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:45
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
 #: internal/widget/window-menu.go:93 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Proprietà"
@@ -204,11 +204,11 @@ msgstr "Esci dall'applicazione"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:44
+#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Rimuovi questo fumetto dai preferiti"
 
-#: internal/widget/context-menu.go:52 internal/widget/zoom-box.go:44
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:44
 #: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
 msgstr ""
@@ -282,12 +282,12 @@ msgstr "Visualizzatore XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/zoom-box.go:52
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:52
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/zoom-box.go:36
+#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:36
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
 msgstr ""
