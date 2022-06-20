@@ -27,7 +27,7 @@ func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 
 	menu := glib.MenuNew()
 
-	menu.AppendSectionWithoutLabel(&NewContextMenuSection().MenuModel)
+	menu.AppendSectionWithoutLabel(&NewComicPropertiesMenuSection().MenuModel)
 
 	if !prefersAppMenu {
 		appSection := glib.MenuNew()
