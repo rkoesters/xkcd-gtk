@@ -157,7 +157,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
-	win.windowMenu, err = NewWindowMenu(win.accels, win.comicContainer, app.application.PrefersAppMenu())
+	win.windowMenu, err = NewWindowMenu(win.comicContainer, app.application.PrefersAppMenu())
 	if err != nil {
 		return nil, err
 	}

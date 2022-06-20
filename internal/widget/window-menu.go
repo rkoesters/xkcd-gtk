@@ -18,7 +18,7 @@ type WindowMenu struct {
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMenu, error) {
+func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMenu, error) {
 	var err error
 
 	wm := &WindowMenu{}
@@ -70,7 +70,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, comicContainer *ImageViewer, prefersA
 	}
 
 	// Zoom section.
-	wm.zoomBox, err = NewZoomBox(accels)
+	wm.zoomBox, err = NewZoomBox()
 	if err != nil {
 		return nil, err
 	}

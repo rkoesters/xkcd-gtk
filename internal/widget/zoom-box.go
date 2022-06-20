@@ -8,8 +8,6 @@ import (
 )
 
 type ZoomBox struct {
-	accels *gtk.AccelGroup // ptr to win.accels
-
 	box *gtk.ButtonBox
 
 	zoomInButton    *gtk.Button
@@ -19,12 +17,10 @@ type ZoomBox struct {
 
 var _ Widget = &ZoomBox{}
 
-func NewZoomBox(accels *gtk.AccelGroup) (*ZoomBox, error) {
+func NewZoomBox() (*ZoomBox, error) {
 	var err error
 
-	zb := &ZoomBox{
-		accels: accels,
-	}
+	zb := &ZoomBox{}
 
 	zb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
@@ -61,8 +57,6 @@ func NewZoomBox(accels *gtk.AccelGroup) (*ZoomBox, error) {
 }
 
 func (zb *ZoomBox) Destroy() {
-	zb.accels = nil
-
 	zb.box = nil
 
 	zb.zoomInButton = nil
