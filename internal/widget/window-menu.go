@@ -44,12 +44,12 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 	wm.popoverBox.SetMarginEnd(style.PopoverMenuPadding)
 	wm.popover.Add(wm.popoverBox)
 
-	addMenuSeparator := func(menuBox *gtk.Box, padding uint) error {
+	addMenuSeparator := func(menuBox *gtk.Box) error {
 		sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 		if err != nil {
 			return err
 		}
-		menuBox.PackStart(sep, false, true, padding)
+		menuBox.PackStart(sep, false, true, style.PopoverMenuPadding/2)
 		return nil
 	}
 
@@ -75,8 +75,9 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 		return nil, err
 	}
 	wm.zoomBox.SetCurrentZoom(comicContainer.scale)
+	wm.zoomBox.box.SetMarginBottom(style.PopoverMenuPadding / 2)
 	wm.popoverBox.Add(wm.zoomBox.IWidget())
-	err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding)
+	err = addMenuSeparator(wm.popoverBox)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +97,7 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 	}
 
 	if !prefersAppMenu {
-		if err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding/2); err != nil {
+		if err = addMenuSeparator(wm.popoverBox); err != nil {
 			return nil, err
 		}
 
@@ -108,7 +109,7 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 		if err != nil {
 			return nil, err
 		}
-		if err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding/2); err != nil {
+		if err = addMenuSeparator(wm.popoverBox); err != nil {
 			return nil, err
 		}
 
@@ -128,7 +129,7 @@ func NewWindowMenu(comicContainer *ImageViewer, prefersAppMenu bool) (*WindowMen
 		if err != nil {
 			return nil, err
 		}
-		if err = addMenuSeparator(wm.popoverBox, style.PopoverMenuPadding/2); err != nil {
+		if err = addMenuSeparator(wm.popoverBox); err != nil {
 			return nil, err
 		}
 
