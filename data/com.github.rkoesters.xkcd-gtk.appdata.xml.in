@@ -55,6 +55,15 @@
   </custom>
 
   <releases>
+    <release version="1.6.0" date="2022-06-20">
+      <description>
+        <ul>
+          <li>Zoom in and out to get a better look at comics.</li>
+          <li>Minor improvements to appearance of search, bookmark, and window menus.</li>
+          <li>Update dependencies.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.5.3" date="2022-06-18">
       <description>
         <ul>
