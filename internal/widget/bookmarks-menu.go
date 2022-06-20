@@ -59,14 +59,14 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	}
 	bm.menuButton.SetPopover(bm.popover)
 
-	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPaddingCompact/2)
+	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPadding/2)
 	if err != nil {
 		return nil, err
 	}
-	bm.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
-	bm.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
-	bm.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
-	bm.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
+	bm.popoverBox.SetMarginTop(style.PopoverPadding)
+	bm.popoverBox.SetMarginBottom(style.PopoverPadding)
+	bm.popoverBox.SetMarginStart(style.PopoverPadding)
+	bm.popoverBox.SetMarginEnd(style.PopoverPadding)
 
 	bm.addButton, err = gtk.ButtonNew()
 	if err != nil {
@@ -80,8 +80,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	}
 	bm.addButton.SetImage(bookmarkNewImage)
 	bm.addButton.SetAlwaysShowImage(true)
-	bm.addButton.SetMarginStart(style.PopoverPaddingCompact)
-	bm.addButton.SetMarginEnd(style.PopoverPaddingCompact)
 	bm.popoverBox.Add(bm.addButton)
 
 	bm.removeButton, err = gtk.ButtonNew()
@@ -96,15 +94,13 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	}
 	bm.removeButton.SetImage(bookmarkRemoveImage)
 	bm.removeButton.SetAlwaysShowImage(true)
-	bm.removeButton.SetMarginStart(style.PopoverPaddingCompact)
-	bm.removeButton.SetMarginEnd(style.PopoverPaddingCompact)
 	bm.popoverBox.Add(bm.removeButton)
 
 	bm.separator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
 	}
-	bm.popoverBox.PackStart(bm.separator, false, false, style.PopoverPaddingCompact/2)
+	bm.popoverBox.PackStart(bm.separator, false, false, style.PopoverPadding/2)
 
 	bm.scroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {

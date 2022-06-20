@@ -52,7 +52,7 @@ msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
 "offline"
 
-#: internal/widget/application-window.go:322
+#: internal/widget/application-window.go:316
 msgid "Checking for new comic..."
 msgstr "A pesquisar por uma nova banda desenhada..."
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Banda desenhada não encontrada"
 
-#: internal/widget/application-window.go:382
+#: internal/widget/application-window.go:376
 msgid "Connect to the internet to download comic image"
 msgstr "Ligue-se à internet para descarregar imagens de banda desenhada"
 
@@ -143,7 +143,7 @@ msgstr "Atalhos de Teclado"
 msgid "Link"
 msgstr "Ligação"
 
-#: internal/widget/application-window.go:397
+#: internal/widget/application-window.go:391
 msgid "Loading comic..."
 msgstr "A carregar banda desenhada..."
 
@@ -209,7 +209,7 @@ msgstr ""
 "Ler xkcd: um romance de banda desenhada da internet, sarcasmo, matemática e "
 "linguagem"
 
-#: internal/widget/bookmarks-menu.go:92 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:90 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Remover esta banda desenhada dos marcadores"
 

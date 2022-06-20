@@ -288,15 +288,9 @@ func (win *ApplicationWindow) StyleUpdated() {
 	if style.IsSkinnyMenuTheme(themeName) {
 		win.windowMenu.popoverBox.SetMarginStart(0)
 		win.windowMenu.popoverBox.SetMarginEnd(0)
-
-		win.bookmarksMenu.popoverBox.SetMarginStart(0)
-		win.bookmarksMenu.popoverBox.SetMarginEnd(0)
 	} else {
 		win.windowMenu.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
 		win.windowMenu.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
-
-		win.bookmarksMenu.popoverBox.SetMarginStart(style.PopoverPaddingCompact)
-		win.bookmarksMenu.popoverBox.SetMarginEnd(style.PopoverPaddingCompact)
 	}
 }
 

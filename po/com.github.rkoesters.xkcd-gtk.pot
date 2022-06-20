@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:322
+#: internal/widget/application-window.go:316
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:382
+#: internal/widget/application-window.go:376
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:397
+#: internal/widget/application-window.go:391
 msgid "Loading comic..."
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:92 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:90 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr ""
 
