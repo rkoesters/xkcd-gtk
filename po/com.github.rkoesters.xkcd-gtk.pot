@@ -177,10 +177,6 @@ msgstr ""
 msgid "Open shortcuts window"
 msgstr ""
 
-#: internal/widget/context-menu.go:52 internal/widget/shortcuts-window.ui:83
-msgid "Original zoom"
-msgstr ""
-
 #: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:45
 #: internal/widget/shortcuts-window.ui:105
 msgid "Properties"
@@ -205,6 +201,10 @@ msgstr ""
 
 #: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:44
 msgid "Remove from bookmarks"
+msgstr ""
+
+#: internal/widget/context-menu.go:52 internal/widget/shortcuts-window.ui:83
+msgid "Reset zoom"
 msgstr ""
 
 #: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52

@@ -49,7 +49,7 @@ func NewZoomMenuSection() *glib.Menu {
 	zoomSection := glib.MenuNew()
 	zoomSection.Append(l("Zoom in"), "win.zoom-in")
 	zoomSection.Append(l("Zoom out"), "win.zoom-out")
-	zoomSection.Append(l("Original zoom"), "win.zoom-original")
+	zoomSection.Append(l("Reset zoom"), "win.zoom-reset")
 	return zoomSection
 }
 
