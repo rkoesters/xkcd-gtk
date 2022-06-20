@@ -13,3 +13,4 @@ internal/widget/properties-dialog.go
 internal/widget/search-menu.go
 internal/widget/shortcuts-window.ui
 internal/widget/window-menu.go
+internal/widget/zoom-bar.go

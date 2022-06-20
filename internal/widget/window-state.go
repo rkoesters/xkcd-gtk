@@ -11,6 +11,15 @@ import (
 	"path/filepath"
 )
 
+const (
+	// ImageScaleMin is the minimum scale by which the application will zoom
+	// the comic image.
+	ImageScaleMin = 0.25
+	// ImageScaleMax is the maximum scale by which the application will zoom
+	// the comic image.
+	ImageScaleMax = 5
+)
+
 // WindowState is a struct that holds the information about the state of a
 // Window. This struct is meant to be stored so we can restore the state of a
 // Window.
@@ -22,6 +31,8 @@ type WindowState struct {
 	Width     int
 	PositionX int
 	PositionY int
+
+	ImageScale float64
 
 	PropertiesVisible   bool
 	PropertiesHeight    int
@@ -38,6 +49,7 @@ func (ws *WindowState) loadDefaults() {
 	ws.Width = 700
 	ws.PositionX = 0
 	ws.PositionY = 0
+	ws.ImageScale = 1
 	ws.PropertiesVisible = false
 	ws.PropertiesHeight = 350
 	ws.PropertiesWidth = 300
@@ -51,6 +63,9 @@ func (ws *WindowState) Read(r io.Reader) {
 	err := dec.Decode(ws)
 	if err != nil {
 		ws.loadDefaults()
+	}
+	if ws.ImageScale < ImageScaleMin || ws.ImageScale > ImageScaleMax {
+		ws.ImageScale = 1
 	}
 }
 

@@ -40,11 +40,11 @@ msgstr "Toevoegen aan bladwijzers"
 msgid "Alt text"
 msgstr "Alt-tekst"
 
-#: internal/widget/shortcuts-window.ui:91
+#: internal/widget/shortcuts-window.ui:118
 msgid "Application actions"
 msgstr "Toepassingsacties"
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:65
+#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:92
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
@@ -52,7 +52,7 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/application-window.go:297
+#: internal/widget/application-window.go:325
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal..."
 
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:357
+#: internal/widget/application-window.go:385
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -142,7 +142,7 @@ msgstr "Sneltoetsen"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:372
+#: internal/widget/application-window.go:400
 msgid "Loading comic..."
 msgstr "Bezig met laden..."
 
@@ -175,16 +175,20 @@ msgstr "Nummer"
 msgid "Open link"
 msgstr "Link openen"
 
-#: internal/widget/shortcuts-window.ui:95
+#: internal/widget/shortcuts-window.ui:122
 msgid "Open new window"
 msgstr "Nieuw venster openen"
 
-#: internal/widget/shortcuts-window.ui:109
+#: internal/widget/shortcuts-window.ui:136
 msgid "Open shortcuts window"
 msgstr "Sneltoetsvenster openen"
 
+#: internal/widget/shortcuts-window.ui:83
+msgid "Original zoom"
+msgstr ""
+
 #: internal/widget/context-menu.go:46 internal/widget/properties-dialog.go:45
-#: internal/widget/shortcuts-window.ui:78
+#: internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Eigenschappen"
 
@@ -196,7 +200,7 @@ msgstr "Toon de uitleg van verhalen middels de 'explain xkcd'-wiki"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: internal/widget/shortcuts-window.ui:116
+#: internal/widget/shortcuts-window.ui:143
 msgid "Quit application"
 msgstr "Afsluiten"
 
@@ -229,11 +233,11 @@ msgstr "Zoek naar specifieke verhalen"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: internal/widget/shortcuts-window.ui:69
+#: internal/widget/shortcuts-window.ui:96
 msgid "Show bookmarks menu"
 msgstr "Bladwijzermenu tonen"
 
-#: internal/widget/shortcuts-window.ui:82
+#: internal/widget/shortcuts-window.ui:109
 msgid "Show comic properties"
 msgstr "Eigenschappen tonen"
 
@@ -242,7 +246,7 @@ msgid "Title"
 msgstr "Titel"
 
 #: internal/widget/window-menu.go:35 internal/widget/app-menu.ui:10
-#: internal/widget/shortcuts-window.ui:102
+#: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"
 
@@ -273,6 +277,18 @@ msgstr "XKCD-winkel"
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
 msgstr "XKCD lezen"
+
+#: internal/widget/shortcuts-window.ui:65
+msgid "Zoom"
+msgstr ""
+
+#: internal/widget/zoom-bar.go:50 internal/widget/shortcuts-window.ui:69
+msgid "Zoom in"
+msgstr ""
+
+#: internal/widget/zoom-bar.go:41 internal/widget/shortcuts-window.ui:76
+msgid "Zoom out"
+msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
 msgid "webcomic;romance;sarcasm;math;language;"

@@ -33,6 +33,8 @@ type ApplicationWindow struct {
 
 	navigationBar *NavigationBar
 	searchMenu    *SearchMenu
+
+	zoomBar       *ZoomBar
 	bookmarksMenu *BookmarksMenu
 	windowMenu    *WindowMenu
 
@@ -80,6 +82,8 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	registerAction("previous-comic", win.PreviousComic)
 	registerAction("random-comic", win.RandomComic)
 	registerAction("show-properties", win.ShowProperties)
+	registerAction("zoom-in", win.ZoomIn)
+	registerAction("zoom-out", win.ZoomOut)
 
 	// Initialize our window accelerators.
 	win.accels, err = gtk.AccelGroupNew()
@@ -87,6 +91,9 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 		return nil, err
 	}
 	win.window.AddAccelGroup(win.accels)
+
+	// Zoom original size.
+	win.accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, func() { win.comicContainer.SetScale(1) })
 
 	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 	win.app.application.SetAccelsForAction("win.show-properties", []string{"<Control>p"})
@@ -126,6 +133,13 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	}
 	win.header.PackStart(win.navigationBar.IWidget())
 
+	// Create the search menu.
+	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackStart(win.searchMenu.IWidget())
+
 	// Create the window menu.
 	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu())
 	if err != nil {
@@ -140,26 +154,26 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	}
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
-	// Create the search menu.
-	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
+	// Create zoom in and zoom out buttons.
+	win.zoomBar, err = NewZoomBar(win.accels, win.comicContainer)
 	if err != nil {
 		return nil, err
 	}
-	win.header.PackEnd(win.searchMenu.IWidget())
+	win.header.PackEnd(win.zoomBar.IWidget())
 
 	win.header.ShowAll()
 	win.window.SetTitlebar(win.header)
 
+	// Reload saved window state.
+	win.state.LoadState()
+
 	// Create main part of window.
-	win.comicContainer, err = NewImageViewer(win.window)
+	win.comicContainer, err = NewImageViewer(win.window, win.state.ImageScale)
 	if err != nil {
 		return nil, err
 	}
 	win.comicContainer.Show()
 	win.window.Add(win.comicContainer.IWidget())
-
-	// Recall our window state.
-	win.state.LoadState()
 	win.window.Resize(win.state.Width, win.state.Height)
 	if win.state.PositionX != 0 && win.state.PositionY != 0 {
 		win.window.Move(win.state.PositionX, win.state.PositionY)
@@ -251,6 +265,13 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.navigationBar.SetNewestButtonImage(newestImg)
 	}
 
+	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		win.searchMenu.IWidget().(*gtk.MenuButton).SetImage(searchImg)
+	}
+
 	bookmarksImg, err := gtk.ImageNewFromIconName(icon("user-bookmarks"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
@@ -258,11 +279,18 @@ func (win *ApplicationWindow) StyleUpdated() {
 		win.bookmarksMenu.IWidget().(*gtk.MenuButton).SetImage(bookmarksImg)
 	}
 
-	searchImg, err := gtk.ImageNewFromIconName(icon("edit-find"), headerBarIconSize)
+	zoomOutImg, err := gtk.ImageNewFromIconName(icon("zoom-out"), headerBarIconSize)
 	if err != nil {
 		log.Print(err)
 	} else {
-		win.searchMenu.IWidget().(*gtk.MenuButton).SetImage(searchImg)
+		win.zoomBar.zoomOutButton.SetImage(zoomOutImg)
+	}
+
+	zoomInImg, err := gtk.ImageNewFromIconName(icon("zoom-in"), headerBarIconSize)
+	if err != nil {
+		log.Print(err)
+	} else {
+		win.zoomBar.zoomInButton.SetImage(zoomInImg)
 	}
 
 	menuImg, err := gtk.ImageNewFromIconName(icon("open-menu"), headerBarIconSize)
@@ -399,7 +427,7 @@ func (win *ApplicationWindow) DisplayComic() {
 
 // DrawComic draws the comic and inverts it if we are in dark mode.
 func (win *ApplicationWindow) DrawComic() {
-	win.comicContainer.SetFromFile(cache.ComicImagePath(win.comicNumber()), win.app.DarkMode())
+	win.comicContainer.SetComic(win.comicNumber(), win.app.DarkMode())
 }
 
 func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
@@ -434,6 +462,14 @@ func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
 			})
 		}
 	}()
+}
+
+func (win *ApplicationWindow) ZoomIn() {
+	win.state.ImageScale = win.comicContainer.ZoomIn()
+}
+
+func (win *ApplicationWindow) ZoomOut() {
+	win.state.ImageScale = win.comicContainer.ZoomOut()
 }
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
@@ -477,6 +513,9 @@ func (win *ApplicationWindow) Destroy() {
 
 	win.searchMenu.Destroy()
 	win.searchMenu = nil
+
+	win.zoomBar.Destroy()
+	win.zoomBar = nil
 
 	win.bookmarksMenu.Destroy()
 	win.bookmarksMenu = nil
