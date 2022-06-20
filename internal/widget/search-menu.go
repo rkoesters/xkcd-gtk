@@ -17,6 +17,8 @@ type SearchMenu struct {
 	accels *gtk.AccelGroup // ptr to win.accels
 
 	menuButton *gtk.MenuButton
+	popover    *gtk.Popover
+	popoverBox *gtk.Box
 	entry      *gtk.SearchEntry
 	noResults  *gtk.Label
 	results    *gtk.Box
@@ -42,33 +44,33 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.menuButton.SetTooltipText(l("Search"))
 	sm.menuButton.AddAccelerator("activate", sm.accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-	popover, err := gtk.PopoverNew(sm.menuButton)
+	sm.popover, err = gtk.PopoverNew(sm.menuButton)
 	if err != nil {
 		return nil, err
 	}
-	sm.menuButton.SetPopover(popover)
+	sm.menuButton.SetPopover(sm.popover)
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPadding)
+	sm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPadding)
 	if err != nil {
 		return nil, err
 	}
-	box.SetMarginTop(style.PopoverPadding)
-	box.SetMarginBottom(style.PopoverPadding)
-	box.SetMarginStart(style.PopoverPadding)
-	box.SetMarginEnd(style.PopoverPadding)
+	sm.popoverBox.SetMarginTop(style.PopoverPadding)
+	sm.popoverBox.SetMarginBottom(style.PopoverPadding)
+	sm.popoverBox.SetMarginStart(style.PopoverPadding)
+	sm.popoverBox.SetMarginEnd(style.PopoverPadding)
 	sm.entry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err
 	}
 	sm.entry.SetSizeRequest(300, -1)
 	sm.entry.Connect("search-changed", sm.Search)
-	box.Add(sm.entry)
+	sm.popoverBox.Add(sm.entry)
 
 	sm.noResults, err = gtk.LabelNew(l("No results found"))
 	if err != nil {
 		return nil, err
 	}
-	box.Add(sm.noResults)
+	sm.popoverBox.Add(sm.noResults)
 
 	sm.scroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
@@ -80,7 +82,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.scroller.SetProperty("min-content-width", 200)
 	sm.scroller.SetProperty("max-content-height", 350)
 	sm.scroller.SetProperty("max-content-width", 350)
-	box.Add(sm.scroller)
+	sm.popoverBox.Add(sm.scroller)
 	sm.results, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
 		return nil, err
@@ -88,8 +90,8 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.scroller.Add(sm.results)
 	defer sm.loadSearchResults(nil)
 
-	box.ShowAll()
-	popover.Add(box)
+	sm.popoverBox.ShowAll()
+	sm.popover.Add(sm.popoverBox)
 
 	return sm, nil
 }
@@ -98,6 +100,8 @@ func (sm *SearchMenu) Destroy() {
 	sm.accels = nil
 
 	sm.menuButton = nil
+	sm.popover = nil
+	sm.popoverBox = nil
 	sm.entry = nil
 	sm.noResults = nil
 	sm.results = nil
