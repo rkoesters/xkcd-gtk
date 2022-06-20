@@ -18,6 +18,8 @@ type ZoomBox struct {
 var _ Widget = &ZoomBox{}
 
 func NewZoomBox() (*ZoomBox, error) {
+	const zbIconSize = gtk.ICON_SIZE_SMALL_TOOLBAR
+
 	var err error
 
 	zb := &ZoomBox{}
@@ -35,7 +37,7 @@ func NewZoomBox() (*ZoomBox, error) {
 	}
 	zb.zoomOutButton.SetTooltipText(l("Zoom out"))
 	zb.zoomOutButton.SetProperty("action-name", "win.zoom-out")
-	zoomOutImg, err := gtk.ImageNewFromIconName("zoom-out-symbolic", gtk.ICON_SIZE_MENU)
+	zoomOutImg, err := gtk.ImageNewFromIconName("zoom-out-symbolic", zbIconSize)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +58,7 @@ func NewZoomBox() (*ZoomBox, error) {
 	}
 	zb.zoomInButton.SetTooltipText(l("Zoom in"))
 	zb.zoomInButton.SetProperty("action-name", "win.zoom-in")
-	zoomInImg, err := gtk.ImageNewFromIconName("zoom-in-symbolic", gtk.ICON_SIZE_MENU)
+	zoomInImg, err := gtk.ImageNewFromIconName("zoom-in-symbolic", zbIconSize)
 	if err != nil {
 		return nil, err
 	}
