@@ -20,8 +20,7 @@ msgstr ""
 
 #: internal/widget/about-dialog.go:17
 msgid "A simple xkcd viewer written in Go using GTK+3"
-msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK+3"
+msgstr "Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK+3"
 
 #: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:38
 msgid "About Comic Sticks"
@@ -65,9 +64,8 @@ msgstr "Comic Sticks"
 msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
-msgstr ""
-"Met Comic Sticks kunt u xkcd-stripverhalen lezen. De toepassing heeft"
-" ondersteuning voor snelzoeken, offline-lezen en bevat intuïtieve sneltoetsen."
+msgstr "Met Comic Sticks kunt u xkcd-stripverhalen lezen. De toepassing heeft "
+"ondersteuning voor snelzoeken, offline-lezen en bevat intuïtieve sneltoetsen."
 
 #: internal/cache/cache.go:61
 msgid "Comic not found"
@@ -164,7 +162,7 @@ msgstr "Nieuws"
 
 #: internal/widget/search-menu.go:69
 msgid "No results found"
-msgstr "Geen resultaten"
+msgstr "Er zijn geen zoekresultaten"
 
 #: internal/widget/properties-dialog.go:86
 msgid "Number"
