@@ -1,28 +1,27 @@
 # Translations for Comic Sticks (xkcd-gtk).
 # Copyright (C) 2015-2020 Ryan Koesters
 # This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Heimen Stoffels <vistausss@fastmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 04:22-0800\n"
-"PO-Revision-Date: 2019-11-03 13:51+0100\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2022-06-21 12:31+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.04.2\n"
 
 #: internal/widget/about-dialog.go:17
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
-"+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK+3"
 
 #: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:38
 msgid "About Comic Sticks"
@@ -54,7 +53,7 @@ msgstr "Sla verhalen op voor offline weergave"
 
 #: internal/widget/application-window.go:273
 msgid "Checking for new comic..."
-msgstr "Bezig met zoeken naar nieuw verhaal..."
+msgstr "Bezig met zoeken naar nieuw verhaal…"
 
 #: internal/widget/application.go:17
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -67,8 +66,8 @@ msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
-"Met Comic Sticks kun je xkcd-stripverhalen lezen. De toepassing bevat "
-"snelzoeken, offline-lezen en intuïtieve sneltoetsen."
+"Met Comic Sticks kunt u xkcd-stripverhalen lezen. De toepassing heeft"
+" ondersteuning voor snelzoeken, offline-lezen en bevat intuïtieve sneltoetsen."
 
 #: internal/cache/cache.go:61
 msgid "Comic not found"
@@ -96,7 +95,7 @@ msgstr "Datum"
 
 #: internal/cache/cache.go:60
 msgid "Error reading local comic database"
-msgstr ""
+msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 
 #: internal/widget/context-menu.go:35 internal/widget/window-menu.go:85
 msgid "Explain"
@@ -104,7 +103,7 @@ msgstr "Uitleg tonen"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid "Features:"
-msgstr "Mogelijkheden:"
+msgstr "Kenmerken:"
 
 #: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:43
 msgid "Go to a random comic"
@@ -132,7 +131,7 @@ msgstr "Afbeelding"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
 msgid "Keep track of comics with bookmarks"
-msgstr "Organiseer verhalen middels bladwijzers"
+msgstr "Orden verhalen middels bladwijzers"
 
 #: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:34
 msgid "Keyboard shortcuts"
@@ -144,7 +143,7 @@ msgstr "Link"
 
 #: internal/widget/application-window.go:348
 msgid "Loading comic..."
-msgstr "Bezig met laden..."
+msgstr "Bezig met laden…"
 
 #: internal/widget/window-menu.go:31
 msgid "Menu"
@@ -181,7 +180,7 @@ msgstr "Nieuw venster openen"
 
 #: internal/widget/shortcuts-window.ui:136
 msgid "Open shortcuts window"
-msgstr "Sneltoetsvenster openen"
+msgstr "Sneltoetsen tonen"
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
 #: internal/widget/window-menu.go:89 internal/widget/shortcuts-window.ui:105
@@ -190,7 +189,7 @@ msgstr "Eigenschappen"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "Quickly access comic explainations via the explain xkcd wiki"
-msgstr "Toon de uitleg van verhalen middels de 'explain xkcd'-wiki"
+msgstr "Toon de uitleg van verhalen middels de ‘explain xkcd’-wiki"
 
 #: internal/widget/app-menu.ui:42
 msgid "Quit"
@@ -212,7 +211,7 @@ msgstr "Verwijderen uit bladwijzers"
 #: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
-msgstr ""
+msgstr "Oorspronkelijk zoomniveau"
 
 #: internal/widget/search-menu.go:44 internal/widget/shortcuts-window.ui:52
 msgid "Search"
@@ -257,7 +256,7 @@ msgstr "Transcriptie"
 
 #: internal/search/index.go:72
 msgid "Updating comic search index..."
-msgstr "Bezig met bijwerken van zoekindex..."
+msgstr "Bezig met bijwerken van zoekindex…"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "View comic metadata"
@@ -265,7 +264,7 @@ msgstr "Toon de metagegevens"
 
 #: internal/widget/window-menu.go:111 internal/widget/app-menu.ui:16
 msgid "What If?"
-msgstr "Wat als...?"
+msgstr "Wat als…?"
 
 #: internal/widget/window-menu.go:115 internal/widget/app-menu.ui:20
 msgid "XKCD Blog"
@@ -281,17 +280,17 @@ msgstr "XKCD lezen"
 
 #: internal/widget/shortcuts-window.ui:65
 msgid "Zoom"
-msgstr ""
+msgstr "Zoomen"
 
 #: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
-msgstr ""
+msgstr "Inzoomen"
 
 #: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
-msgstr ""
+msgstr "Uitzoomen"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
 msgid "webcomic;romance;sarcasm;math;language;"
