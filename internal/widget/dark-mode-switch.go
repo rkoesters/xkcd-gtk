@@ -46,6 +46,10 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 	if err != nil {
 		return nil, err
 	}
+	// Add this style class to disable the min-width sometimes given to
+	// ModelButtons. The other ModelButtons in the menu will set the
+	// min-width which gives us the flexibility to add the switch without
+	// widening the menu.
 	sc.AddClass(style.ClassNarrowModelButton)
 	dms.box.PackStart(dms.label, true, true, 0)
 
