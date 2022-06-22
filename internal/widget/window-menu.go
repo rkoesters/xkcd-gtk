@@ -11,14 +11,15 @@ type WindowMenu struct {
 	popover    *gtk.Popover
 	popoverBox *gtk.Box
 
-	zoomBox *ZoomBox
+	zoomBox        *ZoomBox
+	darkModeSwitch *DarkModeSwitch
 
 	showProperties func() // win.ShowProperties
 }
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
+func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, error) {
 	var err error
 
 	wm := &WindowMenu{}
@@ -100,10 +101,11 @@ func NewWindowMenu(prefersAppMenu bool) (*WindowMenu, error) {
 		if err != nil {
 			return nil, err
 		}
-		err = addMenuEntry(wm.popoverBox, l("Toggle dark mode"), "app.toggle-dark-mode")
+		wm.darkModeSwitch, err = NewDarkModeSwitch(setDarkMode)
 		if err != nil {
 			return nil, err
 		}
+		wm.popoverBox.PackStart(wm.darkModeSwitch.IWidget(), false, true, 0)
 		if err = addMenuSeparator(wm.popoverBox); err != nil {
 			return nil, err
 		}
@@ -151,6 +153,8 @@ func (wm *WindowMenu) Destroy() {
 	wm.popoverBox = nil
 	wm.zoomBox.Destroy()
 	wm.zoomBox = nil
+	wm.darkModeSwitch.Destroy()
+	wm.darkModeSwitch = nil
 }
 
 func (wm *WindowMenu) IWidget() gtk.IWidget {

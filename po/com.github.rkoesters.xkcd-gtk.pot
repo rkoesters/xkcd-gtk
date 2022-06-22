@@ -20,11 +20,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 
-#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:38
+#: internal/widget/window-menu.go:137 internal/widget/app-menu.ui:38
 msgid "About Comic Sticks"
 msgstr ""
 
-#: internal/widget/window-menu.go:123 internal/widget/app-menu.ui:28
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:28
 msgid "About XKCD"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:273
+#: internal/widget/application-window.go:274
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:333
+#: internal/widget/application-window.go:334
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -78,6 +78,10 @@ msgstr ""
 
 #: internal/cache/cache.go:62
 msgid "Couldn't get comic"
+msgstr ""
+
+#: internal/widget/dark-mode-switch.go:40
+msgid "Dark mode"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
@@ -92,7 +96,7 @@ msgstr ""
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:85
+#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:86
 msgid "Explain"
 msgstr ""
 
@@ -128,7 +132,7 @@ msgstr ""
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:34
+#: internal/widget/window-menu.go:133 internal/widget/app-menu.ui:34
 msgid "Keyboard shortcuts"
 msgstr ""
 
@@ -136,11 +140,11 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:348
+#: internal/widget/application-window.go:349
 msgid "Loading comic..."
 msgstr ""
 
-#: internal/widget/window-menu.go:31
+#: internal/widget/window-menu.go:32
 msgid "Menu"
 msgstr ""
 
@@ -148,7 +152,7 @@ msgstr ""
 msgid "Navigate"
 msgstr ""
 
-#: internal/widget/window-menu.go:99 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:100 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New window"
 msgstr ""
@@ -165,7 +169,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:81
+#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:82
 msgid "Open link"
 msgstr ""
 
@@ -178,7 +182,7 @@ msgid "Open shortcuts window"
 msgstr ""
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
-#: internal/widget/window-menu.go:89 internal/widget/shortcuts-window.ui:105
+#: internal/widget/window-menu.go:90 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr ""
 
@@ -240,7 +244,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: internal/widget/window-menu.go:103 internal/widget/app-menu.ui:10
+#: internal/widget/dark-mode-switch.go:51 internal/widget/app-menu.ui:10
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr ""
@@ -257,15 +261,15 @@ msgstr ""
 msgid "View comic metadata"
 msgstr ""
 
-#: internal/widget/window-menu.go:111 internal/widget/app-menu.ui:16
+#: internal/widget/window-menu.go:113 internal/widget/app-menu.ui:16
 msgid "What If?"
 msgstr ""
 
-#: internal/widget/window-menu.go:115 internal/widget/app-menu.ui:20
+#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:20
 msgid "XKCD Blog"
 msgstr ""
 
-#: internal/widget/window-menu.go:119 internal/widget/app-menu.ui:24
+#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:24
 msgid "XKCD Store"
 msgstr ""
 

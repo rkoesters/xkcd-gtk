@@ -155,7 +155,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
-	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu())
+	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu(), app.SetDarkMode)
 	if err != nil {
 		return nil, err
 	}
@@ -192,6 +192,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 	if err != nil {
 		log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
 	}
+	win.windowMenu.darkModeSwitch.SetActive(darkMode)
 
 	// What GTK theme we are using?
 	themeName := os.Getenv("GTK_THEME")

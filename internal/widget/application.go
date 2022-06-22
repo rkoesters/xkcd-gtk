@@ -143,13 +143,17 @@ func (app *Application) Activate() {
 
 // ToggleDarkMode toggles the value of "gtk-application-prefer-dark-theme".
 func (app *Application) ToggleDarkMode() {
-	previous := app.DarkMode()
+	app.SetDarkMode(!app.DarkMode())
+}
 
+// SetDarkMode sets the value of "gtk-application-prefer-dark-theme" to the
+// enabled argument.
+func (app *Application) SetDarkMode(enabled bool) {
 	// Setting 'gtk-application-prefer-dark-theme' will trigger a call to
 	// win.DrawComic which will call app.DarkMode again, which will then
 	// update app.settings.DarkMode (which effectively serves as a cache of
 	// 'gtk-application-prefer-dark-theme').
-	err := app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", !previous)
+	err := app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", enabled)
 	if err != nil {
 		log.Print("error setting dark mode state: ", err)
 	}

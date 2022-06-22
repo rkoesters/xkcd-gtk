@@ -8,6 +8,7 @@ internal/widget/application-window.go
 internal/widget/application.go
 internal/widget/bookmarks-menu.go
 internal/widget/context-menu.go
+internal/widget/dark-mode-switch.go
 internal/widget/navigation-bar.go
 internal/widget/properties-dialog.go
 internal/widget/search-menu.go
