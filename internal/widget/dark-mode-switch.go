@@ -1,7 +1,6 @@
 package widget
 
 import (
-	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
@@ -59,7 +58,7 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 	dms.swtch.SetTooltipText(l("Toggle dark mode"))
 	dms.swtch.Connect("notify::active", func() {
 		active := dms.swtch.GetActive()
-		go glib.IdleAdd(func() { setter(active) })
+		setter(active)
 	})
 	dms.box.PackEnd(dms.swtch, false, true, 0)
 
