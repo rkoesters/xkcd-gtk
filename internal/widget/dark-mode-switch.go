@@ -42,7 +42,7 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 		return nil, err
 	}
 	dms.label.SetHAlign(gtk.ALIGN_START)
-	dms.box.PackStart(dms.label, false, true, 0)
+	dms.box.PackStart(dms.label, true, true, 0)
 
 	dms.swtch, err = gtk.SwitchNew()
 	if err != nil {
