@@ -82,3 +82,11 @@ func (dms *DarkModeSwitch) Destroy() {
 func (dms *DarkModeSwitch) SetActive(active bool) {
 	dms.swtch.SetActive(active)
 }
+
+func (dms *DarkModeSwitch) SetCompact(compact bool) {
+	if compact {
+		dms.swtch.SetMarginEnd(style.PopoverPaddingCompact)
+	} else {
+		dms.swtch.SetMarginEnd(0)
+	}
+}
