@@ -50,7 +50,7 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 	// ModelButtons. The other ModelButtons in the menu will set the
 	// min-width which gives us the flexibility to add the switch without
 	// widening the menu.
-	sc.AddClass(style.ClassNarrowModelButton)
+	sc.AddClass(style.ClassNoMinWidth)
 	dms.box.PackStart(dms.label, true, true, 0)
 
 	dms.swtch, err = gtk.SwitchNew()

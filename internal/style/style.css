@@ -8,6 +8,6 @@
 	border-radius: 0px;
 }
 
-modelbutton.narrow {
+.no-min-width {
     min-width: 0;
 }

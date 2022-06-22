@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	ClassComicContainer    = "comic-container"
-	ClassLinked            = "linked"
-	ClassNarrowModelButton = "narrow"
+	ClassComicContainer = "comic-container"
+	ClassLinked         = "linked"
+	ClassNoMinWidth     = "no-min-width"
 
 	PopoverPadding        = 10
 	PopoverPaddingCompact = 8
