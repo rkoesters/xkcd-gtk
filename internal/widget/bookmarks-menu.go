@@ -18,7 +18,6 @@ type BookmarksMenu struct {
 
 	windowState *WindowState                  // ptr to win.state
 	actions     map[string]*glib.SimpleAction // ptr to win.actions
-	accels      *gtk.AccelGroup               // ptr to win.accels
 
 	menuButton   *gtk.MenuButton
 	popover      *gtk.Popover
@@ -41,7 +40,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 		bookmarks:   b,
 		windowState: ws,
 		actions:     actions,
-		accels:      accels,
 		setComic:    comicSetter,
 	}
 
@@ -51,7 +49,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 		return nil, err
 	}
 	bm.menuButton.SetTooltipText(l("Bookmarks"))
-	bm.menuButton.AddAccelerator("activate", bm.accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	bm.menuButton.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
 	bm.popover, err = gtk.PopoverNew(bm.menuButton)
 	if err != nil {
@@ -133,7 +131,6 @@ func (bm *BookmarksMenu) Destroy() {
 
 	bm.windowState = nil
 	bm.actions = nil
-	bm.accels = nil
 
 	bm.menuButton = nil
 	bm.popover = nil
