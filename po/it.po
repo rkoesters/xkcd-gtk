@@ -33,7 +33,7 @@ msgstr "Informazioni su XKCD"
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
-#: internal/widget/properties-dialog.go:102
+#: internal/widget/properties-dialog.go:127
 msgid "Alt text"
 msgstr "Ferma Testo"
 
@@ -92,7 +92,7 @@ msgstr "Abilità modalità scura"
 msgid "Dark mode for late night reading"
 msgstr "Modalità scura per la lettura a tarda notte"
 
-#: internal/widget/properties-dialog.go:94
+#: internal/widget/properties-dialog.go:119
 msgid "Date"
 msgstr "Data"
 
@@ -128,7 +128,7 @@ msgstr "Vai al prossimo fumetto"
 msgid "Go to the previous comic"
 msgstr "Vai al fumetto precedente"
 
-#: internal/widget/properties-dialog.go:98
+#: internal/widget/properties-dialog.go:123
 msgid "Image"
 msgstr "Immagine"
 
@@ -140,7 +140,7 @@ msgstr "Tieni traccia dei fumetti con i segnalibri"
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
-#: internal/widget/properties-dialog.go:110
+#: internal/widget/properties-dialog.go:135
 msgid "Link"
 msgstr "Link"
 
@@ -161,7 +161,7 @@ msgstr "Naviga"
 msgid "New window"
 msgstr "Nuova Finestra"
 
-#: internal/widget/properties-dialog.go:106
+#: internal/widget/properties-dialog.go:131
 msgid "News"
 msgstr "Novità"
 
@@ -169,7 +169,7 @@ msgstr "Novità"
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
-#: internal/widget/properties-dialog.go:86
+#: internal/widget/properties-dialog.go:111
 msgid "Number"
 msgstr "Numero"
 
@@ -246,7 +246,7 @@ msgstr "Mostra menu segnalibri"
 msgid "Show comic properties"
 msgstr "Mostra proprietà fumetto"
 
-#: internal/widget/properties-dialog.go:90
+#: internal/widget/properties-dialog.go:115
 msgid "Title"
 msgstr "Titolo"
 
@@ -255,7 +255,7 @@ msgstr "Titolo"
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:139
 msgid "Transcript"
 msgstr "Trascrizione"
 

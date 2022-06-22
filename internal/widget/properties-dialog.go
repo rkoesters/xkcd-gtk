@@ -83,35 +83,59 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	grid.SetMarginStart(12)
 	grid.SetMarginEnd(12)
 
-	pd.comicNumber, err = pd.addRowToGrid(grid, 0, l("Number"))
+	addRowToGrid := func(row int, label string) (*gtk.Label, error) {
+		keyLabel, err := gtk.LabelNew(label)
+		if err != nil {
+			return nil, err
+		}
+		keyLabel.SetHAlign(gtk.ALIGN_END)
+		keyLabel.SetVAlign(gtk.ALIGN_START)
+		valLabel, err := gtk.LabelNew("")
+		if err != nil {
+			return nil, err
+		}
+		valLabel.SetXAlign(0)
+		valLabel.SetHAlign(gtk.ALIGN_START)
+		valLabel.SetVAlign(gtk.ALIGN_START)
+		valLabel.SetLineWrap(true)
+		valLabel.SetSelectable(true)
+		valLabel.SetCanFocus(false)
+
+		grid.Attach(keyLabel, 0, row, 1, 1)
+		grid.Attach(valLabel, 1, row, 1, 1)
+
+		return valLabel, nil
+	}
+
+	pd.comicNumber, err = addRowToGrid(0, l("Number"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicTitle, err = pd.addRowToGrid(grid, 1, l("Title"))
+	pd.comicTitle, err = addRowToGrid(1, l("Title"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicDate, err = pd.addRowToGrid(grid, 2, l("Date"))
+	pd.comicDate, err = addRowToGrid(2, l("Date"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicImage, err = pd.addRowToGrid(grid, 3, l("Image"))
+	pd.comicImage, err = addRowToGrid(3, l("Image"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicAltText, err = pd.addRowToGrid(grid, 4, l("Alt text"))
+	pd.comicAltText, err = addRowToGrid(4, l("Alt text"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicNews, err = pd.addRowToGrid(grid, 5, l("News"))
+	pd.comicNews, err = addRowToGrid(5, l("News"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicLink, err = pd.addRowToGrid(grid, 6, l("Link"))
+	pd.comicLink, err = addRowToGrid(6, l("Link"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicTranscript, err = pd.addRowToGrid(grid, 7, l("Transcript"))
+	pd.comicTranscript, err = addRowToGrid(7, l("Transcript"))
 	if err != nil {
 		return nil, err
 	}
@@ -148,30 +172,6 @@ func (win *ApplicationWindow) ShowProperties() {
 
 	win.app.application.AddWindow(win.properties.IWindow())
 	win.properties.dialog.Present()
-}
-
-func (pd *PropertiesDialog) addRowToGrid(grid *gtk.Grid, row int, label string) (*gtk.Label, error) {
-	keyLabel, err := gtk.LabelNew(label)
-	if err != nil {
-		return nil, err
-	}
-	keyLabel.SetHAlign(gtk.ALIGN_END)
-	keyLabel.SetVAlign(gtk.ALIGN_START)
-	valLabel, err := gtk.LabelNew("")
-	if err != nil {
-		return nil, err
-	}
-	valLabel.SetXAlign(0)
-	valLabel.SetHAlign(gtk.ALIGN_START)
-	valLabel.SetVAlign(gtk.ALIGN_START)
-	valLabel.SetLineWrap(true)
-	valLabel.SetSelectable(true)
-	valLabel.SetCanFocus(false)
-
-	grid.Attach(keyLabel, 0, row, 1, 1)
-	grid.Attach(valLabel, 1, row, 1, 1)
-
-	return valLabel, nil
 }
 
 // Update changes the dialog's contents to match the parent Window's comic.
