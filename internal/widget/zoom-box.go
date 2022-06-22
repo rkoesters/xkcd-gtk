@@ -3,7 +3,6 @@ package widget
 import (
 	"fmt"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -84,11 +83,10 @@ func (zb *ZoomBox) SetCurrentZoom(scale float64) {
 	zb.zoomResetButton.SetLabel(fmt.Sprintf("%.0f%%", scale*100))
 }
 
-func (zb *ZoomBox) SetLinkedButtons(linked bool) {
+func (zb *ZoomBox) SetLinkedButtons(linked bool) error {
 	sc, err := zb.box.GetStyleContext()
 	if err != nil {
-		log.Print(err)
-		return
+		return err
 	}
 
 	if linked {
@@ -98,4 +96,6 @@ func (zb *ZoomBox) SetLinkedButtons(linked bool) {
 		sc.RemoveClass(style.ClassLinked)
 		zb.box.SetSpacing(4)
 	}
+
+	return nil
 }

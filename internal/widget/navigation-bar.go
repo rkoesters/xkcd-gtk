@@ -3,7 +3,6 @@ package widget
 import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -104,11 +103,10 @@ func (nb *NavigationBar) SetNewestButtonImage(image gtk.IWidget) {
 	nb.newestButton.SetImage(image)
 }
 
-func (nb *NavigationBar) SetLinkedButtons(linked bool) {
+func (nb *NavigationBar) SetLinkedButtons(linked bool) error {
 	sc, err := nb.box.GetStyleContext()
 	if err != nil {
-		log.Print(err)
-		return
+		return err
 	}
 
 	if linked {
@@ -118,4 +116,6 @@ func (nb *NavigationBar) SetLinkedButtons(linked bool) {
 		sc.RemoveClass(style.ClassLinked)
 		nb.box.SetSpacing(4)
 	}
+
+	return nil
 }

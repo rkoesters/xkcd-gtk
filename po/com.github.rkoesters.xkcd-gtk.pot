@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:273
+#: internal/widget/application-window.go:277
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:333
+#: internal/widget/application-window.go:337
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -104,23 +104,23 @@ msgstr ""
 msgid "Features:"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:43
+#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:43
 msgid "Go to a random comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:45 internal/widget/shortcuts-window.ui:15
+#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:15
 msgid "Go to the first comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:36
+#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:36
 msgid "Go to the newest comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:29
+#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:29
 msgid "Go to the next comic"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:50 internal/widget/shortcuts-window.ui:22
+#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:22
 msgid "Go to the previous comic"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:348
+#: internal/widget/application-window.go:352
 msgid "Loading comic..."
 msgstr ""
 
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
 #: internal/widget/shortcuts-window.ui:83
 msgid "Reset zoom"
 msgstr ""
@@ -281,12 +281,12 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
 #: internal/widget/shortcuts-window.ui:69
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
+#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
 #: internal/widget/shortcuts-window.ui:76
 msgid "Zoom out"
 msgstr ""

@@ -244,8 +244,12 @@ func (win *ApplicationWindow) StyleUpdated() {
 	setButtonImageFromIconName(icon("open-menu"), headerBarIconSize, win.windowMenu.SetButtonImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
-	win.navigationBar.SetLinkedButtons(linked)
-	win.windowMenu.zoomBox.SetLinkedButtons(linked)
+	if err = win.navigationBar.SetLinkedButtons(linked); err != nil {
+		log.Print(err)
+	}
+	if err = win.windowMenu.zoomBox.SetLinkedButtons(linked); err != nil {
+		log.Print(err)
+	}
 
 	compact := style.IsCompactMenuTheme(themeName)
 	win.windowMenu.SetCompact(compact)
