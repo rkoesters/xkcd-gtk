@@ -27,7 +27,6 @@ type ApplicationWindow struct {
 	comicMutex sync.RWMutex
 
 	actions map[string]*glib.SimpleAction
-	accels  *gtk.AccelGroup
 
 	header        *gtk.HeaderBar
 	navigationBar *NavigationBar
@@ -87,18 +86,18 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	registerAction("zoom-reset", win.ZoomReset)
 
 	// Initialize our window accelerators.
-	win.accels, err = gtk.AccelGroupNew()
+	accels, err := gtk.AccelGroupNew()
 	if err != nil {
 		return nil, err
 	}
-	win.window.AddAccelGroup(win.accels)
+	win.window.AddAccelGroup(accels)
 
 	// Zoom keyboard shortcuts
-	win.accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
-	win.accels.Connect(gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomOut)
-	win.accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
+	accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
+	accels.Connect(gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomOut)
+	accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
 
-	win.accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
+	accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 	win.app.application.SetAccelsForAction("win.show-properties", []string{"<Control>p"})
 
 	// If the gtk theme changes, we might want to adjust our styling.
@@ -148,7 +147,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
-	win.navigationBar, err = NewNavigationBar(win.accels)
+	win.navigationBar, err = NewNavigationBar(accels)
 	if err != nil {
 		return nil, err
 	}
@@ -163,14 +162,14 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu.IWidget())
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, win.accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
 	win.header.PackEnd(win.bookmarksMenu.IWidget())
 
 	// Create the search menu.
-	win.searchMenu, err = NewSearchMenu(win.accels, win.SetComic)
+	win.searchMenu, err = NewSearchMenu(accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
@@ -467,7 +466,6 @@ func (win *ApplicationWindow) Destroy() {
 	win.comic = nil
 
 	win.actions = nil
-	win.accels = nil
 
 	win.header = nil
 
