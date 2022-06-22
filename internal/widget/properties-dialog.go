@@ -23,8 +23,6 @@ type PropertiesDialog struct {
 	comicNews       *gtk.Label
 	comicLink       *gtk.Label
 	comicTranscript *gtk.Label
-
-	accels *gtk.AccelGroup
 }
 
 var _ Window = &PropertiesDialog{}
@@ -51,12 +49,12 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	}
 
 	// Make Control-q to quit the app work in this dialog.
-	pd.accels, err = gtk.AccelGroupNew()
+	accels, err := gtk.AccelGroupNew()
 	if err != nil {
 		return nil, err
 	}
-	pd.dialog.AddAccelGroup(pd.accels)
-	pd.accels.Connect(gdk.KEY_q, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
+	pd.dialog.AddAccelGroup(accels)
+	accels.Connect(gdk.KEY_q, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
 
 	pd.dialog.Connect("delete-event", pd.Close)
 	pd.dialog.Connect("destroy", pd.Destroy)
@@ -216,8 +214,6 @@ func (pd *PropertiesDialog) Destroy() {
 	pd.comicNews = nil
 	pd.comicLink = nil
 	pd.comicTranscript = nil
-
-	pd.accels = nil
 }
 
 func (pd *PropertiesDialog) IWidget() gtk.IWidget { return pd.dialog }
