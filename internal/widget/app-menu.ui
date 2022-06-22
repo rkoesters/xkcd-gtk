@@ -26,7 +26,7 @@
       </item>
       <item>
         <attribute name="label" translatable="yes">About XKCD</attribute>
-        <attribute name="action">app.open-store</attribute>
+        <attribute name="action">app.open-about-xkcd</attribute>
       </item>
     </section>
     <section>
