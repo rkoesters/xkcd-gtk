@@ -10,8 +10,7 @@ import (
 )
 
 type ImageViewer struct {
-	scrolledWindow    *gtk.ScrolledWindow
-	scrolledWindowCtx *gtk.StyleContext
+	scrolledWindow *gtk.ScrolledWindow
 
 	image          *gtk.Image
 	unscaledPixbuf *gdk.Pixbuf // will be inverted in dark mode
@@ -39,11 +38,11 @@ func NewImageViewer(parent *gtk.ApplicationWindow, imageScale float64) (*ImageVi
 
 	iv.scrolledWindow.SetSizeRequest(500, 400)
 
-	iv.scrolledWindowCtx, err = iv.scrolledWindow.GetStyleContext()
+	sc, err := iv.scrolledWindow.GetStyleContext()
 	if err != nil {
 		return nil, err
 	}
-	iv.scrolledWindowCtx.AddClass(style.ClassComicContainer)
+	sc.AddClass(style.ClassComicContainer)
 
 	iv.image, err = gtk.ImageNew()
 	if err != nil {
@@ -84,7 +83,6 @@ func (iv *ImageViewer) IWidget() gtk.IWidget {
 
 func (iv *ImageViewer) Destroy() {
 	iv.scrolledWindow = nil
-	iv.scrolledWindowCtx = nil
 	iv.image = nil
 	iv.unscaledPixbuf = nil
 	iv.finalPixbuf = nil
