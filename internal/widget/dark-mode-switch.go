@@ -10,7 +10,7 @@ import (
 // application's dark mode is enabled.
 type DarkModeSwitch struct {
 	box   *gtk.Box
-	label *gtk.Label
+	label *gtk.ModelButton
 	swtch *gtk.Switch
 }
 
@@ -26,22 +26,26 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 		return nil, err
 	}
 	dms.box.SetHomogeneous(false)
-	sc, err := dms.box.GetStyleContext()
-	if err != nil {
-		return nil, err
-	}
-	// These 3 style classes are needed to make Adwaita and elementary's
-	// stylesheets use the same padding for this gtk.Box as they do for the
-	// gtk.ModelButtons that WindowMenu uses.
-	sc.AddClass("menuitem")
-	sc.AddClass("button")
-	sc.AddClass("flat")
 
-	dms.label, err = gtk.LabelNew(l("Dark mode"))
+	// Use a ModelButton to force the theme to apply the same padding as the
+	// other items on the WindowMenu. Has the added benefit of increasing
+	// the clickable area for toggling dark mode.
+	dms.label, err = gtk.ModelButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	dms.label.SetHAlign(gtk.ALIGN_START)
+	dms.label.SetLabel(l("Dark mode"))
+	dms.label.SetActionName("app.toggle-dark-mode")
+	lc, err := dms.label.GetChild()
+	if err != nil {
+		return nil, err
+	}
+	lc.ToWidget().SetHAlign(gtk.ALIGN_START)
+	sc, err := dms.label.GetStyleContext()
+	if err != nil {
+		return nil, err
+	}
+	sc.AddClass(style.ClassNarrowModelButton)
 	dms.box.PackStart(dms.label, true, true, 0)
 
 	dms.swtch, err = gtk.SwitchNew()

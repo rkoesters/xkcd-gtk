@@ -2,3 +2,7 @@
 	background-color: #000000;
 	border-radius: 0px;
 }
+
+modelbutton.narrow {
+    min-width: 0;
+}
