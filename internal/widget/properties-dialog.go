@@ -83,7 +83,11 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	grid.SetMarginStart(12)
 	grid.SetMarginEnd(12)
 
-	addRowToGrid := func(row int, label string) (*gtk.Label, error) {
+	row := 0
+
+	addRowToGrid := func(label string) (*gtk.Label, error) {
+		defer func() { row++ }()
+
 		keyLabel, err := gtk.LabelNew(label)
 		if err != nil {
 			return nil, err
@@ -107,35 +111,35 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 		return valLabel, nil
 	}
 
-	pd.comicNumber, err = addRowToGrid(0, l("Number"))
+	pd.comicNumber, err = addRowToGrid(l("Number"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicTitle, err = addRowToGrid(1, l("Title"))
+	pd.comicTitle, err = addRowToGrid(l("Title"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicDate, err = addRowToGrid(2, l("Date"))
+	pd.comicDate, err = addRowToGrid(l("Date"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicImage, err = addRowToGrid(3, l("Image"))
+	pd.comicImage, err = addRowToGrid(l("Image"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicAltText, err = addRowToGrid(4, l("Alt text"))
+	pd.comicAltText, err = addRowToGrid(l("Alt text"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicNews, err = addRowToGrid(5, l("News"))
+	pd.comicNews, err = addRowToGrid(l("News"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicLink, err = addRowToGrid(6, l("Link"))
+	pd.comicLink, err = addRowToGrid(l("Link"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicTranscript, err = addRowToGrid(7, l("Transcript"))
+	pd.comicTranscript, err = addRowToGrid(l("Transcript"))
 	if err != nil {
 		return nil, err
 	}

@@ -32,7 +32,7 @@ msgstr ""
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:126
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Dark mode for late night reading"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:118
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgstr ""
 msgid "Go to the previous comic"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:122
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:134
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgstr ""
 msgid "New window"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:130
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:110
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr ""
 
@@ -240,7 +240,7 @@ msgstr ""
 msgid "Show comic properties"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr ""
 
@@ -249,7 +249,7 @@ msgstr ""
 msgid "Toggle dark mode"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:138
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr ""
 
