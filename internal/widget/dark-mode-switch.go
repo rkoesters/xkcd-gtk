@@ -36,7 +36,6 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 	}
 	dms.label.SetLabel(l("Dark mode"))
 	dms.label.SetActionName("app.toggle-dark-mode")
-	dms.label.SetTooltipText(l("Toggle dark mode"))
 	lc, err := dms.label.GetChild()
 	if err != nil {
 		return nil, err
