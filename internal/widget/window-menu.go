@@ -73,8 +73,8 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 	}
 	wm.zoomBox.box.SetMarginBottom(style.PopoverPaddingCompact / 2)
 	wm.popoverBox.Add(wm.zoomBox.IWidget())
-	err = addMenuSeparator()
-	if err != nil {
+
+	if err = addMenuSeparator(); err != nil {
 		return nil, err
 	}
 
