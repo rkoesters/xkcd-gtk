@@ -21,7 +21,7 @@ func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
 
 	dms := &DarkModeSwitch{}
 
-	dms.box, err = gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PopoverPaddingCompact/2)
+	dms.box, err = gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PopoverPaddingCompact)
 	if err != nil {
 		return nil, err
 	}
