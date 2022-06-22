@@ -139,8 +139,8 @@ func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
 	iv.image.SetFromPixbuf(iv.finalPixbuf)
 }
 
-func (iv *ImageViewer) applyDarkModeImageInversion(enabled bool) {
-	if enabled {
+func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) {
+	if darkMode {
 		// Invert the pixels of the comic image.
 		pixels := iv.unscaledPixbuf.GetPixels()
 		for i := 0; i < len(pixels); i++ {

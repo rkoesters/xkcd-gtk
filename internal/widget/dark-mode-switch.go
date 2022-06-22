@@ -15,7 +15,7 @@ type DarkModeSwitch struct {
 
 var _ Widget = &DarkModeSwitch{}
 
-func NewDarkModeSwitch(setter func(active bool)) (*DarkModeSwitch, error) {
+func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	var err error
 
 	dms := &DarkModeSwitch{}
