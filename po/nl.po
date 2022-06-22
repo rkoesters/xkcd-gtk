@@ -168,7 +168,7 @@ msgstr "Nieuw venster"
 msgid "News"
 msgstr "Nieuws"
 
-#: internal/widget/search-menu.go:69
+#: internal/widget/search-menu.go:66
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
@@ -219,7 +219,7 @@ msgstr "Verwijderen uit bladwijzers"
 msgid "Reset zoom"
 msgstr "Oorspronkelijk zoomniveau"
 
-#: internal/widget/search-menu.go:44 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52
 msgid "Search"
 msgstr "Zoeken"
 

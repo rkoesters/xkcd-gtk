@@ -14,8 +14,6 @@ import (
 )
 
 type SearchMenu struct {
-	accels *gtk.AccelGroup // ptr to win.accels
-
 	menuButton *gtk.MenuButton
 	popover    *gtk.Popover
 	popoverBox *gtk.Box
@@ -33,7 +31,6 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	var err error
 
 	sm := &SearchMenu{
-		accels:   accels,
 		setComic: comicSetter,
 	}
 
@@ -42,7 +39,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 		return nil, err
 	}
 	sm.menuButton.SetTooltipText(l("Search"))
-	sm.menuButton.AddAccelerator("activate", sm.accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	sm.menuButton.AddAccelerator("activate", accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
 	sm.popover, err = gtk.PopoverNew(sm.menuButton)
 	if err != nil {
@@ -97,8 +94,6 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 }
 
 func (sm *SearchMenu) Destroy() {
-	sm.accels = nil
-
 	sm.menuButton = nil
 	sm.popover = nil
 	sm.popoverBox = nil

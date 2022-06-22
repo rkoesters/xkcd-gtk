@@ -166,7 +166,7 @@ msgstr "Nouvelle fenêtre"
 msgid "News"
 msgstr "Actualités"
 
-#: internal/widget/search-menu.go:69
+#: internal/widget/search-menu.go:66
 msgid "No results found"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:44 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52
 msgid "Search"
 msgstr "Rechercher"
 

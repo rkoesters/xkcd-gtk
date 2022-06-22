@@ -169,7 +169,7 @@ msgstr "Nova Janela"
 msgid "News"
 msgstr "Noticias"
 
-#: internal/widget/search-menu.go:69
+#: internal/widget/search-menu.go:66
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
@@ -223,7 +223,7 @@ msgstr "Remover esta banda desenhada dos marcadores"
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:44 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52
 msgid "Search"
 msgstr "Procurar"
 
