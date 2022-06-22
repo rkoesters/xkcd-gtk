@@ -21,11 +21,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
-#: internal/widget/window-menu.go:137 internal/widget/app-menu.ui:38
+#: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:38
 msgid "About Comic Sticks"
 msgstr "A proposito di Sticks Comic"
 
-#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:28
+#: internal/widget/window-menu.go:126 internal/widget/app-menu.ui:28
 msgid "About XKCD"
 msgstr "Informazioni su XKCD"
 
@@ -136,7 +136,7 @@ msgstr "Immagine"
 msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
-#: internal/widget/window-menu.go:133 internal/widget/app-menu.ui:34
+#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:34
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
@@ -267,15 +267,15 @@ msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 msgid "View comic metadata"
 msgstr "Visualizza metadati fumetto"
 
-#: internal/widget/window-menu.go:113 internal/widget/app-menu.ui:16
+#: internal/widget/window-menu.go:114 internal/widget/app-menu.ui:16
 msgid "What If?"
 msgstr "E se?"
 
-#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:20
+#: internal/widget/window-menu.go:118 internal/widget/app-menu.ui:20
 msgid "XKCD Blog"
 msgstr "XKCD Blog"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:24
+#: internal/widget/window-menu.go:122 internal/widget/app-menu.ui:24
 msgid "XKCD Store"
 msgstr "XKCD Store"
 

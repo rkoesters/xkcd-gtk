@@ -106,6 +106,7 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 			return nil, err
 		}
 		wm.popoverBox.PackStart(wm.darkModeSwitch.IWidget(), false, true, 0)
+
 		if err = addMenuSeparator(); err != nil {
 			return nil, err
 		}
@@ -126,6 +127,7 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 		if err != nil {
 			return nil, err
 		}
+
 		if err = addMenuSeparator(); err != nil {
 			return nil, err
 		}
