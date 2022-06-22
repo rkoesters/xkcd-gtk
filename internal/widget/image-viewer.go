@@ -103,8 +103,13 @@ func (iv *ImageViewer) ShowLoadingScreen() {
 }
 
 func (iv *ImageViewer) SetScale(scale float64) float64 {
+	var err error
 	iv.scale = safeScale(scale)
-	iv.applyImageScaling()
+	iv.finalPixbuf, err = scaleImage(iv.unscaledPixbuf, iv.scale)
+	if err != nil {
+		log.Print(err)
+		return 0
+	}
 	iv.image.SetFromPixbuf(iv.finalPixbuf)
 	return iv.scale
 }
@@ -128,7 +133,7 @@ func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
 		return
 	}
 	iv.applyDarkModeImageInversion(darkMode)
-	err = iv.applyImageScaling()
+	iv.finalPixbuf, err = scaleImage(iv.unscaledPixbuf, iv.scale)
 	if err != nil {
 		log.Print(err)
 		return
@@ -146,19 +151,14 @@ func (iv *ImageViewer) applyDarkModeImageInversion(enabled bool) {
 	}
 }
 
-func (iv *ImageViewer) applyImageScaling() error {
-	var unscaledWidth, unscaledHeight, width, height int
-	unscaledWidth = iv.unscaledPixbuf.GetWidth()
-	unscaledHeight = iv.unscaledPixbuf.GetHeight()
-	width = int(float64(unscaledWidth) * iv.scale)
-	height = int(float64(unscaledHeight) * iv.scale)
-	var err error
-	iv.finalPixbuf, err = iv.unscaledPixbuf.ScaleSimple(width, height, gdk.INTERP_BILINEAR)
-	return err
-}
-
 func (iv *ImageViewer) SetTooltipText(s string) {
 	iv.image.SetTooltipText(s)
+}
+
+func scaleImage(unscaled *gdk.Pixbuf, scale float64) (*gdk.Pixbuf, error) {
+	width := int(float64(unscaled.GetWidth()) * scale)
+	height := int(float64(unscaled.GetHeight()) * scale)
+	return unscaled.ScaleSimple(width, height, gdk.INTERP_BILINEAR)
 }
 
 func safeScale(scale float64) float64 {
