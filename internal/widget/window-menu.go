@@ -13,8 +13,6 @@ type WindowMenu struct {
 
 	zoomBox        *ZoomBox
 	darkModeSwitch *DarkModeSwitch
-
-	showProperties func() // win.ShowProperties
 }
 
 var _ Widget = &WindowMenu{}
