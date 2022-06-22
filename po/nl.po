@@ -111,19 +111,19 @@ msgstr "Uitleg tonen"
 msgid "Features:"
 msgstr "Kenmerken:"
 
-#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:43
+#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:43
 msgid "Go to a random comic"
 msgstr "Toon een willekeurig verhaal"
 
-#: internal/widget/navigation-bar.go:41 internal/widget/shortcuts-window.ui:15
+#: internal/widget/navigation-bar.go:45 internal/widget/shortcuts-window.ui:15
 msgid "Go to the first comic"
 msgstr "Ga naar het eerste verhaal"
 
-#: internal/widget/navigation-bar.go:77 internal/widget/shortcuts-window.ui:36
+#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:36
 msgid "Go to the newest comic"
 msgstr "Ga naar het nieuwste verhaal"
 
-#: internal/widget/navigation-bar.go:68 internal/widget/shortcuts-window.ui:29
+#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:29
 msgid "Go to the next comic"
 msgstr "Ga naar het volgende verhaal"
 

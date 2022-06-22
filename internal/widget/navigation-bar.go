@@ -8,8 +8,6 @@ import (
 )
 
 type NavigationBar struct {
-	accels *gtk.AccelGroup // ptr to win.accels
-
 	box *gtk.ButtonBox
 
 	firstButton    *gtk.Button
@@ -24,9 +22,7 @@ var _ Widget = &NavigationBar{}
 func NewNavigationBar(accels *gtk.AccelGroup) (*NavigationBar, error) {
 	var err error
 
-	nb := &NavigationBar{
-		accels: accels,
-	}
+	nb := &NavigationBar{}
 
 	nb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
@@ -34,57 +30,47 @@ func NewNavigationBar(accels *gtk.AccelGroup) (*NavigationBar, error) {
 	}
 	nb.box.SetLayout(gtk.BUTTONBOX_EXPAND)
 
-	nb.firstButton, err = gtk.ButtonNew()
-	if err != nil {
-		return nil, err
+	addNavButton := func(label, action string, key uint) (*gtk.Button, error) {
+		btn, err := gtk.ButtonNew()
+		if err != nil {
+			return nil, err
+		}
+		btn.SetTooltipText(label)
+		btn.SetActionName(action)
+		btn.AddAccelerator("activate", accels, key, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+		nb.box.Add(btn)
+		return btn, nil
 	}
-	nb.firstButton.SetTooltipText(l("Go to the first comic"))
-	nb.firstButton.SetProperty("action-name", "win.first-comic")
-	nb.firstButton.AddAccelerator("activate", nb.accels, gdk.KEY_Home, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	nb.box.Add(nb.firstButton)
 
-	nb.previousButton, err = gtk.ButtonNew()
+	nb.firstButton, err = addNavButton(l("Go to the first comic"), "win.first-comic", gdk.KEY_Home)
 	if err != nil {
 		return nil, err
 	}
-	nb.previousButton.SetTooltipText(l("Go to the previous comic"))
-	nb.previousButton.SetProperty("action-name", "win.previous-comic")
-	nb.previousButton.AddAccelerator("activate", nb.accels, gdk.KEY_Left, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	nb.box.Add(nb.previousButton)
 
-	nb.randomButton, err = gtk.ButtonNew()
+	nb.previousButton, err = addNavButton(l("Go to the previous comic"), "win.previous-comic", gdk.KEY_Left)
 	if err != nil {
 		return nil, err
 	}
-	nb.randomButton.SetTooltipText(l("Go to a random comic"))
-	nb.randomButton.SetProperty("action-name", "win.random-comic")
-	nb.randomButton.AddAccelerator("activate", nb.accels, gdk.KEY_r, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	nb.box.Add(nb.randomButton)
 
-	nb.nextButton, err = gtk.ButtonNew()
+	nb.randomButton, err = addNavButton(l("Go to a random comic"), "win.random-comic", gdk.KEY_r)
 	if err != nil {
 		return nil, err
 	}
-	nb.nextButton.SetTooltipText(l("Go to the next comic"))
-	nb.nextButton.SetProperty("action-name", "win.next-comic")
-	nb.nextButton.AddAccelerator("activate", nb.accels, gdk.KEY_Right, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	nb.box.Add(nb.nextButton)
 
-	nb.newestButton, err = gtk.ButtonNew()
+	nb.nextButton, err = addNavButton(l("Go to the next comic"), "win.next-comic", gdk.KEY_Right)
 	if err != nil {
 		return nil, err
 	}
-	nb.newestButton.SetTooltipText(l("Go to the newest comic"))
-	nb.newestButton.SetProperty("action-name", "win.newest-comic")
-	nb.newestButton.AddAccelerator("activate", nb.accels, gdk.KEY_End, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	nb.box.Add(nb.newestButton)
+
+	nb.newestButton, err = addNavButton(l("Go to the newest comic"), "win.newest-comic", gdk.KEY_End)
+	if err != nil {
+		return nil, err
+	}
 
 	return nb, nil
 }
 
 func (nb *NavigationBar) Destroy() {
-	nb.accels = nil
-
 	nb.box = nil
 
 	nb.firstButton = nil

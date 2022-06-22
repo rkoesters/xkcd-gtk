@@ -108,19 +108,19 @@ msgstr "Spiega"
 msgid "Features:"
 msgstr "Caratteristiche:"
 
-#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:43
+#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:43
 msgid "Go to a random comic"
 msgstr "Vai ad un fumetto a caso"
 
-#: internal/widget/navigation-bar.go:41 internal/widget/shortcuts-window.ui:15
+#: internal/widget/navigation-bar.go:45 internal/widget/shortcuts-window.ui:15
 msgid "Go to the first comic"
 msgstr "Vai al primo fumetto"
 
-#: internal/widget/navigation-bar.go:77 internal/widget/shortcuts-window.ui:36
+#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:36
 msgid "Go to the newest comic"
 msgstr "Vai al fumetto più recente"
 
-#: internal/widget/navigation-bar.go:68 internal/widget/shortcuts-window.ui:29
+#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:29
 msgid "Go to the next comic"
 msgstr "Vai al prossimo fumetto"
 
