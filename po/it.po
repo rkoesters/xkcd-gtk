@@ -21,11 +21,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
-#: internal/widget/window-menu.go:137 internal/widget/app-menu.ui:38
+#: internal/widget/window-menu.go:142 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
 msgstr "A proposito di Sticks Comic"
 
-#: internal/widget/window-menu.go:124 internal/widget/app-menu.ui:28
+#: internal/widget/window-menu.go:129 internal/widget/app-menu.ui:30
 msgid "About XKCD"
 msgstr "Informazioni su XKCD"
 
@@ -33,7 +33,7 @@ msgstr "Informazioni su XKCD"
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
-#: internal/widget/properties-dialog.go:127
+#: internal/widget/properties-dialog.go:126
 msgid "Alt text"
 msgstr "Ferma Testo"
 
@@ -92,7 +92,7 @@ msgstr "Abilità modalità scura"
 msgid "Dark mode for late night reading"
 msgstr "Modalità scura per la lettura a tarda notte"
 
-#: internal/widget/properties-dialog.go:119
+#: internal/widget/properties-dialog.go:118
 msgid "Date"
 msgstr "Data"
 
@@ -128,7 +128,7 @@ msgstr "Vai al prossimo fumetto"
 msgid "Go to the previous comic"
 msgstr "Vai al fumetto precedente"
 
-#: internal/widget/properties-dialog.go:123
+#: internal/widget/properties-dialog.go:122
 msgid "Image"
 msgstr "Immagine"
 
@@ -136,11 +136,11 @@ msgstr "Immagine"
 msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
-#: internal/widget/window-menu.go:133 internal/widget/app-menu.ui:34
+#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:36
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
-#: internal/widget/properties-dialog.go:135
+#: internal/widget/properties-dialog.go:134
 msgid "Link"
 msgstr "Link"
 
@@ -161,7 +161,7 @@ msgstr "Naviga"
 msgid "New window"
 msgstr "Nuova Finestra"
 
-#: internal/widget/properties-dialog.go:131
+#: internal/widget/properties-dialog.go:130
 msgid "News"
 msgstr "Novità"
 
@@ -169,7 +169,7 @@ msgstr "Novità"
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
-#: internal/widget/properties-dialog.go:111
+#: internal/widget/properties-dialog.go:110
 msgid "Number"
 msgstr "Numero"
 
@@ -196,7 +196,7 @@ msgstr ""
 "Accedi rapidamente alle spiegazioni dei fumetti tramite il wiki esplicativo "
 "di xkcd"
 
-#: internal/widget/app-menu.ui:42
+#: internal/widget/app-menu.ui:44
 msgid "Quit"
 msgstr "Esci"
 
@@ -246,16 +246,16 @@ msgstr "Mostra menu segnalibri"
 msgid "Show comic properties"
 msgstr "Mostra proprietà fumetto"
 
-#: internal/widget/properties-dialog.go:115
+#: internal/widget/properties-dialog.go:114
 msgid "Title"
 msgstr "Titolo"
 
-#: internal/widget/dark-mode-switch.go:51 internal/widget/app-menu.ui:10
+#: internal/widget/dark-mode-switch.go:51 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
 
-#: internal/widget/properties-dialog.go:139
+#: internal/widget/properties-dialog.go:138
 msgid "Transcript"
 msgstr "Trascrizione"
 
@@ -267,15 +267,15 @@ msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 msgid "View comic metadata"
 msgstr "Visualizza metadati fumetto"
 
-#: internal/widget/window-menu.go:112 internal/widget/app-menu.ui:16
+#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "E se?"
 
-#: internal/widget/window-menu.go:116 internal/widget/app-menu.ui:20
+#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
 msgid "XKCD Blog"
 msgstr "XKCD Blog"
 
-#: internal/widget/window-menu.go:120 internal/widget/app-menu.ui:24
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
 msgid "XKCD Store"
 msgstr "XKCD Store"
 

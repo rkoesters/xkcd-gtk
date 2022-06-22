@@ -99,6 +99,11 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 		if err != nil {
 			return nil, err
 		}
+
+		if err = addMenuSeparator(); err != nil {
+			return nil, err
+		}
+
 		wm.darkModeSwitch, err = NewDarkModeSwitch(setDarkMode)
 		if err != nil {
 			return nil, err

@@ -6,6 +6,8 @@
         <attribute name="label" translatable="yes">New window</attribute>
         <attribute name="action">app.new-window</attribute>
       </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">Toggle dark mode</attribute>
         <attribute name="action">app.toggle-dark-mode</attribute>

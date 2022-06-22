@@ -20,11 +20,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 
-#: internal/widget/window-menu.go:137 internal/widget/app-menu.ui:38
+#: internal/widget/window-menu.go:142 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
 msgstr ""
 
-#: internal/widget/window-menu.go:124 internal/widget/app-menu.ui:28
+#: internal/widget/window-menu.go:129 internal/widget/app-menu.ui:30
 msgid "About XKCD"
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:127
+#: internal/widget/properties-dialog.go:126
 msgid "Alt text"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Dark mode for late night reading"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:119
+#: internal/widget/properties-dialog.go:118
 msgid "Date"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgstr ""
 msgid "Go to the previous comic"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:123
+#: internal/widget/properties-dialog.go:122
 msgid "Image"
 msgstr ""
 
@@ -132,11 +132,11 @@ msgstr ""
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/window-menu.go:133 internal/widget/app-menu.ui:34
+#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:36
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:135
+#: internal/widget/properties-dialog.go:134
 msgid "Link"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgstr ""
 msgid "New window"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:131
+#: internal/widget/properties-dialog.go:130
 msgid "News"
 msgstr ""
 
@@ -165,7 +165,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:111
+#: internal/widget/properties-dialog.go:110
 msgid "Number"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr ""
 
-#: internal/widget/app-menu.ui:42
+#: internal/widget/app-menu.ui:44
 msgid "Quit"
 msgstr ""
 
@@ -240,16 +240,16 @@ msgstr ""
 msgid "Show comic properties"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:115
+#: internal/widget/properties-dialog.go:114
 msgid "Title"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:51 internal/widget/app-menu.ui:10
+#: internal/widget/dark-mode-switch.go:51 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:139
+#: internal/widget/properties-dialog.go:138
 msgid "Transcript"
 msgstr ""
 
@@ -261,15 +261,15 @@ msgstr ""
 msgid "View comic metadata"
 msgstr ""
 
-#: internal/widget/window-menu.go:112 internal/widget/app-menu.ui:16
+#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr ""
 
-#: internal/widget/window-menu.go:116 internal/widget/app-menu.ui:20
+#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
 msgid "XKCD Blog"
 msgstr ""
 
-#: internal/widget/window-menu.go:120 internal/widget/app-menu.ui:24
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
 msgid "XKCD Store"
 msgstr ""
 
