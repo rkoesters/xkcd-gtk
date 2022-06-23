@@ -343,7 +343,7 @@ func (win *ApplicationWindow) SetComic(n int) {
 
 		// Add the DisplayComic function to the event loop so our UI
 		// gets updated with the new comic.
-		glib.IdleAdd(win.DisplayComic)
+		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, win.DisplayComic)
 	}()
 }
 
@@ -405,11 +405,11 @@ func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
 		const refreshRate = 5 * time.Minute
 		newest, _ := cache.CheckForNewestComicInfo(refreshRate)
 		if win.comicNumber() < newest.Num {
-			glib.IdleAdd(func() {
+			glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
 				win.actions["next-comic"].SetEnabled(true)
 			})
 		} else {
-			glib.IdleAdd(func() {
+			glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
 				win.actions["next-comic"].SetEnabled(false)
 			})
 		}
