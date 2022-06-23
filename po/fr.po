@@ -251,7 +251,7 @@ msgstr "Afficher les propriétés de la BD"
 msgid "Title"
 msgstr "Titre"
 
-#: internal/widget/dark-mode-switch.go:65 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:69 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"

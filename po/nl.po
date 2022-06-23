@@ -251,7 +251,7 @@ msgstr "Eigenschappen tonen"
 msgid "Title"
 msgstr "Titel"
 
-#: internal/widget/dark-mode-switch.go:65 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:69 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"

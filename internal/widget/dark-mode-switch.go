@@ -15,7 +15,7 @@ type DarkModeSwitch struct {
 
 var _ Widget = &DarkModeSwitch{}
 
-func NewDarkModeSwitch(setter func(darkMode bool), toggler func(), popoverHider func()) (*DarkModeSwitch, error) {
+func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	var err error
 
 	dms := &DarkModeSwitch{}
@@ -34,13 +34,17 @@ func NewDarkModeSwitch(setter func(darkMode bool), toggler func(), popoverHider 
 		return nil, err
 	}
 	dms.label.SetLabel(l("Dark mode"))
-	// Instead of using dms.label.SetActionName("app.toggle-dark-mode"),
-	// give a closure that immediately closes the popover menu to hide weird
-	// graphical glitching that occurs when the popover is transitioning to
-	// closed ("Popdown") while dark mode changes state.
-	dms.label.Connect("clicked", func() {
-		popoverHider()
-		toggler()
+	// Use "button-release-event" instead of "clicked" because "b-r-e" runs
+	// the default handlers after our closure, whereas "clicked" always runs
+	// the default handlers first. Running before the default handlers
+	// allows us to prevent the running of the default handlers.
+	dms.label.Connect("button-release-event", func() {
+		dms.swtch.SetActive(!dms.swtch.GetActive())
+		// Prevent the default handlers from running. This prevents
+		// those handlers from closing the popover menu. The popover
+		// menu should remain open to mimic the behavior of clicking the
+		// switch (which would not close the menu).
+		dms.label.StopEmission("button-release-event")
 	})
 	lc, err := dms.label.GetChild()
 	if err != nil {
@@ -64,8 +68,7 @@ func NewDarkModeSwitch(setter func(darkMode bool), toggler func(), popoverHider 
 	}
 	dms.swtch.SetTooltipText(l("Toggle dark mode"))
 	dms.swtch.Connect("notify::active", func() {
-		active := dms.swtch.GetActive()
-		setter(active)
+		setter(dms.swtch.GetActive())
 	})
 	dms.box.PackEnd(dms.swtch, false, true, 0)
 

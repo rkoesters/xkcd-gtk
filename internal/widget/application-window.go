@@ -154,7 +154,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackStart(win.navigationBar.IWidget())
 
 	// Create the window menu.
-	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu(), app.SetDarkMode, app.ToggleDarkMode)
+	win.windowMenu, err = NewWindowMenu(app.application.PrefersAppMenu(), app.SetDarkMode)
 	if err != nil {
 		return nil, err
 	}
