@@ -104,7 +104,7 @@ func Load(app *gtk.Application) {
 		// Wait before showing the cache progress window. If the cache
 		// is already complete, then the caching and indexing operation
 		// will be very fast.
-		time.Sleep(time.Second)
+		time.Sleep(2 * time.Second)
 
 		select {
 		case <-done:
