@@ -27,7 +27,7 @@ msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
 
 #: internal/widget/window-menu.go:142 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
-msgstr "Karikatürler Hakkında"
+msgstr "Comic Sticks Hakkında"
 
 #: internal/widget/window-menu.go:129 internal/widget/app-menu.ui:30
 msgid "About XKCD"
@@ -61,7 +61,7 @@ msgstr "Yeni karikatür denetleniyor..."
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
-msgstr "Karikatürler"
+msgstr "Comic Sticks"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
 msgid ""

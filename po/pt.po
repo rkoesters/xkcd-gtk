@@ -60,7 +60,7 @@ msgstr "A pesquisar por uma nova banda desenhada..."
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
-msgstr "Bonecos de Banda Desenhada"
+msgstr "Comic Sticks"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
 msgid ""
