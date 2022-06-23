@@ -213,5 +213,4 @@ func (sm *SearchMenu) setComicFromSearch(id string) {
 		return
 	}
 	sm.setComic(number)
-	sm.menuButton.GetPopover().Hide()
 }

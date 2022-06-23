@@ -243,7 +243,7 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 			log.Print(err)
 			return
 		}
-		item.Connect("clicked", func() { bm.setComicFromBookmark(comic.Num) })
+		item.Connect("clicked", func() { bm.setComic(comic.Num) })
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
 		if err != nil {
@@ -277,9 +277,4 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 		item.Add(box)
 		bm.list.Add(item)
 	}
-}
-
-func (bm *BookmarksMenu) setComicFromBookmark(id int) {
-	bm.setComic(id)
-	bm.menuButton.GetPopover().Hide()
 }
