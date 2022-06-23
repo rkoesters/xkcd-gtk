@@ -255,7 +255,7 @@ msgstr "Mostrar propriedades da banda desenhada"
 msgid "Title"
 msgstr "Título"
 
-#: internal/widget/dark-mode-switch.go:58 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:65 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"

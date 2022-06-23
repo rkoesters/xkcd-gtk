@@ -15,7 +15,7 @@ type DarkModeSwitch struct {
 
 var _ Widget = &DarkModeSwitch{}
 
-func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
+func NewDarkModeSwitch(setter func(darkMode bool), toggler func(), popoverHider func()) (*DarkModeSwitch, error) {
 	var err error
 
 	dms := &DarkModeSwitch{}
@@ -34,7 +34,14 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 		return nil, err
 	}
 	dms.label.SetLabel(l("Dark mode"))
-	dms.label.SetActionName("app.toggle-dark-mode")
+	// Instead of using dms.label.SetActionName("app.toggle-dark-mode"),
+	// give a closure that immediately closes the popover menu to hide weird
+	// graphical glitching that occurs when the popover is transitioning to
+	// closed ("Popdown") while dark mode changes state.
+	dms.label.Connect("clicked", func() {
+		popoverHider()
+		toggler()
+	})
 	lc, err := dms.label.GetChild()
 	if err != nil {
 		return nil, err
