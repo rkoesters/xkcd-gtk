@@ -80,7 +80,7 @@ msgstr ""
 msgid "Couldn't get comic"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:36
+#: internal/widget/dark-mode-switch.go:46
 msgid "Dark mode"
 msgstr ""
 
@@ -244,7 +244,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:69 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:33 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr ""

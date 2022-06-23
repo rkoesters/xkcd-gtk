@@ -26,6 +26,16 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	}
 	dms.box.SetHomogeneous(false)
 
+	dms.swtch, err = gtk.SwitchNew()
+	if err != nil {
+		return nil, err
+	}
+	dms.swtch.SetTooltipText(l("Toggle dark mode"))
+	dms.swtch.Connect("notify::active", func() {
+		setter(dms.swtch.GetActive())
+	})
+	dms.box.PackEnd(dms.swtch, false, true, 0)
+
 	// Use a ModelButton to force the theme to apply the same padding as the
 	// other items on the WindowMenu. Has the added benefit of increasing
 	// the clickable area for toggling dark mode.
@@ -40,10 +50,10 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	// allows us to prevent the running of the default handlers.
 	dms.label.Connect("button-release-event", func() {
 		dms.swtch.SetActive(!dms.swtch.GetActive())
-		// Prevent the default handlers from running. This prevents
-		// those handlers from closing the popover menu. The popover
-		// menu should remain open to mimic the behavior of clicking the
-		// switch (which would not close the menu).
+		// Prevent the default handlers from running so they do not
+		// close the popover menu. The popover menu should remain open
+		// to mimic the behavior of clicking the switch (which would not
+		// close the menu).
 		dms.label.StopEmission("button-release-event")
 	})
 	lc, err := dms.label.GetChild()
@@ -61,16 +71,6 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	// widening the menu.
 	sc.AddClass(style.ClassNoMinWidth)
 	dms.box.PackStart(dms.label, true, true, 0)
-
-	dms.swtch, err = gtk.SwitchNew()
-	if err != nil {
-		return nil, err
-	}
-	dms.swtch.SetTooltipText(l("Toggle dark mode"))
-	dms.swtch.Connect("notify::active", func() {
-		setter(dms.swtch.GetActive())
-	})
-	dms.box.PackEnd(dms.swtch, false, true, 0)
 
 	dms.box.ShowAll()
 	return dms, nil
