@@ -59,66 +59,66 @@
     <release version="1.6.0" date="2022-06-20">
       <description>
         <ul>
-          <li>Zoom in and out to get a better look at comics.</li>
-          <li>Minor improvements to appearance of search, bookmark, and window menus.</li>
-          <li>Update dependencies.</li>
+          <li>Zoom in and out to get a better look at comics</li>
+          <li>Minor improvements to appearance of search, bookmark, and window menus</li>
+          <li>Update dependencies</li>
         </ul>
       </description>
     </release>
     <release version="1.5.3" date="2022-06-18">
       <description>
         <ul>
-          <li>Fixes and tweaks to app UI text and translations.</li>
-          <li>Update dependencies.</li>
+          <li>Fixes and tweaks to app UI text and translations</li>
+          <li>Update dependencies</li>
         </ul>
       </description>
     </release>
     <release version="1.5.2" date="2022-02-13">
       <description>
         <ul>
-          <li>Improve caching behavior of "Newest Comic" button.</li>
-          <li>Fix a crash when closing the comic window while the properties dialog is not open.</li>
-          <li>Update dependencies.</li>
+          <li>Improve caching behavior of "Newest Comic" button</li>
+          <li>Fix a crash when closing the comic window while the properties dialog is not open</li>
+          <li>Update dependencies</li>
         </ul>
       </description>
     </release>
     <release version="1.5.1" date="2021-10-23">
       <description>
         <ul>
-          <li>Fix a localization bug.</li>
+          <li>Fix a localization bug</li>
         </ul>
       </description>
     </release>
     <release version="1.5.0" date="2021-10-22">
       <description>
         <ul>
-          <li>Add a context menu when right-clicking on a comic.</li>
-          <li>Tweak spacing of navigation buttons on elementary OS.</li>
-          <li>Fix "Show Properties" keyboard shortcut hint in window menu.</li>
-          <li>Bump versions of dependencies.</li>
+          <li>Add a context menu when right-clicking on a comic</li>
+          <li>Tweak spacing of navigation buttons on elementary OS</li>
+          <li>Fix "Show Properties" keyboard shortcut hint in window menu</li>
+          <li>Bump versions of dependencies</li>
         </ul>
       </description>
     </release>
     <release version="1.4.4" date="2021-10-18">
       <description>
         <ul>
-          <li>Improve appearance of window menu, including shortcut hints where applicable.</li>
-          <li>Tweak appearance of navigation buttons on elementary OS.</li>
+          <li>Improve appearance of window menu, including shortcut hints where applicable</li>
+          <li>Tweak appearance of navigation buttons on elementary OS</li>
         </ul>
       </description>
     </release>
     <release version="1.4.3" date="2021-10-16">
       <description>
         <ul>
-          <li>Minor performance improvements.</li>
+          <li>Minor performance improvements</li>
         </ul>
       </description>
     </release>
     <release version="1.4.2" date="2021-07-18">
       <description>
         <ul>
-          <li>Improve UI contrast in dark mode by always using symbolic icons while in dark mode.</li>
-          <li>Improve comic metadata cache usage, decreasing app's internet usage.</li>
+          <li>Improve UI contrast in dark mode by always using symbolic icons while in dark mode</li>
+          <li>Improve comic metadata cache usage, decreasing app's internet usage</li>
         </ul>
       </description>
     </release>
@@ -130,10 +130,10 @@
     <release version="1.4.0" date="2021-06-09">
       <description>
         <ul>
-          <li>Move the random comic button to sit between the other navigation buttons.</li>
-          <li>Signicantly reduce app start up time when not connected to the internet.</li>
-          <li>Improve usage of cached data.</li>
-          <li>Add warning log message if there are app files that may have been misplaced due to a bug in version 1.3.2.</li>
+          <li>Move the random comic button to sit between the other navigation buttons</li>
+          <li>Signicantly reduce app start up time when not connected to the internet</li>
+          <li>Improve usage of cached data</li>
+          <li>Add warning log message if there are app files that may have been misplaced due to a bug in version 1.3.2</li>
         </ul>
       </description>
     </release>
@@ -141,9 +141,9 @@
       <description>
         <ul>
           <li>Add Portuguese translations (Thanks to rottenpants466)</li>
-          <li>Fix bug where app would dump app files in the root of the config and cache directories. The app will now put those files in an app-specific subdirectory.</li>
-          <li>Bump dependency versions.</li>
-          <li>Fix race condition in search results from 1.3.3.</li>
+          <li>Fix bug where app would dump app files in the root of the config and cache directories. The app will now put those files in an app-specific subdirectory</li>
+          <li>Bump dependency versions</li>
+          <li>Fix race condition in search results from 1.3.3</li>
         </ul>
       </description>
     </release>
