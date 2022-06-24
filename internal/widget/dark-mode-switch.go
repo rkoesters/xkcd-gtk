@@ -87,8 +87,8 @@ func (dms *DarkModeSwitch) Destroy() {
 }
 
 // SetActive informs the switch whether dark mode is enabled or not.
-func (dms *DarkModeSwitch) SetActive(active bool) {
-	dms.swtch.SetActive(active)
+func (dms *DarkModeSwitch) SyncDarkMode(darkMode bool) {
+	dms.swtch.SetActive(darkMode)
 }
 
 func (dms *DarkModeSwitch) SetCompact(compact bool) {

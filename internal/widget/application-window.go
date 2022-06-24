@@ -191,7 +191,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 	if err != nil {
 		log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
 	}
-	win.windowMenu.darkModeSwitch.SetActive(darkMode)
+	win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 
 	// What GTK theme we are using?
 	themeName := os.Getenv("GTK_THEME")
