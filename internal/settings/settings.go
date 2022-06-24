@@ -3,6 +3,7 @@ package settings
 
 import (
 	"encoding/json"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"io"
 	"os"
 )
@@ -17,12 +18,14 @@ func (settings *Settings) loadDefaults() {
 }
 
 // Read takes the given io.Reader and tries to parse json encoded state from it.
-func (settings *Settings) Read(r io.Reader) {
+func (settings *Settings) Read(r io.Reader) error {
 	dec := json.NewDecoder(r)
 	err := dec.Decode(settings)
 	if err != nil {
 		settings.loadDefaults()
+		return err
 	}
+	return nil
 }
 
 // ReadFile opens the given file and calls Read on the contents.
@@ -33,7 +36,10 @@ func (settings *Settings) ReadFile(filename string) {
 		return
 	}
 	defer f.Close()
-	settings.Read(f)
+	err = settings.Read(f)
+	if err != nil {
+		log.Printf("error reading from '%v': %v", filename, err)
+	}
 }
 
 // Write takes the given io.Writer and writes the Settings struct to it in json.
