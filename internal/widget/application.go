@@ -217,7 +217,10 @@ func (app *Application) LoadSettings() {
 	paths.CheckForMisplacedSettings()
 
 	// Read settings from disk.
-	app.settings.ReadFile(paths.Settings())
+	err = app.settings.ReadFile(paths.Settings())
+	if err != nil {
+		log.Print("error reading app settings: ", err)
+	}
 
 	// Get reference to Gtk's settings.
 	app.gtkSettings, err = gtk.SettingsGetDefault()
@@ -250,7 +253,10 @@ func (app *Application) LoadBookmarks() {
 	paths.CheckForMisplacedBookmarks()
 
 	app.bookmarks = bookmarks.New()
-	app.bookmarks.ReadFile(paths.Bookmarks())
+	err := app.bookmarks.ReadFile(paths.Bookmarks())
+	if err != nil {
+		log.Print("error reading bookmarks: ", err)
+	}
 }
 
 // SaveBookmarks tries to save our bookmarks to disk.
