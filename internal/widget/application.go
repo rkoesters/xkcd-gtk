@@ -115,7 +115,10 @@ func (app *Application) SetupCache() {
 	}
 
 	// Asynchronously fill the comic metadata cache and search index.
-	search.Load(app.application)
+	err = search.Load(app.application)
+	if err != nil {
+		log.Print("error building search index: ", err)
+	}
 }
 
 // CloseCache closes the search index and comic cache.

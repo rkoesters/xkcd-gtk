@@ -56,10 +56,10 @@ func Search(userQuery string) (*bleve.SearchResult, error) {
 
 // Load asynchronously fills the comic metadata cache and search index via the
 // internet. It may show a loading dialog to the user.
-func Load(app *gtk.Application) {
+func Load(app *gtk.Application) error {
 	loadingWindow, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)
 	if err != nil {
-		log.Print(err)
+		return err
 	}
 	loadingWindow.SetTitle(l("Search Index Update"))
 	loadingWindow.SetTypeHint(gdk.WINDOW_TYPE_HINT_DIALOG)
@@ -67,7 +67,7 @@ func Load(app *gtk.Application) {
 
 	progressBar, err := gtk.ProgressBarNew()
 	if err != nil {
-		log.Print(err)
+		return err
 	}
 	progressBar.SetText(l("Updating comic search index..."))
 	progressBar.SetShowText(true)
@@ -126,6 +126,8 @@ func Load(app *gtk.Application) {
 			loadingWindow.Close()
 		})
 	}()
+
+	return nil
 }
 
 func checkForMisplacedSearchIndex() {
