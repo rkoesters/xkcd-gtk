@@ -213,17 +213,17 @@
     </release>
     <release version="1.0.4" date="2018-10-22">
       <description>
-        <p>Update app metadata to pass appstream-util validate-relax</p>
+        <p>Update app metadata to pass appstream-util validate-relax.</p>
       </description>
     </release>
     <release version="1.0.3" date="2018-10-21">
       <description>
-        <p>Revert fuzzy searching due to regressions</p>
+        <p>Revert fuzzy searching due to regressions.</p>
       </description>
     </release>
     <release version="1.0.2" date="2018-10-21">
       <description>
-        <p>Minor fixes</p>
+        <p>Minor fixes:</p>
         <ul>
           <li>Use fuzzy searching</li>
           <li>Only show alt text when hovering directly over the comic image</li>
@@ -237,7 +237,7 @@
     </release>
     <release version="1.0.0" date="2018-10-18">
       <description>
-        <p>First stable release</p>
+        <p>First stable release!</p>
         <ul>
           <li>Improve startup time</li>
           <li>Add keyboard shortcuts for faster navigation</li>
