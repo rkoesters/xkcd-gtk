@@ -141,7 +141,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
 	appstream-util --nonet validate-relax $(APPDATA_PATH)
-	-appstream-util --nonet validate-strict $(APPDATA_PATH)
+	-appstream-util validate-strict $(APPDATA_PATH)
 
 test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
