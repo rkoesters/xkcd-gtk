@@ -26,8 +26,8 @@ msgid "About Comic Sticks"
 msgstr "A proposito di Sticks Comic"
 
 #: internal/widget/window-menu.go:129 internal/widget/app-menu.ui:30
-msgid "About XKCD"
-msgstr "Informazioni su XKCD"
+msgid "About xkcd"
+msgstr "Informazioni su xkcd"
 
 #: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
@@ -271,14 +271,6 @@ msgstr "Visualizza metadati fumetto"
 msgid "What If?"
 msgstr "E se?"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
-msgid "XKCD Blog"
-msgstr "XKCD Blog"
-
-#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
-msgid "XKCD Store"
-msgstr "XKCD Store"
-
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
 msgstr "Visualizzatore XKCD"
@@ -300,3 +292,11 @@ msgstr ""
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"
+
+#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
+msgid "xkcd blog"
+msgstr "xkcd blog"
+
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
+msgid "xkcd store"
+msgstr "xkcd store"

@@ -19,15 +19,15 @@
         <attribute name="action">app.open-what-if</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">XKCD Blog</attribute>
+        <attribute name="label" translatable="yes">xkcd blog</attribute>
         <attribute name="action">app.open-blog</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">XKCD Store</attribute>
+        <attribute name="label" translatable="yes">xkcd store</attribute>
         <attribute name="action">app.open-store</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">About XKCD</attribute>
+        <attribute name="label" translatable="yes">About xkcd</attribute>
         <attribute name="action">app.open-about-xkcd</attribute>
       </item>
     </section>

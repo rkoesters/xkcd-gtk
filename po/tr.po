@@ -30,8 +30,8 @@ msgid "About Comic Sticks"
 msgstr "Comic Sticks Hakkında"
 
 #: internal/widget/window-menu.go:129 internal/widget/app-menu.ui:30
-msgid "About XKCD"
-msgstr "XKCD Hakkında"
+msgid "About xkcd"
+msgstr "xkcd Hakkında"
 
 #: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
@@ -275,14 +275,6 @@ msgstr "Karikatür üst verisini görüntüle"
 msgid "What If?"
 msgstr "Farzedelim?"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
-msgid "XKCD Blog"
-msgstr "XKCD Günlüğü"
-
-#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
-msgid "XKCD Store"
-msgstr "XKCD Mağazası"
-
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
 msgstr "XKCD Görüntüleyici"
@@ -304,3 +296,11 @@ msgstr "Uzaklaştır"
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
+
+#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
+msgid "xkcd blog"
+msgstr "xkcd günlüğü"
+
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
+msgid "xkcd store"
+msgstr "xkcd mağazası"

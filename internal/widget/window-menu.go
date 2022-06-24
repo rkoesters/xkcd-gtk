@@ -118,15 +118,15 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 		if err != nil {
 			return nil, err
 		}
-		err = addMenuEntry(l("XKCD Blog"), "app.open-blog")
+		err = addMenuEntry(l("xkcd blog"), "app.open-blog")
 		if err != nil {
 			return nil, err
 		}
-		err = addMenuEntry(l("XKCD Store"), "app.open-store")
+		err = addMenuEntry(l("xkcd store"), "app.open-store")
 		if err != nil {
 			return nil, err
 		}
-		err = addMenuEntry(l("About XKCD"), "app.open-about-xkcd")
+		err = addMenuEntry(l("About xkcd"), "app.open-about-xkcd")
 		if err != nil {
 			return nil, err
 		}
