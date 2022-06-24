@@ -24,6 +24,7 @@
   <url type="bugtracker">https://github.com/rkoesters/xkcd-gtk/issues</url>
 
   <developer_name>Ryan Koesters</developer_name>
+  <update_contact>https://github.com/rkoesters/xkcd-gtk/issues</update_contact>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
 
