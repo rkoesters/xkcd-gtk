@@ -168,7 +168,7 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 		srID := sr.ID
 		item.Connect("clicked", func() { sm.setComicFromSearch(srID) })
 
-		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 6)
+		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
 		if err != nil {
 			log.Print(err)
 			return
