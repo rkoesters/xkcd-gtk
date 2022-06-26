@@ -20,7 +20,7 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 
 	dms := &DarkModeSwitch{}
 
-	dms.box, err = gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 2)
+	dms.box, err = gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
 		return nil, err
 	}
