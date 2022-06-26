@@ -225,8 +225,8 @@ func (win *ApplicationWindow) StyleUpdated() {
 		return s
 	}
 
-	setButtonImageFromIconName := func(icon string, iconSize gtk.IconSize, imageSetter func(gtk.IWidget)) {
-		img, err := gtk.ImageNewFromIconName(icon, iconSize)
+	setButtonImageFromIconName := func(icon string, imageSetter func(gtk.IWidget)) {
+		img, err := gtk.ImageNewFromIconName(icon, headerBarIconSize)
 		if err != nil {
 			log.Print(err)
 		} else {
@@ -234,14 +234,14 @@ func (win *ApplicationWindow) StyleUpdated() {
 		}
 	}
 
-	setButtonImageFromIconName("go-first-symbolic", headerBarIconSize, win.navigationBar.SetFirstButtonImage)
-	setButtonImageFromIconName("go-previous-symbolic", headerBarIconSize, win.navigationBar.SetPreviousButtonImage)
-	setButtonImageFromIconName("media-playlist-shuffle-symbolic", headerBarIconSize, win.navigationBar.SetRandomButtonImage)
-	setButtonImageFromIconName("go-next-symbolic", headerBarIconSize, win.navigationBar.SetNextButtonImage)
-	setButtonImageFromIconName("go-last-symbolic", headerBarIconSize, win.navigationBar.SetNewestButtonImage)
-	setButtonImageFromIconName(icon("edit-find"), headerBarIconSize, win.searchMenu.SetButtonImage)
-	setButtonImageFromIconName(icon("user-bookmarks"), headerBarIconSize, win.bookmarksMenu.SetButtonImage)
-	setButtonImageFromIconName(icon("open-menu"), headerBarIconSize, win.windowMenu.SetButtonImage)
+	setButtonImageFromIconName("go-first-symbolic", win.navigationBar.SetFirstButtonImage)
+	setButtonImageFromIconName("go-previous-symbolic", win.navigationBar.SetPreviousButtonImage)
+	setButtonImageFromIconName("media-playlist-shuffle-symbolic", win.navigationBar.SetRandomButtonImage)
+	setButtonImageFromIconName("go-next-symbolic", win.navigationBar.SetNextButtonImage)
+	setButtonImageFromIconName("go-last-symbolic", win.navigationBar.SetNewestButtonImage)
+	setButtonImageFromIconName(icon("edit-find"), win.searchMenu.SetButtonImage)
+	setButtonImageFromIconName(icon("user-bookmarks"), win.bookmarksMenu.SetButtonImage)
+	setButtonImageFromIconName(icon("open-menu"), win.windowMenu.SetButtonImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
 	if err = win.navigationBar.SetLinkedButtons(linked); err != nil {
