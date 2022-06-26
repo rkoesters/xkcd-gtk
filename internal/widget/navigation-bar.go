@@ -114,7 +114,7 @@ func (nb *NavigationBar) SetLinkedButtons(linked bool) error {
 		nb.box.SetSpacing(0)
 	} else {
 		sc.RemoveClass(style.ClassLinked)
-		nb.box.SetSpacing(4)
+		nb.box.SetSpacing(style.PaddingUnlinkedButtonBox)
 	}
 
 	return nil

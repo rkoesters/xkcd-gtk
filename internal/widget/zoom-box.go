@@ -94,7 +94,7 @@ func (zb *ZoomBox) SetLinkedButtons(linked bool) error {
 		zb.box.SetSpacing(0)
 	} else {
 		sc.RemoveClass(style.ClassLinked)
-		zb.box.SetSpacing(4)
+		zb.box.SetSpacing(style.PaddingUnlinkedButtonBox)
 	}
 
 	return nil
