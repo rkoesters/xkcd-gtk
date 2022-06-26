@@ -36,7 +36,7 @@ msgstr "Over xkcd"
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
-#: internal/widget/properties-dialog.go:128
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Alt-tekst"
 
@@ -95,7 +95,7 @@ msgstr "Donker thema aan/uit"
 msgid "Dark mode for late night reading"
 msgstr "Donker thema voor de late avonduurtjes"
 
-#: internal/widget/properties-dialog.go:120
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Datum"
 
@@ -131,7 +131,7 @@ msgstr "Ga naar het volgende verhaal"
 msgid "Go to the previous comic"
 msgstr "Ga naar het vorige verhaal"
 
-#: internal/widget/properties-dialog.go:124
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -143,7 +143,7 @@ msgstr "Orden verhalen middels bladwijzers"
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 
-#: internal/widget/properties-dialog.go:136
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Link"
 
@@ -164,7 +164,7 @@ msgstr "Navigatie"
 msgid "New window"
 msgstr "Nieuw venster"
 
-#: internal/widget/properties-dialog.go:132
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Nieuws"
 
@@ -172,7 +172,7 @@ msgstr "Nieuws"
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
-#: internal/widget/properties-dialog.go:112
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Nummer"
 
@@ -188,7 +188,7 @@ msgstr "Nieuw venster openen"
 msgid "Open shortcuts window"
 msgstr "Sneltoetsen tonen"
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:43
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:88 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Eigenschappen"
@@ -247,7 +247,7 @@ msgstr "Bladwijzermenu tonen"
 msgid "Show comic properties"
 msgstr "Eigenschappen tonen"
 
-#: internal/widget/properties-dialog.go:116
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Titel"
 
@@ -256,7 +256,7 @@ msgstr "Titel"
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"
 
-#: internal/widget/properties-dialog.go:140
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Transcriptie"
 

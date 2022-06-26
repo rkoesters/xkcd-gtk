@@ -33,7 +33,7 @@ msgstr "Informazioni su xkcd"
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
-#: internal/widget/properties-dialog.go:128
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Ferma Testo"
 
@@ -92,7 +92,7 @@ msgstr "Abilità modalità scura"
 msgid "Dark mode for late night reading"
 msgstr "Modalità scura per la lettura a tarda notte"
 
-#: internal/widget/properties-dialog.go:120
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Data"
 
@@ -128,7 +128,7 @@ msgstr "Vai al prossimo fumetto"
 msgid "Go to the previous comic"
 msgstr "Vai al fumetto precedente"
 
-#: internal/widget/properties-dialog.go:124
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Immagine"
 
@@ -140,7 +140,7 @@ msgstr "Tieni traccia dei fumetti con i segnalibri"
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
-#: internal/widget/properties-dialog.go:136
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Link"
 
@@ -161,7 +161,7 @@ msgstr "Naviga"
 msgid "New window"
 msgstr "Nuova Finestra"
 
-#: internal/widget/properties-dialog.go:132
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Novità"
 
@@ -169,7 +169,7 @@ msgstr "Novità"
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
-#: internal/widget/properties-dialog.go:112
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Numero"
 
@@ -185,7 +185,7 @@ msgstr "Apri nuova finestra"
 msgid "Open shortcuts window"
 msgstr "Apri la finestra delle scorciatoie"
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:43
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:88 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Proprietà"
@@ -246,7 +246,7 @@ msgstr "Mostra menu segnalibri"
 msgid "Show comic properties"
 msgstr "Mostra proprietà fumetto"
 
-#: internal/widget/properties-dialog.go:116
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Titolo"
 
@@ -255,7 +255,7 @@ msgstr "Titolo"
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
 
-#: internal/widget/properties-dialog.go:140
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Trascrizione"
 

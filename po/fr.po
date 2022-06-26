@@ -33,7 +33,7 @@ msgstr "À propos de xkcd"
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:128
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Texte alternatif"
 
@@ -93,7 +93,7 @@ msgstr "Activer le thème sombre"
 msgid "Dark mode for late night reading"
 msgstr "Thème sombre pour une lecture tardive"
 
-#: internal/widget/properties-dialog.go:120
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Date"
 
@@ -129,7 +129,7 @@ msgstr "Aller à a BD suivante"
 msgid "Go to the previous comic"
 msgstr "Aller à la BD précédente"
 
-#: internal/widget/properties-dialog.go:124
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Image"
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#: internal/widget/properties-dialog.go:136
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Lien"
 
@@ -162,7 +162,7 @@ msgstr "Navigation"
 msgid "New window"
 msgstr "Nouvelle fenêtre"
 
-#: internal/widget/properties-dialog.go:132
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Actualités"
 
@@ -170,7 +170,7 @@ msgstr "Actualités"
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:112
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Numéro"
 
@@ -186,7 +186,7 @@ msgstr "Ouvrir une nouvelle fenêtre"
 msgid "Open shortcuts window"
 msgstr "Ouvir la fenêtre des raccourcis"
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:43
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:88 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Propriétés"
@@ -247,7 +247,7 @@ msgstr ""
 msgid "Show comic properties"
 msgstr "Afficher les propriétés de la BD"
 
-#: internal/widget/properties-dialog.go:116
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Titre"
 
@@ -256,7 +256,7 @@ msgstr "Titre"
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"
 
-#: internal/widget/properties-dialog.go:140
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Transcription"
 

@@ -4,6 +4,7 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"strconv"
 	"strings"
 	"time"
@@ -74,12 +75,12 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	grid.SetColumnSpacing(12)
-	grid.SetRowSpacing(12)
-	grid.SetMarginTop(12)
-	grid.SetMarginBottom(12)
-	grid.SetMarginStart(12)
-	grid.SetMarginEnd(12)
+	grid.SetColumnSpacing(style.PaddingPropertiesDialog)
+	grid.SetRowSpacing(style.PaddingPropertiesDialog)
+	grid.SetMarginTop(style.PaddingPropertiesDialog)
+	grid.SetMarginBottom(style.PaddingPropertiesDialog)
+	grid.SetMarginStart(style.PaddingPropertiesDialog)
+	grid.SetMarginEnd(style.PaddingPropertiesDialog)
 
 	row := 0
 
