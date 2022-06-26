@@ -47,14 +47,14 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	}
 	sm.menuButton.SetPopover(sm.popover)
 
-	sm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PopoverPadding)
+	sm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PaddingPopover)
 	if err != nil {
 		return nil, err
 	}
-	sm.popoverBox.SetMarginTop(style.PopoverPadding)
-	sm.popoverBox.SetMarginBottom(style.PopoverPadding)
-	sm.popoverBox.SetMarginStart(style.PopoverPadding)
-	sm.popoverBox.SetMarginEnd(style.PopoverPadding)
+	sm.popoverBox.SetMarginTop(style.PaddingPopover)
+	sm.popoverBox.SetMarginBottom(style.PaddingPopover)
+	sm.popoverBox.SetMarginStart(style.PaddingPopover)
+	sm.popoverBox.SetMarginEnd(style.PaddingPopover)
 	sm.entry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err

@@ -44,7 +44,7 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 		if err != nil {
 			return err
 		}
-		wm.popoverBox.PackStart(sep, false, true, style.PopoverPaddingCompact/2)
+		wm.popoverBox.PackStart(sep, false, true, style.PaddingPopoverCompact/2)
 		return nil
 	}
 
@@ -69,7 +69,7 @@ func NewWindowMenu(prefersAppMenu bool, setDarkMode func(bool)) (*WindowMenu, er
 	if err != nil {
 		return nil, err
 	}
-	wm.zoomBox.box.SetMarginBottom(style.PopoverPaddingCompact / 2)
+	wm.zoomBox.box.SetMarginBottom(style.PaddingPopoverCompact / 2)
 	wm.popoverBox.Add(wm.zoomBox.IWidget())
 
 	if err = addMenuSeparator(); err != nil {
@@ -172,15 +172,15 @@ func (wm *WindowMenu) SetButtonImage(image gtk.IWidget) {
 
 func (wm *WindowMenu) SetCompact(compact bool) {
 	if compact {
-		wm.popoverBox.SetMarginTop(style.PopoverPaddingCompact)
-		wm.popoverBox.SetMarginBottom(style.PopoverPaddingCompact)
+		wm.popoverBox.SetMarginTop(style.PaddingPopoverCompact)
+		wm.popoverBox.SetMarginBottom(style.PaddingPopoverCompact)
 		wm.popoverBox.SetMarginStart(0)
 		wm.popoverBox.SetMarginEnd(0)
 	} else {
-		wm.popoverBox.SetMarginTop(style.PopoverPadding)
-		wm.popoverBox.SetMarginBottom(style.PopoverPadding)
-		wm.popoverBox.SetMarginStart(style.PopoverPadding)
-		wm.popoverBox.SetMarginEnd(style.PopoverPadding)
+		wm.popoverBox.SetMarginTop(style.PaddingPopover)
+		wm.popoverBox.SetMarginBottom(style.PaddingPopover)
+		wm.popoverBox.SetMarginStart(style.PaddingPopover)
+		wm.popoverBox.SetMarginEnd(style.PaddingPopover)
 	}
 	wm.darkModeSwitch.SetCompact(compact)
 }

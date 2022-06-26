@@ -93,7 +93,7 @@ func (dms *DarkModeSwitch) SyncDarkMode(darkMode bool) {
 
 func (dms *DarkModeSwitch) SetCompact(compact bool) {
 	if compact {
-		dms.swtch.SetMarginEnd(style.PopoverPaddingCompact)
+		dms.swtch.SetMarginEnd(style.PaddingPopoverCompact)
 	} else {
 		dms.swtch.SetMarginEnd(0)
 	}

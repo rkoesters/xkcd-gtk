@@ -16,8 +16,8 @@ const (
 	ClassLinked         = "linked"
 	ClassNoMinWidth     = "no-min-width"
 
-	PopoverPadding        = 10
-	PopoverPaddingCompact = 8
+	PaddingPopover        = 10
+	PaddingPopoverCompact = 8
 )
 
 var (
