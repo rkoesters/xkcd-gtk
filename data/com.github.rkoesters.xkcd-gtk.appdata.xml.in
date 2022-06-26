@@ -58,6 +58,7 @@
   <releases>
     <release version="1.6.0" date="2022-06-20">
       <description>
+        <p>The zoom update!</p>
         <ul>
           <li>Zoom in and out to get a better look at comics</li>
           <li>Minor improvements to appearance of search, bookmark, and window menus</li>
@@ -67,6 +68,7 @@
     </release>
     <release version="1.5.3" date="2022-06-18">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Fixes and tweaks to app UI text and translations</li>
           <li>Update dependencies</li>
@@ -75,6 +77,7 @@
     </release>
     <release version="1.5.2" date="2022-02-13">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Improve caching behavior of "Newest Comic" button</li>
           <li>Fix a crash when closing the comic window while the properties dialog is not open</li>
@@ -84,6 +87,7 @@
     </release>
     <release version="1.5.1" date="2021-10-23">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Fix a localization bug</li>
         </ul>
@@ -91,6 +95,7 @@
     </release>
     <release version="1.5.0" date="2021-10-22">
       <description>
+        <p>The context menu update!</p>
         <ul>
           <li>Add a context menu when right-clicking on a comic</li>
           <li>Tweak spacing of navigation buttons on elementary OS</li>
@@ -101,6 +106,7 @@
     </release>
     <release version="1.4.4" date="2021-10-18">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Improve appearance of window menu, including shortcut hints where applicable</li>
           <li>Tweak appearance of navigation buttons on elementary OS</li>
@@ -109,6 +115,7 @@
     </release>
     <release version="1.4.3" date="2021-10-16">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Minor performance improvements</li>
         </ul>
@@ -116,6 +123,7 @@
     </release>
     <release version="1.4.2" date="2021-07-18">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Improve UI contrast in dark mode by always using symbolic icons while in dark mode</li>
           <li>Improve comic metadata cache usage, decreasing app's internet usage</li>
@@ -129,6 +137,7 @@
     </release>
     <release version="1.4.0" date="2021-06-09">
       <description>
+        <p>Major fixes:</p>
         <ul>
           <li>Move the random comic button to sit between the other navigation buttons</li>
           <li>Signicantly reduce app start up time when not connected to the internet</li>
@@ -139,6 +148,7 @@
     </release>
     <release version="1.3.4" date="2021-05-30">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Add Portuguese translations (Thanks to rottenpants466)</li>
           <li>Fix bug where app would dump app files in the root of the config and cache directories. The app will now put those files in an app-specific subdirectory</li>
@@ -149,6 +159,7 @@
     </release>
     <release version="1.3.2" date="2020-02-08">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Add Italian translations (Thanks to albanobattistella)</li>
           <li>Minor performance improvement to bookmarks menu</li>
@@ -158,6 +169,7 @@
     </release>
     <release version="1.3.1" date="2019-11-08">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Add loading icon while fetching comic</li>
           <li>Add Dutch translations (Thanks to Vistaus)</li>
@@ -166,6 +178,7 @@
     </release>
     <release version="1.3.0" date="2019-05-11">
       <description>
+        <p>The bookmarks update!</p>
         <ul>
           <li>Add bookmarks for keeping track of comics</li>
           <li>Update search menu to not waste space</li>
@@ -174,6 +187,7 @@
     </release>
     <release version="1.2.0" date="2019-05-03">
       <description>
+        <p>The localization update!</p>
         <ul>
           <li>Add support for translations (user interface only, comics will remain in their original language)</li>
           <li>Add French translations (Thanks to NathanBnm)</li>
@@ -187,13 +201,12 @@
     </release>
     <release version="1.1.2" date="2018-11-16">
       <description>
-        <ul>
-          <li>Fix restoring of window state when maximized</li>
-        </ul>
+        <p>Fix restoring of window state when maximized.</p>
       </description>
     </release>
     <release version="1.1.1" date="2018-11-04">
       <description>
+        <p>Minor fixes:</p>
         <ul>
           <li>Add keyboard shortcut for dark mode</li>
           <li>Fix saving of properties window state</li>
