@@ -13,7 +13,6 @@ import (
 type ImageViewer struct {
 	scrolledWindow *gtk.ScrolledWindow
 
-	comicId        int
 	image          *gtk.Image
 	unscaledPixbuf *gdk.Pixbuf // will be inverted in dark mode
 	scale          float64
@@ -125,7 +124,6 @@ func (iv *ImageViewer) ZoomOut() float64 {
 }
 
 func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
-	iv.comicId = comicId
 	path := cache.ComicImagePath(comicId)
 	var err error
 	iv.unscaledPixbuf, err = gdk.PixbufNewFromFile(path)
