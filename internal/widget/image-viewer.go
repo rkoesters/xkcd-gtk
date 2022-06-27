@@ -172,22 +172,6 @@ func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) {
 				}
 			}
 		}
-		if build.Debug() {
-			png := filepath.Join(paths.CacheDir(), fmt.Sprintf("dark-mode-%v.png", iv.comicId))
-			jpg := filepath.Join(paths.CacheDir(), fmt.Sprintf("dark-mode-%v.jpg", iv.comicId))
-			err := iv.unscaledPixbuf.SavePNG(png, 9)
-			if err != nil {
-				log.Print("error saving dark mode screenshot: ", err)
-			} else {
-				log.Print("saved dark mode screenshot to ", png)
-			}
-			err = iv.unscaledPixbuf.SaveJPEG(jpg, 100)
-			if err != nil {
-				log.Print("error saving dark mode screenshot: ", err)
-			} else {
-				log.Print("saved dark mode screenshot to ", jpg)
-			}
-		}
 	}
 }
 
