@@ -159,9 +159,7 @@ func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
 			for y := 0; y < height; y++ {
 				index := (y * rowstride) + (x * nChannels)
 				switch nChannels {
-				case 4:
-					fallthrough
-				case 3:
+				case 3, 4:
 					pixels[index] = math.MaxUint8 - pixels[index]
 					pixels[index+1] = math.MaxUint8 - pixels[index+1]
 					pixels[index+2] = math.MaxUint8 - pixels[index+2]
