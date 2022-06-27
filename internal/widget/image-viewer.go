@@ -1,17 +1,22 @@
 package widget
 
 import (
+	"fmt"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"math"
+	"path/filepath"
 )
 
 type ImageViewer struct {
 	scrolledWindow *gtk.ScrolledWindow
 
+	comicId        int
 	image          *gtk.Image
 	unscaledPixbuf *gdk.Pixbuf // will be inverted in dark mode
 	scale          float64
@@ -123,6 +128,7 @@ func (iv *ImageViewer) ZoomOut() float64 {
 }
 
 func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
+	iv.comicId = comicId
 	path := cache.ComicImagePath(comicId)
 	var err error
 	iv.unscaledPixbuf, err = gdk.PixbufNewFromFile(path)
@@ -141,11 +147,54 @@ func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
 
 func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) {
 	if darkMode {
-		// Invert the pixels of the comic image.
+		log.Debug("inverting comic image")
 		pixels := iv.unscaledPixbuf.GetPixels()
-		for i := 0; i < len(pixels); i++ {
-			pixels[i] = math.MaxUint8 - pixels[i]
+		colorspace := iv.unscaledPixbuf.GetColorspace()
+		alpha := iv.unscaledPixbuf.GetHasAlpha()
+		bitsPerSample := iv.unscaledPixbuf.GetBitsPerSample()
+		width := iv.unscaledPixbuf.GetWidth()
+		height := iv.unscaledPixbuf.GetHeight()
+		rowstride := iv.unscaledPixbuf.GetRowstride()
+		nChannels := iv.unscaledPixbuf.GetNChannels()
+		log.Debugf("pixels is %T, len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", pixels, len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
+		for x := 0; x < width; x++ {
+			for y := 0; y < height; y++ {
+				index := (y * rowstride) + (x * nChannels)
+				switch nChannels {
+				case 4:
+					fallthrough
+				case 3:
+					pixels[index] = math.MaxUint8 - pixels[index]
+					pixels[index+1] = math.MaxUint8 - pixels[index+1]
+					pixels[index+2] = math.MaxUint8 - pixels[index+2]
+				default:
+					log.Fatalf("unsupported number of channels: %v (only 3 and 4 are supported)", nChannels)
+				}
+			}
 		}
+		pb, err := gdk.PixbufNewFromData(pixels, colorspace, alpha, bitsPerSample, width, height, rowstride)
+		if err != nil {
+			log.Print("error applying dark mode: ", err)
+			return
+		}
+		if build.Debug() {
+			png := filepath.Join(paths.CacheDir(), fmt.Sprintf("dark-mode-%v.png", iv.comicId))
+			jpg := filepath.Join(paths.CacheDir(), fmt.Sprintf("dark-mode-%v.jpg", iv.comicId))
+			err := pb.SavePNG(png, 9)
+			if err != nil {
+				log.Print("error saving dark mode screenshot: ", err)
+			} else {
+				log.Print("saved dark mode screenshot to ", png)
+			}
+			err = pb.SaveJPEG(jpg, 100)
+			if err != nil {
+				log.Print("error saving dark mode screenshot: ", err)
+			} else {
+				log.Print("saved dark mode screenshot to ", jpg)
+			}
+		}
+		iv.image.SetFromPixbuf(pb)
+		iv.unscaledPixbuf = pb
 	}
 }
 
