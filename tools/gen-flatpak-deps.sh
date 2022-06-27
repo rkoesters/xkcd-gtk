@@ -1,6 +1,9 @@
 #!/bin/sh
 set -eu
 
+LC_COLLATE=C
+export LC_COLLATE
+
 name_to_remote () {
   printf 'https://'
   printf '%s' "${1:?}" |
