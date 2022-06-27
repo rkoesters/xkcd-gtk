@@ -35,11 +35,7 @@ func (settings *Settings) ReadFile(filename string) error {
 		return err
 	}
 	defer f.Close()
-	err = settings.Read(f)
-	if err != nil {
-		return err
-	}
-	return nil
+	return settings.Read(f)
 }
 
 // Write takes the given io.Writer and writes the Settings struct to it in json.
