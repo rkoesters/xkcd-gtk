@@ -56,6 +56,18 @@
   </custom>
 
   <releases>
+    <release version="1.6.1">
+      <description>
+        <p>Minor improvements:</p>
+        <ul>
+          <li>The dark mode toggle in the window menu is now a switch</li>
+          <li>Fix inversion of gifs with transparency in dark mode</li>
+          <li>Fix capitalization of "xkcd" in window and app menus</li>
+          <li>Add Turkish translation (thanks to libreajans)</li>
+          <li>Update Dutch translation (thanks to Vistaus)</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.6.0" date="2022-06-20">
       <description>
         <p>The zoom update!</p>
