@@ -1,16 +1,13 @@
 package widget
 
 import (
-	"fmt"
+	"errors"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"math"
-	"path/filepath"
 )
 
 type ImageViewer struct {
@@ -136,16 +133,19 @@ func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
 		log.Print(err)
 		return
 	}
-	iv.applyDarkModeImageInversion(darkMode)
+	err = iv.applyDarkModeImageInversion(darkMode)
+	if err != nil {
+		log.Print("error inverting image: ", err)
+	}
 	iv.finalPixbuf, err = scaleImage(iv.unscaledPixbuf, iv.scale)
 	if err != nil {
-		log.Print(err)
+		log.Print("error scaling image: ", err)
 		return
 	}
 	iv.image.SetFromPixbuf(iv.finalPixbuf)
 }
 
-func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) {
+func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
 	if darkMode {
 		log.Debug("inverting comic image")
 		pixels := iv.unscaledPixbuf.GetPixels()
@@ -168,11 +168,12 @@ func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) {
 					pixels[index+1] = math.MaxUint8 - pixels[index+1]
 					pixels[index+2] = math.MaxUint8 - pixels[index+2]
 				default:
-					log.Fatalf("unsupported number of channels: %v (only 3 and 4 are supported)", nChannels)
+					return errors.New("unsupported number of channels")
 				}
 			}
 		}
 	}
+	return nil
 }
 
 func (iv *ImageViewer) SetTooltipText(s string) {
