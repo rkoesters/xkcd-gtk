@@ -44,6 +44,7 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 		return nil, err
 	}
 	dms.label.SetLabel(l("Dark mode"))
+	dms.label.SetActionName("app.toggle-dark-mode")
 	// Use "button-release-event" instead of "clicked" because "b-r-e" runs
 	// the default handlers after our closure, whereas "clicked" always runs
 	// the default handlers first. Running before the default handlers
