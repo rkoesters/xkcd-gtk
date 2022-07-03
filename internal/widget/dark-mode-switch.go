@@ -45,7 +45,7 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	}
 	dms.label.SetLabel(l("Dark mode"))
 	// Keyboard navigation should go to the switch rather than the label.
-	dms.label.SetProperty("can-focus", false)
+	dms.label.SetCanFocus(false)
 	// Use "button-release-event" instead of "clicked" because "b-r-e" runs
 	// the default handlers after our closure, whereas "clicked" always runs
 	// the default handlers first. Running before the default handlers
