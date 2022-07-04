@@ -65,26 +65,28 @@ func NewApplication() (*Application, error) {
 	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
 	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
 
-	// Connect startup signal to our methods.
-	app.application.Connect("startup", func() {
-		app.SetupAppMenu()
-		app.LoadSettings()
-		style.InitCSS(app.DarkMode())
-		app.LoadBookmarks()
-		app.SetupCache()
-	})
-
-	// Connect shutdown signal to our methods.
-	app.application.Connect("shutdown", func() {
-		app.SaveSettings()
-		app.SaveBookmarks()
-		app.CloseCache()
-	})
-
-	// Connect activate signal to our methods.
+	// Connect application signal handlers.
+	app.application.Connect("startup", app.Startup)
+	app.application.Connect("shutdown", app.Shutdown)
 	app.application.Connect("activate", app.Activate)
 
 	return &app, nil
+}
+
+// Startup is called when the "startup" signal is emitted.
+func (app *Application) Startup() {
+	app.SetupAppMenu()
+	app.LoadSettings()
+	style.InitCSS(app.DarkMode())
+	app.LoadBookmarks()
+	app.SetupCache()
+}
+
+// Shutdown is called when the "shutdown" signal is emitted.
+func (app *Application) Shutdown() {
+	app.SaveSettings()
+	app.SaveBookmarks()
+	app.CloseCache()
 }
 
 // SetDefault is a wrapper around glib.Application.SetDefault().
