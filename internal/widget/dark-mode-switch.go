@@ -52,7 +52,7 @@ func NewDarkModeSwitch(darkMode bool, setter func(darkMode bool)) (*DarkModeSwit
 	// the default handlers first. Running before the default handlers
 	// allows us to prevent the running of the default handlers.
 	dms.label.Connect("button-release-event", func() {
-		dms.swtch.SetActive(!dms.swtch.GetActive())
+		dms.swtch.Activate()
 		// Prevent the default handlers from running so they do not
 		// close the popover menu. The popover menu should remain open
 		// to mimic the behavior of clicking the switch (which would not
