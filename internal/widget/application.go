@@ -66,16 +66,20 @@ func NewApplication() (*Application, error) {
 	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
 
 	// Connect startup signal to our methods.
-	app.application.Connect("startup", style.InitCSS)
-	app.application.Connect("startup", app.SetupAppMenu)
-	app.application.Connect("startup", app.LoadSettings)
-	app.application.Connect("startup", app.LoadBookmarks)
-	app.application.Connect("startup", app.SetupCache)
+	app.application.Connect("startup", func() {
+		style.InitCSS()
+		app.SetupAppMenu()
+		app.LoadSettings()
+		app.LoadBookmarks()
+		app.SetupCache()
+	})
 
 	// Connect shutdown signal to our methods.
-	app.application.Connect("shutdown", app.SaveSettings)
-	app.application.Connect("shutdown", app.SaveBookmarks)
-	app.application.Connect("shutdown", app.CloseCache)
+	app.application.Connect("shutdown", func() {
+		app.SaveSettings()
+		app.SaveBookmarks()
+		app.CloseCache()
+	})
 
 	// Connect activate signal to our methods.
 	app.application.Connect("activate", app.Activate)
