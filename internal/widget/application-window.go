@@ -107,10 +107,14 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 		darkMode := win.app.DarkMode()
 		err := style.UpdateCSS(darkMode)
 		if err != nil {
-			log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
+			log.Printf("error calling style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
 		}
 		win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
-		win.DrawComic()
+		comicId := win.comicNumber()
+		err = win.comicContainer.DrawComic(comicId, darkMode)
+		if err != nil {
+			log.Print("error calling ImageViewer.DrawComic(id=%v, darkMode=%v) -> %v ", comicId, darkMode, err)
+		}
 	})
 	win.window.Connect("delete-event", func() {
 		app.gtkSettings.HandlerDisconnect(darkModeSignal)
@@ -374,12 +378,7 @@ func (win *ApplicationWindow) DisplayComic() {
 		win.properties.Update()
 	}
 
-	win.DrawComic()
-}
-
-// DrawComic draws the comic and inverts it if we are in dark mode.
-func (win *ApplicationWindow) DrawComic() {
-	err := win.comicContainer.DrawComic(win.comicNumber(), win.app.DarkMode())
+	err := win.comicContainer.DrawComic(win.comic.Num, win.app.DarkMode())
 	if err != nil {
 		log.Print("error drawing comic: ", err)
 	}
