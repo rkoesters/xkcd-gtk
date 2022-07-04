@@ -67,9 +67,9 @@ func NewApplication() (*Application, error) {
 
 	// Connect startup signal to our methods.
 	app.application.Connect("startup", func() {
-		style.InitCSS()
 		app.SetupAppMenu()
 		app.LoadSettings()
+		style.InitCSS(app.DarkMode())
 		app.LoadBookmarks()
 		app.SetupCache()
 	})

@@ -56,6 +56,15 @@
   </custom>
 
   <releases>
+    <release version="1.6.2">
+      <description>
+        <p>Minor improvements:</p>
+        <ul>
+          <li>Fix keyboard navigation for dark mode switch</li>
+          <li>Fix dark mode when using some themes that do not support gtk-application-prefer-dark-theme</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.6.1" date="2022-06-30">
       <description>
         <p>Minor improvements:</p>

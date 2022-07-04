@@ -30,7 +30,7 @@ var (
 )
 
 // InitCSS initializes the application's custom CSS.
-func InitCSS() error {
+func InitCSS(darkMode bool) error {
 	var err error
 
 	cssDataMutex.Lock()
@@ -48,9 +48,7 @@ func InitCSS() error {
 
 	gtk.AddProviderForScreen(screen, cssProvider, gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-	// loadedCSSDarkMode defaults to false, and InitCSS is usually called
-	// before it is set to anything else.
-	return loadCSS(cssProvider, loadedCSSDarkMode)
+	return loadCSS(cssProvider, darkMode)
 }
 
 // UpdateCSS reloads the application CSS if darkMode does not match the
@@ -67,17 +65,11 @@ func UpdateCSS(darkMode bool) error {
 	cssDataMutex.Lock()
 	defer cssDataMutex.Unlock()
 
-	err := loadCSS(cssProvider, darkMode)
-	if err != nil {
-		return err
-	}
-
-	loadedCSSDarkMode = darkMode
-
-	return nil
+	return loadCSS(cssProvider, darkMode)
 }
 
 func loadCSS(p *gtk.CssProvider, darkMode bool) error {
+	loadedCSSDarkMode = darkMode
 	if darkMode {
 		log.Debug("loading style-dark.css")
 		return p.LoadFromData(styleDarkCSS)
