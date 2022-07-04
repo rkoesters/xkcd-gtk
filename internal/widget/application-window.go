@@ -109,13 +109,13 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 		if err != nil {
 			log.Printf("error calling style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
 		}
-		win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 		comicId := win.comicNumber()
 		err = win.comicContainer.DrawComic(comicId, darkMode)
 		if err != nil {
 			log.Print("error calling ImageViewer.DrawComic(id=%v, darkMode=%v) -> %v ", comicId, darkMode, err)
 		}
 		win.StyleUpdated()
+		win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 	})
 	win.window.Connect("delete-event", func() {
 		app.gtkSettings.HandlerDisconnect(darkModeSignal)
