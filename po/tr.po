@@ -87,7 +87,7 @@ msgstr "Karikatürleri indirmek için internete bağlanın!"
 msgid "Couldn't get comic"
 msgstr "Karikatür alınamadı"
 
-#: internal/widget/dark-mode-switch.go:46
+#: internal/widget/dark-mode-switch.go:47
 #, fuzzy
 msgid "Dark mode"
 msgstr "Koyu kipi aç/kapat"

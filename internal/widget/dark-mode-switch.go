@@ -15,7 +15,7 @@ type DarkModeSwitch struct {
 
 var _ Widget = &DarkModeSwitch{}
 
-func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
+func NewDarkModeSwitch(darkMode bool, setter func(darkMode bool)) (*DarkModeSwitch, error) {
 	var err error
 
 	dms := &DarkModeSwitch{}
@@ -31,6 +31,7 @@ func NewDarkModeSwitch(setter func(darkMode bool)) (*DarkModeSwitch, error) {
 		return nil, err
 	}
 	dms.swtch.SetTooltipText(l("Toggle dark mode"))
+	dms.swtch.SetActive(darkMode)
 	dms.swtch.Connect("notify::active", func() {
 		setter(dms.swtch.GetActive())
 	})

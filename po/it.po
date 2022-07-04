@@ -83,7 +83,7 @@ msgstr "Collegati a Internet per scaricare alcuni fumetti!"
 msgid "Couldn't get comic"
 msgstr "Impossibile ottenere fumetto"
 
-#: internal/widget/dark-mode-switch.go:46
+#: internal/widget/dark-mode-switch.go:47
 #, fuzzy
 msgid "Dark mode"
 msgstr "Abilità modalità scura"

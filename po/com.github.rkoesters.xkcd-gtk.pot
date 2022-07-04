@@ -80,7 +80,7 @@ msgstr ""
 msgid "Couldn't get comic"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:46
+#: internal/widget/dark-mode-switch.go:47
 msgid "Dark mode"
 msgstr ""
 

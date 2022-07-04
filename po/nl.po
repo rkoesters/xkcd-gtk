@@ -86,7 +86,7 @@ msgstr "Maak verbinding met internet om verhalen op te halen!"
 msgid "Couldn't get comic"
 msgstr "Kan stripverhaal niet ophalen"
 
-#: internal/widget/dark-mode-switch.go:46
+#: internal/widget/dark-mode-switch.go:47
 #, fuzzy
 msgid "Dark mode"
 msgstr "Donker thema aan/uit"
