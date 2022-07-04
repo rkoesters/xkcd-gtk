@@ -104,7 +104,12 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.window.Connect("style-updated", win.StyleUpdated)
 
 	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", func() {
-		win.UpdateCSS()
+		darkMode := win.app.DarkMode()
+		err := style.UpdateCSS(darkMode)
+		if err != nil {
+			log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
+		}
+		win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 		win.DrawComic()
 	})
 	win.window.Connect("delete-event", func() {
@@ -188,8 +193,6 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *ApplicationWindow) StyleUpdated() {
-	win.UpdateCSS()
-
 	// What GTK theme we are using?
 	themeName := os.Getenv("GTK_THEME")
 	if themeName == "" {
@@ -250,16 +253,6 @@ func (win *ApplicationWindow) StyleUpdated() {
 
 	compact := style.IsCompactMenuTheme(themeName)
 	win.windowMenu.SetCompact(compact)
-}
-
-// UpdateCSS reloads the application CSS.
-func (win *ApplicationWindow) UpdateCSS() {
-	darkMode := win.app.DarkMode()
-	err := style.UpdateCSS(darkMode)
-	if err != nil {
-		log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
-	}
-	win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 }
 
 // FirstComic goes to the first comic.
