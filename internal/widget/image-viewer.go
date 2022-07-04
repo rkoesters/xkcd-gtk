@@ -124,6 +124,7 @@ func (iv *ImageViewer) ZoomOut() float64 {
 }
 
 func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
+	log.Debugf("ImageViewer.DrawComic(%v, %v)", comicId, darkMode)
 	path := cache.ComicImagePath(comicId)
 	var err error
 	iv.unscaledPixbuf, err = gdk.PixbufNewFromFile(path)
@@ -144,7 +145,6 @@ func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
 
 func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
 	if darkMode {
-		log.Debug("inverting comic image")
 		pixels := iv.unscaledPixbuf.GetPixels()
 		colorspace := iv.unscaledPixbuf.GetColorspace()
 		alpha := iv.unscaledPixbuf.GetHasAlpha()
@@ -153,7 +153,7 @@ func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
 		height := iv.unscaledPixbuf.GetHeight()
 		rowstride := iv.unscaledPixbuf.GetRowstride()
 		nChannels := iv.unscaledPixbuf.GetNChannels()
-		log.Debugf("pixels is %T, len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", pixels, len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
+		log.Debugf("inverting comic image: len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
 		for x := 0; x < width; x++ {
 			for y := 0; y < height; y++ {
 				index := (y * rowstride) + (x * nChannels)
