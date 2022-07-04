@@ -379,7 +379,10 @@ func (win *ApplicationWindow) DisplayComic() {
 
 // DrawComic draws the comic and inverts it if we are in dark mode.
 func (win *ApplicationWindow) DrawComic() {
-	win.comicContainer.SetComic(win.comicNumber(), win.app.DarkMode())
+	err := win.comicContainer.DrawComic(win.comicNumber(), win.app.DarkMode())
+	if err != nil {
+		log.Print("error drawing comic: ", err)
+	}
 }
 
 func (win *ApplicationWindow) updateNextPreviousButtonStatus() {

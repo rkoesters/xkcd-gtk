@@ -123,24 +123,23 @@ func (iv *ImageViewer) ZoomOut() float64 {
 	return iv.SetScale(iv.scale - zoomIncrement)
 }
 
-func (iv *ImageViewer) SetComic(comicId int, darkMode bool) {
+func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
 	path := cache.ComicImagePath(comicId)
 	var err error
 	iv.unscaledPixbuf, err = gdk.PixbufNewFromFile(path)
 	if err != nil {
-		log.Print(err)
-		return
+		return err
 	}
 	err = iv.applyDarkModeImageInversion(darkMode)
 	if err != nil {
-		log.Print("error inverting image: ", err)
+		return err
 	}
 	iv.finalPixbuf, err = scaleImage(iv.unscaledPixbuf, iv.scale)
 	if err != nil {
-		log.Print("error scaling image: ", err)
-		return
+		return err
 	}
 	iv.image.SetFromPixbuf(iv.finalPixbuf)
+	return nil
 }
 
 func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
