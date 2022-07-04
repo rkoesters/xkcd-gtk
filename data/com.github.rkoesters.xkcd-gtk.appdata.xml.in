@@ -61,6 +61,7 @@
         <p>Minor improvements:</p>
         <ul>
           <li>Fix keyboard navigation for dark mode switch</li>
+          <li>Fix dark mode switch animation when clicking label</li>
           <li>Fix dark mode when using some themes that do not support gtk-application-prefer-dark-theme</li>
         </ul>
       </description>
