@@ -56,6 +56,7 @@ func InitCSS() error {
 // UpdateCSS reloads the application CSS if darkMode does not match the
 // currently loaded CSS.
 func UpdateCSS(darkMode bool) error {
+	log.Debugf("UpdateCSS(darkMode=%v)", darkMode)
 	cssDataMutex.RLock()
 	if darkMode == loadedCSSDarkMode {
 		cssDataMutex.RUnlock()

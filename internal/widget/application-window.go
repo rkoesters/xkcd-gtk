@@ -103,7 +103,10 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Connect("style-updated", win.StyleUpdated)
 
-	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DrawComic)
+	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", func() {
+		win.UpdateCSS()
+		win.DrawComic()
+	})
 	win.window.Connect("delete-event", func() {
 		app.gtkSettings.HandlerDisconnect(darkModeSignal)
 	})
@@ -185,13 +188,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *ApplicationWindow) StyleUpdated() {
-	// Reload app CSS, if needed.
-	darkMode := win.app.DarkMode()
-	err := style.UpdateCSS(darkMode)
-	if err != nil {
-		log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
-	}
-	win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
+	win.UpdateCSS()
 
 	// What GTK theme we are using?
 	themeName := os.Getenv("GTK_THEME")
@@ -215,7 +212,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 		headerBarIconSize = gtk.ICON_SIZE_LARGE_TOOLBAR
 	}
 
-	useSymbolicIcons := style.IsSymbolicIconTheme(themeName, darkMode)
+	useSymbolicIcons := style.IsSymbolicIconTheme(themeName, win.app.DarkMode())
 
 	// We will call icon() to automatically add -symbolic if needed.
 	icon := func(s string) string {
@@ -244,15 +241,25 @@ func (win *ApplicationWindow) StyleUpdated() {
 	setButtonImageFromIconName(icon("open-menu"), win.windowMenu.SetButtonImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
-	if err = win.navigationBar.SetLinkedButtons(linked); err != nil {
+	if err := win.navigationBar.SetLinkedButtons(linked); err != nil {
 		log.Print(err)
 	}
-	if err = win.windowMenu.zoomBox.SetLinkedButtons(linked); err != nil {
+	if err := win.windowMenu.zoomBox.SetLinkedButtons(linked); err != nil {
 		log.Print(err)
 	}
 
 	compact := style.IsCompactMenuTheme(themeName)
 	win.windowMenu.SetCompact(compact)
+}
+
+// UpdateCSS reloads the application CSS.
+func (win *ApplicationWindow) UpdateCSS() {
+	darkMode := win.app.DarkMode()
+	err := style.UpdateCSS(darkMode)
+	if err != nil {
+		log.Printf("style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
+	}
+	win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 }
 
 // FirstComic goes to the first comic.
