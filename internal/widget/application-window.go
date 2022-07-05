@@ -368,11 +368,7 @@ func (win *ApplicationWindow) DisplayComic() {
 	win.updateNextPreviousButtonStatus()
 
 	// If the comic has a link, lets give the option of visiting it.
-	if win.comic.Link == "" {
-		win.actions["open-link"].SetEnabled(false)
-	} else {
-		win.actions["open-link"].SetEnabled(true)
-	}
+	win.actions["open-link"].SetEnabled(win.comic.Link != "")
 
 	if win.properties != nil {
 		win.properties.Update()
@@ -388,33 +384,20 @@ func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
 	n := win.comicNumber()
 
 	// Enable/disable previous button.
-	if n > 1 {
-		win.actions["previous-comic"].SetEnabled(true)
-	} else {
-		win.actions["previous-comic"].SetEnabled(false)
-	}
+	win.actions["previous-comic"].SetEnabled(n > 1)
 
 	// Enable/disable next button with data from cache.
 	newest, _ := cache.NewestComicInfoFromCache()
-	if n < newest.Num {
-		win.actions["next-comic"].SetEnabled(true)
-	} else {
-		win.actions["next-comic"].SetEnabled(false)
-	}
+	win.actions["next-comic"].SetEnabled(n < newest.Num)
 
 	// Asynchronously enable/disable next button with data from internet.
 	go func() {
 		const refreshRate = 5 * time.Minute
 		newest, _ := cache.CheckForNewestComicInfo(refreshRate)
-		if win.comicNumber() < newest.Num {
-			glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
-				win.actions["next-comic"].SetEnabled(true)
-			})
-		} else {
-			glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
-				win.actions["next-comic"].SetEnabled(false)
-			})
-		}
+		current := win.comicNumber()
+		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
+			win.actions["next-comic"].SetEnabled(current < newest.Num)
+		})
 	}()
 }
 
