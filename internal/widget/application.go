@@ -78,6 +78,7 @@ func (app *Application) Startup() {
 	app.SetupAppMenu()
 	app.LoadSettings()
 	style.InitCSS(app.DarkMode())
+	app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", app.DarkModeChanged)
 	app.LoadBookmarks()
 	app.SetupCache()
 }
@@ -148,6 +149,15 @@ func (app *Application) Activate() {
 		return
 	}
 	win.window.Present()
+}
+
+// DarkModeChanged is called when gtk-application-prefer-dark-theme is changed.
+func (app *Application) DarkModeChanged() {
+	darkMode := app.DarkMode()
+	err := style.UpdateCSS(darkMode)
+	if err != nil {
+		log.Printf("error calling style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
+	}
 }
 
 // ToggleDarkMode toggles the value of "gtk-application-prefer-dark-theme".

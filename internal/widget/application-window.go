@@ -103,20 +103,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Connect("style-updated", win.StyleUpdated)
 
-	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", func() {
-		darkMode := win.app.DarkMode()
-		err := style.UpdateCSS(darkMode)
-		if err != nil {
-			log.Printf("error calling style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)
-		}
-		comicId := win.comicNumber()
-		err = win.comicContainer.DrawComic(comicId, darkMode)
-		if err != nil {
-			log.Print("error calling ImageViewer.DrawComic(id=%v, darkMode=%v) -> %v ", comicId, darkMode, err)
-		}
-		win.StyleUpdated()
-		win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
-	})
+	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DarkModeChanged)
 	win.window.Connect("delete-event", func() {
 		app.gtkSettings.HandlerDisconnect(darkModeSignal)
 	})
@@ -194,6 +181,17 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.SetComic(win.state.ComicNumber)
 
 	return win, nil
+}
+
+func (win *ApplicationWindow) DarkModeChanged() {
+	darkMode := win.app.DarkMode()
+	comicId := win.comicNumber()
+	err := win.comicContainer.DrawComic(comicId, darkMode)
+	if err != nil {
+		log.Print("error calling ImageViewer.DrawComic(id=%v, darkMode=%v) -> %v ", comicId, darkMode, err)
+	}
+	win.StyleUpdated()
+	win.windowMenu.darkModeSwitch.SyncDarkMode(darkMode)
 }
 
 // StyleUpdated is called when the style of our gtk window is updated.
