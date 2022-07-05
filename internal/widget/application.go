@@ -154,6 +154,7 @@ func (app *Application) Activate() {
 // DarkModeChanged is called when gtk-application-prefer-dark-theme is changed.
 func (app *Application) DarkModeChanged() {
 	darkMode := app.DarkMode()
+	log.Debugf("DarkModeChanged() -> %v", darkMode)
 	err := style.UpdateCSS(darkMode)
 	if err != nil {
 		log.Printf("error calling style.UpdateCSS(darkMode=%v) -> %v", darkMode, err)

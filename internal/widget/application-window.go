@@ -185,6 +185,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 
 func (win *ApplicationWindow) DarkModeChanged() {
 	darkMode := win.app.DarkMode()
+	log.Debugf("DarkModeChanged() -> %v", darkMode)
 	comicId := win.comicNumber()
 	err := win.comicContainer.DrawComic(comicId, darkMode)
 	if err != nil {

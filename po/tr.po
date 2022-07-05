@@ -53,7 +53,7 @@ msgstr "Yer imleri"
 msgid "Cache comics for later offline viewing"
 msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
 
-#: internal/widget/application-window.go:280
+#: internal/widget/application-window.go:281
 msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
-#: internal/widget/application-window.go:340
+#: internal/widget/application-window.go:341
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
@@ -148,7 +148,7 @@ msgstr "Klavye kısayolları"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: internal/widget/application-window.go:355
+#: internal/widget/application-window.go:356
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 
