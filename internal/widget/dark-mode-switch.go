@@ -40,7 +40,7 @@ func NewDarkModeSwitch(getDarkMode func() bool, setDarkMode func(bool)) (*DarkMo
 	}
 	dms.swtch.SetTooltipText(l("Toggle dark mode"))
 	dms.swtch.SetActive(dms.getDarkMode())
-	dms.swtch.Connect("notify::active", dms.ActiveChanged)
+	dms.swtch.Connect("notify::active", dms.SwitchStateChanged)
 	dms.box.PackEnd(dms.swtch, false, true, 0)
 
 	// Use a ModelButton to force the theme to apply the same padding as the
@@ -95,8 +95,8 @@ func (dms *DarkModeSwitch) Destroy() {
 	dms.swtch = nil
 }
 
-// ActiveChanged is called when the state of the switch changes.
-func (dms *DarkModeSwitch) ActiveChanged() {
+// SwitchStateChanged is called when the active state of the switch changes.
+func (dms *DarkModeSwitch) SwitchStateChanged() {
 	swtchState := dms.swtch.GetActive()
 	// Avoid calling dms.setDarkMode when this signal might have been
 	// emitted by dms.SyncDarkMode.
