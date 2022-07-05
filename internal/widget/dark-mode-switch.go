@@ -93,6 +93,8 @@ func (dms *DarkModeSwitch) Destroy() {
 	dms.box = nil
 	dms.label = nil
 	dms.swtch = nil
+	dms.getDarkMode = nil
+	dms.setDarkMode = nil
 }
 
 // SwitchStateChanged is called when the active state of the switch changes.
