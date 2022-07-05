@@ -84,7 +84,7 @@ msgstr "Connectez-vous à Internet pour télécharger des bandes dessinées !"
 msgid "Couldn't get comic"
 msgstr "Impossible de récupérer la BD"
 
-#: internal/widget/dark-mode-switch.go:47
+#: internal/widget/dark-mode-switch.go:53
 #, fuzzy
 msgid "Dark mode"
 msgstr "Activer le thème sombre"
@@ -251,7 +251,7 @@ msgstr "Afficher les propriétés de la BD"
 msgid "Title"
 msgstr "Titre"
 
-#: internal/widget/dark-mode-switch.go:33 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:41 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"

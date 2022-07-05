@@ -17,7 +17,7 @@ type WindowMenu struct {
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(prefersAppMenu, darkMode bool, setDarkMode func(bool)) (*WindowMenu, error) {
+func NewWindowMenu(prefersAppMenu bool, getDarkMode func() bool, setDarkMode func(bool)) (*WindowMenu, error) {
 	var err error
 
 	wm := &WindowMenu{}
@@ -104,7 +104,7 @@ func NewWindowMenu(prefersAppMenu, darkMode bool, setDarkMode func(bool)) (*Wind
 			return nil, err
 		}
 
-		wm.darkModeSwitch, err = NewDarkModeSwitch(darkMode, setDarkMode)
+		wm.darkModeSwitch, err = NewDarkModeSwitch(getDarkMode, setDarkMode)
 		if err != nil {
 			return nil, err
 		}

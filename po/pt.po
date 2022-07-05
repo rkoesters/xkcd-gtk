@@ -87,7 +87,7 @@ msgstr "Ligue-se à internet para descarregar banda desenhada!"
 msgid "Couldn't get comic"
 msgstr "Não Foi Possível Adquirir a Banda Desenhada"
 
-#: internal/widget/dark-mode-switch.go:47
+#: internal/widget/dark-mode-switch.go:53
 #, fuzzy
 msgid "Dark mode"
 msgstr "Alternar modo escuro"
@@ -255,7 +255,7 @@ msgstr "Mostrar propriedades da banda desenhada"
 msgid "Title"
 msgstr "Título"
 
-#: internal/widget/dark-mode-switch.go:33 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:41 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:129
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
