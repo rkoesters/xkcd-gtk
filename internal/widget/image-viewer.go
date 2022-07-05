@@ -124,7 +124,7 @@ func (iv *ImageViewer) ZoomOut() float64 {
 }
 
 func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
-	log.Debugf("ImageViewer.DrawComic(%v, %v)", comicId, darkMode)
+	log.Debugf("ImageViewer.DrawComic(id=%v, darkMode=%v)", comicId, darkMode)
 	path := cache.ComicImagePath(comicId)
 	var err error
 	iv.unscaledPixbuf, err = gdk.PixbufNewFromFile(path)
