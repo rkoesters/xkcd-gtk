@@ -322,32 +322,34 @@ func (win *ApplicationWindow) SetComic(n int) {
 	go func() {
 		var err error
 
+		// Add the DisplayComic function to the event loop so our UI
+		// gets updated with the new comic.
+		defer glib.IdleAddPriority(glib.PRIORITY_DEFAULT, win.DisplayComic)
+
 		// Make sure we are the only ones changing win.comic.
 		win.comicMutex.Lock()
 		defer win.comicMutex.Unlock()
 
 		win.comic, err = cache.ComicInfo(n)
 		if err != nil {
-			log.Printf("error downloading comic info: %v", n)
-		} else {
-			_, err = os.Stat(cache.ComicImagePath(n))
-			if os.IsNotExist(err) {
-				err = cache.DownloadComicImage(n)
-				if err != nil {
-					// We can be sneaky, we use SafeTitle
-					// for window title, but we can leave
-					// Title alone so the properties dialog
-					// can still be correct.
-					win.comic.SafeTitle = l("Connect to the internet to download comic image")
-				}
-			} else if err != nil {
-				log.Print("error finding comic image in cache: ", err)
-			}
+			log.Print("error downloading comic info: ", n)
+			return
 		}
 
-		// Add the DisplayComic function to the event loop so our UI
-		// gets updated with the new comic.
-		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, win.DisplayComic)
+		_, err = os.Stat(cache.ComicImagePath(n))
+		if err != nil && !os.IsNotExist(err) {
+			log.Print("error finding comic image in cache: ", err)
+			return
+		}
+
+		err = cache.DownloadComicImage(n)
+		if err != nil {
+			log.Print("error downloading comic image: ", err)
+			// We can be sneaky if we get an error, we use SafeTitle
+			// for window title, but we can leave Title alone so the
+			// properties dialog can still be correct.
+			win.comic.SafeTitle = l("Connect to the internet to download comic image")
+		}
 	}()
 }
 
