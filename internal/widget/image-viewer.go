@@ -3,6 +3,7 @@ package widget
 import (
 	"errors"
 	"github.com/gotk3/gotk3/gdk"
+	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
@@ -25,7 +26,7 @@ type ImageViewer struct {
 
 var _ Widget = &ImageViewer{}
 
-func NewImageViewer(parent *gtk.ApplicationWindow, imageScale float64) (*ImageViewer, error) {
+func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageViewer, error) {
 	var err error
 
 	iv := new(ImageViewer)
@@ -52,7 +53,7 @@ func NewImageViewer(parent *gtk.ApplicationWindow, imageScale float64) (*ImageVi
 	iv.image.SetHAlign(gtk.ALIGN_CENTER)
 	iv.image.SetVAlign(gtk.ALIGN_CENTER)
 
-	iv.contextMenu, err = NewContextMenu(parent.IActionGroup)
+	iv.contextMenu, err = NewContextMenu(actionGroup)
 	if err != nil {
 		return nil, err
 	}

@@ -121,7 +121,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.window.Connect("destroy", win.Destroy)
 
 	// Create image viewing frame
-	win.comicContainer, err = NewImageViewer(win.window, win.state.ImageScale)
+	win.comicContainer, err = NewImageViewer(win.window.IActionGroup, win.state.ImageScale)
 	if err != nil {
 		return nil, err
 	}
