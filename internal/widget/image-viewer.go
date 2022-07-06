@@ -144,27 +144,29 @@ func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
 }
 
 func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
-	if darkMode {
-		pixels := iv.unscaledPixbuf.GetPixels()
-		colorspace := iv.unscaledPixbuf.GetColorspace()
-		alpha := iv.unscaledPixbuf.GetHasAlpha()
-		bitsPerSample := iv.unscaledPixbuf.GetBitsPerSample()
-		width := iv.unscaledPixbuf.GetWidth()
-		height := iv.unscaledPixbuf.GetHeight()
-		rowstride := iv.unscaledPixbuf.GetRowstride()
-		nChannels := iv.unscaledPixbuf.GetNChannels()
-		log.Debugf("inverting comic image: len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
-		for x := 0; x < width; x++ {
-			for y := 0; y < height; y++ {
-				index := (y * rowstride) + (x * nChannels)
-				switch nChannels {
-				case 3, 4:
-					pixels[index] = math.MaxUint8 - pixels[index]
-					pixels[index+1] = math.MaxUint8 - pixels[index+1]
-					pixels[index+2] = math.MaxUint8 - pixels[index+2]
-				default:
-					return errors.New("unsupported number of channels")
-				}
+	if !darkMode {
+		return nil
+	}
+
+	pixels := iv.unscaledPixbuf.GetPixels()
+	colorspace := iv.unscaledPixbuf.GetColorspace()
+	alpha := iv.unscaledPixbuf.GetHasAlpha()
+	bitsPerSample := iv.unscaledPixbuf.GetBitsPerSample()
+	width := iv.unscaledPixbuf.GetWidth()
+	height := iv.unscaledPixbuf.GetHeight()
+	rowstride := iv.unscaledPixbuf.GetRowstride()
+	nChannels := iv.unscaledPixbuf.GetNChannels()
+	log.Debugf("inverting comic image: len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
+	for x := 0; x < width; x++ {
+		for y := 0; y < height; y++ {
+			index := (y * rowstride) + (x * nChannels)
+			switch nChannels {
+			case 3, 4:
+				pixels[index] = math.MaxUint8 - pixels[index]
+				pixels[index+1] = math.MaxUint8 - pixels[index+1]
+				pixels[index+2] = math.MaxUint8 - pixels[index+2]
+			default:
+				return errors.New("unsupported number of channels")
 			}
 		}
 	}
