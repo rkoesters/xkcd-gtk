@@ -1,7 +1,7 @@
 package paths
 
 import (
-	"log"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"os"
 	"path/filepath"
 )
