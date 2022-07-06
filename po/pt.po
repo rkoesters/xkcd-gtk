@@ -75,7 +75,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Banda desenhada não encontrada"
 
-#: internal/widget/application-window.go:351
+#: internal/widget/application-window.go:354
 msgid "Connect to the internet to download comic image"
 msgstr "Ligue-se à internet para descarregar imagens de banda desenhada"
 
@@ -148,7 +148,7 @@ msgstr "Atalhos de Teclado"
 msgid "Link"
 msgstr "Ligação"
 
-#: internal/widget/application-window.go:358
+#: internal/widget/application-window.go:361
 msgid "Loading comic..."
 msgstr "A carregar banda desenhada..."
 

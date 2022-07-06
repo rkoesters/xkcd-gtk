@@ -341,6 +341,9 @@ func (win *ApplicationWindow) SetComic(n int) {
 			log.Print("error finding comic image in cache: ", err)
 			return
 		}
+		if err == nil {
+			return
+		}
 
 		err = cache.DownloadComicImage(n)
 		if err != nil {
