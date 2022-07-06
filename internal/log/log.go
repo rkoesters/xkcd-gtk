@@ -22,5 +22,5 @@ var (
 
 // Init performs initialization required for the log package.
 func Init() {
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	log.SetFlags(log.LstdFlags | log.Lshortfile | log.Lmicroseconds)
 }
