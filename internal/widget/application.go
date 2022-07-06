@@ -11,6 +11,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
+	"os"
 )
 
 // AppName is the user-visible name of this application.
@@ -372,4 +373,23 @@ func (app *Application) OpenStore() {
 // OpenAboutXKCD opens aboutLink in the user's web browser.
 func (app *Application) OpenAboutXKCD() {
 	openURL(aboutLink)
+}
+
+func (app *Application) gtkTheme() string {
+	theme := os.Getenv("GTK_THEME")
+	if theme != "" {
+		return theme
+	}
+	themeIface, err := app.gtkSettings.GetProperty("gtk-theme-name")
+	if err != nil {
+		log.Print("error getting gtk-theme-name: ", err)
+		return ""
+	}
+	var ok bool
+	theme, ok = themeIface.(string)
+	if !ok {
+		log.Print("error converting gtk-theme-name to a string")
+		return ""
+	}
+	return theme
 }

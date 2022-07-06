@@ -197,21 +197,7 @@ func (win *ApplicationWindow) DarkModeChanged() {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *ApplicationWindow) StyleUpdated() {
-	// What GTK theme we are using?
-	themeName := os.Getenv("GTK_THEME")
-	if themeName == "" {
-		// The theme is not being set by the environment, so lets ask
-		// GTK what theme it is going to use.
-		themeNameIface, err := win.app.gtkSettings.GetProperty("gtk-theme-name")
-		if err != nil {
-			log.Print(err)
-		} else {
-			themeNameStr, ok := themeNameIface.(string)
-			if ok {
-				themeName = themeNameStr
-			}
-		}
-	}
+	themeName := win.app.gtkTheme()
 
 	// The default size for our headerbar buttons is small.
 	headerBarIconSize := gtk.ICON_SIZE_SMALL_TOOLBAR
