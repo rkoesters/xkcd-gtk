@@ -337,11 +337,11 @@ func (win *ApplicationWindow) SetComic(n int) {
 		}
 
 		_, err = os.Stat(cache.ComicImagePath(n))
-		if err != nil && !os.IsNotExist(err) {
-			log.Print("error finding comic image in cache: ", err)
+		if err == nil {
 			return
 		}
-		if err == nil {
+		if !os.IsNotExist(err) {
+			log.Print("error finding comic image in cache: ", err)
 			return
 		}
 
