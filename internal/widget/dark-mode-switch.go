@@ -12,20 +12,20 @@ type DarkModeSwitch struct {
 	label *gtk.ModelButton
 	swtch *gtk.Switch
 
-	// getDarkMode and setDarkMode are used to interact with the
-	// application's dark mode state.
-	getDarkMode func() bool
+	// darkMode and setDarkMode are used to interact with the application's
+	// dark mode state.
+	darkMode    func() bool
 	setDarkMode func(bool)
 }
 
 var _ Widget = &DarkModeSwitch{}
 
-func NewDarkModeSwitch(getDarkMode func() bool, setDarkMode func(bool)) (*DarkModeSwitch, error) {
+func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*DarkModeSwitch, error) {
 	var err error
 
 	dms := &DarkModeSwitch{
-		getDarkMode: getDarkMode,
-		setDarkMode: setDarkMode,
+		darkMode:    darkModeGetter,
+		setDarkMode: darkModeSetter,
 	}
 
 	dms.box, err = gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 2)
@@ -39,7 +39,7 @@ func NewDarkModeSwitch(getDarkMode func() bool, setDarkMode func(bool)) (*DarkMo
 		return nil, err
 	}
 	dms.swtch.SetTooltipText(l("Toggle dark mode"))
-	dms.swtch.SetActive(dms.getDarkMode())
+	dms.swtch.SetActive(dms.darkMode())
 	dms.swtch.Connect("notify::active", dms.SwitchStateChanged)
 	dms.box.PackEnd(dms.swtch, false, true, 0)
 
@@ -93,7 +93,7 @@ func (dms *DarkModeSwitch) Destroy() {
 	dms.box = nil
 	dms.label = nil
 	dms.swtch = nil
-	dms.getDarkMode = nil
+	dms.darkMode = nil
 	dms.setDarkMode = nil
 }
 
@@ -102,7 +102,7 @@ func (dms *DarkModeSwitch) SwitchStateChanged() {
 	swtchState := dms.swtch.GetActive()
 	// Avoid calling dms.setDarkMode when this signal might have been
 	// emitted by dms.SyncDarkMode.
-	if swtchState == dms.getDarkMode() {
+	if swtchState == dms.darkMode() {
 		return
 	}
 	dms.setDarkMode(swtchState)
