@@ -131,9 +131,11 @@ func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
 	if err != nil {
 		return err
 	}
-	err = iv.applyDarkModeImageInversion(darkMode)
-	if err != nil {
-		return err
+	if darkMode {
+		err = iv.applyDarkModeImageInversion()
+		if err != nil {
+			return err
+		}
 	}
 	iv.finalPixbuf, err = scaleImage(iv.unscaledPixbuf, iv.scale)
 	if err != nil {
@@ -143,11 +145,7 @@ func (iv *ImageViewer) DrawComic(comicId int, darkMode bool) error {
 	return nil
 }
 
-func (iv *ImageViewer) applyDarkModeImageInversion(darkMode bool) error {
-	if !darkMode {
-		return nil
-	}
-
+func (iv *ImageViewer) applyDarkModeImageInversion() error {
 	pixels := iv.unscaledPixbuf.GetPixels()
 	colorspace := iv.unscaledPixbuf.GetColorspace()
 	alpha := iv.unscaledPixbuf.GetHasAlpha()
