@@ -79,8 +79,19 @@ func (zb *ZoomBox) IWidget() gtk.IWidget {
 	return zb.box
 }
 
-func (zb *ZoomBox) SetCurrentZoom(scale float64) {
+func (zb *ZoomBox) SetCurrentZoom(scale float64) error {
 	zb.zoomResetButton.SetLabel(fmt.Sprintf("%.0f%%", scale*100))
+	child, err := zb.zoomResetButton.GetChild()
+	if err != nil {
+		return err
+	}
+	label, err := gtk.WidgetToLabel(child.ToWidget())
+	if err != nil {
+		return err
+	}
+	// Zoom goes from `25%` to `500%`, so 4 characters.
+	label.SetWidthChars(4)
+	return nil
 }
 
 func (zb *ZoomBox) SetCompact(compact bool) {

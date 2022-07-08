@@ -405,7 +405,10 @@ func (win *ApplicationWindow) ZoomReset() {
 }
 
 func (win *ApplicationWindow) updateZoomButtonStatus() {
-	win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	err := win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	if err != nil {
+		log.Printf("error calling ZoomBox.SetCurrentZoom(%v): %v", win.state.ImageScale, err)
+	}
 	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < ImageScaleMax)
 	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > ImageScaleMin)
 	win.actions["zoom-reset"].SetEnabled(win.state.ImageScale != 1)
