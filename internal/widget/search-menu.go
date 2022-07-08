@@ -85,7 +85,12 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 		return nil, err
 	}
 	sm.scroller.Add(sm.results)
-	defer sm.loadSearchResults(nil)
+	defer func() {
+		err := sm.loadSearchResults(nil)
+		if err != nil {
+			log.Print("error initializing search results: ", err)
+		}
+	}()
 
 	sm.popoverBox.ShowAll()
 	sm.popover.Add(sm.popoverBox)
@@ -119,18 +124,24 @@ func (sm *SearchMenu) Search() {
 		log.Print("error getting search text: ", err)
 	}
 	if userQuery == "" {
-		sm.loadSearchResults(nil)
+		err := sm.loadSearchResults(nil)
+		if err != nil {
+			log.Print("error clearing search results: ", err)
+		}
 		return
 	}
 	result, err := search.Search(userQuery)
 	if err != nil {
 		log.Print("error getting search results: ", err)
 	}
-	sm.loadSearchResults(result)
+	err = sm.loadSearchResults(result)
+	if err != nil {
+		log.Print("error displaying search results: ", err)
+	}
 }
 
 // Show the user the given search results.
-func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
+func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
 	sm.results.GetChildren().Foreach(func(child interface{}) {
 		sm.results.Remove(child.(gtk.IWidget))
 	})
@@ -138,12 +149,12 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 	if result == nil {
 		sm.scroller.SetVisible(false)
 		sm.noResults.SetVisible(false)
-		return
+		return nil
 	}
 	if result.Hits.Len() == 0 {
 		sm.scroller.SetVisible(false)
 		sm.noResults.SetVisible(true)
-		return
+		return nil
 	}
 
 	defer sm.results.ShowAll()
@@ -162,8 +173,7 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 	for _, sr := range result.Hits {
 		item, err := gtk.ModelButtonNew()
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		srID := sr.ID
 		item.Connect("clicked", func() {
@@ -175,14 +185,12 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 
 		labelID, err := gtk.LabelNew(sr.ID)
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		labelID.SetXAlign(1)
 		// Set character column width using character width of largest
@@ -192,21 +200,20 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 
 		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["safe_title"]))
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
 		box.Add(labelTitle)
 
 		child, err := item.GetChild()
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		item.Remove(child)
 		item.Add(box)
 		sm.results.Add(item)
 	}
+	return nil
 }
 
 // setComicFromSearch is a wrapper around win.SetComic to work with search
