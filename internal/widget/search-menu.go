@@ -73,8 +73,8 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	if err != nil {
 		return nil, err
 	}
-	sm.scroller.SetProperty("propagate-natural-height", true)
-	sm.scroller.SetProperty("propagate-natural-width", true)
+	sm.scroller.SetPropagateNaturalHeight(true)
+	sm.scroller.SetPropagateNaturalWidth(true)
 	sm.scroller.SetProperty("min-content-height", 0)
 	sm.scroller.SetProperty("min-content-width", 200)
 	sm.scroller.SetProperty("max-content-height", 350)

@@ -102,8 +102,8 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	if err != nil {
 		return nil, err
 	}
-	bm.scroller.SetProperty("propagate-natural-height", true)
-	bm.scroller.SetProperty("propagate-natural-width", true)
+	bm.scroller.SetPropagateNaturalHeight(true)
+	bm.scroller.SetPropagateNaturalWidth(true)
 	bm.scroller.SetProperty("min-content-height", 0)
 	bm.scroller.SetProperty("min-content-width", 200)
 	bm.scroller.SetProperty("max-content-height", 350)
