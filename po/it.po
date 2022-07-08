@@ -49,11 +49,11 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
-#: internal/widget/application-window.go:264
+#: internal/widget/application-window.go:267
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
 
-#: internal/widget/application.go:18
+#: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
-#: internal/widget/application-window.go:337
+#: internal/widget/application-window.go:340
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
@@ -144,7 +144,7 @@ msgstr "Tasti Rapidi"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:344
+#: internal/widget/application-window.go:347
 msgid "Loading comic..."
 msgstr "Caricamento fumetto..."
 

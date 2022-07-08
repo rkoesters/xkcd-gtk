@@ -53,11 +53,11 @@ msgstr "Yer imleri"
 msgid "Cache comics for later offline viewing"
 msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
 
-#: internal/widget/application-window.go:264
+#: internal/widget/application-window.go:267
 msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
 
-#: internal/widget/application.go:18
+#: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
-#: internal/widget/application-window.go:337
+#: internal/widget/application-window.go:340
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
@@ -148,7 +148,7 @@ msgstr "Klavye kısayolları"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: internal/widget/application-window.go:344
+#: internal/widget/application-window.go:347
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 

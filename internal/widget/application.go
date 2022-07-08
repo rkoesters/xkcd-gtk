@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"errors"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
@@ -370,21 +371,19 @@ func (app *Application) OpenAboutXKCD() {
 	openURL(aboutLink)
 }
 
-func (app *Application) gtkTheme() string {
+func (app *Application) gtkTheme() (string, error) {
 	theme := os.Getenv("GTK_THEME")
 	if theme != "" {
-		return theme
+		return theme, nil
 	}
 	themeIface, err := app.gtkSettings.GetProperty("gtk-theme-name")
 	if err != nil {
-		log.Print("error getting gtk-theme-name: ", err)
-		return ""
+		return "", err
 	}
 	var ok bool
 	theme, ok = themeIface.(string)
 	if !ok {
-		log.Print("error converting gtk-theme-name to a string")
-		return ""
+		return "", errors.New("error converting gtk-theme-name to a string")
 	}
-	return theme
+	return theme, nil
 }

@@ -49,11 +49,11 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
 
-#: internal/widget/application-window.go:264
+#: internal/widget/application-window.go:267
 msgid "Checking for new comic..."
 msgstr "Recherche d'une nouvelle bande dessinée…"
 
-#: internal/widget/application.go:18
+#: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "BD introuvable"
 
-#: internal/widget/application-window.go:337
+#: internal/widget/application-window.go:340
 msgid "Connect to the internet to download comic image"
 msgstr "Connectez-vous à Internet pour télécharger la bande dessinée"
 
@@ -145,7 +145,7 @@ msgstr "Raccourcis clavier"
 msgid "Link"
 msgstr "Lien"
 
-#: internal/widget/application-window.go:344
+#: internal/widget/application-window.go:347
 msgid "Loading comic..."
 msgstr "Chargement de la BD…"
 
