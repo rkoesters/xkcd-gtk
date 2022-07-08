@@ -177,11 +177,6 @@ func (app *Application) SetDarkMode(darkMode bool) {
 	// menu closing).
 	go glib.IdleAdd(func() {
 		log.Debugf("SetDarkMode(darkMode=%v).func()", darkMode)
-		// Avoid superfluous emitting of
-		// notify::gtk-application-prefer-dark-theme.
-		if darkMode == app.DarkMode() {
-			return
-		}
 		// Setting 'gtk-application-prefer-dark-theme' will trigger a
 		// call to win.DrawComic which will call app.DarkMode again,
 		// which will then update app.settings.DarkMode (which
