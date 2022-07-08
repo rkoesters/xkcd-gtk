@@ -33,7 +33,7 @@ msgstr "Comic Sticks Hakkında"
 msgid "About xkcd"
 msgstr "xkcd Hakkında"
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:73 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
@@ -212,7 +212,7 @@ msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:86 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
