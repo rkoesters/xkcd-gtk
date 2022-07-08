@@ -17,7 +17,7 @@ import (
 func main() {
 	log.Init()
 	rand.Seed(time.Now().Unix())
-	build.Parse()
+	build.Init()
 	paths.Init(build.AppID)
 	glib.InitI18n(build.AppID, paths.LocaleDir())
 	glib.SetApplicationName(widget.AppName())
