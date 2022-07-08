@@ -5,7 +5,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/build"
 )
 
-// NewAboutDialog creates our about dialog.
+// NewAboutDialog creates our application's about dialog.
 func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	dialog, err := gtk.AboutDialogNew()
 	if err != nil {
@@ -22,7 +22,7 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	dialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
 
 	// We want to keep the about dialog around in case we want to show it
-	// again.
+	// again, so do not destroy it on close.
 	dialog.HideOnDelete()
 	dialog.Connect("response", dialog.Hide)
 	dialog.Connect("hide", func() {
