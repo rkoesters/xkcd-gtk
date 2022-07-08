@@ -12,7 +12,6 @@ func openURL(url string) error {
 	err := xdg.Open(url)
 	if err != nil {
 		log.Print("error opening ", url, " in web browser: ", err)
-		return err
 	}
-	return nil
+	return err
 }
