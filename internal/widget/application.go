@@ -328,7 +328,6 @@ func (app *Application) ShowAbout() {
 			log.Print("error creating about dialog: ", err)
 			return
 		}
-
 	}
 
 	// Set our parent window as the active window, but avoid accidentally
