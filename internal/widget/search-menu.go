@@ -179,7 +179,7 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
 		if err != nil {
 			return err
 		}
-		sm.results.Add(clb.IWidget())
+		sm.results.Add(clb)
 	}
 	return nil
 }

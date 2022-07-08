@@ -7,22 +7,12 @@ import (
 	"strconv"
 )
 
-type ComicListButton struct {
-	button *gtk.ModelButton
-}
-
-var _ Widget = &ComicListButton{}
-
-func NewComicListButton(id int, title string, comicSetter func(int), idWidth int) (*ComicListButton, error) {
-	var err error
-
-	clb := &ComicListButton{}
-
-	clb.button, err = gtk.ModelButtonNew()
+func NewComicListButton(id int, title string, comicSetter func(int), idWidth int) (*gtk.ModelButton, error) {
+	clb, err := gtk.ModelButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	clb.button.Connect("clicked", func() { comicSetter(id) })
+	clb.Connect("clicked", func() { comicSetter(id) })
 
 	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
 	if err != nil {
@@ -52,20 +42,12 @@ func NewComicListButton(id int, title string, comicSetter func(int), idWidth int
 	labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
 	box.Add(labelTitle)
 
-	child, err := clb.button.GetChild()
+	child, err := clb.GetChild()
 	if err != nil {
 		return nil, err
 	}
-	clb.button.Remove(child)
-	clb.button.Add(box)
+	clb.Remove(child)
+	clb.Add(box)
 
 	return clb, nil
-}
-
-func (clb *ComicListButton) IWidget() gtk.IWidget {
-	return clb.button
-}
-
-func (clb *ComicListButton) Destroy() {
-	clb.button = nil
 }

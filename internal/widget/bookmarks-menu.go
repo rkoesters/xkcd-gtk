@@ -247,7 +247,7 @@ func (bm *BookmarksMenu) loadBookmarkList() error {
 		if err != nil {
 			return err
 		}
-		bm.list.Add(clb.IWidget())
+		bm.list.Add(clb)
 	}
 	return nil
 }
