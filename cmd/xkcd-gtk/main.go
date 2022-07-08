@@ -15,26 +15,14 @@ import (
 )
 
 func main() {
-	// Initialize internal log package.
 	log.Init()
-
-	// Make sure the random number generator is seeded.
 	rand.Seed(time.Now().Unix())
-
-	// Initialize compile-time information provided by the build package.
 	build.Parse()
-
-	// Initialize the paths under which we will store app files.
 	paths.Init(build.AppID)
-
-	// Initialize localization.
 	glib.InitI18n(build.AppID, paths.LocaleDir())
-
-	// Let glib and gtk know who we are.
 	glib.SetApplicationName(widget.AppName())
 	gtk.WindowSetDefaultIconName(build.AppID)
 
-	// Create the application.
 	app, err := widget.NewApplication()
 	if err != nil {
 		log.Fatal("error creating application: ", err)
@@ -51,6 +39,5 @@ func main() {
 		args[1] = "--gtk-debug=interactive"
 	}
 
-	// Run the event loop.
 	os.Exit(app.Run(args))
 }
