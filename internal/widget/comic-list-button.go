@@ -14,7 +14,7 @@ func NewComicListButton(id int, title string, comicSetter func(int), idWidth int
 	}
 	clb.Connect("clicked", func() { comicSetter(id) })
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 0)
+	box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
 	if err != nil {
 		return nil, err
 	}
@@ -23,24 +23,17 @@ func NewComicListButton(id int, title string, comicSetter func(int), idWidth int
 	if err != nil {
 		return nil, err
 	}
-	labelID.SetXAlign(1)
+	labelID.SetXAlign(1) // align end
 	labelID.SetWidthChars(idWidth)
-	box.Add(labelID)
-
-	sep, err := gtk.SeparatorNew(gtk.ORIENTATION_VERTICAL)
-	if err != nil {
-		return nil, err
-	}
-	sep.SetMarginStart(style.PaddingComicListButton)
-	sep.SetMarginEnd(style.PaddingComicListButton)
-	box.Add(sep)
+	box.PackStart(labelID, false, false, 0)
 
 	labelTitle, err := gtk.LabelNew(title)
 	if err != nil {
 		return nil, err
 	}
+	labelTitle.SetXAlign(0) // align start
 	labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
-	box.Add(labelTitle)
+	box.PackStart(labelTitle, true, true, 0)
 
 	child, err := clb.GetChild()
 	if err != nil {
