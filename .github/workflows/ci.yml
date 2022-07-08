@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         go:
-          - 1.11.x  # debian buster
           - 1.13.x  # ubuntu focal
           - 1.15.x  # debian bullseye
           - 1.16.x  # debian bookworm

@@ -5,8 +5,7 @@ GTK+3.
 
 <a href="https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Get it on AppCenter" src="https://appcenter.elementary.io/badge.svg"/></a>
 <a href="https://flathub.org/apps/details/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.svg"/></a>
-<a href="https://aur.archlinux.org/packages/xkcd-gtk/"><img height="51" alt="Available in AUR" 
-src="https://img.shields.io/aur/version/xkcd-gtk?color=%231793D1&logo=archlinux"/></a>
+<a href="https://aur.archlinux.org/packages/xkcd-gtk/"><img height="51" alt="Available in AUR" src="https://img.shields.io/aur/version/xkcd-gtk?color=%231793D1&logo=archlinux"/></a>
 
 ![screenshot](screenshots/screenshot-1@2x.png)
 
@@ -14,7 +13,7 @@ src="https://img.shields.io/aur/version/xkcd-gtk?color=%231793D1&logo=archlinux"
 
 ### Requirements
 
-To build this program, you will need Go (version >= 1.11, something like
+To build this program, you will need Go (version >= 1.13, something like
 `golang` or `go`) and GTK+ development files (version >= 3.20, something like
 `libgtk-3-dev` or `gtk3-devel`).
 
