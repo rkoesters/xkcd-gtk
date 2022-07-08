@@ -83,19 +83,12 @@ func (zb *ZoomBox) SetCurrentZoom(scale float64) {
 	zb.zoomResetButton.SetLabel(fmt.Sprintf("%.0f%%", scale*100))
 }
 
-func (zb *ZoomBox) SetLinkedButtons(linked bool) error {
-	sc, err := zb.box.GetStyleContext()
-	if err != nil {
-		return err
-	}
-
-	if linked {
-		sc.AddClass(style.ClassLinked)
-		zb.box.SetSpacing(0)
+func (zb *ZoomBox) SetCompact(compact bool) {
+	if compact {
+		zb.box.SetMarginStart(style.PaddingPopoverCompact)
+		zb.box.SetMarginEnd(style.PaddingPopoverCompact)
 	} else {
-		sc.RemoveClass(style.ClassLinked)
-		zb.box.SetSpacing(style.PaddingUnlinkedButtonBox)
+		zb.box.SetMarginStart(0)
+		zb.box.SetMarginEnd(0)
 	}
-
-	return nil
 }

@@ -237,9 +237,6 @@ func (win *ApplicationWindow) StyleUpdated() {
 	if err := win.navigationBar.SetLinkedButtons(linked); err != nil {
 		log.Print(err)
 	}
-	if err := win.windowMenu.zoomBox.SetLinkedButtons(linked); err != nil {
-		log.Print(err)
-	}
 
 	compact := style.IsCompactMenuTheme(themeName)
 	win.windowMenu.SetCompact(compact)

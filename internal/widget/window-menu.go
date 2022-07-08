@@ -182,5 +182,6 @@ func (wm *WindowMenu) SetCompact(compact bool) {
 		wm.popoverBox.SetMarginStart(style.PaddingPopover)
 		wm.popoverBox.SetMarginEnd(style.PaddingPopover)
 	}
+	wm.zoomBox.SetCompact(compact)
 	wm.darkModeSwitch.SetCompact(compact)
 }
