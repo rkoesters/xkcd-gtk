@@ -104,8 +104,8 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	}
 	bm.scroller.SetPropagateNaturalHeight(true)
 	bm.scroller.SetPropagateNaturalWidth(true)
-	bm.scroller.SetProperty("min-content-height", 0)
-	bm.scroller.SetProperty("min-content-width", 200)
+	bm.scroller.SetMinContentHeight(0)
+	bm.scroller.SetMinContentWidth(200)
 	bm.scroller.SetProperty("max-content-height", 350)
 	bm.scroller.SetProperty("max-content-width", 350)
 	bm.popoverBox.Add(bm.scroller)
