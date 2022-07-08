@@ -300,18 +300,11 @@ func (app *Application) SaveBookmarks() {
 func (app *Application) ShowShortcuts() {
 	var err error
 	if app.shortcutsWindow == nil {
-		app.shortcutsWindow, err = NewShortcutsWindow()
+		app.shortcutsWindow, err = NewShortcutsWindow(app.application.RemoveWindow)
 		if err != nil {
 			log.Print("error creating shortcuts window: ", err)
 			return
 		}
-
-		// We want to keep the shortcuts window around in case we want
-		// to show it again.
-		app.shortcutsWindow.HideOnDelete()
-		app.shortcutsWindow.Connect("hide", func() {
-			app.application.RemoveWindow(&app.shortcutsWindow.Window)
-		})
 	}
 
 	app.application.AddWindow(app.shortcutsWindow)
