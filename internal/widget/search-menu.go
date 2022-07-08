@@ -166,7 +166,12 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 			return
 		}
 		srID := sr.ID
-		item.Connect("clicked", func() { sm.setComicFromSearch(srID) })
+		item.Connect("clicked", func() {
+			err := sm.setComicFromSearch(srID)
+			if err != nil {
+				log.Print("error setting comic from search result: ", err)
+			}
+		})
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
 		if err != nil {
@@ -206,11 +211,11 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) {
 
 // setComicFromSearch is a wrapper around win.SetComic to work with search
 // result buttons.
-func (sm *SearchMenu) setComicFromSearch(id string) {
+func (sm *SearchMenu) setComicFromSearch(id string) error {
 	number, err := strconv.Atoi(id)
 	if err != nil {
-		log.Print("error setting comic from search result: ", err)
-		return
+		return err
 	}
 	sm.setComic(number)
+	return nil
 }
