@@ -178,7 +178,10 @@ func (bm *BookmarksMenu) unregisterBookmarkObserver() {
 
 func (bm *BookmarksMenu) UpdateBookmarksMenu() {
 	bm.UpdateBookmarkButton()
-	bm.loadBookmarkList()
+	err := bm.loadBookmarkList()
+	if err != nil {
+		log.Print("error calling loadBookmarkList(): ", err)
+	}
 }
 
 func (bm *BookmarksMenu) UpdateBookmarkButton() {
@@ -205,7 +208,7 @@ func (bm *BookmarksMenu) UpdateBookmarkButton() {
 	}
 }
 
-func (bm *BookmarksMenu) loadBookmarkList() {
+func (bm *BookmarksMenu) loadBookmarkList() error {
 	bm.list.GetChildren().Foreach(func(child interface{}) {
 		bm.list.Remove(child.(gtk.IWidget))
 	})
@@ -213,7 +216,7 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 	if bm.bookmarks.Empty() {
 		bm.scroller.SetVisible(false)
 		bm.separator.SetVisible(false)
-		return
+		return nil
 	}
 
 	defer bm.list.ShowAll()
@@ -234,27 +237,23 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 		id := iter.Value().(int)
 		comic, err := cache.ComicInfo(id)
 		if err != nil {
-			log.Print("error retrieving comic ", id, ": ", err)
-			continue
+			return err
 		}
 
 		item, err := gtk.ModelButtonNew()
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		item.Connect("clicked", func() { bm.setComic(comic.Num) })
 
 		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 
 		labelID, err := gtk.LabelNew(strconv.Itoa(comic.Num))
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		labelID.SetXAlign(1)
 		labelID.SetWidthChars(idWidth)
@@ -262,19 +261,18 @@ func (bm *BookmarksMenu) loadBookmarkList() {
 
 		labelTitle, err := gtk.LabelNew(comic.SafeTitle)
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
 		box.Add(labelTitle)
 
 		child, err := item.GetChild()
 		if err != nil {
-			log.Print(err)
-			return
+			return err
 		}
 		item.Remove(child)
 		item.Add(box)
 		bm.list.Add(item)
 	}
+	return nil
 }
