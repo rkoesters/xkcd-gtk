@@ -15,6 +15,7 @@ const (
 	ClassComicContainer = "comic-container"
 	ClassLinked         = "linked"
 	ClassNoMinWidth     = "no-min-width"
+	ClassView           = "view"
 
 	PaddingComicListButton   = 6
 	PaddingPopover           = 10
