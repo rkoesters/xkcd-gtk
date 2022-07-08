@@ -28,7 +28,7 @@ func NewZoomBox() (*ZoomBox, error) {
 		return nil, err
 	}
 	zb.box.SetLayout(gtk.BUTTONBOX_EXPAND)
-	zb.box.SetProperty("homogeneous", false)
+	zb.box.SetHomogeneous(false)
 
 	zb.zoomOutButton, err = gtk.ButtonNew()
 	if err != nil {
