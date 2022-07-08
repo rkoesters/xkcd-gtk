@@ -77,8 +77,8 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.scroller.SetPropagateNaturalWidth(true)
 	sm.scroller.SetMinContentHeight(0)
 	sm.scroller.SetMinContentWidth(200)
-	sm.scroller.SetProperty("max-content-height", 350)
-	sm.scroller.SetProperty("max-content-width", 350)
+	sm.scroller.SetMaxContentHeight(350)
+	sm.scroller.SetMaxContentWidth(350)
 	sm.popoverBox.Add(sm.scroller)
 	sm.results, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
