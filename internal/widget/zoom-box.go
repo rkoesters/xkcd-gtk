@@ -89,7 +89,7 @@ func (zb *ZoomBox) SetCurrentZoom(scale float64) error {
 	if err != nil {
 		return err
 	}
-	label.SetJustify(gtk.JUSTIFY_CENTER)
+	label.SetXAlign(0.5) // align center
 	// Zoom goes from `25%` to `500%`, so 4 characters. But
 	// gtk_label_set_width_chars uses
 	// pango_font_metrics_get_approximate_char_width which is not the widest
