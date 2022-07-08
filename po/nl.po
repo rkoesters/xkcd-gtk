@@ -32,7 +32,7 @@ msgstr "Over Comic Sticks"
 msgid "About xkcd"
 msgstr "Over xkcd"
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
@@ -44,7 +44,7 @@ msgstr "Alt-tekst"
 msgid "Application actions"
 msgstr "Toepassingsacties"
 
-#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:92
+#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:92
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
@@ -168,7 +168,7 @@ msgstr "Nieuw venster"
 msgid "News"
 msgstr "Nieuws"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:65
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
@@ -210,7 +210,7 @@ msgstr "Afsluiten"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Verwijderen uit bladwijzers"
 
@@ -219,7 +219,7 @@ msgstr "Verwijderen uit bladwijzers"
 msgid "Reset zoom"
 msgstr "Oorspronkelijk zoomniveau"
 
-#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:52
 msgid "Search"
 msgstr "Zoeken"
 

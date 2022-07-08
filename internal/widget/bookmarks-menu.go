@@ -4,7 +4,6 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
@@ -244,40 +243,11 @@ func (bm *BookmarksMenu) loadBookmarkList() error {
 		if err != nil {
 			return err
 		}
-
-		item, err := gtk.ModelButtonNew()
+		clb, err := NewComicListButton(comic.Num, comic.SafeTitle, bm.setComic, idWidth)
 		if err != nil {
 			return err
 		}
-		item.Connect("clicked", func() { bm.setComic(comic.Num) })
-
-		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
-		if err != nil {
-			return err
-		}
-
-		labelID, err := gtk.LabelNew(strconv.Itoa(comic.Num))
-		if err != nil {
-			return err
-		}
-		labelID.SetXAlign(1)
-		labelID.SetWidthChars(idWidth)
-		box.Add(labelID)
-
-		labelTitle, err := gtk.LabelNew(comic.SafeTitle)
-		if err != nil {
-			return err
-		}
-		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
-		box.Add(labelTitle)
-
-		child, err := item.GetChild()
-		if err != nil {
-			return err
-		}
-		item.Remove(child)
-		item.Add(box)
-		bm.list.Add(item)
+		bm.list.Add(clb.IWidget())
 	}
 	return nil
 }

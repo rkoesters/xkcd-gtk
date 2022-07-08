@@ -5,7 +5,6 @@ import (
 	"github.com/blevesearch/bleve/v2"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
@@ -171,58 +170,16 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
 	}
 
 	for _, sr := range result.Hits {
-		item, err := gtk.ModelButtonNew()
-		if err != nil {
-			return err
-		}
-		srID := sr.ID
-		item.Connect("clicked", func() {
-			err := sm.setComicFromSearch(srID)
-			if err != nil {
-				log.Print("error setting comic from search result: ", err)
-			}
-		})
-
-		box, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, style.PaddingComicListButton)
+		id, err := strconv.Atoi(sr.ID)
 		if err != nil {
 			return err
 		}
 
-		labelID, err := gtk.LabelNew(sr.ID)
+		clb, err := NewComicListButton(id, fmt.Sprint(sr.Fields["safe_title"]), sm.setComic, idWidth)
 		if err != nil {
 			return err
 		}
-		labelID.SetXAlign(1)
-		// Set character column width using character width of largest
-		// comic number.
-		labelID.SetWidthChars(idWidth)
-		box.Add(labelID)
-
-		labelTitle, err := gtk.LabelNew(fmt.Sprint(sr.Fields["safe_title"]))
-		if err != nil {
-			return err
-		}
-		labelTitle.SetEllipsize(pango.ELLIPSIZE_END)
-		box.Add(labelTitle)
-
-		child, err := item.GetChild()
-		if err != nil {
-			return err
-		}
-		item.Remove(child)
-		item.Add(box)
-		sm.results.Add(item)
+		sm.results.Add(clb.IWidget())
 	}
-	return nil
-}
-
-// setComicFromSearch is a wrapper around win.SetComic to work with search
-// result buttons.
-func (sm *SearchMenu) setComicFromSearch(id string) error {
-	number, err := strconv.Atoi(id)
-	if err != nil {
-		return err
-	}
-	sm.setComic(number)
 	return nil
 }

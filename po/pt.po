@@ -30,7 +30,7 @@ msgstr "Sobre o Comic Sticks"
 msgid "About xkcd"
 msgstr "Sobre o xkcd"
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
@@ -42,7 +42,7 @@ msgstr "Texto Alternativo"
 msgid "Application actions"
 msgstr "Ações da Aplicação"
 
-#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:92
+#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:92
 msgid "Bookmarks"
 msgstr "Marcadores"
 
@@ -169,7 +169,7 @@ msgstr "Nova Janela"
 msgid "News"
 msgstr "Noticias"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:65
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
@@ -214,7 +214,7 @@ msgstr ""
 "Ler xkcd: um romance de banda desenhada da internet, sarcasmo, matemática e "
 "linguagem"
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Remover esta banda desenhada dos marcadores"
 
@@ -223,7 +223,7 @@ msgstr "Remover esta banda desenhada dos marcadores"
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:52
 msgid "Search"
 msgstr "Procurar"
 
