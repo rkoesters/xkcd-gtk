@@ -77,7 +77,10 @@ func NewApplication() (*Application, error) {
 
 // Startup is called when the "startup" signal is emitted.
 func (app *Application) Startup() {
-	app.SetupAppMenu()
+	err := app.SetupAppMenu()
+	if err != nil {
+		log.Fatal("error creating app menu: ", err)
+	}
 	app.LoadSettings()
 	style.InitCSS(app.DarkMode())
 	app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", app.DarkModeChanged)
@@ -101,14 +104,16 @@ func (app *Application) Run(args []string) int {
 }
 
 // SetupAppMenu creates an AppMenu if the environment wants it.
-func (app *Application) SetupAppMenu() {
-	if app.application.PrefersAppMenu() {
-		menu, err := NewAppMenu()
-		if err != nil {
-			log.Fatal("error creating app menu: ", err)
-		}
-		app.application.SetAppMenu(menu)
+func (app *Application) SetupAppMenu() error {
+	if !app.application.PrefersAppMenu() {
+		return nil
 	}
+	menu, err := NewAppMenu()
+	if err != nil {
+		return err
+	}
+	app.application.SetAppMenu(menu)
+	return nil
 }
 
 // SetupCache initializes the comic cache and the search index.
