@@ -118,7 +118,12 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	win.Connect("delete-event", func() {
 		bm.unregisterBookmarkObserver()
 	})
-	defer bm.loadBookmarkList()
+	defer func() {
+		err := bm.loadBookmarkList()
+		if err != nil {
+			log.Print("error calling loadBookmarkList(): ", err)
+		}
+	}()
 
 	bm.popoverBox.ShowAll()
 	bm.popover.Add(bm.popoverBox)
