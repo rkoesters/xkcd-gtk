@@ -54,11 +54,6 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.popoverBox.SetMarginBottom(style.PaddingPopover)
 	sm.popoverBox.SetMarginStart(style.PaddingPopover)
 	sm.popoverBox.SetMarginEnd(style.PaddingPopover)
-	sc, err := sm.popoverBox.GetStyleContext()
-	if err != nil {
-		return nil, err
-	}
-	sc.AddClass(style.ClassView)
 	sm.entry, err = gtk.SearchEntryNew()
 	if err != nil {
 		return nil, err
@@ -83,7 +78,6 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.scroller.SetMinContentWidth(200)
 	sm.scroller.SetMaxContentHeight(350)
 	sm.scroller.SetMaxContentWidth(350)
-	sm.scroller.SetShadowType(gtk.SHADOW_IN)
 	sm.popoverBox.Add(sm.scroller)
 	sm.results, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {

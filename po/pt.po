@@ -169,7 +169,7 @@ msgstr "Nova Janela"
 msgid "News"
 msgstr "Noticias"
 
-#: internal/widget/search-menu.go:70
+#: internal/widget/search-menu.go:65
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 

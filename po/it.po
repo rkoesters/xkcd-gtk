@@ -165,7 +165,7 @@ msgstr "Nuova Finestra"
 msgid "News"
 msgstr "Novità"
 
-#: internal/widget/search-menu.go:70
+#: internal/widget/search-menu.go:65
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
