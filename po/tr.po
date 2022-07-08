@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Poedit 3.1\n"
 "X-Project-Style: gnome\n"
 
-#: internal/widget/about-dialog.go:17
+#: internal/widget/about-dialog.go:18
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
 

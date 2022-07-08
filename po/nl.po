@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#: internal/widget/about-dialog.go:17
+#: internal/widget/about-dialog.go:18
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 "Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"

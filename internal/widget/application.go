@@ -323,19 +323,12 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if app.aboutDialog == nil {
-		app.aboutDialog, err = NewAboutDialog(build.AppID, AppName(), build.Version())
+		app.aboutDialog, err = NewAboutDialog(app.application.RemoveWindow)
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return
 		}
 
-		// We want to keep the about dialog around in case we want to
-		// show it again.
-		app.aboutDialog.HideOnDelete()
-		app.aboutDialog.Connect("response", app.aboutDialog.Hide)
-		app.aboutDialog.Connect("hide", func() {
-			app.application.RemoveWindow(&app.aboutDialog.Window)
-		})
 	}
 
 	// Set our parent window as the active window, but avoid accidentally
