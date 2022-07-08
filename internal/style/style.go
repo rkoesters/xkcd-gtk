@@ -16,7 +16,7 @@ const (
 	ClassLinked         = "linked"
 	ClassNoMinWidth     = "no-min-width"
 
-	PaddingComicListButton   = 8
+	PaddingComicListButton   = 6
 	PaddingPopover           = 10
 	PaddingPopoverCompact    = 8
 	PaddingPropertiesDialog  = 12
