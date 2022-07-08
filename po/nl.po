@@ -32,7 +32,7 @@ msgstr "Over Comic Sticks"
 msgid "About xkcd"
 msgstr "Over xkcd"
 
-#: internal/widget/bookmarks-menu.go:73 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
@@ -210,7 +210,7 @@ msgstr "Afsluiten"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
-#: internal/widget/bookmarks-menu.go:86 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Verwijderen uit bladwijzers"
 

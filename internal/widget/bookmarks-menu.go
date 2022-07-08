@@ -64,11 +64,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.popoverBox.SetMarginBottom(style.PaddingPopover)
 	bm.popoverBox.SetMarginStart(style.PaddingPopover)
 	bm.popoverBox.SetMarginEnd(style.PaddingPopover)
-	sc, err := bm.popoverBox.GetStyleContext()
-	if err != nil {
-		return nil, err
-	}
-	sc.AddClass(style.ClassView)
 
 	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
 	if err != nil {
@@ -112,7 +107,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	bm.scroller.SetMinContentWidth(200)
 	bm.scroller.SetMaxContentHeight(350)
 	bm.scroller.SetMaxContentWidth(350)
-	bm.scroller.SetShadowType(gtk.SHADOW_IN)
 	bm.popoverBox.Add(bm.scroller)
 	bm.list, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {

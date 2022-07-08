@@ -28,7 +28,7 @@ msgstr ""
 msgid "About xkcd"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:73 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:86 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr ""
 
