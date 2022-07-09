@@ -21,11 +21,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Une simple visionneuse pour XKCD écrite en Go avec GTK+3"
 
-#: internal/widget/window-menu.go:142 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:151 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
 msgstr "À propos de Comic Sticks"
 
-#: internal/widget/window-menu.go:129 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr "À propos de xkcd"
 
@@ -101,7 +101,7 @@ msgstr "Date"
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:84
+#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:88
 msgid "Explain"
 msgstr "Explication"
 
@@ -137,7 +137,7 @@ msgstr "Image"
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:147 internal/widget/app-menu.ui:36
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
@@ -157,7 +157,7 @@ msgstr "Menu"
 msgid "Navigate"
 msgstr "Navigation"
 
-#: internal/widget/window-menu.go:98 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:107 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New window"
 msgstr "Nouvelle fenêtre"
@@ -174,7 +174,7 @@ msgstr ""
 msgid "Number"
 msgstr "Numéro"
 
-#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:80
+#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:84
 msgid "Open link"
 msgstr "Ouvrir le lien"
 
@@ -187,7 +187,7 @@ msgid "Open shortcuts window"
 msgstr "Ouvir la fenêtre des raccourcis"
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
-#: internal/widget/window-menu.go:88 internal/widget/shortcuts-window.ui:105
+#: internal/widget/window-menu.go:92 internal/widget/shortcuts-window.ui:105
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -268,7 +268,7 @@ msgstr "Mise à jour de l'index de recherche des BD…"
 msgid "View comic metadata"
 msgstr "Visualisez les métadonnées des BD"
 
-#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:126 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "What If?"
 
@@ -294,10 +294,10 @@ msgstr ""
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romance;sarcasme;maths;langue;"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:130 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr "Blog xkcd"
 
-#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:134 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "Boutique xkcd"
