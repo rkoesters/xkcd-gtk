@@ -12,7 +12,7 @@ type WindowMenu struct {
 	popoverBox *gtk.Box
 
 	zoomBox        *ZoomBox
-	darkModeSwitch *DarkModeSwitch
+	darkModeSwitch *DarkModeSwitch // may be nil
 }
 
 var _ Widget = &WindowMenu{}
@@ -162,7 +162,9 @@ func (wm *WindowMenu) Destroy() {
 	wm.popoverBox = nil
 	wm.zoomBox.Destroy()
 	wm.zoomBox = nil
-	wm.darkModeSwitch.Destroy()
+	if wm.darkModeSwitch != nil {
+		wm.darkModeSwitch.Destroy()
+	}
 	wm.darkModeSwitch = nil
 }
 
