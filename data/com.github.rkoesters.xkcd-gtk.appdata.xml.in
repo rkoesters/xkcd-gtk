@@ -56,6 +56,17 @@
   </custom>
 
   <releases>
+    <release version="1.6.3">
+      <description>
+        <p>Minor improvements:</p>
+        <ul>
+          <li>Fix crash when closing window in desktop environments that show an app menu</li>
+          <li>Fix dark mode signal loop caused by bug in dark mode switch</li>
+          <li>Use linked button style for zoom buttons on elementary OS</li>
+          <li>Tweak visual appearance of popover menus</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.6.2" date="2022-07-04">
       <description>
         <p>Minor improvements:</p>
