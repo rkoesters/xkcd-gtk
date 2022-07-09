@@ -70,6 +70,10 @@ func NewNavigationBar(accels *gtk.AccelGroup) (*NavigationBar, error) {
 }
 
 func (nb *NavigationBar) Destroy() {
+	if nb == nil {
+		return
+	}
+
 	nb.box = nil
 
 	nb.firstButton = nil

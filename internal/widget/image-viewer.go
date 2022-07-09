@@ -84,6 +84,10 @@ func (iv *ImageViewer) IWidget() gtk.IWidget {
 }
 
 func (iv *ImageViewer) Destroy() {
+	if iv == nil {
+		return
+	}
+
 	iv.scrolledWindow = nil
 	iv.image = nil
 	iv.unscaledPixbuf = nil

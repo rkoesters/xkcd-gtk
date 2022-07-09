@@ -157,14 +157,16 @@ func NewWindowMenu(prefersAppMenu bool, darkModeGetter func() bool, darkModeSett
 }
 
 func (wm *WindowMenu) Destroy() {
+	if wm == nil {
+		return
+	}
+
 	wm.menuButton = nil
 	wm.popover = nil
 	wm.popoverBox = nil
 	wm.zoomBox.Destroy()
 	wm.zoomBox = nil
-	if wm.darkModeSwitch != nil {
-		wm.darkModeSwitch.Destroy()
-	}
+	wm.darkModeSwitch.Destroy()
 	wm.darkModeSwitch = nil
 }
 

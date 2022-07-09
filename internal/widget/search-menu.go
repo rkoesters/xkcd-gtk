@@ -98,6 +98,10 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 }
 
 func (sm *SearchMenu) Destroy() {
+	if sm == nil {
+		return
+	}
+
 	sm.menuButton = nil
 	sm.popover = nil
 	sm.popoverBox = nil

@@ -204,6 +204,10 @@ func (pd *PropertiesDialog) Close() {
 // Destroy removes our references to the dialog so the garbage collector can
 // take care of it.
 func (pd *PropertiesDialog) Destroy() {
+	if pd == nil {
+		return
+	}
+
 	pd.parent = nil
 	pd.dialog = nil
 

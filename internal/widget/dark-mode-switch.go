@@ -90,6 +90,10 @@ func (dms *DarkModeSwitch) IWidget() gtk.IWidget {
 }
 
 func (dms *DarkModeSwitch) Destroy() {
+	if dms == nil {
+		return
+	}
+
 	dms.box = nil
 	dms.label = nil
 	dms.swtch = nil

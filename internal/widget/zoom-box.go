@@ -68,6 +68,10 @@ func NewZoomBox() (*ZoomBox, error) {
 }
 
 func (zb *ZoomBox) Destroy() {
+	if zb == nil {
+		return
+	}
+
 	zb.box = nil
 
 	zb.zoomInButton = nil

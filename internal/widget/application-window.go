@@ -443,6 +443,10 @@ func (win *ApplicationWindow) comicNumber() int {
 // Destroy releases all references in the Window struct. This is needed to
 // mitigate a memory leak when closing windows.
 func (win *ApplicationWindow) Destroy() {
+	if win == nil {
+		return
+	}
+
 	win.app = nil
 	win.window = nil
 
@@ -467,9 +471,7 @@ func (win *ApplicationWindow) Destroy() {
 	win.comicContainer.Destroy()
 	win.comicContainer = nil
 
-	if win.properties != nil {
-		win.properties.Destroy()
-	}
+	win.properties.Destroy()
 	win.properties = nil
 
 	runtime.GC()

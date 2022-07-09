@@ -54,6 +54,10 @@ func (cm *ContextMenu) Present(event *gdk.Event) {
 }
 
 func (cm *ContextMenu) Destroy() {
+	if cm == nil {
+		return
+	}
+
 	cm.menu = nil
 }
 
