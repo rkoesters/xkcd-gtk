@@ -98,7 +98,6 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
 
 	accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
-	win.app.application.SetAccelsForAction("win.show-properties", []string{"<Control>p"})
 
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Connect("style-updated", win.StyleUpdated)
