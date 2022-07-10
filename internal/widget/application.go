@@ -103,9 +103,14 @@ func (app *Application) Run(args []string) int {
 	return app.application.Run(args)
 }
 
+// PrefersAppMenu is a wrapper around gtk.Application.PrefersAppMenu().
+func (app *Application) PrefersAppMenu() bool {
+	return app.application.PrefersAppMenu()
+}
+
 // SetupAppMenu creates an AppMenu if the environment wants it.
 func (app *Application) SetupAppMenu() error {
-	if !app.application.PrefersAppMenu() {
+	if !app.PrefersAppMenu() {
 		return nil
 	}
 	menu, err := NewAppMenu()
