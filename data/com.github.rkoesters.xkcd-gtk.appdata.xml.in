@@ -56,7 +56,7 @@
   </custom>
 
   <releases>
-    <release version="1.6.3">
+    <release version="1.6.3" date="2022-07-09">
       <description>
         <p>Minor improvements:</p>
         <ul>
