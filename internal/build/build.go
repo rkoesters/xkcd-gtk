@@ -16,7 +16,7 @@ var data = ""
 // before using Options.
 var Options map[string]string
 
-// Cached result of Options["debug"] == "on" to speed up Debug which can
+// Cached result of Options["debug"] == "true" to speed up Debug which can
 // potentially be called in very quick succession.
 var debugMode bool
 
@@ -27,7 +27,7 @@ func Init() {
 	Options = parse(data)
 
 	// Cache this comparison to speed up Debug.
-	debugMode = Options["debug"] == "on"
+	debugMode = Options["debug"] == "true"
 
 	log.Debug("build data: ", data)
 }

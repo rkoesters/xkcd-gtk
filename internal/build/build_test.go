@@ -5,12 +5,12 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	const data = "version=0.0.0,debug=on"
+	const data = "version=0.0.0,debug=true"
 	flags := parse(data)
 	if flags == nil {
 		t.Fatal("flags == nil")
 	}
-	if flags["version"] != "0.0.0" || flags["debug"] != "on" {
+	if flags["version"] != "0.0.0" || flags["debug"] != "true" {
 		t.Fatalf("parse failure: data='%v' flags='%v'", data, flags)
 	}
 }

@@ -13,7 +13,7 @@ PANGO_VERSION = $(shell tools/pango-version.sh)
 
 # Comma separated
 BUILD_DATA     = version=$(APP_VERSION)
-DEV_BUILD_DATA = debug=on
+DEV_BUILD_DATA = debug=true
 # Space separated
 TAGS           = $(GTK_VERSION) $(PANGO_VERSION)
 DEV_TAGS       = xkcd_gtk_debug
