@@ -11,9 +11,12 @@ APP_VERSION   = $(shell tools/app-version.sh)
 GTK_VERSION   = $(shell tools/gtk-version.sh)
 PANGO_VERSION = $(shell tools/pango-version.sh)
 
-BUILD_DATA = version=$(APP_VERSION)
-TAGS       = $(GTK_VERSION) $(PANGO_VERSION)
-DEV_TAGS   = xkcd_gtk_debug
+# Comma separated
+BUILD_DATA     = version=$(APP_VERSION)
+DEV_BUILD_DATA = debug=on
+# Space separated
+TAGS           = $(GTK_VERSION) $(PANGO_VERSION)
+DEV_TAGS       = xkcd_gtk_debug
 
 ################################################################################
 # Install Variables
@@ -87,7 +90,7 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES) $(APPDATA_PATH)
-	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),$(DEV_BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 %.css.go: %.css tools/go-wrap.sh
 	tools/go-wrap.sh $< >$@
@@ -144,7 +147,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	-appstream-util validate-strict $(APPDATA_PATH)
 
 test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
-	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),debug=on" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
+	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),$(DEV_BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 
