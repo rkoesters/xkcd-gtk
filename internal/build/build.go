@@ -6,9 +6,6 @@ import (
 	"strings"
 )
 
-// AppID is the reverse domain name notation ID of this application.
-const AppID = "com.github.rkoesters.xkcd-gtk"
-
 // Comma separated list of key=value pairs.
 var data = ""
 
