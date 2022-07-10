@@ -114,6 +114,9 @@ func (dms *DarkModeSwitch) SwitchStateChanged() {
 
 // SyncDarkMode informs the switch whether dark mode is enabled or not.
 func (dms *DarkModeSwitch) SyncDarkMode(darkMode bool) {
+	if dms == nil {
+		return
+	}
 	// Avoid calling dms.swtch.SetActive when this signal might have been
 	// emitted by dms.SwitchStateChanged.
 	if darkMode == dms.swtch.GetActive() {
@@ -123,6 +126,9 @@ func (dms *DarkModeSwitch) SyncDarkMode(darkMode bool) {
 }
 
 func (dms *DarkModeSwitch) SetCompact(compact bool) {
+	if dms == nil {
+		return
+	}
 	if compact {
 		dms.swtch.SetMarginEnd(style.PaddingPopoverCompact)
 	} else {
