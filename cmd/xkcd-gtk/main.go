@@ -20,6 +20,7 @@ func main() {
 	build.Init()
 	paths.Init(build.AppID)
 	glib.InitI18n(build.AppID, paths.LocaleDir())
+	glib.SetPrgname(build.AppID)
 	glib.SetApplicationName(widget.AppName())
 	gtk.WindowSetDefaultIconName(build.AppID)
 
