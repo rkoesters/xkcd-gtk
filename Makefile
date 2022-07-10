@@ -147,7 +147,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	-appstream-util validate-strict $(APPDATA_PATH)
 
 test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
-	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),$(DEV_BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
+	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 
