@@ -186,7 +186,7 @@ msgid "Open new window"
 msgstr ""
 
 #: internal/widget/shortcuts-window.ui:136
-msgid "Open properties dialog"
+msgid "Open properties window"
 msgstr ""
 
 #: internal/widget/shortcuts-window.ui:156

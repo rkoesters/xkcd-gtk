@@ -133,7 +133,7 @@
             <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Open properties dialog</property>
+                <property name="title" translatable="yes">Open properties window</property>
                 <property name="accelerator">&lt;ctrl&gt;p &lt;alt&gt;Return</property>
                 <property name="visible">yes</property>
               </object>
