@@ -88,7 +88,7 @@ var (
 		"win32",
 	}, "|"))
 
-	nonSymbolicIconForce        = flag.Bool("force-non-symbolic-icons", false, "Force use of non-symbolic icons in the headerbar.")
+	nonSymbolicIconForce        = flag.Bool("force-non-symbolic-icons", false, "Force use of non-symbolic icons in the toolbar.")
 	nonSymbolicIconThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
