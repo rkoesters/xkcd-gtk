@@ -103,7 +103,7 @@ func (app *Application) Run(args []string) int {
 	return app.application.Run(args)
 }
 
-var forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu")
+var forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu.")
 
 // PrefersAppMenu is a wrapper around gtk.Application.PrefersAppMenu().
 func (app *Application) PrefersAppMenu() bool {
