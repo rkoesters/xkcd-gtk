@@ -18,7 +18,7 @@ import (
 
 var (
 	debug   = flag.Bool("debug", false, "Enable debugging features.")
-	version = flag.Bool("version", false, "Print app version.")
+	version = flag.Bool("version", false, "Print app version and exit.")
 )
 
 func usage() {
