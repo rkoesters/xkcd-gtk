@@ -15,10 +15,16 @@ import (
 )
 
 func main() {
-	log.Init()
 	rand.Seed(time.Now().Unix())
+	log.Init()
 	build.Init()
 	paths.Init(build.AppID)
+
+	if build.Debug() {
+		// Show gtk's interactive debugging window.
+		os.Setenv("GTK_DEBUG", "interactive")
+	}
+
 	glib.InitI18n(build.AppID, paths.LocaleDir())
 	glib.SetPrgname(build.AppID)
 	glib.SetApplicationName(widget.AppName())
@@ -30,11 +36,6 @@ func main() {
 	}
 	// Tell glib that this is the process's main application.
 	app.SetDefault()
-
-	// Show gtk's interactive debugging window if this is a debugging build.
-	if build.Debug() {
-		os.Setenv("GTK_DEBUG", "interactive")
-	}
 
 	os.Exit(app.Run(os.Args))
 }
