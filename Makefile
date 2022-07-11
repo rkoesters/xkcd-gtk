@@ -13,7 +13,6 @@ PANGO_VERSION = $(shell tools/pango-version.sh)
 
 # Comma separated
 BUILD_DATA     = version=$(APP_VERSION)
-DEV_BUILD_DATA = debug=true
 # Space separated
 TAGS           = $(GTK_VERSION) $(PANGO_VERSION)
 DEV_TAGS       = xkcd_gtk_debug
@@ -90,7 +89,7 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(GEN_SOURCES) $(APPDATA_PATH)
-	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA),$(DEV_BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 %.css.go: %.css tools/go-wrap.sh
 	tools/go-wrap.sh $< >$@

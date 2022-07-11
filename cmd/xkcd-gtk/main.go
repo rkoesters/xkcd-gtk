@@ -15,20 +15,23 @@ import (
 	"time"
 )
 
+var (
+	debug = flag.Bool("debug", false, "Enable debugging features")
+)
+
 func main() {
 	rand.Seed(time.Now().Unix())
 	log.Init()
 	build.Init()
 	paths.Init(build.AppID)
-
-	if build.Debug() {
-		// Show gtk's interactive debugging window.
-		os.Setenv("GTK_DEBUG", "interactive")
-	}
-
 	flag.Parse()
 	if flag.NArg() > 0 {
 		log.Fatal("error: unexpected command line arguments: ", flag.Args())
+	}
+
+	if *debug {
+		// Show gtk's interactive debugging window.
+		os.Setenv("GTK_DEBUG", "interactive")
 	}
 
 	glib.InitI18n(build.AppID, paths.LocaleDir())
