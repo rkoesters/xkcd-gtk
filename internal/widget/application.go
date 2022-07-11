@@ -2,10 +2,10 @@ package widget
 
 import (
 	"errors"
+	"flag"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
-	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
@@ -103,9 +103,11 @@ func (app *Application) Run(args []string) int {
 	return app.application.Run(args)
 }
 
+var forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu")
+
 // PrefersAppMenu is a wrapper around gtk.Application.PrefersAppMenu().
 func (app *Application) PrefersAppMenu() bool {
-	return app.application.PrefersAppMenu() || build.Options["always-prefer-app-menu"] == "true"
+	return app.application.PrefersAppMenu() || *forceAppMenu
 }
 
 // SetupAppMenu creates an AppMenu if the environment wants it.
