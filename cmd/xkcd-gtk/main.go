@@ -24,7 +24,7 @@ func main() {
 	glib.SetApplicationName(widget.AppName())
 	gtk.WindowSetDefaultIconName(build.AppID)
 
-	app, err := widget.NewApplication()
+	app, err := widget.NewApplication(build.AppID)
 	if err != nil {
 		log.Fatal("error creating application: ", err)
 	}
