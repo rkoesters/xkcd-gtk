@@ -34,6 +34,7 @@ func main() {
 	log.Init()
 	build.Init()
 	paths.Init(build.AppID)
+
 	flag.Usage = usage
 	flag.Parse()
 	if flag.NArg() > 0 {
