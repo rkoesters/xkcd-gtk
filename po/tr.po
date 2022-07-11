@@ -159,10 +159,6 @@ msgstr "Bağlantı"
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 
-#: internal/widget/window-menu.go:31
-msgid "Menu"
-msgstr "Menü"
-
 #: internal/widget/shortcuts-window.ui:38
 msgid "Navigate"
 msgstr "Dolaş"
@@ -285,6 +281,10 @@ msgstr "Karikatür üst verisini görüntüle"
 #: internal/widget/window-menu.go:128 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "Farzedelim?"
+
+#: internal/widget/window-menu.go:31
+msgid "Window menu"
+msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"

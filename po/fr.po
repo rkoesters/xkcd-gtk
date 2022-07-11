@@ -156,10 +156,6 @@ msgstr "Lien"
 msgid "Loading comic..."
 msgstr "Chargement de la BD…"
 
-#: internal/widget/window-menu.go:31
-msgid "Menu"
-msgstr "Menu"
-
 #: internal/widget/shortcuts-window.ui:38
 msgid "Navigate"
 msgstr "Navigation"
@@ -282,6 +278,10 @@ msgstr "Visualisez les métadonnées des BD"
 #: internal/widget/window-menu.go:128 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "What If?"
+
+#: internal/widget/window-menu.go:31
+msgid "Window menu"
+msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"

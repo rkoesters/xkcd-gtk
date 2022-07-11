@@ -28,7 +28,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
-	wm.menuButton.SetTooltipText(l("Menu"))
+	wm.menuButton.SetTooltipText(l("Window menu"))
 	wm.menuButton.AddAccelerator("activate", accels, gdk.KEY_F10, 0, gtk.ACCEL_VISIBLE)
 
 	wm.popover, err = gtk.PopoverNew(wm.menuButton)

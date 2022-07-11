@@ -152,10 +152,6 @@ msgstr ""
 msgid "Loading comic..."
 msgstr ""
 
-#: internal/widget/window-menu.go:31
-msgid "Menu"
-msgstr ""
-
 #: internal/widget/shortcuts-window.ui:38
 msgid "Navigate"
 msgstr ""
@@ -275,6 +271,10 @@ msgstr ""
 
 #: internal/widget/window-menu.go:128 internal/widget/app-menu.ui:18
 msgid "What If?"
+msgstr ""
+
+#: internal/widget/window-menu.go:31
+msgid "Window menu"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
