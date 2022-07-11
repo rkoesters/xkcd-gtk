@@ -3,6 +3,7 @@
 package main
 
 import (
+	"flag"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
@@ -25,6 +26,11 @@ func main() {
 		os.Setenv("GTK_DEBUG", "interactive")
 	}
 
+	flag.Parse()
+	if flag.NArg() > 0 {
+		log.Fatal("error: unexpected command line arguments: ", flag.Args())
+	}
+
 	glib.InitI18n(build.AppID, paths.LocaleDir())
 	glib.SetPrgname(build.AppID)
 	glib.SetApplicationName(widget.AppName())
@@ -37,5 +43,5 @@ func main() {
 	// Tell glib that this is the process's main application.
 	app.SetDefault()
 
-	os.Exit(app.Run(os.Args))
+	os.Exit(app.Run(nil))
 }
