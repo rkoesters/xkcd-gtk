@@ -133,6 +133,7 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fmt $(MODULE_PACKAGES)
 	go mod tidy
 	([ -d vendor ] && go mod vendor) || true
+	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool simplify --replace
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
 	for lang in $(LINGUAS); do \
 		msgmerge -U --backup=none "po/$$lang.po" $(POT_PATH); \
@@ -142,6 +143,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
+	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool validate
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
 	appstream-util --nonet validate-relax $(APPDATA_PATH)
 	-appstream-util validate-strict $(APPDATA_PATH)
