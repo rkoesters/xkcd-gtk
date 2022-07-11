@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: internal/widget/about-dialog.go:18
+#: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
@@ -33,7 +33,7 @@ msgstr "Informazioni su xkcd"
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Ferma Testo"
 
@@ -49,9 +49,14 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
-#: internal/widget/application-window.go:266
+#: internal/widget/application-window.go:265
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
+
+#: internal/widget/shortcuts-window.ui:143
+#, fuzzy
+msgid "Close window"
+msgstr "Nuova Finestra"
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -71,7 +76,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
-#: internal/widget/application-window.go:339
+#: internal/widget/application-window.go:338
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
@@ -92,7 +97,7 @@ msgstr "Abilità modalità scura"
 msgid "Dark mode for late night reading"
 msgstr "Modalità scura per la lettura a tarda notte"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Data"
 
@@ -128,7 +133,7 @@ msgstr "Vai al prossimo fumetto"
 msgid "Go to the previous comic"
 msgstr "Vai al fumetto precedente"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Immagine"
 
@@ -140,11 +145,11 @@ msgstr "Tieni traccia dei fumetti con i segnalibri"
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:346
+#: internal/widget/application-window.go:345
 msgid "Loading comic..."
 msgstr "Caricamento fumetto..."
 
@@ -161,7 +166,7 @@ msgstr "Naviga"
 msgid "New window"
 msgstr "Nuova Finestra"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Novità"
 
@@ -169,7 +174,7 @@ msgstr "Novità"
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Numero"
 
@@ -200,7 +205,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Esci"
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:150
 msgid "Quit application"
 msgstr "Esci dall'applicazione"
 
@@ -246,7 +251,7 @@ msgstr "Mostra menu segnalibri"
 msgid "Show comic properties"
 msgstr "Mostra proprietà fumetto"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Titolo"
 
@@ -255,7 +260,7 @@ msgstr "Titolo"
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Trascrizione"
 

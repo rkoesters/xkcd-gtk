@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Poedit 3.1\n"
 "X-Project-Style: gnome\n"
 
-#: internal/widget/about-dialog.go:18
+#: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
 
@@ -37,7 +37,7 @@ msgstr "xkcd Hakkında"
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Alternatif metin"
 
@@ -53,9 +53,14 @@ msgstr "Yer imleri"
 msgid "Cache comics for later offline viewing"
 msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
 
-#: internal/widget/application-window.go:266
+#: internal/widget/application-window.go:265
 msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
+
+#: internal/widget/shortcuts-window.ui:143
+#, fuzzy
+msgid "Close window"
+msgstr "Yeni pencere"
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -75,7 +80,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
-#: internal/widget/application-window.go:339
+#: internal/widget/application-window.go:338
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
@@ -96,7 +101,7 @@ msgstr "Koyu kipi aç/kapat"
 msgid "Dark mode for late night reading"
 msgstr "Gece geç saatlerde okumak için koyu kip"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Tarih"
 
@@ -132,7 +137,7 @@ msgstr "Sonraki karikatüre git"
 msgid "Go to the previous comic"
 msgstr "Önceki karikatüre git"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Görüntü"
 
@@ -144,11 +149,11 @@ msgstr "Yer imleriyle karikatürleri takip edin"
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Bağlantı"
 
-#: internal/widget/application-window.go:346
+#: internal/widget/application-window.go:345
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 
@@ -165,7 +170,7 @@ msgstr "Dolaş"
 msgid "New window"
 msgstr "Yeni pencere"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Haberler"
 
@@ -173,7 +178,7 @@ msgstr "Haberler"
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Sayı"
 
@@ -202,7 +207,7 @@ msgstr "xkcd wiki aracılığıyla karikatür açıklamalarına hızla erişin"
 msgid "Quit"
 msgstr "Çık"
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:150
 msgid "Quit application"
 msgstr "Uygulamadan çık"
 
@@ -249,7 +254,7 @@ msgstr "Yer imleri menüsünü göster"
 msgid "Show comic properties"
 msgstr "Karikatür özelliklerini göster"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Başlık"
 
@@ -259,7 +264,7 @@ msgid "Toggle dark mode"
 msgstr "Koyu kipi aç/kapat"
 
 # Arayüzde, özellikler sayfasında karikatürde yazılı olan metinleri göstermek için kullanılıyor.
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Yazılı metin"
 

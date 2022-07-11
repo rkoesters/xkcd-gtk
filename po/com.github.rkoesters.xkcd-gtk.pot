@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: internal/widget/about-dialog.go:18
+#: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr ""
 
@@ -48,8 +48,12 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:266
+#: internal/widget/application-window.go:265
 msgid "Checking for new comic..."
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:143
+msgid "Close window"
 msgstr ""
 
 #: internal/widget/application.go:19
@@ -68,7 +72,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:339
+#: internal/widget/application-window.go:338
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -88,7 +92,7 @@ msgstr ""
 msgid "Dark mode for late night reading"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr ""
 
@@ -124,7 +128,7 @@ msgstr ""
 msgid "Go to the previous comic"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr ""
 
@@ -136,11 +140,11 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:346
+#: internal/widget/application-window.go:345
 msgid "Loading comic..."
 msgstr ""
 
@@ -157,7 +161,7 @@ msgstr ""
 msgid "New window"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr ""
 
@@ -165,7 +169,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr ""
 
@@ -194,7 +198,7 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:150
 msgid "Quit application"
 msgstr ""
 
@@ -240,7 +244,7 @@ msgstr ""
 msgid "Show comic properties"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr ""
 
@@ -249,7 +253,7 @@ msgstr ""
 msgid "Toggle dark mode"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr ""
 

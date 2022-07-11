@@ -92,12 +92,11 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	}
 	win.window.AddAccelGroup(accels)
 
-	// Zoom keyboard shortcuts
 	accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
 	accels.Connect(gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomOut)
 	accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
-
 	accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.window.Close)
 
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.window.Connect("style-updated", win.StyleUpdated)

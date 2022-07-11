@@ -49,12 +49,13 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 		pd.dialog.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
 	}
 
-	// Make Control-q to quit the app work in this dialog.
+	// Initialize our window accelerators.
 	accels, err := gtk.AccelGroupNew()
 	if err != nil {
 		return nil, err
 	}
 	pd.dialog.AddAccelGroup(accels)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, pd.dialog.Close)
 	accels.Connect(gdk.KEY_q, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, parent.app.Quit)
 
 	pd.dialog.Connect("delete-event", pd.Close)

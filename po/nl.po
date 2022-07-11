@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#: internal/widget/about-dialog.go:18
+#: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 "Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
@@ -36,7 +36,7 @@ msgstr "Over xkcd"
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Alt-tekst"
 
@@ -52,9 +52,14 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/application-window.go:266
+#: internal/widget/application-window.go:265
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal…"
+
+#: internal/widget/shortcuts-window.ui:143
+#, fuzzy
+msgid "Close window"
+msgstr "Nieuw venster"
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -74,7 +79,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:339
+#: internal/widget/application-window.go:338
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -95,7 +100,7 @@ msgstr "Donker thema aan/uit"
 msgid "Dark mode for late night reading"
 msgstr "Donker thema voor de late avonduurtjes"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Datum"
 
@@ -131,7 +136,7 @@ msgstr "Ga naar het volgende verhaal"
 msgid "Go to the previous comic"
 msgstr "Ga naar het vorige verhaal"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -143,11 +148,11 @@ msgstr "Orden verhalen middels bladwijzers"
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:346
+#: internal/widget/application-window.go:345
 msgid "Loading comic..."
 msgstr "Bezig met laden…"
 
@@ -164,7 +169,7 @@ msgstr "Navigatie"
 msgid "New window"
 msgstr "Nieuw venster"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Nieuws"
 
@@ -172,7 +177,7 @@ msgstr "Nieuws"
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Nummer"
 
@@ -201,7 +206,7 @@ msgstr "Toon de uitleg van verhalen middels de ‘explain xkcd’-wiki"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:150
 msgid "Quit application"
 msgstr "Afsluiten"
 
@@ -247,7 +252,7 @@ msgstr "Bladwijzermenu tonen"
 msgid "Show comic properties"
 msgstr "Eigenschappen tonen"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Titel"
 
@@ -256,7 +261,7 @@ msgstr "Titel"
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Transcriptie"
 

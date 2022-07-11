@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
 )
@@ -28,6 +29,14 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	dialog.Connect("hide", func() {
 		windowRemover(&dialog.Window)
 	})
+
+	// Initialize our window accelerators.
+	accels, err := gtk.AccelGroupNew()
+	if err != nil {
+		return nil, err
+	}
+	dialog.AddAccelGroup(accels)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, dialog.Close)
 
 	return dialog, nil
 }

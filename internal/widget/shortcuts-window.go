@@ -2,6 +2,7 @@ package widget
 
 import (
 	"errors"
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 )
 
@@ -34,6 +35,14 @@ func NewShortcutsWindow(windowRemover func(gtk.IWindow)) (*gtk.ShortcutsWindow, 
 	sw.Connect("hide", func() {
 		windowRemover(&sw.Window)
 	})
+
+	// Initialize our window accelerators.
+	accels, err := gtk.AccelGroupNew()
+	if err != nil {
+		return nil, err
+	}
+	sw.AddAccelGroup(accels)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, sw.Close)
 
 	return sw, nil
 }

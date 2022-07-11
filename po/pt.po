@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: internal/widget/about-dialog.go:18
+#: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Um leitor simples de xkcd escrito em Go e usando o GTK+3"
 
@@ -34,7 +34,7 @@ msgstr "Sobre o xkcd"
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Texto Alternativo"
 
@@ -52,9 +52,14 @@ msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
 "offline"
 
-#: internal/widget/application-window.go:266
+#: internal/widget/application-window.go:265
 msgid "Checking for new comic..."
 msgstr "A pesquisar por uma nova banda desenhada..."
+
+#: internal/widget/shortcuts-window.ui:143
+#, fuzzy
+msgid "Close window"
+msgstr "Nova Janela"
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -75,7 +80,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Banda desenhada não encontrada"
 
-#: internal/widget/application-window.go:339
+#: internal/widget/application-window.go:338
 msgid "Connect to the internet to download comic image"
 msgstr "Ligue-se à internet para descarregar imagens de banda desenhada"
 
@@ -96,7 +101,7 @@ msgstr "Alternar modo escuro"
 msgid "Dark mode for late night reading"
 msgstr "Modo escuro para leitura à noite"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Data"
 
@@ -132,7 +137,7 @@ msgstr "Ir para a banda desenhada seguinte"
 msgid "Go to the previous comic"
 msgstr "Ir para a banda desenhada anterior"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Imagem"
 
@@ -144,11 +149,11 @@ msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Ligação"
 
-#: internal/widget/application-window.go:346
+#: internal/widget/application-window.go:345
 msgid "Loading comic..."
 msgstr "A carregar banda desenhada..."
 
@@ -165,7 +170,7 @@ msgstr "Navegar"
 msgid "New window"
 msgstr "Nova Janela"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Noticias"
 
@@ -173,7 +178,7 @@ msgstr "Noticias"
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Número"
 
@@ -203,7 +208,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Sair"
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:150
 msgid "Quit application"
 msgstr "Sair da aplicação"
 
@@ -251,7 +256,7 @@ msgstr "Mostrar menu de marcadores"
 msgid "Show comic properties"
 msgstr "Mostrar propriedades da banda desenhada"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Título"
 
@@ -260,7 +265,7 @@ msgstr "Título"
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Transcrição"
 
