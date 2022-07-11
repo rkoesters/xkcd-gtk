@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
@@ -47,6 +48,8 @@ var (
 	comicNotFound         string
 	couldNotDownloadComic string
 	noComicsFound         string
+
+	offlineMode = flag.Bool("offline", false, "Do not use network, rely only on local data.")
 )
 
 // Init initializes the comic cache. Function index is called each time a comic
@@ -288,6 +291,10 @@ func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 // May return nil, the returned error should be checked. Should not be used on
 // UI event loop.
 func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
+	if *offlineMode {
+		return nil, ErrOffline
+	}
+
 	log.Debug("NewestComicInfoFromInternet start")
 	defer log.Debug("NewestComicInfoFromInternet end")
 
@@ -301,6 +308,10 @@ func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
 }
 
 func downloadComicInfo(n int) (*xkcd.Comic, error) {
+	if *offlineMode {
+		return nil, ErrOffline
+	}
+
 	log.Debugf("downloadComicInfo(%v) start", n)
 	defer log.Debugf("downloadComicInfo(%v) end", n)
 
@@ -338,6 +349,10 @@ func putComicInfo(comic *xkcd.Comic) error {
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
 func DownloadComicImage(n int) error {
+	if *offlineMode {
+		return ErrOffline
+	}
+
 	log.Debugf("DownloadComicImage(%v) start", n)
 	defer log.Debugf("DownloadComicImage(%v) end", n)
 

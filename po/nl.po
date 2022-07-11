@@ -74,7 +74,7 @@ msgstr ""
 "Met Comic Sticks kunt u xkcd-stripverhalen lezen. De toepassing heeft "
 "ondersteuning voor snelzoeken, offline-lezen en bevat intuïtieve sneltoetsen."
 
-#: internal/cache/cache.go:61
+#: internal/cache/cache.go:64
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
@@ -82,11 +82,11 @@ msgstr "Verhaal niet gevonden"
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
-#: internal/cache/cache.go:63
+#: internal/cache/cache.go:66
 msgid "Connect to the internet to download some comics!"
 msgstr "Maak verbinding met internet om verhalen op te halen!"
 
-#: internal/cache/cache.go:62
+#: internal/cache/cache.go:65
 msgid "Couldn't get comic"
 msgstr "Kan stripverhaal niet ophalen"
 
@@ -102,7 +102,7 @@ msgstr "Donker thema voor de late avonduurtjes"
 msgid "Date"
 msgstr "Datum"
 
-#: internal/cache/cache.go:60
+#: internal/cache/cache.go:63
 msgid "Error reading local comic database"
 msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 

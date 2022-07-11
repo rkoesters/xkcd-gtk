@@ -68,7 +68,7 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: internal/cache/cache.go:61
+#: internal/cache/cache.go:64
 msgid "Comic not found"
 msgstr ""
 
@@ -76,11 +76,11 @@ msgstr ""
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
-#: internal/cache/cache.go:63
+#: internal/cache/cache.go:66
 msgid "Connect to the internet to download some comics!"
 msgstr ""
 
-#: internal/cache/cache.go:62
+#: internal/cache/cache.go:65
 msgid "Couldn't get comic"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: internal/cache/cache.go:60
+#: internal/cache/cache.go:63
 msgid "Error reading local comic database"
 msgstr ""
 
