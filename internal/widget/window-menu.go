@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
@@ -17,7 +18,7 @@ type WindowMenu struct {
 
 var _ Widget = &WindowMenu{}
 
-func NewWindowMenu(prefersAppMenu bool, darkModeGetter func() bool, darkModeSetter func(bool)) (*WindowMenu, error) {
+func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter func() bool, darkModeSetter func(bool)) (*WindowMenu, error) {
 	var err error
 
 	wm := &WindowMenu{}
@@ -28,6 +29,7 @@ func NewWindowMenu(prefersAppMenu bool, darkModeGetter func() bool, darkModeSett
 		return nil, err
 	}
 	wm.menuButton.SetTooltipText(l("Menu"))
+	wm.menuButton.AddAccelerator("activate", accels, gdk.KEY_F10, 0, gtk.ACCEL_VISIBLE)
 
 	wm.popover, err = gtk.PopoverNew(wm.menuButton)
 	if err != nil {

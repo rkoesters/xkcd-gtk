@@ -25,11 +25,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
 
-#: internal/widget/window-menu.go:151 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:153 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
 msgstr "Comic Sticks Hakkında"
 
-#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:140 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr "xkcd Hakkında"
 
@@ -41,11 +41,12 @@ msgstr "Yer imlerine ekle"
 msgid "Alt text"
 msgstr "Alternatif metin"
 
-#: internal/widget/shortcuts-window.ui:118
-msgid "Application actions"
-msgstr "Uygulama eylemleri"
+#: internal/widget/shortcuts-window.ui:145
+#, fuzzy
+msgid "Application"
+msgstr "Uygulamadan çık"
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:92
+#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
@@ -57,7 +58,7 @@ msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelle�
 msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:22
 #, fuzzy
 msgid "Close window"
 msgstr "Yeni pencere"
@@ -109,7 +110,7 @@ msgstr "Tarih"
 msgid "Error reading local comic database"
 msgstr "Yerel karikatür veritabanı okuma hatası"
 
-#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:88
+#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:90
 msgid "Explain"
 msgstr "Açıkla"
 
@@ -117,23 +118,27 @@ msgstr "Açıkla"
 msgid "Features:"
 msgstr "Özellikler:"
 
-#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:43
+#: internal/widget/shortcuts-window.ui:11
+msgid "General"
+msgstr ""
+
+#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:70
 msgid "Go to a random comic"
 msgstr "Rastgele bir karikatüre git"
 
-#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:15
+#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:42
 msgid "Go to the first comic"
 msgstr "İlk karikatüre git"
 
-#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:36
+#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:63
 msgid "Go to the newest comic"
 msgstr "En yeni karikatüre git"
 
-#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:29
+#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:56
 msgid "Go to the next comic"
 msgstr "Sonraki karikatüre git"
 
-#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:22
+#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:49
 msgid "Go to the previous comic"
 msgstr "Önceki karikatüre git"
 
@@ -145,7 +150,7 @@ msgstr "Görüntü"
 msgid "Keep track of comics with bookmarks"
 msgstr "Yer imleriyle karikatürleri takip edin"
 
-#: internal/widget/window-menu.go:147 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:149 internal/widget/app-menu.ui:36
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
@@ -157,15 +162,15 @@ msgstr "Bağlantı"
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 
-#: internal/widget/window-menu.go:30
+#: internal/widget/window-menu.go:31
 msgid "Menu"
 msgstr "Menü"
 
-#: internal/widget/shortcuts-window.ui:11
+#: internal/widget/shortcuts-window.ui:38
 msgid "Navigate"
 msgstr "Dolaş"
 
-#: internal/widget/window-menu.go:107 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:109 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New window"
 msgstr "Yeni pencere"
@@ -182,20 +187,34 @@ msgstr "Sonuç bulunamadı"
 msgid "Number"
 msgstr "Sayı"
 
-#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:84
+#: internal/widget/shortcuts-window.ui:123
+#, fuzzy
+msgid "Open bookmarks menu"
+msgstr "Yer imleri menüsünü göster"
+
+#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:86
 msgid "Open link"
 msgstr "Bağlantıyı aç"
 
-#: internal/widget/shortcuts-window.ui:122
+#: internal/widget/shortcuts-window.ui:15
 msgid "Open new window"
 msgstr "Yeni pencere aç"
 
 #: internal/widget/shortcuts-window.ui:136
+msgid "Open properties dialog"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:156
 msgid "Open shortcuts window"
 msgstr "Kısayollar penceresini aç"
 
+#: internal/widget/shortcuts-window.ui:29
+#, fuzzy
+msgid "Open window menu"
+msgstr "Yer imleri menüsünü göster"
+
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
-#: internal/widget/window-menu.go:92 internal/widget/shortcuts-window.ui:105
+#: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Özellikler"
 
@@ -207,7 +226,7 @@ msgstr "xkcd wiki aracılığıyla karikatür açıklamalarına hızla erişin"
 msgid "Quit"
 msgstr "Çık"
 
-#: internal/widget/shortcuts-window.ui:150
+#: internal/widget/shortcuts-window.ui:163
 msgid "Quit application"
 msgstr "Uygulamadan çık"
 
@@ -222,11 +241,11 @@ msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
 #: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr "Yakınlaştırmayı sıfırla"
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Ara"
 
@@ -234,7 +253,7 @@ msgstr "Ara"
 msgid "Search Index Update"
 msgstr "Arama Dizini Güncellemesi"
 
-#: internal/widget/shortcuts-window.ui:56
+#: internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Karikatür ara"
 
@@ -246,20 +265,12 @@ msgstr "Karikatür ara"
 msgid "Shortcuts"
 msgstr "Kısayollar"
 
-#: internal/widget/shortcuts-window.ui:96
-msgid "Show bookmarks menu"
-msgstr "Yer imleri menüsünü göster"
-
-#: internal/widget/shortcuts-window.ui:109
-msgid "Show comic properties"
-msgstr "Karikatür özelliklerini göster"
-
 #: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Başlık"
 
 #: internal/widget/dark-mode-switch.go:41 internal/widget/app-menu.ui:12
-#: internal/widget/shortcuts-window.ui:129
+#: internal/widget/shortcuts-window.ui:149
 msgid "Toggle dark mode"
 msgstr "Koyu kipi aç/kapat"
 
@@ -276,7 +287,7 @@ msgstr "Karikatür arama dizini güncelleniyor..."
 msgid "View comic metadata"
 msgstr "Karikatür üst verisini görüntüle"
 
-#: internal/widget/window-menu.go:126 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:128 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "Farzedelim?"
 
@@ -284,17 +295,17 @@ msgstr "Farzedelim?"
 msgid "XKCD Viewer"
 msgstr "XKCD Görüntüleyici"
 
-#: internal/widget/shortcuts-window.ui:65
+#: internal/widget/shortcuts-window.ui:92
 msgid "Zoom"
 msgstr "Yakınlaştırma"
 
 #: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
-#: internal/widget/shortcuts-window.ui:69
+#: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr "Yaklaştır"
 
 #: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
-#: internal/widget/shortcuts-window.ui:76
+#: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr "Uzaklaştır"
 
@@ -302,10 +313,20 @@ msgstr "Uzaklaştır"
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
 
-#: internal/widget/window-menu.go:130 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:132 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr "xkcd günlüğü"
 
-#: internal/widget/window-menu.go:134 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "xkcd mağazası"
+
+#~ msgid "Show comic properties"
+#~ msgstr "Karikatür özelliklerini göster"
+
+#~ msgid "Application actions"
+#~ msgstr "Uygulama eylemleri"
+
+#, fuzzy
+#~ msgid "Menus"
+#~ msgstr "Menü"

@@ -21,11 +21,11 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Une simple visionneuse pour XKCD écrite en Go avec GTK+3"
 
-#: internal/widget/window-menu.go:151 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:153 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
 msgstr "À propos de Comic Sticks"
 
-#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:140 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr "À propos de xkcd"
 
@@ -37,11 +37,12 @@ msgstr ""
 msgid "Alt text"
 msgstr "Texte alternatif"
 
-#: internal/widget/shortcuts-window.ui:118
-msgid "Application actions"
-msgstr "Actions de l'application"
+#: internal/widget/shortcuts-window.ui:145
+#, fuzzy
+msgid "Application"
+msgstr "Quitter l'application"
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:92
+#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr ""
 
@@ -53,7 +54,7 @@ msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
 msgid "Checking for new comic..."
 msgstr "Recherche d'une nouvelle bande dessinée…"
 
-#: internal/widget/shortcuts-window.ui:143
+#: internal/widget/shortcuts-window.ui:22
 #, fuzzy
 msgid "Close window"
 msgstr "Nouvelle fenêtre"
@@ -106,7 +107,7 @@ msgstr "Date"
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:88
+#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:90
 msgid "Explain"
 msgstr "Explication"
 
@@ -114,23 +115,27 @@ msgstr "Explication"
 msgid "Features:"
 msgstr "Fonctionnalités :"
 
-#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:43
+#: internal/widget/shortcuts-window.ui:11
+msgid "General"
+msgstr ""
+
+#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:70
 msgid "Go to a random comic"
 msgstr "Charger une BD aléatoirement"
 
-#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:15
+#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:42
 msgid "Go to the first comic"
 msgstr "Aller à la première BD"
 
-#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:36
+#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:63
 msgid "Go to the newest comic"
 msgstr "Aller à la BD la plus récente"
 
-#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:29
+#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:56
 msgid "Go to the next comic"
 msgstr "Aller à a BD suivante"
 
-#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:22
+#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:49
 msgid "Go to the previous comic"
 msgstr "Aller à la BD précédente"
 
@@ -142,7 +147,7 @@ msgstr "Image"
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/window-menu.go:147 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:149 internal/widget/app-menu.ui:36
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
@@ -154,15 +159,15 @@ msgstr "Lien"
 msgid "Loading comic..."
 msgstr "Chargement de la BD…"
 
-#: internal/widget/window-menu.go:30
+#: internal/widget/window-menu.go:31
 msgid "Menu"
 msgstr "Menu"
 
-#: internal/widget/shortcuts-window.ui:11
+#: internal/widget/shortcuts-window.ui:38
 msgid "Navigate"
 msgstr "Navigation"
 
-#: internal/widget/window-menu.go:107 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:109 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New window"
 msgstr "Nouvelle fenêtre"
@@ -179,20 +184,33 @@ msgstr ""
 msgid "Number"
 msgstr "Numéro"
 
-#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:84
+#: internal/widget/shortcuts-window.ui:123
+msgid "Open bookmarks menu"
+msgstr ""
+
+#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:86
 msgid "Open link"
 msgstr "Ouvrir le lien"
 
-#: internal/widget/shortcuts-window.ui:122
+#: internal/widget/shortcuts-window.ui:15
 msgid "Open new window"
 msgstr "Ouvrir une nouvelle fenêtre"
 
 #: internal/widget/shortcuts-window.ui:136
+msgid "Open properties dialog"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:156
 msgid "Open shortcuts window"
 msgstr "Ouvir la fenêtre des raccourcis"
 
+#: internal/widget/shortcuts-window.ui:29
+#, fuzzy
+msgid "Open window menu"
+msgstr "Nouvelle fenêtre"
+
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
-#: internal/widget/window-menu.go:92 internal/widget/shortcuts-window.ui:105
+#: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -204,7 +222,7 @@ msgstr "Accédez rapidement aux explications de la BD via le wiki de XKCD"
 msgid "Quit"
 msgstr "Quitter"
 
-#: internal/widget/shortcuts-window.ui:150
+#: internal/widget/shortcuts-window.ui:163
 msgid "Quit application"
 msgstr "Quitter l'application"
 
@@ -220,11 +238,11 @@ msgid "Remove from bookmarks"
 msgstr ""
 
 #: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:52
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Rechercher"
 
@@ -232,7 +250,7 @@ msgstr "Rechercher"
 msgid "Search Index Update"
 msgstr "Rechercher une mise à jour de l'index"
 
-#: internal/widget/shortcuts-window.ui:56
+#: internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Rechercher des BD"
 
@@ -244,20 +262,12 @@ msgstr "Recherchez des BD"
 msgid "Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: internal/widget/shortcuts-window.ui:96
-msgid "Show bookmarks menu"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:109
-msgid "Show comic properties"
-msgstr "Afficher les propriétés de la BD"
-
 #: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Titre"
 
 #: internal/widget/dark-mode-switch.go:41 internal/widget/app-menu.ui:12
-#: internal/widget/shortcuts-window.ui:129
+#: internal/widget/shortcuts-window.ui:149
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"
 
@@ -273,7 +283,7 @@ msgstr "Mise à jour de l'index de recherche des BD…"
 msgid "View comic metadata"
 msgstr "Visualisez les métadonnées des BD"
 
-#: internal/widget/window-menu.go:126 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:128 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "What If?"
 
@@ -281,17 +291,17 @@ msgstr "What If?"
 msgid "XKCD Viewer"
 msgstr "Visionneuse pour XKCD"
 
-#: internal/widget/shortcuts-window.ui:65
+#: internal/widget/shortcuts-window.ui:92
 msgid "Zoom"
 msgstr ""
 
 #: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
-#: internal/widget/shortcuts-window.ui:69
+#: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
 #: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
-#: internal/widget/shortcuts-window.ui:76
+#: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""
 
@@ -299,10 +309,20 @@ msgstr ""
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romance;sarcasme;maths;langue;"
 
-#: internal/widget/window-menu.go:130 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:132 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr "Blog xkcd"
 
-#: internal/widget/window-menu.go:134 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "Boutique xkcd"
+
+#~ msgid "Show comic properties"
+#~ msgstr "Afficher les propriétés de la BD"
+
+#~ msgid "Application actions"
+#~ msgstr "Actions de l'application"
+
+#, fuzzy
+#~ msgid "Menus"
+#~ msgstr "Menu"

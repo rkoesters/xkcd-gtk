@@ -8,6 +8,33 @@
         <property name="visible">yes</property>
         <child>
           <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes">General</property>
+            <property name="visible">yes</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Open new window</property>
+                <property name="accelerator">&lt;ctrl&gt;n</property>
+                <property name="visible">yes</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Close window</property>
+                <property name="accelerator">&lt;ctrl&gt;w</property>
+                <property name="visible">yes</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Open window menu</property>
+                <property name="accelerator">F10</property>
+                <property name="visible">yes</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
             <property name="title" translatable="yes">Navigate</property>
             <property name="visible">yes</property>
             <child>
@@ -93,7 +120,7 @@
             <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Show bookmarks menu</property>
+                <property name="title" translatable="yes">Open bookmarks menu</property>
                 <property name="accelerator">&lt;ctrl&gt;b</property>
                 <property name="visible">yes</property>
               </object>
@@ -106,7 +133,7 @@
             <property name="visible">yes</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Show comic properties</property>
+                <property name="title" translatable="yes">Open properties dialog</property>
                 <property name="accelerator">&lt;ctrl&gt;p &lt;alt&gt;Return</property>
                 <property name="visible">yes</property>
               </object>
@@ -115,15 +142,8 @@
         </child>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="title" translatable="yes">Application actions</property>
+            <property name="title" translatable="yes">Application</property>
             <property name="visible">yes</property>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Open new window</property>
-                <property name="accelerator">&lt;ctrl&gt;n</property>
-                <property name="visible">yes</property>
-              </object>
-            </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Toggle dark mode</property>
@@ -135,13 +155,6 @@
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Open shortcuts window</property>
                 <property name="accelerator">&lt;ctrl&gt;question</property>
-                <property name="visible">yes</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Close window</property>
-                <property name="accelerator">&lt;ctrl&gt;w</property>
                 <property name="visible">yes</property>
               </object>
             </child>
