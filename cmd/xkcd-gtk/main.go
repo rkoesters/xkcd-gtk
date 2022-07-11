@@ -17,7 +17,8 @@ import (
 )
 
 var (
-	debug = flag.Bool("debug", false, "Enable debugging features")
+	debug   = flag.Bool("debug", false, "Enable debugging features.")
+	version = flag.Bool("version", false, "Print app version.")
 )
 
 func usage() {
@@ -42,6 +43,10 @@ func main() {
 		log.Print("unexpected command line arguments: ", flag.Args())
 		flag.Usage()
 		os.Exit(1)
+	}
+	if *version {
+		fmt.Printf("%v version %v\n", build.AppID, build.Version())
+		os.Exit(0)
 	}
 
 	if *debug {
