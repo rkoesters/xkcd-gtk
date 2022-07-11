@@ -143,7 +143,6 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
-	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool validate
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
 	appstream-util --nonet validate-relax $(APPDATA_PATH)
 	-appstream-util validate-strict $(APPDATA_PATH)
