@@ -67,7 +67,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Zoom in</property>
-                <property name="accelerator">&lt;ctrl&gt;equal</property>
+                <property name="accelerator">&lt;ctrl&gt;plus</property>
                 <property name="visible">yes</property>
               </object>
             </child>

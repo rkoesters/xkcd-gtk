@@ -49,7 +49,7 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
-#: internal/widget/application-window.go:265
+#: internal/widget/application-window.go:266
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
-#: internal/widget/application-window.go:338
+#: internal/widget/application-window.go:339
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
@@ -149,7 +149,7 @@ msgstr "Tasti Rapidi"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:345
+#: internal/widget/application-window.go:346
 msgid "Loading comic..."
 msgstr "Caricamento fumetto..."
 

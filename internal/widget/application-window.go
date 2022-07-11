@@ -92,7 +92,8 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	}
 	win.window.AddAccelGroup(accels)
 
-	accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
+	accels.Connect(gdk.KEY_plus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
+	accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn) // without holding shift
 	accels.Connect(gdk.KEY_minus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomOut)
 	accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
 	accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
