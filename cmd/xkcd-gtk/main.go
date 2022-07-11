@@ -39,7 +39,7 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 	if flag.NArg() > 0 {
-		log.Print("error: unexpected command line arguments: ", flag.Args())
+		log.Print("unexpected command line arguments: ", flag.Args())
 		flag.Usage()
 		os.Exit(1)
 	}
