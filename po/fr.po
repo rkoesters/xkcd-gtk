@@ -38,9 +38,8 @@ msgid "Alt text"
 msgstr "Texte alternatif"
 
 #: internal/widget/shortcuts-window.ui:145
-#, fuzzy
 msgid "Application"
-msgstr "Quitter l'application"
+msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
@@ -55,9 +54,8 @@ msgid "Checking for new comic..."
 msgstr "Recherche d'une nouvelle bande dessinée…"
 
 #: internal/widget/shortcuts-window.ui:22
-#, fuzzy
 msgid "Close window"
-msgstr "Nouvelle fenêtre"
+msgstr ""
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -91,9 +89,8 @@ msgid "Couldn't get comic"
 msgstr "Impossible de récupérer la BD"
 
 #: internal/widget/dark-mode-switch.go:53
-#, fuzzy
 msgid "Dark mode"
-msgstr "Activer le thème sombre"
+msgstr "Thème sombre"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Dark mode for late night reading"
@@ -205,9 +202,8 @@ msgid "Open shortcuts window"
 msgstr "Ouvir la fenêtre des raccourcis"
 
 #: internal/widget/shortcuts-window.ui:29
-#, fuzzy
 msgid "Open window menu"
-msgstr "Nouvelle fenêtre"
+msgstr ""
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
@@ -316,13 +312,3 @@ msgstr "Blog xkcd"
 #: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "Boutique xkcd"
-
-#~ msgid "Show comic properties"
-#~ msgstr "Afficher les propriétés de la BD"
-
-#~ msgid "Application actions"
-#~ msgstr "Actions de l'application"
-
-#, fuzzy
-#~ msgid "Menus"
-#~ msgstr "Menu"

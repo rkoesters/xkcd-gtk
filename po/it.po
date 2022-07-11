@@ -38,9 +38,8 @@ msgid "Alt text"
 msgstr "Ferma Testo"
 
 #: internal/widget/shortcuts-window.ui:145
-#, fuzzy
 msgid "Application"
-msgstr "Esci dall'applicazione"
+msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
@@ -55,9 +54,8 @@ msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
 
 #: internal/widget/shortcuts-window.ui:22
-#, fuzzy
 msgid "Close window"
-msgstr "Nuova Finestra"
+msgstr ""
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -90,9 +88,8 @@ msgid "Couldn't get comic"
 msgstr "Impossibile ottenere fumetto"
 
 #: internal/widget/dark-mode-switch.go:53
-#, fuzzy
 msgid "Dark mode"
-msgstr "Abilità modalità scura"
+msgstr "Modalità scura"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Dark mode for late night reading"
@@ -184,7 +181,6 @@ msgid "Number"
 msgstr "Numero"
 
 #: internal/widget/shortcuts-window.ui:123
-#, fuzzy
 msgid "Open bookmarks menu"
 msgstr "Mostra menu segnalibri"
 
@@ -205,9 +201,8 @@ msgid "Open shortcuts window"
 msgstr "Apri la finestra delle scorciatoie"
 
 #: internal/widget/shortcuts-window.ui:29
-#, fuzzy
 msgid "Open window menu"
-msgstr "Mostra menu segnalibri"
+msgstr ""
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
@@ -316,13 +311,3 @@ msgstr "xkcd blog"
 #: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "xkcd store"
-
-#~ msgid "Show comic properties"
-#~ msgstr "Mostra proprietà fumetto"
-
-#~ msgid "Application actions"
-#~ msgstr "Azioni Applicazione"
-
-#, fuzzy
-#~ msgid "Menus"
-#~ msgstr "Menu"

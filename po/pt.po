@@ -39,9 +39,8 @@ msgid "Alt text"
 msgstr "Texto Alternativo"
 
 #: internal/widget/shortcuts-window.ui:145
-#, fuzzy
 msgid "Application"
-msgstr "Sair da aplicação"
+msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
@@ -58,9 +57,8 @@ msgid "Checking for new comic..."
 msgstr "A pesquisar por uma nova banda desenhada..."
 
 #: internal/widget/shortcuts-window.ui:22
-#, fuzzy
 msgid "Close window"
-msgstr "Nova Janela"
+msgstr ""
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -94,9 +92,8 @@ msgid "Couldn't get comic"
 msgstr "Não Foi Possível Adquirir a Banda Desenhada"
 
 #: internal/widget/dark-mode-switch.go:53
-#, fuzzy
 msgid "Dark mode"
-msgstr "Alternar modo escuro"
+msgstr "Modo escuro"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Dark mode for late night reading"
@@ -188,7 +185,6 @@ msgid "Number"
 msgstr "Número"
 
 #: internal/widget/shortcuts-window.ui:123
-#, fuzzy
 msgid "Open bookmarks menu"
 msgstr "Mostrar menu de marcadores"
 
@@ -209,9 +205,8 @@ msgid "Open shortcuts window"
 msgstr "Abrir a janela de atalhos"
 
 #: internal/widget/shortcuts-window.ui:29
-#, fuzzy
 msgid "Open window menu"
-msgstr "Mostrar menu de marcadores"
+msgstr ""
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
@@ -321,13 +316,3 @@ msgstr "Blogue xkcd"
 #: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "Loja xkcd"
-
-#~ msgid "Show comic properties"
-#~ msgstr "Mostrar propriedades da banda desenhada"
-
-#~ msgid "Application actions"
-#~ msgstr "Ações da Aplicação"
-
-#, fuzzy
-#~ msgid "Menus"
-#~ msgstr "Menu"

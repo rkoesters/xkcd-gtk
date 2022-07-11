@@ -42,9 +42,8 @@ msgid "Alt text"
 msgstr "Alternatif metin"
 
 #: internal/widget/shortcuts-window.ui:145
-#, fuzzy
 msgid "Application"
-msgstr "Uygulamadan çık"
+msgstr ""
 
 #: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
@@ -59,9 +58,8 @@ msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
 
 #: internal/widget/shortcuts-window.ui:22
-#, fuzzy
 msgid "Close window"
-msgstr "Yeni pencere"
+msgstr ""
 
 #: internal/widget/application.go:19
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -94,7 +92,6 @@ msgid "Couldn't get comic"
 msgstr "Karikatür alınamadı"
 
 #: internal/widget/dark-mode-switch.go:53
-#, fuzzy
 msgid "Dark mode"
 msgstr "Koyu kipi aç/kapat"
 
@@ -188,7 +185,6 @@ msgid "Number"
 msgstr "Sayı"
 
 #: internal/widget/shortcuts-window.ui:123
-#, fuzzy
 msgid "Open bookmarks menu"
 msgstr "Yer imleri menüsünü göster"
 
@@ -209,9 +205,8 @@ msgid "Open shortcuts window"
 msgstr "Kısayollar penceresini aç"
 
 #: internal/widget/shortcuts-window.ui:29
-#, fuzzy
 msgid "Open window menu"
-msgstr "Yer imleri menüsünü göster"
+msgstr ""
 
 #: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
@@ -320,13 +315,3 @@ msgstr "xkcd günlüğü"
 #: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "xkcd mağazası"
-
-#~ msgid "Show comic properties"
-#~ msgstr "Karikatür özelliklerini göster"
-
-#~ msgid "Application actions"
-#~ msgstr "Uygulama eylemleri"
-
-#, fuzzy
-#~ msgid "Menus"
-#~ msgstr "Menü"
