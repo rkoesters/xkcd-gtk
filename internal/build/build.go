@@ -17,9 +17,9 @@ var Options map[string]string
 // compile time. Init must be called before using Options or calling any other
 // function provided by this package.
 func Init() {
-	Options = parse(data)
-
 	log.Debug("build data: ", data)
+
+	Options = parse(data)
 }
 
 func parse(data string) map[string]string {
