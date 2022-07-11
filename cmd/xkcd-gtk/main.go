@@ -4,6 +4,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
@@ -19,14 +20,26 @@ var (
 	debug = flag.Bool("debug", false, "Enable debugging features")
 )
 
+func usage() {
+	fmt.Fprintf(flag.CommandLine.Output(), "Usage of %s:\n", os.Args[0])
+	fmt.Fprintln(flag.CommandLine.Output())
+	fmt.Fprintf(flag.CommandLine.Output(), "  %s [flags...]\n", os.Args[0])
+	fmt.Fprintln(flag.CommandLine.Output())
+	fmt.Fprintf(flag.CommandLine.Output(), "Flags:\n")
+	flag.PrintDefaults()
+}
+
 func main() {
 	rand.Seed(time.Now().Unix())
 	log.Init()
 	build.Init()
 	paths.Init(build.AppID)
+	flag.Usage = usage
 	flag.Parse()
 	if flag.NArg() > 0 {
-		log.Fatal("error: unexpected command line arguments: ", flag.Args())
+		log.Print("error: unexpected command line arguments: ", flag.Args())
+		flag.Usage()
+		os.Exit(1)
 	}
 
 	if *debug {
