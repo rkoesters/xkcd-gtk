@@ -36,7 +36,7 @@ msgstr "Over xkcd"
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
-#: internal/widget/properties-dialog.go:130
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Alt-tekst"
 
@@ -100,7 +100,7 @@ msgstr "Donker thema aan/uit"
 msgid "Dark mode for late night reading"
 msgstr "Donker thema voor de late avonduurtjes"
 
-#: internal/widget/properties-dialog.go:122
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Datum"
 
@@ -136,7 +136,7 @@ msgstr "Ga naar het volgende verhaal"
 msgid "Go to the previous comic"
 msgstr "Ga naar het vorige verhaal"
 
-#: internal/widget/properties-dialog.go:126
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -148,7 +148,7 @@ msgstr "Orden verhalen middels bladwijzers"
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 
-#: internal/widget/properties-dialog.go:138
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Link"
 
@@ -169,7 +169,7 @@ msgstr "Navigatie"
 msgid "New window"
 msgstr "Nieuw venster"
 
-#: internal/widget/properties-dialog.go:134
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Nieuws"
 
@@ -177,7 +177,7 @@ msgstr "Nieuws"
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Nummer"
 
@@ -252,7 +252,7 @@ msgstr "Bladwijzermenu tonen"
 msgid "Show comic properties"
 msgstr "Eigenschappen tonen"
 
-#: internal/widget/properties-dialog.go:118
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Titel"
 
@@ -261,7 +261,7 @@ msgstr "Titel"
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"
 
-#: internal/widget/properties-dialog.go:142
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Transcriptie"
 

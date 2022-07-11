@@ -33,7 +33,7 @@ msgstr "À propos de xkcd"
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:130
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Texte alternatif"
 
@@ -98,7 +98,7 @@ msgstr "Activer le thème sombre"
 msgid "Dark mode for late night reading"
 msgstr "Thème sombre pour une lecture tardive"
 
-#: internal/widget/properties-dialog.go:122
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Date"
 
@@ -134,7 +134,7 @@ msgstr "Aller à a BD suivante"
 msgid "Go to the previous comic"
 msgstr "Aller à la BD précédente"
 
-#: internal/widget/properties-dialog.go:126
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Image"
 
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#: internal/widget/properties-dialog.go:138
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Lien"
 
@@ -167,7 +167,7 @@ msgstr "Navigation"
 msgid "New window"
 msgstr "Nouvelle fenêtre"
 
-#: internal/widget/properties-dialog.go:134
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Actualités"
 
@@ -175,7 +175,7 @@ msgstr "Actualités"
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Numéro"
 
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Show comic properties"
 msgstr "Afficher les propriétés de la BD"
 
-#: internal/widget/properties-dialog.go:118
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Titre"
 
@@ -261,7 +261,7 @@ msgstr "Titre"
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"
 
-#: internal/widget/properties-dialog.go:142
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Transcription"
 

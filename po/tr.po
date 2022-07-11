@@ -37,7 +37,7 @@ msgstr "xkcd Hakkında"
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
-#: internal/widget/properties-dialog.go:130
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Alternatif metin"
 
@@ -101,7 +101,7 @@ msgstr "Koyu kipi aç/kapat"
 msgid "Dark mode for late night reading"
 msgstr "Gece geç saatlerde okumak için koyu kip"
 
-#: internal/widget/properties-dialog.go:122
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Tarih"
 
@@ -137,7 +137,7 @@ msgstr "Sonraki karikatüre git"
 msgid "Go to the previous comic"
 msgstr "Önceki karikatüre git"
 
-#: internal/widget/properties-dialog.go:126
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Görüntü"
 
@@ -149,7 +149,7 @@ msgstr "Yer imleriyle karikatürleri takip edin"
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
-#: internal/widget/properties-dialog.go:138
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Bağlantı"
 
@@ -170,7 +170,7 @@ msgstr "Dolaş"
 msgid "New window"
 msgstr "Yeni pencere"
 
-#: internal/widget/properties-dialog.go:134
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Haberler"
 
@@ -178,7 +178,7 @@ msgstr "Haberler"
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Sayı"
 
@@ -254,7 +254,7 @@ msgstr "Yer imleri menüsünü göster"
 msgid "Show comic properties"
 msgstr "Karikatür özelliklerini göster"
 
-#: internal/widget/properties-dialog.go:118
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Başlık"
 
@@ -264,7 +264,7 @@ msgid "Toggle dark mode"
 msgstr "Koyu kipi aç/kapat"
 
 # Arayüzde, özellikler sayfasında karikatürde yazılı olan metinleri göstermek için kullanılıyor.
-#: internal/widget/properties-dialog.go:142
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Yazılı metin"
 

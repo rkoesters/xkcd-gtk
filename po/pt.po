@@ -34,7 +34,7 @@ msgstr "Sobre o xkcd"
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
-#: internal/widget/properties-dialog.go:130
+#: internal/widget/properties-dialog.go:129
 msgid "Alt text"
 msgstr "Texto Alternativo"
 
@@ -101,7 +101,7 @@ msgstr "Alternar modo escuro"
 msgid "Dark mode for late night reading"
 msgstr "Modo escuro para leitura à noite"
 
-#: internal/widget/properties-dialog.go:122
+#: internal/widget/properties-dialog.go:121
 msgid "Date"
 msgstr "Data"
 
@@ -137,7 +137,7 @@ msgstr "Ir para a banda desenhada seguinte"
 msgid "Go to the previous comic"
 msgstr "Ir para a banda desenhada anterior"
 
-#: internal/widget/properties-dialog.go:126
+#: internal/widget/properties-dialog.go:125
 msgid "Image"
 msgstr "Imagem"
 
@@ -149,7 +149,7 @@ msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
 
-#: internal/widget/properties-dialog.go:138
+#: internal/widget/properties-dialog.go:137
 msgid "Link"
 msgstr "Ligação"
 
@@ -170,7 +170,7 @@ msgstr "Navegar"
 msgid "New window"
 msgstr "Nova Janela"
 
-#: internal/widget/properties-dialog.go:134
+#: internal/widget/properties-dialog.go:133
 msgid "News"
 msgstr "Noticias"
 
@@ -178,7 +178,7 @@ msgstr "Noticias"
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:113
 msgid "Number"
 msgstr "Número"
 
@@ -256,7 +256,7 @@ msgstr "Mostrar menu de marcadores"
 msgid "Show comic properties"
 msgstr "Mostrar propriedades da banda desenhada"
 
-#: internal/widget/properties-dialog.go:118
+#: internal/widget/properties-dialog.go:117
 msgid "Title"
 msgstr "Título"
 
@@ -265,7 +265,7 @@ msgstr "Título"
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
 
-#: internal/widget/properties-dialog.go:142
+#: internal/widget/properties-dialog.go:141
 msgid "Transcript"
 msgstr "Transcrição"
 
