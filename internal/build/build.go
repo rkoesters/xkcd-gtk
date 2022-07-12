@@ -9,17 +9,17 @@ import (
 // Comma separated list of key=value pairs.
 var data = ""
 
-// Options is a [key]=value pair of compile time flags. Init must be called
-// before using Options.
-var Options map[string]string
+// Data is a [key]=value pair of compile time flags/data. Init must be called
+// before using Data.
+var Data map[string]string
 
 // Init initializes the build package by parsing the data provided to it at
-// compile time. Init must be called before using Options or calling any other
+// compile time. Init must be called before using Data or calling any other
 // function provided by this package.
 func Init() {
 	log.Debug("build data: ", data)
 
-	Options = parse(data)
+	Data = parse(data)
 }
 
 func parse(data string) map[string]string {
@@ -43,7 +43,7 @@ func parse(data string) map[string]string {
 
 // Version returns the version string of this binary.
 func Version() string {
-	v, ok := Options["version"]
+	v, ok := Data["version"]
 	if ok {
 		return v
 	} else {
