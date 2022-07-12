@@ -30,12 +30,13 @@ func parse(data string) map[string]string {
 	}
 
 	for _, s := range strings.Split(data, ",") {
+		// Use strings.Cut once our minimum Go version is 1.18:
 		pair := strings.SplitN(s, "=", 2)
-		if len(pair) != 2 {
-			log.Print("error parsing build flag: ", s)
-			continue
+		if len(pair) < 2 {
+			flags[pair[0]] = ""
+		} else {
+			flags[pair[0]] = pair[1]
 		}
-		flags[pair[0]] = pair[1]
 	}
 
 	return flags
