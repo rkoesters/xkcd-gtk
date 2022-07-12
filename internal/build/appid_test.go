@@ -9,6 +9,6 @@ import (
 func TestAppIDIsValid(t *testing.T) {
 	build.Init()
 	if !glib.ApplicationIDIsValid(build.AppID()) {
-		t.Fail()
+		t.Error("invalid application ID:", build.AppID())
 	}
 }
