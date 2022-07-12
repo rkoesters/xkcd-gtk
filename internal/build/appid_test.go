@@ -7,7 +7,8 @@ import (
 )
 
 func TestAppIDIsValid(t *testing.T) {
-	if !glib.ApplicationIDIsValid(build.AppID) {
+	build.Init()
+	if !glib.ApplicationIDIsValid(build.AppID()) {
 		t.Fail()
 	}
 }

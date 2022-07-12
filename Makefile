@@ -12,7 +12,7 @@ GTK_VERSION   = $(shell tools/gtk-version.sh)
 PANGO_VERSION = $(shell tools/pango-version.sh)
 
 # Comma separated
-BUILD_DATA     = version=$(APP_VERSION)
+BUILD_DATA     = app-id=$(APP),version=$(APP_VERSION)
 # Space separated
 TAGS           = $(GTK_VERSION) $(PANGO_VERSION)
 DEV_TAGS       = xkcd_gtk_debug

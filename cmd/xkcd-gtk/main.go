@@ -38,10 +38,10 @@ func main() {
 
 	log.Init()
 	build.Init()
-	paths.Init(build.AppID)
+	paths.Init(build.AppID())
 
 	if *version {
-		fmt.Printf("%v version %v\n", build.AppID, build.Version())
+		fmt.Printf("%v version %v\n", build.AppID(), build.Version())
 		os.Exit(0)
 	}
 
@@ -49,12 +49,12 @@ func main() {
 		os.Setenv("GTK_DEBUG", *gtkDebug)
 	}
 
-	glib.InitI18n(build.AppID, paths.LocaleDir())
-	glib.SetPrgname(build.AppID)
+	glib.InitI18n(build.AppID(), paths.LocaleDir())
+	glib.SetPrgname(build.AppID())
 	glib.SetApplicationName(widget.AppName())
-	gtk.WindowSetDefaultIconName(build.AppID)
+	gtk.WindowSetDefaultIconName(build.AppID())
 
-	app, err := widget.NewApplication(build.AppID)
+	app, err := widget.NewApplication(build.AppID())
 	if err != nil {
 		log.Fatal("error creating application: ", err)
 	}

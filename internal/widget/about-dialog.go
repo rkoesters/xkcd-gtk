@@ -13,7 +13,7 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 		return nil, err
 	}
 
-	dialog.SetLogoIconName(build.AppID)
+	dialog.SetLogoIconName(build.AppID())
 	dialog.SetProgramName(AppName())
 	dialog.SetVersion(build.Version())
 	dialog.SetComments(l("A simple xkcd viewer written in Go using GTK+3"))
