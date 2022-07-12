@@ -12,7 +12,9 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
+	"math/rand"
 	"os"
+	"time"
 )
 
 // AppName is the user-visible name of this application.
@@ -89,6 +91,9 @@ func (app *Application) Startup() {
 
 	app.LoadBookmarks()
 	app.SetupCache()
+
+	// ApplicationWindow.RandomComic() would like a seeded PRNG.
+	rand.Seed(time.Now().Unix())
 }
 
 // Shutdown is called when the "shutdown" signal is emitted.

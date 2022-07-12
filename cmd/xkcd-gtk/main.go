@@ -11,9 +11,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"github.com/rkoesters/xkcd-gtk/internal/widget"
-	"math/rand"
 	"os"
-	"time"
 )
 
 var (
@@ -48,9 +46,6 @@ func main() {
 		fmt.Printf("%v version %v\n", build.AppID, build.Version())
 		os.Exit(0)
 	}
-
-	// ApplicationWindow.RandomComic() would like a seeded PRNG.
-	rand.Seed(time.Now().Unix())
 
 	if *gtkDebug != "" {
 		os.Setenv("GTK_DEBUG", *gtkDebug)
