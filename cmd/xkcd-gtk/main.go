@@ -21,10 +21,8 @@ var (
 
 func usage() {
 	w := flag.CommandLine.Output()
-	fmt.Fprintf(w, "Usage of %s:\n", os.Args[0])
-	fmt.Fprintln(w)
-	fmt.Fprintf(w, "  %s [flags...]\n", os.Args[0])
-	fmt.Fprintln(w)
+	fmt.Fprintf(w, "Usage of %s:\n\n", os.Args[0])
+	fmt.Fprintf(w, "  %s [flags...]\n\n", os.Args[0])
 	fmt.Fprintf(w, "Flags:\n")
 	flag.PrintDefaults()
 }
