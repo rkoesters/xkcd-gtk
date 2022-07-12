@@ -17,8 +17,8 @@ import (
 )
 
 var (
-	debug   = flag.Bool("debug", false, "Enable debugging features.")
-	version = flag.Bool("version", false, "Print app version and exit.")
+	gtkDebug = flag.String("gtk-debug", "", "Set GTK_DEBUG environment variable to provided string.")
+	version  = flag.Bool("version", false, "Print app version and exit.")
 )
 
 func usage() {
@@ -44,14 +44,14 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
+
 	if *version {
 		fmt.Printf("%v version %v\n", build.AppID, build.Version())
 		os.Exit(0)
 	}
 
-	if *debug {
-		// Show gtk's interactive debugging window.
-		os.Setenv("GTK_DEBUG", "interactive")
+	if *gtkDebug != "" {
+		os.Setenv("GTK_DEBUG", *gtkDebug)
 	}
 
 	glib.InitI18n(build.AppID, paths.LocaleDir())
