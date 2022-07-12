@@ -77,13 +77,16 @@ func NewApplication(appID string) (*Application, error) {
 
 // Startup is called when the "startup" signal is emitted.
 func (app *Application) Startup() {
+	app.LoadSettings()
+
 	err := app.SetupAppMenu()
 	if err != nil {
 		log.Fatal("error creating app menu: ", err)
 	}
-	app.LoadSettings()
+
 	style.InitCSS(app.DarkMode())
 	app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", app.DarkModeChanged)
+
 	app.LoadBookmarks()
 	app.SetupCache()
 }
