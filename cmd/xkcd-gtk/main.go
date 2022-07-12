@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	gtkDebug = flag.String("gtk-debug", "", "Set GTK_DEBUG environment variable to provided string.")
+	gtkDebug = flag.String("gtk-debug", "", "Behave as if the GTK_DEBUG env variable was set to the provided string.")
 	version  = flag.Bool("version", false, "Print app version and exit.")
 )
 
