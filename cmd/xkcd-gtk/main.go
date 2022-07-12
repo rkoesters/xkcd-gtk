@@ -32,23 +32,25 @@ func usage() {
 }
 
 func main() {
-	rand.Seed(time.Now().Unix())
-	log.Init()
-	build.Init()
-	paths.Init(build.AppID)
-
 	flag.Usage = usage
 	flag.Parse()
 	if flag.NArg() > 0 {
-		log.Print("unexpected command line arguments: ", flag.Args())
+		fmt.Fprintf(flag.CommandLine.Output(), "unexpected command line arguments: %v\n", flag.Args())
 		flag.Usage()
 		os.Exit(1)
 	}
+
+	log.Init()
+	build.Init()
+	paths.Init(build.AppID)
 
 	if *version {
 		fmt.Printf("%v version %v\n", build.AppID, build.Version())
 		os.Exit(0)
 	}
+
+	// ApplicationWindow.RandomComic() would like a seeded PRNG.
+	rand.Seed(time.Now().Unix())
 
 	if *gtkDebug != "" {
 		os.Setenv("GTK_DEBUG", *gtkDebug)
