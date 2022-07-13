@@ -22,6 +22,10 @@ import (
 	bolt "go.etcd.io/bbolt"
 )
 
+var (
+	offlineMode = flag.Bool("offline", false, "Do not use network, rely only on local data.")
+)
+
 const (
 	// cacheVersionCurrent should be incremented every time a release breaks
 	// compatibility with the previous release's cache (although breaking
@@ -49,8 +53,6 @@ var (
 	comicNotFound         string
 	couldNotDownloadComic string
 	noComicsFound         string
-
-	offlineMode = flag.Bool("offline", false, "Do not use network, rely only on local data.")
 )
 
 // Init initializes the comic cache. Function index is called each time a comic

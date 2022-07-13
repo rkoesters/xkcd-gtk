@@ -75,7 +75,7 @@ msgstr ""
 "Karikatürler, hızlı çizgi roman arama, çevrimdışı çalışma ve sezgisel klavye "
 "kısayollarıyla xkcd karikatürlerini masaüstünüze getirir."
 
-#: internal/cache/cache.go:65
+#: internal/cache/cache.go:67
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
@@ -83,11 +83,11 @@ msgstr "Karikatür bulunamadı"
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
-#: internal/cache/cache.go:67
+#: internal/cache/cache.go:69
 msgid "Connect to the internet to download some comics!"
 msgstr "Karikatürleri indirmek için internete bağlanın!"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:68
 msgid "Couldn't get comic"
 msgstr "Karikatür alınamadı"
 
@@ -103,7 +103,7 @@ msgstr "Gece geç saatlerde okumak için koyu kip"
 msgid "Date"
 msgstr "Tarih"
 
-#: internal/cache/cache.go:64
+#: internal/cache/cache.go:66
 msgid "Error reading local comic database"
 msgstr "Yerel karikatür veritabanı okuma hatası"
 

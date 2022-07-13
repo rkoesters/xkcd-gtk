@@ -72,7 +72,7 @@ msgstr ""
 "recherche rapide, une navigation hors ligne et des raccourcis clavier "
 "intuitifs."
 
-#: internal/cache/cache.go:65
+#: internal/cache/cache.go:67
 msgid "Comic not found"
 msgstr "BD introuvable"
 
@@ -80,11 +80,11 @@ msgstr "BD introuvable"
 msgid "Connect to the internet to download comic image"
 msgstr "Connectez-vous à Internet pour télécharger la bande dessinée"
 
-#: internal/cache/cache.go:67
+#: internal/cache/cache.go:69
 msgid "Connect to the internet to download some comics!"
 msgstr "Connectez-vous à Internet pour télécharger des bandes dessinées !"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:68
 msgid "Couldn't get comic"
 msgstr "Impossible de récupérer la BD"
 
@@ -100,7 +100,7 @@ msgstr "Thème sombre pour une lecture tardive"
 msgid "Date"
 msgstr "Date"
 
-#: internal/cache/cache.go:64
+#: internal/cache/cache.go:66
 msgid "Error reading local comic database"
 msgstr ""
 
