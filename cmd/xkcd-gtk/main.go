@@ -15,6 +15,7 @@ import (
 )
 
 var (
+	gdkDebug = flag.String("gdk-debug", "", "Behave as if the GDK_DEBUG env variable was set to the provided string.")
 	gtkDebug = flag.String("gtk-debug", "", "Behave as if the GTK_DEBUG env variable was set to the provided string.")
 	version  = flag.Bool("version", false, "Print app version and exit.")
 )
@@ -45,6 +46,9 @@ func main() {
 		os.Exit(0)
 	}
 
+	if *gdkDebug != "" {
+		os.Setenv("GDK_DEBUG", *gdkDebug)
+	}
 	if *gtkDebug != "" {
 		os.Setenv("GTK_DEBUG", *gtkDebug)
 	}
