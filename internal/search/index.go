@@ -12,8 +12,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	"os"
-	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -22,14 +20,14 @@ var index bleve.Index
 
 // Init initializes the search index.
 func Init() (err error) {
-	checkForMisplacedSearchIndex()
+	paths.CheckForMisplacedSearchIndex()
 
-	log.Debug("opening search index: ", searchIndexPath())
-	index, err = bleve.Open(searchIndexPath())
+	log.Debug("opening search index: ", paths.SearchIndex())
+	index, err = bleve.Open(paths.SearchIndex())
 	if err == bleve.ErrorIndexPathDoesNotExist {
 		log.Debug("search index not found, creating new search index")
 		mapping := bleve.NewIndexMapping()
-		index, err = bleve.New(searchIndexPath(), mapping)
+		index, err = bleve.New(paths.SearchIndex(), mapping)
 	}
 	return
 }
@@ -128,17 +126,4 @@ func Load(app *gtk.Application) error {
 	}()
 
 	return nil
-}
-
-func checkForMisplacedSearchIndex() {
-	misplacedSearchIndex := filepath.Join(paths.Builder{}.CacheDir(), "search")
-
-	_, err := os.Stat(misplacedSearchIndex)
-	if !os.IsNotExist(err) {
-		log.Printf("WARNING: Potentially misplaced search index '%v'. Should be '%v'.", misplacedSearchIndex, searchIndexPath())
-	}
-}
-
-func searchIndexPath() string {
-	return filepath.Join(paths.CacheDir(), "search")
 }

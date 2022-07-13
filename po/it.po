@@ -237,7 +237,7 @@ msgstr ""
 msgid "Search"
 msgstr "Cerca"
 
-#: internal/search/index.go:64
+#: internal/search/index.go:62
 msgid "Search Index Update"
 msgstr "Cerca aggiornamento indice"
 
@@ -266,7 +266,7 @@ msgstr "Abilità modalità scura"
 msgid "Transcript"
 msgstr "Trascrizione"
 
-#: internal/search/index.go:72
+#: internal/search/index.go:70
 msgid "Updating comic search index..."
 msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 

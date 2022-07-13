@@ -240,7 +240,7 @@ msgstr "Yakınlaştırmayı sıfırla"
 msgid "Search"
 msgstr "Ara"
 
-#: internal/search/index.go:64
+#: internal/search/index.go:62
 msgid "Search Index Update"
 msgstr "Arama Dizini Güncellemesi"
 
@@ -270,7 +270,7 @@ msgstr "Koyu kipi aç/kapat"
 msgid "Transcript"
 msgstr "Yazılı metin"
 
-#: internal/search/index.go:72
+#: internal/search/index.go:70
 msgid "Updating comic search index..."
 msgstr "Karikatür arama dizini güncelleniyor..."
 

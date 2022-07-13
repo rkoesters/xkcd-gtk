@@ -238,7 +238,7 @@ msgstr "Oorspronkelijk zoomniveau"
 msgid "Search"
 msgstr "Zoeken"
 
-#: internal/search/index.go:64
+#: internal/search/index.go:62
 msgid "Search Index Update"
 msgstr "Zoekindex bijwerken"
 
@@ -267,7 +267,7 @@ msgstr "Donker thema aan/uit"
 msgid "Transcript"
 msgstr "Transcriptie"
 
-#: internal/search/index.go:72
+#: internal/search/index.go:70
 msgid "Updating comic search index..."
 msgstr "Bezig met bijwerken van zoekindex…"
 

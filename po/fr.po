@@ -238,7 +238,7 @@ msgstr ""
 msgid "Search"
 msgstr "Rechercher"
 
-#: internal/search/index.go:64
+#: internal/search/index.go:62
 msgid "Search Index Update"
 msgstr "Rechercher une mise à jour de l'index"
 
@@ -267,7 +267,7 @@ msgstr "Activer le thème sombre"
 msgid "Transcript"
 msgstr "Transcription"
 
-#: internal/search/index.go:72
+#: internal/search/index.go:70
 msgid "Updating comic search index..."
 msgstr "Mise à jour de l'index de recherche des BD…"
 
