@@ -115,8 +115,9 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 	msgfmt -c -o $@ $<
 
 flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO_SOURCES)
-	cp $< $@
-	tools/gen-flatpak-deps.sh >>$@
+	cp $< $@.tmp
+	tools/gen-flatpak-deps.sh >>$@.tmp
+	mv $@.tmp $@
 
 flathub: flatpak/flathub.yml
 	flatpak-builder --user --install-deps-from=flathub --force-clean $(FPBFLAGS) flatpak-build/flathub/ $<
