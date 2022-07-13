@@ -26,7 +26,7 @@ list_deps () {
 }
 
 deps="$(list_deps)"
-if ! [ $? ]; then
+if [ $? -ne 0 ]; then
   echo "$0: error generating list of dependencies" >&2
   exit 1
 fi
