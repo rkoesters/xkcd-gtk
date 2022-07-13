@@ -57,8 +57,8 @@ jobs:
           shellcheck \
           yamllint
 
-      - run: make check
       - run: go mod graph
+      - run: make check
       - run: make
       - run: make test
 
@@ -99,8 +99,8 @@ jobs:
         with:
           platforms: arm64
 
-      - run: make flatpak/${{ matrix.repo }}.yml
       - run: go mod graph
+      - run: make flatpak/${{ matrix.repo }}.yml
       - run: cat flatpak/${{ matrix.repo }}.yml
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
