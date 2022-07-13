@@ -7,10 +7,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/rkoesters/xkcd"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	bolt "go.etcd.io/bbolt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -19,6 +15,11 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/rkoesters/xkcd"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
+	bolt "go.etcd.io/bbolt"
 )
 
 const (

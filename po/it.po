@@ -29,11 +29,11 @@ msgstr "A proposito di Sticks Comic"
 msgid "About xkcd"
 msgstr "Informazioni su xkcd"
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Ferma Testo"
 
@@ -41,7 +41,7 @@ msgstr "Ferma Testo"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
@@ -49,7 +49,7 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
-#: internal/widget/application-window.go:267
+#: internal/widget/application-window.go:268
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
 
@@ -57,7 +57,7 @@ msgstr "Verifica di nuovi fumetti..."
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:21
+#: internal/widget/application.go:22
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -71,19 +71,19 @@ msgstr ""
 "Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei "
 "fumetti, navigazione offline e scorciatoie da tastiera intuitive."
 
-#: internal/cache/cache.go:64
+#: internal/cache/cache.go:65
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
-#: internal/widget/application-window.go:340
+#: internal/widget/application-window.go:341
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:67
 msgid "Connect to the internet to download some comics!"
 msgstr "Collegati a Internet per scaricare alcuni fumetti!"
 
-#: internal/cache/cache.go:65
+#: internal/cache/cache.go:66
 msgid "Couldn't get comic"
 msgstr "Impossibile ottenere fumetto"
 
@@ -95,11 +95,11 @@ msgstr "Modalità scura"
 msgid "Dark mode for late night reading"
 msgstr "Modalità scura per la lettura a tarda notte"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Data"
 
-#: internal/cache/cache.go:63
+#: internal/cache/cache.go:64
 msgid "Error reading local comic database"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr "Vai al prossimo fumetto"
 msgid "Go to the previous comic"
 msgstr "Vai al fumetto precedente"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Immagine"
 
@@ -147,11 +147,11 @@ msgstr "Tieni traccia dei fumetti con i segnalibri"
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:347
+#: internal/widget/application-window.go:348
 msgid "Loading comic..."
 msgstr "Caricamento fumetto..."
 
@@ -164,15 +164,15 @@ msgstr "Naviga"
 msgid "New window"
 msgstr "Nuova Finestra"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Novità"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:67
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Numero"
 
@@ -200,7 +200,7 @@ msgstr "Apri la finestra delle scorciatoie"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Proprietà"
@@ -224,20 +224,20 @@ msgstr "Esci dall'applicazione"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Rimuovi questo fumetto dai preferiti"
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:79
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Cerca"
 
-#: internal/search/index.go:62
+#: internal/search/index.go:63
 msgid "Search Index Update"
 msgstr "Cerca aggiornamento indice"
 
@@ -253,7 +253,7 @@ msgstr "Cerca fumetti"
 msgid "Shortcuts"
 msgstr "Tasti Rapidi"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Titolo"
 
@@ -262,11 +262,11 @@ msgstr "Titolo"
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Trascrizione"
 
-#: internal/search/index.go:70
+#: internal/search/index.go:71
 msgid "Updating comic search index..."
 msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 
@@ -290,12 +290,12 @@ msgstr "Visualizzatore XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
+#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""

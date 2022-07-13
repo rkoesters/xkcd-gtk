@@ -2,13 +2,14 @@ package widget
 
 import (
 	"encoding/json"
+	"io"
+	"os"
+	"path/filepath"
+
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	"io"
-	"os"
-	"path/filepath"
 )
 
 const (

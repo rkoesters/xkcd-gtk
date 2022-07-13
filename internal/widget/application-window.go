@@ -2,6 +2,13 @@ package widget
 
 import (
 	"fmt"
+	"math/rand"
+	"os"
+	"runtime"
+	"strconv"
+	"sync"
+	"time"
+
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
@@ -9,12 +16,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"math/rand"
-	"os"
-	"runtime"
-	"strconv"
-	"sync"
-	"time"
 )
 
 // ApplicationWindow is the main application window.

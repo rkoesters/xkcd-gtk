@@ -1,9 +1,10 @@
 package paths_test
 
 import (
-	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"path/filepath"
 	"testing"
+
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 )
 
 func TestPaths(t *testing.T) {

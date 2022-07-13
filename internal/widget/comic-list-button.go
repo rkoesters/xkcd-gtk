@@ -1,10 +1,11 @@
 package widget
 
 import (
+	"strconv"
+
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"strconv"
 )
 
 func NewComicListButton(id int, title string, comicSetter func(int), idWidth int) (*gtk.ModelButton, error) {

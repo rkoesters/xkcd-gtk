@@ -1,11 +1,12 @@
 package cache
 
 import (
-	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"os"
 	"path/filepath"
 	"strconv"
+
+	"github.com/rkoesters/xkcd-gtk/internal/log"
+	"github.com/rkoesters/xkcd-gtk/internal/paths"
 )
 
 func checkForMisplacedCacheFiles() {

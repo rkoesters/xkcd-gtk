@@ -1,13 +1,14 @@
 package widget
 
 import (
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"strconv"
-	"strings"
-	"time"
 )
 
 // PropertiesDialog holds a gtk dialog that shows the comic information for the

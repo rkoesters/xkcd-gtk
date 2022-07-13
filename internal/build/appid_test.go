@@ -1,9 +1,10 @@
 package build_test
 
 import (
+	"testing"
+
 	"github.com/gotk3/gotk3/glib"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
-	"testing"
 )
 
 func TestAppIDIsValid(t *testing.T) {

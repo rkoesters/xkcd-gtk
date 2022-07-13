@@ -1,9 +1,10 @@
 package settings_test
 
 import (
-	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"strings"
 	"testing"
+
+	"github.com/rkoesters/xkcd-gtk/internal/settings"
 )
 
 const (

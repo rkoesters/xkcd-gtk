@@ -1,9 +1,10 @@
 package paths
 
 import (
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"os"
 	"path/filepath"
+
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 // SearchIndex returns the path to the application's search index.

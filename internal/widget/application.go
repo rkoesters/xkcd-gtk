@@ -3,6 +3,10 @@ package widget
 import (
 	"errors"
 	"flag"
+	"math/rand"
+	"os"
+	"time"
+
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
@@ -12,9 +16,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/settings"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"math/rand"
-	"os"
-	"time"
 )
 
 // AppName is the user-visible name of this application.

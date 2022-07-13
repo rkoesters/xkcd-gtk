@@ -3,6 +3,9 @@
 package search
 
 import (
+	"strconv"
+	"time"
+
 	"github.com/blevesearch/bleve/v2"
 	"github.com/blevesearch/bleve/v2/search/query"
 	"github.com/gotk3/gotk3/gdk"
@@ -12,8 +15,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	"strconv"
-	"time"
 )
 
 var index bleve.Index

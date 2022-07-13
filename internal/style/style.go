@@ -4,12 +4,13 @@ package style
 
 import (
 	"flag"
-	"github.com/gotk3/gotk3/gdk"
-	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"regexp"
 	"strings"
 	"sync"
+
+	"github.com/gotk3/gotk3/gdk"
+	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 const (

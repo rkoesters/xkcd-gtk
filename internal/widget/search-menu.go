@@ -2,6 +2,8 @@ package widget
 
 import (
 	"fmt"
+	"strconv"
+
 	"github.com/blevesearch/bleve/v2"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
@@ -9,7 +11,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
-	"strconv"
 )
 
 type SearchMenu struct {

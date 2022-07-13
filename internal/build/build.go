@@ -2,8 +2,9 @@
 package build
 
 import (
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"strings"
+
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 // Comma separated list of key=value pairs.

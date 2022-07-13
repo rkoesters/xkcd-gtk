@@ -2,9 +2,10 @@ package bookmarks_test
 
 import (
 	"bytes"
-	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"strings"
 	"testing"
+
+	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 )
 
 const sortedBookmarkFile = `1

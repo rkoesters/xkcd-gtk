@@ -30,11 +30,11 @@ msgstr "Sobre o Comic Sticks"
 msgid "About xkcd"
 msgstr "Sobre o xkcd"
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Texto Alternativo"
 
@@ -42,7 +42,7 @@ msgstr "Texto Alternativo"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Marcadores"
 
@@ -52,7 +52,7 @@ msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
 "offline"
 
-#: internal/widget/application-window.go:267
+#: internal/widget/application-window.go:268
 msgid "Checking for new comic..."
 msgstr "A pesquisar por uma nova banda desenhada..."
 
@@ -60,7 +60,7 @@ msgstr "A pesquisar por uma nova banda desenhada..."
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:21
+#: internal/widget/application.go:22
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -75,19 +75,19 @@ msgstr ""
 "pesquisa rápida de banda desenhada, navegação em modo offline e atalhos de "
 "teclado intuitivos."
 
-#: internal/cache/cache.go:64
+#: internal/cache/cache.go:65
 msgid "Comic not found"
 msgstr "Banda desenhada não encontrada"
 
-#: internal/widget/application-window.go:340
+#: internal/widget/application-window.go:341
 msgid "Connect to the internet to download comic image"
 msgstr "Ligue-se à internet para descarregar imagens de banda desenhada"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:67
 msgid "Connect to the internet to download some comics!"
 msgstr "Ligue-se à internet para descarregar banda desenhada!"
 
-#: internal/cache/cache.go:65
+#: internal/cache/cache.go:66
 msgid "Couldn't get comic"
 msgstr "Não Foi Possível Adquirir a Banda Desenhada"
 
@@ -99,11 +99,11 @@ msgstr "Modo escuro"
 msgid "Dark mode for late night reading"
 msgstr "Modo escuro para leitura à noite"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Data"
 
-#: internal/cache/cache.go:63
+#: internal/cache/cache.go:64
 msgid "Error reading local comic database"
 msgstr ""
 
@@ -139,7 +139,7 @@ msgstr "Ir para a banda desenhada seguinte"
 msgid "Go to the previous comic"
 msgstr "Ir para a banda desenhada anterior"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Imagem"
 
@@ -151,11 +151,11 @@ msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Ligação"
 
-#: internal/widget/application-window.go:347
+#: internal/widget/application-window.go:348
 msgid "Loading comic..."
 msgstr "A carregar banda desenhada..."
 
@@ -168,15 +168,15 @@ msgstr "Navegar"
 msgid "New window"
 msgstr "Nova Janela"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Noticias"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:67
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Número"
 
@@ -204,7 +204,7 @@ msgstr "Abrir a janela de atalhos"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Propriedades"
@@ -229,20 +229,20 @@ msgstr ""
 "Ler xkcd: um romance de banda desenhada da internet, sarcasmo, matemática e "
 "linguagem"
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Remover esta banda desenhada dos marcadores"
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:79
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Procurar"
 
-#: internal/search/index.go:62
+#: internal/search/index.go:63
 msgid "Search Index Update"
 msgstr "Índice de Pesquisa Atualizado"
 
@@ -258,7 +258,7 @@ msgstr "Procurar por Bandas Desenhadas"
 msgid "Shortcuts"
 msgstr "Atalhos de Teclado"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Título"
 
@@ -267,11 +267,11 @@ msgstr "Título"
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Transcrição"
 
-#: internal/search/index.go:70
+#: internal/search/index.go:71
 msgid "Updating comic search index..."
 msgstr "A atualizar o índice de pesquisa da banda desenhada..."
 
@@ -295,12 +295,12 @@ msgstr "Visualizador XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
+#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""

@@ -1,10 +1,11 @@
 package paths
 
 import (
-	"github.com/rkoesters/xdg/basedir"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"os"
 	"path/filepath"
+
+	"github.com/rkoesters/xdg/basedir"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 const defaultDirMode = 0755

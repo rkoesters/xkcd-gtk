@@ -5,12 +5,13 @@ package bookmarks
 import (
 	"bufio"
 	"fmt"
-	"github.com/emirpasic/gods/sets/treeset"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"io"
 	"os"
 	"strconv"
 	"sync"
+
+	"github.com/emirpasic/gods/sets/treeset"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 // List holds the user's comic bookmarks.

@@ -1,9 +1,10 @@
 package paths
 
 import (
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"os"
 	"path/filepath"
+
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 // Bookmarks returns the path to the user's bookmarks file.

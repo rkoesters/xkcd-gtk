@@ -32,11 +32,11 @@ msgstr "Over Comic Sticks"
 msgid "About xkcd"
 msgstr "Over xkcd"
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Alt-tekst"
 
@@ -44,7 +44,7 @@ msgstr "Alt-tekst"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
@@ -52,7 +52,7 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/application-window.go:267
+#: internal/widget/application-window.go:268
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal…"
 
@@ -60,7 +60,7 @@ msgstr "Bezig met zoeken naar nieuw verhaal…"
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:21
+#: internal/widget/application.go:22
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -74,19 +74,19 @@ msgstr ""
 "Met Comic Sticks kunt u xkcd-stripverhalen lezen. De toepassing heeft "
 "ondersteuning voor snelzoeken, offline-lezen en bevat intuïtieve sneltoetsen."
 
-#: internal/cache/cache.go:64
+#: internal/cache/cache.go:65
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:340
+#: internal/widget/application-window.go:341
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:67
 msgid "Connect to the internet to download some comics!"
 msgstr "Maak verbinding met internet om verhalen op te halen!"
 
-#: internal/cache/cache.go:65
+#: internal/cache/cache.go:66
 msgid "Couldn't get comic"
 msgstr "Kan stripverhaal niet ophalen"
 
@@ -98,11 +98,11 @@ msgstr "Donker thema"
 msgid "Dark mode for late night reading"
 msgstr "Donker thema voor de late avonduurtjes"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Datum"
 
-#: internal/cache/cache.go:63
+#: internal/cache/cache.go:64
 msgid "Error reading local comic database"
 msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 
@@ -138,7 +138,7 @@ msgstr "Ga naar het volgende verhaal"
 msgid "Go to the previous comic"
 msgstr "Ga naar het vorige verhaal"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -150,11 +150,11 @@ msgstr "Orden verhalen middels bladwijzers"
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:347
+#: internal/widget/application-window.go:348
 msgid "Loading comic..."
 msgstr "Bezig met laden…"
 
@@ -167,15 +167,15 @@ msgstr "Navigatie"
 msgid "New window"
 msgstr "Nieuw venster"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Nieuws"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:67
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Nummer"
 
@@ -203,7 +203,7 @@ msgstr "Sneltoetsen tonen"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Eigenschappen"
@@ -225,20 +225,20 @@ msgstr "Afsluiten"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr "Verwijderen uit bladwijzers"
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr "Oorspronkelijk zoomniveau"
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:79
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Zoeken"
 
-#: internal/search/index.go:62
+#: internal/search/index.go:63
 msgid "Search Index Update"
 msgstr "Zoekindex bijwerken"
 
@@ -254,7 +254,7 @@ msgstr "Zoek naar specifieke verhalen"
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Titel"
 
@@ -263,11 +263,11 @@ msgstr "Titel"
 msgid "Toggle dark mode"
 msgstr "Donker thema aan/uit"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Transcriptie"
 
-#: internal/search/index.go:70
+#: internal/search/index.go:71
 msgid "Updating comic search index..."
 msgstr "Bezig met bijwerken van zoekindex…"
 
@@ -291,12 +291,12 @@ msgstr "XKCD lezen"
 msgid "Zoom"
 msgstr "Zoomen"
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr "Inzoomen"
 
-#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
+#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr "Uitzoomen"

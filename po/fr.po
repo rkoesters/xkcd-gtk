@@ -29,11 +29,11 @@ msgstr "À propos de Comic Sticks"
 msgid "About xkcd"
 msgstr "À propos de xkcd"
 
-#: internal/widget/bookmarks-menu.go:68 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:129
+#: internal/widget/properties-dialog.go:130
 msgid "Alt text"
 msgstr "Texte alternatif"
 
@@ -41,7 +41,7 @@ msgstr "Texte alternatif"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr ""
 
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
 
-#: internal/widget/application-window.go:267
+#: internal/widget/application-window.go:268
 msgid "Checking for new comic..."
 msgstr "Recherche d'une nouvelle bande dessinée…"
 
@@ -57,7 +57,7 @@ msgstr "Recherche d'une nouvelle bande dessinée…"
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:21
+#: internal/widget/application.go:22
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
@@ -72,19 +72,19 @@ msgstr ""
 "recherche rapide, une navigation hors ligne et des raccourcis clavier "
 "intuitifs."
 
-#: internal/cache/cache.go:64
+#: internal/cache/cache.go:65
 msgid "Comic not found"
 msgstr "BD introuvable"
 
-#: internal/widget/application-window.go:340
+#: internal/widget/application-window.go:341
 msgid "Connect to the internet to download comic image"
 msgstr "Connectez-vous à Internet pour télécharger la bande dessinée"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:67
 msgid "Connect to the internet to download some comics!"
 msgstr "Connectez-vous à Internet pour télécharger des bandes dessinées !"
 
-#: internal/cache/cache.go:65
+#: internal/cache/cache.go:66
 msgid "Couldn't get comic"
 msgstr "Impossible de récupérer la BD"
 
@@ -96,11 +96,11 @@ msgstr "Thème sombre"
 msgid "Dark mode for late night reading"
 msgstr "Thème sombre pour une lecture tardive"
 
-#: internal/widget/properties-dialog.go:121
+#: internal/widget/properties-dialog.go:122
 msgid "Date"
 msgstr "Date"
 
-#: internal/cache/cache.go:63
+#: internal/cache/cache.go:64
 msgid "Error reading local comic database"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr "Aller à a BD suivante"
 msgid "Go to the previous comic"
 msgstr "Aller à la BD précédente"
 
-#: internal/widget/properties-dialog.go:125
+#: internal/widget/properties-dialog.go:126
 msgid "Image"
 msgstr "Image"
 
@@ -148,11 +148,11 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#: internal/widget/properties-dialog.go:137
+#: internal/widget/properties-dialog.go:138
 msgid "Link"
 msgstr "Lien"
 
-#: internal/widget/application-window.go:347
+#: internal/widget/application-window.go:348
 msgid "Loading comic..."
 msgstr "Chargement de la BD…"
 
@@ -165,15 +165,15 @@ msgstr "Navigation"
 msgid "New window"
 msgstr "Nouvelle fenêtre"
 
-#: internal/widget/properties-dialog.go:133
+#: internal/widget/properties-dialog.go:134
 msgid "News"
 msgstr "Actualités"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:67
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:113
+#: internal/widget/properties-dialog.go:114
 msgid "Number"
 msgstr "Numéro"
 
@@ -201,7 +201,7 @@ msgstr "Ouvir la fenêtre des raccourcis"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:44
+#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
 #: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Propriétés"
@@ -225,20 +225,20 @@ msgstr ""
 "Lisez xkcd : une bande dessinée de romance, de sarcasme, de maths et de "
 "langue en ligne"
 
-#: internal/widget/bookmarks-menu.go:81 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:50
+#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:79
+#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Rechercher"
 
-#: internal/search/index.go:62
+#: internal/search/index.go:63
 msgid "Search Index Update"
 msgstr "Rechercher une mise à jour de l'index"
 
@@ -254,7 +254,7 @@ msgstr "Recherchez des BD"
 msgid "Shortcuts"
 msgstr "Raccourcis clavier"
 
-#: internal/widget/properties-dialog.go:117
+#: internal/widget/properties-dialog.go:118
 msgid "Title"
 msgstr "Titre"
 
@@ -263,11 +263,11 @@ msgstr "Titre"
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"
 
-#: internal/widget/properties-dialog.go:141
+#: internal/widget/properties-dialog.go:142
 msgid "Transcript"
 msgstr "Transcription"
 
-#: internal/search/index.go:70
+#: internal/search/index.go:71
 msgid "Updating comic search index..."
 msgstr "Mise à jour de l'index de recherche des BD…"
 
@@ -291,12 +291,12 @@ msgstr "Visionneuse pour XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:58
+#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:37
+#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""

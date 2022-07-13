@@ -2,6 +2,7 @@ package widget
 
 import (
 	"errors"
+
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 )

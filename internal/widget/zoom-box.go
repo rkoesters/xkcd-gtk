@@ -2,6 +2,7 @@ package widget
 
 import (
 	"fmt"
+
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
