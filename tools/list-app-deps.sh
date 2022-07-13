@@ -3,8 +3,7 @@
 # application.
 set -eu
 
-pkg_deps="$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)"
-if [ $? -ne 0 ]; then
+if ! pkg_deps="$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)"; then
   echo "$0: error finding dependencies of cmd/xkcd-gtk" >&2
   exit 1
 fi

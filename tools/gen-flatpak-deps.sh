@@ -25,8 +25,7 @@ list_deps () {
   sort
 }
 
-deps="$(list_deps)"
-if [ $? -ne 0 ]; then
+if ! deps="$(list_deps)"; then
   echo "$0: error generating list of dependencies" >&2
   exit 1
 fi
