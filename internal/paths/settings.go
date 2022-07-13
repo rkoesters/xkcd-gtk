@@ -20,7 +20,7 @@ func Settings() string {
 // are any stray configuration files that may have been caused by a bug that
 // commit d13e4dc0ff81e9d12df29e7f9be4e82e7f70cc01 fixed.
 func CheckForMisplacedSettings() {
-	misplacedSettings := filepath.Join(Builder{}.Settings())
+	misplacedSettings := Builder{}.Settings()
 
 	_, err := os.Stat(misplacedSettings)
 	if !os.IsNotExist(err) {

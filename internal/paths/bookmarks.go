@@ -21,8 +21,8 @@ func Bookmarks() string {
 // commit d13e4dc0ff81e9d12df29e7f9be4e82e7f70cc01 fixed.
 func CheckForMisplacedBookmarks() {
 	misplacedBookmarksList := []string{
+		Builder{}.Bookmarks(),
 		filepath.Join(Builder{}.ConfigDir(), "bookmarks"),
-		filepath.Join(Builder{}.Bookmarks()),
 		filepath.Join(ConfigDir(), "bookmarks"),
 	}
 
