@@ -25,9 +25,11 @@ list_deps () {
   sort
 }
 
+deps="$(list_deps)"
+
 IFS='
 '
-for dep in $(list_deps); do
+for dep in ${deps:?}; do
   name=$(echo "${dep:?}" | cut -d ' ' -f 1)
   version=$(echo "${dep:?}" | cut -d ' ' -f 2)
   remote="$(name_to_remote "${name:?}")"
