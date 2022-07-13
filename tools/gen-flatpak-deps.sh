@@ -26,6 +26,10 @@ list_deps () {
 }
 
 deps="$(list_deps)"
+if ! [ $? ]; then
+  echo "$0: error generating list of dependencies" >&2
+  exit 1
+fi
 
 IFS='
 '
