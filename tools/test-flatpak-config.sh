@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+set -eu -o pipefail
+
 # Confirm that there are no conflicting source directories in the flatpak
 # config.
 if [ $# -lt 1 ]; then

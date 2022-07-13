@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 # Simple script to wrap a plain text file as go const string.
-set -eu
+set -eu -o pipefail
 
 if [ $# != 1 ]; then
   echo "usage: $0 FILE" >&2

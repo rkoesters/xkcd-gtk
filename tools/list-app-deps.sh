@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # Find and print modules that are direct and indirect dependencies of the this
 # application.
-set -eu
+set -eu -o pipefail
 
 if ! pkg_deps="$(tools/list-pkg-deps.sh github.com/rkoesters/xkcd-gtk/cmd/xkcd-gtk)"; then
   echo "$0: error finding dependencies of cmd/xkcd-gtk" >&2

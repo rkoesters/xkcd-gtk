@@ -1,5 +1,5 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -eu -o pipefail
 
 LC_COLLATE=C
 export LC_COLLATE

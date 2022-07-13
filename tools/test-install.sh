@@ -1,6 +1,6 @@
 #!/bin/bash
 # Comfirms that `make uninstall` removes everything that `make install` creates.
-set -eEu
+set -eEu -o pipefail
 trap 'echo "$0 FAILED"' ERR
 
 export MAKEFLAGS=""

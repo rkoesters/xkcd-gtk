@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+set -eu -o pipefail
+
 pkg-config --modversion pango |
 sed 's/\.[^.]*$//g' |
 sed 's/\./_/g' |

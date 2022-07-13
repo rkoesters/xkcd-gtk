@@ -1,5 +1,5 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -eu -o pipefail
 
 failure () {
   echo "FAILURE $*"
