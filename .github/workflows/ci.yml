@@ -109,5 +109,5 @@ jobs:
           manifest-path: flatpak/${{ matrix.repo }}.yml
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
-          cache-key: ${{ matrix.repo }}-${{ hashFiles('flatpak/*.yml') }}
+          cache-key: ${{ matrix.repo }}-${{ matrix.arch }}-${{ hashFiles('flatpak/*.yml') }}
           arch: ${{ matrix.arch }}
