@@ -73,6 +73,8 @@ func (zb *ZoomBox) Destroy() {
 		return
 	}
 
+	zb.ButtonBox = nil
+
 	zb.zoomInButton = nil
 	zb.zoomOutButton = nil
 	zb.zoomResetButton = nil
