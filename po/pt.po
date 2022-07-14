@@ -119,23 +119,23 @@ msgstr "Funcionalidades:"
 msgid "General"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:70
+#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
 msgid "Go to a random comic"
 msgstr "Ir aleatoriamente para uma banda desenhada"
 
-#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:42
+#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:42
 msgid "Go to the first comic"
 msgstr "Ir para a primeira banda desenhada"
 
-#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:63
+#: internal/widget/navigation-bar.go:75 internal/widget/shortcuts-window.ui:63
 msgid "Go to the newest comic"
 msgstr "Ir para a banda desenhada mais recente"
 
-#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:56
+#: internal/widget/navigation-bar.go:70 internal/widget/shortcuts-window.ui:56
 msgid "Go to the next comic"
 msgstr "Ir para a banda desenhada seguinte"
 
-#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:49
+#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:49
 msgid "Go to the previous comic"
 msgstr "Ir para a banda desenhada anterior"
 

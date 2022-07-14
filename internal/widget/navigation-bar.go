@@ -1,8 +1,12 @@
 package widget
 
 import (
+	"time"
+
 	"github.com/gotk3/gotk3/gdk"
+	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -14,14 +18,21 @@ type NavigationBar struct {
 	randomButton   *gtk.Button
 	nextButton     *gtk.Button
 	newestButton   *gtk.Button
+
+	// For UpdateButtonState.
+	actions     map[string]*glib.SimpleAction
+	comicNumber func() int
 }
 
 var _ Widget = &NavigationBar{}
 
-func NewNavigationBar(accels *gtk.AccelGroup) (*NavigationBar, error) {
+func NewNavigationBar(accels *gtk.AccelGroup, actions map[string]*glib.SimpleAction, comicNumber func() int) (*NavigationBar, error) {
 	var err error
 
-	nb := &NavigationBar{}
+	nb := &NavigationBar{
+		actions:     actions,
+		comicNumber: comicNumber,
+	}
 
 	nb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
@@ -85,6 +96,23 @@ func (nb *NavigationBar) Destroy() {
 
 func (nb *NavigationBar) IWidget() gtk.IWidget {
 	return nb.box
+}
+
+func (nb *NavigationBar) UpdateButtonState() {
+	n := nb.comicNumber()
+	nb.actions["previous-comic"].SetEnabled(n > 1)
+
+	newest, _ := cache.NewestComicInfoFromCache()
+	nb.actions["next-comic"].SetEnabled(n < newest.Num)
+
+	go func() {
+		const refreshRate = 5 * time.Minute
+		newest, _ := cache.CheckForNewestComicInfo(refreshRate)
+		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
+			n := nb.comicNumber()
+			nb.actions["next-comic"].SetEnabled(n < newest.Num)
+		})
+	}()
 }
 
 func (nb *NavigationBar) SetFirstButtonImage(image gtk.IWidget) {

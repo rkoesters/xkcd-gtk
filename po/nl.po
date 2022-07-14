@@ -118,23 +118,23 @@ msgstr "Kenmerken:"
 msgid "General"
 msgstr ""
 
-#: internal/widget/navigation-bar.go:54 internal/widget/shortcuts-window.ui:70
+#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
 msgid "Go to a random comic"
 msgstr "Toon een willekeurig verhaal"
 
-#: internal/widget/navigation-bar.go:44 internal/widget/shortcuts-window.ui:42
+#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:42
 msgid "Go to the first comic"
 msgstr "Ga naar het eerste verhaal"
 
-#: internal/widget/navigation-bar.go:64 internal/widget/shortcuts-window.ui:63
+#: internal/widget/navigation-bar.go:75 internal/widget/shortcuts-window.ui:63
 msgid "Go to the newest comic"
 msgstr "Ga naar het nieuwste verhaal"
 
-#: internal/widget/navigation-bar.go:59 internal/widget/shortcuts-window.ui:56
+#: internal/widget/navigation-bar.go:70 internal/widget/shortcuts-window.ui:56
 msgid "Go to the next comic"
 msgstr "Ga naar het volgende verhaal"
 
-#: internal/widget/navigation-bar.go:49 internal/widget/shortcuts-window.ui:49
+#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:49
 msgid "Go to the previous comic"
 msgstr "Ga naar het vorige verhaal"
 

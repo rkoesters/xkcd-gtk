@@ -148,7 +148,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.SetShowCloseButton(true)
 
 	// Create navigation buttons
-	win.navigationBar, err = NewNavigationBar(accels)
+	win.navigationBar, err = NewNavigationBar(accels, win.actions, win.comicNumber)
 	if err != nil {
 		return nil, err
 	}
@@ -303,7 +303,7 @@ func (win *ApplicationWindow) SetComic(n int) {
 	win.header.SetSubtitle(strconv.Itoa(n))
 
 	// Update UI to reflect new current comic.
-	win.updateNextPreviousButtonStatus()
+	win.navigationBar.UpdateButtonState()
 	win.bookmarksMenu.UpdateBookmarkButton()
 
 	go func() {
@@ -357,7 +357,7 @@ func (win *ApplicationWindow) DisplayComic() {
 	win.header.SetTitle(win.comic.SafeTitle)
 	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
 	win.comicContainer.SetTooltipText(win.comic.Alt)
-	win.updateNextPreviousButtonStatus()
+	win.navigationBar.UpdateButtonState()
 
 	// If the comic has a link, lets give the option of visiting it.
 	win.actions["open-link"].SetEnabled(win.comic.Link != "")
@@ -370,27 +370,6 @@ func (win *ApplicationWindow) DisplayComic() {
 	if err != nil {
 		log.Print("error drawing comic: ", err)
 	}
-}
-
-func (win *ApplicationWindow) updateNextPreviousButtonStatus() {
-	n := win.comicNumber()
-
-	// Enable/disable previous button.
-	win.actions["previous-comic"].SetEnabled(n > 1)
-
-	// Enable/disable next button with data from cache.
-	newest, _ := cache.NewestComicInfoFromCache()
-	win.actions["next-comic"].SetEnabled(n < newest.Num)
-
-	// Asynchronously enable/disable next button with data from internet.
-	go func() {
-		const refreshRate = 5 * time.Minute
-		newest, _ := cache.CheckForNewestComicInfo(refreshRate)
-		current := win.comicNumber()
-		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
-			win.actions["next-comic"].SetEnabled(current < newest.Num)
-		})
-	}()
 }
 
 func (win *ApplicationWindow) ZoomIn() {
