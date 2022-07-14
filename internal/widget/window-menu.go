@@ -7,7 +7,7 @@ import (
 )
 
 type WindowMenu struct {
-	menuButton *gtk.MenuButton
+	*gtk.MenuButton
 
 	popover    *gtk.Popover
 	popoverBox *gtk.Box
@@ -19,24 +19,23 @@ type WindowMenu struct {
 var _ Widget = &WindowMenu{}
 
 func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter func() bool, darkModeSetter func(bool)) (*WindowMenu, error) {
-	var err error
-
-	wm := &WindowMenu{}
-
-	// Create the menu
-	wm.menuButton, err = gtk.MenuButtonNew()
+	super, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	wm.menuButton.SetTooltipText(l("Window menu"))
-	wm.menuButton.AddAccelerator("activate", accels, gdk.KEY_F10, 0, gtk.ACCEL_VISIBLE)
+	wm := &WindowMenu{
+		MenuButton: super,
+	}
 
-	wm.popover, err = gtk.PopoverNew(wm.menuButton)
+	wm.SetTooltipText(l("Window menu"))
+	wm.AddAccelerator("activate", accels, gdk.KEY_F10, 0, gtk.ACCEL_VISIBLE)
+
+	wm.popover, err = gtk.PopoverNew(wm.MenuButton)
 	if err != nil {
 		return nil, err
 	}
-	wm.menuButton.SetPopover(wm.popover)
-	wm.menuButton.SetUsePopover(true)
+	wm.SetPopover(wm.popover)
+	wm.SetUsePopover(true)
 
 	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
@@ -75,7 +74,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
-	wm.zoomBox.box.SetMarginBottom(style.PaddingPopoverCompact / 2)
+	wm.zoomBox.SetMarginBottom(style.PaddingPopoverCompact / 2)
 	wm.popoverBox.Add(wm.zoomBox.IWidget())
 
 	if err = addMenuSeparator(); err != nil {
@@ -163,7 +162,8 @@ func (wm *WindowMenu) Destroy() {
 		return
 	}
 
-	wm.menuButton = nil
+	wm.MenuButton = nil
+
 	wm.popover = nil
 	wm.popoverBox = nil
 	wm.zoomBox.Destroy()
@@ -173,11 +173,11 @@ func (wm *WindowMenu) Destroy() {
 }
 
 func (wm *WindowMenu) IWidget() gtk.IWidget {
-	return wm.menuButton
+	return wm.MenuButton
 }
 
 func (wm *WindowMenu) SetButtonImage(image gtk.IWidget) {
-	wm.menuButton.SetImage(image)
+	wm.SetImage(image)
 }
 
 func (wm *WindowMenu) SetCompact(compact bool) {

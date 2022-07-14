@@ -7,16 +7,12 @@ import (
 )
 
 type ContextMenu struct {
-	menu *gtk.Menu
+	*gtk.Menu
 }
 
 var _ Widget = &ContextMenu{}
 
 func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
-	var err error
-
-	cm := &ContextMenu{}
-
 	menuModel := glib.MenuNew()
 
 	bookmarkSection := glib.MenuNew()
@@ -36,21 +32,25 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	propertiesSection.Append(l("Properties"), "win.show-properties")
 	menuModel.AppendSectionWithoutLabel(&propertiesSection.MenuModel)
 
-	cm.menu, err = gtk.GtkMenuNewFromModel(&menuModel.MenuModel)
+	super, err := gtk.GtkMenuNewFromModel(&menuModel.MenuModel)
 	if err != nil {
 		return nil, err
 	}
-	cm.menu.SetHAlign(gtk.ALIGN_START)
-	cm.menu.ShowAll()
+	cm := &ContextMenu{
+		Menu: super,
+	}
 
-	cm.menu.InsertActionGroup("win", actionGroup)
-	cm.menu.HideOnDelete()
+	cm.SetHAlign(gtk.ALIGN_START)
+	cm.ShowAll()
+
+	cm.InsertActionGroup("win", actionGroup)
+	cm.HideOnDelete()
 
 	return cm, nil
 }
 
 func (cm *ContextMenu) Present(event *gdk.Event) {
-	cm.menu.PopupAtPointer(event)
+	cm.PopupAtPointer(event)
 }
 
 func (cm *ContextMenu) Destroy() {
@@ -58,9 +58,9 @@ func (cm *ContextMenu) Destroy() {
 		return
 	}
 
-	cm.menu = nil
+	cm.Menu = nil
 }
 
 func (cm *ContextMenu) IWidget() gtk.IWidget {
-	return cm.menu
+	return cm.Menu
 }

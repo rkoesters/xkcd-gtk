@@ -13,13 +13,8 @@ import (
 )
 
 type BookmarksMenu struct {
-	bookmarks  *bookmarks.List // ptr to app.bookmarks
-	observerID int
+	*gtk.MenuButton
 
-	windowState *WindowState                  // ptr to win.state
-	actions     map[string]*glib.SimpleAction // ptr to win.actions
-
-	menuButton   *gtk.MenuButton
 	popover      *gtk.Popover
 	popoverBox   *gtk.Box
 	addButton    *gtk.Button
@@ -28,34 +23,39 @@ type BookmarksMenu struct {
 	scroller     *gtk.ScrolledWindow
 	list         *gtk.Box
 
+	bookmarks  *bookmarks.List // ptr to app.bookmarks
+	observerID int
+
+	windowState *WindowState                  // ptr to win.state
+	actions     map[string]*glib.SimpleAction // ptr to win.actions
+
 	setComic func(int) // win.SetComic
 }
 
 var _ Widget = &BookmarksMenu{}
 
 func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
-	var err error
-
+	super, err := gtk.MenuButtonNew()
+	if err != nil {
+		return nil, err
+	}
 	bm := &BookmarksMenu{
+		MenuButton: super,
+
 		bookmarks:   b,
 		windowState: ws,
 		actions:     actions,
 		setComic:    comicSetter,
 	}
 
-	// Create the bookmark menu
-	bm.menuButton, err = gtk.MenuButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	bm.menuButton.SetTooltipText(l("Bookmarks"))
-	bm.menuButton.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	bm.SetTooltipText(l("Bookmarks"))
+	bm.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-	bm.popover, err = gtk.PopoverNew(bm.menuButton)
+	bm.popover, err = gtk.PopoverNew(bm.MenuButton)
 	if err != nil {
 		return nil, err
 	}
-	bm.menuButton.SetPopover(bm.popover)
+	bm.SetPopover(bm.popover)
 
 	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
@@ -136,12 +136,8 @@ func (bm *BookmarksMenu) Destroy() {
 		return
 	}
 
-	bm.bookmarks = nil
+	bm.MenuButton = nil
 
-	bm.windowState = nil
-	bm.actions = nil
-
-	bm.menuButton = nil
 	bm.popover = nil
 	bm.popoverBox = nil
 	bm.addButton = nil
@@ -149,14 +145,19 @@ func (bm *BookmarksMenu) Destroy() {
 	bm.separator = nil
 	bm.scroller = nil
 	bm.list = nil
+
+	bm.bookmarks = nil
+
+	bm.windowState = nil
+	bm.actions = nil
 }
 
 func (bm *BookmarksMenu) IWidget() gtk.IWidget {
-	return bm.menuButton
+	return bm.MenuButton
 }
 
 func (bm *BookmarksMenu) SetButtonImage(image gtk.IWidget) {
-	bm.menuButton.SetImage(image)
+	bm.SetImage(image)
 }
 
 // AddBookmark adds win's current comic to the user's bookmarks.

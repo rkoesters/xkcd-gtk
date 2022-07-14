@@ -14,8 +14,9 @@ import (
 // PropertiesDialog holds a gtk dialog that shows the comic information for the
 // parent window's comic.
 type PropertiesDialog struct {
+	*gtk.Dialog
+
 	parent *ApplicationWindow
-	dialog *gtk.Dialog
 
 	comicNumber     *gtk.Label
 	comicTitle      *gtk.Label
@@ -32,22 +33,23 @@ var _ Window = &PropertiesDialog{}
 // NewPropertiesDialog creates and returns a PropertiesDialog for the given
 // parent Window.
 func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
-	var err error
-
-	pd := new(PropertiesDialog)
-	pd.parent = parent
-
-	pd.dialog, err = gtk.DialogNew()
+	super, err := gtk.DialogNew()
 	if err != nil {
 		return nil, err
 	}
-	pd.dialog.SetTransientFor(parent.window)
-	pd.dialog.SetTitle(l("Properties"))
-	pd.dialog.SetSizeRequest(400, 400)
-	pd.dialog.SetDestroyWithParent(true)
-	pd.dialog.Resize(parent.state.PropertiesWidth, parent.state.PropertiesHeight)
+	pd := &PropertiesDialog{
+		Dialog: super,
+
+		parent: parent,
+	}
+
+	pd.SetTransientFor(parent.ApplicationWindow)
+	pd.SetTitle(l("Properties"))
+	pd.SetSizeRequest(400, 400)
+	pd.SetDestroyWithParent(true)
+	pd.Resize(parent.state.PropertiesWidth, parent.state.PropertiesHeight)
 	if parent.state.PropertiesPositionX != 0 && parent.state.PropertiesPositionY != 0 {
-		pd.dialog.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
+		pd.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
 	}
 
 	// Initialize our window accelerators.
@@ -55,11 +57,11 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	pd.dialog.AddAccelGroup(accels)
-	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, pd.dialog.Close)
+	pd.AddAccelGroup(accels)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, pd.Dialog.Close)
 
-	pd.dialog.Connect("delete-event", pd.Close)
-	pd.dialog.Connect("destroy", pd.Destroy)
+	pd.Connect("delete-event", pd.Close)
+	pd.Connect("destroy", pd.Destroy)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
@@ -147,7 +149,7 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 
 	scwin.Add(grid)
 
-	box, err := pd.dialog.GetContentArea()
+	box, err := pd.GetContentArea()
 	if err != nil {
 		return nil, err
 	}
@@ -174,8 +176,8 @@ func (win *ApplicationWindow) ShowProperties() {
 		}
 	}
 
-	win.app.application.AddWindow(win.properties.IWindow())
-	win.properties.dialog.Present()
+	win.app.AddWindow(win.properties.IWindow())
+	win.properties.Dialog.Present()
 }
 
 // Update changes the dialog's contents to match the parent Window's comic.
@@ -197,9 +199,9 @@ func (pd *PropertiesDialog) Update() {
 // window state.
 func (pd *PropertiesDialog) Close() {
 	pd.parent.properties = nil
-	pd.parent.state.PropertiesWidth, pd.parent.state.PropertiesHeight = pd.dialog.GetSize()
-	pd.parent.state.PropertiesPositionX, pd.parent.state.PropertiesPositionY = pd.dialog.GetPosition()
-	pd.parent.state.SaveState(pd.parent.window, pd.dialog)
+	pd.parent.state.PropertiesWidth, pd.parent.state.PropertiesHeight = pd.GetSize()
+	pd.parent.state.PropertiesPositionX, pd.parent.state.PropertiesPositionY = pd.GetPosition()
+	pd.parent.state.SaveState(pd.parent.ApplicationWindow, pd.Dialog)
 }
 
 // Destroy removes our references to the dialog so the garbage collector can
@@ -209,8 +211,9 @@ func (pd *PropertiesDialog) Destroy() {
 		return
 	}
 
+	pd.Dialog = nil
+
 	pd.parent = nil
-	pd.dialog = nil
 
 	pd.comicNumber = nil
 	pd.comicTitle = nil
@@ -222,8 +225,8 @@ func (pd *PropertiesDialog) Destroy() {
 	pd.comicTranscript = nil
 }
 
-func (pd *PropertiesDialog) IWidget() gtk.IWidget { return pd.dialog }
-func (pd *PropertiesDialog) IWindow() gtk.IWindow { return pd.dialog }
+func (pd *PropertiesDialog) IWidget() gtk.IWidget { return pd.Dialog }
+func (pd *PropertiesDialog) IWindow() gtk.IWindow { return pd.Dialog }
 
 // formatDate takes a year, month, and date as strings and turns them into a
 // pretty date.

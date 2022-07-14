@@ -20,9 +20,10 @@ import (
 
 // ApplicationWindow is the main application window.
 type ApplicationWindow struct {
-	app    *Application
-	window *gtk.ApplicationWindow
-	state  WindowState
+	*gtk.ApplicationWindow
+
+	app   *Application
+	state WindowState
 
 	comic      *xkcd.Comic
 	comicMutex sync.RWMutex
@@ -44,32 +45,27 @@ var _ Window = &ApplicationWindow{}
 
 // NewApplicationWindow creates a new xkcd viewer window.
 func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
-	var err error
-
-	win := &ApplicationWindow{
-		app: app,
-	}
-
-	// Reload saved window state.
-	win.state.LoadState()
-
-	win.window, err = gtk.ApplicationWindowNew(app.application)
+	super, err := gtk.ApplicationWindowNew(app.Application)
 	if err != nil {
 		return nil, err
 	}
+	win := &ApplicationWindow{
+		ApplicationWindow: super,
 
-	win.comicMutex.Lock()
-	win.comic = &xkcd.Comic{Title: AppName()}
-	win.comicMutex.Unlock()
+		app:     app,
+		comic:   &xkcd.Comic{Title: AppName()},
+		actions: make(map[string]*glib.SimpleAction),
+	}
 
-	// Initialize our window actions.
-	win.actions = make(map[string]*glib.SimpleAction)
+	// Put everything where the user left it.
+	win.state.LoadState()
+
 	registerAction := func(name string, fn interface{}) {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", fn)
 
 		win.actions[name] = action
-		win.window.AddAction(action)
+		win.AddAction(action)
 	}
 
 	registerAction("bookmark-new", func() { win.bookmarksMenu.AddBookmark() })
@@ -91,7 +87,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.window.AddAccelGroup(accels)
+	win.AddAccelGroup(accels)
 
 	accels.Connect(gdk.KEY_plus, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn)
 	accels.Connect(gdk.KEY_equal, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomIn) // without holding shift
@@ -99,41 +95,40 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	accels.Connect(gdk.KEY_0, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ZoomReset)
 	accels.Connect(gdk.KEY_p, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
 	accels.Connect(gdk.KEY_Return, gdk.MOD1_MASK, gtk.ACCEL_VISIBLE, win.ShowProperties)
-	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.window.Close)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, win.Close)
 
 	// If the gtk theme changes, we might want to adjust our styling.
-	win.window.Connect("style-updated", win.StyleUpdated)
+	win.Connect("style-updated", win.StyleUpdated)
 
 	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DarkModeChanged)
-	win.window.Connect("delete-event", func() {
+	win.Connect("delete-event", func() {
 		app.gtkSettings.HandlerDisconnect(darkModeSignal)
 	})
 
 	// If the window is closed, we want to write our state to disk.
-	win.window.Connect("delete-event", func() {
+	win.Connect("delete-event", func() {
 		if win.properties == nil {
-			win.state.SaveState(win.window, nil)
+			win.state.SaveState(win.ApplicationWindow, nil)
 		} else {
-			win.state.SaveState(win.window, win.properties.dialog)
+			win.state.SaveState(win.ApplicationWindow, win.properties.Dialog)
 		}
 	})
 
 	// When gtk destroys the window, we want to clean up.
-	win.window.Connect("destroy", win.Destroy)
+	win.Connect("destroy", win.Destroy)
 
 	// Create image viewing frame
-	win.comicContainer, err = NewImageViewer(win.window.IActionGroup, win.state.ImageScale)
+	win.comicContainer, err = NewImageViewer(win.IActionGroup, win.state.ImageScale)
 	if err != nil {
 		return nil, err
 	}
-	win.comicContainer.Show()
-	win.window.Add(win.comicContainer.IWidget())
-	win.window.Resize(win.state.Width, win.state.Height)
+	win.Add(win.comicContainer.IWidget())
+	win.Resize(win.state.Width, win.state.Height)
 	if win.state.PositionX != 0 && win.state.PositionY != 0 {
-		win.window.Move(win.state.PositionX, win.state.PositionY)
+		win.Move(win.state.PositionX, win.state.PositionY)
 	}
 	if win.state.Maximized {
-		win.window.Maximize()
+		win.Maximize()
 	}
 	if win.state.PropertiesVisible {
 		win.ShowProperties()
@@ -163,7 +158,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu.IWidget())
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.window, &win.state, win.actions, accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.ApplicationWindow, &win.state, win.actions, accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
@@ -177,7 +172,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.searchMenu.IWidget())
 
 	win.header.ShowAll()
-	win.window.SetTitlebar(win.header)
+	win.SetTitlebar(win.header)
 
 	win.SetComic(win.state.ComicNumber)
 
@@ -427,40 +422,27 @@ func (win *ApplicationWindow) Destroy() {
 		return
 	}
 
+	win.ApplicationWindow = nil
+
 	win.app = nil
-	win.window = nil
-
 	win.comic = nil
-
 	win.actions = nil
-
 	win.header = nil
-
 	win.navigationBar.Destroy()
 	win.navigationBar = nil
-
 	win.searchMenu.Destroy()
 	win.searchMenu = nil
-
 	win.bookmarksMenu.Destroy()
 	win.bookmarksMenu = nil
-
 	win.windowMenu.Destroy()
 	win.windowMenu = nil
-
 	win.comicContainer.Destroy()
 	win.comicContainer = nil
-
 	win.properties.Destroy()
 	win.properties = nil
 
 	runtime.GC()
 }
 
-// Close requests that the window be closed.
-func (win *ApplicationWindow) Close() {
-	win.window.Close()
-}
-
-func (win *ApplicationWindow) IWidget() gtk.IWidget { return win.window }
-func (win *ApplicationWindow) IWindow() gtk.IWindow { return win.window }
+func (win *ApplicationWindow) IWidget() gtk.IWidget { return win.ApplicationWindow }
+func (win *ApplicationWindow) IWindow() gtk.IWindow { return win.ApplicationWindow }

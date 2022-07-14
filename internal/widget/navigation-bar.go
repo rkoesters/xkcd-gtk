@@ -11,7 +11,7 @@ import (
 )
 
 type NavigationBar struct {
-	box *gtk.ButtonBox
+	*gtk.ButtonBox
 
 	firstButton    *gtk.Button
 	previousButton *gtk.Button
@@ -27,18 +27,18 @@ type NavigationBar struct {
 var _ Widget = &NavigationBar{}
 
 func NewNavigationBar(accels *gtk.AccelGroup, actions map[string]*glib.SimpleAction, comicNumber func() int) (*NavigationBar, error) {
-	var err error
-
+	super, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
 	nb := &NavigationBar{
+		ButtonBox: super,
+
 		actions:     actions,
 		comicNumber: comicNumber,
 	}
 
-	nb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
-	if err != nil {
-		return nil, err
-	}
-	nb.box.SetLayout(gtk.BUTTONBOX_EXPAND)
+	nb.SetLayout(gtk.BUTTONBOX_EXPAND)
 
 	addNavButton := func(label, action string, key uint) (*gtk.Button, error) {
 		btn, err := gtk.ButtonNew()
@@ -48,7 +48,7 @@ func NewNavigationBar(accels *gtk.AccelGroup, actions map[string]*glib.SimpleAct
 		btn.SetTooltipText(label)
 		btn.SetActionName(action)
 		btn.AddAccelerator("activate", accels, key, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-		nb.box.Add(btn)
+		nb.Add(btn)
 		return btn, nil
 	}
 
@@ -85,7 +85,7 @@ func (nb *NavigationBar) Destroy() {
 		return
 	}
 
-	nb.box = nil
+	nb.ButtonBox = nil
 
 	nb.firstButton = nil
 	nb.previousButton = nil
@@ -95,7 +95,7 @@ func (nb *NavigationBar) Destroy() {
 }
 
 func (nb *NavigationBar) IWidget() gtk.IWidget {
-	return nb.box
+	return nb.ButtonBox
 }
 
 func (nb *NavigationBar) UpdateButtonState() {
@@ -136,17 +136,17 @@ func (nb *NavigationBar) SetNewestButtonImage(image gtk.IWidget) {
 }
 
 func (nb *NavigationBar) SetLinkedButtons(linked bool) error {
-	sc, err := nb.box.GetStyleContext()
+	sc, err := nb.GetStyleContext()
 	if err != nil {
 		return err
 	}
 
 	if linked {
 		sc.AddClass(style.ClassLinked)
-		nb.box.SetSpacing(0)
+		nb.SetSpacing(0)
 	} else {
 		sc.RemoveClass(style.ClassLinked)
-		nb.box.SetSpacing(style.PaddingUnlinkedButtonBox)
+		nb.SetSpacing(style.PaddingUnlinkedButtonBox)
 	}
 
 	return nil

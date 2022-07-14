@@ -13,7 +13,7 @@ import (
 )
 
 type ImageViewer struct {
-	scrolledWindow *gtk.ScrolledWindow
+	*gtk.ScrolledWindow
 
 	image          *gtk.Image
 	unscaledPixbuf *gdk.Pixbuf // will be inverted in dark mode
@@ -28,20 +28,19 @@ type ImageViewer struct {
 var _ Widget = &ImageViewer{}
 
 func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageViewer, error) {
-	var err error
-
-	iv := new(ImageViewer)
-
-	iv.scale = safeScale(imageScale)
-
-	iv.scrolledWindow, err = gtk.ScrolledWindowNew(nil, nil)
+	super, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
+	iv := &ImageViewer{
+		ScrolledWindow: super,
 
-	iv.scrolledWindow.SetSizeRequest(500, 400)
+		scale: safeScale(imageScale),
+	}
 
-	sc, err := iv.scrolledWindow.GetStyleContext()
+	iv.SetSizeRequest(500, 400)
+
+	sc, err := iv.GetStyleContext()
 	if err != nil {
 		return nil, err
 	}
@@ -74,14 +73,16 @@ func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageVi
 			return false
 		}
 	})
-	iv.scrolledWindow.Add(iv.eventBox)
+	iv.Add(iv.eventBox)
+
+	iv.ShowAll()
 
 	return iv, nil
 }
 
 func (iv *ImageViewer) IWidget() gtk.IWidget {
 	// Return the top-level widget.
-	return iv.scrolledWindow
+	return iv.ScrolledWindow
 }
 
 func (iv *ImageViewer) Destroy() {
@@ -89,7 +90,8 @@ func (iv *ImageViewer) Destroy() {
 		return
 	}
 
-	iv.scrolledWindow = nil
+	iv.ScrolledWindow = nil
+
 	iv.image = nil
 	iv.unscaledPixbuf = nil
 	iv.finalPixbuf = nil
@@ -97,10 +99,6 @@ func (iv *ImageViewer) Destroy() {
 
 	iv.contextMenu.Destroy()
 	iv.contextMenu = nil
-}
-
-func (iv *ImageViewer) Show() {
-	iv.scrolledWindow.ShowAll()
 }
 
 func (iv *ImageViewer) ShowLoadingScreen() {

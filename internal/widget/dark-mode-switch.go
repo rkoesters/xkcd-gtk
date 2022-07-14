@@ -8,7 +8,8 @@ import (
 // DarkModeSwitch is a labeled gtk.Switch intended for toggling whether the
 // application's dark mode is enabled.
 type DarkModeSwitch struct {
-	box   *gtk.Box
+	*gtk.Box
+
 	label *gtk.ModelButton
 	swtch *gtk.Switch
 
@@ -21,18 +22,18 @@ type DarkModeSwitch struct {
 var _ Widget = &DarkModeSwitch{}
 
 func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*DarkModeSwitch, error) {
-	var err error
-
+	super, err := gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 2)
+	if err != nil {
+		return nil, err
+	}
 	dms := &DarkModeSwitch{
+		Box: super,
+
 		darkMode:    darkModeGetter,
 		setDarkMode: darkModeSetter,
 	}
 
-	dms.box, err = gtk.BoxNew(gtk.ORIENTATION_HORIZONTAL, 2)
-	if err != nil {
-		return nil, err
-	}
-	dms.box.SetHomogeneous(false)
+	dms.SetHomogeneous(false)
 
 	dms.swtch, err = gtk.SwitchNew()
 	if err != nil {
@@ -41,7 +42,7 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	dms.swtch.SetTooltipText(l("Toggle dark mode"))
 	dms.swtch.SetActive(dms.darkMode())
 	dms.swtch.Connect("notify::active", dms.SwitchStateChanged)
-	dms.box.PackEnd(dms.swtch, false, true, 0)
+	dms.PackEnd(dms.swtch, false, true, 0)
 
 	// Use a ModelButton to force the theme to apply the same padding as the
 	// other items on the WindowMenu. Has the added benefit of increasing
@@ -79,14 +80,14 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	// min-width which gives us the flexibility to add the switch without
 	// widening the menu.
 	sc.AddClass(style.ClassNoMinWidth)
-	dms.box.PackStart(dms.label, true, true, 0)
+	dms.PackStart(dms.label, true, true, 0)
 
-	dms.box.ShowAll()
+	dms.ShowAll()
 	return dms, nil
 }
 
 func (dms *DarkModeSwitch) IWidget() gtk.IWidget {
-	return dms.box
+	return dms.Box
 }
 
 func (dms *DarkModeSwitch) Destroy() {
@@ -94,7 +95,8 @@ func (dms *DarkModeSwitch) Destroy() {
 		return
 	}
 
-	dms.box = nil
+	dms.Box = nil
+
 	dms.label = nil
 	dms.swtch = nil
 	dms.darkMode = nil

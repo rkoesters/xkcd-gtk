@@ -23,7 +23,8 @@ func AppName() string { return l("Comic Sticks") }
 
 // Application holds onto our GTK representation of our application.
 type Application struct {
-	application *gtk.Application
+	*gtk.Application
+
 	gtkSettings *gtk.Settings
 	actions     map[string]*glib.SimpleAction
 
@@ -36,22 +37,22 @@ type Application struct {
 
 // NewApplication creates an instance of our GTK Application.
 func NewApplication(appID string) (*Application, error) {
-	var app Application
-	var err error
-
-	app.application, err = gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
+	super, err := gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
 	if err != nil {
 		return nil, err
 	}
+	app := Application{
+		Application: super,
 
-	// Initialize our application actions.
-	app.actions = make(map[string]*glib.SimpleAction)
+		actions: make(map[string]*glib.SimpleAction),
+	}
+
 	registerAction := func(name string, fn interface{}) {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", fn)
 
 		app.actions[name] = action
-		app.application.AddAction(action)
+		app.AddAction(action)
 	}
 
 	registerAction("new-window", app.Activate)
@@ -65,15 +66,15 @@ func NewApplication(appID string) (*Application, error) {
 	registerAction("toggle-dark-mode", app.ToggleDarkMode)
 
 	// Initialize our application accelerators.
-	app.application.SetAccelsForAction("app.new-window", []string{"<Control>n"})
-	app.application.SetAccelsForAction("app.quit", []string{"<Control>q"})
-	app.application.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
-	app.application.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
+	app.SetAccelsForAction("app.new-window", []string{"<Control>n"})
+	app.SetAccelsForAction("app.quit", []string{"<Control>q"})
+	app.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
+	app.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
 
 	// Connect application signal handlers.
-	app.application.Connect("startup", app.Startup)
-	app.application.Connect("shutdown", app.Shutdown)
-	app.application.Connect("activate", app.Activate)
+	app.Connect("startup", app.Startup)
+	app.Connect("shutdown", app.Shutdown)
+	app.Connect("activate", app.Activate)
 
 	return &app, nil
 }
@@ -104,19 +105,11 @@ func (app *Application) Shutdown() {
 	app.CloseCache()
 }
 
-// SetDefault is a wrapper around glib.Application.SetDefault().
-func (app *Application) SetDefault() { app.application.SetDefault() }
-
-// Run is a wrapper around glib.Application.Run().
-func (app *Application) Run(args []string) int {
-	return app.application.Run(args)
-}
-
 var forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu.")
 
 // PrefersAppMenu is a wrapper around gtk.Application.PrefersAppMenu().
 func (app *Application) PrefersAppMenu() bool {
-	return app.application.PrefersAppMenu() || *forceAppMenu
+	return app.Application.PrefersAppMenu() || *forceAppMenu
 }
 
 // SetupAppMenu creates an AppMenu if the environment wants it.
@@ -128,7 +121,7 @@ func (app *Application) SetupAppMenu() error {
 	if err != nil {
 		return err
 	}
-	app.application.SetAppMenu(menu)
+	app.SetAppMenu(menu)
 	return nil
 }
 
@@ -145,7 +138,7 @@ func (app *Application) SetupCache() {
 	}
 
 	// Asynchronously fill the comic metadata cache and search index.
-	err = search.Load(app.application)
+	err = search.Load(app.Application)
 	if err != nil {
 		log.Print("error building search index: ", err)
 	}
@@ -171,7 +164,7 @@ func (app *Application) Activate() {
 		log.Print("error creating window: ", err)
 		return
 	}
-	win.window.Present()
+	win.Present()
 }
 
 // DarkModeChanged is called when gtk-application-prefer-dark-theme is changed.
@@ -236,7 +229,7 @@ func (app *Application) DarkMode() bool {
 // Quit closes all windows so the application can close.
 func (app *Application) Quit() {
 	// Close the active window so that it has a chance to save its state.
-	win := app.application.GetActiveWindow()
+	win := app.GetActiveWindow()
 	if win != nil {
 		parent, _ := win.GetTransientFor()
 		if parent != nil {
@@ -247,7 +240,7 @@ func (app *Application) Quit() {
 	}
 
 	// Quit the application.
-	glib.IdleAdd(app.application.Quit)
+	glib.IdleAdd(app.Application.Quit)
 }
 
 // LoadSettings tries to load our settings from disk.
@@ -316,14 +309,14 @@ func (app *Application) SaveBookmarks() {
 func (app *Application) ShowShortcuts() {
 	var err error
 	if app.shortcutsWindow == nil {
-		app.shortcutsWindow, err = NewShortcutsWindow(app.application.RemoveWindow)
+		app.shortcutsWindow, err = NewShortcutsWindow(app.RemoveWindow)
 		if err != nil {
 			log.Print("error creating shortcuts window: ", err)
 			return
 		}
 	}
 
-	app.application.AddWindow(app.shortcutsWindow)
+	app.AddWindow(app.shortcutsWindow)
 	app.shortcutsWindow.Present()
 }
 
@@ -332,7 +325,7 @@ func (app *Application) ShowAbout() {
 	var err error
 
 	if app.aboutDialog == nil {
-		app.aboutDialog, err = NewAboutDialog(app.application.RemoveWindow)
+		app.aboutDialog, err = NewAboutDialog(app.RemoveWindow)
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return
@@ -341,12 +334,12 @@ func (app *Application) ShowAbout() {
 
 	// Set our parent window as the active window, but avoid accidentally
 	// setting ourself as the parent window.
-	win := app.application.GetActiveWindow()
+	win := app.GetActiveWindow()
 	if win.Native() != app.aboutDialog.Native() {
 		app.aboutDialog.SetTransientFor(win)
 	}
 
-	app.application.AddWindow(app.aboutDialog)
+	app.AddWindow(app.aboutDialog)
 	app.aboutDialog.Present()
 }
 

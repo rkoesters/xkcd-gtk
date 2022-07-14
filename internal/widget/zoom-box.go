@@ -8,7 +8,7 @@ import (
 )
 
 type ZoomBox struct {
-	box *gtk.ButtonBox
+	*gtk.ButtonBox
 
 	zoomInButton    *gtk.Button
 	zoomOutButton   *gtk.Button
@@ -20,16 +20,16 @@ var _ Widget = &ZoomBox{}
 func NewZoomBox() (*ZoomBox, error) {
 	const zbIconSize = gtk.ICON_SIZE_SMALL_TOOLBAR
 
-	var err error
-
-	zb := &ZoomBox{}
-
-	zb.box, err = gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
+	super, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
 	}
-	zb.box.SetLayout(gtk.BUTTONBOX_EXPAND)
-	zb.box.SetHomogeneous(false)
+	zb := &ZoomBox{
+		ButtonBox: super,
+	}
+
+	zb.SetLayout(gtk.BUTTONBOX_EXPAND)
+	zb.SetHomogeneous(false)
 
 	zb.zoomOutButton, err = gtk.ButtonNew()
 	if err != nil {
@@ -42,7 +42,7 @@ func NewZoomBox() (*ZoomBox, error) {
 		return nil, err
 	}
 	zb.zoomOutButton.SetImage(zoomOutImg)
-	zb.box.PackStart(zb.zoomOutButton, true, true, 0)
+	zb.PackStart(zb.zoomOutButton, true, true, 0)
 
 	zb.zoomResetButton, err = gtk.ButtonNew()
 	if err != nil {
@@ -50,7 +50,7 @@ func NewZoomBox() (*ZoomBox, error) {
 	}
 	zb.zoomResetButton.SetTooltipText(l("Reset zoom"))
 	zb.zoomResetButton.SetActionName("win.zoom-reset")
-	zb.box.PackStart(zb.zoomResetButton, true, true, 0)
+	zb.PackStart(zb.zoomResetButton, true, true, 0)
 
 	zb.zoomInButton, err = gtk.ButtonNew()
 	if err != nil {
@@ -63,7 +63,7 @@ func NewZoomBox() (*ZoomBox, error) {
 		return nil, err
 	}
 	zb.zoomInButton.SetImage(zoomInImg)
-	zb.box.PackStart(zb.zoomInButton, true, true, 0)
+	zb.PackStart(zb.zoomInButton, true, true, 0)
 
 	return zb, nil
 }
@@ -73,15 +73,13 @@ func (zb *ZoomBox) Destroy() {
 		return
 	}
 
-	zb.box = nil
-
 	zb.zoomInButton = nil
 	zb.zoomOutButton = nil
 	zb.zoomResetButton = nil
 }
 
 func (zb *ZoomBox) IWidget() gtk.IWidget {
-	return zb.box
+	return zb.ButtonBox
 }
 
 func (zb *ZoomBox) SetCurrentZoom(scale float64) error {
@@ -106,10 +104,10 @@ func (zb *ZoomBox) SetCurrentZoom(scale float64) error {
 
 func (zb *ZoomBox) SetCompact(compact bool) {
 	if compact {
-		zb.box.SetMarginStart(style.PaddingPopoverCompact)
-		zb.box.SetMarginEnd(style.PaddingPopoverCompact)
+		zb.SetMarginStart(style.PaddingPopoverCompact)
+		zb.SetMarginEnd(style.PaddingPopoverCompact)
 	} else {
-		zb.box.SetMarginStart(0)
-		zb.box.SetMarginEnd(0)
+		zb.SetMarginStart(0)
+		zb.SetMarginEnd(0)
 	}
 }

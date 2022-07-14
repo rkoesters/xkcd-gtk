@@ -20,19 +20,19 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
 
-#: internal/widget/window-menu.go:153 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
 msgid "About Comic Sticks"
 msgstr ""
 
-#: internal/widget/window-menu.go:140 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:23
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:19
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:130
+#: internal/widget/properties-dialog.go:132
 msgid "Alt text"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:268
+#: internal/widget/application-window.go:263
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:341
+#: internal/widget/application-window.go:336
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Couldn't get comic"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:53
+#: internal/widget/dark-mode-switch.go:54
 msgid "Dark mode"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Dark mode for late night reading"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:122
+#: internal/widget/properties-dialog.go:124
 msgid "Date"
 msgstr ""
 
@@ -100,7 +100,7 @@ msgstr ""
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:35 internal/widget/window-menu.go:90
+#: internal/widget/context-menu.go:31 internal/widget/window-menu.go:89
 msgid "Explain"
 msgstr ""
 
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Go to the previous comic"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:126
+#: internal/widget/properties-dialog.go:128
 msgid "Image"
 msgstr ""
 
@@ -140,15 +140,15 @@ msgstr ""
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/window-menu.go:149 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:138
+#: internal/widget/properties-dialog.go:140
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:348
+#: internal/widget/application-window.go:343
 msgid "Loading comic..."
 msgstr ""
 
@@ -156,20 +156,20 @@ msgstr ""
 msgid "Navigate"
 msgstr ""
 
-#: internal/widget/window-menu.go:109 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
 msgid "New window"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:134
+#: internal/widget/properties-dialog.go:136
 msgid "News"
 msgstr ""
 
-#: internal/widget/search-menu.go:67
+#: internal/widget/search-menu.go:68
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:114
+#: internal/widget/properties-dialog.go:116
 msgid "Number"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Open bookmarks menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:34 internal/widget/window-menu.go:86
+#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:85
 msgid "Open link"
 msgstr ""
 
@@ -197,8 +197,8 @@ msgstr ""
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:36 internal/widget/properties-dialog.go:45
-#: internal/widget/window-menu.go:94 internal/widget/shortcuts-window.ui:132
+#: internal/widget/context-menu.go:32 internal/widget/properties-dialog.go:47
+#: internal/widget/window-menu.go:93 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr ""
 
@@ -219,16 +219,16 @@ msgstr ""
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:24
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:20
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internal/widget/context-menu.go:30 internal/widget/zoom-box.go:51
+#: internal/widget/context-menu.go:26 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:41 internal/widget/shortcuts-window.ui:79
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr ""
 
@@ -248,16 +248,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:118
+#: internal/widget/properties-dialog.go:120
 msgid "Title"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:41 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:12
 #: internal/widget/shortcuts-window.ui:149
 msgid "Toggle dark mode"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:142
+#: internal/widget/properties-dialog.go:144
 msgid "Transcript"
 msgstr ""
 
@@ -269,11 +269,11 @@ msgstr ""
 msgid "View comic metadata"
 msgstr ""
 
-#: internal/widget/window-menu.go:128 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:127 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr ""
 
-#: internal/widget/window-menu.go:31
+#: internal/widget/window-menu.go:30
 msgid "Window menu"
 msgstr ""
 
@@ -285,12 +285,12 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:28 internal/widget/zoom-box.go:59
+#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:29 internal/widget/zoom-box.go:38
+#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""
@@ -299,10 +299,10 @@ msgstr ""
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr ""
 
-#: internal/widget/window-menu.go:132 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr ""
 
-#: internal/widget/window-menu.go:136 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr ""

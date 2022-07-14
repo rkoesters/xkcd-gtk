@@ -14,7 +14,8 @@ import (
 )
 
 type SearchMenu struct {
-	menuButton *gtk.MenuButton
+	*gtk.MenuButton
+
 	popover    *gtk.Popover
 	popoverBox *gtk.Box
 	entry      *gtk.SearchEntry
@@ -28,25 +29,25 @@ type SearchMenu struct {
 var _ Widget = &SearchMenu{}
 
 func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, error) {
-	var err error
-
+	super, err := gtk.MenuButtonNew()
+	if err != nil {
+		return nil, err
+	}
 	sm := &SearchMenu{
+		MenuButton: super,
+
 		setComic: comicSetter,
 	}
 
-	sm.menuButton, err = gtk.MenuButtonNew()
-	if err != nil {
-		return nil, err
-	}
-	sm.menuButton.SetTooltipText(l("Search"))
-	sm.menuButton.AddAccelerator("activate", accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-	sm.menuButton.AddAccelerator("activate", accels, gdk.KEY_slash, 0, gtk.ACCEL_VISIBLE)
+	sm.SetTooltipText(l("Search"))
+	sm.AddAccelerator("activate", accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	sm.AddAccelerator("activate", accels, gdk.KEY_slash, 0, gtk.ACCEL_VISIBLE)
 
-	sm.popover, err = gtk.PopoverNew(sm.menuButton)
+	sm.popover, err = gtk.PopoverNew(sm.MenuButton)
 	if err != nil {
 		return nil, err
 	}
-	sm.menuButton.SetPopover(sm.popover)
+	sm.SetPopover(sm.popover)
 
 	sm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PaddingPopover)
 	if err != nil {
@@ -104,7 +105,8 @@ func (sm *SearchMenu) Destroy() {
 		return
 	}
 
-	sm.menuButton = nil
+	sm.MenuButton = nil
+
 	sm.popover = nil
 	sm.popoverBox = nil
 	sm.entry = nil
@@ -114,11 +116,11 @@ func (sm *SearchMenu) Destroy() {
 }
 
 func (sm *SearchMenu) IWidget() gtk.IWidget {
-	return sm.menuButton
+	return sm.MenuButton
 }
 
 func (sm *SearchMenu) SetButtonImage(image gtk.IWidget) {
-	sm.menuButton.SetImage(image)
+	sm.SetImage(image)
 }
 
 // Search preforms a search with win.searchEntry.GetText() and puts the results
