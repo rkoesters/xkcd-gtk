@@ -234,7 +234,7 @@ msgstr ""
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:79
+#: internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Rechercher"
 
@@ -242,7 +242,7 @@ msgstr "Rechercher"
 msgid "Search Index Update"
 msgstr "Rechercher une mise à jour de l'index"
 
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Rechercher des BD"
 

@@ -233,7 +233,7 @@ msgstr "Rimuovi questo fumetto dai preferiti"
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:79
+#: internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Cerca"
 
@@ -241,7 +241,7 @@ msgstr "Cerca"
 msgid "Search Index Update"
 msgstr "Cerca aggiornamento indice"
 
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Cerca fumetti"
 

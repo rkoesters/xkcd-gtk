@@ -234,7 +234,7 @@ msgstr "Verwijderen uit bladwijzers"
 msgid "Reset zoom"
 msgstr "Oorspronkelijk zoomniveau"
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:79
+#: internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Zoeken"
 
@@ -242,7 +242,7 @@ msgstr "Zoeken"
 msgid "Search Index Update"
 msgstr "Zoekindex bijwerken"
 
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Verhalen doorzoeken"
 

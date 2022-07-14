@@ -39,7 +39,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 		setComic: comicSetter,
 	}
 
-	sm.SetTooltipText(l("Search"))
+	sm.SetTooltipText(l("Search comics"))
 	sm.AddAccelerator("activate", accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	sm.AddAccelerator("activate", accels, gdk.KEY_slash, 0, gtk.ACCEL_VISIBLE)
 

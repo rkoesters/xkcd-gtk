@@ -236,7 +236,7 @@ msgstr "Yer imlerinden kaldır"
 msgid "Reset zoom"
 msgstr "Yakınlaştırmayı sıfırla"
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:79
+#: internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Ara"
 
@@ -244,7 +244,7 @@ msgstr "Ara"
 msgid "Search Index Update"
 msgstr "Arama Dizini Güncellemesi"
 
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Karikatür ara"
 

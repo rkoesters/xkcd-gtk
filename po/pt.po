@@ -238,7 +238,7 @@ msgstr "Remover esta banda desenhada dos marcadores"
 msgid "Reset zoom"
 msgstr ""
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:79
+#: internal/widget/shortcuts-window.ui:79
 msgid "Search"
 msgstr "Procurar"
 
@@ -246,7 +246,7 @@ msgstr "Procurar"
 msgid "Search Index Update"
 msgstr "Índice de Pesquisa Atualizado"
 
-#: internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Procurar Bandas Desenhadas"
 
