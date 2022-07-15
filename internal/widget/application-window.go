@@ -108,9 +108,9 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	// If the window is closed, we want to write our state to disk.
 	win.Connect("delete-event", func() {
 		if win.properties == nil {
-			win.state.SaveState(win.ApplicationWindow, nil)
+			win.state.SaveState(win, nil)
 		} else {
-			win.state.SaveState(win.ApplicationWindow, win.properties.Dialog)
+			win.state.SaveState(win, win.properties)
 		}
 	})
 
@@ -158,7 +158,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.ApplicationWindow, &win.state, win.actions, accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win, &win.state, win.actions, accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}

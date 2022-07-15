@@ -34,7 +34,7 @@ type BookmarksMenu struct {
 
 var _ Widget = &BookmarksMenu{}
 
-func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
+func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
 	super, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err

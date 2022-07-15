@@ -6,7 +6,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
@@ -106,18 +105,18 @@ func (ws *WindowState) LoadState() {
 
 // SaveState writes win.state to disk so it can be loaded next time we open a
 // window.
-func (ws *WindowState) SaveState(window *gtk.ApplicationWindow, propertiesDialog *gtk.Dialog) {
+func (ws *WindowState) SaveState(window *ApplicationWindow, dialog *PropertiesDialog) {
 	ws.Maximized = window.IsMaximized()
 	if !ws.Maximized {
 		ws.Width, ws.Height = window.GetSize()
 		ws.PositionX, ws.PositionY = window.GetPosition()
 	}
-	if propertiesDialog == nil {
+	if dialog == nil {
 		ws.PropertiesVisible = false
 	} else {
 		ws.PropertiesVisible = true
-		ws.PropertiesWidth, ws.PropertiesHeight = propertiesDialog.GetSize()
-		ws.PropertiesPositionX, ws.PropertiesPositionY = propertiesDialog.GetPosition()
+		ws.PropertiesWidth, ws.PropertiesHeight = dialog.GetSize()
+		ws.PropertiesPositionX, ws.PropertiesPositionY = dialog.GetPosition()
 	}
 
 	err := ws.WriteFile(windowStatePath())
