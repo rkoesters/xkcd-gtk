@@ -7,10 +7,10 @@ import (
 
 // Widget is a custom GTK+ widget.
 type Widget interface {
-	// IWidget returns the Widget's top-level gtk.Widget.
-	IWidget() gtk.IWidget
+	// Our custom widgets should embed a gtk.Widget.
+	gtk.IWidget
 
-	// Destroy performs clean up to aid garbage collection. Should
-	// gracefully accept a nil receiver.
-	Destroy()
+	// Dispose performs clean up to aid garbage collection. Should break
+	// reference cycles, if any. Must gracefully accept a nil receiver.
+	Dispose()
 }

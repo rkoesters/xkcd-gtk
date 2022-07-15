@@ -28,7 +28,7 @@ type PropertiesDialog struct {
 	comicTranscript *gtk.Label
 }
 
-var _ Window = &PropertiesDialog{}
+var _ Widget = &PropertiesDialog{}
 
 // NewPropertiesDialog creates and returns a PropertiesDialog for the given
 // parent Window.
@@ -58,10 +58,10 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 		return nil, err
 	}
 	pd.AddAccelGroup(accels)
-	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, pd.Dialog.Close)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, pd.Close)
 
-	pd.Connect("delete-event", pd.Close)
-	pd.Connect("destroy", pd.Destroy)
+	pd.Connect("delete-event", pd.DeleteEvent)
+	pd.Connect("destroy", pd.Dispose)
 
 	scwin, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
@@ -176,7 +176,7 @@ func (win *ApplicationWindow) ShowProperties() {
 		}
 	}
 
-	win.app.AddWindow(win.properties.IWindow())
+	win.app.AddWindow(win.properties)
 	win.properties.Dialog.Present()
 }
 
@@ -195,18 +195,18 @@ func (pd *PropertiesDialog) Update() {
 	pd.comicTranscript.SetText(pd.parent.comic.Transcript)
 }
 
-// Close is called when the dialog is closed. It tells the parent to save its
-// window state.
-func (pd *PropertiesDialog) Close() {
+// DeleteEvent is called when the dialog is closed. It tells the parent to save
+// its window state.
+func (pd *PropertiesDialog) DeleteEvent() {
 	pd.parent.properties = nil
 	pd.parent.state.PropertiesWidth, pd.parent.state.PropertiesHeight = pd.GetSize()
 	pd.parent.state.PropertiesPositionX, pd.parent.state.PropertiesPositionY = pd.GetPosition()
 	pd.parent.state.SaveState(pd.parent.ApplicationWindow, pd.Dialog)
 }
 
-// Destroy removes our references to the dialog so the garbage collector can
+// Dispose removes our references to the dialog so the garbage collector can
 // take care of it.
-func (pd *PropertiesDialog) Destroy() {
+func (pd *PropertiesDialog) Dispose() {
 	if pd == nil {
 		return
 	}
@@ -224,9 +224,6 @@ func (pd *PropertiesDialog) Destroy() {
 	pd.comicLink = nil
 	pd.comicTranscript = nil
 }
-
-func (pd *PropertiesDialog) IWidget() gtk.IWidget { return pd.Dialog }
-func (pd *PropertiesDialog) IWindow() gtk.IWindow { return pd.Dialog }
 
 // formatDate takes a year, month, and date as strings and turns them into a
 // pretty date.

@@ -86,11 +86,7 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	return dms, nil
 }
 
-func (dms *DarkModeSwitch) IWidget() gtk.IWidget {
-	return dms.Box
-}
-
-func (dms *DarkModeSwitch) Destroy() {
+func (dms *DarkModeSwitch) Dispose() {
 	if dms == nil {
 		return
 	}

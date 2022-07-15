@@ -41,7 +41,7 @@ type ApplicationWindow struct {
 	properties *PropertiesDialog // May be nil.
 }
 
-var _ Window = &ApplicationWindow{}
+var _ Widget = &ApplicationWindow{}
 
 // NewApplicationWindow creates a new xkcd viewer window.
 func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
@@ -115,14 +115,14 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	})
 
 	// When gtk destroys the window, we want to clean up.
-	win.Connect("destroy", win.Destroy)
+	win.Connect("destroy", win.Dispose)
 
 	// Create image viewing frame
 	win.comicContainer, err = NewImageViewer(win.IActionGroup, win.state.ImageScale)
 	if err != nil {
 		return nil, err
 	}
-	win.Add(win.comicContainer.IWidget())
+	win.Add(win.comicContainer)
 	win.Resize(win.state.Width, win.state.Height)
 	if win.state.PositionX != 0 && win.state.PositionY != 0 {
 		win.Move(win.state.PositionX, win.state.PositionY)
@@ -147,7 +147,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	if err != nil {
 		return nil, err
 	}
-	win.header.PackStart(win.navigationBar.IWidget())
+	win.header.PackStart(win.navigationBar)
 
 	// Create the window menu.
 	win.windowMenu, err = NewWindowMenu(accels, app.PrefersAppMenu(), app.DarkMode, app.SetDarkMode)
@@ -155,21 +155,21 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 		return nil, err
 	}
 	win.updateZoomButtonStatus()
-	win.header.PackEnd(win.windowMenu.IWidget())
+	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
 	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win.ApplicationWindow, &win.state, win.actions, accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
-	win.header.PackEnd(win.bookmarksMenu.IWidget())
+	win.header.PackEnd(win.bookmarksMenu)
 
 	// Create the search menu.
 	win.searchMenu, err = NewSearchMenu(accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
-	win.header.PackEnd(win.searchMenu.IWidget())
+	win.header.PackEnd(win.searchMenu)
 
 	win.header.ShowAll()
 	win.SetTitlebar(win.header)
@@ -415,9 +415,9 @@ func (win *ApplicationWindow) comicNumber() int {
 	return win.comic.Num
 }
 
-// Destroy releases all references in the Window struct. This is needed to
+// Dispose releases all references in the Window struct. This is needed to
 // mitigate a memory leak when closing windows.
-func (win *ApplicationWindow) Destroy() {
+func (win *ApplicationWindow) Dispose() {
 	if win == nil {
 		return
 	}
@@ -428,21 +428,18 @@ func (win *ApplicationWindow) Destroy() {
 	win.comic = nil
 	win.actions = nil
 	win.header = nil
-	win.navigationBar.Destroy()
+	win.navigationBar.Dispose()
 	win.navigationBar = nil
-	win.searchMenu.Destroy()
+	win.searchMenu.Dispose()
 	win.searchMenu = nil
-	win.bookmarksMenu.Destroy()
+	win.bookmarksMenu.Dispose()
 	win.bookmarksMenu = nil
-	win.windowMenu.Destroy()
+	win.windowMenu.Dispose()
 	win.windowMenu = nil
-	win.comicContainer.Destroy()
+	win.comicContainer.Dispose()
 	win.comicContainer = nil
-	win.properties.Destroy()
+	win.properties.Dispose()
 	win.properties = nil
 
 	runtime.GC()
 }
-
-func (win *ApplicationWindow) IWidget() gtk.IWidget { return win.ApplicationWindow }
-func (win *ApplicationWindow) IWindow() gtk.IWindow { return win.ApplicationWindow }

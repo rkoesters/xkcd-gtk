@@ -80,12 +80,7 @@ func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageVi
 	return iv, nil
 }
 
-func (iv *ImageViewer) IWidget() gtk.IWidget {
-	// Return the top-level widget.
-	return iv.ScrolledWindow
-}
-
-func (iv *ImageViewer) Destroy() {
+func (iv *ImageViewer) Dispose() {
 	if iv == nil {
 		return
 	}
@@ -97,7 +92,7 @@ func (iv *ImageViewer) Destroy() {
 	iv.finalPixbuf = nil
 	iv.eventBox = nil
 
-	iv.contextMenu.Destroy()
+	iv.contextMenu.Dispose()
 	iv.contextMenu = nil
 }
 

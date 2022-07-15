@@ -75,7 +75,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 	wm.zoomBox.SetMarginBottom(style.PaddingPopoverCompact / 2)
-	wm.popoverBox.Add(wm.zoomBox.IWidget())
+	wm.popoverBox.Add(wm.zoomBox)
 
 	if err = addMenuSeparator(); err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
-	wm.popoverBox.PackStart(wm.darkModeSwitch.IWidget(), false, true, 0)
+	wm.popoverBox.PackStart(wm.darkModeSwitch, false, true, 0)
 
 	if err = addMenuSeparator(); err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	return wm, nil
 }
 
-func (wm *WindowMenu) Destroy() {
+func (wm *WindowMenu) Dispose() {
 	if wm == nil {
 		return
 	}
@@ -166,14 +166,10 @@ func (wm *WindowMenu) Destroy() {
 
 	wm.popover = nil
 	wm.popoverBox = nil
-	wm.zoomBox.Destroy()
+	wm.zoomBox.Dispose()
 	wm.zoomBox = nil
-	wm.darkModeSwitch.Destroy()
+	wm.darkModeSwitch.Dispose()
 	wm.darkModeSwitch = nil
-}
-
-func (wm *WindowMenu) IWidget() gtk.IWidget {
-	return wm.MenuButton
 }
 
 func (wm *WindowMenu) SetButtonImage(image gtk.IWidget) {

@@ -80,7 +80,7 @@ func NewNavigationBar(accels *gtk.AccelGroup, actions map[string]*glib.SimpleAct
 	return nb, nil
 }
 
-func (nb *NavigationBar) Destroy() {
+func (nb *NavigationBar) Dispose() {
 	if nb == nil {
 		return
 	}
@@ -92,10 +92,6 @@ func (nb *NavigationBar) Destroy() {
 	nb.randomButton = nil
 	nb.nextButton = nil
 	nb.newestButton = nil
-}
-
-func (nb *NavigationBar) IWidget() gtk.IWidget {
-	return nb.ButtonBox
 }
 
 func (nb *NavigationBar) UpdateButtonState() {

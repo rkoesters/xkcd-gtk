@@ -100,7 +100,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	return sm, nil
 }
 
-func (sm *SearchMenu) Destroy() {
+func (sm *SearchMenu) Dispose() {
 	if sm == nil {
 		return
 	}
@@ -113,10 +113,6 @@ func (sm *SearchMenu) Destroy() {
 	sm.noResults = nil
 	sm.results = nil
 	sm.scroller = nil
-}
-
-func (sm *SearchMenu) IWidget() gtk.IWidget {
-	return sm.MenuButton
 }
 
 func (sm *SearchMenu) SetButtonImage(image gtk.IWidget) {

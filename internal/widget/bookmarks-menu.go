@@ -131,7 +131,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *gtk.ApplicationWindow, ws *WindowS
 	return bm, nil
 }
 
-func (bm *BookmarksMenu) Destroy() {
+func (bm *BookmarksMenu) Dispose() {
 	if bm == nil {
 		return
 	}
@@ -150,10 +150,6 @@ func (bm *BookmarksMenu) Destroy() {
 
 	bm.windowState = nil
 	bm.actions = nil
-}
-
-func (bm *BookmarksMenu) IWidget() gtk.IWidget {
-	return bm.MenuButton
 }
 
 func (bm *BookmarksMenu) SetButtonImage(image gtk.IWidget) {

@@ -53,14 +53,10 @@ func (cm *ContextMenu) Present(event *gdk.Event) {
 	cm.PopupAtPointer(event)
 }
 
-func (cm *ContextMenu) Destroy() {
+func (cm *ContextMenu) Dispose() {
 	if cm == nil {
 		return
 	}
 
 	cm.Menu = nil
-}
-
-func (cm *ContextMenu) IWidget() gtk.IWidget {
-	return cm.Menu
 }

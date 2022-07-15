@@ -68,7 +68,7 @@ func NewZoomBox() (*ZoomBox, error) {
 	return zb, nil
 }
 
-func (zb *ZoomBox) Destroy() {
+func (zb *ZoomBox) Dispose() {
 	if zb == nil {
 		return
 	}
@@ -78,10 +78,6 @@ func (zb *ZoomBox) Destroy() {
 	zb.zoomInButton = nil
 	zb.zoomOutButton = nil
 	zb.zoomResetButton = nil
-}
-
-func (zb *ZoomBox) IWidget() gtk.IWidget {
-	return zb.ButtonBox
 }
 
 func (zb *ZoomBox) SetCurrentZoom(scale float64) error {
