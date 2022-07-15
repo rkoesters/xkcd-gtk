@@ -53,9 +53,14 @@ func Search(userQuery string) (*bleve.SearchResult, error) {
 	return index.Search(searchRequest)
 }
 
+type WindowAddRemover interface {
+	AddWindow(gtk.IWindow)
+	RemoveWindow(gtk.IWindow)
+}
+
 // Load asynchronously fills the comic metadata cache and search index via the
 // internet. It may show a loading dialog to the user.
-func Load(app *gtk.Application) error {
+func Load(war WindowAddRemover) error {
 	loadingWindow, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)
 	if err != nil {
 		return err
@@ -112,7 +117,7 @@ func Load(app *gtk.Application) error {
 			return
 		default:
 			glib.IdleAdd(func() {
-				app.AddWindow(loadingWindow)
+				war.AddWindow(loadingWindow)
 				loadingWindow.Present()
 			})
 		}
@@ -121,7 +126,7 @@ func Load(app *gtk.Application) error {
 		<-done
 
 		glib.IdleAdd(func() {
-			app.RemoveWindow(loadingWindow)
+			war.RemoveWindow(loadingWindow)
 			loadingWindow.Close()
 		})
 	}()

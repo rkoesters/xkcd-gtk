@@ -138,7 +138,7 @@ func (app *Application) SetupCache() {
 	}
 
 	// Asynchronously fill the comic metadata cache and search index.
-	err = search.Load(app.Application)
+	err = search.Load(app)
 	if err != nil {
 		log.Print("error building search index: ", err)
 	}
