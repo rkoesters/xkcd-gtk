@@ -51,7 +51,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	bm.SetTooltipText(l("Bookmarks"))
 	bm.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 
-	bm.popover, err = gtk.PopoverNew(bm.MenuButton)
+	bm.popover, err = gtk.PopoverNew(bm)
 	if err != nil {
 		return nil, err
 	}

@@ -43,7 +43,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.AddAccelerator("activate", accels, gdk.KEY_f, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	sm.AddAccelerator("activate", accels, gdk.KEY_slash, 0, gtk.ACCEL_VISIBLE)
 
-	sm.popover, err = gtk.PopoverNew(sm.MenuButton)
+	sm.popover, err = gtk.PopoverNew(sm)
 	if err != nil {
 		return nil, err
 	}
