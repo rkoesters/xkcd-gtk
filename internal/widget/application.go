@@ -18,6 +18,10 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
+var (
+	forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu.")
+)
+
 // AppName is the user-visible name of this application.
 func AppName() string { return l("Comic Sticks") }
 
@@ -115,8 +119,6 @@ func (app *Application) Shutdown() {
 	app.SaveBookmarks()
 	app.CloseCache()
 }
-
-var forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu.")
 
 // PrefersAppMenu is a wrapper around gtk.Application.PrefersAppMenu().
 func (app *Application) PrefersAppMenu() bool {

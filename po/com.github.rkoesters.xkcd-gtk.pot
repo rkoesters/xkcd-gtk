@@ -56,7 +56,7 @@ msgstr ""
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:22
+#: internal/widget/application.go:26
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
