@@ -26,8 +26,8 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	// again, so do not destroy it on close.
 	dialog.HideOnDelete()
 	dialog.Connect("response", dialog.Hide)
-	dialog.Connect("hide", func() {
-		windowRemover(&dialog.Window)
+	dialog.Connect("hide", func(dialog *gtk.AboutDialog) {
+		windowRemover(dialog)
 	})
 
 	// Initialize our window accelerators.

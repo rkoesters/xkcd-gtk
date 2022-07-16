@@ -58,13 +58,13 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	// the default handlers after our closure, whereas "clicked" always runs
 	// the default handlers first. Running before the default handlers
 	// allows us to prevent the running of the default handlers.
-	dms.label.Connect("button-release-event", func() {
+	dms.label.Connect("button-release-event", func(label *gtk.Label) {
 		dms.swtch.Activate()
 		// Prevent the default handlers from running so they do not
 		// close the popover menu. The popover menu should remain open
 		// to mimic the behavior of clicking the switch (which would not
 		// close the menu).
-		dms.label.StopEmission("button-release-event")
+		label.StopEmission("button-release-event")
 	})
 	lc, err := dms.label.GetChild()
 	if err != nil {

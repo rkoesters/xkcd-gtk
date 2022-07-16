@@ -115,9 +115,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	}
 	bm.scroller.Add(bm.list)
 	bm.registerBookmarkObserver()
-	win.Connect("delete-event", func() {
-		bm.unregisterBookmarkObserver()
-	})
+	win.Connect("delete-event", bm.unregisterBookmarkObserver)
 	defer func() {
 		err := bm.loadBookmarkList()
 		if err != nil {

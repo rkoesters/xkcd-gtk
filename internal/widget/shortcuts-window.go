@@ -33,8 +33,8 @@ func NewShortcutsWindow(windowRemover func(gtk.IWindow)) (*gtk.ShortcutsWindow, 
 	// We want to keep the shortcuts window around in case we want to show
 	// it again, so do not destroy it on close.
 	sw.HideOnDelete()
-	sw.Connect("hide", func() {
-		windowRemover(&sw.Window)
+	sw.Connect("hide", func(sw *gtk.ShortcutsWindow) {
+		windowRemover(sw)
 	})
 
 	// Initialize our window accelerators.

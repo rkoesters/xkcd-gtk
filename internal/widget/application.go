@@ -386,3 +386,8 @@ func (app *Application) gtkTheme() (string, error) {
 	}
 	return theme, nil
 }
+
+type WindowAddRemover interface {
+	AddWindow(gtk.IWindow)
+	RemoveWindow(gtk.IWindow)
+}
