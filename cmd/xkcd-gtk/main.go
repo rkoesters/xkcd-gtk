@@ -18,7 +18,7 @@ import (
 var (
 	gdkDebug = flag.String("gdk-debug", "", "Behave as if the GDK_DEBUG env variable was set to the provided string.")
 	gtkDebug = flag.String("gtk-debug", "", "Behave as if the GTK_DEBUG env variable was set to the provided string.")
-	service  = flag.Bool("gapplication-service", false, "Start as a D-Bus service.")
+	service  = flag.Bool("gapplication-service", false, "Start in GApplication service mode.")
 	version  = flag.Bool("version", false, "Print app version and exit.")
 )
 
