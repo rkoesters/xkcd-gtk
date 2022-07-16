@@ -56,6 +56,16 @@
   </custom>
 
   <releases>
+    <release version="1.6.4">
+      <description>
+        <p>Add a couple new keyboard shortcuts and add some common aliases for existing keyboard shortcuts. Open the shortcuts window with ctrl+? to check out what's new!</p>
+        <p>Other improvements:</p>
+        <ul>
+          <li>Fix crash when closing window in desktop environments that show an app menu (but for real this time)</li>
+          <li>Add support for launching as a D-Bus service in desktop environments that prefer that method of launching applications</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.6.3" date="2022-07-09">
       <description>
         <p>Minor improvements:</p>
