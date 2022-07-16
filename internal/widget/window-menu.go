@@ -172,10 +172,6 @@ func (wm *WindowMenu) Dispose() {
 	wm.darkModeSwitch = nil
 }
 
-func (wm *WindowMenu) SetButtonImage(image gtk.IWidget) {
-	wm.SetImage(image)
-}
-
 func (wm *WindowMenu) SetCompact(compact bool) {
 	if compact {
 		wm.popoverBox.SetMarginTop(style.PaddingPopoverCompact)

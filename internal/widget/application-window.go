@@ -229,9 +229,9 @@ func (win *ApplicationWindow) StyleUpdated() {
 	setButtonImageFromIconName("media-playlist-shuffle-symbolic", win.navigationBar.SetRandomButtonImage)
 	setButtonImageFromIconName("go-next-symbolic", win.navigationBar.SetNextButtonImage)
 	setButtonImageFromIconName("go-last-symbolic", win.navigationBar.SetNewestButtonImage)
-	setButtonImageFromIconName(icon("edit-find"), win.searchMenu.SetButtonImage)
-	setButtonImageFromIconName(icon("user-bookmarks"), win.bookmarksMenu.SetButtonImage)
-	setButtonImageFromIconName(icon("open-menu"), win.windowMenu.SetButtonImage)
+	setButtonImageFromIconName(icon("edit-find"), win.searchMenu.SetImage)
+	setButtonImageFromIconName(icon("user-bookmarks"), win.bookmarksMenu.SetImage)
+	setButtonImageFromIconName(icon("open-menu"), win.windowMenu.SetImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
 	if err := win.navigationBar.SetLinkedButtons(linked); err != nil {

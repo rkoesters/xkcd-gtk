@@ -115,10 +115,6 @@ func (sm *SearchMenu) Dispose() {
 	sm.scroller = nil
 }
 
-func (sm *SearchMenu) SetButtonImage(image gtk.IWidget) {
-	sm.SetImage(image)
-}
-
 // Search preforms a search with win.searchEntry.GetText() and puts the results
 // into win.searchResults.
 func (sm *SearchMenu) Search() {

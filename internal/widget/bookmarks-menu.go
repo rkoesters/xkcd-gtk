@@ -150,10 +150,6 @@ func (bm *BookmarksMenu) Dispose() {
 	bm.actions = nil
 }
 
-func (bm *BookmarksMenu) SetButtonImage(image gtk.IWidget) {
-	bm.SetImage(image)
-}
-
 // AddBookmark adds win's current comic to the user's bookmarks.
 func (bm *BookmarksMenu) AddBookmark() {
 	bm.bookmarks.Add(bm.windowState.ComicNumber)
