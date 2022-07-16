@@ -56,7 +56,7 @@
   </custom>
 
   <releases>
-    <release version="1.6.4">
+    <release version="1.6.4" date="2022-07-16">
       <description>
         <p>Add a couple new keyboard shortcuts and add some common aliases for existing keyboard shortcuts. Open the shortcuts window with ctrl+? to check out what's new!</p>
         <p>Other improvements:</p>
