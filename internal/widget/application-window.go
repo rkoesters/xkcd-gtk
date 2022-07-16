@@ -102,7 +102,12 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 
 	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DarkModeChanged)
 	win.Connect("delete-event", func() {
-		app.gtkSettings.HandlerDisconnect(darkModeSignal)
+		gtks, err := gtk.SettingsGetDefault()
+		if err != nil {
+			log.Print("error calling gtk.SettingsGetDefault(): ", err)
+			return
+		}
+		gtks.HandlerDisconnect(darkModeSignal)
 	})
 
 	// If the window is closed, we want to write our state to disk.
