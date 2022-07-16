@@ -112,11 +112,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 
 	// If the window is closed, we want to write our state to disk.
 	win.Connect("delete-event", func() {
-		if win.properties == nil {
-			win.state.SaveState(win, nil)
-		} else {
-			win.state.SaveState(win, win.properties)
-		}
+		win.state.SaveState(win, win.properties)
 	})
 
 	// When gtk destroys the window, we want to clean up.
@@ -223,9 +219,9 @@ func (win *ApplicationWindow) StyleUpdated() {
 		img, err := gtk.ImageNewFromIconName(icon, headerBarIconSize)
 		if err != nil {
 			log.Print(err)
-		} else {
-			imageSetter(img)
+			return
 		}
+		imageSetter(img)
 	}
 
 	setButtonImageFromIconName("go-first-symbolic", win.navigationBar.SetFirstButtonImage)
@@ -289,9 +285,9 @@ func (win *ApplicationWindow) RandomComic() {
 	newestComic, _ := cache.NewestComicInfoFromCache()
 	if newestComic.Num <= 0 {
 		win.SetComic(newestComic.Num)
-	} else {
-		win.SetComic(rand.Intn(newestComic.Num) + 1)
+		return
 	}
+	win.SetComic(rand.Intn(newestComic.Num) + 1)
 }
 
 // SetComic sets the current comic to the given comic.

@@ -46,19 +46,17 @@ func parse(data string) map[string]string {
 // AppID returns the RDNN ID of this binary.
 func AppID() string {
 	id, ok := Data["app-id"]
-	if ok {
-		return id
-	} else {
+	if !ok {
 		return "undefined"
 	}
+	return id
 }
 
 // Version returns the version string of this binary.
 func Version() string {
 	v, ok := Data["version"]
-	if ok {
-		return v
-	} else {
+	if !ok {
 		return "undefined"
 	}
+	return v
 }
