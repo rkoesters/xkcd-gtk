@@ -85,9 +85,16 @@ func NewApplication(appID string, service bool) (*Application, error) {
 
 // Startup is called when the "startup" signal is emitted.
 func (app *Application) Startup() {
+	var err error
+
+	app.gtkSettings, err = gtk.SettingsGetDefault()
+	if err != nil {
+		log.Fatal("error calling gtk.SettingsGetDefault(): ", err)
+	}
+
 	app.LoadSettings()
 
-	err := app.SetupAppMenu()
+	err = app.SetupAppMenu()
 	if err != nil {
 		log.Fatal("error creating app menu: ", err)
 	}
@@ -259,16 +266,10 @@ func (app *Application) LoadSettings() {
 		log.Print("error reading app settings: ", err)
 	}
 
-	// Get reference to Gtk's settings.
-	app.gtkSettings, err = gtk.SettingsGetDefault()
-	if err == nil {
-		// Apply Dark Mode setting.
-		err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
-		if err != nil {
-			log.Print("error setting dark mode state: ", err)
-		}
-	} else {
-		log.Print("error querying gtk settings: ", err)
+	// Apply Dark Mode setting.
+	err = app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", app.settings.DarkMode)
+	if err != nil {
+		log.Print("error setting dark mode state: ", err)
 	}
 }
 
