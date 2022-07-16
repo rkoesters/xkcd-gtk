@@ -76,12 +76,6 @@ GEN_FLATPAK_YML = $(patsubst %.in,%,$(FLATPAK_YML_IN))
 FLATPAK_YML     = $(APP).yml $(GEN_FLATPAK_YML)
 
 ################################################################################
-# Local Customizations (not tracked by source control)
-################################################################################
-
--include .config.mk
-
-################################################################################
 # Targets
 ################################################################################
 
@@ -124,8 +118,14 @@ flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO
 flathub: flatpak/flathub.yml
 	flatpak-builder --user --install-deps-from=flathub --force-clean $(FPBFLAGS) flatpak-build/flathub/ $<
 
+flathub-install: flatpak/flathub.yml
+	flatpak-builder --user --install-deps-from=flathub --force-clean --install $(FPBFLAGS) flatpak-build/flathub/ $<
+
 appcenter: flatpak/appcenter.yml
 	flatpak-builder --user --install-deps-from=appcenter --force-clean $(FPBFLAGS) flatpak-build/appcenter/ $<
+
+appcenter-install: flatpak/appcenter.yml
+	flatpak-builder --user --install-deps-from=appcenter --force-clean --install $(FPBFLAGS) flatpak-build/appcenter/ $<
 
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '..'/path: '.'/" $< >$@
@@ -197,4 +197,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all appcenter check ci clean dev fix flathub install strip test uninstall
+.PHONY: all appcenter appcenter-install check ci clean dev fix flathub flathub-install install strip test uninstall
