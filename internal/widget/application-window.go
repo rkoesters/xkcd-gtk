@@ -284,7 +284,7 @@ func (win *ApplicationWindow) RandomComic() {
 	win.ShowLoading()
 	newestComic, _ := cache.NewestComicInfoFromCache()
 	if newestComic.Num <= 0 {
-		win.SetComic(newestComic.Num)
+		win.FirstComic()
 		return
 	}
 	win.SetComic(rand.Intn(newestComic.Num) + 1)
