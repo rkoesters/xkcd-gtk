@@ -69,7 +69,7 @@ func NewApplication(appID string) (*Application, error) {
 	registerAction("open-blog", app.OpenBlog)
 	registerAction("open-store", app.OpenStore)
 	registerAction("open-what-if", app.OpenWhatIf)
-	registerAction("quit", app.Quit)
+	registerAction("quit", app.PleaseQuit)
 	registerAction("show-about", app.ShowAbout)
 	registerAction("show-shortcuts", app.ShowShortcuts)
 	registerAction("toggle-dark-mode", app.ToggleDarkMode)
@@ -240,8 +240,8 @@ func (app *Application) DarkMode() bool {
 	return darkMode
 }
 
-// Quit closes all windows so the application can close.
-func (app *Application) Quit() {
+// PleaseQuit gives open windows a chance to save state and then calls Quit.
+func (app *Application) PleaseQuit() {
 	// Close the active window so that it has a chance to save its state.
 	win := app.GetActiveWindow()
 	if win != nil {
@@ -249,12 +249,12 @@ func (app *Application) Quit() {
 		if parent != nil {
 			win = parent
 		}
-
 		win.Close()
 	}
 
-	// Quit the application.
-	glib.IdleAdd(app.Application.Quit)
+	// Add Quit to the event loop instead of calling it here so that signals
+	// emitted by win.Close() above have a chance to run.
+	glib.IdleAdd(app.Quit)
 }
 
 // LoadSettings tries to load our settings from disk.
