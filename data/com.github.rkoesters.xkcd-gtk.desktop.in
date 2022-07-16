@@ -6,6 +6,7 @@ GenericName=XKCD Viewer
 Comment=Read xkcd: a webcomic of romance, sarcasm, math, and language
 TryExec=com.github.rkoesters.xkcd-gtk
 Exec=com.github.rkoesters.xkcd-gtk
+DBusActivatable=true
 Icon=com.github.rkoesters.xkcd-gtk
 StartupNotify=true
 Terminal=false

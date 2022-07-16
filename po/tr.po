@@ -164,7 +164,7 @@ msgid "Navigate"
 msgstr "Dolaş"
 
 #: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:6
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
 msgid "New window"
 msgstr "Yeni pencere"
 
@@ -304,7 +304,7 @@ msgstr "Yaklaştır"
 msgid "Zoom out"
 msgstr "Uzaklaştır"
 
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
 

@@ -161,7 +161,7 @@ msgid "Navigate"
 msgstr "Navigation"
 
 #: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:6
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:18
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
 msgid "New window"
 msgstr "Nouvelle fenêtre"
 
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Zoom out"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:14
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romance;sarcasme;maths;langue;"
 

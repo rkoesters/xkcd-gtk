@@ -39,6 +39,7 @@ MODULE = github.com/rkoesters/xkcd-gtk
 EXE_NAME     = $(APP)
 ICON_NAME    = $(APP).svg
 DESKTOP_NAME = $(APP).desktop
+SERVICE_NAME = $(APP).service
 APPDATA_NAME = $(APP).appdata.xml
 POT_NAME     = $(APP).pot
 
@@ -46,6 +47,7 @@ EXE_PATH     = $(EXE_NAME)
 DEV_PATH     = $(EXE_PATH)-dev
 ICON_PATH    = data/$(ICON_NAME)
 DESKTOP_PATH = data/$(DESKTOP_NAME)
+SERVICE_PATH = data/$(SERVICE_NAME)
 APPDATA_PATH = data/$(APPDATA_NAME)
 POT_PATH     = po/$(POT_NAME)
 
@@ -176,6 +178,8 @@ install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	cp $(ICON_PATH) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
 	mkdir -p $(DESTDIR)$(datadir)/applications
 	cp $(DESKTOP_PATH) $(DESTDIR)$(datadir)/applications
+	mkdir -p $(DESTDIR)$(datadir)/dbus-1/services
+	cp $(SERVICE_PATH) $(DESTDIR)$(datadir)/dbus-1/services
 	mkdir -p $(DESTDIR)$(datadir)/metainfo
 	cp $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
 	for lang in $(LINGUAS); do \
@@ -187,6 +191,7 @@ uninstall:
 	rm $(DESTDIR)$(bindir)/$(EXE_NAME)
 	rm $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME)
 	rm $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME)
+	rm $(DESTDIR)$(datadir)/dbus-1/services/$(SERVICE_NAME)
 	rm $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
 	for lang in $(LINGUAS); do \
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
