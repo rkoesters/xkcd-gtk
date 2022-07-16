@@ -20,6 +20,7 @@ import (
 
 var (
 	forceAppMenu = flag.Bool("force-app-menu", false, "Always set an app menu.")
+	service      = flag.Bool("gapplication-service", false, "Start in GApplication service mode.")
 )
 
 // AppName is the user-visible name of this application.
@@ -40,9 +41,9 @@ type Application struct {
 }
 
 // NewApplication creates an instance of our GTK Application.
-func NewApplication(appID string, service bool) (*Application, error) {
+func NewApplication(appID string) (*Application, error) {
 	flags := glib.APPLICATION_FLAGS_NONE
-	if service {
+	if *service {
 		flags = flags | glib.APPLICATION_IS_SERVICE
 	}
 	super, err := gtk.ApplicationNew(appID, flags)

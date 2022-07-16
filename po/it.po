@@ -57,7 +57,7 @@ msgstr "Verifica di nuovi fumetti..."
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:26
+#: internal/widget/application.go:27
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
 msgid "Comic Sticks"
