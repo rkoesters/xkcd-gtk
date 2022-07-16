@@ -28,7 +28,7 @@ msgstr ""
 msgid "About xkcd"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:19
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:18
 msgid "Add to bookmarks"
 msgstr ""
 
@@ -100,7 +100,7 @@ msgstr ""
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:31 internal/widget/window-menu.go:89
+#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:89
 msgid "Explain"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Open bookmarks menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:85
+#: internal/widget/context-menu.go:29 internal/widget/window-menu.go:85
 msgid "Open link"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:32 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:31 internal/widget/properties-dialog.go:47
 #: internal/widget/window-menu.go:93 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr ""
@@ -219,11 +219,11 @@ msgstr ""
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:20
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:19
 msgid "Remove from bookmarks"
 msgstr ""
 
-#: internal/widget/context-menu.go:26 internal/widget/zoom-box.go:51
+#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
@@ -285,12 +285,12 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:59
+#: internal/widget/context-menu.go:23 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:38
+#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""

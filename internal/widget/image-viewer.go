@@ -67,7 +67,7 @@ func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageVi
 		button := gdk.EventButtonNewFromEvent(event)
 		switch button.Button() {
 		case gdk.BUTTON_SECONDARY:
-			iv.contextMenu.Present(event)
+			iv.contextMenu.PopupAtPointer(event)
 			return true
 		default:
 			return false

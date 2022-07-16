@@ -1,7 +1,6 @@
 package widget
 
 import (
-	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 )
@@ -47,10 +46,6 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	cm.HideOnDelete()
 
 	return cm, nil
-}
-
-func (cm *ContextMenu) Present(event *gdk.Event) {
-	cm.PopupAtPointer(event)
 }
 
 func (cm *ContextMenu) Dispose() {
