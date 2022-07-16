@@ -27,7 +27,7 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	dialog.HideOnDelete()
 	dialog.Connect("response", func(dialog *gtk.AboutDialog) {
 		dialog.Hide()
-	))
+	})
 	dialog.Connect("hide", func(dialog *gtk.AboutDialog) {
 		windowRemover(dialog)
 	})
