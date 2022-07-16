@@ -36,8 +36,12 @@ type Application struct {
 }
 
 // NewApplication creates an instance of our GTK Application.
-func NewApplication(appID string) (*Application, error) {
-	super, err := gtk.ApplicationNew(appID, glib.APPLICATION_FLAGS_NONE)
+func NewApplication(appID string, service bool) (*Application, error) {
+	flags := glib.APPLICATION_FLAGS_NONE
+	if service {
+		flags = flags | glib.APPLICATION_IS_SERVICE
+	}
+	super, err := gtk.ApplicationNew(appID, flags)
 	if err != nil {
 		return nil, err
 	}
