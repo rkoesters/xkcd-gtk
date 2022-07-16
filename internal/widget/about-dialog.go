@@ -25,7 +25,9 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	// We want to keep the about dialog around in case we want to show it
 	// again, so do not destroy it on close.
 	dialog.HideOnDelete()
-	dialog.Connect("response", dialog.Hide)
+	dialog.Connect("response", func(dialog *gtk.AboutDialog) {
+		dialog.Hide()
+	))
 	dialog.Connect("hide", func(dialog *gtk.AboutDialog) {
 		windowRemover(dialog)
 	})

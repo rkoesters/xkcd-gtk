@@ -100,8 +100,8 @@ func (dms *DarkModeSwitch) Dispose() {
 }
 
 // SwitchStateChanged is called when the active state of the switch changes.
-func (dms *DarkModeSwitch) SwitchStateChanged() {
-	swtchState := dms.swtch.GetActive()
+func (dms *DarkModeSwitch) SwitchStateChanged(swtch *gtk.Switch) {
+	swtchState := swtch.GetActive()
 	// Avoid calling dms.setDarkMode when this signal might have been
 	// emitted by dms.SyncDarkMode.
 	if swtchState == dms.darkMode() {
