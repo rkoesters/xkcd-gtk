@@ -251,6 +251,10 @@ func (app *Application) PleaseQuit() {
 			log.Print("error converting window to gtk.Window")
 			return
 		}
+		if win == nil {
+			log.Print("window is nil")
+			return
+		}
 		win.Close()
 	})
 }
