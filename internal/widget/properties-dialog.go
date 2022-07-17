@@ -167,15 +167,14 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 // ShowProperties presents the properties dialog to the user. If the dialog
 // doesn't exist yet, we create it.
 func (win *ApplicationWindow) ShowProperties() {
-	var err error
 	if win.properties == nil {
-		win.properties, err = NewPropertiesDialog(win)
+		pd, err := NewPropertiesDialog(win)
 		if err != nil {
 			log.Print("error creating properties dialog: ", err)
 			return
 		}
+		win.properties = pd
 	}
-
 	win.app.AddWindow(win.properties)
 	win.properties.Dialog.Present()
 }
