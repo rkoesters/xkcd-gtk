@@ -225,7 +225,12 @@ func (bm *BookmarksMenu) UpdateBookmarkButton() {
 
 func (bm *BookmarksMenu) loadBookmarkList() error {
 	bm.list.GetChildren().Foreach(func(child interface{}) {
-		bm.list.Remove(child.(gtk.IWidget))
+		w, ok := child.(*gtk.Widget)
+		if !ok {
+			log.Print("error converting child to gtk.Widget")
+			return
+		}
+		bm.list.Remove(w)
 	})
 
 	if bm.bookmarks.Empty() {
