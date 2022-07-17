@@ -141,17 +141,23 @@ func (app *Application) SetupAppMenu() error {
 
 // SetupCache initializes the comic cache and the search index.
 func (app *Application) SetupCache() {
+	log.Debug("SetupCache() start")
+	defer log.Debug("SetupCache() end")
+
+	log.Debug("calling cache.Init()")
 	err := cache.Init(search.Index)
 	if err != nil {
 		log.Print("error initializing comic cache: ", err)
 	}
 
+	log.Debug("calling search.Init()")
 	err = search.Init()
 	if err != nil {
 		log.Print("error initializing search index: ", err)
 	}
 
 	// Asynchronously fill the comic metadata cache and search index.
+	log.Debug("calling search.Load()")
 	err = search.Load(app)
 	if err != nil {
 		log.Print("error building search index: ", err)
@@ -160,11 +166,16 @@ func (app *Application) SetupCache() {
 
 // CloseCache closes the search index and comic cache.
 func (app *Application) CloseCache() {
+	log.Debug("CloseCache() start")
+	defer log.Debug("CloseCache() end")
+
+	log.Debug("calling search.Close()")
 	err := search.Close()
 	if err != nil {
 		log.Print("error closing search index: ", err)
 	}
 
+	log.Debug("calling cache.Close()")
 	err = cache.Close()
 	if err != nil {
 		log.Print("error closing comic cache: ", err)
@@ -263,12 +274,13 @@ func (app *Application) PleaseQuit() {
 
 // LoadSettings tries to load our settings from disk.
 func (app *Application) LoadSettings() {
-	var err error
+	log.Debug("LoadSettings() start")
+	defer log.Debug("LoadSettings() end")
 
 	paths.CheckForMisplacedSettings()
 
 	// Read settings from disk.
-	err = app.settings.ReadFile(paths.Settings())
+	err := app.settings.ReadFile(paths.Settings())
 	if err != nil {
 		log.Print("error reading app settings: ", err)
 	}
@@ -282,6 +294,9 @@ func (app *Application) LoadSettings() {
 
 // SaveSettings tries to save our settings to disk.
 func (app *Application) SaveSettings() {
+	log.Debug("SaveSettings() start")
+	defer log.Debug("SaveSettings() end")
+
 	err := paths.EnsureConfigDir()
 	if err != nil {
 		log.Printf("error saving settings: %v", err)
@@ -295,6 +310,9 @@ func (app *Application) SaveSettings() {
 
 // LoadBookmarks tries to load our bookmarks from disk.
 func (app *Application) LoadBookmarks() {
+	log.Debug("LoadBookmarks() start")
+	defer log.Debug("LoadBookmarks() end")
+
 	paths.CheckForMisplacedBookmarks()
 
 	app.bookmarks = bookmarks.New()
@@ -306,6 +324,9 @@ func (app *Application) LoadBookmarks() {
 
 // SaveBookmarks tries to save our bookmarks to disk.
 func (app *Application) SaveBookmarks() {
+	log.Debug("SaveBookmarks() start")
+	defer log.Debug("SaveBookmarks() end")
+
 	err := paths.EnsureDataDir()
 	if err != nil {
 		log.Printf("error saving bookmarks: %v", err)
