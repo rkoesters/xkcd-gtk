@@ -24,6 +24,6 @@ func urlLabel(s string) string {
 	case gtk.TEXT_DIR_RTL:
 		return "↖ " + s
 	default:
-		return s + " ➚"
+		return s + " ↗"
 	}
 }
