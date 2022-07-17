@@ -145,6 +145,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
 #: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: internal/widget/shortcuts-window.ui:4
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
@@ -250,10 +251,6 @@ msgstr "Cerca fumetti"
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
 msgid "Search for comics"
 msgstr "Cerca fumetti"
-
-#: internal/widget/shortcuts-window.ui:4
-msgid "Shortcuts"
-msgstr "Tasti Rapidi"
 
 #: internal/widget/properties-dialog.go:120
 msgid "Title"

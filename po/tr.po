@@ -149,6 +149,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Yer imleriyle karikatürleri takip edin"
 
 #: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: internal/widget/shortcuts-window.ui:4
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
@@ -253,10 +254,6 @@ msgstr "Karikatür ara"
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
 msgid "Search for comics"
 msgstr "Karikatür ara"
-
-#: internal/widget/shortcuts-window.ui:4
-msgid "Shortcuts"
-msgstr "Kısayollar"
 
 #: internal/widget/properties-dialog.go:120
 msgid "Title"

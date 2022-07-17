@@ -149,6 +149,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 
 #: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: internal/widget/shortcuts-window.ui:4
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
@@ -255,10 +256,6 @@ msgstr "Procurar Bandas Desenhadas"
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
 msgid "Search for comics"
 msgstr "Procurar por Bandas Desenhadas"
-
-#: internal/widget/shortcuts-window.ui:4
-msgid "Shortcuts"
-msgstr "Atalhos de Teclado"
 
 #: internal/widget/properties-dialog.go:120
 msgid "Title"

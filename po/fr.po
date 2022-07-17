@@ -146,6 +146,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr ""
 
 #: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: internal/widget/shortcuts-window.ui:4
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
@@ -251,10 +252,6 @@ msgstr "Rechercher des BD"
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
 msgid "Search for comics"
 msgstr "Recherchez des BD"
-
-#: internal/widget/shortcuts-window.ui:4
-msgid "Shortcuts"
-msgstr "Raccourcis clavier"
 
 #: internal/widget/properties-dialog.go:120
 msgid "Title"
