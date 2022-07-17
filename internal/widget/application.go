@@ -257,6 +257,8 @@ func (app *Application) PleaseQuit() {
 		}
 		win.Close()
 	})
+	// Add Quit to end of event queue to give windows time to save state.
+	glib.IdleAddPriority(glib.PRIORITY_LOW, app.Quit)
 }
 
 // LoadSettings tries to load our settings from disk.
