@@ -18,7 +18,7 @@ type ZoomBox struct {
 var _ Widget = &ZoomBox{}
 
 func NewZoomBox() (*ZoomBox, error) {
-	const zbIconSize = gtk.ICON_SIZE_SMALL_TOOLBAR
+	const zbIconSize = gtk.ICON_SIZE_MENU
 
 	super, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {

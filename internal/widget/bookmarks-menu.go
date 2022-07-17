@@ -34,6 +34,8 @@ type BookmarksMenu struct {
 var _ Widget = &BookmarksMenu{}
 
 func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
+	const bmIconSize = gtk.ICON_SIZE_MENU
+
 	super, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
@@ -77,7 +79,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 		return nil, err
 	}
 	addButton.SetActionName("win.bookmark-new")
-	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
+	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", bmIconSize)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +92,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 		return nil, err
 	}
 	removeButton.SetActionName("win.bookmark-remove")
-	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
+	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", bmIconSize)
 	if err != nil {
 		return nil, err
 	}

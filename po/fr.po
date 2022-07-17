@@ -30,7 +30,7 @@ msgstr "À propos"
 msgid "About xkcd"
 msgstr "À propos de xkcd"
 
-#: internal/widget/bookmarks-menu.go:75 internal/widget/context-menu.go:18
+#: internal/widget/bookmarks-menu.go:77 internal/widget/context-menu.go:18
 msgid "Add to bookmarks"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgstr "Texte alternatif"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:50 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:52 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr ""
 
@@ -228,7 +228,7 @@ msgstr ""
 "Lisez xkcd : une bande dessinée de romance, de sarcasme, de maths et de "
 "langue en ligne"
 
-#: internal/widget/bookmarks-menu.go:88 internal/widget/context-menu.go:19
+#: internal/widget/bookmarks-menu.go:90 internal/widget/context-menu.go:19
 msgid "Remove from bookmarks"
 msgstr ""
 
