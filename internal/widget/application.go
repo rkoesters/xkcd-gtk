@@ -315,38 +315,28 @@ func (app *Application) SaveBookmarks() {
 
 // ShowShortcuts shows a shortcuts window to the user.
 func (app *Application) ShowShortcuts() {
-	var err error
 	if app.shortcutsWindow == nil {
-		app.shortcutsWindow, err = NewShortcutsWindow(app.RemoveWindow)
+		sw, err := NewShortcutsWindow(app.RemoveWindow)
 		if err != nil {
 			log.Print("error creating shortcuts window: ", err)
 			return
 		}
+		app.shortcutsWindow = sw
 	}
-
 	app.AddWindow(app.shortcutsWindow)
 	app.shortcutsWindow.Present()
 }
 
 // ShowAbout shows our application info to the user.
 func (app *Application) ShowAbout() {
-	var err error
-
 	if app.aboutDialog == nil {
-		app.aboutDialog, err = NewAboutDialog(app.RemoveWindow)
+		ad, err := NewAboutDialog(app.RemoveWindow)
 		if err != nil {
 			log.Print("error creating about dialog: ", err)
 			return
 		}
+		app.aboutDialog = ad
 	}
-
-	// Set our parent window as the active window, but avoid accidentally
-	// setting ourself as the parent window.
-	win := app.GetActiveWindow()
-	if win != nil && win.Native() != app.aboutDialog.Native() {
-		app.aboutDialog.SetTransientFor(win)
-	}
-
 	app.AddWindow(app.aboutDialog)
 	app.aboutDialog.Present()
 }
