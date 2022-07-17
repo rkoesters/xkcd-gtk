@@ -1,3 +1,4 @@
+//go:build !xkcd_gtk_debug
 // +build !xkcd_gtk_debug
 
 package log
