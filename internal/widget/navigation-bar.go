@@ -103,7 +103,7 @@ func (nb *NavigationBar) UpdateButtonState() {
 	nb.actions["next-comic"].SetEnabled(n < newest.Num)
 
 	go func() {
-		const refreshRate = 5 * time.Minute
+		const refreshRate = time.Hour
 		newest, _ := cache.CheckForNewestComicInfo(refreshRate)
 		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
 			n := nb.comicNumber()
