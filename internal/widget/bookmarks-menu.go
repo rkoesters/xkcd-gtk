@@ -15,13 +15,12 @@ import (
 type BookmarksMenu struct {
 	*gtk.MenuButton
 
-	popover      *gtk.Popover
-	popoverBox   *gtk.Box
-	addButton    *gtk.Button
-	removeButton *gtk.Button
-	separator    *gtk.Separator
-	scroller     *gtk.ScrolledWindow
-	list         *gtk.Box
+	popover          *gtk.Popover
+	popoverBox       *gtk.Box
+	addRemoveButtons *gtk.Stack
+	separator        *gtk.Separator
+	scroller         *gtk.ScrolledWindow
+	list             *gtk.Box
 
 	bookmarks  *bookmarks.List // ptr to app.bookmarks
 	observerID int
@@ -66,31 +65,38 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	bm.popoverBox.SetMarginStart(style.PaddingPopover)
 	bm.popoverBox.SetMarginEnd(style.PaddingPopover)
 
-	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
+	bm.addRemoveButtons, err = gtk.StackNew()
 	if err != nil {
 		return nil, err
 	}
-	bm.addButton.SetActionName("win.bookmark-new")
+	bm.addRemoveButtons.SetHomogeneous(true)
+	bm.popoverBox.Add(bm.addRemoveButtons)
+
+	addButton, err := gtk.ButtonNewWithLabel(l("Add to bookmarks"))
+	if err != nil {
+		return nil, err
+	}
+	addButton.SetActionName("win.bookmark-new")
 	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
-	bm.addButton.SetImage(bookmarkNewImage)
-	bm.addButton.SetAlwaysShowImage(true)
-	bm.popoverBox.Add(bm.addButton)
+	addButton.SetImage(bookmarkNewImage)
+	addButton.SetAlwaysShowImage(true)
+	bm.addRemoveButtons.AddNamed(addButton, "add")
 
-	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
+	removeButton, err := gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
 	if err != nil {
 		return nil, err
 	}
-	bm.removeButton.SetActionName("win.bookmark-remove")
+	removeButton.SetActionName("win.bookmark-remove")
 	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", gtk.ICON_SIZE_BUTTON)
 	if err != nil {
 		return nil, err
 	}
-	bm.removeButton.SetImage(bookmarkRemoveImage)
-	bm.removeButton.SetAlwaysShowImage(true)
-	bm.popoverBox.Add(bm.removeButton)
+	removeButton.SetImage(bookmarkRemoveImage)
+	removeButton.SetAlwaysShowImage(true)
+	bm.addRemoveButtons.AddNamed(removeButton, "remove")
 
 	bm.separator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
@@ -138,8 +144,7 @@ func (bm *BookmarksMenu) Dispose() {
 
 	bm.popover = nil
 	bm.popoverBox = nil
-	bm.addButton = nil
-	bm.removeButton = nil
+	bm.addRemoveButtons = nil
 	bm.separator = nil
 	bm.scroller = nil
 	bm.list = nil
@@ -185,26 +190,15 @@ func (bm *BookmarksMenu) UpdateBookmarksMenu() {
 }
 
 func (bm *BookmarksMenu) UpdateBookmarkButton() {
-	if bm.bookmarks.Contains(bm.windowState.ComicNumber) {
-		hasFocus := bm.addButton.HasFocus()
-		bm.actions["bookmark-new"].SetEnabled(false)
-		bm.addButton.SetVisible(false)
+	currentIsBookmarked := bm.bookmarks.Contains(bm.windowState.ComicNumber)
 
-		bm.actions["bookmark-remove"].SetEnabled(true)
-		bm.removeButton.SetVisible(true)
-		if hasFocus {
-			bm.removeButton.GrabFocus()
-		}
+	bm.actions["bookmark-new"].SetEnabled(!currentIsBookmarked)
+	bm.actions["bookmark-remove"].SetEnabled(currentIsBookmarked)
+
+	if currentIsBookmarked {
+		bm.addRemoveButtons.SetVisibleChildName("remove")
 	} else {
-		hasFocus := bm.removeButton.HasFocus()
-		bm.actions["bookmark-remove"].SetEnabled(false)
-		bm.removeButton.SetVisible(false)
-
-		bm.actions["bookmark-new"].SetEnabled(true)
-		bm.addButton.SetVisible(true)
-		if hasFocus {
-			bm.addButton.GrabFocus()
-		}
+		bm.addRemoveButtons.SetVisibleChildName("add")
 	}
 }
 
