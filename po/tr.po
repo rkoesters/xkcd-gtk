@@ -26,6 +26,7 @@ msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
 
 #: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
 msgid "About Comic Sticks"
 msgstr "Comic Sticks Hakkında"
 
@@ -148,6 +149,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Yer imleriyle karikatürleri takip edin"
 
 #: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 

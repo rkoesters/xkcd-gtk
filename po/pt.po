@@ -23,6 +23,7 @@ msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Um leitor simples de xkcd escrito em Go e usando o GTK+3"
 
 #: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
 msgid "About Comic Sticks"
 msgstr "Sobre o Comic Sticks"
 
@@ -148,6 +149,7 @@ msgid "Keep track of comics with bookmarks"
 msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 
 #: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
 
