@@ -23,8 +23,8 @@ msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
 #: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
-msgid "About Comic Sticks"
-msgstr "A proposito di Sticks Comic"
+msgid "About"
+msgstr "Informazioni"
 
 #: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:30
 msgid "About xkcd"

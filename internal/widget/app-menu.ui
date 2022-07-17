@@ -37,7 +37,7 @@
         <attribute name="action">app.show-shortcuts</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">About Comic Sticks</attribute>
+        <attribute name="label" translatable="yes">About</attribute>
         <attribute name="action">app.show-about</attribute>
       </item>
       <item>

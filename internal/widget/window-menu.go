@@ -149,7 +149,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("About Comic Sticks"), "app.show-about")
+	err = addMenuEntry(l("About"), "app.show-about")
 	if err != nil {
 		return nil, err
 	}

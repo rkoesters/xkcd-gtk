@@ -22,7 +22,7 @@ msgstr ""
 
 #: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
-msgid "About Comic Sticks"
+msgid "About"
 msgstr ""
 
 #: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:30
