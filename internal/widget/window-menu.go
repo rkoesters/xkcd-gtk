@@ -60,7 +60,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		}
 		mb.SetActionName(action)
 		if external {
-			label += style.ExternalSuffix
+			label = externalLink(label)
 		}
 		mb.SetLabel(label)
 		mbl, err := mb.GetChild()
@@ -189,4 +189,15 @@ func (wm *WindowMenu) SetCompact(compact bool) {
 	}
 	wm.zoomBox.SetCompact(compact)
 	wm.darkModeSwitch.SetCompact(compact)
+}
+
+// externalLink returns the given label string with an added suffix hinting to
+// the user that the button will open a browser window.
+func externalLink(s string) string {
+	switch gtk.GetLocaleDirection() {
+	case gtk.TEXT_DIR_RTL:
+		return "↖ " + s
+	default:
+		return s + " ➚"
+	}
 }

@@ -3,7 +3,6 @@ package widget
 import (
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
 type ContextMenu struct {
@@ -27,8 +26,8 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	menuModel.AppendSectionWithoutLabel(&zoomSection.MenuModel)
 
 	propertiesSection := glib.MenuNew()
-	propertiesSection.Append(l("Open link")+style.ExternalSuffix, "win.open-link")
-	propertiesSection.Append(l("Explain")+style.ExternalSuffix, "win.explain")
+	propertiesSection.Append(externalLink(l("Open link")), "win.open-link")
+	propertiesSection.Append(externalLink(l("Explain")), "win.explain")
 	propertiesSection.Append(l("Properties"), "win.show-properties")
 	menuModel.AppendSectionWithoutLabel(&propertiesSection.MenuModel)
 

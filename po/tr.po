@@ -34,7 +34,7 @@ msgstr "Hakkında"
 msgid "About xkcd"
 msgstr "xkcd Hakkında"
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:19
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:18
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
@@ -108,7 +108,7 @@ msgstr "Tarih"
 msgid "Error reading local comic database"
 msgstr "Yerel karikatür veritabanı okuma hatası"
 
-#: internal/widget/context-menu.go:31 internal/widget/window-menu.go:92
+#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:92
 msgid "Explain"
 msgstr "Açıkla"
 
@@ -186,7 +186,7 @@ msgstr "Sayı"
 msgid "Open bookmarks menu"
 msgstr "Yer imleri menüsünü göster"
 
-#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:88
+#: internal/widget/context-menu.go:29 internal/widget/window-menu.go:88
 msgid "Open link"
 msgstr "Bağlantıyı aç"
 
@@ -206,7 +206,7 @@ msgstr "Kısayollar penceresini aç"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:32 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:31 internal/widget/properties-dialog.go:47
 #: internal/widget/window-menu.go:96 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Özellikler"
@@ -229,11 +229,11 @@ msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:20
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:19
 msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
-#: internal/widget/context-menu.go:26 internal/widget/zoom-box.go:51
+#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr "Yakınlaştırmayı sıfırla"
@@ -296,12 +296,12 @@ msgstr "XKCD Görüntüleyici"
 msgid "Zoom"
 msgstr "Yakınlaştırma"
 
-#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:59
+#: internal/widget/context-menu.go:23 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr "Yaklaştır"
 
-#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:38
+#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr "Uzaklaştır"
