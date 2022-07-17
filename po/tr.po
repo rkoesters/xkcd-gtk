@@ -175,7 +175,7 @@ msgstr "Yeni pencere"
 msgid "News"
 msgstr "Haberler"
 
-#: internal/widget/search-menu.go:68
+#: internal/widget/search-menu.go:89
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
@@ -247,7 +247,7 @@ msgstr "Ara"
 msgid "Search Index Update"
 msgstr "Arama Dizini Güncellemesi"
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:43 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Karikatür ara"
 

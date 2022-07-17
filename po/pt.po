@@ -175,7 +175,7 @@ msgstr "Nova Janela"
 msgid "News"
 msgstr "Noticias"
 
-#: internal/widget/search-menu.go:68
+#: internal/widget/search-menu.go:89
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
@@ -249,7 +249,7 @@ msgstr "Procurar"
 msgid "Search Index Update"
 msgstr "Índice de Pesquisa Atualizado"
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:43 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Procurar Bandas Desenhadas"
 

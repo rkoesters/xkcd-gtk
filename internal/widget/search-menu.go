@@ -16,12 +16,13 @@ import (
 type SearchMenu struct {
 	*gtk.MenuButton
 
-	popover    *gtk.Popover
-	popoverBox *gtk.Box
-	entry      *gtk.SearchEntry
-	noResults  *gtk.Label
-	results    *gtk.Box
-	scroller   *gtk.ScrolledWindow
+	popover         *gtk.Popover
+	popoverBox      *gtk.Box
+	entry           *gtk.SearchEntry
+	resultsScroller *gtk.ScrolledWindow
+	resultsStack    *gtk.Stack
+	resultsNone     *gtk.Label
+	resultsBox      *gtk.Box
 
 	setComic func(int) // win.SetComic
 }
@@ -65,28 +66,37 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.entry.Connect("search-changed", sm.Search)
 	sm.popoverBox.Add(sm.entry)
 
-	sm.noResults, err = gtk.LabelNew(l("No results found"))
+	sm.resultsScroller, err = gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	sm.popoverBox.Add(sm.noResults)
+	sm.resultsScroller.SetPropagateNaturalHeight(true)
+	sm.resultsScroller.SetPropagateNaturalWidth(true)
+	sm.resultsScroller.SetMinContentHeight(0)
+	sm.resultsScroller.SetMinContentWidth(200)
+	sm.resultsScroller.SetMaxContentHeight(350)
+	sm.resultsScroller.SetMaxContentWidth(350)
+	sm.popoverBox.Add(sm.resultsScroller)
 
-	sm.scroller, err = gtk.ScrolledWindowNew(nil, nil)
+	sm.resultsStack, err = gtk.StackNew()
 	if err != nil {
 		return nil, err
 	}
-	sm.scroller.SetPropagateNaturalHeight(true)
-	sm.scroller.SetPropagateNaturalWidth(true)
-	sm.scroller.SetMinContentHeight(0)
-	sm.scroller.SetMinContentWidth(200)
-	sm.scroller.SetMaxContentHeight(350)
-	sm.scroller.SetMaxContentWidth(350)
-	sm.popoverBox.Add(sm.scroller)
-	sm.results, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	sm.resultsStack.SetHomogeneous(false)
+	sm.resultsStack.SetTransitionType(gtk.STACK_TRANSITION_TYPE_SLIDE_DOWN)
+	sm.resultsScroller.Add(sm.resultsStack)
+
+	sm.resultsNone, err = gtk.LabelNew(l("No results found"))
 	if err != nil {
 		return nil, err
 	}
-	sm.scroller.Add(sm.results)
+	sm.resultsStack.Add(sm.resultsNone)
+
+	sm.resultsBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	if err != nil {
+		return nil, err
+	}
+	sm.resultsStack.Add(sm.resultsBox)
 	defer func() {
 		err := sm.loadSearchResults(nil)
 		if err != nil {
@@ -110,9 +120,10 @@ func (sm *SearchMenu) Dispose() {
 	sm.popover = nil
 	sm.popoverBox = nil
 	sm.entry = nil
-	sm.noResults = nil
-	sm.results = nil
-	sm.scroller = nil
+	sm.resultsScroller = nil
+	sm.resultsStack = nil
+	sm.resultsNone = nil
+	sm.resultsBox = nil
 }
 
 // Search preforms a search with win.searchEntry.GetText() and puts the results
@@ -141,24 +152,26 @@ func (sm *SearchMenu) Search() {
 
 // Show the user the given search results.
 func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
-	sm.results.GetChildren().Foreach(func(child interface{}) {
-		sm.results.Remove(child.(gtk.IWidget))
+	sm.resultsBox.GetChildren().Foreach(func(child interface{}) {
+		w, ok := child.(*gtk.Widget)
+		if !ok {
+			log.Print("error converting child to gtk.Widget")
+			return
+		}
+		sm.resultsBox.Remove(w)
 	})
 
+	sm.resultsScroller.SetVisible(result != nil)
 	if result == nil {
-		sm.scroller.SetVisible(false)
-		sm.noResults.SetVisible(false)
 		return nil
 	}
 	if result.Hits.Len() == 0 {
-		sm.scroller.SetVisible(false)
-		sm.noResults.SetVisible(true)
+		sm.resultsStack.SetVisibleChild(sm.resultsNone)
 		return nil
 	}
+	sm.resultsStack.SetVisibleChild(sm.resultsBox)
 
-	defer sm.results.ShowAll()
-	defer sm.scroller.SetVisible(true)
-	defer sm.noResults.SetVisible(false)
+	defer sm.resultsBox.ShowAll()
 
 	// We are grabbing the newest comic so we can figure out how wide to
 	// make comic ID column.
@@ -179,7 +192,7 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
 		if err != nil {
 			return err
 		}
-		sm.results.Add(clb)
+		sm.resultsBox.Add(clb)
 	}
 	return nil
 }

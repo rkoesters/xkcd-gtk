@@ -172,7 +172,7 @@ msgstr "Nouvelle fenêtre"
 msgid "News"
 msgstr "Actualités"
 
-#: internal/widget/search-menu.go:68
+#: internal/widget/search-menu.go:89
 msgid "No results found"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr "Rechercher"
 msgid "Search Index Update"
 msgstr "Rechercher une mise à jour de l'index"
 
-#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:43 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Rechercher des BD"
 
