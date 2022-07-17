@@ -343,7 +343,7 @@ func (app *Application) ShowAbout() {
 	// Set our parent window as the active window, but avoid accidentally
 	// setting ourself as the parent window.
 	win := app.GetActiveWindow()
-	if win.Native() != app.aboutDialog.Native() {
+	if win != nil && win.Native() != app.aboutDialog.Native() {
 		app.aboutDialog.SetTransientFor(win)
 	}
 
