@@ -20,6 +20,8 @@ const (
 	PaddingPopoverCompact    = 8
 	PaddingPropertiesDialog  = 12
 	PaddingUnlinkedButtonBox = 4
+
+	ExternalSuffix = " ➚"
 )
 
 var (

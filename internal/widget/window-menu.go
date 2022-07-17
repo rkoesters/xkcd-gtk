@@ -53,12 +53,15 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil
 	}
 
-	addMenuEntry := func(label, action string) error {
+	addMenuEntry := func(label, action string, external bool) error {
 		mb, err := gtk.ModelButtonNew()
 		if err != nil {
 			return err
 		}
 		mb.SetActionName(action)
+		if external {
+			label += style.ExternalSuffix
+		}
 		mb.SetLabel(label)
 		mbl, err := mb.GetChild()
 		if err != nil {
@@ -82,15 +85,15 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	}
 
 	// Comic properties section.
-	err = addMenuEntry(l("Open link"), "win.open-link")
+	err = addMenuEntry(l("Open link"), "win.open-link", true)
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("Explain"), "win.explain")
+	err = addMenuEntry(l("Explain"), "win.explain", true)
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("Properties"), "win.show-properties")
+	err = addMenuEntry(l("Properties"), "win.show-properties", false)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +108,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = addMenuEntry(l("New window"), "app.new-window")
+	err = addMenuEntry(l("New window"), "app.new-window", false)
 	if err != nil {
 		return nil, err
 	}
@@ -124,19 +127,19 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = addMenuEntry(l("What If?"), "app.open-what-if")
+	err = addMenuEntry(l("What If?"), "app.open-what-if", true)
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("xkcd blog"), "app.open-blog")
+	err = addMenuEntry(l("xkcd blog"), "app.open-blog", true)
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("xkcd store"), "app.open-store")
+	err = addMenuEntry(l("xkcd store"), "app.open-store", true)
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("About xkcd"), "app.open-about-xkcd")
+	err = addMenuEntry(l("About xkcd"), "app.open-about-xkcd", true)
 	if err != nil {
 		return nil, err
 	}
@@ -145,11 +148,11 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = addMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
+	err = addMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts", false)
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("About"), "app.show-about")
+	err = addMenuEntry(l("About"), "app.show-about", false)
 	if err != nil {
 		return nil, err
 	}

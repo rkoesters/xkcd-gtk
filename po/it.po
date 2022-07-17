@@ -21,16 +21,16 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
-#: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:155 internal/widget/app-menu.ui:40
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
 msgid "About"
 msgstr "Informazioni"
 
-#: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:142 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr "Informazioni su xkcd"
 
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:18
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:19
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
@@ -104,7 +104,7 @@ msgstr "Data"
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:89
+#: internal/widget/context-menu.go:31 internal/widget/window-menu.go:92
 msgid "Explain"
 msgstr "Spiega"
 
@@ -144,7 +144,7 @@ msgstr "Immagine"
 msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
-#: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:151 internal/widget/app-menu.ui:36
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
@@ -161,7 +161,7 @@ msgstr "Caricamento fumetto..."
 msgid "Navigate"
 msgstr "Naviga"
 
-#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:111 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
 msgid "New window"
 msgstr "Nuova Finestra"
@@ -182,7 +182,7 @@ msgstr "Numero"
 msgid "Open bookmarks menu"
 msgstr "Mostra menu segnalibri"
 
-#: internal/widget/context-menu.go:29 internal/widget/window-menu.go:85
+#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:88
 msgid "Open link"
 msgstr "Apri Link"
 
@@ -202,8 +202,8 @@ msgstr "Apri la finestra delle scorciatoie"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:31 internal/widget/properties-dialog.go:47
-#: internal/widget/window-menu.go:93 internal/widget/shortcuts-window.ui:132
+#: internal/widget/context-menu.go:32 internal/widget/properties-dialog.go:47
+#: internal/widget/window-menu.go:96 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Proprietà"
 
@@ -226,11 +226,11 @@ msgstr "Esci dall'applicazione"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 
-#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:19
+#: internal/widget/bookmarks-menu.go:82 internal/widget/context-menu.go:20
 msgid "Remove from bookmarks"
 msgstr "Rimuovi questo fumetto dai preferiti"
 
-#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:51
+#: internal/widget/context-menu.go:26 internal/widget/zoom-box.go:51
 #: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr ""
@@ -276,7 +276,7 @@ msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 msgid "View comic metadata"
 msgstr "Visualizza metadati fumetto"
 
-#: internal/widget/window-menu.go:127 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:130 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "E se?"
 
@@ -292,12 +292,12 @@ msgstr "Visualizzatore XKCD"
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/context-menu.go:23 internal/widget/zoom-box.go:59
+#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:59
 #: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:38
+#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:38
 #: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""
@@ -306,10 +306,10 @@ msgstr ""
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"
 
-#: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:134 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr "xkcd blog"
 
-#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:138 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "xkcd store"
