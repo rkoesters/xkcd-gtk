@@ -96,6 +96,7 @@ func (nb *NavigationBar) Dispose() {
 
 func (nb *NavigationBar) UpdateButtonState() {
 	n := nb.comicNumber()
+	nb.actions["first-comic"].SetEnabled(n > 1)
 	nb.actions["previous-comic"].SetEnabled(n > 1)
 
 	newest, _ := cache.NewestComicInfoFromCache()
