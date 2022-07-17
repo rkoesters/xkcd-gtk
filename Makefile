@@ -7,15 +7,12 @@ DEVFLAGS   = -race
 TESTFLAGS  = -cover
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 
-APP_VERSION   = $(shell tools/app-version.sh)
 GTK_VERSION   = $(shell tools/gtk-version.sh)
 PANGO_VERSION = $(shell tools/pango-version.sh)
 
-# Comma separated
-BUILD_DATA     = app-id=$(APP),version=$(APP_VERSION)
 # Space separated
-TAGS           = $(GTK_VERSION) $(PANGO_VERSION)
-DEV_TAGS       = xkcd_gtk_debug
+TAGS     = $(GTK_VERSION) $(PANGO_VERSION)
+DEV_TAGS = xkcd_gtk_debug
 
 ################################################################################
 # Install Variables
@@ -36,6 +33,8 @@ datadir = $(prefix)/share
 APP    = com.github.rkoesters.xkcd-gtk
 MODULE = github.com/rkoesters/xkcd-gtk
 
+APP_VERSION = $(shell tools/app-version.sh)
+
 EXE_NAME     = $(APP)
 ICON_NAME    = $(APP).svg
 DESKTOP_NAME = $(APP).desktop
@@ -53,6 +52,7 @@ POT_PATH     = po/$(POT_NAME)
 
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
+BUILD_DATA      = app-id=$(APP),version=$(APP_VERSION)
 
 GO_SOURCES     = $(shell find cmd internal -name '*.go' -type f)
 CSS_SOURCES    = $(shell find cmd internal -name '*.css' -type f)
