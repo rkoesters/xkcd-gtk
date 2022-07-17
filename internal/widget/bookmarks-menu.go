@@ -196,6 +196,13 @@ func (bm *BookmarksMenu) UpdateBookmarksMenu() {
 }
 
 func (bm *BookmarksMenu) UpdateBookmarkButton() {
+	focused := false
+	if c, err := bm.addRemoveButtons.GetVisibleChild(); err != nil {
+		log.Print("error fetching child of bm.addRemoveButtons: ", err)
+	} else {
+		focused = c.ToWidget().IsFocus()
+	}
+
 	currentIsBookmarked := bm.bookmarks.Contains(bm.windowState.ComicNumber)
 
 	bm.actions["bookmark-new"].SetEnabled(!currentIsBookmarked)
@@ -205,6 +212,14 @@ func (bm *BookmarksMenu) UpdateBookmarkButton() {
 		bm.addRemoveButtons.SetVisibleChild(bm.removeButton)
 	} else {
 		bm.addRemoveButtons.SetVisibleChild(bm.addButton)
+	}
+
+	if focused {
+		if c, err := bm.addRemoveButtons.GetVisibleChild(); err != nil {
+			log.Print("error fetching child of bm.addRemoveButtons: ", err)
+		} else {
+			c.ToWidget().GrabFocus()
+		}
 	}
 }
 
