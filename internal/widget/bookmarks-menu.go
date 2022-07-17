@@ -18,6 +18,8 @@ type BookmarksMenu struct {
 	popover          *gtk.Popover
 	popoverBox       *gtk.Box
 	addRemoveButtons *gtk.Stack
+	addButton        *gtk.Button
+	removeButton     *gtk.Button
 	separator        *gtk.Separator
 	scroller         *gtk.ScrolledWindow
 	list             *gtk.Box
@@ -74,31 +76,31 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	bm.addRemoveButtons.SetHomogeneous(true)
 	bm.popoverBox.Add(bm.addRemoveButtons)
 
-	addButton, err := gtk.ButtonNewWithLabel(l("Add to bookmarks"))
+	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
 	if err != nil {
 		return nil, err
 	}
-	addButton.SetActionName("win.bookmark-new")
+	bm.addButton.SetActionName("win.bookmark-new")
 	bookmarkNewImage, err := gtk.ImageNewFromIconName("bookmark-new-symbolic", bmIconSize)
 	if err != nil {
 		return nil, err
 	}
-	addButton.SetImage(bookmarkNewImage)
-	addButton.SetAlwaysShowImage(true)
-	bm.addRemoveButtons.AddNamed(addButton, "add")
+	bm.addButton.SetImage(bookmarkNewImage)
+	bm.addButton.SetAlwaysShowImage(true)
+	bm.addRemoveButtons.Add(bm.addButton)
 
-	removeButton, err := gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
+	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
 	if err != nil {
 		return nil, err
 	}
-	removeButton.SetActionName("win.bookmark-remove")
+	bm.removeButton.SetActionName("win.bookmark-remove")
 	bookmarkRemoveImage, err := gtk.ImageNewFromIconName("edit-delete-symbolic", bmIconSize)
 	if err != nil {
 		return nil, err
 	}
-	removeButton.SetImage(bookmarkRemoveImage)
-	removeButton.SetAlwaysShowImage(true)
-	bm.addRemoveButtons.AddNamed(removeButton, "remove")
+	bm.removeButton.SetImage(bookmarkRemoveImage)
+	bm.removeButton.SetAlwaysShowImage(true)
+	bm.addRemoveButtons.Add(bm.removeButton)
 
 	bm.separator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
@@ -147,6 +149,8 @@ func (bm *BookmarksMenu) Dispose() {
 	bm.popover = nil
 	bm.popoverBox = nil
 	bm.addRemoveButtons = nil
+	bm.addButton = nil
+	bm.removeButton = nil
 	bm.separator = nil
 	bm.scroller = nil
 	bm.list = nil
@@ -198,9 +202,9 @@ func (bm *BookmarksMenu) UpdateBookmarkButton() {
 	bm.actions["bookmark-remove"].SetEnabled(currentIsBookmarked)
 
 	if currentIsBookmarked {
-		bm.addRemoveButtons.SetVisibleChildName("remove")
+		bm.addRemoveButtons.SetVisibleChild(bm.removeButton)
 	} else {
-		bm.addRemoveButtons.SetVisibleChildName("add")
+		bm.addRemoveButtons.SetVisibleChild(bm.addButton)
 	}
 }
 
