@@ -240,21 +240,19 @@ func (app *Application) DarkMode() bool {
 	return darkMode
 }
 
-// PleaseQuit gives open windows a chance to save state and then calls Quit.
+// PleaseQuit closes all windows so that the application will exit. Main
+// functional difference with Quit is that PleaseQuit gives windows the
+// opportunity to save state before the application exits.
 func (app *Application) PleaseQuit() {
-	// Close the active window so that it has a chance to save its state.
-	win := app.GetActiveWindow()
-	if win != nil {
-		parent, _ := win.GetTransientFor()
-		if parent != nil {
-			win = parent
+	windows := app.GetWindows()
+	windows.Foreach(func(iw interface{}) {
+		win, ok := iw.(*gtk.Window)
+		if !ok {
+			log.Print("error converting window to gtk.Window")
+			return
 		}
 		win.Close()
-	}
-
-	// Add Quit to the event loop instead of calling it here so that signals
-	// emitted by win.Close() above have a chance to run.
-	glib.IdleAdd(app.Quit)
+	})
 }
 
 // LoadSettings tries to load our settings from disk.
