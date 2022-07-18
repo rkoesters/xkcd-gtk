@@ -127,5 +127,6 @@ func NewComicListScroller() (*gtk.ScrolledWindow, error) {
 	scroller.SetPropagateNaturalHeight(true)
 	scroller.SetMaxContentHeight(350)
 	scroller.SetShadowType(gtk.SHADOW_IN)
+	scroller.SetOverlayScrolling(true)
 	return scroller, nil
 }
