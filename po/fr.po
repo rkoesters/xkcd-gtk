@@ -172,7 +172,7 @@ msgstr "Nouvelle fenêtre"
 msgid "News"
 msgstr "Actualités"
 
-#: internal/widget/search-menu.go:87
+#: internal/widget/search-menu.go:86
 msgid "No results found"
 msgstr ""
 

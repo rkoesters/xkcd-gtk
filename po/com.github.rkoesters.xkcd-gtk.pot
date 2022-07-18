@@ -168,7 +168,7 @@ msgstr ""
 msgid "News"
 msgstr ""
 
-#: internal/widget/search-menu.go:87
+#: internal/widget/search-menu.go:86
 msgid "No results found"
 msgstr ""
 

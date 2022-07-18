@@ -175,7 +175,7 @@ msgstr "Yeni pencere"
 msgid "News"
 msgstr "Haberler"
 
-#: internal/widget/search-menu.go:87
+#: internal/widget/search-menu.go:86
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
