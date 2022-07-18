@@ -31,7 +31,7 @@ msgstr "Sobre"
 msgid "About xkcd"
 msgstr "Sobre o xkcd"
 
-#: internal/widget/bookmarks-menu.go:79 internal/widget/context-menu.go:18
+#: internal/widget/bookmarks-menu.go:73 internal/widget/context-menu.go:18
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
@@ -43,7 +43,7 @@ msgstr "Texto Alternativo"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:54 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:48 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Marcadores"
 
@@ -175,7 +175,7 @@ msgstr "Nova Janela"
 msgid "News"
 msgstr "Noticias"
 
-#: internal/widget/search-menu.go:86
+#: internal/widget/search-menu.go:71
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
@@ -232,7 +232,7 @@ msgstr ""
 "Ler xkcd: um romance de banda desenhada da internet, sarcasmo, matemática e "
 "linguagem"
 
-#: internal/widget/bookmarks-menu.go:92 internal/widget/context-menu.go:19
+#: internal/widget/bookmarks-menu.go:86 internal/widget/context-menu.go:19
 msgid "Remove from bookmarks"
 msgstr "Remover esta banda desenhada dos marcadores"
 
@@ -249,7 +249,7 @@ msgstr "Procurar"
 msgid "Search Index Update"
 msgstr "Índice de Pesquisa Atualizado"
 
-#: internal/widget/search-menu.go:43 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Procurar Bandas Desenhadas"
 

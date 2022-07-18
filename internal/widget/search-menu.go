@@ -7,7 +7,6 @@ import (
 	"github.com/blevesearch/bleve/v2"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
@@ -19,12 +18,10 @@ type SearchMenu struct {
 	popover         *gtk.Popover
 	popoverBox      *gtk.Box
 	entry           *gtk.SearchEntry
-	resultsScroller *gtk.ScrolledWindow
 	resultsStack    *gtk.Stack
 	resultsNone     *gtk.Label
-	resultsBox      *gtk.Box
-
-	setComic func(int) // win.SetComic
+	resultsScroller *gtk.ScrolledWindow
+	resultsList     *ComicListView
 }
 
 var _ Widget = &SearchMenu{}
@@ -36,8 +33,6 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	}
 	sm := &SearchMenu{
 		MenuButton: super,
-
-		setComic: comicSetter,
 	}
 
 	sm.SetTooltipText(l("Search comics"))
@@ -62,26 +57,16 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	if err != nil {
 		return nil, err
 	}
-	sm.entry.SetWidthChars(40)
+	sm.entry.SetWidthChars(30)
 	sm.entry.Connect("search-changed", sm.Search)
 	sm.popoverBox.Add(sm.entry)
-
-	sm.resultsScroller, err = gtk.ScrolledWindowNew(nil, nil)
-	if err != nil {
-		return nil, err
-	}
-	sm.resultsScroller.SetPolicy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-	sm.resultsScroller.SetPropagateNaturalHeight(true)
-	sm.resultsScroller.SetMaxContentHeight(350)
-	sm.popoverBox.Add(sm.resultsScroller)
 
 	sm.resultsStack, err = gtk.StackNew()
 	if err != nil {
 		return nil, err
 	}
 	sm.resultsStack.SetHomogeneous(false)
-	sm.resultsStack.SetTransitionType(gtk.STACK_TRANSITION_TYPE_SLIDE_DOWN)
-	sm.resultsScroller.Add(sm.resultsStack)
+	sm.popoverBox.Add(sm.resultsStack)
 
 	sm.resultsNone, err = gtk.LabelNew(l("No results found"))
 	if err != nil {
@@ -89,11 +74,21 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	}
 	sm.resultsStack.Add(sm.resultsNone)
 
-	sm.resultsBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	sm.resultsScroller, err = NewComicListScroller()
 	if err != nil {
 		return nil, err
 	}
-	sm.resultsStack.Add(sm.resultsBox)
+	sm.resultsStack.Add(sm.resultsScroller)
+
+	sm.resultsList, err = NewComicListView(func(n int) {
+		comicSetter(n)
+		sm.popover.Popdown()
+	})
+	if err != nil {
+		return nil, err
+	}
+	sm.resultsScroller.Add(sm.resultsList)
+
 	defer func() {
 		err := sm.loadSearchResults(nil)
 		if err != nil {
@@ -117,10 +112,11 @@ func (sm *SearchMenu) Dispose() {
 	sm.popover = nil
 	sm.popoverBox = nil
 	sm.entry = nil
-	sm.resultsScroller = nil
 	sm.resultsStack = nil
 	sm.resultsNone = nil
-	sm.resultsBox = nil
+	sm.resultsScroller = nil
+	sm.resultsList.Dispose()
+	sm.resultsList = nil
 }
 
 // Search preforms a search with win.searchEntry.GetText() and puts the results
@@ -149,16 +145,7 @@ func (sm *SearchMenu) Search() {
 
 // Show the user the given search results.
 func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
-	sm.resultsBox.GetChildren().Foreach(func(child interface{}) {
-		w, ok := child.(*gtk.Widget)
-		if !ok {
-			log.Print("error converting child to gtk.Widget")
-			return
-		}
-		sm.resultsBox.Remove(w)
-	})
-
-	sm.resultsScroller.SetVisible(result != nil)
+	sm.resultsStack.SetVisible(result != nil)
 	if result == nil {
 		return nil
 	}
@@ -166,30 +153,23 @@ func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
 		sm.resultsStack.SetVisibleChild(sm.resultsNone)
 		return nil
 	}
-	sm.resultsStack.SetVisibleChild(sm.resultsBox)
+	sm.resultsStack.SetVisibleChild(sm.resultsScroller)
 
-	defer sm.resultsBox.ShowAll()
-
-	// We are grabbing the newest comic so we can figure out how wide to
-	// make comic ID column.
-	newest, err := cache.NewestComicInfoFromCache()
-	idWidth := len(strconv.Itoa(newest.Num))
+	clm, err := NewComicListModel()
 	if err != nil {
-		// For the time being, its probably 4 characters.
-		idWidth = 4
+		return err
 	}
 
 	for _, sr := range result.Hits {
-		id, err := strconv.Atoi(sr.ID)
+		comicNum, err := strconv.Atoi(sr.ID)
 		if err != nil {
 			return err
 		}
-
-		clb, err := NewComicListButton(id, fmt.Sprint(sr.Fields["safe_title"]), sm.setComic, idWidth)
+		err = clm.AppendComic(comicNum, fmt.Sprint(sr.Fields["safe_title"]))
 		if err != nil {
 			return err
 		}
-		sm.resultsBox.Add(clb)
 	}
+	sm.resultsList.SetModel(clm)
 	return nil
 }

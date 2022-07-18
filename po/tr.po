@@ -34,7 +34,7 @@ msgstr "Hakkında"
 msgid "About xkcd"
 msgstr "xkcd Hakkında"
 
-#: internal/widget/bookmarks-menu.go:79 internal/widget/context-menu.go:18
+#: internal/widget/bookmarks-menu.go:73 internal/widget/context-menu.go:18
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
@@ -46,7 +46,7 @@ msgstr "Alternatif metin"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:54 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:48 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
@@ -175,7 +175,7 @@ msgstr "Yeni pencere"
 msgid "News"
 msgstr "Haberler"
 
-#: internal/widget/search-menu.go:86
+#: internal/widget/search-menu.go:71
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
@@ -230,7 +230,7 @@ msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
-#: internal/widget/bookmarks-menu.go:92 internal/widget/context-menu.go:19
+#: internal/widget/bookmarks-menu.go:86 internal/widget/context-menu.go:19
 msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
@@ -247,7 +247,7 @@ msgstr "Ara"
 msgid "Search Index Update"
 msgstr "Arama Dizini Güncellemesi"
 
-#: internal/widget/search-menu.go:43 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Karikatür ara"
 

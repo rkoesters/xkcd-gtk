@@ -1,8 +1,6 @@
 package widget
 
 import (
-	"strconv"
-
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
@@ -20,17 +18,14 @@ type BookmarksMenu struct {
 	addRemoveButtons *gtk.Stack
 	addButton        *gtk.Button
 	removeButton     *gtk.Button
-	separator        *gtk.Separator
 	scroller         *gtk.ScrolledWindow
-	list             *gtk.Box
+	list             *ComicListView
 
 	bookmarks  *bookmarks.List // ptr to app.bookmarks
 	observerID int
 
 	windowState *WindowState                  // ptr to win.state
 	actions     map[string]*glib.SimpleAction // ptr to win.actions
-
-	setComic func(int) // win.SetComic
 }
 
 var _ Widget = &BookmarksMenu{}
@@ -48,7 +43,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 		bookmarks:   b,
 		windowState: ws,
 		actions:     actions,
-		setComic:    comicSetter,
 	}
 
 	bm.SetTooltipText(l("Bookmarks"))
@@ -60,7 +54,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	}
 	bm.SetPopover(bm.popover)
 
-	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PaddingPopover)
 	if err != nil {
 		return nil, err
 	}
@@ -102,28 +96,21 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	bm.removeButton.SetAlwaysShowImage(true)
 	bm.addRemoveButtons.Add(bm.removeButton)
 
-	bm.separator, err = gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
+	bm.scroller, err = NewComicListScroller()
 	if err != nil {
 		return nil, err
 	}
-	bm.popoverBox.PackStart(bm.separator, false, false, style.PaddingPopover)
-
-	bm.scroller, err = gtk.ScrolledWindowNew(nil, nil)
-	if err != nil {
-		return nil, err
-	}
-	bm.scroller.SetPropagateNaturalHeight(true)
-	bm.scroller.SetPropagateNaturalWidth(true)
-	bm.scroller.SetMinContentHeight(0)
-	bm.scroller.SetMinContentWidth(200)
-	bm.scroller.SetMaxContentHeight(350)
-	bm.scroller.SetMaxContentWidth(350)
 	bm.popoverBox.Add(bm.scroller)
-	bm.list, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+
+	bm.list, err = NewComicListView(func(n int) {
+		comicSetter(n)
+		bm.popover.Popdown()
+	})
 	if err != nil {
 		return nil, err
 	}
 	bm.scroller.Add(bm.list)
+
 	bm.registerBookmarkObserver()
 	win.Connect("delete-event", bm.unregisterBookmarkObserver)
 	defer func() {
@@ -151,8 +138,8 @@ func (bm *BookmarksMenu) Dispose() {
 	bm.addRemoveButtons = nil
 	bm.addButton = nil
 	bm.removeButton = nil
-	bm.separator = nil
 	bm.scroller = nil
+	bm.list.Dispose()
 	bm.list = nil
 
 	bm.bookmarks = nil
@@ -224,46 +211,29 @@ func (bm *BookmarksMenu) UpdateBookmarkButton() {
 }
 
 func (bm *BookmarksMenu) loadBookmarkList() error {
-	bm.list.GetChildren().Foreach(func(child interface{}) {
-		w, ok := child.(*gtk.Widget)
-		if !ok {
-			log.Print("error converting child to gtk.Widget")
-			return
-		}
-		bm.list.Remove(w)
-	})
-
-	if bm.bookmarks.Empty() {
-		bm.scroller.SetVisible(false)
-		bm.separator.SetVisible(false)
+	empty := bm.bookmarks.Empty()
+	bm.scroller.SetVisible(!empty)
+	if empty {
 		return nil
 	}
 
-	defer bm.list.ShowAll()
-	defer bm.scroller.SetVisible(true)
-	defer bm.separator.SetVisible(true)
-
-	// We are grabbing the newest comic so we can figure out how
-	// wide to make the comic number column.
-	newest, err := cache.NewestComicInfoFromCache()
-	idWidth := len(strconv.Itoa(newest.Num))
+	clm, err := NewComicListModel()
 	if err != nil {
-		// For the time being, its probably 4 characters.
-		idWidth = 4
+		return err
 	}
 
 	iter := bm.bookmarks.Iterator()
 	for iter.Next() {
-		id := iter.Value().(int)
-		comic, err := cache.ComicInfo(id)
+		comicNumber := iter.Value().(int)
+		comic, err := cache.ComicInfo(comicNumber)
 		if err != nil {
 			return err
 		}
-		clb, err := NewComicListButton(comic.Num, comic.SafeTitle, bm.setComic, idWidth)
+		err = clm.AppendComic(comicNumber, comic.SafeTitle)
 		if err != nil {
 			return err
 		}
-		bm.list.Add(clb)
 	}
+	bm.list.SetModel(clm)
 	return nil
 }
