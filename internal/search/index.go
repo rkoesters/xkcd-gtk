@@ -48,7 +48,7 @@ func Index(comic *xkcd.Comic) error {
 func Search(userQuery string) (*bleve.SearchResult, error) {
 	q := query.NewQueryStringQuery(userQuery)
 	searchRequest := bleve.NewSearchRequest(q)
-	searchRequest.Size = 50
+	searchRequest.Size = 100
 	searchRequest.Fields = []string{"*"}
 	return index.Search(searchRequest)
 }
