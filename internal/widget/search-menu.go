@@ -62,7 +62,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	if err != nil {
 		return nil, err
 	}
-	sm.entry.SetSizeRequest(300, -1)
+	sm.entry.SetWidthChars(50)
 	sm.entry.Connect("search-changed", sm.Search)
 	sm.popoverBox.Add(sm.entry)
 
@@ -72,8 +72,6 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	}
 	sm.resultsScroller.SetPropagateNaturalHeight(true)
 	sm.resultsScroller.SetPropagateNaturalWidth(true)
-	sm.resultsScroller.SetMinContentHeight(0)
-	sm.resultsScroller.SetMinContentWidth(200)
 	sm.resultsScroller.SetMaxContentHeight(350)
 	sm.resultsScroller.SetMaxContentWidth(350)
 	sm.popoverBox.Add(sm.resultsScroller)
