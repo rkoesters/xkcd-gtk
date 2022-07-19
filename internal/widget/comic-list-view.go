@@ -33,8 +33,8 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 	clv.SetHoverSelection(true)
 
 	const (
-		xpad = 4
-		ypad = 4
+		xpad = 2
+		ypad = 6
 	)
 
 	numberRenderer, err := gtk.CellRendererTextNew()
