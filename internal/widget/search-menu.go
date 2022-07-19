@@ -89,17 +89,10 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	}
 	sm.resultsScroller.Add(sm.resultsList)
 
-	defer func() {
-		err := sm.loadSearchResults(nil)
-		if err != nil {
-			log.Print("error initializing search results: ", err)
-		}
-	}()
-
 	sm.popoverBox.ShowAll()
 	sm.popover.Add(sm.popoverBox)
 
-	return sm, nil
+	return sm, sm.loadSearchResults(nil)
 }
 
 func (sm *SearchMenu) Dispose() {
