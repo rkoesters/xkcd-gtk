@@ -1,6 +1,8 @@
 package widget
 
 import (
+	"strconv"
+
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
@@ -32,44 +34,35 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 	clv.SetActivateOnSingleClick(true)
 	clv.SetHoverSelection(true)
 
-	const (
-		xpad = 2
-		ypad = 6
-	)
+	insertColumn := func(pos int, xalign float64, expand bool, ellipsize pango.EllipsizeMode) (*gtk.TreeViewColumn, error) {
+		renderer, err := gtk.CellRendererTextNew()
+		if err != nil {
+			return nil, err
+		}
+		renderer.SetAlignment(xalign, 0)
+		renderer.SetProperty("xpad", 2)
+		renderer.SetProperty("ypad", 6)
+		renderer.SetProperty("ellipsize", ellipsize)
+		tvc, err := gtk.TreeViewColumnNewWithAttribute(strconv.Itoa(pos), renderer, "text", pos)
+		if err != nil {
+			return nil, err
+		}
+		tvc.SetVisible(true)
+		tvc.SetExpand(expand)
+		tvc.SetSizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+		clv.InsertColumn(tvc, pos)
+		return tvc, nil
+	}
 
-	numberRenderer, err := gtk.CellRendererTextNew()
+	clv.numberColumn, err = insertColumn(comicListColumnNumber, 1, false, pango.ELLIPSIZE_NONE)
 	if err != nil {
 		return nil, err
 	}
-	numberRenderer.SetAlignment(1, 0) // xalign right, yalign top
-	numberRenderer.SetProperty("xpad", xpad)
-	numberRenderer.SetProperty("ypad", ypad)
-	numberRenderer.SetProperty("ellipsize", pango.ELLIPSIZE_NONE)
-	clv.numberColumn, err = gtk.TreeViewColumnNewWithAttribute("number", numberRenderer, "text", comicListColumnNumber)
-	if err != nil {
-		return nil, err
-	}
-	clv.numberColumn.SetVisible(true)
-	clv.numberColumn.SetExpand(false)
-	clv.numberColumn.SetSizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
-	clv.InsertColumn(clv.numberColumn, comicListColumnNumber)
 
-	titleRenderer, err := gtk.CellRendererTextNew()
+	clv.titleColumn, err = insertColumn(comicListColumnTitle, 0, true, pango.ELLIPSIZE_END)
 	if err != nil {
 		return nil, err
 	}
-	titleRenderer.SetAlignment(0, 0) // xalign left, yalign top
-	titleRenderer.SetProperty("xpad", xpad)
-	titleRenderer.SetProperty("ypad", ypad)
-	titleRenderer.SetProperty("ellipsize", pango.ELLIPSIZE_END)
-	clv.titleColumn, err = gtk.TreeViewColumnNewWithAttribute("title", titleRenderer, "text", comicListColumnTitle)
-	if err != nil {
-		return nil, err
-	}
-	clv.titleColumn.SetVisible(true)
-	clv.titleColumn.SetExpand(true)
-	clv.titleColumn.SetSizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
-	clv.InsertColumn(clv.titleColumn, comicListColumnTitle)
 
 	clv.Show()
 
@@ -90,7 +83,7 @@ func (clv *ComicListView) Dispose() {
 }
 
 func (clv *ComicListView) rowActivated(tv *gtk.TreeView, path *gtk.TreePath, col *gtk.TreeViewColumn) {
-	itm, err := clv.GetModel()
+	itm, err := tv.GetModel()
 	if err != nil {
 		log.Print(err)
 		return

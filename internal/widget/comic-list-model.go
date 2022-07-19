@@ -19,10 +19,9 @@ func NewComicListModel() (*ComicListModel, error) {
 	if err != nil {
 		return nil, err
 	}
-	clm := &ComicListModel{
+	return &ComicListModel{
 		ListStore: super,
-	}
-	return clm, nil
+	}, nil
 }
 
 func (clm *ComicListModel) AppendComic(comicNum int, comicTitle string) error {
