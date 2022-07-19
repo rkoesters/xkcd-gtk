@@ -34,13 +34,13 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 	clv.SetActivateOnSingleClick(true)
 	clv.SetHoverSelection(true)
 
-	insertColumn := func(pos int, xalign float64, expand bool, ellipsize pango.EllipsizeMode) (*gtk.TreeViewColumn, error) {
+	insertColumn := func(pos, xpad int, xalign float64, expand bool, ellipsize pango.EllipsizeMode) (*gtk.TreeViewColumn, error) {
 		renderer, err := gtk.CellRendererTextNew()
 		if err != nil {
 			return nil, err
 		}
 		renderer.SetAlignment(xalign, 0)
-		renderer.SetProperty("xpad", 2)
+		renderer.SetProperty("xpad", xpad)
 		renderer.SetProperty("ypad", 6)
 		renderer.SetProperty("ellipsize", ellipsize)
 		tvc, err := gtk.TreeViewColumnNewWithAttribute(strconv.Itoa(pos), renderer, "text", pos)
@@ -54,12 +54,12 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 		return tvc, nil
 	}
 
-	clv.numberColumn, err = insertColumn(comicListColumnNumber, 1, false, pango.ELLIPSIZE_NONE)
+	clv.numberColumn, err = insertColumn(comicListColumnNumber, 4, 1, false, pango.ELLIPSIZE_NONE)
 	if err != nil {
 		return nil, err
 	}
 
-	clv.titleColumn, err = insertColumn(comicListColumnTitle, 0, true, pango.ELLIPSIZE_END)
+	clv.titleColumn, err = insertColumn(comicListColumnTitle, 0, 0, true, pango.ELLIPSIZE_END)
 	if err != nil {
 		return nil, err
 	}
