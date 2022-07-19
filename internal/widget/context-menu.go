@@ -26,8 +26,8 @@ func NewContextMenu(actionGroup glib.IActionGroup) (*ContextMenu, error) {
 	menuModel.AppendSectionWithoutLabel(&zoomSection.MenuModel)
 
 	propertiesSection := glib.MenuNew()
-	propertiesSection.Append(urlLabel(l("Open link")), "win.open-link")
-	propertiesSection.Append(urlLabel(l("Explain")), "win.explain")
+	propertiesSection.Append(l("Open link"), "win.open-link")
+	propertiesSection.Append(l("Explain"), "win.explain")
 	propertiesSection.Append(l("Properties"), "win.show-properties")
 	menuModel.AppendSectionWithoutLabel(&propertiesSection.MenuModel)
 

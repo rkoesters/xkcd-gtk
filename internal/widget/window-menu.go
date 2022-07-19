@@ -82,11 +82,11 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	}
 
 	// Comic properties section.
-	err = addMenuEntry(urlLabel(l("Open link")), "win.open-link")
+	err = addMenuEntry(l("Open link"), "win.open-link")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(urlLabel(l("Explain")), "win.explain")
+	err = addMenuEntry(l("Explain"), "win.explain")
 	if err != nil {
 		return nil, err
 	}
@@ -124,19 +124,19 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = addMenuEntry(urlLabel(l("What If?")), "app.open-what-if")
+	err = addMenuEntry(l("What If?"), "app.open-what-if")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(urlLabel(l("xkcd blog")), "app.open-blog")
+	err = addMenuEntry(l("xkcd blog"), "app.open-blog")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(urlLabel(l("xkcd store")), "app.open-store")
+	err = addMenuEntry(l("xkcd store"), "app.open-store")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(urlLabel(l("About xkcd")), "app.open-about-xkcd")
+	err = addMenuEntry(l("About xkcd"), "app.open-about-xkcd")
 	if err != nil {
 		return nil, err
 	}
