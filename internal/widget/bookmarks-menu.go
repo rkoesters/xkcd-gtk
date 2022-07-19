@@ -68,7 +68,7 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 		return nil, err
 	}
 	bm.addRemoveButtons.SetHomogeneous(true)
-	bm.addRemoveButtons.SetSizeRequest(250, -1)
+	bm.addRemoveButtons.SetSizeRequest(280, -1)
 	bm.popoverBox.Add(bm.addRemoveButtons)
 
 	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))

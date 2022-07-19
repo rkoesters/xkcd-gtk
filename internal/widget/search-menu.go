@@ -57,7 +57,7 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	if err != nil {
 		return nil, err
 	}
-	sm.entry.SetWidthChars(35)
+	sm.entry.SetSizeRequest(280, -1)
 	sm.entry.Connect("search-changed", sm.Search)
 	sm.popoverBox.Add(sm.entry)
 
