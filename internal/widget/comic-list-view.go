@@ -2,6 +2,7 @@ package widget
 
 import (
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/gotk3/gotk3/pango"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
@@ -32,7 +33,7 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 	clv.SetHoverSelection(true)
 
 	const (
-		xpad = 3
+		xpad = 4
 		ypad = 4
 	)
 
@@ -43,11 +44,14 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 	numberRenderer.SetAlignment(1, 0) // xalign right, yalign top
 	numberRenderer.SetProperty("xpad", xpad)
 	numberRenderer.SetProperty("ypad", ypad)
+	numberRenderer.SetProperty("ellipsize", pango.ELLIPSIZE_NONE)
 	clv.numberColumn, err = gtk.TreeViewColumnNewWithAttribute("number", numberRenderer, "text", comicListColumnNumber)
 	if err != nil {
 		return nil, err
 	}
 	clv.numberColumn.SetVisible(true)
+	clv.numberColumn.SetExpand(false)
+	clv.numberColumn.SetSizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
 	clv.InsertColumn(clv.numberColumn, comicListColumnNumber)
 
 	titleRenderer, err := gtk.CellRendererTextNew()
@@ -57,11 +61,14 @@ func NewComicListView(comicSetter func(int)) (*ComicListView, error) {
 	titleRenderer.SetAlignment(0, 0) // xalign left, yalign top
 	titleRenderer.SetProperty("xpad", xpad)
 	titleRenderer.SetProperty("ypad", ypad)
+	titleRenderer.SetProperty("ellipsize", pango.ELLIPSIZE_END)
 	clv.titleColumn, err = gtk.TreeViewColumnNewWithAttribute("title", titleRenderer, "text", comicListColumnTitle)
 	if err != nil {
 		return nil, err
 	}
 	clv.titleColumn.SetVisible(true)
+	clv.titleColumn.SetExpand(true)
+	clv.titleColumn.SetSizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
 	clv.InsertColumn(clv.titleColumn, comicListColumnTitle)
 
 	clv.Show()
@@ -80,12 +87,6 @@ func (clv *ComicListView) Dispose() {
 	clv.numberColumn = nil
 	clv.titleColumn = nil
 	clv.setComic = nil
-}
-
-func (clv *ComicListView) SetModel(m gtk.ITreeModel) {
-	clv.TreeView.SetModel(m)
-	clv.numberColumn.QueueResize()
-	clv.titleColumn.QueueResize()
 }
 
 func (clv *ComicListView) rowActivated(tv *gtk.TreeView, path *gtk.TreePath, col *gtk.TreeViewColumn) {
@@ -124,6 +125,7 @@ func NewComicListScroller() (*gtk.ScrolledWindow, error) {
 		return nil, err
 	}
 	scroller.SetPolicy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+	scroller.SetPropagateNaturalWidth(false) // ComicListView will ellipsize.
 	scroller.SetPropagateNaturalHeight(true)
 	scroller.SetMaxContentHeight(350)
 	scroller.SetShadowType(gtk.SHADOW_IN)
