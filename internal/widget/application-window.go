@@ -180,6 +180,10 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	return win, nil
 }
 
+func (win *ApplicationWindow) IsNil() bool {
+	return win == nil
+}
+
 func (win *ApplicationWindow) DarkModeChanged() {
 	darkMode := win.app.DarkMode()
 	log.Debugf("DarkModeChanged() -> %v", darkMode)

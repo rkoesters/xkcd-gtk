@@ -103,18 +103,28 @@ func (ws *WindowState) LoadState() {
 	ws.ReadFile(windowStatePath())
 }
 
+type StateHaver interface {
+	// IsNil returns whether the value contained in the interface is nil,
+	// regardless of whether the type is nil. Useful for interfaces because
+	// interfaces are a tuple of (type, value), and (type, nil) != nil, only
+	// (nil, nil) == nil.
+	IsNil() bool
+
+	IsMaximized() bool
+	GetSize() (int, int)     // returns width, height
+	GetPosition() (int, int) // returns x, y
+}
+
 // SaveState writes win.state to disk so it can be loaded next time we open a
 // window.
-func (ws *WindowState) SaveState(window *ApplicationWindow, dialog *PropertiesDialog) {
+func (ws *WindowState) SaveState(window, dialog StateHaver) {
 	ws.Maximized = window.IsMaximized()
 	if !ws.Maximized {
 		ws.Width, ws.Height = window.GetSize()
 		ws.PositionX, ws.PositionY = window.GetPosition()
 	}
-	if dialog == nil {
-		ws.PropertiesVisible = false
-	} else {
-		ws.PropertiesVisible = true
+	ws.PropertiesVisible = !dialog.IsNil()
+	if ws.PropertiesVisible {
 		ws.PropertiesWidth, ws.PropertiesHeight = dialog.GetSize()
 		ws.PropertiesPositionX, ws.PropertiesPositionY = dialog.GetPosition()
 	}

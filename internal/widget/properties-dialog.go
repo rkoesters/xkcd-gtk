@@ -169,6 +169,10 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	return pd, nil
 }
 
+func (pd *PropertiesDialog) IsNil() bool {
+	return pd == nil
+}
+
 // ShowProperties presents the properties dialog to the user. If the dialog
 // doesn't exist yet, we create it.
 func (win *ApplicationWindow) ShowProperties() {
