@@ -181,7 +181,10 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 }
 
 func (win *ApplicationWindow) IsVisible() bool {
-	return win == nil || win.ApplicationWindow.IsVisible()
+	if win == nil {
+		return false
+	}
+	return win.ApplicationWindow.IsVisible()
 }
 
 func (win *ApplicationWindow) DarkModeChanged() {

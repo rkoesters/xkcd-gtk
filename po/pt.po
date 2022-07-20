@@ -53,7 +53,7 @@ msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
 "offline"
 
-#: internal/widget/application-window.go:268
+#: internal/widget/application-window.go:271
 msgid "Checking for new comic..."
 msgstr "A pesquisar por uma nova banda desenhada..."
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Banda desenhada não encontrada"
 
-#: internal/widget/application-window.go:341
+#: internal/widget/application-window.go:344
 msgid "Connect to the internet to download comic image"
 msgstr "Ligue-se à internet para descarregar imagens de banda desenhada"
 
@@ -158,7 +158,7 @@ msgstr "Atalhos de Teclado"
 msgid "Link"
 msgstr "Ligação"
 
-#: internal/widget/application-window.go:348
+#: internal/widget/application-window.go:351
 msgid "Loading comic..."
 msgstr "A carregar banda desenhada..."
 
