@@ -119,10 +119,9 @@ type StateHaver interface {
 // window.
 func (ws *WindowState) SaveState(window, dialog StateHaver) {
 	ws.Maximized = window.IsMaximized()
-	if !ws.Maximized {
-		ws.Width, ws.Height = window.GetSize()
-		ws.PositionX, ws.PositionY = window.GetPosition()
-	}
+	ws.Width, ws.Height = window.GetSize()
+	ws.PositionX, ws.PositionY = window.GetPosition()
+
 	ws.PropertiesVisible = !dialog.IsNil()
 	if ws.PropertiesVisible {
 		ws.PropertiesWidth, ws.PropertiesHeight = dialog.GetSize()
