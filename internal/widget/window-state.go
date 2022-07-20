@@ -104,12 +104,7 @@ func (ws *WindowState) LoadState() {
 }
 
 type StateHaver interface {
-	// IsNil returns whether the value contained in the interface is nil,
-	// regardless of whether the type is nil. Useful for interfaces because
-	// interfaces are a tuple of (type, value), and (type, nil) != nil, only
-	// (nil, nil) == nil.
-	IsNil() bool
-
+	IsVisible() bool
 	IsMaximized() bool
 	GetSize() (int, int)     // returns width, height
 	GetPosition() (int, int) // returns x, y
@@ -122,7 +117,7 @@ func (ws *WindowState) SaveState(window, dialog StateHaver) {
 	ws.Width, ws.Height = window.GetSize()
 	ws.PositionX, ws.PositionY = window.GetPosition()
 
-	ws.PropertiesVisible = !dialog.IsNil()
+	ws.PropertiesVisible = dialog.IsVisible()
 	if ws.PropertiesVisible {
 		ws.PropertiesWidth, ws.PropertiesHeight = dialog.GetSize()
 		ws.PropertiesPositionX, ws.PropertiesPositionY = dialog.GetPosition()

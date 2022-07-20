@@ -169,8 +169,8 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	return pd, nil
 }
 
-func (pd *PropertiesDialog) IsNil() bool {
-	return pd == nil
+func (pd *PropertiesDialog) IsVisible() bool {
+	return pd == nil || pd.Dialog.IsVisible()
 }
 
 // ShowProperties presents the properties dialog to the user. If the dialog

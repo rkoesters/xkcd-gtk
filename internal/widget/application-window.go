@@ -180,8 +180,8 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	return win, nil
 }
 
-func (win *ApplicationWindow) IsNil() bool {
-	return win == nil
+func (win *ApplicationWindow) IsVisible() bool {
+	return win == nil || win.ApplicationWindow.IsVisible()
 }
 
 func (win *ApplicationWindow) DarkModeChanged() {
