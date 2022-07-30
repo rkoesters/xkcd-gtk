@@ -50,7 +50,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Cache comics for later offline viewing"
 msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
 
@@ -64,11 +64,11 @@ msgstr ""
 
 #: internal/widget/application.go:27
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
 msgstr "Comic Sticks"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
@@ -96,7 +96,7 @@ msgstr "Karikatür alınamadı"
 msgid "Dark mode"
 msgstr "Koyu kipi aç/kapat"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "Dark mode for late night reading"
 msgstr "Gece geç saatlerde okumak için koyu kip"
 
@@ -112,7 +112,7 @@ msgstr "Yerel karikatür veritabanı okuma hatası"
 msgid "Explain"
 msgstr "Açıkla"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
 msgid "Features:"
 msgstr "Özellikler:"
 
@@ -144,7 +144,7 @@ msgstr "Önceki karikatüre git"
 msgid "Image"
 msgstr "Görüntü"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
 msgid "Keep track of comics with bookmarks"
 msgstr "Yer imleriyle karikatürleri takip edin"
 
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Properties"
 msgstr "Özellikler"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
 msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr "xkcd wiki aracılığıyla karikatür açıklamalarına hızla erişin"
 
@@ -225,7 +225,7 @@ msgid "Quit application"
 msgstr "Uygulamadan çık"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
@@ -251,7 +251,7 @@ msgstr "Arama Dizini Güncellemesi"
 msgid "Search comics"
 msgstr "Karikatür ara"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
 msgid "Search for comics"
 msgstr "Karikatür ara"
 
@@ -273,7 +273,7 @@ msgstr "Yazılı metin"
 msgid "Updating comic search index..."
 msgstr "Karikatür arama dizini güncelleniyor..."
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
 msgstr "Karikatür üst verisini görüntüle"
 

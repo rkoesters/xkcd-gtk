@@ -45,7 +45,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
@@ -59,11 +59,11 @@ msgstr ""
 
 #: internal/widget/application.go:27
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Dark mode"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "Dark mode for late night reading"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Explain"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
 msgid "Features:"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
 msgid "Keep track of comics with bookmarks"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
 msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgid "Quit application"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Search comics"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
 msgid "Search for comics"
 msgstr ""
 
@@ -264,7 +264,7 @@ msgstr ""
 msgid "Updating comic search index..."
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
 msgstr ""
 

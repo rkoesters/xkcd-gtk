@@ -49,7 +49,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
@@ -63,11 +63,11 @@ msgstr ""
 
 #: internal/widget/application.go:27
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
 msgstr "Comic Sticks"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
@@ -95,7 +95,7 @@ msgstr "Kan stripverhaal niet ophalen"
 msgid "Dark mode"
 msgstr "Donker thema"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "Dark mode for late night reading"
 msgstr "Donker thema voor de late avonduurtjes"
 
@@ -111,7 +111,7 @@ msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 msgid "Explain"
 msgstr "Uitleg tonen"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
 msgid "Features:"
 msgstr "Kenmerken:"
 
@@ -143,7 +143,7 @@ msgstr "Ga naar het vorige verhaal"
 msgid "Image"
 msgstr "Afbeelding"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
 msgid "Keep track of comics with bookmarks"
 msgstr "Orden verhalen middels bladwijzers"
 
@@ -211,7 +211,7 @@ msgstr ""
 msgid "Properties"
 msgstr "Eigenschappen"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
 msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr "Toon de uitleg van verhalen middels de ‘explain xkcd’-wiki"
 
@@ -224,7 +224,7 @@ msgid "Quit application"
 msgstr "Afsluiten"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
@@ -249,7 +249,7 @@ msgstr "Zoekindex bijwerken"
 msgid "Search comics"
 msgstr "Verhalen doorzoeken"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
 msgid "Search for comics"
 msgstr "Zoek naar specifieke verhalen"
 
@@ -270,7 +270,7 @@ msgstr "Transcriptie"
 msgid "Updating comic search index..."
 msgstr "Bezig met bijwerken van zoekindex…"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
 msgstr "Toon de metagegevens"
 

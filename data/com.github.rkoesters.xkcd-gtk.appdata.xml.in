@@ -2,6 +2,7 @@
 <component type="desktop">
   <id>com.github.rkoesters.xkcd-gtk</id>
 
+  <launchable type="desktop-id">com.github.rkoesters.xkcd-gtk.desktop</launchable>
   <provides>
     <binary>com.github.rkoesters.xkcd-gtk</binary>
   </provides>

@@ -47,7 +47,7 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Cache comics for later offline viewing"
 msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
@@ -63,11 +63,11 @@ msgstr ""
 
 #: internal/widget/application.go:27
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:9
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
 msgstr "Comic Sticks"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:12
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid ""
 "Comic Sticks brings xkcd comics to your desktop with quick comic searching, "
 "offline browsing, and intuitive keyboard shortcuts."
@@ -96,7 +96,7 @@ msgstr "Não Foi Possível Adquirir a Banda Desenhada"
 msgid "Dark mode"
 msgstr "Modo escuro"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "Dark mode for late night reading"
 msgstr "Modo escuro para leitura à noite"
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Explain"
 msgstr "Explicar"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
 msgid "Features:"
 msgstr "Funcionalidades:"
 
@@ -144,7 +144,7 @@ msgstr "Ir para a banda desenhada anterior"
 msgid "Image"
 msgstr "Imagem"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
 msgid "Keep track of comics with bookmarks"
 msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Properties"
 msgstr "Propriedades"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
 msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr ""
 "Acessa rapidamente as explicações de bandas desenhadas a partir da wiki xkcd"
@@ -226,7 +226,7 @@ msgid "Quit application"
 msgstr "Sair da aplicação"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "Ler xkcd: um romance de banda desenhada da internet, sarcasmo, matemática e "
@@ -253,7 +253,7 @@ msgstr "Índice de Pesquisa Atualizado"
 msgid "Search comics"
 msgstr "Procurar Bandas Desenhadas"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:15
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
 msgid "Search for comics"
 msgstr "Procurar por Bandas Desenhadas"
 
@@ -274,7 +274,7 @@ msgstr "Transcrição"
 msgid "Updating comic search index..."
 msgstr "A atualizar o índice de pesquisa da banda desenhada..."
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
 msgstr "Ver a meta data da banda desenhada"
 
