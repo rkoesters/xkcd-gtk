@@ -13,13 +13,12 @@ import (
 type BookmarksMenu struct {
 	*gtk.MenuButton
 
-	popover          *gtk.Popover
-	popoverBox       *gtk.Box
-	addRemoveButtons *gtk.Stack
-	addButton        *gtk.Button
-	removeButton     *gtk.Button
-	scroller         *gtk.ScrolledWindow
-	list             *ComicListView
+	popover      *gtk.Popover
+	popoverBox   *gtk.Box
+	addButton    *gtk.Button
+	removeButton *gtk.Button
+	scroller     *gtk.ScrolledWindow
+	list         *ComicListView
 
 	bookmarks  *bookmarks.List // ptr to app.bookmarks
 	observerID int
@@ -31,7 +30,11 @@ type BookmarksMenu struct {
 var _ Widget = &BookmarksMenu{}
 
 func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
-	const bmIconSize = gtk.ICON_SIZE_MENU
+	const (
+		bmIconSize = gtk.ICON_SIZE_MENU
+		btnWidth   = 280
+		btnHeight  = -1
+	)
 
 	super, err := gtk.MenuButtonNew()
 	if err != nil {
@@ -63,14 +66,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	bm.popoverBox.SetMarginStart(style.PaddingPopover)
 	bm.popoverBox.SetMarginEnd(style.PaddingPopover)
 
-	bm.addRemoveButtons, err = gtk.StackNew()
-	if err != nil {
-		return nil, err
-	}
-	bm.addRemoveButtons.SetHomogeneous(true)
-	bm.addRemoveButtons.SetSizeRequest(280, -1)
-	bm.popoverBox.Add(bm.addRemoveButtons)
-
 	bm.addButton, err = gtk.ButtonNewWithLabel(l("Add to bookmarks"))
 	if err != nil {
 		return nil, err
@@ -82,7 +77,8 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	}
 	bm.addButton.SetImage(bookmarkNewImage)
 	bm.addButton.SetAlwaysShowImage(true)
-	bm.addRemoveButtons.Add(bm.addButton)
+	bm.addButton.SetSizeRequest(btnWidth, btnHeight)
+	bm.popoverBox.Add(bm.addButton)
 
 	bm.removeButton, err = gtk.ButtonNewWithLabel(l("Remove from bookmarks"))
 	if err != nil {
@@ -95,7 +91,8 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	}
 	bm.removeButton.SetImage(bookmarkRemoveImage)
 	bm.removeButton.SetAlwaysShowImage(true)
-	bm.addRemoveButtons.Add(bm.removeButton)
+	bm.removeButton.SetSizeRequest(btnWidth, btnHeight)
+	bm.popoverBox.Add(bm.removeButton)
 
 	bm.scroller, err = NewComicListScroller()
 	if err != nil {
@@ -136,7 +133,6 @@ func (bm *BookmarksMenu) Dispose() {
 
 	bm.popover = nil
 	bm.popoverBox = nil
-	bm.addRemoveButtons = nil
 	bm.addButton = nil
 	bm.removeButton = nil
 	bm.scroller = nil
@@ -184,29 +180,25 @@ func (bm *BookmarksMenu) UpdateBookmarksMenu() {
 }
 
 func (bm *BookmarksMenu) UpdateBookmarkButton() {
-	focused := false
-	if c, err := bm.addRemoveButtons.GetVisibleChild(); err != nil {
-		log.Print("error fetching child of bm.addRemoveButtons: ", err)
-	} else {
-		focused = c.ToWidget().IsFocus()
-	}
-
 	currentIsBookmarked := bm.bookmarks.Contains(bm.windowState.ComicNumber)
 
+	var focused bool
+	if currentIsBookmarked {
+		focused = bm.addButton.IsFocus()
+	} else {
+		focused = bm.removeButton.IsFocus()
+	}
+
+	bm.addButton.SetVisible(!currentIsBookmarked)
+	bm.removeButton.SetVisible(currentIsBookmarked)
 	bm.actions["bookmark-new"].SetEnabled(!currentIsBookmarked)
 	bm.actions["bookmark-remove"].SetEnabled(currentIsBookmarked)
 
-	if currentIsBookmarked {
-		bm.addRemoveButtons.SetVisibleChild(bm.removeButton)
-	} else {
-		bm.addRemoveButtons.SetVisibleChild(bm.addButton)
-	}
-
 	if focused {
-		if c, err := bm.addRemoveButtons.GetVisibleChild(); err != nil {
-			log.Print("error fetching child of bm.addRemoveButtons: ", err)
+		if currentIsBookmarked {
+			bm.removeButton.GrabFocus()
 		} else {
-			c.ToWidget().GrabFocus()
+			bm.addButton.GrabFocus()
 		}
 	}
 }
