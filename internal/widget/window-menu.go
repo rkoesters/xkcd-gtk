@@ -95,8 +95,8 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	// If the desktop environment will show an app menu, then we do not need
-	// to add the app menu contents to the window menu.
+	// If the desktop environment will show an app menu, then we do not need to
+	// add the app menu contents to the window menu.
 	if prefersAppMenu {
 		return wm, nil
 	}

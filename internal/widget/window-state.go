@@ -12,11 +12,11 @@ import (
 )
 
 const (
-	// ImageScaleMin is the minimum scale by which the application will zoom
-	// the comic image.
+	// ImageScaleMin is the minimum scale by which the application will zoom the
+	// comic image.
 	ImageScaleMin = 0.25
-	// ImageScaleMax is the maximum scale by which the application will zoom
-	// the comic image.
+	// ImageScaleMax is the maximum scale by which the application will zoom the
+	// comic image.
 	ImageScaleMax = 5
 )
 

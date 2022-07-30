@@ -22,8 +22,8 @@ func NewAboutDialog(windowRemover func(gtk.IWindow)) (*gtk.AboutDialog, error) {
 	dialog.SetCopyright("Copyright © 2015-2022 Ryan Koesters")
 	dialog.SetLicenseType(gtk.LICENSE_GPL_3_0)
 
-	// We want to keep the about dialog around in case we want to show it
-	// again, so do not destroy it on close.
+	// We want to keep the about dialog around in case we want to show it again,
+	// so do not destroy it on close.
 	dialog.HideOnDelete()
 	dialog.Connect("response", func(dialog gtk.IWindow) {
 		dialog.ToWindow().Hide()

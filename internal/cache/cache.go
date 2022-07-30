@@ -43,12 +43,12 @@ var (
 	sendCachedNewestComic          chan<- *xkcd.Comic
 	recvCachedNewestComicUpdatedAt <-chan time.Time
 
-	// addToSearchIndex is a callback to insert the given comic into the
-	// search index.
+	// addToSearchIndex is a callback to insert the given comic into the search
+	// index.
 	addToSearchIndex func(comic *xkcd.Comic) error
 
-	// Error messages to be shown in the window title. Initialized in Init
-	// to provide translations to system language.
+	// Error messages to be shown in the window title. Initialized in Init to
+	// provide translations to system language.
 	cacheDatabaseError    string
 	comicNotFound         string
 	couldNotDownloadComic string
@@ -74,8 +74,8 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	}
 
 	// If the user's cache isn't compatible with our binary's cache
-	// implementation, then we need to start over (we will move the old
-	// cache to .bak just in case).
+	// implementation, then we need to start over (we will move the old cache to
+	// .bak just in case).
 	if existingCacheVersion() != currentCacheVersion() {
 		log.Debug("incompatible cache database found, backing up and rebuilding cache database...")
 		os.Rename(comicCacheDBPath(), comicCacheDBPath()+".bak")
@@ -136,8 +136,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 			case cachedNewestComicOut <- cachedNewestComic:
 				// Sending the comic was all we wanted to do.
 			case cachedNewestComicUpdatedAtOut <- cachedNewestComicUpdatedAt:
-				// Sending the time stamp was all we wanted to
-				// do.
+				// Sending the time stamp was all we wanted to do.
 			}
 		}
 	}()
@@ -194,8 +193,7 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 		data := bucket.Get(intToBytes(n))
 		if data == nil {
-			// The comic metadata isn't in our cache yet, we will
-			// try to download it.
+			// The comic metadata isn't in our cache yet, we will try to download it.
 			return ErrMiss
 		}
 

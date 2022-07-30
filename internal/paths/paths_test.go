@@ -8,10 +8,10 @@ import (
 )
 
 func TestPaths(t *testing.T) {
-	// More thorough tests can be found in builder_test.go. These tests are
-	// to verify that the package level versions of each method generally
-	// works by checking that they return valid, absolute paths (or the
-	// current directory in the case of the fallback for LocaleDir).
+	// More thorough tests can be found in builder_test.go. These tests are to
+	// verify that the package level versions of each method generally works by
+	// checking that they return valid, absolute paths (or the current directory
+	// in the case of the fallback for LocaleDir).
 
 	paths.Init("com.example.test")
 

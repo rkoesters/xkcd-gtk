@@ -211,16 +211,14 @@ func (app *Application) ToggleDarkMode() {
 // darkMode argument.
 func (app *Application) SetDarkMode(darkMode bool) {
 	log.Debugf("SetDarkMode(darkMode=%v)", darkMode)
-	// Change the dark mode setting in one of the next iterations of the
-	// event loop (i.e. do not block) so that the style does not change in
-	// the middle of any ongoing animations (e.g. a switch toggling or a
-	// menu closing).
+	// Change the dark mode setting in one of the next iterations of the event
+	// loop (i.e. do not block) so that the style does not change in the middle of
+	// any ongoing animations (e.g. a switch toggling or a menu closing).
 	go glib.IdleAdd(func() {
 		log.Debugf("SetDarkMode(darkMode=%v).func()", darkMode)
-		// Setting 'gtk-application-prefer-dark-theme' will trigger a
-		// call to win.DrawComic which will call app.DarkMode again,
-		// which will then update app.settings.DarkMode (which
-		// effectively serves as a cache of
+		// Setting 'gtk-application-prefer-dark-theme' will trigger a call to
+		// win.DrawComic which will call app.DarkMode again, which will then update
+		// app.settings.DarkMode (which effectively serves as a cache of
 		// 'gtk-application-prefer-dark-theme').
 		err := app.gtkSettings.SetProperty("gtk-application-prefer-dark-theme", darkMode)
 		if err != nil {

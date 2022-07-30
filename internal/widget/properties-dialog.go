@@ -153,8 +153,8 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	// A gtk.Dialog content area has some children by default, we want to
-	// remove those children so the only child is scwin.
+	// A gtk.Dialog content area has some children by default, we want to remove
+	// those children so the only child is scwin.
 	box.GetChildren().Foreach(func(child interface{}) {
 		w, ok := child.(*gtk.Widget)
 		if !ok {

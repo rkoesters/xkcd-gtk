@@ -13,8 +13,8 @@ type DarkModeSwitch struct {
 	label *gtk.ModelButton
 	swtch *gtk.Switch
 
-	// darkMode and setDarkMode are used to interact with the application's
-	// dark mode state.
+	// darkMode and setDarkMode are used to interact with the application's dark
+	// mode state.
 	darkMode    func() bool
 	setDarkMode func(bool)
 }
@@ -44,9 +44,9 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	dms.swtch.Connect("notify::active", dms.SwitchStateChanged)
 	dms.PackEnd(dms.swtch, false, true, 0)
 
-	// Use a ModelButton to force the theme to apply the same padding as the
-	// other items on the WindowMenu. Has the added benefit of increasing
-	// the clickable area for toggling dark mode.
+	// Use a ModelButton to force the theme to apply the same padding as the other
+	// items on the WindowMenu. Has the added benefit of increasing the clickable
+	// area for toggling dark mode.
 	dms.label, err = gtk.ModelButtonNew()
 	if err != nil {
 		return nil, err
@@ -54,16 +54,15 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	dms.label.SetLabel(l("Dark mode"))
 	// Keyboard navigation should go to the switch rather than the label.
 	dms.label.SetCanFocus(false)
-	// Use "button-release-event" instead of "clicked" because "b-r-e" runs
-	// the default handlers after our closure, whereas "clicked" always runs
-	// the default handlers first. Running before the default handlers
-	// allows us to prevent the running of the default handlers.
+	// Use "button-release-event" instead of "clicked" because "b-r-e" runs the
+	// default handlers after our closure, whereas "clicked" always runs the
+	// default handlers first. Running before the default handlers allows us to
+	// prevent the running of the default handlers.
 	dms.label.Connect("button-release-event", func(w gtk.IWidget) {
 		dms.swtch.Activate()
-		// Prevent the default handlers from running so they do not
-		// close the popover menu. The popover menu should remain open
-		// to mimic the behavior of clicking the switch (which would not
-		// close the menu).
+		// Prevent the default handlers from running so they do not close the
+		// popover menu. The popover menu should remain open to mimic the behavior
+		// of clicking the switch (which would not close the menu).
 		w.ToWidget().StopEmission("button-release-event")
 	})
 	lc, err := dms.label.GetChild()
@@ -76,9 +75,8 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 		return nil, err
 	}
 	// Add this style class to disable the min-width sometimes given to
-	// ModelButtons. The other ModelButtons in the menu will set the
-	// min-width which gives us the flexibility to add the switch without
-	// widening the menu.
+	// ModelButtons. The other ModelButtons in the menu will set the min-width
+	// which gives us the flexibility to add the switch without widening the menu.
 	sc.AddClass(style.ClassNoMinWidth)
 	dms.PackStart(dms.label, true, true, 0)
 
@@ -102,8 +100,8 @@ func (dms *DarkModeSwitch) Dispose() {
 // SwitchStateChanged is called when the active state of the switch changes.
 func (dms *DarkModeSwitch) SwitchStateChanged(swtch *gtk.Switch) {
 	swtchState := swtch.GetActive()
-	// Avoid calling dms.setDarkMode when this signal might have been
-	// emitted by dms.SyncDarkMode.
+	// Avoid calling dms.setDarkMode when this signal might have been emitted by
+	// dms.SyncDarkMode.
 	if swtchState == dms.darkMode() {
 		return
 	}
@@ -115,8 +113,8 @@ func (dms *DarkModeSwitch) SyncDarkMode(darkMode bool) {
 	if dms == nil {
 		return
 	}
-	// Avoid calling dms.swtch.SetActive when this signal might have been
-	// emitted by dms.SwitchStateChanged.
+	// Avoid calling dms.swtch.SetActive when this signal might have been emitted
+	// by dms.SwitchStateChanged.
 	if darkMode == dms.swtch.GetActive() {
 		return
 	}
