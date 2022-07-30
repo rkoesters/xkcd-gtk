@@ -5,52 +5,54 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	const data = "version=0.0.0,debug=true"
-	flags := parse(data)
-	if flags == nil {
-		t.Fatal("flags == nil")
-	}
-	if flags["version"] != "0.0.0" || flags["debug"] != "true" {
-		t.Fatalf("parse failure: data='%v' flags='%v'", data, flags)
-	}
-}
+	tests := []struct {
+		desc string
+		data string
+		want map[string]string
+	}{{
+		desc: "empty build data",
+		want: map[string]string{},
+	}, {
+		desc: "well formed build data",
+		data: "version=0.0.0,debug=true",
+		want: map[string]string{
+			"version": "0.0.0",
+			"debug":   "true",
+		},
+	}, {
+		desc: "blank key-value pair",
+		data: "version=0.0.0,",
+		want: map[string]string{
+			"version": "0.0.0",
+			"":        "",
+		},
+	}, {
+		desc: "bad format",
+		data: "asdf",
+		want: map[string]string{
+			"asdf": "",
+		},
+	}}
 
-func TestParseEmpty(t *testing.T) {
-	const data = ""
-	flags := parse(data)
-	if flags == nil {
-		t.Fatal("flags == nil")
-	}
-	if flags["version"] != "" || flags["debug"] != "" {
-		t.Fatalf("parse failure: data='%v' flags='%v'", data, flags)
-	}
-}
-
-func TestParseBlankKVPair(t *testing.T) {
-	const data = "version=0.0.0,"
-	flags := parse(data)
-	if flags == nil {
-		t.Fatal("flags == nil")
-	}
-	if flags["version"] != "0.0.0" || flags["debug"] != "" {
-		t.Fatalf("parse failure: data='%v' flags='%v'", data, flags)
-	}
-	if flags[""] != "" {
-		t.Fatal("parse failure: blank key=value pair has non-zero value")
-	}
-}
-
-func TestParseBadFormat(t *testing.T) {
-	// Should print warnings, but should not panic.
-	const data = "asdf"
-	flags := parse(data)
-	if flags == nil {
-		t.Fatal("flags == nil")
-	}
-	if flags["version"] != "" || flags["debug"] != "" {
-		t.Fatalf("parse failure: data='%v' flags='%v'", data, flags)
-	}
-	if flags["asdf"] != "" {
-		t.Fatal("parse failure: invalid key=value pair has non-zero value")
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
+			flags := parse(tc.data)
+			if flags == nil {
+				t.Fatal("flags == nil")
+			}
+			for k, got := range flags {
+				want, ok := tc.want[k]
+				if !ok {
+					t.Errorf("unexpected key %q", k)
+				}
+				if got != want {
+					t.Errorf("got %q, want %q", got, want)
+				}
+				delete(tc.want, k)
+			}
+			if len(tc.want) > 0 {
+				t.Error("missing key-value pairs: ", tc.want)
+			}
+		})
 	}
 }
