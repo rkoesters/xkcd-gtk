@@ -46,7 +46,10 @@ func Index(comic *xkcd.Comic) error {
 
 // Search searches the index for the given userQuery.
 func Search(userQuery string) (*bleve.SearchResult, error) {
-	q := query.NewQueryStringQuery(userQuery)
+	q := query.NewDisjunctionQuery([]query.Query{
+		query.NewQueryStringQuery(userQuery),
+		query.NewFuzzyQuery(userQuery),
+	})
 	searchRequest := bleve.NewSearchRequest(q)
 	searchRequest.Size = 100
 	searchRequest.Fields = []string{"*"}

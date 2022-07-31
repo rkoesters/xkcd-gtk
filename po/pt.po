@@ -245,7 +245,7 @@ msgstr ""
 msgid "Search"
 msgstr "Procurar"
 
-#: internal/search/index.go:68
+#: internal/search/index.go:71
 msgid "Search Index Update"
 msgstr "Índice de Pesquisa Atualizado"
 
@@ -270,7 +270,7 @@ msgstr "Alternar modo escuro"
 msgid "Transcript"
 msgstr "Transcrição"
 
-#: internal/search/index.go:76
+#: internal/search/index.go:79
 msgid "Updating comic search index..."
 msgstr "A atualizar o índice de pesquisa da banda desenhada..."
 
