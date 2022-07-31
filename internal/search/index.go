@@ -105,8 +105,9 @@ func Load(war WindowAddRemover) error {
 
 	// Show cache progress window.
 	go func() {
-		// Wait before showing the cache progress window. If the cache is already
-		// complete, then the caching and indexing operation will be very fast.
+		// Wait before showing the cache progress window. If the cache is
+		// already complete, then the caching and indexing operation will be
+		// very fast.
 		time.Sleep(2 * time.Second)
 
 		select {

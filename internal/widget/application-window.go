@@ -312,8 +312,8 @@ func (win *ApplicationWindow) SetComic(n int) {
 	go func() {
 		var err error
 
-		// Add the DisplayComic function to the event loop so our UI gets updated
-		// with the new comic.
+		// Add the DisplayComic function to the event loop so our UI gets
+		// updated with the new comic.
 		defer glib.IdleAddPriority(glib.PRIORITY_DEFAULT, win.DisplayComic)
 
 		// Make sure we are the only ones changing win.comic.
@@ -338,9 +338,9 @@ func (win *ApplicationWindow) SetComic(n int) {
 		err = cache.DownloadComicImage(n)
 		if err != nil {
 			log.Print("error downloading comic image: ", err)
-			// We can be sneaky if we get an error, we use SafeTitle for window title,
-			// but we can leave Title alone so the properties dialog can still be
-			// correct.
+			// We can be sneaky if we get an error, we use SafeTitle for window
+			// title, but we can leave Title alone so the properties dialog can
+			// still be correct.
 			win.comic.SafeTitle = l("Connect to the internet to download comic image")
 		}
 	}()

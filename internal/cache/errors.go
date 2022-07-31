@@ -10,7 +10,8 @@ var (
 	// ErrLocalFailure means that there was an error while trying to access the
 	// local cache.
 	ErrLocalFailure = errors.New("error accessing local xkcd cache")
-	// ErrOffline means that there was an error trying to access the xkcd server.
+	// ErrOffline means that there was an error trying to access the xkcd
+	// server.
 	ErrOffline = errors.New("error accessing xkcd server")
 	// ErrNoComicsFound is returned when a function can not find any comics.
 	ErrNoComicsFound = errors.New("no comics found")

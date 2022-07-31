@@ -193,7 +193,8 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 		data := bucket.Get(intToBytes(n))
 		if data == nil {
-			// The comic metadata isn't in our cache yet, we will try to download it.
+			// The comic metadata isn't in our cache yet, we will try to
+			// download it.
 			return ErrMiss
 		}
 

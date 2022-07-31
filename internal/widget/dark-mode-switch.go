@@ -44,9 +44,9 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	dms.swtch.Connect("notify::active", dms.SwitchStateChanged)
 	dms.PackEnd(dms.swtch, false, true, 0)
 
-	// Use a ModelButton to force the theme to apply the same padding as the other
-	// items on the WindowMenu. Has the added benefit of increasing the clickable
-	// area for toggling dark mode.
+	// Use a ModelButton to force the theme to apply the same padding as the
+	// other items on the WindowMenu. Has the added benefit of increasing the
+	// clickable area for toggling dark mode.
 	dms.label, err = gtk.ModelButtonNew()
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	dms.label.Connect("button-release-event", func(w gtk.IWidget) {
 		dms.swtch.Activate()
 		// Prevent the default handlers from running so they do not close the
-		// popover menu. The popover menu should remain open to mimic the behavior
-		// of clicking the switch (which would not close the menu).
+		// popover menu. The popover menu should remain open to mimic the
+		// behavior of clicking the switch (which would not close the menu).
 		w.ToWidget().StopEmission("button-release-event")
 	})
 	lc, err := dms.label.GetChild()
@@ -76,7 +76,8 @@ func NewDarkModeSwitch(darkModeGetter func() bool, darkModeSetter func(bool)) (*
 	}
 	// Add this style class to disable the min-width sometimes given to
 	// ModelButtons. The other ModelButtons in the menu will set the min-width
-	// which gives us the flexibility to add the switch without widening the menu.
+	// which gives us the flexibility to add the switch without widening the
+	// menu.
 	sc.AddClass(style.ClassNoMinWidth)
 	dms.PackStart(dms.label, true, true, 0)
 
@@ -113,8 +114,8 @@ func (dms *DarkModeSwitch) SyncDarkMode(darkMode bool) {
 	if dms == nil {
 		return
 	}
-	// Avoid calling dms.swtch.SetActive when this signal might have been emitted
-	// by dms.SwitchStateChanged.
+	// Avoid calling dms.swtch.SetActive when this signal might have been
+	// emitted by dms.SwitchStateChanged.
 	if darkMode == dms.swtch.GetActive() {
 		return
 	}

@@ -10,7 +10,7 @@ type Widget interface {
 	// Our custom widgets should embed a gtk.Widget.
 	gtk.IWidget
 
-	// Dispose performs clean up to aid garbage collection. Should break reference
-	// cycles, if any. Must gracefully accept a nil receiver.
+	// Dispose performs clean up to aid garbage collection. Should break
+	// reference cycles, if any. Must gracefully accept a nil receiver.
 	Dispose()
 }
