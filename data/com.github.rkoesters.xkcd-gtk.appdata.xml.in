@@ -57,6 +57,16 @@
   </custom>
 
   <releases>
+    <release version="1.6.5" date="2022-07-31">
+      <description>
+        <p>Minor improvements:</p>
+        <ul>
+          <li>Overhaul search and bookmark menus to improve performance with large lists</li>
+          <li>Improve comic search by including results that are at most one edit distance away from the search query</li>
+          <li>Add shortcuts window and about window to desktop entry</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.6.4" date="2022-07-16">
       <description>
         <p>Add a couple new keyboard shortcuts and add some common aliases for existing keyboard shortcuts. Open the shortcuts window with ctrl+? to check out what's new!</p>
