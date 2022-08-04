@@ -116,16 +116,16 @@ flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO
 	mv $@.tmp $@
 
 flathub: flatpak/flathub.yml
-	flatpak-builder --user --install-deps-from=flathub --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder --user --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
 flathub-install: flatpak/flathub.yml
-	flatpak-builder --user --install-deps-from=flathub --force-clean --install $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder --user --install --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
 appcenter: flatpak/appcenter.yml
-	flatpak-builder --user --install-deps-from=appcenter --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder --user --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
 appcenter-install: flatpak/appcenter.yml
-	flatpak-builder --user --install-deps-from=appcenter --force-clean --install $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder --user --install --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '..'/path: '.'/" $< >$@
