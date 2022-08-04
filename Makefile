@@ -155,7 +155,7 @@ test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
 	tools/test-install.sh
 
 # Shorthand for all the targets that CI covers.
-ci: all check test
+ci: all appcenter check flathub test
 
 clean:
 	rm -f $(EXE_PATH)
