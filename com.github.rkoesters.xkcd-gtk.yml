@@ -37,14 +37,14 @@ modules:
 
       - type: archive
         only-arches: [x86_64]
-        url: https://go.dev/dl/go1.18.3.linux-amd64.tar.gz
-        sha256: 956f8507b302ab0bb747613695cdae10af99bbd39a90cae522b7c0302cc27245
+        url: https://go.dev/dl/go1.18.5.linux-amd64.tar.gz
+        sha256: 9e5de37f9c49942c601b191ac5fba404b868bfc21d446d6960acc12283d6e5f2
         dest: go
 
       - type: archive
         only-arches: [aarch64]
-        url: https://go.dev/dl/go1.18.3.linux-arm64.tar.gz
-        sha256: beacbe1441bee4d7978b900136d1d6a71d150f0a9bb77e9d50c822065623a35a
+        url: https://go.dev/dl/go1.18.5.linux-arm64.tar.gz
+        sha256: 006f6622718212363fa1ff004a6ab4d87bbbe772ec5631bab7cac10be346e4f1
         dest: go
 
       - type: git
