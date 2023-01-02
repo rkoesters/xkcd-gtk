@@ -15,3 +15,30 @@ func (app *Application) OpenURL(url string) error {
 	}
 	return err
 }
+
+const (
+	whatIfLink = "https://what-if.xkcd.com/"
+	blogLink   = "https://blog.xkcd.com/"
+	storeLink  = "https://store.xkcd.com/"
+	aboutLink  = "https://xkcd.com/about/"
+)
+
+// OpenWhatIf opens whatifLink in the user's web browser.
+func (app *Application) OpenWhatIf() {
+	app.OpenURL(whatIfLink)
+}
+
+// OpenBlog opens blogLink in the user's web browser.
+func (app *Application) OpenBlog() {
+	app.OpenURL(blogLink)
+}
+
+// OpenStore opens storeLink in the user's web browser.
+func (app *Application) OpenStore() {
+	app.OpenURL(storeLink)
+}
+
+// OpenAboutXKCD opens aboutLink in the user's web browser.
+func (app *Application) OpenAboutXKCD() {
+	app.OpenURL(aboutLink)
+}
