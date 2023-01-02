@@ -22,7 +22,7 @@ import (
 type ApplicationWindow struct {
 	*gtk.ApplicationWindow
 
-	app   *Application
+	app   Application
 	state WindowState
 
 	comic      *xkcd.Comic
@@ -44,8 +44,8 @@ type ApplicationWindow struct {
 var _ Widget = &ApplicationWindow{}
 
 // NewApplicationWindow creates a new xkcd viewer window.
-func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
-	super, err := gtk.ApplicationWindowNew(app.Application)
+func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
+	super, err := gtk.ApplicationWindowNew(app.GtkApplication())
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	// If the gtk theme changes, we might want to adjust our styling.
 	win.Connect("style-updated", win.StyleUpdated)
 
-	darkModeSignal := app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", win.DarkModeChanged)
+	darkModeSignal := app.ConnectDarkModeChanged(win.DarkModeChanged)
 	win.Connect("delete-event", func() {
 		gtks, err := gtk.SettingsGetDefault()
 		if err != nil {
@@ -159,7 +159,7 @@ func NewApplicationWindow(app *Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(&win.app.bookmarks, win, &win.state, win.actions, accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksRef(), win, &win.state, win.actions, accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
@@ -201,7 +201,7 @@ func (win *ApplicationWindow) DarkModeChanged() {
 
 // StyleUpdated is called when the style of our gtk window is updated.
 func (win *ApplicationWindow) StyleUpdated() {
-	themeName, err := win.app.gtkTheme()
+	themeName, err := win.app.GtkTheme()
 	if err != nil {
 		log.Print("error querying GTK theme: ", err)
 	}
@@ -402,7 +402,7 @@ func (win *ApplicationWindow) updateZoomButtonStatus() {
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
 func (win *ApplicationWindow) Explain() {
-	openURL(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comicNumber()))
+	win.app.OpenURL(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comicNumber()))
 }
 
 // OpenLink opens the comic's Link in the user's web browser.
@@ -411,7 +411,7 @@ func (win *ApplicationWindow) OpenLink() {
 	link := win.comic.Link
 	win.comicMutex.RUnlock()
 
-	openURL(link)
+	win.app.OpenURL(link)
 }
 
 // comicNumber returns the number of the current comic in a thread-safe way. Do

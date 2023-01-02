@@ -58,7 +58,7 @@ msgstr "Recherche d'une nouvelle bande dessinée…"
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:27
+#: internal/widget/application.go:10
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"

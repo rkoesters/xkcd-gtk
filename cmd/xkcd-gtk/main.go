@@ -9,10 +9,10 @@ import (
 
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/app"
 	"github.com/rkoesters/xkcd-gtk/internal/build"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
-	"github.com/rkoesters/xkcd-gtk/internal/widget"
 )
 
 var (
@@ -56,10 +56,10 @@ func main() {
 
 	glib.InitI18n(build.AppID(), paths.LocaleDir())
 	glib.SetPrgname(build.AppID())
-	glib.SetApplicationName(widget.AppName())
+	glib.SetApplicationName(app.Name())
 	gtk.WindowSetDefaultIconName(build.AppID())
 
-	app, err := widget.NewApplication(build.AppID())
+	app, err := app.New(build.AppID())
 	if err != nil {
 		log.Fatal("error creating application: ", err)
 	}
