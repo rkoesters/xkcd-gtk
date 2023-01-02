@@ -59,17 +59,17 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.3.5
+        tag: v2.3.6
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
         url: https://github.com/blevesearch/bleve_index_api.git
-        tag: v1.0.4
+        tag: v1.0.5
         dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git
         url: https://github.com/blevesearch/geo.git
-        tag: v0.1.15
+        tag: v0.1.16
         dest: vendor/github.com/blevesearch/geo
 
       - type: git
@@ -89,7 +89,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/scorch_segment_api.git
-        tag: v2.1.3
+        tag: v2.1.4
         dest: vendor/github.com/blevesearch/scorch_segment_api/v2
 
       - type: git
@@ -114,27 +114,27 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v11.3.6
+        tag: v11.3.7
         dest: vendor/github.com/blevesearch/zapx/v11
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v12.3.6
+        tag: v12.3.7
         dest: vendor/github.com/blevesearch/zapx/v12
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v13.3.6
+        tag: v13.3.7
         dest: vendor/github.com/blevesearch/zapx/v13
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v14.3.6
+        tag: v14.3.7
         dest: vendor/github.com/blevesearch/zapx/v14
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v15.3.6
+        tag: v15.3.8
         dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
