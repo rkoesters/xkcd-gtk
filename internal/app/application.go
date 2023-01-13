@@ -1,3 +1,4 @@
+// Package app implements the xkcd-gtk application.
 package app
 
 import (
