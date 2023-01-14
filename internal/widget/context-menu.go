@@ -87,5 +87,6 @@ func (cm *ContextMenu) PopupAtPointer(event *gdk.EventButton) {
 
 func (cm *ContextMenu) SetCompact(compact bool) {
 	cm.PopoverMenu.SetCompact(compact)
+	cm.bookmarkButton.SetCompact(compact)
 	cm.zoomBox.SetCompact(compact)
 }

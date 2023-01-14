@@ -165,7 +165,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), &win.state, win.actions, accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), &win.state, win.actions, accels, win.SetComic, win.IsBookmarkedWS, win.SetBookmarked)
 	if err != nil {
 		return nil, err
 	}
@@ -314,7 +314,7 @@ func (win *ApplicationWindow) SetComic(n int) {
 
 	// Update UI to reflect new current comic.
 	win.navigationBar.UpdateButtonState()
-	win.bookmarksMenu.UpdateBookmarkButton()
+	win.bookmarksMenu.bookmarkButton.Update()
 	win.comicContainer.contextMenu.bookmarkButton.Update()
 
 	go func() {
@@ -443,6 +443,9 @@ func (win *ApplicationWindow) registerBookmarkObserver() {
 	go func() {
 		for range ch {
 			glib.IdleAdd(func() {
+				currentIsBookmarked := win.IsBookmarkedWS()
+				win.actions["bookmark-new"].SetEnabled(!currentIsBookmarked)
+				win.actions["bookmark-remove"].SetEnabled(currentIsBookmarked)
 				win.bookmarksMenu.UpdateBookmarksMenu()
 				win.comicContainer.contextMenu.bookmarkButton.Update()
 			})
