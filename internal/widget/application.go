@@ -14,7 +14,7 @@ func AppName() string { return l("Comic Sticks") }
 // github.com/rkoesters/xkcd-gtk/internal/app.
 type Application interface {
 	AddWindow(gtk.IWindow)
-	BookmarksRef() *bookmarks.List
+	BookmarksList() *bookmarks.List
 	ConnectDarkModeChanged(f interface{}) glib.SignalHandle
 	DarkMode() bool
 	GtkApplication() *gtk.Application

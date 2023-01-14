@@ -27,7 +27,7 @@ type ImageViewer struct {
 
 var _ Widget = &ImageViewer{}
 
-func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageViewer, error) {
+func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64, bookmarkedGetter func() bool, bookmarkedSetter func(bool)) (*ImageViewer, error) {
 	super, err := gtk.ScrolledWindowNew(nil, nil)
 	if err != nil {
 		return nil, err
@@ -60,7 +60,7 @@ func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageVi
 	iv.eventBox.Add(iv.image)
 	iv.Add(iv.eventBox)
 
-	iv.contextMenu, err = NewContextMenu(iv.eventBox, actionGroup)
+	iv.contextMenu, err = NewContextMenu(iv.eventBox, actionGroup, bookmarkedGetter, bookmarkedSetter)
 	if err != nil {
 		return nil, err
 	}

@@ -28,6 +28,8 @@ type ApplicationWindow struct {
 	comic      *xkcd.Comic
 	comicMutex sync.RWMutex
 
+	bookmarksObserverID int
+
 	actions map[string]*glib.SimpleAction
 
 	header        *gtk.HeaderBar
@@ -68,8 +70,8 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 		win.AddAction(action)
 	}
 
-	registerAction("bookmark-new", func() { win.bookmarksMenu.AddBookmark() })
-	registerAction("bookmark-remove", func() { win.bookmarksMenu.RemoveBookmark() })
+	registerAction("bookmark-new", win.AddBookmark)
+	registerAction("bookmark-remove", win.RemoveBookmark)
 	registerAction("explain", win.Explain)
 	registerAction("first-comic", win.FirstComic)
 	registerAction("newest-comic", win.NewestComic)
@@ -110,6 +112,10 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 		gtks.HandlerDisconnect(darkModeSignal)
 	})
 
+	// Keep tabs on the user's bookmarks.
+	win.registerBookmarkObserver()
+	win.Connect("delete-event", win.unregisterBookmarkObserver)
+
 	// If the window is closed, we want to write our state to disk.
 	win.Connect("delete-event", func() {
 		win.state.SaveState(win, win.properties)
@@ -119,7 +125,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.Connect("destroy", win.Dispose)
 
 	// Create image viewing frame
-	win.comicContainer, err = NewImageViewer(win.IActionGroup, win.state.ImageScale)
+	win.comicContainer, err = NewImageViewer(win.IActionGroup, win.state.ImageScale, win.IsBookmarkedWS, win.SetBookmarked)
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +165,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksRef(), win, &win.state, win.actions, accels, win.SetComic)
+	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), &win.state, win.actions, accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
@@ -309,6 +315,7 @@ func (win *ApplicationWindow) SetComic(n int) {
 	// Update UI to reflect new current comic.
 	win.navigationBar.UpdateButtonState()
 	win.bookmarksMenu.UpdateBookmarkButton()
+	win.comicContainer.contextMenu.bookmarkButton.Update()
 
 	go func() {
 		var err error
@@ -427,6 +434,54 @@ func (win *ApplicationWindow) comicNumber() int {
 
 	return win.comic.Num
 }
+
+func (win *ApplicationWindow) registerBookmarkObserver() {
+	ch := make(chan string)
+
+	win.bookmarksObserverID = win.app.BookmarksList().AddObserver(ch)
+
+	go func() {
+		for range ch {
+			glib.IdleAdd(func() {
+				win.bookmarksMenu.UpdateBookmarksMenu()
+				win.comicContainer.contextMenu.bookmarkButton.Update()
+			})
+		}
+	}()
+}
+
+func (win *ApplicationWindow) unregisterBookmarkObserver() {
+	win.app.BookmarksList().RemoveObserver(win.bookmarksObserverID)
+}
+
+// IsBookmarked returns whether the current comic is bookmarked. Do not call
+// while holding a write lock on win.comicMutex.
+func (win *ApplicationWindow) IsBookmarked() bool {
+	return win.app.BookmarksList().Contains(win.comicNumber())
+}
+
+// IsBookmarkedWS is the same as IsBookmarked, except it uses the WindowState
+// struct instead of Comic struct. Do not call while holding a write lock on
+// win.comicMutex.
+func (win *ApplicationWindow) IsBookmarkedWS() bool {
+	return win.app.BookmarksList().Contains(win.state.ComicNumber)
+}
+
+// SetBookmarked adds win's current comic to the user's bookmarks if bookmarked
+// is true, otherwise it removes the current comic from the user's bookmarks.
+func (win *ApplicationWindow) SetBookmarked(bookmarked bool) {
+	if bookmarked {
+		win.app.BookmarksList().Add(win.comicNumber())
+	} else {
+		win.app.BookmarksList().Remove(win.comicNumber())
+	}
+}
+
+// AddBookmark adds win's current comic to the user's bookmarks.
+func (win *ApplicationWindow) AddBookmark() { win.SetBookmarked(true) }
+
+// RemoveBookmark removes win's current comic from the user's bookmarks.
+func (win *ApplicationWindow) RemoveBookmark() { win.SetBookmarked(false) }
 
 // Dispose releases all references in the Window struct. This is needed to
 // mitigate a memory leak when closing windows.

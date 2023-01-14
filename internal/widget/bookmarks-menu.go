@@ -20,16 +20,14 @@ type BookmarksMenu struct {
 	scroller     *gtk.ScrolledWindow
 	list         *ComicListView
 
-	bookmarks  *bookmarks.List // ptr to app.bookmarks
-	observerID int
-
+	bookmarks   *bookmarks.List               // ptr to app.bookmarks
 	windowState *WindowState                  // ptr to win.state
 	actions     map[string]*glib.SimpleAction // ptr to win.actions
 }
 
 var _ Widget = &BookmarksMenu{}
 
-func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
+func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int)) (*BookmarksMenu, error) {
 	const (
 		bmIconSize = gtk.ICON_SIZE_MENU
 		btnWidth   = 280
@@ -109,8 +107,6 @@ func NewBookmarksMenu(b *bookmarks.List, win *ApplicationWindow, ws *WindowState
 	}
 	bm.scroller.Add(bm.list)
 
-	bm.registerBookmarkObserver()
-	win.Connect("delete-event", bm.unregisterBookmarkObserver)
 	defer func() {
 		err := bm.loadBookmarkList()
 		if err != nil {
@@ -143,32 +139,6 @@ func (bm *BookmarksMenu) Dispose() {
 
 	bm.windowState = nil
 	bm.actions = nil
-}
-
-// AddBookmark adds win's current comic to the user's bookmarks.
-func (bm *BookmarksMenu) AddBookmark() {
-	bm.bookmarks.Add(bm.windowState.ComicNumber)
-}
-
-// RemoveBookmark removes win's current comic from the user's bookmarks.
-func (bm *BookmarksMenu) RemoveBookmark() {
-	bm.bookmarks.Remove(bm.windowState.ComicNumber)
-}
-
-func (bm *BookmarksMenu) registerBookmarkObserver() {
-	ch := make(chan string)
-
-	bm.observerID = bm.bookmarks.AddObserver(ch)
-
-	go func() {
-		for range ch {
-			glib.IdleAdd(bm.UpdateBookmarksMenu)
-		}
-	}()
-}
-
-func (bm *BookmarksMenu) unregisterBookmarkObserver() {
-	bm.bookmarks.RemoveObserver(bm.observerID)
 }
 
 func (bm *BookmarksMenu) UpdateBookmarksMenu() {

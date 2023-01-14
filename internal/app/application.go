@@ -349,8 +349,8 @@ func (app *Application) SaveBookmarks() {
 	}
 }
 
-// BookmarksRef returns a pointer to the app's list of bookmarks.
-func (app *Application) BookmarksRef() *bookmarks.List {
+// BookmarksList returns a pointer to the app's list of bookmarks.
+func (app *Application) BookmarksList() *bookmarks.List {
 	return &app.bookmarks
 }
 
