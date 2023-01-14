@@ -25,18 +25,14 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
 
-#: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:40
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
 msgid "About"
 msgstr "Hakkında"
 
-#: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr "xkcd Hakkında"
-
-#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:18
-msgid "Add to bookmarks"
-msgstr "Yer imlerine ekle"
 
 #: internal/widget/properties-dialog.go:132
 msgid "Alt text"
@@ -46,7 +42,12 @@ msgstr "Alternatif metin"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmark-check-button.go:30
+#, fuzzy
+msgid "Bookmark this comic"
+msgstr "İlk karikatüre git"
+
+#: internal/widget/bookmarks-menu.go:48 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
@@ -54,7 +55,7 @@ msgstr "Yer imleri"
 msgid "Cache comics for later offline viewing"
 msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
 
-#: internal/widget/application-window.go:271
+#: internal/widget/application-window.go:278
 msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
 
@@ -80,7 +81,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
-#: internal/widget/application-window.go:344
+#: internal/widget/application-window.go:352
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
@@ -108,7 +109,7 @@ msgstr "Tarih"
 msgid "Error reading local comic database"
 msgstr "Yerel karikatür veritabanı okuma hatası"
 
-#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:89
+#: internal/widget/context-menu.go:56 internal/widget/window-menu.go:58
 msgid "Explain"
 msgstr "Açıkla"
 
@@ -148,7 +149,7 @@ msgstr "Görüntü"
 msgid "Keep track of comics with bookmarks"
 msgstr "Yer imleriyle karikatürleri takip edin"
 
-#: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:36
 #: internal/widget/shortcuts-window.ui:4
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
@@ -158,7 +159,7 @@ msgstr "Klavye kısayolları"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: internal/widget/application-window.go:351
+#: internal/widget/application-window.go:359
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 
@@ -166,7 +167,7 @@ msgstr "Karikatür yükleniyor..."
 msgid "Navigate"
 msgstr "Dolaş"
 
-#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:77 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
 msgid "New window"
 msgstr "Yeni pencere"
@@ -187,7 +188,7 @@ msgstr "Sayı"
 msgid "Open bookmarks menu"
 msgstr "Yer imleri menüsünü göster"
 
-#: internal/widget/context-menu.go:29 internal/widget/window-menu.go:85
+#: internal/widget/context-menu.go:52 internal/widget/window-menu.go:54
 msgid "Open link"
 msgstr "Bağlantıyı aç"
 
@@ -207,8 +208,8 @@ msgstr "Kısayollar penceresini aç"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:31 internal/widget/properties-dialog.go:47
-#: internal/widget/window-menu.go:93 internal/widget/shortcuts-window.ui:132
+#: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:47
+#: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Özellikler"
 
@@ -230,12 +231,7 @@ msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
-#: internal/widget/bookmarks-menu.go:83 internal/widget/context-menu.go:19
-msgid "Remove from bookmarks"
-msgstr "Yer imlerinden kaldır"
-
-#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:51
-#: internal/widget/shortcuts-window.ui:110
+#: internal/widget/zoom-box.go:51 internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr "Yakınlaştırmayı sıfırla"
 
@@ -277,11 +273,11 @@ msgstr "Karikatür arama dizini güncelleniyor..."
 msgid "View comic metadata"
 msgstr "Karikatür üst verisini görüntüle"
 
-#: internal/widget/window-menu.go:127 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:96 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "Farzedelim?"
 
-#: internal/widget/window-menu.go:30
+#: internal/widget/window-menu.go:29
 msgid "Window menu"
 msgstr ""
 
@@ -293,13 +289,11 @@ msgstr "XKCD Görüntüleyici"
 msgid "Zoom"
 msgstr "Yakınlaştırma"
 
-#: internal/widget/context-menu.go:23 internal/widget/zoom-box.go:59
-#: internal/widget/shortcuts-window.ui:96
+#: internal/widget/zoom-box.go:59 internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr "Yaklaştır"
 
-#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:38
-#: internal/widget/shortcuts-window.ui:103
+#: internal/widget/zoom-box.go:38 internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr "Uzaklaştır"
 
@@ -307,10 +301,20 @@ msgstr "Uzaklaştır"
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
 
-#: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:100 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr "xkcd günlüğü"
 
-#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "xkcd mağazası"
+
+#~ msgid "Add to bookmarks"
+#~ msgstr "Yer imlerine ekle"
+
+#~ msgid "Remove from bookmarks"
+#~ msgstr "Yer imlerinden kaldır"
+
+#, fuzzy
+#~ msgid "Bookmark"
+#~ msgstr "Yer imleri"
