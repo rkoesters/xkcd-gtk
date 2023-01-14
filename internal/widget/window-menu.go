@@ -9,8 +9,7 @@ import (
 type WindowMenu struct {
 	*gtk.MenuButton
 
-	popover    *gtk.Popover
-	popoverBox *gtk.Box
+	popover *PopoverMenu
 
 	zoomBox        *ZoomBox
 	darkModeSwitch *DarkModeSwitch // may be nil
@@ -30,44 +29,14 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	wm.SetTooltipText(l("Window menu"))
 	wm.AddAccelerator("activate", accels, gdk.KEY_F10, 0, gtk.ACCEL_VISIBLE)
 
-	wm.popover, err = gtk.PopoverNew(wm)
+	wm.popover, err = NewPopoverMenu(wm)
 	if err != nil {
 		return nil, err
 	}
-	wm.SetPopover(wm.popover)
+	wm.SetPopover(wm.popover.Popover)
 	wm.SetUsePopover(true)
 
-	wm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
-	if err != nil {
-		return nil, err
-	}
-	wm.popover.Add(wm.popoverBox)
-	defer wm.popoverBox.ShowAll()
-
-	addMenuSeparator := func() error {
-		sep, err := gtk.SeparatorNew(gtk.ORIENTATION_HORIZONTAL)
-		if err != nil {
-			return err
-		}
-		wm.popoverBox.PackStart(sep, false, true, style.PaddingPopoverCompact/2)
-		return nil
-	}
-
-	addMenuEntry := func(label, action string) error {
-		mb, err := gtk.ModelButtonNew()
-		if err != nil {
-			return err
-		}
-		mb.SetActionName(action)
-		mb.SetLabel(label)
-		mbl, err := mb.GetChild()
-		if err != nil {
-			return err
-		}
-		mbl.ToWidget().SetHAlign(gtk.ALIGN_START)
-		wm.popoverBox.PackStart(mb, false, true, 0)
-		return nil
-	}
+	defer wm.popover.ShowAll()
 
 	// Zoom section.
 	wm.zoomBox, err = NewZoomBox()
@@ -75,22 +44,22 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 	wm.zoomBox.SetMarginBottom(style.PaddingPopoverCompact / 2)
-	wm.popoverBox.Add(wm.zoomBox)
+	wm.popover.AddChild(wm.zoomBox, style.PaddingPopoverCompact/2)
 
-	if err = addMenuSeparator(); err != nil {
+	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err
 	}
 
 	// Comic properties section.
-	err = addMenuEntry(l("Open link"), "win.open-link")
+	err = wm.popover.AddMenuEntry(l("Open link"), "win.open-link")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("Explain"), "win.explain")
+	err = wm.popover.AddMenuEntry(l("Explain"), "win.explain")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("Properties"), "win.show-properties")
+	err = wm.popover.AddMenuEntry(l("Properties"), "win.show-properties")
 	if err != nil {
 		return nil, err
 	}
@@ -101,16 +70,16 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return wm, nil
 	}
 
-	if err = addMenuSeparator(); err != nil {
+	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err
 	}
 
-	err = addMenuEntry(l("New window"), "app.new-window")
+	err = wm.popover.AddMenuEntry(l("New window"), "app.new-window")
 	if err != nil {
 		return nil, err
 	}
 
-	if err = addMenuSeparator(); err != nil {
+	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err
 	}
 
@@ -118,38 +87,38 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
-	wm.popoverBox.PackStart(wm.darkModeSwitch, false, true, 0)
+	wm.popover.AddChild(wm.darkModeSwitch, 0)
 
-	if err = addMenuSeparator(); err != nil {
-		return nil, err
-	}
-
-	err = addMenuEntry(l("What If?"), "app.open-what-if")
-	if err != nil {
-		return nil, err
-	}
-	err = addMenuEntry(l("xkcd blog"), "app.open-blog")
-	if err != nil {
-		return nil, err
-	}
-	err = addMenuEntry(l("xkcd store"), "app.open-store")
-	if err != nil {
-		return nil, err
-	}
-	err = addMenuEntry(l("About xkcd"), "app.open-about-xkcd")
-	if err != nil {
+	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err
 	}
 
-	if err = addMenuSeparator(); err != nil {
-		return nil, err
-	}
-
-	err = addMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
+	err = wm.popover.AddMenuEntry(l("What If?"), "app.open-what-if")
 	if err != nil {
 		return nil, err
 	}
-	err = addMenuEntry(l("About"), "app.show-about")
+	err = wm.popover.AddMenuEntry(l("xkcd blog"), "app.open-blog")
+	if err != nil {
+		return nil, err
+	}
+	err = wm.popover.AddMenuEntry(l("xkcd store"), "app.open-store")
+	if err != nil {
+		return nil, err
+	}
+	err = wm.popover.AddMenuEntry(l("About xkcd"), "app.open-about-xkcd")
+	if err != nil {
+		return nil, err
+	}
+
+	if err = wm.popover.AddSeparator(); err != nil {
+		return nil, err
+	}
+
+	err = wm.popover.AddMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
+	if err != nil {
+		return nil, err
+	}
+	err = wm.popover.AddMenuEntry(l("About"), "app.show-about")
 	if err != nil {
 		return nil, err
 	}
@@ -164,8 +133,8 @@ func (wm *WindowMenu) Dispose() {
 
 	wm.MenuButton = nil
 
+	wm.popover.Dispose()
 	wm.popover = nil
-	wm.popoverBox = nil
 	wm.zoomBox.Dispose()
 	wm.zoomBox = nil
 	wm.darkModeSwitch.Dispose()
@@ -173,17 +142,7 @@ func (wm *WindowMenu) Dispose() {
 }
 
 func (wm *WindowMenu) SetCompact(compact bool) {
-	if compact {
-		wm.popoverBox.SetMarginTop(style.PaddingPopoverCompact)
-		wm.popoverBox.SetMarginBottom(style.PaddingPopoverCompact)
-		wm.popoverBox.SetMarginStart(0)
-		wm.popoverBox.SetMarginEnd(0)
-	} else {
-		wm.popoverBox.SetMarginTop(style.PaddingPopover)
-		wm.popoverBox.SetMarginBottom(style.PaddingPopover)
-		wm.popoverBox.SetMarginStart(style.PaddingPopover)
-		wm.popoverBox.SetMarginEnd(style.PaddingPopover)
-	}
+	wm.popover.SetCompact(compact)
 	wm.zoomBox.SetCompact(compact)
 	wm.darkModeSwitch.SetCompact(compact)
 }
