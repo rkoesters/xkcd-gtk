@@ -247,6 +247,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 
 	compact := style.IsCompactMenuTheme(themeName)
 	win.windowMenu.SetCompact(compact)
+	win.comicContainer.contextMenu.SetCompact(compact)
 }
 
 // FirstComic goes to the first comic.
@@ -392,6 +393,10 @@ func (win *ApplicationWindow) ZoomReset() {
 
 func (win *ApplicationWindow) updateZoomButtonStatus() {
 	err := win.windowMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
+	if err != nil {
+		log.Printf("error calling ZoomBox.SetCurrentZoom(%v): %v", win.state.ImageScale, err)
+	}
+	err = win.comicContainer.contextMenu.zoomBox.SetCurrentZoom(win.state.ImageScale)
 	if err != nil {
 		log.Printf("error calling ZoomBox.SetCurrentZoom(%v): %v", win.state.ImageScale, err)
 	}

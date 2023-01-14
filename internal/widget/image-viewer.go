@@ -53,27 +53,28 @@ func NewImageViewer(actionGroup glib.IActionGroup, imageScale float64) (*ImageVi
 	iv.image.SetHAlign(gtk.ALIGN_CENTER)
 	iv.image.SetVAlign(gtk.ALIGN_CENTER)
 
-	iv.contextMenu, err = NewContextMenu(actionGroup)
-	if err != nil {
-		return nil, err
-	}
-
 	iv.eventBox, err = gtk.EventBoxNew()
 	if err != nil {
 		return nil, err
 	}
 	iv.eventBox.Add(iv.image)
+	iv.Add(iv.eventBox)
+
+	iv.contextMenu, err = NewContextMenu(iv.eventBox, actionGroup)
+	if err != nil {
+		return nil, err
+	}
+
 	iv.eventBox.Connect("button-press-event", func(eventBox *gtk.EventBox, event *gdk.Event) bool {
 		button := gdk.EventButtonNewFromEvent(event)
 		switch button.Button() {
 		case gdk.BUTTON_SECONDARY:
-			iv.contextMenu.PopupAtPointer(event)
+			iv.contextMenu.PopupAtPointer(button)
 			return true
 		default:
 			return false
 		}
 	})
-	iv.Add(iv.eventBox)
 
 	iv.ShowAll()
 
