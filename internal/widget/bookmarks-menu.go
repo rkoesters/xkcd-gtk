@@ -43,6 +43,7 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 		updateButtonIcons: updateButtonIcons,
 	}
 	bm.SetLayout(gtk.BUTTONBOX_EXPAND)
+	bm.SetProperty("homogeneous", false)
 
 	bm.bookmarkButton, err = gtk.ButtonNew()
 	if err != nil {
@@ -106,6 +107,12 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 	}
 	sc.AddClass(style.ClassLinked)
 	bm.SetSpacing(0)
+
+	sc, err = bm.popoverButton.GetStyleContext()
+	if err != nil {
+		return nil, err
+	}
+	sc.AddClass(style.ClassSlimButton)
 
 	return bm, nil
 }
