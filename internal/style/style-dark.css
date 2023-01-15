@@ -6,3 +6,7 @@
 .no-min-width {
     min-width: 0;
 }
+
+headerbar > buttonbox > button {
+    background-color: rgba(0, 0, 0, 0);
+}

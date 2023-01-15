@@ -165,7 +165,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), &win.state, win.actions, accels, win.SetComic, win.IsBookmarkedWS, win.SetBookmarked)
+	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), &win.state, win.actions, accels, win.SetComic, win.IsBookmarkedWS, win.SetBookmarked, win.StyleUpdated)
 	if err != nil {
 		return nil, err
 	}
@@ -228,13 +228,16 @@ func (win *ApplicationWindow) StyleUpdated() {
 		return s
 	}
 
-	setButtonImageFromIconName := func(icon string, imageSetter func(gtk.IWidget)) {
-		img, err := gtk.ImageNewFromIconName(icon, headerBarIconSize)
+	setButtonImageFromIconNameAndSize := func(icon string, size gtk.IconSize, imageSetter func(gtk.IWidget)) {
+		img, err := gtk.ImageNewFromIconName(icon, size)
 		if err != nil {
 			log.Print(err)
 			return
 		}
 		imageSetter(img)
+	}
+	setButtonImageFromIconName := func(icon string, imageSetter func(gtk.IWidget)) {
+		setButtonImageFromIconNameAndSize(icon, headerBarIconSize, imageSetter)
 	}
 
 	setButtonImageFromIconName("go-first-symbolic", win.navigationBar.SetFirstButtonImage)
@@ -243,7 +246,13 @@ func (win *ApplicationWindow) StyleUpdated() {
 	setButtonImageFromIconName("go-next-symbolic", win.navigationBar.SetNextButtonImage)
 	setButtonImageFromIconName("go-last-symbolic", win.navigationBar.SetNewestButtonImage)
 	setButtonImageFromIconName(icon("edit-find"), win.searchMenu.SetImage)
-	setButtonImageFromIconName(icon("user-bookmarks"), win.bookmarksMenu.SetImage)
+	if win.IsBookmarked() {
+		setButtonImageFromIconName(icon("starred"), win.bookmarksMenu.bookmarkButton.SetImage)
+
+	} else {
+		setButtonImageFromIconName(icon("non-starred"), win.bookmarksMenu.bookmarkButton.SetImage)
+	}
+	setButtonImageFromIconNameAndSize("pan-down-symbolic", gtk.ICON_SIZE_MENU, win.bookmarksMenu.popoverButton.SetImage)
 	setButtonImageFromIconName(icon("open-menu"), win.windowMenu.SetImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
@@ -314,7 +323,7 @@ func (win *ApplicationWindow) SetComic(n int) {
 
 	// Update UI to reflect new current comic.
 	win.navigationBar.UpdateButtonState()
-	win.bookmarksMenu.bookmarkButton.Update()
+	win.bookmarksMenu.Update(win.app.BookmarksList().Contains(n))
 	win.comicContainer.contextMenu.bookmarkButton.Update()
 
 	go func() {
@@ -448,6 +457,7 @@ func (win *ApplicationWindow) registerBookmarkObserver() {
 				win.actions["bookmark-remove"].SetEnabled(currentIsBookmarked)
 				win.bookmarksMenu.UpdateBookmarksMenu()
 				win.comicContainer.contextMenu.bookmarkButton.Update()
+				win.bookmarksMenu.Update(currentIsBookmarked)
 			})
 		}
 	}()

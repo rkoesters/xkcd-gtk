@@ -11,48 +11,58 @@ import (
 )
 
 type BookmarksMenu struct {
-	*gtk.MenuButton
+	*gtk.ButtonBox
 
-	popover        *gtk.Popover
-	popoverBox     *gtk.Box
-	bookmarkButton *BookmarkCheckButton
-	scroller       *gtk.ScrolledWindow
-	list           *ComicListView
+	bookmarkButton *gtk.Button
 
-	bookmarks   *bookmarks.List               // ptr to app.bookmarks
-	windowState *WindowState                  // ptr to win.state
-	actions     map[string]*glib.SimpleAction // ptr to win.actions
+	popoverButton *gtk.MenuButton
+	popover       *gtk.Popover
+	popoverBox    *gtk.Box
+	scroller      *gtk.ScrolledWindow
+	list          *ComicListView
+
+	bookmarks         *bookmarks.List               // ptr to app.bookmarks
+	windowState       *WindowState                  // ptr to win.state
+	actions           map[string]*glib.SimpleAction // ptr to win.actions
+	updateButtonIcons func()
 }
 
 var _ Widget = &BookmarksMenu{}
 
-func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int), bookmarkedGetter func() bool, bookmarkedSetter func(bool)) (*BookmarksMenu, error) {
-	const (
-		bmIconSize = gtk.ICON_SIZE_MENU
-		btnWidth   = 280
-		btnHeight  = -1
-	)
-
-	super, err := gtk.MenuButtonNew()
+func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int), bookmarkedGetter func() bool, bookmarkedSetter func(bool), updateButtonIcons func()) (*BookmarksMenu, error) {
+	super, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
 	}
 	bm := &BookmarksMenu{
-		MenuButton: super,
+		ButtonBox: super,
 
-		bookmarks:   b,
-		windowState: ws,
-		actions:     actions,
+		bookmarks:         b,
+		windowState:       ws,
+		actions:           actions,
+		updateButtonIcons: updateButtonIcons,
 	}
+	bm.SetLayout(gtk.BUTTONBOX_EXPAND)
 
-	bm.SetTooltipText(l("Bookmarks"))
-	bm.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
-
-	bm.popover, err = gtk.PopoverNew(bm)
+	bm.bookmarkButton, err = gtk.ButtonNew()
 	if err != nil {
 		return nil, err
 	}
-	bm.SetPopover(bm.popover)
+	bm.Add(bm.bookmarkButton)
+
+	bm.popoverButton, err = gtk.MenuButtonNew()
+	if err != nil {
+		return nil, err
+	}
+	bm.popoverButton.SetTooltipText(l("Bookmarks"))
+	bm.popoverButton.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
+	bm.Add(bm.popoverButton)
+
+	bm.popover, err = gtk.PopoverNew(bm.popoverButton)
+	if err != nil {
+		return nil, err
+	}
+	bm.popoverButton.SetPopover(bm.popover)
 
 	bm.popoverBox, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, style.PaddingPopover)
 	if err != nil {
@@ -62,14 +72,6 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 	bm.popoverBox.SetMarginBottom(style.PaddingPopover)
 	bm.popoverBox.SetMarginStart(style.PaddingPopover)
 	bm.popoverBox.SetMarginEnd(style.PaddingPopover)
-
-	bm.bookmarkButton, err = NewBookmarkCheckButton(bookmarkedGetter, bookmarkedSetter)
-	if err != nil {
-		return nil, err
-	}
-	bm.bookmarkButton.SetSizeRequest(btnWidth, btnHeight)
-	bm.bookmarkButton.SetCompact(false)
-	bm.popoverBox.Add(bm.bookmarkButton)
 
 	bm.scroller, err = NewComicListScroller()
 	if err != nil {
@@ -84,6 +86,7 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 	if err != nil {
 		return nil, err
 	}
+	bm.list.SetSizeRequest(280, -1)
 	bm.scroller.Add(bm.list)
 
 	defer func() {
@@ -96,6 +99,13 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 	bm.popoverBox.ShowAll()
 	bm.popover.Add(bm.popoverBox)
 
+	sc, err := bm.GetStyleContext()
+	if err != nil {
+		return nil, err
+	}
+	sc.AddClass(style.ClassLinked)
+	bm.SetSpacing(0)
+
 	return bm, nil
 }
 
@@ -104,23 +114,23 @@ func (bm *BookmarksMenu) Dispose() {
 		return
 	}
 
-	bm.MenuButton = nil
+	bm.ButtonBox = nil
 
+	bm.bookmarkButton = nil
+
+	bm.popoverButton = nil
 	bm.popover = nil
 	bm.popoverBox = nil
-	bm.bookmarkButton = nil
 	bm.scroller = nil
 	bm.list.Dispose()
 	bm.list = nil
 
 	bm.bookmarks = nil
-
 	bm.windowState = nil
 	bm.actions = nil
 }
 
 func (bm *BookmarksMenu) UpdateBookmarksMenu() {
-	bm.bookmarkButton.Update()
 	err := bm.loadBookmarkList()
 	if err != nil {
 		log.Print("error calling loadBookmarkList(): ", err)
@@ -153,4 +163,16 @@ func (bm *BookmarksMenu) loadBookmarkList() error {
 	}
 	bm.list.SetModel(clm)
 	return nil
+}
+
+func (bm *BookmarksMenu) Update(currentIsBookmarked bool) {
+	if currentIsBookmarked {
+		bm.bookmarkButton.SetTooltipText(l("Remove from bookmarks"))
+		bm.bookmarkButton.SetActionName("win.bookmark-remove")
+
+	} else {
+		bm.bookmarkButton.SetTooltipText(l("Add to bookmarks"))
+		bm.bookmarkButton.SetActionName("win.bookmark-new")
+	}
+	glib.IdleAdd(bm.updateButtonIcons)
 }
