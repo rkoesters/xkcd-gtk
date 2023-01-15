@@ -21,15 +21,16 @@ type BookmarksMenu struct {
 	scroller      *gtk.ScrolledWindow
 	list          *ComicListView
 
-	bookmarks         *bookmarks.List               // ptr to app.bookmarks
-	windowState       *WindowState                  // ptr to win.state
-	actions           map[string]*glib.SimpleAction // ptr to win.actions
-	updateButtonIcons func()
+	bookmarks *bookmarks.List               // ptr to app.bookmarks
+	actions   map[string]*glib.SimpleAction // ptr to win.actions
+
+	currentIsBookmarked func() bool
+	updateButtonIcons   func()
 }
 
 var _ Widget = &BookmarksMenu{}
 
-func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int), bookmarkedGetter func() bool, bookmarkedSetter func(bool), updateButtonIcons func()) (*BookmarksMenu, error) {
+func NewBookmarksMenu(b *bookmarks.List, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int), bookmarkedGetter func() bool, updateButtonIcons func()) (*BookmarksMenu, error) {
 	super, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
@@ -37,10 +38,11 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 	bm := &BookmarksMenu{
 		ButtonBox: super,
 
-		bookmarks:         b,
-		windowState:       ws,
-		actions:           actions,
-		updateButtonIcons: updateButtonIcons,
+		bookmarks: b,
+		actions:   actions,
+
+		currentIsBookmarked: bookmarkedGetter,
+		updateButtonIcons:   updateButtonIcons,
 	}
 	bm.SetLayout(gtk.BUTTONBOX_EXPAND)
 	bm.SetHomogeneous(false)
@@ -134,15 +136,29 @@ func (bm *BookmarksMenu) Dispose() {
 	bm.list = nil
 
 	bm.bookmarks = nil
-	bm.windowState = nil
 	bm.actions = nil
 }
 
-func (bm *BookmarksMenu) UpdateBookmarksMenu() {
+func (bm *BookmarksMenu) Update() {
 	err := bm.loadBookmarkList()
 	if err != nil {
 		log.Print("error calling loadBookmarkList(): ", err)
 	}
+
+	bookmarked := bm.currentIsBookmarked()
+
+	bm.actions["bookmark-new"].SetEnabled(!bookmarked)
+	bm.actions["bookmark-remove"].SetEnabled(bookmarked)
+
+	if bookmarked {
+		bm.bookmarkButton.SetActionName("win.bookmark-remove")
+		bm.bookmarkButton.SetTooltipText(l("Remove from bookmarks"))
+	} else {
+		bm.bookmarkButton.SetActionName("win.bookmark-new")
+		bm.bookmarkButton.SetTooltipText(l("Add to bookmarks"))
+	}
+
+	glib.IdleAdd(bm.updateButtonIcons)
 }
 
 func (bm *BookmarksMenu) loadBookmarkList() error {
@@ -171,16 +187,4 @@ func (bm *BookmarksMenu) loadBookmarkList() error {
 	}
 	bm.list.SetModel(clm)
 	return nil
-}
-
-func (bm *BookmarksMenu) Update(currentIsBookmarked bool) {
-	if currentIsBookmarked {
-		bm.bookmarkButton.SetTooltipText(l("Remove from bookmarks"))
-		bm.bookmarkButton.SetActionName("win.bookmark-remove")
-
-	} else {
-		bm.bookmarkButton.SetTooltipText(l("Add to bookmarks"))
-		bm.bookmarkButton.SetActionName("win.bookmark-new")
-	}
-	glib.IdleAdd(bm.updateButtonIcons)
 }
