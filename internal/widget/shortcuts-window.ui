@@ -120,6 +120,13 @@
             <property name="visible">1</property>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Bookmark this comic</property>
+                <property name="accelerator">&lt;ctrl&gt;d</property>
+                <property name="visible">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Open bookmarks menu</property>
                 <property name="accelerator">&lt;ctrl&gt;b</property>
                 <property name="visible">1</property>
@@ -147,7 +154,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Toggle dark mode</property>
-                <property name="accelerator">&lt;ctrl&gt;d</property>
+                <property name="accelerator">&lt;ctrl&gt;t</property>
                 <property name="visible">1</property>
               </object>
             </child>

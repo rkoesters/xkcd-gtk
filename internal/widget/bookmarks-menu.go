@@ -48,6 +48,7 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 	if err != nil {
 		return nil, err
 	}
+	bm.bookmarkButton.AddAccelerator("activate", accels, gdk.KEY_d, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	bm.Add(bm.bookmarkButton)
 
 	bm.popoverButton, err = gtk.MenuButtonNew()

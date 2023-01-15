@@ -80,7 +80,7 @@ func New(appID string) (*Application, error) {
 	app.SetAccelsForAction("app.new-window", []string{"<Control>n"})
 	app.SetAccelsForAction("app.quit", []string{"<Control>q"})
 	app.SetAccelsForAction("app.show-shortcuts", []string{"<Control>question"})
-	app.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>d"})
+	app.SetAccelsForAction("app.toggle-dark-mode", []string{"<Control>t"})
 
 	// Connect application signal handlers.
 	app.Connect("startup", app.Startup)
