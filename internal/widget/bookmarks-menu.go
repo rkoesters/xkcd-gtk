@@ -43,7 +43,7 @@ func NewBookmarksMenu(b *bookmarks.List, ws *WindowState, actions map[string]*gl
 		updateButtonIcons: updateButtonIcons,
 	}
 	bm.SetLayout(gtk.BUTTONBOX_EXPAND)
-	bm.SetProperty("homogeneous", false)
+	bm.SetHomogeneous(false)
 
 	bm.bookmarkButton, err = gtk.ButtonNew()
 	if err != nil {
