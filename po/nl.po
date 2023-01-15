@@ -24,14 +24,18 @@ msgstr ""
 "Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
 "+3"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:40
+#: internal/widget/window-menu.go:152 internal/widget/app-menu.ui:40
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
 msgid "About"
 msgstr "Over"
 
-#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:139 internal/widget/app-menu.ui:30
 msgid "About xkcd"
 msgstr "Over xkcd"
+
+#: internal/widget/bookmarks-menu.go:69 internal/widget/context-menu.go:18
+msgid "Add to bookmarks"
+msgstr "Toevoegen aan bladwijzers"
 
 #: internal/widget/properties-dialog.go:132
 msgid "Alt text"
@@ -41,12 +45,7 @@ msgstr "Alt-tekst"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmark-check-button.go:30
-#, fuzzy
-msgid "Bookmark this comic"
-msgstr "Ga naar het eerste verhaal"
-
-#: internal/widget/bookmarks-menu.go:48 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:51 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
@@ -54,7 +53,7 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/application-window.go:278
+#: internal/widget/application-window.go:271
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal…"
 
@@ -80,7 +79,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:352
+#: internal/widget/application-window.go:344
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -108,7 +107,7 @@ msgstr "Datum"
 msgid "Error reading local comic database"
 msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 
-#: internal/widget/context-menu.go:56 internal/widget/window-menu.go:58
+#: internal/widget/context-menu.go:30 internal/widget/window-menu.go:89
 msgid "Explain"
 msgstr "Uitleg tonen"
 
@@ -148,7 +147,7 @@ msgstr "Afbeelding"
 msgid "Keep track of comics with bookmarks"
 msgstr "Orden verhalen middels bladwijzers"
 
-#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:148 internal/widget/app-menu.ui:36
 #: internal/widget/shortcuts-window.ui:4
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Keyboard shortcuts"
@@ -158,7 +157,7 @@ msgstr "Sneltoetsen"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:359
+#: internal/widget/application-window.go:351
 msgid "Loading comic..."
 msgstr "Bezig met laden…"
 
@@ -166,7 +165,7 @@ msgstr "Bezig met laden…"
 msgid "Navigate"
 msgstr "Navigatie"
 
-#: internal/widget/window-menu.go:77 internal/widget/app-menu.ui:6
+#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:6
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
 msgid "New window"
 msgstr "Nieuw venster"
@@ -187,7 +186,7 @@ msgstr "Nummer"
 msgid "Open bookmarks menu"
 msgstr "Bladwijzermenu tonen"
 
-#: internal/widget/context-menu.go:52 internal/widget/window-menu.go:54
+#: internal/widget/context-menu.go:29 internal/widget/window-menu.go:85
 msgid "Open link"
 msgstr "Link openen"
 
@@ -207,8 +206,8 @@ msgstr "Sneltoetsen tonen"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:47
-#: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:132
+#: internal/widget/context-menu.go:31 internal/widget/properties-dialog.go:47
+#: internal/widget/window-menu.go:93 internal/widget/shortcuts-window.ui:132
 msgid "Properties"
 msgstr "Eigenschappen"
 
@@ -229,7 +228,12 @@ msgstr "Afsluiten"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
-#: internal/widget/zoom-box.go:51 internal/widget/shortcuts-window.ui:110
+#: internal/widget/bookmarks-menu.go:83 internal/widget/context-menu.go:19
+msgid "Remove from bookmarks"
+msgstr "Verwijderen uit bladwijzers"
+
+#: internal/widget/context-menu.go:25 internal/widget/zoom-box.go:51
+#: internal/widget/shortcuts-window.ui:110
 msgid "Reset zoom"
 msgstr "Oorspronkelijk zoomniveau"
 
@@ -270,11 +274,11 @@ msgstr "Bezig met bijwerken van zoekindex…"
 msgid "View comic metadata"
 msgstr "Toon de metagegevens"
 
-#: internal/widget/window-menu.go:96 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:127 internal/widget/app-menu.ui:18
 msgid "What If?"
 msgstr "Wat als…?"
 
-#: internal/widget/window-menu.go:29
+#: internal/widget/window-menu.go:30
 msgid "Window menu"
 msgstr ""
 
@@ -286,11 +290,13 @@ msgstr "XKCD lezen"
 msgid "Zoom"
 msgstr "Zoomen"
 
-#: internal/widget/zoom-box.go:59 internal/widget/shortcuts-window.ui:96
+#: internal/widget/context-menu.go:23 internal/widget/zoom-box.go:59
+#: internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr "Inzoomen"
 
-#: internal/widget/zoom-box.go:38 internal/widget/shortcuts-window.ui:103
+#: internal/widget/context-menu.go:24 internal/widget/zoom-box.go:38
+#: internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr "Uitzoomen"
 
@@ -298,20 +304,10 @@ msgstr "Uitzoomen"
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "online;strip;romantiek;sarcasme;wiskunde;taal;"
 
-#: internal/widget/window-menu.go:100 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:131 internal/widget/app-menu.ui:22
 msgid "xkcd blog"
 msgstr "xkcd-blog"
 
-#: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:135 internal/widget/app-menu.ui:26
 msgid "xkcd store"
 msgstr "xkcd-winkel"
-
-#~ msgid "Add to bookmarks"
-#~ msgstr "Toevoegen aan bladwijzers"
-
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Verwijderen uit bladwijzers"
-
-#, fuzzy
-#~ msgid "Bookmark"
-#~ msgstr "Bladwijzers"

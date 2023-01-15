@@ -29,19 +29,24 @@ msgstr ""
 msgid "About xkcd"
 msgstr ""
 
+#: internal/widget/bookmarks-menu.go:175
+msgid "Add to bookmarks"
+msgstr ""
+
 #: internal/widget/properties-dialog.go:132
 msgid "Alt text"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:145
+#: internal/widget/shortcuts-window.ui:152
 msgid "Application"
 msgstr ""
 
 #: internal/widget/bookmark-check-button.go:30
+#: internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
 msgstr ""
 
-#: internal/widget/bookmarks-menu.go:48 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:58 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr ""
 
@@ -49,7 +54,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:278
+#: internal/widget/application-window.go:287
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -73,7 +78,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:352
+#: internal/widget/application-window.go:361
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -151,7 +156,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:359
+#: internal/widget/application-window.go:368
 msgid "Loading comic..."
 msgstr ""
 
@@ -176,7 +181,7 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:123
+#: internal/widget/shortcuts-window.ui:130
 msgid "Open bookmarks menu"
 msgstr ""
 
@@ -188,11 +193,11 @@ msgstr ""
 msgid "Open new window"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:136
+#: internal/widget/shortcuts-window.ui:143
 msgid "Open properties window"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:156
+#: internal/widget/shortcuts-window.ui:163
 msgid "Open shortcuts window"
 msgstr ""
 
@@ -201,7 +206,7 @@ msgid "Open window menu"
 msgstr ""
 
 #: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:47
-#: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:132
+#: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr ""
 
@@ -213,13 +218,17 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:163
+#: internal/widget/shortcuts-window.ui:170
 msgid "Quit application"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
+msgstr ""
+
+#: internal/widget/bookmarks-menu.go:171
+msgid "Remove from bookmarks"
 msgstr ""
 
 #: internal/widget/zoom-box.go:51 internal/widget/shortcuts-window.ui:110
@@ -247,7 +256,7 @@ msgid "Title"
 msgstr ""
 
 #: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:12
-#: internal/widget/shortcuts-window.ui:149
+#: internal/widget/shortcuts-window.ui:156
 msgid "Toggle dark mode"
 msgstr ""
 
