@@ -19,7 +19,7 @@ func (app *Application) OpenURL(url string) error {
 const (
 	whatIfLink = "https://what-if.xkcd.com/"
 	blogLink   = "https://blog.xkcd.com/"
-	storeLink  = "https://store.xkcd.com/"
+	booksLink  = "https://xkcd.com/books/"
 	aboutLink  = "https://xkcd.com/about/"
 )
 
@@ -33,9 +33,9 @@ func (app *Application) OpenBlog() {
 	app.OpenURL(blogLink)
 }
 
-// OpenStore opens storeLink in the user's web browser.
-func (app *Application) OpenStore() {
-	app.OpenURL(storeLink)
+// OpenBooks opens booksLink in the user's web browser.
+func (app *Application) OpenBooks() {
+	app.OpenURL(booksLink)
 }
 
 // OpenAboutXKCD opens aboutLink in the user's web browser.

@@ -304,5 +304,5 @@ msgid "xkcd blog"
 msgstr ""
 
 #: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
-msgid "xkcd store"
+msgid "xkcd books"
 msgstr ""

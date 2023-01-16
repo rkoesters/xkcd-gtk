@@ -23,8 +23,8 @@
         <attribute name="action">app.open-blog</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">xkcd store</attribute>
-        <attribute name="action">app.open-store</attribute>
+        <attribute name="label" translatable="yes">xkcd books</attribute>
+        <attribute name="action">app.open-books</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">About xkcd</attribute>

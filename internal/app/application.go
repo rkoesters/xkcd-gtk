@@ -69,7 +69,7 @@ func New(appID string) (*Application, error) {
 	registerAction("new-window", app.Activate)
 	registerAction("open-about-xkcd", app.OpenAboutXKCD)
 	registerAction("open-blog", app.OpenBlog)
-	registerAction("open-store", app.OpenStore)
+	registerAction("open-books", app.OpenBooks)
 	registerAction("open-what-if", app.OpenWhatIf)
 	registerAction("quit", app.PleaseQuit)
 	registerAction("show-about", app.ShowAbout)

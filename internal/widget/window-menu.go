@@ -101,7 +101,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
-	_, err = wm.popover.AddMenuEntry(l("xkcd store"), "app.open-store")
+	_, err = wm.popover.AddMenuEntry(l("xkcd books"), "app.open-books")
 	if err != nil {
 		return nil, err
 	}
