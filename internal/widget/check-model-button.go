@@ -2,7 +2,6 @@ package widget
 
 import (
 	"github.com/gotk3/gotk3/gtk"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
 )
 
 type CheckModelButton struct {
@@ -30,7 +29,7 @@ func NewCheckModelButton(stateGetter func() bool, stateSetter func(bool)) (*Chec
 	cmb.SetProperty("role", gtk.BUTTON_ROLE_CHECK)
 	cmb.Connect("clicked", cmb.Clicked)
 
-	cmb.SetProperty("active", cmb.state())
+	cmb.SyncState(cmb.state())
 
 	return cmb, nil
 }
@@ -44,6 +43,5 @@ func (cmb *CheckModelButton) Clicked() {
 }
 
 func (cmb *CheckModelButton) SyncState(state bool) {
-	log.Debugf("SyncState(%v)", state)
 	cmb.SetProperty("active", state)
 }
