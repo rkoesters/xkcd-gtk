@@ -252,7 +252,7 @@ func (win *ApplicationWindow) StyleUpdated() {
 	} else {
 		setButtonImageFromIconName(icon("non-starred"), win.bookmarksMenu.bookmarkButton.SetImage)
 	}
-	setButtonImageFromIconNameAndSize("pan-down-symbolic", gtk.ICON_SIZE_MENU, win.bookmarksMenu.popoverButton.SetImage)
+	setButtonImageFromIconNameAndSize("pan-down-symbolic", gtk.ICON_SIZE_SMALL_TOOLBAR, win.bookmarksMenu.popoverButton.SetImage)
 	setButtonImageFromIconName(icon("open-menu"), win.windowMenu.SetImage)
 
 	linked := style.IsLinkedNavButtonsTheme(themeName)
