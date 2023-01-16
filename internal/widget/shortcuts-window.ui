@@ -128,7 +128,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">Open bookmarks menu</property>
-                <property name="accelerator">&lt;ctrl&gt;b</property>
+                <property name="accelerator">&lt;ctrl&gt;&lt;alt&gt;d</property>
                 <property name="visible">1</property>
               </object>
             </child>
