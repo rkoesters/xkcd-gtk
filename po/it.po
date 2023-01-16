@@ -44,7 +44,7 @@ msgstr ""
 
 #: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
-msgstr ""
+msgstr "Aggiungi questo fumetto ai preferiti"
 
 #: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"

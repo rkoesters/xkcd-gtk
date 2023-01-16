@@ -44,7 +44,7 @@ msgstr "Alternatif metin"
 
 #: internal/widget/shortcuts-window.ui:152
 msgid "Application"
-msgstr ""
+msgstr "Yer imlerine ekle"
 
 #: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
