@@ -30,7 +30,7 @@ msgstr "Informazioni"
 msgid "About xkcd"
 msgstr "Informazioni su xkcd"
 
-#: internal/widget/bookmarks-menu.go:158
+#: internal/widget/bookmarks-menu.go:156
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
@@ -42,13 +42,11 @@ msgstr "Ferma Testo"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmark-check-button.go:30
-#: internal/widget/shortcuts-window.ui:123
-#, fuzzy
+#: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
-msgstr "Vai al primo fumetto"
+msgstr ""
 
-#: internal/widget/bookmarks-menu.go:61 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
@@ -110,7 +108,7 @@ msgstr "Data"
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:56 internal/widget/window-menu.go:58
+#: internal/widget/context-menu.go:55 internal/widget/window-menu.go:58
 msgid "Explain"
 msgstr "Spiega"
 
@@ -189,7 +187,7 @@ msgstr "Numero"
 msgid "Open bookmarks menu"
 msgstr "Mostra menu segnalibri"
 
-#: internal/widget/context-menu.go:52 internal/widget/window-menu.go:54
+#: internal/widget/context-menu.go:51 internal/widget/window-menu.go:54
 msgid "Open link"
 msgstr "Apri Link"
 
@@ -209,7 +207,7 @@ msgstr "Apri la finestra delle scorciatoie"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:59 internal/widget/properties-dialog.go:47
 #: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Proprietà"
@@ -233,7 +231,7 @@ msgstr "Esci dall'applicazione"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 
-#: internal/widget/bookmarks-menu.go:155
+#: internal/widget/bookmarks-menu.go:153
 msgid "Remove from bookmarks"
 msgstr "Rimuovi questo fumetto dai preferiti"
 

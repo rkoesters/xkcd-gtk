@@ -33,7 +33,7 @@ msgstr "Over"
 msgid "About xkcd"
 msgstr "Over xkcd"
 
-#: internal/widget/bookmarks-menu.go:158
+#: internal/widget/bookmarks-menu.go:156
 msgid "Add to bookmarks"
 msgstr "Toevoegen aan bladwijzers"
 
@@ -45,13 +45,11 @@ msgstr "Alt-tekst"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmark-check-button.go:30
-#: internal/widget/shortcuts-window.ui:123
-#, fuzzy
+#: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
-msgstr "Ga naar het eerste verhaal"
+msgstr ""
 
-#: internal/widget/bookmarks-menu.go:61 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
@@ -113,7 +111,7 @@ msgstr "Datum"
 msgid "Error reading local comic database"
 msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 
-#: internal/widget/context-menu.go:56 internal/widget/window-menu.go:58
+#: internal/widget/context-menu.go:55 internal/widget/window-menu.go:58
 msgid "Explain"
 msgstr "Uitleg tonen"
 
@@ -192,7 +190,7 @@ msgstr "Nummer"
 msgid "Open bookmarks menu"
 msgstr "Bladwijzermenu tonen"
 
-#: internal/widget/context-menu.go:52 internal/widget/window-menu.go:54
+#: internal/widget/context-menu.go:51 internal/widget/window-menu.go:54
 msgid "Open link"
 msgstr "Link openen"
 
@@ -212,7 +210,7 @@ msgstr "Sneltoetsen tonen"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:59 internal/widget/properties-dialog.go:47
 #: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Eigenschappen"
@@ -234,7 +232,7 @@ msgstr "Afsluiten"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Lees xkcd: een online-strip over romantiek, sarcasme, wiskunde en taal"
 
-#: internal/widget/bookmarks-menu.go:155
+#: internal/widget/bookmarks-menu.go:153
 msgid "Remove from bookmarks"
 msgstr "Verwijderen uit bladwijzers"
 

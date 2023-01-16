@@ -34,7 +34,7 @@ msgstr "Hakkında"
 msgid "About xkcd"
 msgstr "xkcd Hakkında"
 
-#: internal/widget/bookmarks-menu.go:158
+#: internal/widget/bookmarks-menu.go:156
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
@@ -46,13 +46,11 @@ msgstr "Alternatif metin"
 msgid "Application"
 msgstr ""
 
-#: internal/widget/bookmark-check-button.go:30
-#: internal/widget/shortcuts-window.ui:123
-#, fuzzy
+#: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
-msgstr "İlk karikatüre git"
+msgstr ""
 
-#: internal/widget/bookmarks-menu.go:61 internal/widget/shortcuts-window.ui:119
+#: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
 msgstr "Yer imleri"
 
@@ -114,7 +112,7 @@ msgstr "Tarih"
 msgid "Error reading local comic database"
 msgstr "Yerel karikatür veritabanı okuma hatası"
 
-#: internal/widget/context-menu.go:56 internal/widget/window-menu.go:58
+#: internal/widget/context-menu.go:55 internal/widget/window-menu.go:58
 msgid "Explain"
 msgstr "Açıkla"
 
@@ -193,7 +191,7 @@ msgstr "Sayı"
 msgid "Open bookmarks menu"
 msgstr "Yer imleri menüsünü göster"
 
-#: internal/widget/context-menu.go:52 internal/widget/window-menu.go:54
+#: internal/widget/context-menu.go:51 internal/widget/window-menu.go:54
 msgid "Open link"
 msgstr "Bağlantıyı aç"
 
@@ -213,7 +211,7 @@ msgstr "Kısayollar penceresini aç"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:60 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:59 internal/widget/properties-dialog.go:47
 #: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Özellikler"
@@ -236,7 +234,7 @@ msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 "xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
-#: internal/widget/bookmarks-menu.go:155
+#: internal/widget/bookmarks-menu.go:153
 msgid "Remove from bookmarks"
 msgstr "Yer imlerinden kaldır"
 
