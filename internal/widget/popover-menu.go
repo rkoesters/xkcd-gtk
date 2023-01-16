@@ -45,20 +45,35 @@ func (pm *PopoverMenu) AddSeparator() error {
 	return nil
 }
 
-func (pm *PopoverMenu) AddMenuEntry(label, action string) error {
+func (pm *PopoverMenu) AddMenuEntry(label, action string) (*gtk.ModelButton, error) {
 	mb, err := gtk.ModelButtonNew()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	mb.SetActionName(action)
 	mb.SetLabel(label)
 	mbl, err := mb.GetChild()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	mbl.ToWidget().SetHAlign(gtk.ALIGN_START)
 	pm.AddChild(mb, 0)
-	return nil
+	return mb, nil
+}
+
+func (pm *PopoverMenu) AddCheckButton(label string, stateGetter func() bool, stateSetter func(bool)) (*CheckModelButton, error) {
+	mb, err := NewCheckModelButton(stateGetter, stateSetter)
+	if err != nil {
+		return nil, err
+	}
+	mb.SetLabel(label)
+	mbl, err := mb.GetChild()
+	if err != nil {
+		return nil, err
+	}
+	mbl.ToWidget().SetHAlign(gtk.ALIGN_START)
+	pm.AddChild(mb, 0)
+	return mb, nil
 }
 
 func (pm *PopoverMenu) AddChild(child gtk.IWidget, padding uint) {

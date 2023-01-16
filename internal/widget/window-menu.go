@@ -51,15 +51,15 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	}
 
 	// Comic properties section.
-	err = wm.popover.AddMenuEntry(l("Open link"), "win.open-link")
+	_, err = wm.popover.AddMenuEntry(l("Open link"), "win.open-link")
 	if err != nil {
 		return nil, err
 	}
-	err = wm.popover.AddMenuEntry(l("Explain"), "win.explain")
+	_, err = wm.popover.AddMenuEntry(l("Explain"), "win.explain")
 	if err != nil {
 		return nil, err
 	}
-	err = wm.popover.AddMenuEntry(l("Properties"), "win.show-properties")
+	_, err = wm.popover.AddMenuEntry(l("Properties"), "win.show-properties")
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = wm.popover.AddMenuEntry(l("New window"), "app.new-window")
+	_, err = wm.popover.AddMenuEntry(l("New window"), "app.new-window")
 	if err != nil {
 		return nil, err
 	}
@@ -93,19 +93,19 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = wm.popover.AddMenuEntry(l("What If?"), "app.open-what-if")
+	_, err = wm.popover.AddMenuEntry(l("What If?"), "app.open-what-if")
 	if err != nil {
 		return nil, err
 	}
-	err = wm.popover.AddMenuEntry(l("xkcd blog"), "app.open-blog")
+	_, err = wm.popover.AddMenuEntry(l("xkcd blog"), "app.open-blog")
 	if err != nil {
 		return nil, err
 	}
-	err = wm.popover.AddMenuEntry(l("xkcd store"), "app.open-store")
+	_, err = wm.popover.AddMenuEntry(l("xkcd store"), "app.open-store")
 	if err != nil {
 		return nil, err
 	}
-	err = wm.popover.AddMenuEntry(l("About xkcd"), "app.open-about-xkcd")
+	_, err = wm.popover.AddMenuEntry(l("About xkcd"), "app.open-about-xkcd")
 	if err != nil {
 		return nil, err
 	}
@@ -114,11 +114,11 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	err = wm.popover.AddMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
+	_, err = wm.popover.AddMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
 	if err != nil {
 		return nil, err
 	}
-	err = wm.popover.AddMenuEntry(l("About"), "app.show-about")
+	_, err = wm.popover.AddMenuEntry(l("About"), "app.show-about")
 	if err != nil {
 		return nil, err
 	}

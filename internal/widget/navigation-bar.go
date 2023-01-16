@@ -94,13 +94,12 @@ func (nb *NavigationBar) Dispose() {
 	nb.newestButton = nil
 }
 
-func (nb *NavigationBar) UpdateButtonState() {
-	n := nb.comicNumber()
-	nb.actions["first-comic"].SetEnabled(n > 1)
-	nb.actions["previous-comic"].SetEnabled(n > 1)
+func (nb *NavigationBar) UpdateButtonState(comicNumber int) {
+	nb.actions["first-comic"].SetEnabled(comicNumber > 1)
+	nb.actions["previous-comic"].SetEnabled(comicNumber > 1)
 
 	newest, _ := cache.NewestComicInfoFromCache()
-	nb.actions["next-comic"].SetEnabled(n < newest.Num)
+	nb.actions["next-comic"].SetEnabled(comicNumber < newest.Num)
 
 	go func() {
 		const refreshRate = time.Hour

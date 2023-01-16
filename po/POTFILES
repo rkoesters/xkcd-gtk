@@ -6,7 +6,6 @@ internal/widget/about-dialog.go
 internal/widget/app-menu.ui
 internal/widget/application-window.go
 internal/widget/application.go
-internal/widget/bookmark-check-button.go
 internal/widget/bookmarks-menu.go
 internal/widget/context-menu.go
 internal/widget/dark-mode-switch.go

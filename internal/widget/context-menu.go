@@ -10,7 +10,7 @@ import (
 type ContextMenu struct {
 	*PopoverMenu
 
-	bookmarkButton *BookmarkCheckButton
+	bookmarkButton *CheckModelButton
 	zoomBox        *ZoomBox
 }
 
@@ -27,11 +27,10 @@ func NewContextMenu(relative gtk.IWidget, actionGroup glib.IActionGroup, bookmar
 
 	defer cm.ShowAll()
 
-	cm.bookmarkButton, err = NewBookmarkCheckButton(bookmarkedGetter, bookmarkedSetter)
+	cm.bookmarkButton, err = cm.AddCheckButton(l("Bookmark this comic"), bookmarkedGetter, bookmarkedSetter)
 	if err != nil {
 		return nil, err
 	}
-	cm.AddChild(cm.bookmarkButton, 0)
 
 	if err = cm.AddSeparator(); err != nil {
 		return nil, err
@@ -49,15 +48,15 @@ func NewContextMenu(relative gtk.IWidget, actionGroup glib.IActionGroup, bookmar
 		return nil, err
 	}
 
-	err = cm.AddMenuEntry(l("Open link"), "win.open-link")
+	_, err = cm.AddMenuEntry(l("Open link"), "win.open-link")
 	if err != nil {
 		return nil, err
 	}
-	err = cm.AddMenuEntry(l("Explain"), "win.explain")
+	_, err = cm.AddMenuEntry(l("Explain"), "win.explain")
 	if err != nil {
 		return nil, err
 	}
-	err = cm.AddMenuEntry(l("Properties"), "win.show-properties")
+	_, err = cm.AddMenuEntry(l("Properties"), "win.show-properties")
 	if err != nil {
 		return nil, err
 	}
@@ -87,6 +86,5 @@ func (cm *ContextMenu) PopupAtPointer(event *gdk.EventButton) {
 
 func (cm *ContextMenu) SetCompact(compact bool) {
 	cm.PopoverMenu.SetCompact(compact)
-	cm.bookmarkButton.SetCompact(compact)
 	cm.zoomBox.SetCompact(compact)
 }

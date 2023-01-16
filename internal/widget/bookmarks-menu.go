@@ -24,13 +24,12 @@ type BookmarksMenu struct {
 	bookmarks *bookmarks.List               // ptr to app.bookmarks
 	actions   map[string]*glib.SimpleAction // ptr to win.actions
 
-	currentIsBookmarked func() bool
-	updateButtonIcons   func()
+	updateButtonIcons func()
 }
 
 var _ Widget = &BookmarksMenu{}
 
-func NewBookmarksMenu(b *bookmarks.List, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int), bookmarkedGetter func() bool, updateButtonIcons func()) (*BookmarksMenu, error) {
+func NewBookmarksMenu(b *bookmarks.List, actions map[string]*glib.SimpleAction, accels *gtk.AccelGroup, comicSetter func(int), updateButtonIcons func()) (*BookmarksMenu, error) {
 	super, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
 	if err != nil {
 		return nil, err
@@ -41,8 +40,7 @@ func NewBookmarksMenu(b *bookmarks.List, actions map[string]*glib.SimpleAction, 
 		bookmarks: b,
 		actions:   actions,
 
-		currentIsBookmarked: bookmarkedGetter,
-		updateButtonIcons:   updateButtonIcons,
+		updateButtonIcons: updateButtonIcons,
 	}
 	bm.SetLayout(gtk.BUTTONBOX_EXPAND)
 	bm.SetHomogeneous(false)
@@ -139,13 +137,13 @@ func (bm *BookmarksMenu) Dispose() {
 	bm.actions = nil
 }
 
-func (bm *BookmarksMenu) Update() {
+func (bm *BookmarksMenu) Update(comicNumber int) {
 	err := bm.loadBookmarkList()
 	if err != nil {
 		log.Print("error calling loadBookmarkList(): ", err)
 	}
 
-	bookmarked := bm.currentIsBookmarked()
+	bookmarked := bm.bookmarks.Contains(comicNumber)
 
 	bm.actions["bookmark-new"].SetEnabled(!bookmarked)
 	bm.actions["bookmark-remove"].SetEnabled(bookmarked)

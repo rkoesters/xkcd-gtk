@@ -125,7 +125,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.Connect("destroy", win.Dispose)
 
 	// Create image viewing frame
-	win.comicContainer, err = NewImageViewer(win.IActionGroup, win.state.ImageScale, win.IsBookmarkedWS, win.SetBookmarked)
+	win.comicContainer, err = NewImageViewer(win.IActionGroup, win.state.ImageScale, win.IsBookmarked, win.SetBookmarked)
 	if err != nil {
 		return nil, err
 	}
@@ -165,7 +165,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), win.actions, accels, win.SetComic, win.IsBookmarkedWS, win.StyleUpdated)
+	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), win.actions, accels, win.SetComic, win.StyleUpdated)
 	if err != nil {
 		return nil, err
 	}
@@ -322,9 +322,9 @@ func (win *ApplicationWindow) SetComic(n int) {
 	win.header.SetSubtitle(strconv.Itoa(n))
 
 	// Update UI to reflect new current comic.
-	win.navigationBar.UpdateButtonState()
-	win.bookmarksMenu.Update()
-	win.comicContainer.contextMenu.bookmarkButton.Update()
+	win.navigationBar.UpdateButtonState(n)
+	win.bookmarksMenu.Update(n)
+	win.comicContainer.contextMenu.bookmarkButton.SyncState(win.app.BookmarksList().Contains(n))
 
 	go func() {
 		var err error
@@ -377,7 +377,6 @@ func (win *ApplicationWindow) DisplayComic() {
 	win.header.SetTitle(win.comic.SafeTitle)
 	win.header.SetSubtitle(strconv.Itoa(win.comic.Num))
 	win.comicContainer.SetTooltipText(win.comic.Alt)
-	win.navigationBar.UpdateButtonState()
 
 	// If the comic has a link, lets give the option of visiting it.
 	win.actions["open-link"].SetEnabled(win.comic.Link != "")
@@ -452,8 +451,9 @@ func (win *ApplicationWindow) registerBookmarkObserver() {
 	go func() {
 		for range ch {
 			glib.IdleAdd(func() {
-				win.bookmarksMenu.Update()
-				win.comicContainer.contextMenu.bookmarkButton.Update()
+				n := win.comicNumber()
+				win.bookmarksMenu.Update(n)
+				win.comicContainer.contextMenu.bookmarkButton.SyncState(win.app.BookmarksList().Contains(n))
 			})
 		}
 	}()
@@ -467,13 +467,6 @@ func (win *ApplicationWindow) unregisterBookmarkObserver() {
 // while holding a write lock on win.comicMutex.
 func (win *ApplicationWindow) IsBookmarked() bool {
 	return win.app.BookmarksList().Contains(win.comicNumber())
-}
-
-// IsBookmarkedWS is the same as IsBookmarked, except it uses the WindowState
-// struct instead of Comic struct. Do not call while holding a write lock on
-// win.comicMutex.
-func (win *ApplicationWindow) IsBookmarkedWS() bool {
-	return win.app.BookmarksList().Contains(win.state.ComicNumber)
 }
 
 // SetBookmarked adds win's current comic to the user's bookmarks if bookmarked
