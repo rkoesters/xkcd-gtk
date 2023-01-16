@@ -30,7 +30,7 @@ msgstr "Informazioni"
 msgid "About xkcd"
 msgstr "Informazioni su xkcd"
 
-#: internal/widget/bookmarks-menu.go:156
+#: internal/widget/bookmarks-menu.go:157
 msgid "Add to bookmarks"
 msgstr "Aggiungi questo fumetto ai preferiti"
 
@@ -231,7 +231,7 @@ msgstr "Esci dall'applicazione"
 msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 
-#: internal/widget/bookmarks-menu.go:153
+#: internal/widget/bookmarks-menu.go:154
 msgid "Remove from bookmarks"
 msgstr "Rimuovi questo fumetto dai preferiti"
 

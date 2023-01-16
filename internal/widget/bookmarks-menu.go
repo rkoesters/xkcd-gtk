@@ -57,6 +57,7 @@ func NewBookmarksMenu(b *bookmarks.List, actions map[string]*glib.SimpleAction, 
 		return nil, err
 	}
 	bm.popoverButton.SetTooltipText(l("Bookmarks"))
+	bm.popoverButton.AddAccelerator("activate", accels, gdk.KEY_b, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE)
 	bm.popoverButton.AddAccelerator("activate", accels, gdk.KEY_d, gdk.CONTROL_MASK|gdk.MOD1_MASK, gtk.ACCEL_VISIBLE)
 	bm.Add(bm.popoverButton)
 

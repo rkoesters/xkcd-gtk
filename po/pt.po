@@ -31,7 +31,7 @@ msgstr "Sobre"
 msgid "About xkcd"
 msgstr "Sobre o xkcd"
 
-#: internal/widget/bookmarks-menu.go:156
+#: internal/widget/bookmarks-menu.go:157
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
@@ -236,7 +236,7 @@ msgstr ""
 "Ler xkcd: um romance de banda desenhada da internet, sarcasmo, matemática e "
 "linguagem"
 
-#: internal/widget/bookmarks-menu.go:153
+#: internal/widget/bookmarks-menu.go:154
 msgid "Remove from bookmarks"
 msgstr "Remover esta banda desenhada dos marcadores"
 
