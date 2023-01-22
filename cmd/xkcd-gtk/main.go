@@ -18,6 +18,7 @@ import (
 var (
 	gdkDebug = flag.String("gdk-debug", "", "Behave as if the GDK_DEBUG env variable was set to the provided string.")
 	gtkDebug = flag.String("gtk-debug", "", "Behave as if the GTK_DEBUG env variable was set to the provided string.")
+	service  = flag.Bool("gapplication-service", false, "Start in GApplication service mode.")
 	version  = flag.Bool("version", false, "Print app version and exit.")
 )
 
@@ -59,7 +60,12 @@ func main() {
 	glib.SetApplicationName(app.Name())
 	gtk.WindowSetDefaultIconName(build.AppID())
 
-	app, err := app.New(build.AppID())
+	appFlags := glib.APPLICATION_FLAGS_NONE
+	if *service {
+		appFlags = appFlags | glib.APPLICATION_IS_SERVICE
+	}
+
+	app, err := app.New(build.AppID(), appFlags)
 	if err != nil {
 		log.Fatal("error creating application: ", err)
 	}
