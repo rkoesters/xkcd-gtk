@@ -1,16 +1,15 @@
 # Turkish translation for Comic Sticks (xkcd-gtk).
-#
 # Copyright (C) 2015-2022 Ryan Koesters
 # This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
 #
-# Sabri Ünal <libreajans@gmail.com>, 2022.
+# Sabri Ünal <libreajans@gmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/rkoesters/xkcd-gtk/issues\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-06-21 20:56+0300\n"
+"PO-Revision-Date: 2023-01-25 16:11+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Project-Style: gnome\n"
 
 #: internal/widget/about-dialog.go:19
@@ -48,7 +47,7 @@ msgstr "Yer imlerine ekle"
 
 #: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
-msgstr ""
+msgstr "Bu karikatürü yer imlerine ekle"
 
 #: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
 msgid "Bookmarks"
@@ -64,7 +63,7 @@ msgstr "Yeni karikatür denetleniyor..."
 
 #: internal/widget/shortcuts-window.ui:22
 msgid "Close window"
-msgstr ""
+msgstr "Pencereyi kapat"
 
 #: internal/widget/application.go:10
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -122,7 +121,7 @@ msgstr "Özellikler:"
 
 #: internal/widget/shortcuts-window.ui:11
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
 msgid "Go to a random comic"
@@ -201,7 +200,7 @@ msgstr "Yeni pencere aç"
 
 #: internal/widget/shortcuts-window.ui:143
 msgid "Open properties window"
-msgstr ""
+msgstr "Özellikler penceresini aç"
 
 #: internal/widget/shortcuts-window.ui:163
 msgid "Open shortcuts window"
@@ -209,7 +208,7 @@ msgstr "Kısayollar penceresini aç"
 
 #: internal/widget/shortcuts-window.ui:29
 msgid "Open window menu"
-msgstr ""
+msgstr "Pencere menüsünü açar"
 
 #: internal/widget/context-menu.go:59 internal/widget/properties-dialog.go:47
 #: internal/widget/window-menu.go:62 internal/widget/shortcuts-window.ui:139
@@ -286,7 +285,7 @@ msgstr "Farzedelim?"
 
 #: internal/widget/window-menu.go:29
 msgid "Window menu"
-msgstr ""
+msgstr "Pencere menüsü"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
@@ -314,7 +313,4 @@ msgstr "xkcd günlüğü"
 
 #: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
 msgid "xkcd books"
-msgstr ""
-
-#~ msgid "xkcd store"
-#~ msgstr "xkcd mağazası"
+msgstr "xkcd kitapları"
