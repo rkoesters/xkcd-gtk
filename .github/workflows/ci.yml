@@ -63,7 +63,7 @@ jobs:
       - run: make
       - run: make test
 
-  flatpak/modules.txt:
+  flatpak_modules.txt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -91,7 +91,7 @@ jobs:
           name: modules.txt
           path: flatpak/modules.txt
 
-  flatpak/appcenter.yml:
+  flatpak_appcenter.yml:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -119,7 +119,7 @@ jobs:
           name: appcenter.yml
           path: flatpak/appcenter.yml
 
-  flatpak/flathub.yml:
+  flatpak_flathub.yml:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -173,9 +173,9 @@ jobs:
       options: --privileged
 
     needs:
-      - flatpak/modules.txt
-      - flatpak/appcenter.yml
-      - flatpak/flathub.yml
+      - flatpak_modules.txt
+      - flatpak_appcenter.yml
+      - flatpak_flathub.yml
 
     steps:
       - uses: actions/checkout@v3
