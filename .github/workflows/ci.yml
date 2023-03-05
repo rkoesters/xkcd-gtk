@@ -174,7 +174,8 @@ jobs:
 
     needs:
       - flatpak/modules.txt
-      - flatpak/${{ matrix.repo }}.yml
+      - flatpak/appcenter.yml
+      - flatpak/flathub.yml
 
     steps:
       - uses: actions/checkout@v3
