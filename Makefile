@@ -115,23 +115,24 @@ flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO
 	tools/gen-flatpak-deps.sh >>$@.tmp
 	mv $@.tmp $@
 
-flatpak-build/vendor/modules.txt: go.mod go.sum $(ALL_GO_SOURCES)
+flatpak/modules.txt: go.mod go.sum $(ALL_GO_SOURCES)
 	go mod vendor -o flatpak-build/vendor
+	cp flatpak-build/vendor/modules.txt $@
 
-flathub: flatpak/flathub.yml flatpak-build/vendor/modules.txt
+flathub: flatpak/flathub.yml flatpak/modules.txt
 	flatpak-builder --user --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
-flathub-install: flatpak/flathub.yml flatpak-build/vendor/modules.txt
+flathub-install: flatpak/flathub.yml flatpak/modules.txt
 	flatpak-builder --user --install --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
-appcenter: flatpak/appcenter.yml flatpak-build/vendor/modules.txt
+appcenter: flatpak/appcenter.yml flatpak/modules.txt
 	flatpak-builder --user --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
-appcenter-install: flatpak/appcenter.yml flatpak-build/vendor/modules.txt
+appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 	flatpak-builder --user --install --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
 $(APP).yml: flatpak/appcenter.yml
-	sed "s/path: '../path: './" $< >$@
+	sed "s/path: '..'/path: '.'/" $< >$@
 
 fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)

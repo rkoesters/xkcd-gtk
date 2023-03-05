@@ -19,6 +19,7 @@ modules:
   - name: com.github.rkoesters.xkcd-gtk
     buildsystem: simple
     build-commands:
+      - 'ln -s "$(pwd)/src/flatpak/modules.txt" vendor/'
       - 'ln -s "$(pwd)/vendor" src/'
       - 'cd src; PATH="$PATH:../go/bin" make'
       - 'cd src; PATH="$PATH:../go/bin" make install prefix=/app'
@@ -34,11 +35,6 @@ modules:
           - flatpak-build/
           - vendor/
         dest: src
-
-      - type: file
-        path: '../flatpak-build/vendor/modules.txt'
-        dest: vendor
-        dest-filename: modules.txt
 
       - type: archive
         only-arches: [x86_64]
