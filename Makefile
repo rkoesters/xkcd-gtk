@@ -119,33 +119,23 @@ flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO
 	tools/gen-flatpak-deps.sh >>$@.tmp
 	mv $@.tmp $@
 
-# Generate flatpak/modules.txt (a copy of vendor/modules.txt) without touching
-# the module's vendor directory.
-flatpak/modules.txt: go.mod go.sum
-	go mod vendor -o flatpak-build/vendor/
-	cp flatpak-build/vendor/modules.txt $@
+flatpak-build/vendor/modules.txt: go.mod go.sum $(ALL_GO_SOURCES)
+	go mod vendor -o flatpak-build/vendor
 
-# Generate vendor/modules.txt without network access (using the cached
-# flatpak/modules.txt). If you have network access, then use 'go mod vendor'
-# instead.
-vendor/modules.txt:
-	mkdir -p vendor
-	cp flatpak/modules.txt $@
-
-flathub: flatpak/flathub.yml
+flathub: flatpak/flathub.yml flatpak-build/vendor/modules.txt
 	flatpak-builder --user --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
-flathub-install: flatpak/flathub.yml
+flathub-install: flatpak/flathub.yml flatpak-build/vendor/modules.txt
 	flatpak-builder --user --install --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
-appcenter: flatpak/appcenter.yml
+appcenter: flatpak/appcenter.yml flatpak-build/vendor/modules.txt
 	flatpak-builder --user --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
-appcenter-install: flatpak/appcenter.yml
+appcenter-install: flatpak/appcenter.yml flatpak-build/vendor/modules.txt
 	flatpak-builder --user --install --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
 $(APP).yml: flatpak/appcenter.yml
-	sed "s/path: '..'/path: '.'/" $< >$@
+	sed "s/path: '../path: './" $< >$@
 
 fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml flatpak/modules.txt go.sum
 	go fix $(MODULE_PACKAGES)

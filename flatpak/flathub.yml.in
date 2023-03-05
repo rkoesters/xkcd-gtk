@@ -22,7 +22,6 @@ modules:
     buildsystem: simple
     build-commands:
       - 'ln -s "$(pwd)/vendor" src/'
-      - 'cd src; . /usr/lib/sdk/golang/enable.sh; make vendor/modules.txt'
       - 'cd src; . /usr/lib/sdk/golang/enable.sh; make'
       - 'cd src; . /usr/lib/sdk/golang/enable.sh; make install prefix=/app'
 
@@ -37,3 +36,8 @@ modules:
           - flatpak-build/
           - vendor/
         dest: src
+
+      - type: file
+        path: '../flatpak-build/vendor/modules.txt'
+        dest: vendor
+        dest-filename: modules.txt
