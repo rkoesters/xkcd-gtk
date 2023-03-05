@@ -87,10 +87,6 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 dev: $(GEN_SOURCES) $(APPDATA_PATH)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-go.mod: $(ALL_GO_SOURCES)
-go.sum: go.mod $(ALL_GO_SOURCES)
-	go mod tidy
-
 %.css.go: %.css tools/go-wrap.sh
 	tools/go-wrap.sh $< >$@
 
@@ -137,9 +133,10 @@ appcenter-install: flatpak/appcenter.yml flatpak-build/vendor/modules.txt
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '../path: './" $< >$@
 
-fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml flatpak/modules.txt go.sum
+fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
+	go mod tidy
 	([ -d vendor ] && go mod vendor) || true
 	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool simplify --replace
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
