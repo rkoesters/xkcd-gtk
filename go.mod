@@ -8,7 +8,7 @@ require (
 	github.com/gotk3/gotk3 v0.6.1
 	github.com/rkoesters/xdg v0.0.1
 	github.com/rkoesters/xkcd v1.4.0
-	go.etcd.io/bbolt v1.3.6
+	go.etcd.io/bbolt v1.3.7
 )
 
 require (
@@ -34,5 +34,5 @@ require (
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/json-iterator/go v0.0.0-20171115153421-f7279a603ede // indirect
 	github.com/mschoch/smat v0.2.0 // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/sys v0.4.0 // indirect
 )
