@@ -11,6 +11,10 @@ GTK+3.
 
 ## Building from source
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/rkoesters/xkcd-gtk.svg)](https://pkg.go.dev/github.com/rkoesters/xkcd-gtk)
+[![CI](https://github.com/rkoesters/xkcd-gtk/actions/workflows/ci.yml/badge.svg)](https://github.com/rkoesters/xkcd-gtk/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/rkoesters/xkcd-gtk)](https://goreportcard.com/report/github.com/rkoesters/xkcd-gtk)
+
 ### Requirements
 
 To build this program, you will need Go (version >= 1.17, something like
