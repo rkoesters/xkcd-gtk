@@ -8,7 +8,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -387,7 +386,7 @@ func currentCacheVersion() int { return cacheVersionCurrent }
 
 // existingCacheVersion returns the cache version for the user's existing cache.
 func existingCacheVersion() int {
-	b, err := ioutil.ReadFile(cacheVersionPath())
+	b, err := os.ReadFile(cacheVersionPath())
 	if err != nil {
 		return 0
 	}

@@ -1,7 +1,7 @@
 package log_test
 
 import (
-	"io/ioutil"
+	"io"
 	"log"
 	"testing"
 )
@@ -15,7 +15,7 @@ import (
 var logger *log.Logger
 
 func init() {
-	logger = log.New(ioutil.Discard, "", log.LstdFlags|log.Lshortfile)
+	logger = log.New(io.Discard, "", log.LstdFlags|log.Lshortfile)
 }
 
 func BenchmarkLogDebugOffMap(b *testing.B) {

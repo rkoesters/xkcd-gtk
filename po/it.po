@@ -76,7 +76,7 @@ msgstr ""
 "Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei "
 "fumetti, navigazione offline e scorciatoie da tastiera intuitive."
 
-#: internal/cache/cache.go:67
+#: internal/cache/cache.go:66
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
@@ -84,11 +84,11 @@ msgstr "Fumetto non trovato"
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
-#: internal/cache/cache.go:69
+#: internal/cache/cache.go:68
 msgid "Connect to the internet to download some comics!"
 msgstr "Collegati a Internet per scaricare alcuni fumetti!"
 
-#: internal/cache/cache.go:68
+#: internal/cache/cache.go:67
 msgid "Couldn't get comic"
 msgstr "Impossibile ottenere fumetto"
 
@@ -104,7 +104,7 @@ msgstr "Modalità scura per la lettura a tarda notte"
 msgid "Date"
 msgstr "Data"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:65
 msgid "Error reading local comic database"
 msgstr ""
 

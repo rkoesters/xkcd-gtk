@@ -21,8 +21,8 @@ msgstr ""
 #: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
-"+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
+"GTK+3"
 
 #: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:40
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
@@ -79,7 +79,7 @@ msgstr ""
 "Met Comic Sticks kunt u xkcd-stripverhalen lezen. De toepassing heeft "
 "ondersteuning voor snelzoeken, offline-lezen en bevat intuïtieve sneltoetsen."
 
-#: internal/cache/cache.go:67
+#: internal/cache/cache.go:66
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
@@ -87,11 +87,11 @@ msgstr "Verhaal niet gevonden"
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
-#: internal/cache/cache.go:69
+#: internal/cache/cache.go:68
 msgid "Connect to the internet to download some comics!"
 msgstr "Maak verbinding met internet om verhalen op te halen!"
 
-#: internal/cache/cache.go:68
+#: internal/cache/cache.go:67
 msgid "Couldn't get comic"
 msgstr "Kan stripverhaal niet ophalen"
 
@@ -107,7 +107,7 @@ msgstr "Donker thema voor de late avonduurtjes"
 msgid "Date"
 msgstr "Datum"
 
-#: internal/cache/cache.go:66
+#: internal/cache/cache.go:65
 msgid "Error reading local comic database"
 msgstr "De lokale stripdatabank kan niet worden uitgelezen"
 
