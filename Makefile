@@ -169,6 +169,7 @@ clean:
 	rm -f $(APPDATA_PATH)
 	rm -f $(MO)
 	rm -f $(GEN_FLATPAK_YML)
+	rm -f flatpak/modules.txt
 	rm -rf flatpak-build/
 	rm -rf .flatpak-builder/
 
