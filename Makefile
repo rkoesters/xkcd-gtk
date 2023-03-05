@@ -57,8 +57,6 @@ BUILD_DATA      = app-id=$(APP),version=$(APP_VERSION)
 GO_SOURCES     = $(shell find cmd internal -name '*.go' -type f)
 CSS_SOURCES    = $(shell find cmd internal -name '*.css' -type f)
 UI_SOURCES     = $(shell find cmd internal -name '*.ui' -type f)
-GEN_SOURCES    = $(patsubst %,%.go,$(CSS_SOURCES) $(UI_SOURCES))
-ALL_GO_SOURCES = $(GO_SOURCES) $(GEN_SOURCES)
 SH_SOURCES     = $(shell find tools -name '*.sh' -type f)
 
 POTFILES         = $(shell cat po/POTFILES)
@@ -81,17 +79,11 @@ FLATPAK_YML     = $(APP).yml $(GEN_FLATPAK_YML)
 
 all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
 
-$(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
+$(EXE_PATH): Makefile $(GO_SOURCES) $(APPDATA_PATH)
 	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-dev: $(GEN_SOURCES) $(APPDATA_PATH)
+dev: $(APPDATA_PATH)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
-
-%.css.go: %.css tools/go-wrap.sh
-	tools/go-wrap.sh $< >$@
-
-%.ui.go: %.ui tools/go-wrap.sh
-	tools/go-wrap.sh $< >$@
 
 $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 	xgettext -o $@ -LC -kl $(POTFLAGS) $(POTFILES_GO)
@@ -110,12 +102,12 @@ $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 %.mo: %.po
 	msgfmt -c -o $@ $<
 
-flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO_SOURCES)
+flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(GO_SOURCES)
 	cp $< $@.tmp
 	tools/gen-flatpak-deps.sh >>$@.tmp
 	mv $@.tmp $@
 
-flatpak/modules.txt: go.mod go.sum $(ALL_GO_SOURCES)
+flatpak/modules.txt: go.mod go.sum $(GO_SOURCES)
 	go mod vendor -o flatpak-build/vendor
 	cp flatpak-build/vendor/modules.txt $@
 
@@ -134,7 +126,7 @@ appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '..'/path: '.'/" $< >$@
 
-fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
+fix: $(POT_PATH) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	go mod tidy
@@ -145,7 +137,7 @@ fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
 		msgmerge -U --backup=none "po/$$lang.po" $(POT_PATH); \
 	done
 
-check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
+check: $(APPDATA_PATH) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
@@ -153,7 +145,7 @@ check: $(GEN_SOURCES) $(APPDATA_PATH) $(FLATPAK_YML)
 	appstream-util --nonet validate-relax $(APPDATA_PATH)
 	-appstream-util validate-strict $(APPDATA_PATH)
 
-test: $(GEN_SOURCES) $(FLATPAK_YML) $(APPDATA_PATH)
+test: $(FLATPAK_YML) $(APPDATA_PATH)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
@@ -164,7 +156,6 @@ ci: all appcenter check flathub test
 clean:
 	rm -f $(EXE_PATH)
 	rm -f $(DEV_PATH)
-	rm -f $(GEN_SOURCES)
 	rm -f $(DESKTOP_PATH)
 	rm -f $(APPDATA_PATH)
 	rm -f $(MO)

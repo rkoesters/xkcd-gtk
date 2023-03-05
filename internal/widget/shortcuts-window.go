@@ -1,11 +1,15 @@
 package widget
 
 import (
+	_ "embed"
 	"errors"
 
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 )
+
+//go:embed shortcuts-window.ui
+var shortcutsWindowUI string
 
 // NewShortcutsWindow creates a gtk.ShortcutsWindow populated with our
 // application's keyboard shortcuts.

@@ -3,6 +3,7 @@
 package style
 
 import (
+	_ "embed"
 	"sync"
 
 	"github.com/gotk3/gotk3/gdk"
@@ -22,6 +23,12 @@ const (
 	PaddingPropertiesDialog  = 12
 	PaddingUnlinkedButtonBox = 4
 )
+
+//go:embed style.css
+var styleCSS string
+
+//go:embed style-dark.css
+var styleDarkCSS string
 
 var (
 	cssDataMutex      sync.RWMutex

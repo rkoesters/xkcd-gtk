@@ -1,5 +1,3 @@
-*.css.go
-*.ui.go
 /.config.mk
 /.flatpak-builder/
 /build/
