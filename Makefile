@@ -87,6 +87,10 @@ $(EXE_PATH): Makefile $(ALL_GO_SOURCES) $(APPDATA_PATH)
 dev: $(GEN_SOURCES) $(APPDATA_PATH)
 	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
+go.mod: $(ALL_GO_SOURCES)
+go.sum: go.mod $(ALL_GO_SOURCES)
+	go mod tidy
+
 %.css.go: %.css tools/go-wrap.sh
 	tools/go-wrap.sh $< >$@
 
@@ -115,6 +119,19 @@ flatpak/%.yml: flatpak/%.yml.in go.mod go.sum tools/gen-flatpak-deps.sh $(ALL_GO
 	tools/gen-flatpak-deps.sh >>$@.tmp
 	mv $@.tmp $@
 
+# Generate flatpak/modules.txt (a copy of vendor/modules.txt) without touching
+# the module's vendor directory.
+flatpak/modules.txt: go.mod go.sum
+	go mod vendor -o flatpak-build/vendor/
+	cp flatpak-build/vendor/modules.txt $@
+
+# Generate vendor/modules.txt without network access (using the cached
+# flatpak/modules.txt). If you have network access, then use 'go mod vendor'
+# instead.
+vendor/modules.txt:
+	mkdir -p vendor
+	cp flatpak/modules.txt $@
+
 flathub: flatpak/flathub.yml
 	flatpak-builder --user --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
 
@@ -130,10 +147,9 @@ appcenter-install: flatpak/appcenter.yml
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '..'/path: '.'/" $< >$@
 
-fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml
+fix: $(GEN_SOURCES) $(POT_PATH) $(PO) $(APP).yml flatpak/modules.txt go.sum
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
-	go mod tidy
 	([ -d vendor ] && go mod vendor) || true
 	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool simplify --replace
 	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)

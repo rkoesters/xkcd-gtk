@@ -14,10 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         go:
-          - 1.13.x  # ubuntu focal
-          - 1.15.x  # debian bullseye
           - 1.16.x  # debian bookworm
+          - 1.17.x
           - 1.18.x  # ubuntu jammy
+          - 1.19.x
           - 1.x     # latest
 
     name: go${{ matrix.go }}
