@@ -1,4 +1,3 @@
-/.config.mk
 /.flatpak-builder/
 /build/
 /com.github.rkoesters.xkcd-gtk

@@ -28,7 +28,6 @@ modules:
       - type: dir
         path: '.'
         skip:
-          - .config.mk
           - com.github.rkoesters.xkcd-gtk
           - com.github.rkoesters.xkcd-gtk-dev
           - debian/
