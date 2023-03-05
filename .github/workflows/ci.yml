@@ -63,6 +63,90 @@ jobs:
       - run: make
       - run: make test
 
+  flatpak/modules.txt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: stable
+
+      - name: Set up GITHUB_ENV
+        run: |
+          go version | sed 's/^go version /GOVERSION=/' | \
+          tr ' /' '-' >>$GITHUB_ENV
+          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
+          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
+
+      - name: Set up build dependencies
+        run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
+
+      - run: go mod graph
+      - run: make flatpak/modules.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: modules.txt
+          path: flatpak/modules.txt
+
+  flatpak/appcenter.yml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: stable
+
+      - name: Set up GITHUB_ENV
+        run: |
+          go version | sed 's/^go version /GOVERSION=/' | \
+          tr ' /' '-' >>$GITHUB_ENV
+          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
+          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
+
+      - name: Set up build dependencies
+        run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
+
+      - run: go mod graph
+      - run: make flatpak/appcenter.yml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: appcenter.yml
+          path: flatpak/appcenter.yml
+
+  flatpak/flathub.yml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: stable
+
+      - name: Set up GITHUB_ENV
+        run: |
+          go version | sed 's/^go version /GOVERSION=/' | \
+          tr ' /' '-' >>$GITHUB_ENV
+          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
+          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
+
+      - name: Set up build dependencies
+        run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
+
+      - run: go mod graph
+      - run: make flatpak/flathub.yml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: flathub.yml
+          path: flatpak/flathub.yml
+
   flatpak-builder:
     strategy:
       matrix:
@@ -81,7 +165,6 @@ jobs:
             image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
-    needs: build-and-test
 
     runs-on: ubuntu-latest
 
@@ -89,11 +172,15 @@ jobs:
       image: ${{ matrix.image }}
       options: --privileged
 
+    needs:
+      - flatpak/modules.txt
+      - flatpak/${{ matrix.repo }}.yml
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: dnf -y install docker go make
+        run: dnf -y install docker
 
       - name: Set up QEMU
         if: ${{ matrix.arch != 'x86_64' }}
@@ -101,11 +188,15 @@ jobs:
         with:
           platforms: arm64
 
-      - run: go mod graph
-      - run: make flatpak/modules.txt
-      - run: cat flatpak/modules.txt
-      - run: make flatpak/${{ matrix.repo }}.yml
-      - run: cat flatpak/${{ matrix.repo }}.yml
+      - uses: actions/download-artifact@v3
+        with:
+          name: modules.txt
+          path: flatpak/modules.txt
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.repo }}.yml
+          path: flatpak/${{ matrix.repo }}.yml
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
