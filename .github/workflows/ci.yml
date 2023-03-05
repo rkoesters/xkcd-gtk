@@ -101,10 +101,10 @@ jobs:
           platforms: arm64
 
       - run: go mod graph
-      - run: make flatpak/${{ matrix.repo }}.yml
-      - run: cat flatpak/${{ matrix.repo }}.yml
       - run: make flatpak/modules.txt
       - run: cat flatpak/modules.txt
+      - run: make flatpak/${{ matrix.repo }}.yml
+      - run: cat flatpak/${{ matrix.repo }}.yml
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
