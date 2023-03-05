@@ -81,6 +81,7 @@ jobs:
             image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
+    needs: build-and-test
 
     runs-on: ubuntu-latest
 
