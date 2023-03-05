@@ -63,7 +63,7 @@ jobs:
       - run: make
       - run: make test
 
-  flatpak-modules-txt:
+  flatpak-config:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -84,67 +84,23 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
 
       - run: go mod graph
-      - run: make flatpak/modules.txt
 
+      - run: make flatpak/modules.txt
       - uses: actions/upload-artifact@v3
         with:
-          name: modules.txt
+          name: flatpak-modules.txt
           path: flatpak/modules.txt
 
-  flatpak-appcenter-yml:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: stable
-
-      - name: Set up GITHUB_ENV
-        run: |
-          go version | sed 's/^go version /GOVERSION=/' | \
-          tr ' /' '-' >>$GITHUB_ENV
-          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
-          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
-
-      - name: Set up build dependencies
-        run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
-
-      - run: go mod graph
       - run: make flatpak/appcenter.yml
-
       - uses: actions/upload-artifact@v3
         with:
-          name: appcenter.yml
+          name: flatpak-appcenter.yml
           path: flatpak/appcenter.yml
 
-  flatpak-flathub-yml:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: stable
-
-      - name: Set up GITHUB_ENV
-        run: |
-          go version | sed 's/^go version /GOVERSION=/' | \
-          tr ' /' '-' >>$GITHUB_ENV
-          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
-          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
-
-      - name: Set up build dependencies
-        run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
-
-      - run: go mod graph
       - run: make flatpak/flathub.yml
-
       - uses: actions/upload-artifact@v3
         with:
-          name: flathub.yml
+          name: flatpak-flathub.yml
           path: flatpak/flathub.yml
 
   flatpak-builder:
@@ -172,10 +128,7 @@ jobs:
       image: ${{ matrix.image }}
       options: --privileged
 
-    needs:
-      - flatpak-modules-txt
-      - flatpak-appcenter-yml
-      - flatpak-flathub-yml
+    needs: flatpak-config
 
     steps:
       - uses: actions/checkout@v3
@@ -191,12 +144,12 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: modules.txt
+          name: flatpak-modules.txt
           path: flatpak/modules.txt
 
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ matrix.repo }}.yml
+          name: flatpak-${{ matrix.repo }}.yml
           path: flatpak/${{ matrix.repo }}.yml
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
