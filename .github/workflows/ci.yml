@@ -126,6 +126,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: dnf -y install docker
+
       - name: Set up QEMU
         if: ${{ matrix.arch != 'x86_64' }}
         uses: docker/setup-qemu-action@v2
