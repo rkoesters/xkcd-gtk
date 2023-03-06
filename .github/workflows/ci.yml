@@ -84,24 +84,17 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
 
       - run: go mod graph
-
       - run: make flatpak/modules.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: modules.txt
-          path: flatpak/modules.txt
 
       - run: make flatpak/appcenter.yml
-      - uses: actions/upload-artifact@v3
-        with:
-          name: appcenter.yml
-          path: flatpak/appcenter.yml
-
       - run: make flatpak/flathub.yml
+
       - uses: actions/upload-artifact@v3
         with:
-          name: flathub.yml
-          path: flatpak/flathub.yml
+          name: flatpak-config
+          path: |
+            flatpak/modules.txt
+            flatpak/*.yml
 
   flatpak-builder:
     strategy:
@@ -144,12 +137,7 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: modules.txt
-          path: flatpak
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: ${{ matrix.repo }}.yml
+          name: flatpak-config
           path: flatpak
 
       - run: ls -R
