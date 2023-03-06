@@ -21,18 +21,16 @@ jobs:
           - 1.x     # latest
 
     name: go${{ matrix.go }}
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v3
+      - uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Set up GITHUB_ENV
+      - name: Initialize GITHUB_ENV for Go cache
         run: |
           go version | sed 's/^go version /GOVERSION=/' | \
           tr ' /' '-' >>$GITHUB_ENV
@@ -63,6 +61,28 @@ jobs:
       - run: make
       - run: make test
 
+  flatpak-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: stable
+
+      - run: go mod graph
+      - run: make flatpak/modules.txt
+      - run: make flatpak/appcenter.yml
+      - run: make flatpak/flathub.yml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: flatpak-config
+          if-no-files-found: error
+          path: |
+            flatpak/modules.txt
+            flatpak/*.yml
+
   flatpak-builder:
     strategy:
       matrix:
@@ -81,7 +101,7 @@ jobs:
             image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
-
+    needs: flatpak-config
     runs-on: ubuntu-latest
 
     container:
@@ -91,8 +111,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: dnf -y install docker go make
+      - uses: actions/download-artifact@v3
+        with:
+          name: flatpak-config
+          path: flatpak
+
+      - name: Install QEMU dependencies
+        if: ${{ matrix.arch != 'x86_64' }}
+        run: dnf -y install docker
 
       - name: Set up QEMU
         if: ${{ matrix.arch != 'x86_64' }}
@@ -100,18 +126,12 @@ jobs:
         with:
           platforms: arm64
 
-      - run: go mod graph
-      - run: make flatpak/modules.txt
-      - run: cat flatpak/modules.txt
-      - run: make flatpak/${{ matrix.repo }}.yml
-      - run: cat flatpak/${{ matrix.repo }}.yml
-
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
-          bundle: com.github.rkoesters.xkcd-gtk.${{ matrix.repo }}.flatpak
           manifest-path: flatpak/${{ matrix.repo }}.yml
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
           # The action will append matrix.arch to the cache-key for us.
           cache-key: ${{ matrix.repo }}-${{ hashFiles('flatpak/*.yml') }}
           arch: ${{ matrix.arch }}
+          build-bundle: false
