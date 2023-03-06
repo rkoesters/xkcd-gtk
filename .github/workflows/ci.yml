@@ -92,6 +92,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: flatpak-config
+          if-no-files-found: error
           path: |
             flatpak/modules.txt
             flatpak/*.yml
