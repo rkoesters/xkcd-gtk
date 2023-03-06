@@ -29,22 +29,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go }}
-
-      - name: Initialize GITHUB_ENV for Go cache
-        run: |
-          go version | sed 's/^go version /GOVERSION=/' | \
-          tr ' /' '-' >>$GITHUB_ENV
-          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
-          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
-
-      - name: Set up Go cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ${{ env.GOCACHE }}
-            ${{ env.GOPATH }}/pkg/mod
-          key: ${{ env.GOVERSION }}-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ env.GOVERSION }}-
+          cache: true
 
       - name: Set up build dependencies
         run: |
