@@ -88,19 +88,19 @@ jobs:
       - run: make flatpak/modules.txt
       - uses: actions/upload-artifact@v3
         with:
-          name: flatpak-modules.txt
+          name: modules.txt
           path: flatpak/modules.txt
 
       - run: make flatpak/appcenter.yml
       - uses: actions/upload-artifact@v3
         with:
-          name: flatpak-appcenter.yml
+          name: appcenter.yml
           path: flatpak/appcenter.yml
 
       - run: make flatpak/flathub.yml
       - uses: actions/upload-artifact@v3
         with:
-          name: flatpak-flathub.yml
+          name: flathub.yml
           path: flatpak/flathub.yml
 
   flatpak-builder:
@@ -144,13 +144,13 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: flatpak-modules.txt
-          path: flatpak/modules.txt
+          name: modules.txt
+          path: flatpak
 
       - uses: actions/download-artifact@v3
         with:
-          name: flatpak-${{ matrix.repo }}.yml
-          path: flatpak/${{ matrix.repo }}.yml
+          name: ${{ matrix.repo }}.yml
+          path: flatpak
 
       - run: ls -R
 
