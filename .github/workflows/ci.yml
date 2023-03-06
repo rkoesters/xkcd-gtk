@@ -108,7 +108,7 @@ jobs:
         run: dnf -y install docker
 
       - name: Set up QEMU
-        if: ${{ matrix.arch != 'x86_64' }}
+        if: ${{ matrix.arch == 'aarch64' }}
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
@@ -119,5 +119,5 @@ jobs:
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
           arch: ${{ matrix.arch }}
-          cache: false
           build-bundle: false
+          cache: false
