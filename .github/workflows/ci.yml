@@ -104,14 +104,12 @@ jobs:
             image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
-
+    needs: flatpak-config
     runs-on: ubuntu-latest
 
     container:
       image: ${{ matrix.image }}
       options: --privileged
-
-    needs: flatpak-config
 
     steps:
       - uses: actions/checkout@v3
