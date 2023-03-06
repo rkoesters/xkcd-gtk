@@ -126,6 +126,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: actions/download-artifact@v3
+        with:
+          name: flatpak-config
+          path: flatpak
+
       - name: Install QEMU dependencies
         if: ${{ matrix.arch != 'x86_64' }}
         run: dnf -y install docker
@@ -135,13 +140,6 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: flatpak-config
-          path: flatpak
-
-      - run: ls -R
 
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
