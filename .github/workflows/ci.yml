@@ -21,18 +21,16 @@ jobs:
           - 1.x     # latest
 
     name: go${{ matrix.go }}
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v3
+      - uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Set up GITHUB_ENV
+      - name: Initialize GITHUB_ENV for Go cache
         run: |
           go version | sed 's/^go version /GOVERSION=/' | \
           tr ' /' '-' >>$GITHUB_ENV
@@ -68,8 +66,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Go
-        uses: actions/setup-go@v3
+      - uses: actions/setup-go@v3
         with:
           go-version: stable
 
