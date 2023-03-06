@@ -152,6 +152,8 @@ jobs:
           name: flatpak-${{ matrix.repo }}.yml
           path: flatpak/${{ matrix.repo }}.yml
 
+      - run: ls -R
+
       - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
         with:
           bundle: com.github.rkoesters.xkcd-gtk.${{ matrix.repo }}.flatpak
