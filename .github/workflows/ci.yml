@@ -73,16 +73,8 @@ jobs:
         with:
           go-version: stable
 
-      - name: Set up GITHUB_ENV
-        run: |
-          go version | sed 's/^go version /GOVERSION=/' | \
-          tr ' /' '-' >>$GITHUB_ENV
-          go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
-          go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
-
       - run: go mod graph
       - run: make flatpak/modules.txt
-
       - run: make flatpak/appcenter.yml
       - run: make flatpak/flathub.yml
 
