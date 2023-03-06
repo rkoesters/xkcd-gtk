@@ -80,9 +80,6 @@ jobs:
           go env GOPATH | sed 's/^/GOPATH=/' >>$GITHUB_ENV
           go env GOCACHE | sed 's/^/GOCACHE=/' >>$GITHUB_ENV
 
-      - name: Set up build dependencies
-        run: sudo apt-get update && sudo apt-get install -y -q libgtk-3-dev
-
       - run: go mod graph
       - run: make flatpak/modules.txt
 
