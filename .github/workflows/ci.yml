@@ -54,7 +54,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           # TODO: Use go.mod once go.mod go version >= 1.18 for the -o flag.
-          #go-version-file: go.mod
+          # go-version-file: go.mod
           go-version: 1.18.x
 
       - run: go mod graph
