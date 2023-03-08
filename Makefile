@@ -134,7 +134,8 @@ test: $(FLATPAK_YML) $(APPDATA_PATH)
 	tools/test-install.sh
 
 # Shorthand for all the targets that CI covers.
-ci: all appcenter check flathub test
+ci: all check test
+ci-full: ci appcenter flathub
 
 clean:
 	rm -f $(EXE_PATH)
@@ -176,4 +177,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all appcenter appcenter-install check ci clean dev fix flathub flathub-install install strip test uninstall
+.PHONY: all appcenter appcenter-install check ci ci-full clean dev fix flathub flathub-install install strip test uninstall
