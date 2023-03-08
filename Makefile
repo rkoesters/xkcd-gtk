@@ -7,6 +7,7 @@ DEVFLAGS   = $(BUILDFLAGS) -race
 TESTFLAGS  = $(DEVFLAGS) -cover
 VETFLAGS   = $(BUILDFLAGS)
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
+FPBFLAGS   = --user --force-clean
 
 ################################################################################
 # Install Variables
@@ -94,16 +95,16 @@ flatpak/modules.txt: go.mod go.sum $(GO_SOURCES)
 	cp flatpak-build/vendor/modules.txt $@
 
 flathub: flatpak/flathub.yml flatpak/modules.txt
-	flatpak-builder --user --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=flathub flatpak-build/$@/ $<
 
 flathub-install: flatpak/flathub.yml flatpak/modules.txt
-	flatpak-builder --user --install --install-deps-from=flathub --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=flathub --install flatpak-build/$@/ $<
 
 appcenter: flatpak/appcenter.yml flatpak/modules.txt
-	flatpak-builder --user --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter flatpak-build/$@/ $<
 
 appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
-	flatpak-builder --user --install --install-deps-from=appcenter --state-dir=flatpak-build/.flatpak-builder-$@/ --force-clean $(FPBFLAGS) flatpak-build/$@/ $<
+	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter --install flatpak-build/$@/ $<
 
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '..'/path: '.'/" $< >$@
