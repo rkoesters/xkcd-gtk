@@ -42,8 +42,8 @@ jobs:
           yamllint
 
       - run: go mod graph
-      - run: make check
       - run: make
+      - run: make check
       - run: make test
 
   flatpak-config:
