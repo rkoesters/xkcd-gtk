@@ -37,14 +37,14 @@ modules:
 
       - type: archive
         only-arches: [x86_64]
-        url: https://go.dev/dl/go1.19.5.linux-amd64.tar.gz
-        sha256: 36519702ae2fd573c9869461990ae550c8c0d955cd28d2827a6b159fda81ff95
+        url: https://go.dev/dl/go1.19.7.linux-amd64.tar.gz
+        sha256: 7a75720c9b066ae1750f6bcc7052aba70fa3813f4223199ee2a2315fd3eb533d
         dest: go
 
       - type: archive
         only-arches: [aarch64]
-        url: https://go.dev/dl/go1.19.5.linux-arm64.tar.gz
-        sha256: fc0aa29c933cec8d76f5435d859aaf42249aa08c74eb2d154689ae44c08d23b3
+        url: https://go.dev/dl/go1.19.7.linux-arm64.tar.gz
+        sha256: 071ea7bf386fdd08df524859b878d99fc359e491e7ad65c1c1cc55b67972c882
         dest: go
 
       - type: git
