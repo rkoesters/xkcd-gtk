@@ -7,12 +7,6 @@ DEVFLAGS   = -race
 TESTFLAGS  = -cover
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 
-GTK_VERSION   = $(shell tools/gtk-version.sh)
-PANGO_VERSION = $(shell tools/pango-version.sh)
-
-# Space separated
-TAGS     = $(GTK_VERSION) $(PANGO_VERSION)
-DEV_TAGS = xkcd_gtk_debug
 
 ################################################################################
 # Install Variables
@@ -35,43 +29,31 @@ MODULE = github.com/rkoesters/xkcd-gtk
 
 APP_VERSION = $(shell tools/app-version.sh)
 
-EXE_NAME     = $(APP)
-ICON_NAME    = $(APP).svg
-DESKTOP_NAME = $(APP).desktop
-SERVICE_NAME = $(APP).service
-APPDATA_NAME = $(APP).appdata.xml
-POT_NAME     = $(APP).pot
-
-EXE_PATH     = $(EXE_NAME)
-DEV_PATH     = $(EXE_PATH)-dev
-ICON_PATH    = data/$(ICON_NAME)
-DESKTOP_PATH = data/$(DESKTOP_NAME)
-SERVICE_PATH = data/$(SERVICE_NAME)
-APPDATA_PATH = data/$(APPDATA_NAME)
-POT_PATH     = po/$(POT_NAME)
+EXE_PATH     = $(APP)
+DEV_PATH     = $(APP)-dev
+ICON_PATH    = data/$(APP).svg
+DESKTOP_PATH = data/$(APP).desktop
+SERVICE_PATH = data/$(APP).service
+APPDATA_PATH = data/$(APP).appdata.xml
+POT_PATH     = po/$(APP).pot
 
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
 BUILD_DATA      = app-id=$(APP),version=$(APP_VERSION)
+TAGS            = $(shell tools/gtk-version.sh) $(shell tools/pango-version.sh)
 
-GO_SOURCES     = $(shell find cmd internal -name '*.go' -type f)
-CSS_SOURCES    = $(shell find cmd internal -name '*.css' -type f)
-UI_SOURCES     = $(shell find cmd internal -name '*.ui' -type f)
-SH_SOURCES     = $(shell find tools -name '*.sh' -type f)
+GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
+CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
+UI_SOURCES  = $(shell find cmd internal -name '*.ui' -type f)
+SH_SOURCES  = $(shell find tools -name '*.sh' -type f)
 
-POTFILES         = $(shell cat po/POTFILES)
-POTFILES_GO      = $(filter %.go,$(POTFILES))
-POTFILES_UI      = $(filter %.ui,$(POTFILES))
-POTFILES_DESKTOP = $(filter %.desktop.in,$(POTFILES))
-POTFILES_APPDATA = $(filter %.xml.in,$(POTFILES))
+POTFILES = $(shell cat po/POTFILES)
+LINGUAS  = $(shell cat po/LINGUAS)
+PO       = $(shell find po -name '*.po' -type f)
+MO       = $(patsubst %.po,%.mo,$(PO))
 
-LINGUAS = $(shell cat po/LINGUAS)
-PO      = $(shell find po -name '*.po' -type f)
-MO      = $(patsubst %.po,%.mo,$(PO))
-
-FLATPAK_YML_IN  = $(shell find flatpak -name '*.yml.in')
-GEN_FLATPAK_YML = $(patsubst %.in,%,$(FLATPAK_YML_IN))
-FLATPAK_YML     = $(APP).yml $(GEN_FLATPAK_YML)
+FLATPAK_YML_IN = $(shell find flatpak -name '*.yml.in')
+FLATPAK_YML    = $(APP).yml $(patsubst %.in,%,$(FLATPAK_YML_IN))
 
 ################################################################################
 # Targets
@@ -83,13 +65,13 @@ $(EXE_PATH): Makefile $(GO_SOURCES) $(CSS_SOURCES) $(UI_SOURCES) $(APPDATA_PATH)
 	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(APPDATA_PATH)
-	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) $(DEV_TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
-	xgettext -o $@ -LC -kl $(POTFLAGS) $(POTFILES_GO)
-	xgettext -o $@ -j $(POTFLAGS) $(POTFILES_UI)
-	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(POTFILES_DESKTOP)
-	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(POTFILES_APPDATA)
+	xgettext -o $@ -LC -kl $(POTFLAGS) $(filter %.go,$(POTFILES))
+	xgettext -o $@ -j $(POTFLAGS) $(filter %.ui,$(POTFILES))
+	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(filter %.desktop.in,$(POTFILES))
+	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(filter %.xml.in,$(POTFILES))
 	tools/fill-pot-header.sh <$@ >$@.out
 	mv $@.out $@
 
@@ -159,7 +141,7 @@ clean:
 	rm -f $(DESKTOP_PATH)
 	rm -f $(APPDATA_PATH)
 	rm -f $(MO)
-	rm -f $(GEN_FLATPAK_YML)
+	rm -f flatpak/*.yml
 	rm -f flatpak/modules.txt
 	rm -rf flatpak-build/
 	rm -rf .flatpak-builder/
@@ -184,11 +166,11 @@ install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
 	done
 
 uninstall:
-	rm $(DESTDIR)$(bindir)/$(EXE_NAME)
-	rm $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(ICON_NAME)
-	rm $(DESTDIR)$(datadir)/applications/$(DESKTOP_NAME)
-	rm $(DESTDIR)$(datadir)/dbus-1/services/$(SERVICE_NAME)
-	rm $(DESTDIR)$(datadir)/metainfo/$(APPDATA_NAME)
+	rm $(DESTDIR)$(bindir)/$(notdir $(EXE_PATH))
+	rm $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(notdir $(ICON_PATH))
+	rm $(DESTDIR)$(datadir)/applications/$(notdir $(DESKTOP_PATH))
+	rm $(DESTDIR)$(datadir)/dbus-1/services/$(notdir $(SERVICE_PATH))
+	rm $(DESTDIR)$(datadir)/metainfo/$(notdir $(APPDATA_PATH))
 	for lang in $(LINGUAS); do \
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
