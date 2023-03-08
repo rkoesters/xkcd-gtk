@@ -3,9 +3,9 @@
 ################################################################################
 
 BUILDFLAGS = -v
-DEVFLAGS   = $(BUILDFLAGS) -race
-TESTFLAGS  = $(DEVFLAGS) -cover
-VETFLAGS   = $(BUILDFLAGS)
+DEVFLAGS   = -v -race
+TESTFLAGS  = -v -race -cover
+VETFLAGS   = -v
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 FPBFLAGS   = --user --force-clean
 
