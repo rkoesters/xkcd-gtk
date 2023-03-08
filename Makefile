@@ -30,13 +30,12 @@ MODULE = github.com/rkoesters/xkcd-gtk
 
 APP_VERSION = $(shell tools/app-version.sh)
 
-EXE_PATH     = $(APP)
-DEV_PATH     = $(APP)-dev
-ICON_PATH    = data/$(APP).svg
-DESKTOP_PATH = data/$(APP).desktop
-SERVICE_PATH = data/$(APP).service
-APPDATA_PATH = data/$(APP).appdata.xml
-POT_PATH     = po/$(APP).pot
+EXEC    = $(APP)
+ICON    = data/$(APP).svg
+DESKTOP = data/$(APP).desktop
+SERVICE = data/$(APP).service
+APPDATA = data/$(APP).appdata.xml
+POT     = po/$(APP).pot
 
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
@@ -60,15 +59,15 @@ FLATPAK_YML    = $(APP).yml $(patsubst %.in,%,$(FLATPAK_YML_IN))
 # Targets
 ################################################################################
 
-all: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(POT_PATH) $(MO)
+all: $(EXEC) $(DESKTOP) $(APPDATA) $(POT) $(MO)
 
-$(EXE_PATH): Makefile $(GO_SOURCES) $(CSS_SOURCES) $(UI_SOURCES) $(APPDATA_PATH)
+$(EXEC): Makefile $(GO_SOURCES) $(CSS_SOURCES) $(UI_SOURCES) $(APPDATA)
 	go build -o $@ -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-dev: $(APPDATA_PATH)
-	go build -o $(DEV_PATH) -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+dev: $(APPDATA)
+	go build -o $(EXEC)-dev -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-$(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
+$(POT): $(POTFILES) tools/fill-pot-header.sh
 	xgettext -o $@ -LC -kl $(POTFLAGS) $(filter %.go,$(POTFILES))
 	xgettext -o $@ -j $(POTFLAGS) $(filter %.ui,$(POTFILES))
 	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(filter %.desktop.in,$(POTFILES))
@@ -109,26 +108,26 @@ appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 $(APP).yml: flatpak/appcenter.yml
 	sed "s/path: '..'/path: '.'/" $< >$@
 
-fix: $(POT_PATH) $(PO) $(APP).yml
+fix: $(POT) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
 	go fmt $(MODULE_PACKAGES)
 	go mod tidy
 	([ -d vendor ] && go mod vendor) || true
 	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool simplify --replace
-	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT_PATH) $(PO)
+	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT) $(PO)
 	for lang in $(LINGUAS); do \
-		msgmerge -U --backup=none "po/$$lang.po" $(POT_PATH); \
+		msgmerge -U --backup=none "po/$$lang.po" $(POT); \
 	done
 
-check: $(APPDATA_PATH) $(FLATPAK_YML)
+check: $(APPDATA) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(VETFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
-	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
+	xmllint --noout $(APPDATA) $(ICON) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
-	appstream-util --nonet validate-relax $(APPDATA_PATH)
-	-appstream-util validate-strict $(APPDATA_PATH)
+	appstream-util --nonet validate-relax $(APPDATA)
+	-appstream-util validate-strict $(APPDATA)
 
-test: $(FLATPAK_YML) $(APPDATA_PATH)
+test: $(FLATPAK_YML) $(APPDATA)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
@@ -138,41 +137,41 @@ ci: all check test
 ci-full: ci appcenter flathub
 
 clean:
-	rm -f $(EXE_PATH)
-	rm -f $(DEV_PATH)
-	rm -f $(DESKTOP_PATH)
-	rm -f $(APPDATA_PATH)
+	rm -f $(EXEC)
+	rm -f $(EXEC)-dev
+	rm -f $(DESKTOP)
+	rm -f $(APPDATA)
 	rm -f $(MO)
 	rm -f flatpak/*.yml
 	rm -f flatpak/modules.txt
 	rm -rf flatpak-build/
 	rm -rf .flatpak-builder/
 
-strip: $(EXE_PATH)
-	strip $(EXE_PATH)
+strip: $(EXEC)
+	strip $(EXEC)
 
-install: $(EXE_PATH) $(DESKTOP_PATH) $(APPDATA_PATH) $(MO)
+install: $(EXEC) $(DESKTOP) $(APPDATA) $(MO)
 	mkdir -p $(DESTDIR)$(bindir)
-	install $(EXE_PATH) $(DESTDIR)$(bindir)
+	install $(EXEC) $(DESTDIR)$(bindir)
 	mkdir -p $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
-	cp $(ICON_PATH) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
+	cp $(ICON) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps
 	mkdir -p $(DESTDIR)$(datadir)/applications
-	cp $(DESKTOP_PATH) $(DESTDIR)$(datadir)/applications
+	cp $(DESKTOP) $(DESTDIR)$(datadir)/applications
 	mkdir -p $(DESTDIR)$(datadir)/dbus-1/services
-	cp $(SERVICE_PATH) $(DESTDIR)$(datadir)/dbus-1/services
+	cp $(SERVICE) $(DESTDIR)$(datadir)/dbus-1/services
 	mkdir -p $(DESTDIR)$(datadir)/metainfo
-	cp $(APPDATA_PATH) $(DESTDIR)$(datadir)/metainfo
+	cp $(APPDATA) $(DESTDIR)$(datadir)/metainfo
 	for lang in $(LINGUAS); do \
 		mkdir -p "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES"; \
 		cp "po/$$lang.mo" "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
 uninstall:
-	rm $(DESTDIR)$(bindir)/$(notdir $(EXE_PATH))
-	rm $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(notdir $(ICON_PATH))
-	rm $(DESTDIR)$(datadir)/applications/$(notdir $(DESKTOP_PATH))
-	rm $(DESTDIR)$(datadir)/dbus-1/services/$(notdir $(SERVICE_PATH))
-	rm $(DESTDIR)$(datadir)/metainfo/$(notdir $(APPDATA_PATH))
+	rm $(DESTDIR)$(bindir)/$(notdir $(EXEC))
+	rm $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(notdir $(ICON))
+	rm $(DESTDIR)$(datadir)/applications/$(notdir $(DESKTOP))
+	rm $(DESTDIR)$(datadir)/dbus-1/services/$(notdir $(SERVICE))
+	rm $(DESTDIR)$(datadir)/metainfo/$(notdir $(APPDATA))
 	for lang in $(LINGUAS); do \
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
