@@ -28,8 +28,6 @@ datadir = $(prefix)/share
 APP    = com.github.rkoesters.xkcd-gtk
 MODULE = github.com/rkoesters/xkcd-gtk
 
-APP_VERSION = $(shell tools/app-version.sh)
-
 EXEC    = $(APP)
 ICON    = data/$(APP).svg
 DESKTOP = data/$(APP).desktop
@@ -38,7 +36,7 @@ APPDATA = data/$(APP).appdata.xml
 
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
-BUILD_DATA      = app-id=$(APP),version=$(APP_VERSION)
+BUILD_DATA      = app-id=$(APP),version=$(shell tools/app-version.sh)
 TAGS            = $(shell tools/gtk-version.sh) $(shell tools/pango-version.sh)
 
 GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
