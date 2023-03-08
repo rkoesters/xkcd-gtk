@@ -3,10 +3,10 @@
 ################################################################################
 
 BUILDFLAGS =
-DEVFLAGS   = -race
-TESTFLAGS  = -cover
+DEVFLAGS   = $(BUILDFLAGS) -race
+TESTFLAGS  = $(DEVFLAGS) -cover
+VETFLAGS   = $(BUILDFLAGS)
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
-
 
 ################################################################################
 # Install Variables
@@ -65,7 +65,7 @@ $(EXE_PATH): Makefile $(GO_SOURCES) $(CSS_SOURCES) $(UI_SOURCES) $(APPDATA_PATH)
 	go build -o $@ -v -ldflags="-X '$(BUILD_PACKAGE).data=$(BUILD_DATA)'" -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 dev: $(APPDATA_PATH)
-	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(BUILDFLAGS) $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
+	go build -o $(DEV_PATH) -v -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 $(POT_PATH): $(POTFILES) tools/fill-pot-header.sh
 	xgettext -o $@ -LC -kl $(POTFLAGS) $(filter %.go,$(POTFILES))
@@ -120,7 +120,7 @@ fix: $(POT_PATH) $(PO) $(APP).yml
 	done
 
 check: $(APPDATA_PATH) $(FLATPAK_YML)
-	go vet -tags "$(TAGS)" $(BUILDFLAGS) $(MODULE_PACKAGES)
+	go vet -tags "$(TAGS)" $(VETFLAGS) $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA_PATH) $(ICON_PATH) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
@@ -128,7 +128,7 @@ check: $(APPDATA_PATH) $(FLATPAK_YML)
 	-appstream-util validate-strict $(APPDATA_PATH)
 
 test: $(FLATPAK_YML) $(APPDATA_PATH)
-	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(BUILDFLAGS) $(DEVFLAGS) $(TESTFLAGS) $(MODULE_PACKAGES)
+	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(TESTFLAGS) $(MODULE_PACKAGES)
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 
