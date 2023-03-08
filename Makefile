@@ -35,7 +35,6 @@ ICON    = data/$(APP).svg
 DESKTOP = data/$(APP).desktop
 SERVICE = data/$(APP).service
 APPDATA = data/$(APP).appdata.xml
-POT     = po/$(APP).pot
 
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
@@ -47,6 +46,7 @@ CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
 UI_SOURCES  = $(shell find cmd internal -name '*.ui' -type f)
 SH_SOURCES  = $(shell find tools -name '*.sh' -type f)
 
+POT      = po/$(APP).pot
 POTFILES = $(shell cat po/POTFILES)
 LINGUAS  = $(shell cat po/LINGUAS)
 PO       = $(shell find po -name '*.po' -type f)
