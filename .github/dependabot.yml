@@ -4,8 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    commit-message:
-      prefix: "ci"
     reviewers:
       - "rkoesters"
 
@@ -14,7 +12,5 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    commit-message:
-      prefix: "go"
     reviewers:
       - "rkoesters"
