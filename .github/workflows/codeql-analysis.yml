@@ -24,12 +24,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - uses: actions/setup-go@v3
+      - name: Initialize Go
+        uses: actions/setup-go@v3
         with:
           go-version-file: go.mod
           cache: true
 
-      # Initializes the CodeQL tools for scanning.
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update && \
+          sudo apt-get install -y -q gettext libgtk-3-dev
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
@@ -39,11 +44,6 @@ jobs:
           # specified in a config file.  Prefix the list here with "+" to use
           # these queries and those in the config file.
           # queries: ./path/to/local/query, your-org/your-repo/queries@main
-
-      - name: Set up build dependencies
-        run: |
-          sudo apt-get update && \
-          sudo apt-get install -y -q gettext libgtk-3-dev
 
       - run: which go
       - run: go version
