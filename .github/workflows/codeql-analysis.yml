@@ -58,6 +58,9 @@ jobs:
             hashFiles('**/go.sum') }}
           restore-keys: ${{ github.workflow }}-${{ env.GOVERSION }}-
 
+      - run: which go
+      - run: go version
+      - run: go env
       - run: make
 
       - name: Perform CodeQL Analysis
