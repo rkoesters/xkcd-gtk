@@ -1,6 +1,6 @@
 module github.com/rkoesters/xkcd-gtk
 
-go 1.17
+go 1.18
 
 require (
 	github.com/blevesearch/bleve/v2 v2.3.6

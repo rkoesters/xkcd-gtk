@@ -31,13 +31,8 @@ func parse(data string) map[string]string {
 	}
 
 	for _, s := range strings.Split(data, ",") {
-		// Use strings.Cut once our minimum Go version is 1.18:
-		pair := strings.SplitN(s, "=", 2)
-		if len(pair) < 2 {
-			flags[pair[0]] = ""
-		} else {
-			flags[pair[0]] = pair[1]
-		}
+		key, value, _ := strings.Cut(s, "=")
+		flags[key] = value
 	}
 
 	return flags

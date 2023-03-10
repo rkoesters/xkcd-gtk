@@ -14,7 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         go:
-          - 1.17.x
           - 1.18.x  # ubuntu jammy
           - 1.19.x  # debian bookworm
           - 1.20.x
@@ -57,9 +56,7 @@ jobs:
       - name: Initialize Go
         uses: actions/setup-go@v3
         with:
-          # TODO: Use go.mod once go.mod go version >= 1.18 for the -o flag.
-          # go-version-file: go.mod
-          go-version: 1.18.x
+          go-version-file: go.mod
 
       - run: go mod graph
       - run: make flatpak/modules.txt
