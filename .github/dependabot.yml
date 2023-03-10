@@ -6,6 +6,8 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "ci"
+    reviewers:
+      - "rkoesters"
 
 
   - package-ecosystem: "gomod"
@@ -14,3 +16,5 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "ci"
+    reviewers:
+      - "rkoesters"
