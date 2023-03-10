@@ -72,8 +72,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rkoesters/xdg v0.0.1 h1:RmfYxghVvIsb4d51u5LtNOcwqY5r3P44u6o86qqvBMA=
 github.com/rkoesters/xdg v0.0.1/go.mod h1:5DcbjvJkY00fIOKkaBnylbC/rmc1NNJP5dmUcnlcm7U=
-github.com/rkoesters/xkcd v1.4.0 h1:jwsSyQ10Nf1DXMglpxp6zit96fYJfRtCnfRi+Z5buHw=
-github.com/rkoesters/xkcd v1.4.0/go.mod h1:5iEOeKErxx2ZR+6IImYYknaG9a+yNj8ATS4rBoghrNQ=
+github.com/rkoesters/xkcd v1.4.1 h1:+nXYEsarX1bcDxWyb1zOTeqx4Zp+YrdzFKMtdC2twSw=
+github.com/rkoesters/xkcd v1.4.1/go.mod h1:5iEOeKErxx2ZR+6IImYYknaG9a+yNj8ATS4rBoghrNQ=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/spf13/cobra v1.4.0/go.mod h1:Wo4iy3BUC+X2Fybo0PDqwJIv3dNRiZLHQymsfxlB84g=
 github.com/spf13/pflag v1.0.5/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=

@@ -7,7 +7,7 @@ require (
 	github.com/emirpasic/gods v1.18.1
 	github.com/gotk3/gotk3 v0.6.1
 	github.com/rkoesters/xdg v0.0.1
-	github.com/rkoesters/xkcd v1.4.0
+	github.com/rkoesters/xkcd v1.4.1
 	go.etcd.io/bbolt v1.3.7
 )
 
