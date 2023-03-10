@@ -24,14 +24,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-go@v3
+      - name: Initialize Go
+        uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go }}
           cache: true
 
-      - name: Set up build dependencies
+      - name: Install build dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y -q \
           appstream-util \
@@ -49,9 +51,11 @@ jobs:
   flatpak-config:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-go@v3
+      - name: Initialize Go
+        uses: actions/setup-go@v3
         with:
           # TODO: Use go.mod once go.mod go version >= 1.18 for the -o flag.
           # go-version-file: go.mod
@@ -62,7 +66,8 @@ jobs:
       - run: make flatpak/appcenter.yml
       - run: make flatpak/flathub.yml
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload flatpak-config artifact
+        uses: actions/upload-artifact@v3
         with:
           name: flatpak-config
           if-no-files-found: error
@@ -96,9 +101,11 @@ jobs:
       options: --privileged
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v3
+      - name: Download flatpak-config artifact
+        uses: actions/download-artifact@v3
         with:
           name: flatpak-config
           path: flatpak
@@ -107,7 +114,7 @@ jobs:
         if: ${{ matrix.arch != 'x86_64' }}
         run: dnf -y install docker
 
-      - name: Set up QEMU
+      - name: Initialize QEMU
         if: ${{ matrix.arch == 'aarch64' }}
         uses: docker/setup-qemu-action@v2
         with:
