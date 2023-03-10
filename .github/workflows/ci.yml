@@ -120,7 +120,7 @@ jobs:
         with:
           platforms: arm64
 
-      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@master
+      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v5
         with:
           manifest-path: flatpak/${{ matrix.repo }}.yml
           repository-name: ${{ matrix.repo }}
