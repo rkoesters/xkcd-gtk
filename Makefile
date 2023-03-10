@@ -127,6 +127,7 @@ check: $(APPDATA) $(FLATPAK_YML)
 
 test: $(FLATPAK_YML) $(APPDATA)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(TESTFLAGS) $(MODULE_PACKAGES)
+	tools/test-banned-imports.sh
 	tools/test-flatpak-config.sh $(FLATPAK_YML)
 	tools/test-install.sh
 

@@ -1,0 +1,2 @@
+github.com/blevesearch/bleve/http
+github.com/blevesearch/bleve/v[0-9]+/http
