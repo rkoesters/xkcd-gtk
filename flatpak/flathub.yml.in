@@ -23,8 +23,8 @@ modules:
     build-commands:
       - 'ln -s "$(pwd)/src/flatpak/modules.txt" vendor/'
       - 'ln -s "$(pwd)/vendor" src/'
-      - 'cd src; . /usr/lib/sdk/golang/enable.sh; make'
-      - 'cd src; . /usr/lib/sdk/golang/enable.sh; make install prefix=/app'
+      - 'cd src && . /usr/lib/sdk/golang/enable.sh && make'
+      - 'cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app'
 
     sources:
       - type: dir

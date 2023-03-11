@@ -21,8 +21,8 @@ modules:
     build-commands:
       - 'ln -s "$(pwd)/src/flatpak/modules.txt" vendor/'
       - 'ln -s "$(pwd)/vendor" src/'
-      - 'cd src; PATH="$PATH:../go/bin" make'
-      - 'cd src; PATH="$PATH:../go/bin" make install prefix=/app'
+      - 'cd src && PATH="$PATH:../go/bin" make'
+      - 'cd src && PATH="$PATH:../go/bin" make install prefix=/app'
 
     sources:
       - type: dir
