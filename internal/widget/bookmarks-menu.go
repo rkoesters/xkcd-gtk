@@ -162,7 +162,7 @@ func (bm *BookmarksMenu) Update(comicNumber int) {
 
 func (bm *BookmarksMenu) loadBookmarkList() error {
 	empty := bm.bookmarks.Empty()
-	bm.scroller.SetVisible(!empty)
+	bm.popoverButton.SetSensitive(!empty)
 	if empty {
 		return nil
 	}
