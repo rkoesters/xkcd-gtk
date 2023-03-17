@@ -57,6 +57,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version-file: go.mod
+          cache: false  # No go code will be compiled, do not cache nothing.
 
       - run: go mod graph
       - run: make flatpak/modules.txt
