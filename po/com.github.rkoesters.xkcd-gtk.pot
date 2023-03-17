@@ -53,7 +53,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/application-window.go:287
+#: internal/widget/application-window.go:290
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:361
+#: internal/widget/application-window.go:364
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -155,7 +155,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:368
+#: internal/widget/application-window.go:371
 msgid "Loading comic..."
 msgstr ""
 

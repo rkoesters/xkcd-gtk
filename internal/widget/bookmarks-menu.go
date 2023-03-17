@@ -187,3 +187,18 @@ func (bm *BookmarksMenu) loadBookmarkList() error {
 	bm.list.SetModel(clm)
 	return nil
 }
+
+func (bm *BookmarksMenu) SetLinkedButtons(linked bool) error {
+	sc, err := bm.GetStyleContext()
+	if err != nil {
+		return err
+	}
+
+	if linked {
+		sc.AddClass(style.ClassLinked)
+	} else {
+		sc.RemoveClass(style.ClassLinked)
+	}
+
+	return nil
+}
