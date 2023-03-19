@@ -21,8 +21,8 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Une simple visionneuse pour XKCD écrite en Go avec GTK+3"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:40
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:40
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
 msgid "About"
 msgstr "À propos"
 
@@ -53,6 +53,19 @@ msgstr ""
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Cache comics for later offline viewing"
 msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
+
+#: internal/widget/cache-window.go:32 internal/widget/window-menu.go:121
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+msgid "Cache manager"
+msgstr ""
+
+#: internal/widget/cache-window.go:54
+msgid "Cached comic images"
+msgstr ""
+
+#: internal/widget/cache-window.go:49
+msgid "Cached comic metadata"
+msgstr ""
 
 #: internal/widget/application-window.go:290
 msgid "Checking for new comic..."
@@ -244,10 +257,6 @@ msgstr ""
 msgid "Search"
 msgstr "Rechercher"
 
-#: internal/search/index.go:71
-msgid "Search Index Update"
-msgstr "Rechercher une mise à jour de l'index"
-
 #: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Rechercher des BD"
@@ -268,10 +277,6 @@ msgstr "Activer le thème sombre"
 #: internal/widget/properties-dialog.go:144
 msgid "Transcript"
 msgstr "Transcription"
-
-#: internal/search/index.go:79
-msgid "Updating comic search index..."
-msgstr "Mise à jour de l'index de recherche des BD…"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
@@ -312,6 +317,12 @@ msgstr "Blog xkcd"
 #: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
 msgid "xkcd books"
 msgstr ""
+
+#~ msgid "Search Index Update"
+#~ msgstr "Rechercher une mise à jour de l'index"
+
+#~ msgid "Updating comic search index..."
+#~ msgstr "Mise à jour de l'index de recherche des BD…"
 
 #~ msgid "xkcd store"
 #~ msgstr "Boutique xkcd"

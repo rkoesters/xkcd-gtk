@@ -160,6 +160,28 @@ func Close() error {
 	return err
 }
 
+type Refresher interface {
+	RefreshMetadata()
+	RefreshImages()
+}
+
+// DownloadAllComicMetadata asynchronously fills the comic metadata cache and
+// search index via the internet. Status can be checked with Stat().
+func DownloadAllComicMetadata(cacheWindow Refresher) {
+	// Make sure all comic metadata is cached and indexed.
+	go func() {
+		newest, err := NewestComicInfoFromInternet()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		for i := 1; i <= newest.Num; i++ {
+			ComicInfo(i)
+			cacheWindow.RefreshMetadata()
+		}
+	}()
+}
+
 // ComicInfo always returns a valid *xkcd.Comic that can be used, and err will
 // be set if any errors were encountered, however these errors can be ignored
 // safely.
@@ -349,10 +371,12 @@ func putComicInfo(comic *xkcd.Comic) error {
 
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
-func DownloadComicImage(n int) error {
+func DownloadComicImage(n int, cacheWindow Refresher) error {
 	if *offlineMode {
 		return ErrOffline
 	}
+
+	defer cacheWindow.RefreshImages()
 
 	log.Debugf("DownloadComicImage(%v) start", n)
 	defer log.Debugf("DownloadComicImage(%v) end", n)

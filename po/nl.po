@@ -24,8 +24,8 @@ msgstr ""
 "Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
 "GTK+3"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:40
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+#: internal/widget/window-menu.go:125 internal/widget/app-menu.ui:40
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
 msgid "About"
 msgstr "Over"
 
@@ -56,6 +56,19 @@ msgstr "Bladwijzers"
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
+
+#: internal/widget/cache-window.go:32 internal/widget/window-menu.go:121
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+msgid "Cache manager"
+msgstr ""
+
+#: internal/widget/cache-window.go:54
+msgid "Cached comic images"
+msgstr ""
+
+#: internal/widget/cache-window.go:49
+msgid "Cached comic metadata"
+msgstr ""
 
 #: internal/widget/application-window.go:290
 msgid "Checking for new comic..."
@@ -244,10 +257,6 @@ msgstr "Oorspronkelijk zoomniveau"
 msgid "Search"
 msgstr "Zoeken"
 
-#: internal/search/index.go:71
-msgid "Search Index Update"
-msgstr "Zoekindex bijwerken"
-
 #: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Verhalen doorzoeken"
@@ -268,10 +277,6 @@ msgstr "Donker thema aan/uit"
 #: internal/widget/properties-dialog.go:144
 msgid "Transcript"
 msgstr "Transcriptie"
-
-#: internal/search/index.go:79
-msgid "Updating comic search index..."
-msgstr "Bezig met bijwerken van zoekindex…"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
@@ -312,6 +317,12 @@ msgstr "xkcd-blog"
 #: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
 msgid "xkcd books"
 msgstr ""
+
+#~ msgid "Search Index Update"
+#~ msgstr "Zoekindex bijwerken"
+
+#~ msgid "Updating comic search index..."
+#~ msgstr "Bezig met bijwerken van zoekindex…"
 
 #~ msgid "xkcd store"
 #~ msgstr "xkcd-winkel"

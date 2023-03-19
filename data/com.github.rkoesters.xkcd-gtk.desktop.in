@@ -22,6 +22,10 @@ Exec=com.github.rkoesters.xkcd-gtk
 Name=Keyboard shortcuts
 Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-shortcuts [] {}
 
+[Desktop Action show-cache]
+Name=Cache manager
+Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-cache [] {}
+
 [Desktop Action show-about]
 Name=About
 Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-about [] {}

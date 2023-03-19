@@ -15,11 +15,13 @@ func AppName() string { return l("Comic Sticks") }
 type Application interface {
 	AddWindow(gtk.IWindow)
 	BookmarksList() *bookmarks.List
+	CacheWindow() *CacheWindow
 	ConnectDarkModeChanged(f interface{}) glib.SignalHandle
 	DarkMode() bool
 	GtkApplication() *gtk.Application
 	GtkTheme() (string, error)
-	PrefersAppMenu() bool
-	SetDarkMode(bool)
 	OpenURL(string) error
+	PrefersAppMenu() bool
+	RemoveWindow(gtk.IWindow)
+	SetDarkMode(bool)
 }
