@@ -106,8 +106,11 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 
 func (cw *CacheWindow) Dispose() {
 	cw.ApplicationWindow = nil
+	cw.actions = nil
+	cw.box = nil
 	cw.metadataLevelBar = nil
 	cw.imageLevelBar = nil
+	cw.downloadAllImagesButton = nil
 }
 
 func (cw *CacheWindow) Present() {
