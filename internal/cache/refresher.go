@@ -15,8 +15,9 @@ type ViewRefresherGetter func() ViewRefresher
 
 type nullRefresher struct{}
 
-func newNullRefresher() ViewRefresher              { return nullRefresher{} }
-func (r nullRefresher) RefreshMetadata()           {}
-func (r nullRefresher) RefreshMetadataWith(_ Stat) {}
-func (r nullRefresher) RefreshImages()             {}
-func (r nullRefresher) RefreshImagesWith(_ Stat)   {}
+func (_ *nullRefresher) RefreshMetadata()           {}
+func (_ *nullRefresher) RefreshMetadataWith(_ Stat) {}
+func (_ *nullRefresher) RefreshImages()             {}
+func (_ *nullRefresher) RefreshImagesWith(_ Stat)   {}
+
+var nilRefresher *nullRefresher = nil

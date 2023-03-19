@@ -414,7 +414,7 @@ func DownloadAllComicImages(cacheWindow ViewRefresherGetter) {
 	for i := 1; i <= newest.Num; i++ {
 		_, err = os.Stat(ComicImagePath(i))
 		if os.IsNotExist(err) {
-			DownloadComicImage(i, newNullRefresher)
+			DownloadComicImage(i, func() ViewRefresher { return nilRefresher })
 		}
 
 		cacheWindow().RefreshImagesWith(Stat{
