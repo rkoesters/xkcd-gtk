@@ -83,20 +83,20 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
-	wm.darkModeSwitch, err = NewDarkModeSwitch(darkModeGetter, darkModeSetter)
+	_, err = wm.popover.AddMenuEntry(l("Cache manager"), "app.show-cache")
 	if err != nil {
 		return nil, err
 	}
-	wm.popover.AddChild(wm.darkModeSwitch, 0)
 
 	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err
 	}
 
-	_, err = wm.popover.AddMenuEntry(l("Cache manager"), "app.show-cache")
+	wm.darkModeSwitch, err = NewDarkModeSwitch(darkModeGetter, darkModeSetter)
 	if err != nil {
 		return nil, err
 	}
+	wm.popover.AddChild(wm.darkModeSwitch, 0)
 
 	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err

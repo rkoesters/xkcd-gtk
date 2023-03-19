@@ -53,8 +53,8 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/cache-window.go:34 internal/widget/window-menu.go:96
-#: internal/widget/app-menu.ui:18
+#: internal/widget/cache-window.go:34 internal/widget/window-menu.go:86
+#: internal/widget/app-menu.ui:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:18
 #: internal/widget/shortcuts-window.ui:156
 msgid "Toggle dark mode"
 msgstr ""

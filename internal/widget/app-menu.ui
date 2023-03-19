@@ -9,14 +9,14 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">Toggle dark mode</attribute>
-        <attribute name="action">app.toggle-dark-mode</attribute>
+        <attribute name="label" translatable="yes">Cache manager</attribute>
+        <attribute name="action">app.show-cache</attribute>
       </item>
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">Cache manager</attribute>
-        <attribute name="action">app.show-cache</attribute>
+        <attribute name="label" translatable="yes">Toggle dark mode</attribute>
+        <attribute name="action">app.toggle-dark-mode</attribute>
       </item>
     </section>
     <section>

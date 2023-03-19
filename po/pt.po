@@ -57,8 +57,8 @@ msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
 "offline"
 
-#: internal/widget/cache-window.go:34 internal/widget/window-menu.go:96
-#: internal/widget/app-menu.ui:18
+#: internal/widget/cache-window.go:34 internal/widget/window-menu.go:86
+#: internal/widget/app-menu.ui:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
@@ -278,7 +278,7 @@ msgstr "Procurar por Bandas Desenhadas"
 msgid "Title"
 msgstr "Título"
 
-#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:18
 #: internal/widget/shortcuts-window.ui:156
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
