@@ -7,7 +7,6 @@ import (
 
 	"github.com/blevesearch/bleve/v2"
 	"github.com/blevesearch/bleve/v2/search/query"
-	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
@@ -50,9 +49,4 @@ func Search(userQuery string) (*bleve.SearchResult, error) {
 	searchRequest.Size = 100
 	searchRequest.Fields = []string{"*"}
 	return index.Search(searchRequest)
-}
-
-type WindowAddRemover interface {
-	AddWindow(gtk.IWindow)
-	RemoveWindow(gtk.IWindow)
 }
