@@ -285,7 +285,7 @@ msgstr "Koyu kipi aç/kapat"
 msgid "Transcript"
 msgstr "Yazılı metin"
 
-#: internal/widget/search-menu.go:73
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr "Karikatür arama dizini güncelleniyor..."
 

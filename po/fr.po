@@ -283,7 +283,7 @@ msgstr "Activer le thème sombre"
 msgid "Transcript"
 msgstr "Transcription"
 
-#: internal/widget/search-menu.go:73
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr "Mise à jour de l'index de recherche des BD…"
 

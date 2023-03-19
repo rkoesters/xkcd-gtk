@@ -282,7 +282,7 @@ msgstr "Abilità modalità scura"
 msgid "Transcript"
 msgstr "Trascrizione"
 
-#: internal/widget/search-menu.go:73
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 

@@ -277,7 +277,7 @@ msgstr ""
 msgid "Transcript"
 msgstr ""
 
-#: internal/widget/search-menu.go:73
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr ""
 

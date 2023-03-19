@@ -19,8 +19,8 @@ type SearchMenu struct {
 	popover         *gtk.Popover
 	popoverBox      *gtk.Box
 	entry           *gtk.SearchEntry
+	indexing        *gtk.Label
 	resultsStack    *gtk.Stack
-	resultsIndexing *gtk.Label
 	resultsNone     *gtk.Label
 	resultsScroller *gtk.ScrolledWindow
 	resultsList     *ComicListView
@@ -63,18 +63,18 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.entry.Connect("search-changed", sm.Search)
 	sm.popoverBox.Add(sm.entry)
 
+	sm.indexing, err = gtk.LabelNew(l("Updating comic search index..."))
+	if err != nil {
+		return nil, err
+	}
+	sm.popoverBox.Add(sm.indexing)
+
 	sm.resultsStack, err = gtk.StackNew()
 	if err != nil {
 		return nil, err
 	}
 	sm.resultsStack.SetHomogeneous(false)
 	sm.popoverBox.Add(sm.resultsStack)
-
-	sm.resultsIndexing, err = gtk.LabelNew(l("Updating comic search index..."))
-	if err != nil {
-		return nil, err
-	}
-	sm.resultsStack.Add(sm.resultsIndexing)
 
 	sm.resultsNone, err = gtk.LabelNew(l("No results found"))
 	if err != nil {
@@ -100,6 +100,8 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.popoverBox.ShowAll()
 	sm.popover.Add(sm.popoverBox)
 
+	sm.Connect("clicked", sm.refreshIndexingStatus)
+
 	return sm, sm.loadSearchResults(nil)
 }
 
@@ -113,8 +115,8 @@ func (sm *SearchMenu) Dispose() {
 	sm.popover = nil
 	sm.popoverBox = nil
 	sm.entry = nil
+	sm.indexing = nil
 	sm.resultsStack = nil
-	sm.resultsIndexing = nil
 	sm.resultsNone = nil
 	sm.resultsScroller = nil
 	sm.resultsList.Dispose()
@@ -145,18 +147,22 @@ func (sm *SearchMenu) Search() {
 	}
 }
 
-// Show the user the given search results.
-func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
+func (sm *SearchMenu) refreshIndexingStatus() error {
 	s, err := cache.StatMetadata()
 	if err != nil {
 		return err
 	}
-	if s.Complete() {
-		sm.resultsStack.SetVisible(result != nil)
-	} else {
-		sm.resultsStack.SetVisible(true)
-		sm.resultsStack.SetVisibleChild(sm.resultsIndexing)
+	sm.indexing.SetVisible(!s.Complete())
+	return nil
+}
+
+// Show the user the given search results.
+func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
+	err := sm.refreshIndexingStatus()
+	if err != nil {
+		return err
 	}
+	sm.resultsStack.SetVisible(result != nil)
 	if result == nil {
 		return nil
 	}

@@ -1,17 +1,27 @@
 package cache
 
-// ViewRefresher provides methods for refreshing the view of cache statistics.
+// ViewRefreshWither provides methods for refreshing a view of cache statistics
+// with the provided stat. All methods must silently accept a nil receiver.
+type ViewRefreshWither interface {
+	RefreshMetadataWith(Stat)
+	RefreshImagesWith(Stat)
+}
+
+// ViewRefresher provides methods for refreshing a view of cache statistics.
 // All methods must silently accept a nil receiver.
 type ViewRefresher interface {
+	ViewRefreshWither
 	RefreshMetadata()
-	RefreshMetadataWith(Stat)
 	RefreshImages()
-	RefreshImagesWith(Stat)
 }
 
 // ViewRefresherGetter returns a ViewRefresher. Useful for lazily passing the
 // ViewRefresher as an argument.
 type ViewRefresherGetter func() ViewRefresher
+
+// ViewRefreshWitherGetter returns a ViewRefreshWither. Useful for lazily
+// passing the ViewRefreshWither as an argument.
+type ViewRefreshWitherGetter func() ViewRefreshWither
 
 type nullRefresher struct{}
 

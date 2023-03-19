@@ -164,7 +164,7 @@ func (app *Application) SetupCache() {
 
 	// Asynchronously fill the comic metadata cache and search index.
 	log.Debug("calling cache.DownloadAllComicMetadata()")
-	cache.DownloadAllComicMetadata(app.CacheWindow)
+	cache.DownloadAllComicMetadata(app.CacheWindowVRW)
 }
 
 // CloseCache closes the search index and comic cache.
@@ -395,7 +395,13 @@ func (app *Application) ShowCache() {
 	app.cacheWindow.Present()
 }
 
-func (app *Application) CacheWindow() cache.ViewRefresher {
+func (app *Application) CacheWindowVR() cache.ViewRefresher {
+	app.cacheWindowMutex.RLock()
+	defer app.cacheWindowMutex.RUnlock()
+	return app.cacheWindow
+}
+
+func (app *Application) CacheWindowVRW() cache.ViewRefreshWither {
 	app.cacheWindowMutex.RLock()
 	defer app.cacheWindowMutex.RUnlock()
 	return app.cacheWindow

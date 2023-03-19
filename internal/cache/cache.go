@@ -162,7 +162,7 @@ func Close() error {
 
 // DownloadAllComicMetadata asynchronously fills the comic metadata cache and
 // search index via the internet. Status can be checked with Stat().
-func DownloadAllComicMetadata(cacheWindow ViewRefresherGetter) {
+func DownloadAllComicMetadata(cacheWindow ViewRefreshWitherGetter) {
 	// Make sure all comic metadata is cached and indexed.
 	go func() {
 		newest, err := NewestComicInfoFromInternet()
@@ -405,7 +405,7 @@ func DownloadComicImage(n int, cacheWindow ViewRefresherGetter) error {
 
 // DownloadAllComicImages tries to add all comic images to our local cache. If
 // successful, the images can be found at the path returned by ComicImagePath.
-func DownloadAllComicImages(cacheWindow ViewRefresherGetter) {
+func DownloadAllComicImages(cacheWindow ViewRefreshWitherGetter) {
 	newest, err := NewestComicInfoFromCache()
 	if err != nil {
 		log.Print(err)

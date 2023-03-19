@@ -287,7 +287,7 @@ msgstr "Alternar modo escuro"
 msgid "Transcript"
 msgstr "Transcrição"
 
-#: internal/widget/search-menu.go:73
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr "A atualizar o índice de pesquisa da banda desenhada..."
 

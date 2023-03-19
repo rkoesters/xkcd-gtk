@@ -16,7 +16,8 @@ func AppName() string { return l("Comic Sticks") }
 type Application interface {
 	AddWindow(gtk.IWindow)
 	BookmarksList() *bookmarks.List
-	CacheWindow() cache.ViewRefresher
+	CacheWindowVR() cache.ViewRefresher
+	CacheWindowVRW() cache.ViewRefreshWither
 	ConnectDarkModeChanged(f interface{}) glib.SignalHandle
 	DarkMode() bool
 	GtkApplication() *gtk.Application

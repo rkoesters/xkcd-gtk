@@ -283,7 +283,7 @@ msgstr "Donker thema aan/uit"
 msgid "Transcript"
 msgstr "Transcriptie"
 
-#: internal/widget/search-menu.go:73
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr "Bezig met bijwerken van zoekindex…"
 

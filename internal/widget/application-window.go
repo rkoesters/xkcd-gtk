@@ -355,7 +355,7 @@ func (win *ApplicationWindow) SetComic(n int) {
 			return
 		}
 
-		err = cache.DownloadComicImage(n, win.app.CacheWindow)
+		err = cache.DownloadComicImage(n, win.app.CacheWindowVR)
 		if err != nil {
 			log.Print("error downloading comic image: ", err)
 			// We can be sneaky if we get an error, we use SafeTitle for window
