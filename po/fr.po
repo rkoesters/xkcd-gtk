@@ -54,17 +54,17 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
 
-#: internal/widget/cache-window.go:34 internal/widget/window-menu.go:86
+#: internal/widget/cache-window.go:37 internal/widget/window-menu.go:86
 #: internal/widget/app-menu.ui:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:62
+#: internal/widget/cache-window.go:65
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:56
+#: internal/widget/cache-window.go:59
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr "Thème sombre pour une lecture tardive"
 msgid "Date"
 msgstr "Date"
 
-#: internal/widget/cache-window.go:77
+#: internal/widget/cache-window.go:80
 msgid "Download all comic images"
 msgstr ""
 
