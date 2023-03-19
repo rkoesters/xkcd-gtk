@@ -112,7 +112,11 @@ fix: $(POT) $(PO) $(APP).yml
 	go mod tidy
 	([ -d vendor ] && go mod vendor) || true
 	echo $(UI_SOURCES) | xargs -n1 gtk-builder-tool simplify --replace
-	dos2unix -q po/LINGUAS po/POTFILES po/appdata.its $(POT) $(PO)
+	(find data -name '*.in' && \
+	 printf '%s\n' $(UI_SOURCES) && \
+	 grep -E -l '[^A-Za-z0-9]l\(' $(GO_SOURCES)\
+	) | sort >po/POTFILES
+	dos2unix -q po/LINGUAS po/appdata.its $(POT) $(PO)
 	for lang in $(LINGUAS); do \
 		msgmerge -U --backup=none "po/$$lang.po" $(POT); \
 	done
