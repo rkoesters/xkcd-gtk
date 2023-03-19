@@ -17,6 +17,10 @@ type Stat struct {
 	CachedCount       int
 }
 
+func (s Stat) Complete() bool {
+	return s.LatestComicNumber == s.CachedCount
+}
+
 func (s Stat) Fraction() (float64, error) {
 	if s.LatestComicNumber == 0 {
 		return 0, errors.New("division by zero")

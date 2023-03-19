@@ -78,12 +78,12 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	if err != nil {
 		return nil, err
 	}
-	grid.SetColumnSpacing(style.PaddingPropertiesDialog)
-	grid.SetRowSpacing(style.PaddingPropertiesDialog)
-	grid.SetMarginTop(style.PaddingPropertiesDialog)
-	grid.SetMarginBottom(style.PaddingPropertiesDialog)
-	grid.SetMarginStart(style.PaddingPropertiesDialog)
-	grid.SetMarginEnd(style.PaddingPropertiesDialog)
+	grid.SetColumnSpacing(style.PaddingAuxiliaryWindow)
+	grid.SetRowSpacing(style.PaddingAuxiliaryWindow)
+	grid.SetMarginTop(style.PaddingAuxiliaryWindow)
+	grid.SetMarginBottom(style.PaddingAuxiliaryWindow)
+	grid.SetMarginStart(style.PaddingAuxiliaryWindow)
+	grid.SetMarginEnd(style.PaddingAuxiliaryWindow)
 
 	row := 0
 

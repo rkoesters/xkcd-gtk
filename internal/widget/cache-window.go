@@ -1,6 +1,8 @@
 package widget
 
 import (
+	"time"
+
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
@@ -17,6 +19,9 @@ type CacheWindow struct {
 	metadataLevelBar        *labeledLevelBar
 	imageLevelBar           *labeledLevelBar
 	downloadAllImagesButton *gtk.Button
+
+	lastRefreshMetadata time.Time
+	lastRefreshImages   time.Time
 }
 
 var _ Widget = &CacheWindow{}
@@ -42,10 +47,10 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 	if err != nil {
 		return nil, err
 	}
-	cw.box.SetMarginTop(style.PaddingPropertiesDialog)
-	cw.box.SetMarginBottom(style.PaddingPropertiesDialog)
-	cw.box.SetMarginStart(style.PaddingPropertiesDialog)
-	cw.box.SetMarginEnd(style.PaddingPropertiesDialog)
+	cw.box.SetMarginTop(style.PaddingAuxiliaryWindow)
+	cw.box.SetMarginBottom(style.PaddingAuxiliaryWindow)
+	cw.box.SetMarginStart(style.PaddingAuxiliaryWindow)
+	cw.box.SetMarginEnd(style.PaddingAuxiliaryWindow)
 	cw.Add(cw.box)
 
 	cw.metadataLevelBar, err = newLabeledLevelBar(l("Cached comic metadata"))
@@ -58,6 +63,7 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 	if err != nil {
 		return nil, err
 	}
+	cw.imageLevelBar.SetMarginTop(style.PaddingAuxiliaryWindow)
 	cw.box.PackStart(cw.imageLevelBar, false, true, 0)
 
 	bb, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
@@ -65,6 +71,7 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 		return nil, err
 	}
 	bb.SetHAlign(gtk.ALIGN_END)
+	bb.SetMarginTop(style.PaddingAuxiliaryWindow)
 	cw.box.PackEnd(bb, false, true, 0)
 
 	cw.downloadAllImagesButton, err = gtk.ButtonNewWithLabel(l("Download all comic images"))
@@ -122,8 +129,21 @@ func (cw *CacheWindow) IsVisible() bool {
 	return cw.ApplicationWindow.IsVisible()
 }
 
+const stalenessThreshold = time.Second
+
+func (cw *CacheWindow) IsMetadataStale() bool {
+	return time.Since(cw.lastRefreshMetadata) > stalenessThreshold
+}
+
+func (cw *CacheWindow) IsImagesStale() bool {
+	return time.Since(cw.lastRefreshImages) > stalenessThreshold
+}
+
 func (cw *CacheWindow) RefreshMetadata() {
 	if !cw.IsVisible() {
+		return
+	}
+	if !cw.IsMetadataStale() {
 		return
 	}
 
@@ -142,6 +162,9 @@ func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
 	if !cw.IsVisible() {
 		return
 	}
+	if !cw.IsMetadataStale() && !metadata.Complete() {
+		return
+	}
 
 	metaf, err := metadata.Fraction()
 	if err != nil {
@@ -149,10 +172,14 @@ func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
 	}
 	cw.metadataLevelBar.SetFraction(metaf)
 	cw.metadataLevelBar.SetDetails(metadata.String())
+	cw.lastRefreshMetadata = time.Now()
 }
 
 func (cw *CacheWindow) RefreshImages() {
 	if !cw.IsVisible() {
+		return
+	}
+	if !cw.IsImagesStale() {
 		return
 	}
 
@@ -171,6 +198,9 @@ func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
 	if !cw.IsVisible() {
 		return
 	}
+	if !cw.IsImagesStale() && !images.Complete() {
+		return
+	}
 
 	imgf, err := images.Fraction()
 	if err != nil {
@@ -178,6 +208,7 @@ func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
 	}
 	cw.imageLevelBar.SetFraction(imgf)
 	cw.imageLevelBar.SetDetails(images.String())
+	cw.lastRefreshImages = time.Now()
 }
 
 type labeledLevelBar struct {
@@ -209,8 +240,8 @@ func newLabeledLevelBar(title string) (*labeledLevelBar, error) {
 	lb.RemoveOffsetValue(gtk.LEVEL_BAR_OFFSET_LOW)
 	lb.RemoveOffsetValue(gtk.LEVEL_BAR_OFFSET_HIGH)
 	lb.RemoveOffsetValue(gtk.LEVEL_BAR_OFFSET_FULL)
-	lb.SetMarginTop(6)
-	lb.SetMarginBottom(6)
+	lb.SetMarginTop(4)
+	lb.SetMarginBottom(4)
 	super.PackStart(lb, false, true, 0)
 
 	dl, err := gtk.LabelNew("")
@@ -236,5 +267,5 @@ func (lpb *labeledLevelBar) SetFraction(f float64) {
 
 func (lpb *labeledLevelBar) SetDetails(s string) {
 	log.Debugf("labeledLevelBar.SetDetails(%q)", s)
-	lpb.details.SetLabel(s)
+	lpb.details.SetText(s)
 }

@@ -57,17 +57,17 @@ msgstr "Yer imleri"
 msgid "Cache comics for later offline viewing"
 msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
 
-#: internal/widget/cache-window.go:29 internal/widget/window-menu.go:96
+#: internal/widget/cache-window.go:34 internal/widget/window-menu.go:96
 #: internal/widget/app-menu.ui:18
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:57
+#: internal/widget/cache-window.go:62
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:51
+#: internal/widget/cache-window.go:56
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr "Gece geç saatlerde okumak için koyu kip"
 msgid "Date"
 msgstr "Tarih"
 
-#: internal/widget/cache-window.go:70
+#: internal/widget/cache-window.go:77
 msgid "Download all comic images"
 msgstr ""
 
