@@ -196,7 +196,7 @@ msgstr "Nieuw venster"
 msgid "News"
 msgstr "Nieuws"
 
-#: internal/widget/search-menu.go:71
+#: internal/widget/search-menu.go:79
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
@@ -262,7 +262,7 @@ msgstr "Oorspronkelijk zoomniveau"
 msgid "Search"
 msgstr "Zoeken"
 
-#: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Verhalen doorzoeken"
 
@@ -282,6 +282,10 @@ msgstr "Donker thema aan/uit"
 #: internal/widget/properties-dialog.go:144
 msgid "Transcript"
 msgstr "Transcriptie"
+
+#: internal/widget/search-menu.go:73
+msgid "Updating comic search index..."
+msgstr "Bezig met bijwerken van zoekindex…"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
@@ -325,9 +329,6 @@ msgstr ""
 
 #~ msgid "Search Index Update"
 #~ msgstr "Zoekindex bijwerken"
-
-#~ msgid "Updating comic search index..."
-#~ msgstr "Bezig met bijwerken van zoekindex…"
 
 #~ msgid "xkcd store"
 #~ msgstr "xkcd-winkel"

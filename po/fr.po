@@ -194,7 +194,7 @@ msgstr "Nouvelle fenêtre"
 msgid "News"
 msgstr "Actualités"
 
-#: internal/widget/search-menu.go:71
+#: internal/widget/search-menu.go:79
 msgid "No results found"
 msgstr ""
 
@@ -262,7 +262,7 @@ msgstr ""
 msgid "Search"
 msgstr "Rechercher"
 
-#: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Rechercher des BD"
 
@@ -282,6 +282,10 @@ msgstr "Activer le thème sombre"
 #: internal/widget/properties-dialog.go:144
 msgid "Transcript"
 msgstr "Transcription"
+
+#: internal/widget/search-menu.go:73
+msgid "Updating comic search index..."
+msgstr "Mise à jour de l'index de recherche des BD…"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
@@ -325,9 +329,6 @@ msgstr ""
 
 #~ msgid "Search Index Update"
 #~ msgstr "Rechercher une mise à jour de l'index"
-
-#~ msgid "Updating comic search index..."
-#~ msgstr "Mise à jour de l'index de recherche des BD…"
 
 #~ msgid "xkcd store"
 #~ msgstr "Boutique xkcd"

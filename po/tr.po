@@ -196,7 +196,7 @@ msgstr "Yeni pencere"
 msgid "News"
 msgstr "Haberler"
 
-#: internal/widget/search-menu.go:71
+#: internal/widget/search-menu.go:79
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
@@ -263,7 +263,7 @@ msgstr "Yakınlaştırmayı sıfırla"
 msgid "Search"
 msgstr "Ara"
 
-#: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Karikatür ara"
 
@@ -284,6 +284,10 @@ msgstr "Koyu kipi aç/kapat"
 #: internal/widget/properties-dialog.go:144
 msgid "Transcript"
 msgstr "Yazılı metin"
+
+#: internal/widget/search-menu.go:73
+msgid "Updating comic search index..."
+msgstr "Karikatür arama dizini güncelleniyor..."
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
@@ -327,6 +331,3 @@ msgstr "xkcd kitapları"
 
 #~ msgid "Search Index Update"
 #~ msgstr "Arama Dizini Güncellemesi"
-
-#~ msgid "Updating comic search index..."
-#~ msgstr "Karikatür arama dizini güncelleniyor..."

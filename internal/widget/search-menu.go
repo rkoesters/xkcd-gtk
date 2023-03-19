@@ -7,6 +7,7 @@ import (
 	"github.com/blevesearch/bleve/v2"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
@@ -19,6 +20,7 @@ type SearchMenu struct {
 	popoverBox      *gtk.Box
 	entry           *gtk.SearchEntry
 	resultsStack    *gtk.Stack
+	resultsIndexing *gtk.Label
 	resultsNone     *gtk.Label
 	resultsScroller *gtk.ScrolledWindow
 	resultsList     *ComicListView
@@ -68,6 +70,12 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.resultsStack.SetHomogeneous(false)
 	sm.popoverBox.Add(sm.resultsStack)
 
+	sm.resultsIndexing, err = gtk.LabelNew(l("Updating comic search index..."))
+	if err != nil {
+		return nil, err
+	}
+	sm.resultsStack.Add(sm.resultsIndexing)
+
 	sm.resultsNone, err = gtk.LabelNew(l("No results found"))
 	if err != nil {
 		return nil, err
@@ -106,6 +114,7 @@ func (sm *SearchMenu) Dispose() {
 	sm.popoverBox = nil
 	sm.entry = nil
 	sm.resultsStack = nil
+	sm.resultsIndexing = nil
 	sm.resultsNone = nil
 	sm.resultsScroller = nil
 	sm.resultsList.Dispose()
@@ -138,7 +147,16 @@ func (sm *SearchMenu) Search() {
 
 // Show the user the given search results.
 func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
-	sm.resultsStack.SetVisible(result != nil)
+	s, err := cache.StatMetadata()
+	if err != nil {
+		return err
+	}
+	if s.Complete() {
+		sm.resultsStack.SetVisible(result != nil)
+	} else {
+		sm.resultsStack.SetVisible(true)
+		sm.resultsStack.SetVisibleChild(sm.resultsIndexing)
+	}
 	if result == nil {
 		return nil
 	}
