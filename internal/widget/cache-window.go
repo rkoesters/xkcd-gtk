@@ -17,9 +17,13 @@ type CacheManager interface {
 
 type CacheWindow struct {
 	*gtk.ApplicationWindow
-	box              *gtk.Box
-	metadataLevelBar *labeledLevelBar
-	imageLevelBar    *labeledLevelBar
+
+	actions map[string]*glib.SimpleAction
+
+	box                     *gtk.Box
+	metadataLevelBar        *labeledLevelBar
+	imageLevelBar           *labeledLevelBar
+	downloadAllImagesButton *gtk.Button
 }
 
 var _ Widget = &CacheWindow{}
@@ -36,35 +40,67 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 		app.RemoveWindow(win)
 	})
 
-	box, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
-	if err != nil {
-		return nil, err
-	}
-	box.SetMarginTop(style.PaddingPropertiesDialog)
-	box.SetMarginBottom(style.PaddingPropertiesDialog)
-	box.SetMarginStart(style.PaddingPropertiesDialog)
-	box.SetMarginEnd(style.PaddingPropertiesDialog)
-	super.Add(box)
-
-	mpb, err := newLabeledLevelBar(l("Cached comic metadata"))
-	if err != nil {
-		return nil, err
-	}
-	box.PackStart(mpb, false, true, 0)
-	ipb, err := newLabeledLevelBar(l("Cached comic images"))
-	if err != nil {
-		return nil, err
-	}
-	box.PackStart(ipb, false, true, 0)
-
 	cw := &CacheWindow{
 		ApplicationWindow: super,
-		box:               box,
-		metadataLevelBar:  mpb,
-		imageLevelBar:     ipb,
+		actions:           make(map[string]*glib.SimpleAction),
 	}
-	cw.box.ShowAll()
 
+	cw.box, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
+	if err != nil {
+		return nil, err
+	}
+	cw.box.SetMarginTop(style.PaddingPropertiesDialog)
+	cw.box.SetMarginBottom(style.PaddingPropertiesDialog)
+	cw.box.SetMarginStart(style.PaddingPropertiesDialog)
+	cw.box.SetMarginEnd(style.PaddingPropertiesDialog)
+	cw.Add(cw.box)
+
+	cw.metadataLevelBar, err = newLabeledLevelBar(l("Cached comic metadata"))
+	if err != nil {
+		return nil, err
+	}
+	cw.box.PackStart(cw.metadataLevelBar, false, true, 0)
+
+	cw.imageLevelBar, err = newLabeledLevelBar(l("Cached comic images"))
+	if err != nil {
+		return nil, err
+	}
+	cw.box.PackStart(cw.imageLevelBar, false, true, 0)
+
+	bb, err := gtk.ButtonBoxNew(gtk.ORIENTATION_HORIZONTAL)
+	if err != nil {
+		return nil, err
+	}
+	bb.SetHAlign(gtk.ALIGN_END)
+	cw.box.PackEnd(bb, false, true, 0)
+
+	cw.downloadAllImagesButton, err = gtk.ButtonNewWithLabel(l("Download all comic images"))
+	if err != nil {
+		return nil, err
+	}
+	cw.downloadAllImagesButton.SetActionName("win.download-all-images")
+	bb.PackStart(cw.downloadAllImagesButton, false, true, 0)
+
+	registerAction := func(name string, fn interface{}) {
+		action := glib.SimpleActionNew(name, nil)
+		action.Connect("activate", fn)
+
+		cw.actions[name] = action
+		cw.AddAction(action)
+	}
+
+	registerAction("download-all-images", func() {
+		cw.actions["download-all-images"].SetEnabled(false)
+		go func() {
+			cache.DownloadAllComicImages(cw)
+			b := cw.actions["download-all-images"]
+			glib.IdleAdd(func() {
+				b.SetEnabled(true)
+			})
+		}()
+	})
+
+	cw.box.ShowAll()
 	return cw, nil
 }
 
@@ -78,6 +114,15 @@ func (cw *CacheWindow) Present() {
 	cw.ApplicationWindow.Present()
 	cw.RefreshMetadata()
 	cw.RefreshImages()
+}
+
+func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
+	metaf, err := metadata.Fraction()
+	if err != nil {
+		log.Print("error refreshing cache window: ", err)
+	}
+	cw.metadataLevelBar.SetFraction(metaf)
+	cw.metadataLevelBar.SetDetails(metadata.String())
 }
 
 func (cw *CacheWindow) RefreshMetadata() {
@@ -96,13 +141,17 @@ func (cw *CacheWindow) refreshMetadata() {
 	}
 
 	glib.IdleAdd(func() {
-		metaf, err := cs.Fraction()
-		if err != nil {
-			log.Print("error refreshing cache window: ", err)
-		}
-		cw.metadataLevelBar.SetFraction(metaf)
-		cw.metadataLevelBar.SetDetails(cs.String())
+		cw.RefreshMetadataWith(cs)
 	})
+}
+
+func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
+	imgf, err := images.Fraction()
+	if err != nil {
+		log.Print("error refreshing cache window: ", err)
+	}
+	cw.imageLevelBar.SetFraction(imgf)
+	cw.imageLevelBar.SetDetails(images.String())
 }
 
 func (cw *CacheWindow) RefreshImages() {
@@ -121,12 +170,7 @@ func (cw *CacheWindow) refreshImages() {
 	}
 
 	glib.IdleAdd(func() {
-		imgf, err := cs.Fraction()
-		if err != nil {
-			log.Print("error refreshing cache window: ", err)
-		}
-		cw.imageLevelBar.SetFraction(imgf)
-		cw.imageLevelBar.SetDetails(cs.String())
+		cw.RefreshImagesWith(cs)
 	})
 }
 

@@ -2,44 +2,49 @@ package cache
 
 import (
 	"errors"
-	"fmt"
 	"os"
 	"regexp"
+	"strconv"
+	"strings"
 
 	bolt "go.etcd.io/bbolt"
 )
 
 var imageFileNameRegex = regexp.MustCompile("^[0-9][0-9]*$")
 
-type CacheStat struct {
-	LatestComicNumber uint
-	CachedCount       uint
+type Stat struct {
+	LatestComicNumber int
+	CachedCount       int
 }
 
-func (cs CacheStat) Fraction() (float64, error) {
-	if cs.LatestComicNumber == 0 {
+func (s Stat) Fraction() (float64, error) {
+	if s.LatestComicNumber == 0 {
 		return 0, errors.New("division by zero")
 	}
-	return float64(cs.CachedCount) / float64(cs.LatestComicNumber), nil
+	return float64(s.CachedCount) / float64(s.LatestComicNumber), nil
 }
 
-func (cs CacheStat) String() string {
-	return fmt.Sprintln(cs.CachedCount, "/", cs.LatestComicNumber)
+func (s Stat) String() string {
+	var b strings.Builder
+	b.WriteString(strconv.Itoa(s.CachedCount))
+	b.WriteString(" / ")
+	b.WriteString(strconv.Itoa(s.LatestComicNumber))
+	return b.String()
 }
 
-func StatMetadata() (CacheStat, error) {
-	var cs CacheStat
+func StatMetadata() (Stat, error) {
+	var s Stat
 	latestComic, err := NewestComicInfoFromCache()
 	if err != nil {
-		return cs, err
+		return s, err
 	}
-	cs.LatestComicNumber = uint(latestComic.Num)
-	cs.CachedCount, err = countCachedMetadata()
-	return cs, err
+	s.LatestComicNumber = latestComic.Num
+	s.CachedCount, err = countCachedMetadata()
+	return s, err
 }
 
-func countCachedMetadata() (uint, error) {
-	var count uint
+func countCachedMetadata() (int, error) {
+	var count int
 
 	// We are ready to display comic #404, which is an error page rather than an
 	// image.
@@ -66,21 +71,19 @@ func countCachedMetadata() (uint, error) {
 	return count, err
 }
 
-func StatImages() (CacheStat, error) {
-	var cs CacheStat
-
+func StatImages() (Stat, error) {
+	var s Stat
 	latestComic, err := NewestComicInfoFromCache()
 	if err != nil {
-		return cs, err
+		return s, err
 	}
-	cs.LatestComicNumber = uint(latestComic.Num)
-
-	cs.CachedCount, err = countCachedImages()
-	return cs, err
+	s.LatestComicNumber = int(latestComic.Num)
+	s.CachedCount, err = countCachedImages()
+	return s, err
 }
 
-func countCachedImages() (uint, error) {
-	var count uint
+func countCachedImages() (int, error) {
+	var count int
 
 	// We are ready to display comic #404, which is an error page rather than an
 	// image.
