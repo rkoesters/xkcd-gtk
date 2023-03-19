@@ -15,6 +15,12 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">Cache manager</attribute>
+        <attribute name="action">app.show-cache</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="label" translatable="yes">What If?</attribute>
         <attribute name="action">app.open-what-if</attribute>
       </item>

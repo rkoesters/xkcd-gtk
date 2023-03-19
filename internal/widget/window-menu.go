@@ -93,6 +93,15 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return nil, err
 	}
 
+	_, err = wm.popover.AddMenuEntry(l("Cache manager"), "app.show-cache")
+	if err != nil {
+		return nil, err
+	}
+
+	if err = wm.popover.AddSeparator(); err != nil {
+		return nil, err
+	}
+
 	_, err = wm.popover.AddMenuEntry(l("What If?"), "app.open-what-if")
 	if err != nil {
 		return nil, err
@@ -115,10 +124,6 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	}
 
 	_, err = wm.popover.AddMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("Cache manager"), "app.show-cache")
 	if err != nil {
 		return nil, err
 	}
