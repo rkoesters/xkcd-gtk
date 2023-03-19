@@ -1,6 +1,7 @@
 package widget
 
 import (
+	"sync"
 	"time"
 
 	"github.com/gotk3/gotk3/glib"
@@ -20,8 +21,10 @@ type CacheWindow struct {
 	imageLevelBar           *labeledLevelBar
 	downloadAllImagesButton *gtk.Button
 
-	lastRefreshMetadata time.Time
-	lastRefreshImages   time.Time
+	lastRefreshMetadata      time.Time
+	lastRefreshMetadataMutex sync.RWMutex
+	lastRefreshImages        time.Time
+	lastRefreshImagesMutex   sync.RWMutex
 }
 
 var _ Widget = &CacheWindow{}
@@ -129,13 +132,17 @@ func (cw *CacheWindow) IsVisible() bool {
 	return cw.ApplicationWindow.IsVisible()
 }
 
-const stalenessThreshold = time.Second
+const stalenessThreshold = 2 * time.Second
 
 func (cw *CacheWindow) IsMetadataStale() bool {
+	cw.lastRefreshMetadataMutex.RLock()
+	defer cw.lastRefreshMetadataMutex.RUnlock()
 	return time.Since(cw.lastRefreshMetadata) > stalenessThreshold
 }
 
 func (cw *CacheWindow) IsImagesStale() bool {
+	cw.lastRefreshImagesMutex.RLock()
+	defer cw.lastRefreshImagesMutex.RUnlock()
 	return time.Since(cw.lastRefreshImages) > stalenessThreshold
 }
 
@@ -165,6 +172,9 @@ func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
 	if !cw.IsMetadataStale() && !metadata.Complete() {
 		return
 	}
+
+	cw.lastRefreshMetadataMutex.Lock()
+	defer cw.lastRefreshMetadataMutex.Unlock()
 
 	metaf, err := metadata.Fraction()
 	if err != nil {
@@ -201,6 +211,9 @@ func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
 	if !cw.IsImagesStale() && !images.Complete() {
 		return
 	}
+
+	cw.lastRefreshImagesMutex.Lock()
+	defer cw.lastRefreshImagesMutex.Unlock()
 
 	imgf, err := images.Fraction()
 	if err != nil {
