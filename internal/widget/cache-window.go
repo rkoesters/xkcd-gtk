@@ -1,11 +1,10 @@
 package widget
 
 import (
-	"log"
-
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
+	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -105,6 +104,9 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 }
 
 func (cw *CacheWindow) Dispose() {
+	if cw == nil {
+		return
+	}
 	cw.ApplicationWindow = nil
 	cw.actions = nil
 	cw.box = nil
@@ -117,6 +119,13 @@ func (cw *CacheWindow) Present() {
 	cw.ApplicationWindow.Present()
 	go cw.RefreshMetadata()
 	go cw.RefreshImages()
+}
+
+func (cw *CacheWindow) IsVisible() bool {
+	if cw == nil {
+		return false
+	}
+	return cw.ApplicationWindow.IsVisible()
 }
 
 func (cw *CacheWindow) RefreshMetadata() {
@@ -136,6 +145,10 @@ func (cw *CacheWindow) RefreshMetadata() {
 }
 
 func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
+	if !cw.IsVisible() {
+		return
+	}
+
 	metaf, err := metadata.Fraction()
 	if err != nil {
 		log.Print("error refreshing cache window: ", err)
@@ -161,6 +174,10 @@ func (cw *CacheWindow) RefreshImages() {
 }
 
 func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
+	if !cw.IsVisible() {
+		return
+	}
+
 	imgf, err := images.Fraction()
 	if err != nil {
 		log.Print("error refreshing cache window: ", err)
@@ -219,9 +236,11 @@ func newLabeledLevelBar(title string) (*labeledLevelBar, error) {
 }
 
 func (lpb *labeledLevelBar) SetFraction(f float64) {
+	log.Debugf("labeledLevelBar.SetFraction(%q)", f)
 	lpb.bar.SetValue(f)
 }
 
 func (lpb *labeledLevelBar) SetDetails(s string) {
-	lpb.details.SetText(s)
+	log.Debugf("labeledLevelBar.SetDetails(%q)", s)
+	lpb.details.SetLabel(s)
 }

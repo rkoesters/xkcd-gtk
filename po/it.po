@@ -54,17 +54,17 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
-#: internal/widget/cache-window.go:36 internal/widget/window-menu.go:96
+#: internal/widget/cache-window.go:35 internal/widget/window-menu.go:96
 #: internal/widget/app-menu.ui:18
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:64
+#: internal/widget/cache-window.go:63
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:58
+#: internal/widget/cache-window.go:57
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgstr "Modalità scura per la lettura a tarda notte"
 msgid "Date"
 msgstr "Data"
 
-#: internal/widget/cache-window.go:77
+#: internal/widget/cache-window.go:76
 msgid "Download all comic images"
 msgstr ""
 
