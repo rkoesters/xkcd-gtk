@@ -92,7 +92,7 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 	registerAction("download-all-images", func() {
 		cw.actions["download-all-images"].SetEnabled(false)
 		go func() {
-			cache.DownloadAllComicImages(cw)
+			cache.DownloadAllComicImages(func() cache.ViewRefresher { return cw })
 			b := cw.actions["download-all-images"]
 			glib.IdleAdd(func() {
 				b.SetEnabled(true)

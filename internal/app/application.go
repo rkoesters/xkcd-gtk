@@ -6,6 +6,7 @@ import (
 	"flag"
 	"math/rand"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/gotk3/gotk3/glib"
@@ -34,9 +35,10 @@ type Application struct {
 	gtkSettings *gtk.Settings
 	actions     map[string]*glib.SimpleAction
 
-	aboutDialog     *gtk.AboutDialog
-	shortcutsWindow *gtk.ShortcutsWindow
-	cacheWindow     *widget.CacheWindow
+	aboutDialog      *gtk.AboutDialog
+	shortcutsWindow  *gtk.ShortcutsWindow
+	cacheWindow      *widget.CacheWindow
+	cacheWindowMutex sync.RWMutex
 
 	settings  settings.Settings
 	bookmarks bookmarks.List
@@ -160,14 +162,9 @@ func (app *Application) SetupCache() {
 		log.Fatal("error initializing search index: ", err)
 	}
 
-	app.cacheWindow, err = widget.NewCacheWindow(app)
-	if err != nil {
-		log.Fatal("error creating cache window: ", err)
-	}
-
 	// Asynchronously fill the comic metadata cache and search index.
 	log.Debug("calling cache.DownloadAllComicMetadata()")
-	cache.DownloadAllComicMetadata(app.cacheWindow)
+	cache.DownloadAllComicMetadata(app.CacheWindow)
 }
 
 // CloseCache closes the search index and comic cache.
@@ -383,11 +380,24 @@ func (app *Application) ShowAbout() {
 
 // ShowCache shows the cache management window to the user.
 func (app *Application) ShowCache() {
+	if app.cacheWindow == nil {
+		app.cacheWindowMutex.Lock()
+		cw, err := widget.NewCacheWindow(app)
+		if err != nil {
+			log.Print("error creating cache window: ", err)
+			app.cacheWindowMutex.Unlock()
+			return
+		}
+		app.cacheWindow = cw
+		app.cacheWindowMutex.Unlock()
+	}
 	app.AddWindow(app.cacheWindow)
 	app.cacheWindow.Present()
 }
 
-func (app *Application) CacheWindow() *widget.CacheWindow {
+func (app *Application) CacheWindow() cache.ViewRefresher {
+	app.cacheWindowMutex.RLock()
+	defer app.cacheWindowMutex.RUnlock()
 	return app.cacheWindow
 }
 

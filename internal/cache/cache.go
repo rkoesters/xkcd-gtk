@@ -160,6 +160,8 @@ func Close() error {
 	return err
 }
 
+// ViewRefresher provides methods for refreshing the view of cache statistics.
+// All methods must silently accept a nil receiver.
 type ViewRefresher interface {
 	RefreshMetadata()
 	RefreshMetadataWith(Stat)
@@ -167,8 +169,13 @@ type ViewRefresher interface {
 	RefreshImagesWith(Stat)
 }
 
+// ViewRefresherGetter returns a ViewRefresher. Useful for lazily passing the
+// ViewRefresher as an argument.
+type ViewRefresherGetter func() ViewRefresher
+
 type nullRefresher struct{}
 
+func newNullRefresher() ViewRefresher              { return nullRefresher{} }
 func (r nullRefresher) RefreshMetadata()           {}
 func (r nullRefresher) RefreshMetadataWith(_ Stat) {}
 func (r nullRefresher) RefreshImages()             {}
@@ -176,7 +183,7 @@ func (r nullRefresher) RefreshImagesWith(_ Stat)   {}
 
 // DownloadAllComicMetadata asynchronously fills the comic metadata cache and
 // search index via the internet. Status can be checked with Stat().
-func DownloadAllComicMetadata(cacheWindow ViewRefresher) {
+func DownloadAllComicMetadata(cacheWindow ViewRefresherGetter) {
 	// Make sure all comic metadata is cached and indexed.
 	go func() {
 		newest, err := NewestComicInfoFromInternet()
@@ -186,7 +193,7 @@ func DownloadAllComicMetadata(cacheWindow ViewRefresher) {
 		}
 		for i := 1; i <= newest.Num; i++ {
 			ComicInfo(i)
-			cacheWindow.RefreshMetadataWith(Stat{
+			cacheWindow().RefreshMetadataWith(Stat{
 				LatestComicNumber: newest.Num,
 				CachedCount:       i,
 			})
@@ -383,12 +390,12 @@ func putComicInfo(comic *xkcd.Comic) error {
 
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
-func DownloadComicImage(n int, cacheWindow ViewRefresher) error {
+func DownloadComicImage(n int, cacheWindow ViewRefresherGetter) error {
 	if *offlineMode {
 		return ErrOffline
 	}
 
-	defer func() { go cacheWindow.RefreshImages() }()
+	defer func() { go cacheWindow().RefreshImages() }()
 
 	log.Debugf("DownloadComicImage(%v) start", n)
 	defer log.Debugf("DownloadComicImage(%v) end", n)
@@ -419,7 +426,7 @@ func DownloadComicImage(n int, cacheWindow ViewRefresher) error {
 
 // DownloadAllComicImages tries to add all comic images to our local cache. If
 // successful, the images can be found at the path returned by ComicImagePath.
-func DownloadAllComicImages(cacheWindow ViewRefresher) {
+func DownloadAllComicImages(cacheWindow ViewRefresherGetter) {
 	newest, err := NewestComicInfoFromCache()
 	if err != nil {
 		log.Print(err)
@@ -428,10 +435,10 @@ func DownloadAllComicImages(cacheWindow ViewRefresher) {
 	for i := 1; i <= newest.Num; i++ {
 		_, err = os.Stat(ComicImagePath(i))
 		if os.IsNotExist(err) {
-			DownloadComicImage(i, nullRefresher{})
+			DownloadComicImage(i, newNullRefresher)
 		}
 
-		cacheWindow.RefreshImagesWith(Stat{
+		cacheWindow().RefreshImagesWith(Stat{
 			LatestComicNumber: newest.Num,
 			CachedCount:       i,
 		})
