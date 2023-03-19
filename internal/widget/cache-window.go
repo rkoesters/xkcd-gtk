@@ -112,24 +112,11 @@ func (cw *CacheWindow) Dispose() {
 
 func (cw *CacheWindow) Present() {
 	cw.ApplicationWindow.Present()
-	cw.RefreshMetadata()
-	cw.RefreshImages()
-}
-
-func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
-	metaf, err := metadata.Fraction()
-	if err != nil {
-		log.Print("error refreshing cache window: ", err)
-	}
-	cw.metadataLevelBar.SetFraction(metaf)
-	cw.metadataLevelBar.SetDetails(metadata.String())
+	go cw.RefreshMetadata()
+	go cw.RefreshImages()
 }
 
 func (cw *CacheWindow) RefreshMetadata() {
-	go cw.refreshMetadata()
-}
-
-func (cw *CacheWindow) refreshMetadata() {
 	if !cw.IsVisible() {
 		return
 	}
@@ -145,20 +132,16 @@ func (cw *CacheWindow) refreshMetadata() {
 	})
 }
 
-func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
-	imgf, err := images.Fraction()
+func (cw *CacheWindow) RefreshMetadataWith(metadata cache.Stat) {
+	metaf, err := metadata.Fraction()
 	if err != nil {
 		log.Print("error refreshing cache window: ", err)
 	}
-	cw.imageLevelBar.SetFraction(imgf)
-	cw.imageLevelBar.SetDetails(images.String())
+	cw.metadataLevelBar.SetFraction(metaf)
+	cw.metadataLevelBar.SetDetails(metadata.String())
 }
 
 func (cw *CacheWindow) RefreshImages() {
-	go cw.refreshImages()
-}
-
-func (cw *CacheWindow) refreshImages() {
 	if !cw.IsVisible() {
 		return
 	}
@@ -172,6 +155,15 @@ func (cw *CacheWindow) refreshImages() {
 	glib.IdleAdd(func() {
 		cw.RefreshImagesWith(cs)
 	})
+}
+
+func (cw *CacheWindow) RefreshImagesWith(images cache.Stat) {
+	imgf, err := images.Fraction()
+	if err != nil {
+		log.Print("error refreshing cache window: ", err)
+	}
+	cw.imageLevelBar.SetFraction(imgf)
+	cw.imageLevelBar.SetDetails(images.String())
 }
 
 type labeledLevelBar struct {

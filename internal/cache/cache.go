@@ -388,7 +388,7 @@ func DownloadComicImage(n int, cacheWindow ViewRefresher) error {
 		return ErrOffline
 	}
 
-	defer cacheWindow.RefreshImages()
+	defer func() { go cacheWindow.RefreshImages() }()
 
 	log.Debugf("DownloadComicImage(%v) start", n)
 	defer log.Debugf("DownloadComicImage(%v) end", n)
