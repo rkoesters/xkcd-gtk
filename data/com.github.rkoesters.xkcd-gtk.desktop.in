@@ -12,7 +12,7 @@ StartupNotify=true
 Terminal=false
 Categories=Network;Amusement;Viewer;GTK;
 Keywords=webcomic;romance;sarcasm;math;language;
-Actions=new-window;show-shortcuts;show-about;
+Actions=new-window;show-cache;show-shortcuts;show-about;
 
 [Desktop Action new-window]
 Name=New window
