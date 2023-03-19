@@ -8,12 +8,6 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
-type CacheManager interface {
-	MetadataStats() (int, int, error)
-	ImageStats() (int, int, error)
-	DownloadImages()
-}
-
 type CacheWindow struct {
 	*gtk.ApplicationWindow
 

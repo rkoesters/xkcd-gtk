@@ -57,17 +57,17 @@ msgstr ""
 "Cache dos livros de banda desenhada para os visualizar mais tarde em modo "
 "offline"
 
-#: internal/widget/cache-window.go:35 internal/widget/window-menu.go:96
+#: internal/widget/cache-window.go:29 internal/widget/window-menu.go:96
 #: internal/widget/app-menu.ui:18
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:63
+#: internal/widget/cache-window.go:57
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:57
+#: internal/widget/cache-window.go:51
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgstr "Modo escuro para leitura à noite"
 msgid "Date"
 msgstr "Data"
 
-#: internal/widget/cache-window.go:76
+#: internal/widget/cache-window.go:70
 msgid "Download all comic images"
 msgstr ""
 

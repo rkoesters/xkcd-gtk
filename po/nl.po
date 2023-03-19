@@ -57,17 +57,17 @@ msgstr "Bladwijzers"
 msgid "Cache comics for later offline viewing"
 msgstr "Sla verhalen op voor offline weergave"
 
-#: internal/widget/cache-window.go:35 internal/widget/window-menu.go:96
+#: internal/widget/cache-window.go:29 internal/widget/window-menu.go:96
 #: internal/widget/app-menu.ui:18
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:63
+#: internal/widget/cache-window.go:57
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:57
+#: internal/widget/cache-window.go:51
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr "Donker thema voor de late avonduurtjes"
 msgid "Date"
 msgstr "Datum"
 
-#: internal/widget/cache-window.go:76
+#: internal/widget/cache-window.go:70
 msgid "Download all comic images"
 msgstr ""
 
