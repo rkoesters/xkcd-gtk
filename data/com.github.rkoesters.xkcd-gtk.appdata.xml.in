@@ -57,6 +57,11 @@
   </custom>
 
   <releases>
+    <release version="1.7.1" date="2023-03-19">
+      <description>
+        <p>Minor packaging fixes.</p>
+      </description>
+    </release>
     <release version="1.7.0" date="2023-03-19">
       <description>
         <p>Add the cache management window, allowing you to download all comic images in preparation for being offline.</p>
