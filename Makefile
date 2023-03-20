@@ -103,8 +103,11 @@ appcenter: flatpak/appcenter.yml flatpak/modules.txt
 appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter --install flatpak-build/$@/ $<
 
-$(APP).yml: flatpak/appcenter.yml
-	sed "s/path: '..'/path: '.'/" $< >$@
+$(APP).yml: flatpak/appcenter.yml flatpak/modules.txt
+	sed -e "s/path: '..'/path: '.'/" \
+	  -e 's/sources:/sources:\n      - type: file\n        path: flatpak\/appcenter\.modules\.txt\n        dest: vendor\n        dest-filename: modules\.txt\n/' \
+	  -e '/^ *- .ln.*modules\.txt.*vendor.*$$/d' $< >$@
+	cp flatpak/modules.txt flatpak/appcenter.modules.txt
 
 fix: $(POT) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)

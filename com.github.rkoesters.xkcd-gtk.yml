@@ -19,12 +19,16 @@ modules:
   - name: com.github.rkoesters.xkcd-gtk
     buildsystem: simple
     build-commands:
-      - 'ln -s "$(pwd)/src/flatpak/modules.txt" vendor/'
       - 'ln -s "$(pwd)/vendor" src/'
       - 'cd src && PATH="$PATH:../go/bin" make'
       - 'cd src && PATH="$PATH:../go/bin" make install prefix=/app'
 
     sources:
+      - type: file
+        path: flatpak/appcenter.modules.txt
+        dest: vendor
+        dest-filename: modules.txt
+
       - type: dir
         path: '.'
         skip:
