@@ -37,6 +37,7 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 	}
 	super.SetTitle(l("Cache manager"))
 	super.SetSizeRequest(400, -1)
+	super.SetResizable(false)
 	super.HideOnDelete()
 	super.Connect("hide", func(win gtk.IWindow) {
 		app.RemoveWindow(win)

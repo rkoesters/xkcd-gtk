@@ -60,11 +60,11 @@ msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:76
+#: internal/widget/cache-window.go:77
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:70
+#: internal/widget/cache-window.go:71
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr "Thème sombre pour une lecture tardive"
 msgid "Date"
 msgstr "Date"
 
-#: internal/widget/cache-window.go:91
+#: internal/widget/cache-window.go:92
 msgid "Download all comic images"
 msgstr ""
 

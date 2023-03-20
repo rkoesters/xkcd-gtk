@@ -21,8 +21,8 @@ msgstr ""
 #: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
-"GTK+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
+"+3"
 
 #: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:46
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
@@ -63,11 +63,11 @@ msgstr "Sla verhalen op voor offline weergave"
 msgid "Cache manager"
 msgstr ""
 
-#: internal/widget/cache-window.go:76
+#: internal/widget/cache-window.go:77
 msgid "Cached comic images"
 msgstr ""
 
-#: internal/widget/cache-window.go:70
+#: internal/widget/cache-window.go:71
 msgid "Cached comic metadata"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr "Donker thema voor de late avonduurtjes"
 msgid "Date"
 msgstr "Datum"
 
-#: internal/widget/cache-window.go:91
+#: internal/widget/cache-window.go:92
 msgid "Download all comic images"
 msgstr ""
 
