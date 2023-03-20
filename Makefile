@@ -103,11 +103,13 @@ appcenter: flatpak/appcenter.yml flatpak/modules.txt
 appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter --install flatpak-build/$@/ $<
 
+appcenter-reviews: $(APP) flatpak/modules.txt
+	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter flatpak-build/$@/ $<
+
 $(APP).yml: flatpak/appcenter.yml flatpak/modules.txt
 	sed -e "s/path: '..'/path: '.'/" \
-	  -e 's/sources:/sources:\n      - type: file\n        path: flatpak\/appcenter\.modules\.txt\n        dest: vendor\n        dest-filename: modules\.txt\n/' \
+	  -e 's/sources:/sources:\n      - type: file\n        path: flatpak\/modules\.txt\n        dest: vendor\n        dest-filename: modules\.txt\n/' \
 	  -e '/^ *- .ln.*modules\.txt.*vendor.*$$/d' $< >$@
-	cp flatpak/modules.txt flatpak/appcenter.modules.txt
 
 fix: $(POT) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)
@@ -140,7 +142,7 @@ test: $(FLATPAK_YML) $(APPDATA)
 
 # Shorthand for all the targets that CI covers.
 ci: all check test
-ci-full: ci appcenter flathub
+ci-full: ci appcenter appcenter-reviews flathub
 
 clean:
 	rm -f $(EXEC)
@@ -149,7 +151,6 @@ clean:
 	rm -f $(APPDATA)
 	rm -f $(MO)
 	rm -f flatpak/*.yml
-	rm -f flatpak/modules.txt
 	rm -rf flatpak-build/
 	rm -rf .flatpak-builder/
 
@@ -182,4 +183,4 @@ uninstall:
 		rm "$(DESTDIR)$(datadir)/locale/$$lang/LC_MESSAGES/$(APP).mo"; \
 	done
 
-.PHONY: all appcenter appcenter-install check ci ci-full clean dev fix flathub flathub-install install strip test uninstall
+.PHONY: all appcenter appcenter-install appcenter-reviews check ci ci-full clean dev fix flathub flathub-install install strip test uninstall

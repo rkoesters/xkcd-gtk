@@ -25,7 +25,7 @@ modules:
 
     sources:
       - type: file
-        path: flatpak/appcenter.modules.txt
+        path: flatpak/modules.txt
         dest: vendor
         dest-filename: modules.txt
 

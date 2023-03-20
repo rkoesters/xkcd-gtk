@@ -60,9 +60,9 @@ jobs:
           cache: false  # No go code will be compiled, do not cache nothing.
 
       - run: go mod graph
-      - run: make flatpak/modules.txt
-      - run: make flatpak/appcenter.yml
-      - run: make flatpak/flathub.yml
+      - run: make -B flatpak/modules.txt
+      - run: make -B flatpak/appcenter.yml
+      - run: make -B flatpak/flathub.yml
 
       - name: Upload flatpak-config artifact
         uses: actions/upload-artifact@v3
@@ -123,6 +123,43 @@ jobs:
           manifest-path: flatpak/${{ matrix.repo }}.yml
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
+          arch: ${{ matrix.arch }}
+          build-bundle: false
+          cache: false
+
+  appcenter-reviews:
+    strategy:
+      matrix:
+        arch:
+          - aarch64
+          - x86_64
+
+    name: appcenter-reviews-${{ matrix.arch }}
+    runs-on: ubuntu-latest
+
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:elementary-juno
+      options: --privileged
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install QEMU dependencies
+        if: ${{ matrix.arch != 'x86_64' }}
+        run: dnf -y install docker
+
+      - name: Initialize QEMU
+        if: ${{ matrix.arch == 'aarch64' }}
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: arm64
+
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v5
+        with:
+          manifest-path: com.github.rkoesters.xkcd-gtk.yml
+          repository-name: appcenter
+          repository-url: https://flatpak.elementary.io/repo.flatpakrepo
           arch: ${{ matrix.arch }}
           build-bundle: false
           cache: false
