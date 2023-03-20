@@ -20,7 +20,7 @@ const (
 	PaddingComicListButton   = 8
 	PaddingPopover           = 10
 	PaddingPopoverCompact    = 8
-	PaddingPropertiesDialog  = 12
+	PaddingAuxiliaryWindow   = 12
 	PaddingUnlinkedButtonBox = 4
 )
 

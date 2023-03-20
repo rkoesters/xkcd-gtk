@@ -160,6 +160,26 @@ func Close() error {
 	return err
 }
 
+// DownloadAllComicMetadata asynchronously fills the comic metadata cache and
+// search index via the internet. Status can be checked with Stat().
+func DownloadAllComicMetadata(cacheWindow ViewRefreshWitherGetter) {
+	// Make sure all comic metadata is cached and indexed.
+	go func() {
+		newest, err := NewestComicInfoFromInternet()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		for i := 1; i <= newest.Num; i++ {
+			ComicInfo(i)
+			cacheWindow().RefreshMetadataWith(Stat{
+				LatestComicNumber: newest.Num,
+				CachedCount:       i,
+			})
+		}
+	}()
+}
+
 // ComicInfo always returns a valid *xkcd.Comic that can be used, and err will
 // be set if any errors were encountered, however these errors can be ignored
 // safely.
@@ -349,10 +369,12 @@ func putComicInfo(comic *xkcd.Comic) error {
 
 // DownloadComicImage tries to add a comic image to our local cache. If
 // successful, the image can be found at the path returned by ComicImagePath.
-func DownloadComicImage(n int) error {
+func DownloadComicImage(n int, cacheWindow ViewRefresherGetter) error {
 	if *offlineMode {
 		return ErrOffline
 	}
+
+	defer func() { go cacheWindow().RefreshImages() }()
 
 	log.Debugf("DownloadComicImage(%v) start", n)
 	defer log.Debugf("DownloadComicImage(%v) end", n)
@@ -379,6 +401,27 @@ func DownloadComicImage(n int) error {
 		return err
 	}
 	return nil
+}
+
+// DownloadAllComicImages tries to add all comic images to our local cache. If
+// successful, the images can be found at the path returned by ComicImagePath.
+func DownloadAllComicImages(cacheWindow ViewRefreshWitherGetter) {
+	newest, err := NewestComicInfoFromCache()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	for i := 1; i <= newest.Num; i++ {
+		_, err = os.Stat(ComicImagePath(i))
+		if os.IsNotExist(err) {
+			DownloadComicImage(i, func() ViewRefresher { return nilRefresher })
+		}
+
+		cacheWindow().RefreshImagesWith(Stat{
+			LatestComicNumber: newest.Num,
+			CachedCount:       i,
+		})
+	}
 }
 
 // currentCacheVersion returns the cache version for this binary.

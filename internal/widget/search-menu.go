@@ -7,6 +7,7 @@ import (
 	"github.com/blevesearch/bleve/v2"
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
@@ -18,6 +19,7 @@ type SearchMenu struct {
 	popover         *gtk.Popover
 	popoverBox      *gtk.Box
 	entry           *gtk.SearchEntry
+	indexing        *gtk.Label
 	resultsStack    *gtk.Stack
 	resultsNone     *gtk.Label
 	resultsScroller *gtk.ScrolledWindow
@@ -61,6 +63,12 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.entry.Connect("search-changed", sm.Search)
 	sm.popoverBox.Add(sm.entry)
 
+	sm.indexing, err = gtk.LabelNew(l("Updating comic search index..."))
+	if err != nil {
+		return nil, err
+	}
+	sm.popoverBox.Add(sm.indexing)
+
 	sm.resultsStack, err = gtk.StackNew()
 	if err != nil {
 		return nil, err
@@ -92,6 +100,8 @@ func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, 
 	sm.popoverBox.ShowAll()
 	sm.popover.Add(sm.popoverBox)
 
+	sm.Connect("clicked", sm.refreshIndexingStatus)
+
 	return sm, sm.loadSearchResults(nil)
 }
 
@@ -105,6 +115,7 @@ func (sm *SearchMenu) Dispose() {
 	sm.popover = nil
 	sm.popoverBox = nil
 	sm.entry = nil
+	sm.indexing = nil
 	sm.resultsStack = nil
 	sm.resultsNone = nil
 	sm.resultsScroller = nil
@@ -136,8 +147,21 @@ func (sm *SearchMenu) Search() {
 	}
 }
 
+func (sm *SearchMenu) refreshIndexingStatus() error {
+	s, err := cache.StatMetadata()
+	if err != nil {
+		return err
+	}
+	sm.indexing.SetVisible(!s.Complete())
+	return nil
+}
+
 // Show the user the given search results.
 func (sm *SearchMenu) loadSearchResults(result *bleve.SearchResult) error {
+	err := sm.refreshIndexingStatus()
+	if err != nil {
+		return err
+	}
 	sm.resultsStack.SetVisible(result != nil)
 	if result == nil {
 		return nil

@@ -6,6 +6,7 @@ import (
 	"flag"
 	"math/rand"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/gotk3/gotk3/glib"
@@ -34,8 +35,10 @@ type Application struct {
 	gtkSettings *gtk.Settings
 	actions     map[string]*glib.SimpleAction
 
-	aboutDialog     *gtk.AboutDialog
-	shortcutsWindow *gtk.ShortcutsWindow
+	aboutDialog      *gtk.AboutDialog
+	shortcutsWindow  *gtk.ShortcutsWindow
+	cacheWindow      *widget.CacheWindow
+	cacheWindowMutex sync.RWMutex
 
 	settings  settings.Settings
 	bookmarks bookmarks.List
@@ -68,6 +71,7 @@ func New(appID string, flags glib.ApplicationFlags) (*Application, error) {
 	registerAction("open-what-if", app.OpenWhatIf)
 	registerAction("quit", app.PleaseQuit)
 	registerAction("show-about", app.ShowAbout)
+	registerAction("show-cache", app.ShowCache)
 	registerAction("show-shortcuts", app.ShowShortcuts)
 	registerAction("toggle-dark-mode", app.ToggleDarkMode)
 
@@ -149,21 +153,18 @@ func (app *Application) SetupCache() {
 	log.Debug("calling cache.Init()")
 	err := cache.Init(search.Index)
 	if err != nil {
-		log.Print("error initializing comic cache: ", err)
+		log.Fatal("error initializing comic cache: ", err)
 	}
 
 	log.Debug("calling search.Init()")
 	err = search.Init()
 	if err != nil {
-		log.Print("error initializing search index: ", err)
+		log.Fatal("error initializing search index: ", err)
 	}
 
 	// Asynchronously fill the comic metadata cache and search index.
-	log.Debug("calling search.Load()")
-	err = search.Load(app)
-	if err != nil {
-		log.Print("error building search index: ", err)
-	}
+	log.Debug("calling cache.DownloadAllComicMetadata()")
+	cache.DownloadAllComicMetadata(app.CacheWindowVRW)
 }
 
 // CloseCache closes the search index and comic cache.
@@ -375,6 +376,35 @@ func (app *Application) ShowAbout() {
 	}
 	app.AddWindow(app.aboutDialog)
 	app.aboutDialog.Present()
+}
+
+// ShowCache shows the cache management window to the user.
+func (app *Application) ShowCache() {
+	if app.cacheWindow == nil {
+		app.cacheWindowMutex.Lock()
+		cw, err := widget.NewCacheWindow(app)
+		if err != nil {
+			log.Print("error creating cache window: ", err)
+			app.cacheWindowMutex.Unlock()
+			return
+		}
+		app.cacheWindow = cw
+		app.cacheWindowMutex.Unlock()
+	}
+	app.AddWindow(app.cacheWindow)
+	app.cacheWindow.Present()
+}
+
+func (app *Application) CacheWindowVR() cache.ViewRefresher {
+	app.cacheWindowMutex.RLock()
+	defer app.cacheWindowMutex.RUnlock()
+	return app.cacheWindow
+}
+
+func (app *Application) CacheWindowVRW() cache.ViewRefreshWither {
+	app.cacheWindowMutex.RLock()
+	defer app.cacheWindowMutex.RUnlock()
+	return app.cacheWindow
 }
 
 // GtkTheme returns the name of the GTK theme that the application should use.

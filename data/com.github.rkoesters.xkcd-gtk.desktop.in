@@ -12,11 +12,15 @@ StartupNotify=true
 Terminal=false
 Categories=Network;Amusement;Viewer;GTK;
 Keywords=webcomic;romance;sarcasm;math;language;
-Actions=new-window;show-shortcuts;show-about;
+Actions=new-window;show-cache;show-shortcuts;show-about;
 
 [Desktop Action new-window]
 Name=New window
 Exec=com.github.rkoesters.xkcd-gtk
+
+[Desktop Action show-cache]
+Name=Cache manager
+Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-cache [] {}
 
 [Desktop Action show-shortcuts]
 Name=Keyboard shortcuts

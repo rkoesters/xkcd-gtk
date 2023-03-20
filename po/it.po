@@ -21,12 +21,12 @@ msgstr ""
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
-#: internal/widget/window-menu.go:121 internal/widget/app-menu.ui:40
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+#: internal/widget/window-menu.go:130 internal/widget/app-menu.ui:46
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
 msgid "About"
 msgstr "Informazioni"
 
-#: internal/widget/window-menu.go:108 internal/widget/app-menu.ui:30
+#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:36
 msgid "About xkcd"
 msgstr "Informazioni su xkcd"
 
@@ -54,6 +54,20 @@ msgstr "Segnalibri"
 msgid "Cache comics for later offline viewing"
 msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
+#: internal/widget/cache-window.go:37 internal/widget/window-menu.go:86
+#: internal/widget/app-menu.ui:12
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
+msgid "Cache manager"
+msgstr ""
+
+#: internal/widget/cache-window.go:65
+msgid "Cached comic images"
+msgstr ""
+
+#: internal/widget/cache-window.go:59
+msgid "Cached comic metadata"
+msgstr ""
+
 #: internal/widget/application-window.go:290
 msgid "Checking for new comic..."
 msgstr "Verifica di nuovi fumetti..."
@@ -62,7 +76,7 @@ msgstr "Verifica di nuovi fumetti..."
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:10
+#: internal/widget/application.go:11
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
@@ -103,6 +117,10 @@ msgstr "Modalità scura per la lettura a tarda notte"
 #: internal/widget/properties-dialog.go:124
 msgid "Date"
 msgstr "Data"
+
+#: internal/widget/cache-window.go:80
+msgid "Download all comic images"
+msgstr ""
 
 #: internal/cache/cache.go:65
 msgid "Error reading local comic database"
@@ -148,9 +166,9 @@ msgstr "Immagine"
 msgid "Keep track of comics with bookmarks"
 msgstr "Tieni traccia dei fumetti con i segnalibri"
 
-#: internal/widget/window-menu.go:117 internal/widget/app-menu.ui:36
+#: internal/widget/window-menu.go:126 internal/widget/app-menu.ui:42
 #: internal/widget/shortcuts-window.ui:4
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
@@ -175,7 +193,7 @@ msgstr "Nuova Finestra"
 msgid "News"
 msgstr "Novità"
 
-#: internal/widget/search-menu.go:71
+#: internal/widget/search-menu.go:79
 msgid "No results found"
 msgstr "Nessun risultato trovato"
 
@@ -218,7 +236,7 @@ msgstr ""
 "Accedi rapidamente alle spiegazioni dei fumetti tramite il wiki esplicativo "
 "di xkcd"
 
-#: internal/widget/app-menu.ui:44
+#: internal/widget/app-menu.ui:50
 msgid "Quit"
 msgstr "Esci"
 
@@ -243,11 +261,7 @@ msgstr ""
 msgid "Search"
 msgstr "Cerca"
 
-#: internal/search/index.go:71
-msgid "Search Index Update"
-msgstr "Cerca aggiornamento indice"
-
-#: internal/widget/search-menu.go:38 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Cerca fumetti"
 
@@ -259,7 +273,7 @@ msgstr "Cerca fumetti"
 msgid "Title"
 msgstr "Titolo"
 
-#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:12
+#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:18
 #: internal/widget/shortcuts-window.ui:156
 msgid "Toggle dark mode"
 msgstr "Abilità modalità scura"
@@ -268,7 +282,7 @@ msgstr "Abilità modalità scura"
 msgid "Transcript"
 msgstr "Trascrizione"
 
-#: internal/search/index.go:79
+#: internal/widget/search-menu.go:66
 msgid "Updating comic search index..."
 msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 
@@ -276,7 +290,7 @@ msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 msgid "View comic metadata"
 msgstr "Visualizza metadati fumetto"
 
-#: internal/widget/window-menu.go:96 internal/widget/app-menu.ui:18
+#: internal/widget/window-menu.go:105 internal/widget/app-menu.ui:24
 msgid "What If?"
 msgstr "E se?"
 
@@ -304,13 +318,16 @@ msgstr ""
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"
 
-#: internal/widget/window-menu.go:100 internal/widget/app-menu.ui:22
+#: internal/widget/window-menu.go:109 internal/widget/app-menu.ui:28
 msgid "xkcd blog"
 msgstr "xkcd blog"
 
-#: internal/widget/window-menu.go:104 internal/widget/app-menu.ui:26
+#: internal/widget/window-menu.go:113 internal/widget/app-menu.ui:32
 msgid "xkcd books"
 msgstr ""
+
+#~ msgid "Search Index Update"
+#~ msgstr "Cerca aggiornamento indice"
 
 #~ msgid "xkcd store"
 #~ msgstr "xkcd store"
