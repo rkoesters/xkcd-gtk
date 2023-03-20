@@ -57,6 +57,14 @@ func (ws *WindowState) loadDefaults() {
 	ws.PropertiesPositionY = 0
 }
 
+func (ws *WindowState) HasPosition() bool {
+	return ws.PositionX != 0 && ws.PositionY != 0
+}
+
+func (ws *WindowState) HasPropertiesPosition() bool {
+	return ws.PropertiesPositionX != 0 && ws.PropertiesPositionY != 0
+}
+
 // Read takes the given io.Reader and tries to parse json encoded state from it.
 func (ws *WindowState) Read(r io.Reader) {
 	dec := json.NewDecoder(r)

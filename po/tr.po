@@ -37,7 +37,7 @@ msgstr "xkcd Hakkında"
 msgid "Add to bookmarks"
 msgstr "Yer imlerine ekle"
 
-#: internal/widget/properties-dialog.go:132
+#: internal/widget/properties-dialog.go:97
 msgid "Alt text"
 msgstr "Alternatif metin"
 
@@ -117,7 +117,7 @@ msgstr "Koyu kipi aç/kapat"
 msgid "Dark mode for late night reading"
 msgstr "Gece geç saatlerde okumak için koyu kip"
 
-#: internal/widget/properties-dialog.go:124
+#: internal/widget/properties-dialog.go:89
 msgid "Date"
 msgstr "Tarih"
 
@@ -161,7 +161,7 @@ msgstr "Sonraki karikatüre git"
 msgid "Go to the previous comic"
 msgstr "Önceki karikatüre git"
 
-#: internal/widget/properties-dialog.go:128
+#: internal/widget/properties-dialog.go:93
 msgid "Image"
 msgstr "Görüntü"
 
@@ -175,7 +175,7 @@ msgstr "Yer imleriyle karikatürleri takip edin"
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
-#: internal/widget/properties-dialog.go:140
+#: internal/widget/properties-dialog.go:105
 msgid "Link"
 msgstr "Bağlantı"
 
@@ -192,7 +192,7 @@ msgstr "Dolaş"
 msgid "New window"
 msgstr "Yeni pencere"
 
-#: internal/widget/properties-dialog.go:136
+#: internal/widget/properties-dialog.go:101
 msgid "News"
 msgstr "Haberler"
 
@@ -200,7 +200,7 @@ msgstr "Haberler"
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
-#: internal/widget/properties-dialog.go:116
+#: internal/widget/properties-dialog.go:81
 msgid "Number"
 msgstr "Sayı"
 
@@ -228,7 +228,7 @@ msgstr "Kısayollar penceresini aç"
 msgid "Open window menu"
 msgstr "Pencere menüsünü açar"
 
-#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
 #: internal/widget/window-menu.go:53 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Özellikler"
@@ -271,7 +271,7 @@ msgstr "Karikatür ara"
 msgid "Search for comics"
 msgstr "Karikatür ara"
 
-#: internal/widget/properties-dialog.go:120
+#: internal/widget/properties-dialog.go:85
 msgid "Title"
 msgstr "Başlık"
 
@@ -281,7 +281,7 @@ msgid "Toggle dark mode"
 msgstr "Koyu kipi aç/kapat"
 
 # Arayüzde, özellikler sayfasında karikatürde yazılı olan metinleri göstermek için kullanılıyor.
-#: internal/widget/properties-dialog.go:144
+#: internal/widget/properties-dialog.go:109
 msgid "Transcript"
 msgstr "Yazılı metin"
 

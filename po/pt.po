@@ -35,7 +35,7 @@ msgstr "Sobre o xkcd"
 msgid "Add to bookmarks"
 msgstr "Adicione esta banda desenhada aos marcadores"
 
-#: internal/widget/properties-dialog.go:132
+#: internal/widget/properties-dialog.go:97
 msgid "Alt text"
 msgstr "Texto Alternativo"
 
@@ -118,7 +118,7 @@ msgstr "Modo escuro"
 msgid "Dark mode for late night reading"
 msgstr "Modo escuro para leitura à noite"
 
-#: internal/widget/properties-dialog.go:124
+#: internal/widget/properties-dialog.go:89
 msgid "Date"
 msgstr "Data"
 
@@ -162,7 +162,7 @@ msgstr "Ir para a banda desenhada seguinte"
 msgid "Go to the previous comic"
 msgstr "Ir para a banda desenhada anterior"
 
-#: internal/widget/properties-dialog.go:128
+#: internal/widget/properties-dialog.go:93
 msgid "Image"
 msgstr "Imagem"
 
@@ -176,7 +176,7 @@ msgstr "Mantenha o controlo de bandas desenhadas com os marcadores"
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de Teclado"
 
-#: internal/widget/properties-dialog.go:140
+#: internal/widget/properties-dialog.go:105
 msgid "Link"
 msgstr "Ligação"
 
@@ -193,7 +193,7 @@ msgstr "Navegar"
 msgid "New window"
 msgstr "Nova Janela"
 
-#: internal/widget/properties-dialog.go:136
+#: internal/widget/properties-dialog.go:101
 msgid "News"
 msgstr "Noticias"
 
@@ -201,7 +201,7 @@ msgstr "Noticias"
 msgid "No results found"
 msgstr "Nenhum resultado encontrado"
 
-#: internal/widget/properties-dialog.go:116
+#: internal/widget/properties-dialog.go:81
 msgid "Number"
 msgstr "Número"
 
@@ -229,7 +229,7 @@ msgstr "Abrir a janela de atalhos"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
 #: internal/widget/window-menu.go:53 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Propriedades"
@@ -274,7 +274,7 @@ msgstr "Procurar Bandas Desenhadas"
 msgid "Search for comics"
 msgstr "Procurar por Bandas Desenhadas"
 
-#: internal/widget/properties-dialog.go:120
+#: internal/widget/properties-dialog.go:85
 msgid "Title"
 msgstr "Título"
 
@@ -283,7 +283,7 @@ msgstr "Título"
 msgid "Toggle dark mode"
 msgstr "Alternar modo escuro"
 
-#: internal/widget/properties-dialog.go:144
+#: internal/widget/properties-dialog.go:109
 msgid "Transcript"
 msgstr "Transcrição"
 

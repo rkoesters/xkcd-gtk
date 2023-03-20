@@ -8,7 +8,6 @@ import (
 	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
 // PropertiesDialog holds a gtk dialog that shows the comic information for the
@@ -48,7 +47,7 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	pd.SetSizeRequest(400, 400)
 	pd.SetDestroyWithParent(true)
 	pd.Resize(parent.state.PropertiesWidth, parent.state.PropertiesHeight)
-	if parent.state.PropertiesPositionX != 0 && parent.state.PropertiesPositionY != 0 {
+	if parent.state.HasPropertiesPosition() {
 		pd.Move(parent.state.PropertiesPositionX, parent.state.PropertiesPositionY)
 	}
 
@@ -74,74 +73,40 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	scwin.SetMarginEnd(0)
 	scwin.SetVExpand(true)
 
-	grid, err := gtk.GridNew()
+	grid, err := NewGrid()
 	if err != nil {
 		return nil, err
-	}
-	grid.SetColumnSpacing(style.PaddingAuxiliaryWindow)
-	grid.SetRowSpacing(style.PaddingAuxiliaryWindow)
-	grid.SetMarginTop(style.PaddingAuxiliaryWindow)
-	grid.SetMarginBottom(style.PaddingAuxiliaryWindow)
-	grid.SetMarginStart(style.PaddingAuxiliaryWindow)
-	grid.SetMarginEnd(style.PaddingAuxiliaryWindow)
-
-	row := 0
-
-	addRowToGrid := func(label string) (*gtk.Label, error) {
-		defer func() { row++ }()
-
-		keyLabel, err := gtk.LabelNew(label)
-		if err != nil {
-			return nil, err
-		}
-		keyLabel.SetHAlign(gtk.ALIGN_END)
-		keyLabel.SetVAlign(gtk.ALIGN_START)
-		valLabel, err := gtk.LabelNew("")
-		if err != nil {
-			return nil, err
-		}
-		valLabel.SetXAlign(0)
-		valLabel.SetHAlign(gtk.ALIGN_START)
-		valLabel.SetVAlign(gtk.ALIGN_START)
-		valLabel.SetLineWrap(true)
-		valLabel.SetSelectable(true)
-		valLabel.SetCanFocus(false)
-
-		grid.Attach(keyLabel, 0, row, 1, 1)
-		grid.Attach(valLabel, 1, row, 1, 1)
-
-		return valLabel, nil
 	}
 
-	pd.comicNumber, err = addRowToGrid(l("Number"))
+	pd.comicNumber, err = grid.AddRowToGrid(l("Number"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicTitle, err = addRowToGrid(l("Title"))
+	pd.comicTitle, err = grid.AddRowToGrid(l("Title"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicDate, err = addRowToGrid(l("Date"))
+	pd.comicDate, err = grid.AddRowToGrid(l("Date"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicImage, err = addRowToGrid(l("Image"))
+	pd.comicImage, err = grid.AddRowToGrid(l("Image"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicAltText, err = addRowToGrid(l("Alt text"))
+	pd.comicAltText, err = grid.AddRowToGrid(l("Alt text"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicNews, err = addRowToGrid(l("News"))
+	pd.comicNews, err = grid.AddRowToGrid(l("News"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicLink, err = addRowToGrid(l("Link"))
+	pd.comicLink, err = grid.AddRowToGrid(l("Link"))
 	if err != nil {
 		return nil, err
 	}
-	pd.comicTranscript, err = addRowToGrid(l("Transcript"))
+	pd.comicTranscript, err = grid.AddRowToGrid(l("Transcript"))
 	if err != nil {
 		return nil, err
 	}
@@ -155,14 +120,7 @@ func NewPropertiesDialog(parent *ApplicationWindow) (*PropertiesDialog, error) {
 	}
 	// A gtk.Dialog content area has some children by default, we want to remove
 	// those children so the only child is scwin.
-	box.GetChildren().Foreach(func(child interface{}) {
-		w, ok := child.(*gtk.Widget)
-		if !ok {
-			log.Print("error converting child to gtk.Widget")
-			return
-		}
-		box.Remove(w)
-	})
+	emptyBox(box)
 	box.Add(scwin)
 	box.ShowAll()
 
@@ -245,4 +203,15 @@ func formatDate(year, month, day string) string {
 		return ""
 	}
 	return t.Format("Jan _2, 2006")
+}
+
+func emptyBox(box *gtk.Box) {
+	box.GetChildren().Foreach(func(child interface{}) {
+		w, ok := child.(*gtk.Widget)
+		if !ok {
+			log.Print("error converting child to gtk.Widget")
+			return
+		}
+		box.Remove(w)
+	})
 }

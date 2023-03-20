@@ -34,7 +34,7 @@ msgstr "À propos de xkcd"
 msgid "Add to bookmarks"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:132
+#: internal/widget/properties-dialog.go:97
 msgid "Alt text"
 msgstr "Texte alternatif"
 
@@ -115,7 +115,7 @@ msgstr "Thème sombre"
 msgid "Dark mode for late night reading"
 msgstr "Thème sombre pour une lecture tardive"
 
-#: internal/widget/properties-dialog.go:124
+#: internal/widget/properties-dialog.go:89
 msgid "Date"
 msgstr "Date"
 
@@ -159,7 +159,7 @@ msgstr "Aller à a BD suivante"
 msgid "Go to the previous comic"
 msgstr "Aller à la BD précédente"
 
-#: internal/widget/properties-dialog.go:128
+#: internal/widget/properties-dialog.go:93
 msgid "Image"
 msgstr "Image"
 
@@ -173,7 +173,7 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#: internal/widget/properties-dialog.go:140
+#: internal/widget/properties-dialog.go:105
 msgid "Link"
 msgstr "Lien"
 
@@ -190,7 +190,7 @@ msgstr "Navigation"
 msgid "New window"
 msgstr "Nouvelle fenêtre"
 
-#: internal/widget/properties-dialog.go:136
+#: internal/widget/properties-dialog.go:101
 msgid "News"
 msgstr "Actualités"
 
@@ -198,7 +198,7 @@ msgstr "Actualités"
 msgid "No results found"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:116
+#: internal/widget/properties-dialog.go:81
 msgid "Number"
 msgstr "Numéro"
 
@@ -226,7 +226,7 @@ msgstr "Ouvir la fenêtre des raccourcis"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:47
+#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
 #: internal/widget/window-menu.go:53 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Propriétés"
@@ -270,7 +270,7 @@ msgstr "Rechercher des BD"
 msgid "Search for comics"
 msgstr "Recherchez des BD"
 
-#: internal/widget/properties-dialog.go:120
+#: internal/widget/properties-dialog.go:85
 msgid "Title"
 msgstr "Titre"
 
@@ -279,7 +279,7 @@ msgstr "Titre"
 msgid "Toggle dark mode"
 msgstr "Activer le thème sombre"
 
-#: internal/widget/properties-dialog.go:144
+#: internal/widget/properties-dialog.go:109
 msgid "Transcript"
 msgstr "Transcription"
 

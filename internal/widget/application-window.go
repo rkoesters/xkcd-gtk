@@ -131,7 +131,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	}
 	win.Add(win.comicContainer)
 	win.Resize(win.state.Width, win.state.Height)
-	if win.state.PositionX != 0 && win.state.PositionY != 0 {
+	if win.state.HasPositionX() {
 		win.Move(win.state.PositionX, win.state.PositionY)
 	}
 	if win.state.Maximized {
