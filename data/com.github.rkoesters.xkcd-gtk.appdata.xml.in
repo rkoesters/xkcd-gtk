@@ -57,6 +57,12 @@
   </custom>
 
   <releases>
+    <release version="1.7.0">
+      <description>
+        <p>Revamped bookmarks menu and added a cache management tool.</p>
+        <p>To better fit existing keyboard shortcut standards, toggling the light/dark theme has changed to ctrl+t and adding/removing a bookmark has changed to ctrl+d.</p>
+      </description>
+    </release>
     <release version="1.6.5" date="2022-07-31">
       <description>
         <p>Minor improvements:</p>
