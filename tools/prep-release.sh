@@ -26,13 +26,13 @@ if ! release=$(grep "<release version=" "${appdata_xml:?}" | head -n 1 | cut -d 
   failure "could not read most recent release from changelog"
 fi
 
-echo "Checking if current commit is tagged ${release:?}"
-if [ "${release:?}" != "$(git describe --exact-match --tags --match='[0-9].[0-9]*.[0-9]*')" ]; then
-  failure "current commit not tagged ${release:?}"
+echo "Checking if current commit is tagged v${release:?}"
+if [ "v${release:?}" != "$(git describe --exact-match --tags --match='v[0-9].[0-9]*.[0-9]*')" ]; then
+  failure "current commit not tagged v${release:?}"
 fi
 
 echo "Checking for date for release ${release:?} in changelog"
-date=$(git log -1 --format='%ad' --date=short "${release:?}" --)
+date=$(git log -1 --format='%ad' --date=short "v${release:?}" --)
 if ! grep -q "<release version=\"${release:?}\" date=\"${date:?}\"" "${appdata_xml:?}"; then
   failure "date ${date:?} not found in appdata changelog for version ${release:?}"
 fi
