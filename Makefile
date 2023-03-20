@@ -107,9 +107,7 @@ appcenter-reviews: $(APP).yml flatpak/modules.txt
 	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter flatpak-build/$@/ $<
 
 $(APP).yml: flatpak/appcenter.yml flatpak/modules.txt
-	sed -e "s/path: '..'/path: '.'/" \
-	  -e 's/sources:/sources:\n      - type: file\n        path: flatpak\/modules\.txt\n        dest: vendor\n        dest-filename: modules\.txt\n/' \
-	  -e '/^ *- .ln.*modules\.txt.*vendor.*$$/d' $< >$@
+	sed -e "s/path: '..'/path: '.'/" -e 's/path: modules.txt/path: flatpak\/modules.txt/' $< >$@
 
 fix: $(POT) $(PO) $(APP).yml
 	go fix $(MODULE_PACKAGES)

@@ -21,12 +21,16 @@ modules:
   - name: com.github.rkoesters.xkcd-gtk
     buildsystem: simple
     build-commands:
-      - 'ln -s "$(pwd)/src/flatpak/modules.txt" vendor/'
       - 'ln -s "$(pwd)/vendor" src/'
       - 'cd src && . /usr/lib/sdk/golang/enable.sh && make'
       - 'cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app'
 
     sources:
+      - type: file
+        path: modules.txt
+        dest: vendor
+        dest-filename: modules.txt
+
       - type: dir
         path: '..'
         skip:
