@@ -46,20 +46,12 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	wm.zoomBox.SetMarginBottom(style.PaddingPopoverCompact / 2)
 	wm.popover.AddChild(wm.zoomBox, style.PaddingPopoverCompact/2)
 
-	if err = wm.popover.AddSeparator(); err != nil {
-		return nil, err
-	}
-
-	// Comic properties section.
-	_, err = wm.popover.AddMenuEntry(l("Open link"), "win.open-link")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("Explain"), "win.explain")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("Properties"), "win.show-properties")
+	err = wm.popover.AddMenuEntries([][2]string{
+		{"", "sep"},
+		{l("Open link"), "win.open-link"},
+		{l("Explain"), "win.explain"},
+		{l("Properties"), "win.show-properties"},
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -70,25 +62,14 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 		return wm, nil
 	}
 
-	if err = wm.popover.AddSeparator(); err != nil {
-		return nil, err
-	}
-
-	_, err = wm.popover.AddMenuEntry(l("New window"), "app.new-window")
+	err = wm.popover.AddMenuEntries([][2]string{
+		{"", "sep"},
+		{l("New window"), "app.new-window"},
+		{"", "sep"},
+		{l("Cache manager"), "app.show-cache"},
+		{"", "sep"},
+	})
 	if err != nil {
-		return nil, err
-	}
-
-	if err = wm.popover.AddSeparator(); err != nil {
-		return nil, err
-	}
-
-	_, err = wm.popover.AddMenuEntry(l("Cache manager"), "app.show-cache")
-	if err != nil {
-		return nil, err
-	}
-
-	if err = wm.popover.AddSeparator(); err != nil {
 		return nil, err
 	}
 
@@ -98,36 +79,16 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	}
 	wm.popover.AddChild(wm.darkModeSwitch, 0)
 
-	if err = wm.popover.AddSeparator(); err != nil {
-		return nil, err
-	}
-
-	_, err = wm.popover.AddMenuEntry(l("What If?"), "app.open-what-if")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("xkcd blog"), "app.open-blog")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("xkcd books"), "app.open-books")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("About xkcd"), "app.open-about-xkcd")
-	if err != nil {
-		return nil, err
-	}
-
-	if err = wm.popover.AddSeparator(); err != nil {
-		return nil, err
-	}
-
-	_, err = wm.popover.AddMenuEntry(l("Keyboard shortcuts"), "app.show-shortcuts")
-	if err != nil {
-		return nil, err
-	}
-	_, err = wm.popover.AddMenuEntry(l("About"), "app.show-about")
+	err = wm.popover.AddMenuEntries([][2]string{
+		{"", "sep"},
+		{l("What If?"), "app.open-what-if"},
+		{l("xkcd blog"), "app.open-blog"},
+		{l("xkcd books"), "app.open-books"},
+		{l("About xkcd"), "app.open-about-xkcd"},
+		{"", "sep"},
+		{l("Keyboard shortcuts"), "app.show-shortcuts"},
+		{l("About"), "app.show-about"},
+	})
 	if err != nil {
 		return nil, err
 	}

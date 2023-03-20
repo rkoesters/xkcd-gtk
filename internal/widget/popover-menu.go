@@ -61,6 +61,26 @@ func (pm *PopoverMenu) AddMenuEntry(label, action string) (*gtk.ModelButton, err
 	return mb, nil
 }
 
+func (pm *PopoverMenu) AddMenuEntries(labelActionPairs [][2]string) error {
+	var err error
+	for _, pair := range labelActionPairs {
+		label, action := pair[0], pair[1]
+		if action == "sep" {
+			err = pm.AddSeparator()
+			if err != nil {
+				return err
+			}
+			continue
+		}
+
+		_, err = pm.AddMenuEntry(label, action)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (pm *PopoverMenu) AddCheckButton(label string, stateGetter func() bool, stateSetter func(bool)) (*CheckModelButton, error) {
 	mb, err := NewCheckModelButton(stateGetter, stateSetter)
 	if err != nil {

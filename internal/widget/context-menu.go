@@ -44,19 +44,12 @@ func NewContextMenu(relative gtk.IWidget, actionGroup glib.IActionGroup, bookmar
 	cm.zoomBox.SetMarginTop(style.PaddingPopoverCompact / 2)
 	cm.AddChild(cm.zoomBox, 0)
 
-	if err = cm.AddSeparator(); err != nil {
-		return nil, err
-	}
-
-	_, err = cm.AddMenuEntry(l("Open link"), "win.open-link")
-	if err != nil {
-		return nil, err
-	}
-	_, err = cm.AddMenuEntry(l("Explain"), "win.explain")
-	if err != nil {
-		return nil, err
-	}
-	_, err = cm.AddMenuEntry(l("Properties"), "win.show-properties")
+	err = cm.AddMenuEntries([][2]string{
+		{"", "sep"},
+		{l("Open link"), "win.open-link"},
+		{l("Explain"), "win.explain"},
+		{l("Properties"), "win.show-properties"},
+	})
 	if err != nil {
 		return nil, err
 	}
