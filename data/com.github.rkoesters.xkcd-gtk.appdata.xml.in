@@ -59,8 +59,14 @@
   <releases>
     <release version="1.7.0">
       <description>
-        <p>Revamped bookmarks menu and added a cache management tool.</p>
-        <p>To better fit existing keyboard shortcut standards, toggling the light/dark theme has changed to ctrl+t and adding/removing a bookmark has changed to ctrl+d.</p>
+        <p>Add the cache management window, allowing you to download all comic images in preparation for being offline.</p>
+        <p>Add or remove bookmarks with one button click.</p>
+        <p>Keyboard shortcut changes:</p>
+        <ul>
+          <li>New: Add or remove a bookmark with ctrl+d</li>
+          <li>New: Show bookmarks list with ctrl+alt+d</li>
+          <li>Changed: toggle the light/dark theme with ctrl+t</li>
+        </ul>
       </description>
     </release>
     <release version="1.6.5" date="2022-07-31">
