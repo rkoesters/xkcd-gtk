@@ -136,6 +136,8 @@ jobs:
 
     name: appcenter-reviews-${{ matrix.arch }}
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' ||
+            github.head.ref == 'refs/heads/main' }}
 
     container:
       image: bilelmoussaoui/flatpak-github-actions:elementary-juno
