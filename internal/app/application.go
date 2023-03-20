@@ -164,7 +164,7 @@ func (app *Application) SetupCache() {
 
 	// Asynchronously fill the comic metadata cache and search index.
 	log.Debug("calling cache.DownloadAllComicMetadata()")
-	cache.DownloadAllComicMetadata(app.CacheWindowVRW)
+	go cache.DownloadAllComicMetadata(app.CacheWindowVRW)
 }
 
 // CloseCache closes the search index and comic cache.

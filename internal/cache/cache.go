@@ -163,21 +163,18 @@ func Close() error {
 // DownloadAllComicMetadata asynchronously fills the comic metadata cache and
 // search index via the internet. Status can be checked with Stat().
 func DownloadAllComicMetadata(cacheWindow ViewRefreshWitherGetter) {
-	// Make sure all comic metadata is cached and indexed.
-	go func() {
-		newest, err := NewestComicInfoFromInternet()
-		if err != nil {
-			log.Print(err)
-			return
-		}
-		for i := 1; i <= newest.Num; i++ {
-			ComicInfo(i)
-			cacheWindow().RefreshMetadataWith(Stat{
-				LatestComicNumber: newest.Num,
-				CachedCount:       i,
-			})
-		}
-	}()
+	newest, err := NewestComicInfoFromInternet()
+	if err != nil {
+		log.Print(err)
+		return
+	}
+	for i := 1; i <= newest.Num; i++ {
+		ComicInfo(i)
+		cacheWindow().RefreshMetadataWith(Stat{
+			LatestComicNumber: newest.Num,
+			CachedCount:       i,
+		})
+	}
 }
 
 // ComicInfo always returns a valid *xkcd.Comic that can be used, and err will
