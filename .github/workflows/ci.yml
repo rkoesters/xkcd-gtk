@@ -128,16 +128,7 @@ jobs:
           cache: false
 
   appcenter-reviews:
-    strategy:
-      matrix:
-        arch:
-          - aarch64
-          - x86_64
-
-    name: appcenter-reviews-${{ matrix.arch }}
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' ||
-            github.head.ref == 'refs/heads/main' }}
 
     container:
       image: bilelmoussaoui/flatpak-github-actions:elementary-juno
@@ -147,21 +138,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install QEMU dependencies
-        if: ${{ matrix.arch != 'x86_64' }}
-        run: dnf -y install docker
-
-      - name: Initialize QEMU
-        if: ${{ matrix.arch == 'aarch64' }}
-        uses: docker/setup-qemu-action@v2
-        with:
-          platforms: arm64
-
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v5
         with:
           manifest-path: com.github.rkoesters.xkcd-gtk.yml
           repository-name: appcenter
           repository-url: https://flatpak.elementary.io/repo.flatpakrepo
-          arch: ${{ matrix.arch }}
+          arch: x86_64
           build-bundle: false
           cache: false
