@@ -164,19 +164,19 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.updateZoomButtonStatus()
 	win.header.PackEnd(win.windowMenu)
 
-	// Create the bookmarks menu.
-	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), win.actions, accels, win.SetComic, win.StyleUpdated)
-	if err != nil {
-		return nil, err
-	}
-	win.header.PackEnd(win.bookmarksMenu)
-
 	// Create the search menu.
 	win.searchMenu, err = NewSearchMenu(accels, win.SetComic)
 	if err != nil {
 		return nil, err
 	}
 	win.header.PackEnd(win.searchMenu)
+
+	// Create the bookmarks menu.
+	win.bookmarksMenu, err = NewBookmarksMenu(win.app.BookmarksList(), win.actions, accels, win.SetComic, win.StyleUpdated)
+	if err != nil {
+		return nil, err
+	}
+	win.header.PackEnd(win.bookmarksMenu)
 
 	win.header.ShowAll()
 	win.SetTitlebar(win.header)
