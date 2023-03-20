@@ -4,6 +4,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gotk3/gotk3/gdk"
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
@@ -45,6 +46,16 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 		ApplicationWindow: super,
 		actions:           make(map[string]*glib.SimpleAction),
 	}
+
+	cw.Connect("destroy", cw.Dispose)
+
+	// Initialize our window accelerators.
+	accels, err := gtk.AccelGroupNew()
+	if err != nil {
+		return nil, err
+	}
+	cw.AddAccelGroup(accels)
+	accels.Connect(gdk.KEY_w, gdk.CONTROL_MASK, gtk.ACCEL_VISIBLE, cw.Close)
 
 	cw.box, err = gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
