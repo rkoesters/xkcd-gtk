@@ -57,7 +57,7 @@
   </custom>
 
   <releases>
-    <release version="1.7.0">
+    <release version="1.7.0" date="2023-03-19">
       <description>
         <p>Add the cache management window, allowing you to download all comic images in preparation for being offline.</p>
         <p>Add or remove bookmarks with one button click.</p>
