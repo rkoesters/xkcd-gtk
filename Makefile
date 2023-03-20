@@ -103,7 +103,7 @@ appcenter: flatpak/appcenter.yml flatpak/modules.txt
 appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter --install flatpak-build/$@/ $<
 
-appcenter-reviews: $(APP) flatpak/modules.txt
+appcenter-reviews: $(APP).yml flatpak/modules.txt
 	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter flatpak-build/$@/ $<
 
 $(APP).yml: flatpak/appcenter.yml flatpak/modules.txt
