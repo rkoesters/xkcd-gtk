@@ -125,7 +125,9 @@ func (cw *CacheWindow) Dispose() {
 	cw.ApplicationWindow = nil
 	cw.actions = nil
 	cw.box = nil
+	cw.metadataLevelBar.Dispose()
 	cw.metadataLevelBar = nil
+	cw.imageLevelBar.Dispose()
 	cw.imageLevelBar = nil
 	cw.downloadAllImagesButton = nil
 }
@@ -242,6 +244,8 @@ type labeledLevelBar struct {
 	details *gtk.Label
 }
 
+var _ Widget = &labeledLevelBar{}
+
 func newLabeledLevelBar(title string) (*labeledLevelBar, error) {
 	super, err := gtk.BoxNew(gtk.ORIENTATION_VERTICAL, 0)
 	if err != nil {
@@ -284,12 +288,22 @@ func newLabeledLevelBar(title string) (*labeledLevelBar, error) {
 	}, nil
 }
 
-func (lpb *labeledLevelBar) SetFraction(f float64) {
-	log.Debugf("labeledLevelBar.SetFraction(%q)", f)
-	lpb.bar.SetValue(f)
+func (llb *labeledLevelBar) Dispose() {
+	if llb == nil {
+		return
+	}
+	llb.Box = nil
+	llb.title = nil
+	llb.bar = nil
+	llb.details = nil
 }
 
-func (lpb *labeledLevelBar) SetDetails(s string) {
+func (llb *labeledLevelBar) SetFraction(f float64) {
+	log.Debugf("labeledLevelBar.SetFraction(%q)", f)
+	llb.bar.SetValue(f)
+}
+
+func (llb *labeledLevelBar) SetDetails(s string) {
 	log.Debugf("labeledLevelBar.SetDetails(%q)", s)
-	lpb.details.SetText(s)
+	llb.details.SetText(s)
 }
