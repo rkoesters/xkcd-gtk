@@ -103,8 +103,8 @@ appcenter: flatpak/appcenter.yml flatpak/modules.txt
 appcenter-install: flatpak/appcenter.yml flatpak/modules.txt
 	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter --install flatpak-build/$@/ $<
 
-appcenter-reviews: $(APP).yml flatpak/modules.txt
-	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter flatpak-build/$@/ $<
+appcenter-reviews: # No dependencies, manifest will be read as-is from repo.
+	flatpak-builder $(FPBFLAGS) --state-dir=flatpak-build/.flatpak-builder-$@/ --install-deps-from=appcenter flatpak-build/$@/ $(APP).yml
 
 $(APP).yml: flatpak/appcenter.yml flatpak/modules.txt
 	sed -e "s/path: '..'/path: '.'/" -e 's/path: modules.txt/path: flatpak\/modules.txt/' $< >$@

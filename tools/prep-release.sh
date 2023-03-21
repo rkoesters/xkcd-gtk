@@ -37,4 +37,9 @@ if ! grep -q "<release version=\"${release:?}\" date=\"${date:?}\"" "${appdata_x
   failure "date ${date:?} not found in appdata changelog for version ${release:?}"
 fi
 
+echo "Test build com.github.rkoesters.xkcd-gtk.yml flatpak"
+if ! make appcenter-reviews; then
+  failure "failed to build a flatpak with com.github.rkoesters.xkcd-gtk.yml and flatpak/modules.txt"
+fi
+
 success "checks passed!"
