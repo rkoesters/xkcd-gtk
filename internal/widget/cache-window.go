@@ -300,11 +300,9 @@ func (llb *labeledLevelBar) Dispose() {
 }
 
 func (llb *labeledLevelBar) SetFraction(f float64) {
-	log.Debugf("labeledLevelBar.SetFraction(%q)", f)
 	llb.bar.SetValue(f)
 }
 
 func (llb *labeledLevelBar) SetDetails(s string) {
-	log.Debugf("labeledLevelBar.SetDetails(%q)", s)
 	llb.details.SetText(s)
 }
