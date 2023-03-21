@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: com.github.rkoesters.xkcd-gtk\n"
 "Report-Msgid-Bugs-To: https://github.com/rkoesters/xkcd-gtk/issues\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-06-21 12:31+0200\n"
+"PO-Revision-Date: 2023-03-20 19:46+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "Language: nl\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
-"+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
+"GTK+3"
 
 #: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:46
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
@@ -43,7 +43,7 @@ msgstr "Alt-tekst"
 
 #: internal/widget/shortcuts-window.ui:152
 msgid "Application"
-msgstr ""
+msgstr "Toepassing"
 
 #: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
 msgid "Bookmark this comic"
@@ -61,15 +61,15 @@ msgstr "Sla verhalen op voor offline weergave"
 #: internal/widget/app-menu.ui:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
 msgid "Cache manager"
-msgstr ""
+msgstr "Cachebeheer"
 
 #: internal/widget/cache-window.go:77
 msgid "Cached comic images"
-msgstr ""
+msgstr "Afbeeldingen in cache"
 
 #: internal/widget/cache-window.go:71
 msgid "Cached comic metadata"
-msgstr ""
+msgstr "Metagegevens in cache"
 
 #: internal/widget/application-window.go:290
 msgid "Checking for new comic..."
@@ -77,7 +77,7 @@ msgstr "Bezig met zoeken naar nieuw verhaal…"
 
 #: internal/widget/shortcuts-window.ui:22
 msgid "Close window"
-msgstr ""
+msgstr "Venster sluiten"
 
 #: internal/widget/application.go:11
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
@@ -123,7 +123,7 @@ msgstr "Datum"
 
 #: internal/widget/cache-window.go:92
 msgid "Download all comic images"
-msgstr ""
+msgstr "Alle afbeeldingen downloaden"
 
 #: internal/cache/cache.go:65
 msgid "Error reading local comic database"
@@ -139,7 +139,7 @@ msgstr "Kenmerken:"
 
 #: internal/widget/shortcuts-window.ui:11
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
 msgid "Go to a random comic"
@@ -218,7 +218,7 @@ msgstr "Nieuw venster openen"
 
 #: internal/widget/shortcuts-window.ui:143
 msgid "Open properties window"
-msgstr ""
+msgstr "Eigenschappen openen"
 
 #: internal/widget/shortcuts-window.ui:163
 msgid "Open shortcuts window"
@@ -226,7 +226,7 @@ msgstr "Sneltoetsen tonen"
 
 #: internal/widget/shortcuts-window.ui:29
 msgid "Open window menu"
-msgstr ""
+msgstr "Venstermenu openen"
 
 #: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
 #: internal/widget/window-menu.go:53 internal/widget/shortcuts-window.ui:139
@@ -297,7 +297,7 @@ msgstr "Wat als…?"
 
 #: internal/widget/window-menu.go:29
 msgid "Window menu"
-msgstr ""
+msgstr "Venstermenu"
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
@@ -325,7 +325,7 @@ msgstr "xkcd-blog"
 
 #: internal/widget/window-menu.go:86 internal/widget/app-menu.ui:32
 msgid "xkcd books"
-msgstr ""
+msgstr "xkcd-boeken"
 
 #~ msgid "Search Index Update"
 #~ msgstr "Zoekindex bijwerken"
