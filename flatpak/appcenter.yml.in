@@ -3,7 +3,7 @@
 app-id: com.github.rkoesters.xkcd-gtk
 
 runtime: io.elementary.Platform
-runtime-version: '7'
+runtime-version: '7.1'
 
 sdk: io.elementary.Sdk
 
