@@ -21,7 +21,7 @@ Exec=com.github.rkoesters.xkcd-gtk
 
 [Desktop Action show-cache]
 Name=Cache manager
-Icon=system-file-manager
+Icon=emblem-downloads
 Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-cache [] {}
 
 [Desktop Action show-shortcuts]
