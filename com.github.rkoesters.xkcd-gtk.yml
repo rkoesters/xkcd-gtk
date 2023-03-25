@@ -63,7 +63,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.3.6
+        tag: v2.3.7
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
@@ -73,7 +73,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/geo.git
-        tag: v0.1.16
+        tag: v0.1.17
         dest: vendor/github.com/blevesearch/geo
 
       - type: git
@@ -98,7 +98,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/segment.git
-        tag: v0.9.0
+        tag: v0.9.1
         dest: vendor/github.com/blevesearch/segment
 
       - type: git
@@ -108,7 +108,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/upsidedown_store_api.git
-        tag: v1.0.1
+        tag: v1.0.2
         dest: vendor/github.com/blevesearch/upsidedown_store_api
 
       - type: git
@@ -138,7 +138,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v15.3.8
+        tag: v15.3.9
         dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
