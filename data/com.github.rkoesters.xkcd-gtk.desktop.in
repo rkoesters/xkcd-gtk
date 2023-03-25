@@ -16,16 +16,20 @@ Actions=new-window;show-cache;show-shortcuts;show-about;
 
 [Desktop Action new-window]
 Name=New window
+Icon=window-new
 Exec=com.github.rkoesters.xkcd-gtk
 
 [Desktop Action show-cache]
 Name=Cache manager
+Icon=system-file-manager
 Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-cache [] {}
 
 [Desktop Action show-shortcuts]
 Name=Keyboard shortcuts
+Icon=preferences-desktop-keyboard-shortcuts
 Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-shortcuts [] {}
 
 [Desktop Action show-about]
 Name=About
+Icon=help-about
 Exec=gdbus call --session --dest=com.github.rkoesters.xkcd-gtk --object-path=/com/github/rkoesters/xkcd_gtk --method=org.freedesktop.Application.ActivateAction show-about [] {}

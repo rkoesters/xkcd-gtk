@@ -21,11 +21,11 @@ msgstr ""
 #: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
-"GTK+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
+"+3"
 
 #: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:46
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
 msgid "About"
 msgstr "Over"
 
@@ -59,7 +59,7 @@ msgstr "Sla verhalen op voor offline weergave"
 
 #: internal/widget/cache-window.go:38 internal/widget/window-menu.go:69
 #: internal/widget/app-menu.ui:12
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
 msgid "Cache manager"
 msgstr "Cachebeheer"
 
@@ -171,7 +171,7 @@ msgstr "Orden verhalen middels bladwijzers"
 
 #: internal/widget/window-menu.go:89 internal/widget/app-menu.ui:42
 #: internal/widget/shortcuts-window.ui:4
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
 msgid "Keyboard shortcuts"
 msgstr "Sneltoetsen"
 

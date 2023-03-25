@@ -22,7 +22,7 @@ msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
 
 #: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:46
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:31
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
 msgid "About"
 msgstr "Informazioni"
 
@@ -56,7 +56,7 @@ msgstr "Fumetti della cache per una successiva visualizzazione offline"
 
 #: internal/widget/cache-window.go:38 internal/widget/window-menu.go:69
 #: internal/widget/app-menu.ui:12
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:23
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
 msgid "Cache manager"
 msgstr ""
 
@@ -168,7 +168,7 @@ msgstr "Tieni traccia dei fumetti con i segnalibri"
 
 #: internal/widget/window-menu.go:89 internal/widget/app-menu.ui:42
 #: internal/widget/shortcuts-window.ui:4
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:27
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
 msgid "Keyboard shortcuts"
 msgstr "Tasti Rapidi"
 
