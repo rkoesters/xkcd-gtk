@@ -28,6 +28,7 @@ var (
 
 	compactMenuForce        = flag.Bool("force-compact-menu", false, "Force the window menu to use compact styling.")
 	compactMenuThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"CrosAdapta",
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
