@@ -266,6 +266,17 @@ func (win *ApplicationWindow) StyleUpdated() {
 	compact := style.IsCompactMenuTheme(themeName)
 	win.windowMenu.SetCompact(compact)
 	win.comicContainer.contextMenu.SetCompact(compact)
+
+	sc, err := win.header.GetStyleContext()
+	if err != nil {
+		log.Print(err)
+	} else {
+		if style.IsFixHiddenComicTitleTheme(themeName) {
+			sc.AddClass(style.ClassFixHiddenComicTitle)
+		} else {
+			sc.RemoveClass(style.ClassFixHiddenComicTitle)
+		}
+	}
 }
 
 // FirstComic goes to the first comic.

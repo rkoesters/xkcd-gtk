@@ -32,6 +32,11 @@ var (
 		"elementary(-x)?",
 		"io\\.elementary\\.stylesheet.*",
 	}, "|"))
+
+	fixHiddenComicTitleForce        = flag.Bool("force-fix-hidden-comic-title", false, "Force applying a styling fix to ensure comic title is visible in main comic window.")
+	fixHiddenComicTitleThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"CrosAdapta",
+	}, "|"))
 )
 
 // IsLargeToolbarTheme returns true if we should use large toolbar buttons with
@@ -56,4 +61,10 @@ func IsLinkedNavButtonsTheme(theme string) bool {
 // margins of popover-style menus.
 func IsCompactMenuTheme(theme string) bool {
 	return *compactMenuForce || compactMenuThemesRegexp.MatchString(theme)
+}
+
+// IsFixHiddenComicTitleTheme returns true if we should apply a fix for
+// invisible or hard to see headerbar window titles in the main comic window.
+func IsFixHiddenComicTitleTheme(theme string) bool {
+	return *fixHiddenComicTitleForce || fixHiddenComicTitleThemesRegexp.MatchString(theme)
 }

@@ -67,7 +67,7 @@ msgstr ""
 msgid "Cached comic metadata"
 msgstr ""
 
-#: internal/widget/application-window.go:290
+#: internal/widget/application-window.go:301
 msgid "Checking for new comic..."
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr ""
 
-#: internal/widget/application-window.go:366
+#: internal/widget/application-window.go:377
 msgid "Connect to the internet to download comic image"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: internal/widget/application-window.go:373
+#: internal/widget/application-window.go:384
 msgid "Loading comic..."
 msgstr ""
 

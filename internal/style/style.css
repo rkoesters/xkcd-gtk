@@ -20,3 +20,7 @@ headerbar > buttonbox > button.slim-button {
     padding-left: 0;
     padding-right: 0;
 }
+
+headerbar.fix-hidden-comic-title label.title {
+    color: #000000;
+}
