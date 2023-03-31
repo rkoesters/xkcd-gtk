@@ -251,8 +251,7 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 // CheckForNewestComicInfo returns the latest xkcd.Comic. May query xkcd API if
 // latest comic in the cache has not been updated since freshnessThreshold. The
-// returned error can be safely ignored. Should not be used on UI event loop
-// (TODO: stop breaking this rule).
+// returned error can be safely ignored. Should not be used on UI event loop.
 func CheckForNewestComicInfo(freshnessThreshold time.Duration) (*xkcd.Comic, error) {
 	if time.Since(<-recvCachedNewestComicUpdatedAt) < freshnessThreshold {
 		return NewestComicInfoFromCache()

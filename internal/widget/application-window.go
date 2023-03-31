@@ -290,13 +290,16 @@ func (win *ApplicationWindow) NewestComic() {
 	win.header.SetTitle(l("Checking for new comic..."))
 	win.ShowLoading()
 
-	const refreshRate = time.Second
-	newestComic, err := cache.CheckForNewestComicInfo(refreshRate)
-	if err != nil {
-		log.Print("error jumping to newest comic: ", err)
-	}
-
-	win.SetComic(newestComic.Num)
+	go func() {
+		const refreshRate = time.Second
+		newestComic, err := cache.CheckForNewestComicInfo(refreshRate)
+		if err != nil {
+			log.Print("error jumping to newest comic: ", err)
+		}
+		glib.IdleAddPriority(glib.PRIORITY_DEFAULT, func() {
+			win.SetComic(newestComic.Num)
+		})
+	}()
 }
 
 // RandomComic sets the current comic to a random comic.
