@@ -39,7 +39,7 @@ func (s Stat) String() string {
 
 func StatMetadata() (Stat, error) {
 	var s Stat
-	latestComic, err := CheckForNewestComicInfo(time.Second)
+	latestComic, err := CheckForNewestComicInfo(time.Minute)
 	if err != nil {
 		return s, err
 	}
@@ -78,7 +78,7 @@ func countCachedMetadata() (int, error) {
 
 func StatImages() (Stat, error) {
 	var s Stat
-	latestComic, err := CheckForNewestComicInfo(time.Second)
+	latestComic, err := CheckForNewestComicInfo(time.Minute)
 	if err != nil {
 		return s, err
 	}
