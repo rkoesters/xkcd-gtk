@@ -25,11 +25,11 @@ const (
 	PaddingUnlinkedButtonBox = 4
 )
 
-//go:embed style.css
-var styleCSS string
+//go:embed light.css
+var lightCSS string
 
-//go:embed style-dark.css
-var styleDarkCSS string
+//go:embed dark.css
+var darkCSS string
 
 var (
 	cssDataMutex      sync.RWMutex
@@ -79,10 +79,10 @@ func UpdateCSS(darkMode bool) error {
 func loadCSS(p *gtk.CssProvider, darkMode bool) error {
 	loadedCSSDarkMode = darkMode
 	if darkMode {
-		log.Debug("loading style-dark.css")
-		return p.LoadFromData(styleDarkCSS)
+		log.Debug("loading dark.css")
+		return p.LoadFromData(darkCSS)
 	} else {
-		log.Debug("loading style.css")
-		return p.LoadFromData(styleCSS)
+		log.Debug("loading light.css")
+		return p.LoadFromData(lightCSS)
 	}
 }
