@@ -41,6 +41,7 @@ var (
 	recvCachedNewestComic          <-chan *xkcd.Comic
 	sendCachedNewestComic          chan<- *xkcd.Comic
 	recvCachedNewestComicUpdatedAt <-chan time.Time
+	sendCachedNewestComicUpdatedAt chan<- time.Time
 
 	// addToSearchIndex is a callback to insert the given comic into the search
 	// index.
@@ -114,10 +115,12 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	cachedNewestComicOut := make(chan *xkcd.Comic)
 	cachedNewestComicIn := make(chan *xkcd.Comic)
 	cachedNewestComicUpdatedAtOut := make(chan time.Time)
+	cachedNewestComicUpdatedAtIn := make(chan time.Time)
 
 	recvCachedNewestComic = cachedNewestComicOut
 	sendCachedNewestComic = cachedNewestComicIn
 	recvCachedNewestComicUpdatedAt = cachedNewestComicUpdatedAtOut
+	sendCachedNewestComicUpdatedAt = cachedNewestComicUpdatedAtIn
 
 	// Start cachedNewestComic manager.
 	go func() {
@@ -132,6 +135,8 @@ func Init(index func(comic *xkcd.Comic) error) error {
 				cachedNewestComicUpdatedAt = time.Now()
 				cachedNewestComic = newest
 				log.Debugf("newest cached comic set to %v at %v", newest.Num, cachedNewestComicUpdatedAt)
+			case cachedNewestComicUpdatedAt = <-cachedNewestComicUpdatedAtIn:
+				log.Debugf("newest cached comic timestamp set to %v", cachedNewestComicUpdatedAt)
 			case cachedNewestComicOut <- cachedNewestComic:
 				// Sending the comic was all we wanted to do.
 			case cachedNewestComicUpdatedAtOut <- cachedNewestComicUpdatedAt:
@@ -252,6 +257,8 @@ func CheckForNewestComicInfo(freshnessThreshold time.Duration) (*xkcd.Comic, err
 	if time.Since(<-recvCachedNewestComicUpdatedAt) < freshnessThreshold {
 		return NewestComicInfoFromCache()
 	}
+
+	sendCachedNewestComicUpdatedAt <- time.Now()
 
 	c, err := NewestComicInfoFromInternet()
 	if err != nil {

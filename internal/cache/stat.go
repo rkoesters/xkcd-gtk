@@ -6,6 +6,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	bolt "go.etcd.io/bbolt"
 )
@@ -38,7 +39,7 @@ func (s Stat) String() string {
 
 func StatMetadata() (Stat, error) {
 	var s Stat
-	latestComic, err := NewestComicInfoFromCache()
+	latestComic, err := CheckForNewestComicInfo(time.Second)
 	if err != nil {
 		return s, err
 	}
@@ -77,7 +78,7 @@ func countCachedMetadata() (int, error) {
 
 func StatImages() (Stat, error) {
 	var s Stat
-	latestComic, err := NewestComicInfoFromCache()
+	latestComic, err := CheckForNewestComicInfo(time.Second)
 	if err != nil {
 		return s, err
 	}
