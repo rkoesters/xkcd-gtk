@@ -166,9 +166,10 @@ func Close() error {
 }
 
 // DownloadAllComicMetadata asynchronously fills the comic metadata cache and
-// search index via the internet. Status can be checked with Stat().
+// search index via the internet. Status can be checked with Stat(). Should not
+// be called directly in the UI event loop.
 func DownloadAllComicMetadata(cacheWindow ViewRefreshWitherGetter) {
-	newest, err := NewestComicInfoFromInternet()
+	newest, err := newestComicInfoFromInternet()
 	if err != nil {
 		log.Print(err)
 		return
@@ -251,7 +252,8 @@ func ComicInfo(n int) (*xkcd.Comic, error) {
 
 // CheckForNewestComicInfo returns the latest xkcd.Comic. May query xkcd API if
 // latest comic in the cache has not been updated since freshnessThreshold. The
-// returned error can be safely ignored. Should not be used on UI event loop.
+// returned error can be safely ignored. Should not be called directly in the UI
+// event loop.
 func CheckForNewestComicInfo(freshnessThreshold time.Duration) (*xkcd.Comic, error) {
 	if time.Since(<-recvCachedNewestComicUpdatedAt) < freshnessThreshold {
 		return NewestComicInfoFromCache()
@@ -259,7 +261,7 @@ func CheckForNewestComicInfo(freshnessThreshold time.Duration) (*xkcd.Comic, err
 
 	sendCachedNewestComicUpdatedAt <- time.Now()
 
-	c, err := NewestComicInfoFromInternet()
+	c, err := newestComicInfoFromInternet()
 	if err != nil {
 		return NewestComicInfoFromCache()
 	}
@@ -311,16 +313,16 @@ func NewestComicInfoFromCache() (*xkcd.Comic, error) {
 	return newest, nil
 }
 
-// NewestComicInfoFromInternet fetches the latest comic info from the internet.
-// May return nil, the returned error should be checked. Should not be used on
-// UI event loop.
-func NewestComicInfoFromInternet() (*xkcd.Comic, error) {
+// newestComicInfoFromInternet fetches the latest comic info from the internet.
+// May return nil, the returned error should be checked. Should not be called
+// directly in the UI event loop.
+func newestComicInfoFromInternet() (*xkcd.Comic, error) {
 	if *offlineMode {
 		return nil, ErrOffline
 	}
 
-	log.Debug("NewestComicInfoFromInternet start")
-	defer log.Debug("NewestComicInfoFromInternet end")
+	log.Debug("newestComicInfoFromInternet start")
+	defer log.Debug("newestComicInfoFromInternet end")
 
 	c, err := xkcd.GetCurrent()
 	if err != nil {
