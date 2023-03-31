@@ -94,7 +94,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Fumetto non trovato"
 
-#: internal/widget/application-window.go:367
+#: internal/widget/application-window.go:366
 msgid "Connect to the internet to download comic image"
 msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
@@ -176,7 +176,7 @@ msgstr "Tasti Rapidi"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:374
+#: internal/widget/application-window.go:373
 msgid "Loading comic..."
 msgstr "Caricamento fumetto..."
 

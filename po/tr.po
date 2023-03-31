@@ -97,7 +97,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
-#: internal/widget/application-window.go:367
+#: internal/widget/application-window.go:366
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
@@ -179,7 +179,7 @@ msgstr "Klavye kısayolları"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: internal/widget/application-window.go:374
+#: internal/widget/application-window.go:373
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 

@@ -291,8 +291,7 @@ func (win *ApplicationWindow) NewestComic() {
 	win.ShowLoading()
 
 	go func() {
-		const refreshRate = time.Second
-		newestComic, err := cache.CheckForNewestComicInfo(refreshRate)
+		newestComic, err := cache.CheckForNewestComicInfo(time.Second)
 		if err != nil {
 			log.Print("error jumping to newest comic: ", err)
 		}
