@@ -26,17 +26,18 @@ modules:
       - 'cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app'
 
     sources:
-      - type: file
-        path: modules.txt
-        dest: vendor
-        dest-filename: modules.txt
-
       - type: dir
         path: '..'
         skip:
           - com.github.rkoesters.xkcd-gtk
           - com.github.rkoesters.xkcd-gtk-dev
           - debian/
+          - flatpak/
           - flatpak-build/
           - vendor/
         dest: src
+
+      - type: file
+        path: modules.txt
+        dest: vendor
+        dest-filename: modules.txt
