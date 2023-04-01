@@ -40,6 +40,8 @@ type Window struct {
 	PropertiesPositionY int
 }
 
+var _ io.WriterTo = &Window{}
+
 func (w *Window) loadDefaults() {
 	newestComic, _ := cache.NewestComicInfoFromCache()
 	w.ComicNumber = newestComic.Num

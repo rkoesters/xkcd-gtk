@@ -12,6 +12,8 @@ type Application struct {
 	DarkMode bool
 }
 
+var _ io.WriterTo = &Application{}
+
 func (a *Application) loadDefaults() {
 	a.DarkMode = false
 }
