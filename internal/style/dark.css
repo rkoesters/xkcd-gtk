@@ -12,7 +12,10 @@ headerbar > buttonbox > button.slim-button {
     padding-right: 0;
 }
 
-headerbar.fix-hidden-comic-title label.title,
-headerbar.fix-hidden-comic-title label.subtitle {
+headerbar.fix-hidden-comic-title label.title {
     color: #ffffff;
+}
+
+headerbar.fix-hidden-comic-title label.subtitle {
+    color: rgba(255, 255, 255, 0.95);
 }
