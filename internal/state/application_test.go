@@ -14,17 +14,17 @@ const (
 `
 )
 
-func TestRead(t *testing.T) {
+func TestReadFrom(t *testing.T) {
 	var as state.Application
 
 	r := strings.NewReader(state1)
-	as.Read(r)
+	as.ReadFrom(r)
 	if !as.DarkMode {
 		t.Fatal("dark mode is disabled, config: ", state1)
 	}
 
 	r = strings.NewReader(state2)
-	as.Read(r)
+	as.ReadFrom(r)
 	if as.DarkMode {
 		t.Fatal("dark mode is enabled, config: ", state1)
 	}
@@ -49,11 +49,11 @@ func TestWrite(t *testing.T) {
 	}
 }
 
-func TestBadRead(t *testing.T) {
+func TestBadReadFrom(t *testing.T) {
 	var as state.Application
 
 	r := strings.NewReader("bad format")
-	as.Read(r)
+	as.ReadFrom(r)
 	if as.DarkMode {
 		t.Fatal("dark mode enabled after bad read")
 	}

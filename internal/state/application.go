@@ -12,21 +12,25 @@ type Application struct {
 	DarkMode bool
 }
 
-var _ io.WriterTo = &Application{}
+var (
+	_ io.WriterTo   = &Application{}
+	_ io.ReaderFrom = &Application{}
+)
 
 func (a *Application) loadDefaults() {
 	a.DarkMode = false
 }
 
-// Read takes the given io.Reader and tries to parse json encoded state from it.
-func (a *Application) Read(r io.Reader) error {
-	dec := json.NewDecoder(r)
+// ReadFrom takes the given io.Reader and tries to parse json encoded state from
+// it.
+func (a *Application) ReadFrom(r io.Reader) (int64, error) {
+	bc := &byteCounter{Reader: r}
+	dec := json.NewDecoder(bc)
 	err := dec.Decode(a)
 	if err != nil {
 		a.loadDefaults()
-		return err
 	}
-	return nil
+	return bc.count, err
 }
 
 // ReadFile opens the given file and calls Read on the contents.
@@ -37,7 +41,8 @@ func (a *Application) ReadFile(filename string) error {
 		return err
 	}
 	defer f.Close()
-	return a.Read(f)
+	_, err = a.ReadFrom(f)
+	return err
 }
 
 // Write takes the given io.Writer and writes the Settings struct to it in json.

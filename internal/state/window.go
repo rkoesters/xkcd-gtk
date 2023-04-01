@@ -40,7 +40,10 @@ type Window struct {
 	PropertiesPositionY int
 }
 
-var _ io.WriterTo = &Window{}
+var (
+	_ io.WriterTo   = &Window{}
+	_ io.ReaderFrom = &Window{}
+)
 
 func (w *Window) loadDefaults() {
 	newestComic, _ := cache.NewestComicInfoFromCache()
@@ -66,9 +69,11 @@ func (w *Window) HasPropertiesPosition() bool {
 	return w.PropertiesPositionX != 0 && w.PropertiesPositionY != 0
 }
 
-// Read takes the given io.Reader and tries to parse json encoded state from it.
-func (w *Window) Read(r io.Reader) {
-	dec := json.NewDecoder(r)
+// ReadFrom takes the given io.Reader and tries to parse json encoded state from
+// it.
+func (w *Window) ReadFrom(r io.Reader) (int64, error) {
+	bc := &byteCounter{Reader: r}
+	dec := json.NewDecoder(bc)
 	err := dec.Decode(w)
 	if err != nil {
 		w.loadDefaults()
@@ -76,6 +81,7 @@ func (w *Window) Read(r io.Reader) {
 	if w.ImageScale < ImageScaleMin || w.ImageScale > ImageScaleMax {
 		w.ImageScale = 1
 	}
+	return bc.count, err
 }
 
 // ReadFile opens the given file and calls Read on the contents.
@@ -86,7 +92,7 @@ func (w *Window) ReadFile(filename string) {
 		return
 	}
 	defer f.Close()
-	w.Read(f)
+	w.ReadFrom(f)
 }
 
 // WriteTo takes the given io.Writer and writes the Window struct to it in json.
