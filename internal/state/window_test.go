@@ -52,7 +52,6 @@ func TestWriteTo(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			var buf bytes.Buffer
 			n, err := tc.ws.WriteTo(&buf)
-			t.Log(buf.String())
 			if err != nil {
 				t.Errorf("WriteTo returned error: %q", err)
 			}
