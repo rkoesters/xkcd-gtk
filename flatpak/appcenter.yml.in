@@ -30,7 +30,6 @@ modules:
           - com.github.rkoesters.xkcd-gtk
           - com.github.rkoesters.xkcd-gtk-dev
           - debian/
-          - flatpak/
           - flatpak-build/
           - vendor/
         dest: src
