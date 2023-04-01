@@ -33,6 +33,7 @@ func NewWindowMenu(accels *gtk.AccelGroup, prefersAppMenu bool, darkModeGetter f
 	if err != nil {
 		return nil, err
 	}
+	wm.popover.SetSizeRequest(200, -1)
 	wm.SetPopover(wm.popover.Popover)
 	wm.SetUsePopover(true)
 
