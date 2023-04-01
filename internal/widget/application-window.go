@@ -276,6 +276,12 @@ func (win *ApplicationWindow) StyleUpdated() {
 		} else {
 			sc.RemoveClass(style.ClassFixHiddenComicTitle)
 		}
+
+		if style.IsFixJarringHeaderbarButtonsTheme(themeName) {
+			sc.AddClass(style.ClassFixJarringHeaderbarButtons)
+		} else {
+			sc.RemoveClass(style.ClassFixJarringHeaderbarButtons)
+		}
 	}
 }
 

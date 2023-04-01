@@ -37,6 +37,11 @@ var (
 	fixHiddenComicTitleThemesRegexp = regexp.MustCompile(strings.Join([]string{
 		"CrosAdapta",
 	}, "|"))
+
+	fixJarringHeaderbarButtonsForce        = flag.Bool("force-fix-jarring-headerbar-buttons", false, "Force applying a styling fix buttons in the main comic window titlebar.")
+	fixJarringHeaderbarButtonsThemesRegexp = regexp.MustCompile(strings.Join([]string{
+		"CrosAdapta",
+	}, "|"))
 )
 
 // IsLargeToolbarTheme returns true if we should use large toolbar buttons with
@@ -67,4 +72,10 @@ func IsCompactMenuTheme(theme string) bool {
 // invisible or hard to see headerbar window titles in the main comic window.
 func IsFixHiddenComicTitleTheme(theme string) bool {
 	return *fixHiddenComicTitleForce || fixHiddenComicTitleThemesRegexp.MatchString(theme)
+}
+
+// IsFixJarringHeaderbarButtonsTheme returns true if we should apply a fix for
+// headerbar buttons that do not match the headerbar.
+func IsFixJarringHeaderbarButtonsTheme(theme string) bool {
+	return *fixJarringHeaderbarButtonsForce || fixJarringHeaderbarButtonsThemesRegexp.MatchString(theme)
 }

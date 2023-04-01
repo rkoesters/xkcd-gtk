@@ -71,7 +71,7 @@ msgstr "Afbeeldingen in cache"
 msgid "Cached comic metadata"
 msgstr "Metagegevens in cache"
 
-#: internal/widget/application-window.go:301
+#: internal/widget/application-window.go:307
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal…"
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:377
+#: internal/widget/application-window.go:383
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -179,7 +179,7 @@ msgstr "Sneltoetsen"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:384
+#: internal/widget/application-window.go:390
 msgid "Loading comic..."
 msgstr "Bezig met laden…"
 

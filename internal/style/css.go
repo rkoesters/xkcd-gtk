@@ -10,11 +10,13 @@ import (
 )
 
 const (
-	ClassComicContainer      = "comic-container"
-	ClassLinked              = "linked"
-	ClassNoMinWidth          = "no-min-width"
-	ClassSlimButton          = "slim-button"
-	ClassFixHiddenComicTitle = "fix-hidden-comic-title"
+	ClassComicContainer = "comic-container"
+	ClassLinked         = "linked"
+	ClassNoMinWidth     = "no-min-width"
+	ClassSlimButton     = "slim-button"
+
+	ClassFixHiddenComicTitle        = "fix-hidden-comic-title"
+	ClassFixJarringHeaderbarButtons = "fix-jarring-headerbar-buttons"
 )
 
 //go:embed light.css

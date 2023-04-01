@@ -71,7 +71,7 @@ msgstr ""
 msgid "Cached comic metadata"
 msgstr ""
 
-#: internal/widget/application-window.go:301
+#: internal/widget/application-window.go:307
 msgid "Checking for new comic..."
 msgstr "Yeni karikatür denetleniyor..."
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Karikatür bulunamadı"
 
-#: internal/widget/application-window.go:377
+#: internal/widget/application-window.go:383
 msgid "Connect to the internet to download comic image"
 msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
@@ -179,7 +179,7 @@ msgstr "Klavye kısayolları"
 msgid "Link"
 msgstr "Bağlantı"
 
-#: internal/widget/application-window.go:384
+#: internal/widget/application-window.go:390
 msgid "Loading comic..."
 msgstr "Karikatür yükleniyor..."
 
