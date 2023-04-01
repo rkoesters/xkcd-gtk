@@ -4,7 +4,7 @@
 
 BUILDFLAGS = -v
 DEVFLAGS   = -v -race
-TESTFLAGS  = -v -race -cover
+TESTFLAGS  = -race -cover
 VETFLAGS   = -v
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 FPBFLAGS   = --user --force-clean
