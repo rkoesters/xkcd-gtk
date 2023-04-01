@@ -13,7 +13,7 @@
     min-width: 0;
 }
 
-headerbar > buttonbox > button.slim-button {
+button.slim-button {
     padding-left: 0;
     padding-right: 0;
 }
