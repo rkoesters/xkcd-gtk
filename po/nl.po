@@ -21,8 +21,8 @@ msgstr ""
 #: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
-"+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
+"GTK+3"
 
 #: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:46
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
@@ -71,7 +71,7 @@ msgstr "Afbeeldingen in cache"
 msgid "Cached comic metadata"
 msgstr "Metagegevens in cache"
 
-#: internal/widget/application-window.go:307
+#: internal/widget/application-window.go:308
 msgid "Checking for new comic..."
 msgstr "Bezig met zoeken naar nieuw verhaal…"
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "Verhaal niet gevonden"
 
-#: internal/widget/application-window.go:383
+#: internal/widget/application-window.go:384
 msgid "Connect to the internet to download comic image"
 msgstr "Maak verbinding met internet om het verhaal op te halen"
 
@@ -179,7 +179,7 @@ msgstr "Sneltoetsen"
 msgid "Link"
 msgstr "Link"
 
-#: internal/widget/application-window.go:390
+#: internal/widget/application-window.go:391
 msgid "Loading comic..."
 msgstr "Bezig met laden…"
 

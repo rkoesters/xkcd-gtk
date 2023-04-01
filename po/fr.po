@@ -68,7 +68,7 @@ msgstr ""
 msgid "Cached comic metadata"
 msgstr ""
 
-#: internal/widget/application-window.go:307
+#: internal/widget/application-window.go:308
 msgid "Checking for new comic..."
 msgstr "Recherche d'une nouvelle bande dessinée…"
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Comic not found"
 msgstr "BD introuvable"
 
-#: internal/widget/application-window.go:383
+#: internal/widget/application-window.go:384
 msgid "Connect to the internet to download comic image"
 msgstr "Connectez-vous à Internet pour télécharger la bande dessinée"
 
@@ -177,7 +177,7 @@ msgstr "Raccourcis clavier"
 msgid "Link"
 msgstr "Lien"
 
-#: internal/widget/application-window.go:390
+#: internal/widget/application-window.go:391
 msgid "Loading comic..."
 msgstr "Chargement de la BD…"
 
