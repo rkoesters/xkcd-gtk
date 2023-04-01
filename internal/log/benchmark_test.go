@@ -21,7 +21,7 @@ func init() {
 func BenchmarkLogDebugOffMap(b *testing.B) {
 	options := make(map[string]string)
 
-	logDebug := func(v ...interface{}) {
+	logDebug := func(v ...any) {
 		if options["debug"] == "true" {
 			logger.Print(v...)
 		}
@@ -39,7 +39,7 @@ func BenchmarkLogDebugOffBool(b *testing.B) {
 
 	debug := options["debug"] == "true"
 
-	logDebug := func(v ...interface{}) {
+	logDebug := func(v ...any) {
 		if debug {
 			logger.Print(v...)
 		}
@@ -56,7 +56,7 @@ func BenchmarkLogDebugOffTag(b *testing.B) {
 	options := make(map[string]string)
 	_ = options["debug"] == "true"
 
-	logDebug := func(v ...interface{}) {}
+	logDebug := func(v ...any) {}
 
 	b.ResetTimer()
 
@@ -69,7 +69,7 @@ func BenchmarkLogDebugOnMap(b *testing.B) {
 	options := make(map[string]string)
 	options["debug"] = "true"
 
-	logDebug := func(v ...interface{}) {
+	logDebug := func(v ...any) {
 		if options["debug"] == "true" {
 			logger.Print(v...)
 		}
@@ -88,7 +88,7 @@ func BenchmarkLogDebugOnBool(b *testing.B) {
 
 	debug := options["debug"] == "true"
 
-	logDebug := func(v ...interface{}) {
+	logDebug := func(v ...any) {
 		if debug {
 			logger.Print(v...)
 		}

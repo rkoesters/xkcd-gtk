@@ -63,7 +63,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	// Put everything where the user left it.
 	win.state.LoadState()
 
-	registerAction := func(name string, fn interface{}) {
+	registerAction := func(name string, fn any) {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", fn)
 

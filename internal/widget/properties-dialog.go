@@ -206,7 +206,7 @@ func formatDate(year, month, day string) string {
 }
 
 func emptyBox(box *gtk.Box) {
-	box.GetChildren().Foreach(func(child interface{}) {
+	box.GetChildren().Foreach(func(child any) {
 		w, ok := child.(*gtk.Widget)
 		if !ok {
 			log.Print("error converting child to gtk.Widget")

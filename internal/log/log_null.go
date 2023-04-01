@@ -4,12 +4,12 @@ package log
 
 // Debug is equivalent to Print if this is a debug build, otherwise it is a
 // no-op.
-func Debug(v ...interface{}) {}
+func Debug(v ...any) {}
 
 // Debugf is equivalent to Printf if this is a debug build, otherwise it is a
 // no-op.
-func Debugf(format string, v ...interface{}) {}
+func Debugf(format string, v ...any) {}
 
 // Debugln is equivalent to Println if this is a debug build, otherwise it is a
 // no-op.
-func Debugln(v ...interface{}) {}
+func Debugln(v ...any) {}

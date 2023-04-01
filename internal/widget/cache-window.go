@@ -96,7 +96,7 @@ func NewCacheWindow(app Application) (*CacheWindow, error) {
 	cw.downloadAllImagesButton.SetActionName("win.download-all-images")
 	bb.PackStart(cw.downloadAllImagesButton, false, true, 0)
 
-	registerAction := func(name string, fn interface{}) {
+	registerAction := func(name string, fn any) {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", fn)
 

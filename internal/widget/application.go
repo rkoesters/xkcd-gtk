@@ -18,7 +18,7 @@ type Application interface {
 	BookmarksList() *bookmarks.List
 	CacheWindowVR() cache.ViewRefresher
 	CacheWindowVRW() cache.ViewRefreshWither
-	ConnectDarkModeChanged(f interface{}) glib.SignalHandle
+	ConnectDarkModeChanged(f any) glib.SignalHandle
 	DarkMode() bool
 	GtkApplication() *gtk.Application
 	GtkTheme() (string, error)

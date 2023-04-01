@@ -56,7 +56,7 @@ func New(appID string, flags glib.ApplicationFlags) (*Application, error) {
 		actions: make(map[string]*glib.SimpleAction),
 	}
 
-	registerAction := func(name string, fn interface{}) {
+	registerAction := func(name string, fn any) {
 		action := glib.SimpleActionNew(name, nil)
 		action.Connect("activate", fn)
 
@@ -254,7 +254,7 @@ func (app *Application) DarkMode() bool {
 
 // ConnectDarkModeChanged connects the given signal handler to the dark mode GTK
 // signal.
-func (app *Application) ConnectDarkModeChanged(f interface{}) glib.SignalHandle {
+func (app *Application) ConnectDarkModeChanged(f any) glib.SignalHandle {
 	return app.gtkSettings.Connect("notify::gtk-application-prefer-dark-theme", f)
 }
 
@@ -263,7 +263,7 @@ func (app *Application) ConnectDarkModeChanged(f interface{}) glib.SignalHandle 
 // opportunity to save state before the application exits.
 func (app *Application) PleaseQuit() {
 	windows := app.GetWindows()
-	windows.Foreach(func(iw interface{}) {
+	windows.Foreach(func(iw any) {
 		win, ok := iw.(*gtk.Window)
 		if !ok {
 			log.Print("error converting window to gtk.Window")

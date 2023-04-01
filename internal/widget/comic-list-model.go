@@ -28,6 +28,6 @@ func (clm *ComicListModel) AppendComic(comicNum int, comicTitle string) error {
 	return clm.Set(
 		clm.Append(),
 		[]int{comicListColumnNumber, comicListColumnTitle},
-		append([]interface{}{}, comicNum, comicTitle),
+		append([]any{}, comicNum, comicTitle),
 	)
 }
