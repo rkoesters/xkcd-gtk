@@ -16,7 +16,7 @@ import (
 	"github.com/rkoesters/xkcd-gtk/internal/log"
 	"github.com/rkoesters/xkcd-gtk/internal/paths"
 	"github.com/rkoesters/xkcd-gtk/internal/search"
-	"github.com/rkoesters/xkcd-gtk/internal/settings"
+	"github.com/rkoesters/xkcd-gtk/internal/state"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 	"github.com/rkoesters/xkcd-gtk/internal/widget"
 )
@@ -40,7 +40,7 @@ type Application struct {
 	cacheWindow      *widget.CacheWindow
 	cacheWindowMutex sync.RWMutex
 
-	settings  settings.Settings
+	settings  state.Application
 	bookmarks bookmarks.List
 }
 

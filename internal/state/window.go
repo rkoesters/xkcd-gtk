@@ -1,4 +1,4 @@
-package settings
+package state
 
 import (
 	"encoding/json"
@@ -20,10 +20,9 @@ const (
 	ImageScaleMax = 5
 )
 
-// WindowState is a struct that holds the information about the state of a
-// Window. This struct is meant to be stored so we can restore the state of a
-// Window.
-type WindowState struct {
+// Window is a struct that holds the information about the state of a Window.
+// This struct is meant to be stored so we can restore the state of a Window.
+type Window struct {
 	ComicNumber int
 
 	Maximized bool
@@ -41,74 +40,76 @@ type WindowState struct {
 	PropertiesPositionY int
 }
 
-func (ws *WindowState) loadDefaults() {
+func (w *Window) loadDefaults() {
 	newestComic, _ := cache.NewestComicInfoFromCache()
-	ws.ComicNumber = newestComic.Num
-	ws.Maximized = false
-	ws.Height = 500
-	ws.Width = 700
-	ws.PositionX = 0
-	ws.PositionY = 0
-	ws.ImageScale = 1
-	ws.PropertiesVisible = false
-	ws.PropertiesHeight = 350
-	ws.PropertiesWidth = 300
-	ws.PropertiesPositionX = 0
-	ws.PropertiesPositionY = 0
+	w.ComicNumber = newestComic.Num
+	w.Maximized = false
+	w.Height = 500
+	w.Width = 700
+	w.PositionX = 0
+	w.PositionY = 0
+	w.ImageScale = 1
+	w.PropertiesVisible = false
+	w.PropertiesHeight = 350
+	w.PropertiesWidth = 300
+	w.PropertiesPositionX = 0
+	w.PropertiesPositionY = 0
 }
 
-func (ws *WindowState) HasPosition() bool {
-	return ws.PositionX != 0 && ws.PositionY != 0
+func (w *Window) HasPosition() bool {
+	return w.PositionX != 0 && w.PositionY != 0
 }
 
-func (ws *WindowState) HasPropertiesPosition() bool {
-	return ws.PropertiesPositionX != 0 && ws.PropertiesPositionY != 0
+func (w *Window) HasPropertiesPosition() bool {
+	return w.PropertiesPositionX != 0 && w.PropertiesPositionY != 0
 }
 
 // Read takes the given io.Reader and tries to parse json encoded state from it.
-func (ws *WindowState) Read(r io.Reader) {
+func (w *Window) Read(r io.Reader) {
 	dec := json.NewDecoder(r)
-	err := dec.Decode(ws)
+	err := dec.Decode(w)
 	if err != nil {
-		ws.loadDefaults()
+		w.loadDefaults()
 	}
-	if ws.ImageScale < ImageScaleMin || ws.ImageScale > ImageScaleMax {
-		ws.ImageScale = 1
+	if w.ImageScale < ImageScaleMin || w.ImageScale > ImageScaleMax {
+		w.ImageScale = 1
 	}
 }
 
 // ReadFile opens the given file and calls Read on the contents.
-func (ws *WindowState) ReadFile(filename string) {
+func (w *Window) ReadFile(filename string) {
 	f, err := os.Open(filename)
 	if err != nil {
-		ws.loadDefaults()
+		w.loadDefaults()
 		return
 	}
 	defer f.Close()
-	ws.Read(f)
+	w.Read(f)
 }
 
-// Write takes the given io.Writer and writes the WindowState struct to it in
-// json.
-func (ws *WindowState) Write(w io.Writer) error {
-	enc := json.NewEncoder(w)
-	return enc.Encode(ws)
+// WriteTo takes the given io.Writer and writes the Window struct to it in json.
+func (w *Window) WriteTo(o io.Writer) (int64, error) {
+	bc := &byteCounter{Writer: o}
+	enc := json.NewEncoder(bc)
+	err := enc.Encode(w)
+	return bc.count, err
 }
 
 // WriteFile creates or truncates the given file and calls Write on it.
-func (ws *WindowState) WriteFile(filename string) error {
+func (w *Window) WriteFile(filename string) error {
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
-	return ws.Write(f)
+	_, err = w.WriteTo(f)
+	return err
 }
 
-func (ws *WindowState) LoadState() {
+func (w *Window) LoadState() {
 	checkForMisplacedWindowState()
 
-	ws.ReadFile(windowStatePath())
+	w.ReadFile(windowStatePath())
 }
 
 type StateHaver interface {
@@ -120,18 +121,18 @@ type StateHaver interface {
 
 // SaveState writes win.state to disk so it can be loaded next time we open a
 // window.
-func (ws *WindowState) SaveState(window, dialog StateHaver) {
-	ws.Maximized = window.IsMaximized()
-	ws.Width, ws.Height = window.GetSize()
-	ws.PositionX, ws.PositionY = window.GetPosition()
+func (w *Window) SaveState(window, dialog StateHaver) {
+	w.Maximized = window.IsMaximized()
+	w.Width, w.Height = window.GetSize()
+	w.PositionX, w.PositionY = window.GetPosition()
 
-	ws.PropertiesVisible = dialog.IsVisible()
-	if ws.PropertiesVisible {
-		ws.PropertiesWidth, ws.PropertiesHeight = dialog.GetSize()
-		ws.PropertiesPositionX, ws.PropertiesPositionY = dialog.GetPosition()
+	w.PropertiesVisible = dialog.IsVisible()
+	if w.PropertiesVisible {
+		w.PropertiesWidth, w.PropertiesHeight = dialog.GetSize()
+		w.PropertiesPositionX, w.PropertiesPositionY = dialog.GetPosition()
 	}
 
-	err := ws.WriteFile(windowStatePath())
+	err := w.WriteFile(windowStatePath())
 	if err != nil {
 		log.Printf("error saving window state: %v", err)
 	}

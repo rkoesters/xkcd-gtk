@@ -15,7 +15,7 @@ import (
 	"github.com/rkoesters/xkcd"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/settings"
+	"github.com/rkoesters/xkcd-gtk/internal/state"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -24,7 +24,7 @@ type ApplicationWindow struct {
 	*gtk.ApplicationWindow
 
 	app   Application
-	state settings.WindowState
+	state state.Window
 
 	comic      *xkcd.Comic
 	comicMutex sync.RWMutex
@@ -438,8 +438,8 @@ func (win *ApplicationWindow) updateZoomButtonStatus() {
 	if err != nil {
 		log.Printf("error calling ZoomBox.SetCurrentZoom(%v): %v", win.state.ImageScale, err)
 	}
-	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < settings.ImageScaleMax)
-	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > settings.ImageScaleMin)
+	win.actions["zoom-in"].SetEnabled(win.state.ImageScale < state.ImageScaleMax)
+	win.actions["zoom-out"].SetEnabled(win.state.ImageScale > state.ImageScaleMin)
 	win.actions["zoom-reset"].SetEnabled(win.state.ImageScale != 1)
 }
 

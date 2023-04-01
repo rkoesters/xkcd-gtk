@@ -9,7 +9,7 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/settings"
+	"github.com/rkoesters/xkcd-gtk/internal/state"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -184,10 +184,10 @@ func scaleImage(unscaled *gdk.Pixbuf, scale float64) (*gdk.Pixbuf, error) {
 
 func safeScale(scale float64) float64 {
 	switch {
-	case scale < settings.ImageScaleMin:
-		return settings.ImageScaleMin
-	case scale > settings.ImageScaleMax:
-		return settings.ImageScaleMax
+	case scale < state.ImageScaleMin:
+		return state.ImageScaleMin
+	case scale > state.ImageScaleMax:
+		return state.ImageScaleMax
 	default:
 		return scale
 	}
