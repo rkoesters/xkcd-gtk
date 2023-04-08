@@ -18,6 +18,12 @@ jobs:
           - 1.19.x  # debian bookworm
           - 1.20.x
           - 1.x     # latest
+        include:
+          - staticcheck: latest
+          - go: 1.18.x
+            staticcheck: v0.3
+          - go: 1.19.x
+            staticcheck: v0.3
 
     name: go${{ matrix.go }}
     runs-on: ubuntu-latest
@@ -34,9 +40,11 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          sudo apt-get update && sudo apt-get install -y -q appstream-util \
-            gettext libgtk-3-dev libxml2-utils shellcheck yamllint
-          go install honnef.co/go/tools/cmd/staticcheck@v0.3
+          sudo apt-get update
+          sudo apt-get install -y -q appstream-util gettext libgtk-3-dev \
+            libxml2-utils shellcheck yamllint
+          go install \
+            honnef.co/go/tools/cmd/staticcheck@${{ matrix.staticcheck }}
 
       - run: go mod graph
       - run: make
