@@ -126,6 +126,7 @@ fix: $(POT) $(PO) $(APP).yml
 
 check: $(APPDATA) $(FLATPAK_YML)
 	go vet -tags "$(TAGS)" $(VETFLAGS) $(MODULE_PACKAGES)
+	staticcheck -tags "$(TAGS)" $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA) $(ICON) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
