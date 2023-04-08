@@ -27,9 +27,9 @@ type ViewRefreshWitherGetter func() ViewRefreshWither
 
 type nullRefresher struct{}
 
-func (_ *nullRefresher) RefreshMetadata()           {}
-func (_ *nullRefresher) RefreshMetadataWith(_ Stat) {}
-func (_ *nullRefresher) RefreshImages()             {}
-func (_ *nullRefresher) RefreshImagesWith(_ Stat)   {}
+func (*nullRefresher) RefreshMetadata()         {}
+func (*nullRefresher) RefreshMetadataWith(Stat) {}
+func (*nullRefresher) RefreshImages()           {}
+func (*nullRefresher) RefreshImagesWith(Stat)   {}
 
 var nilRefresher *nullRefresher = nil
