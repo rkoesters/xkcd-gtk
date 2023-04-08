@@ -121,3 +121,4 @@ jobs:
           repository-url: ${{ matrix.repo-url }}
           arch: ${{ matrix.arch }}
           build-bundle: false
+          cache-key: ${{ matrix.repo }}-${{ hashFiles('flatpak/*.yml') }}
