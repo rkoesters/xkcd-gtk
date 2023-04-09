@@ -128,5 +128,5 @@ jobs:
           repository-name: ${{ matrix.repo }}
           repository-url: ${{ matrix.repo-url }}
           arch: ${{ matrix.arch }}
-          bundle: xkcd-gtk-${{ matrix.repo }}
+          bundle: xkcd-gtk-${{ matrix.repo }}.flatpak
           verbose: true
