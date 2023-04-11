@@ -11,6 +11,14 @@ version_from_appdata () {
   cut -d '"' -f 2
 }
 
+version_from_ci () {
+  if [ "${CI:-false}" == "false" ]; then
+    return 1
+  fi
+  printf 'ci-%s-%s\n' "${GITHUB_REF_NAME:-nullref}" "${GITHUB_SHA:-nullsha}"
+}
+
 version_from_git 2>/dev/null ||
+version_from_ci 2>/dev/null ||
 version_from_appdata 2>/dev/null ||
 echo "unknown"
