@@ -124,8 +124,8 @@ jobs:
 
       - run: git config --global --add safe.directory "${PWD}"
 
-      - run: ls -A -F
-      - run: git describe --always --tags
+      - run: ls -A -F -l
+      - run: git describe --always --tags --dirty
       - run: tools/app-version.sh
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
