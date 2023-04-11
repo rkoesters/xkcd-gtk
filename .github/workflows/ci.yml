@@ -123,6 +123,8 @@ jobs:
           platforms: arm64
 
       - run: ls -A -F
+      - run: git describe --always --tags
+      - run: tools/app-version.sh
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
