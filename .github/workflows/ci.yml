@@ -122,6 +122,8 @@ jobs:
         with:
           platforms: arm64
 
+      - run: ls -A -F
+
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           manifest-path: flatpak/${{ matrix.repo }}.yml
