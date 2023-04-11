@@ -122,6 +122,8 @@ jobs:
         with:
           platforms: arm64
 
+      - run: git config --global --add safe.directory "${PWD}"
+
       - run: ls -A -F
       - run: git describe --always --tags
       - run: tools/app-version.sh
