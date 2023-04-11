@@ -29,6 +29,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Initialize Go
         uses: actions/setup-go@v4
         with:
@@ -43,9 +46,6 @@ jobs:
           go install \
             honnef.co/go/tools/cmd/staticcheck@${{ matrix.staticcheck }}
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
       - run: go mod graph
       - run: make
       - run: make check
@@ -54,14 +54,14 @@ jobs:
   flatpak-config:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Initialize Go
         uses: actions/setup-go@v4
         with:
           go-version-file: go.mod
           cache: false  # No go code will be compiled, do not cache nothing.
-
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
       - run: go mod graph
       - run: make -B flatpak/modules.txt
@@ -103,6 +103,15 @@ jobs:
       options: --privileged
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download flatpak-config artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: flatpak-config
+          path: flatpak
+
       - name: Install QEMU dependencies
         if: ${{ matrix.arch != 'x86_64' }}
         run: dnf -y install docker
@@ -112,15 +121,6 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
-
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Download flatpak-config artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: flatpak-config
-          path: flatpak
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
