@@ -124,6 +124,8 @@ jobs:
 
       - run: ls -A -F -l
       - run: bash -x tools/app-version.sh
+      - run: git config --global --add safe.directory '*'
+      - run: bash -x tools/app-version.sh
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
