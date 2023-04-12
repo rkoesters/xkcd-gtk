@@ -112,6 +112,9 @@ jobs:
           name: flatpak-config
           path: flatpak
 
+      - name: Configuring build
+        run: tools/app-version.sh | tee tools/app-version.txt
+
       - name: Install QEMU dependencies
         if: ${{ matrix.arch != 'x86_64' }}
         run: dnf -y install docker

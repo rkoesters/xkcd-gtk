@@ -5,6 +5,10 @@ version_from_git () {
   git describe --tags --match='v[0-9].[0-9]*.[0-9]*' --dirty
 }
 
+version_from_text_file () {
+  tr ',' '_' <tools/app-version.txt
+}
+
 version_from_appdata () {
   grep '<release version="' data/com.github.rkoesters.xkcd-gtk.appdata.xml |
   head -n 1 |
@@ -20,5 +24,6 @@ version_from_ci () {
 
 version_from_git 2>/dev/null ||
 version_from_ci 2>/dev/null ||
+version_from_text_file 2>/dev/null ||
 version_from_appdata 2>/dev/null ||
 echo "unknown"
