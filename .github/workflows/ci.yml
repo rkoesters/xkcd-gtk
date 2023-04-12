@@ -112,10 +112,8 @@ jobs:
           name: flatpak-config
           path: flatpak
 
-      - run: ls -A -F -l
-      - run: bash -x tools/app-version.sh
       - name: Configuring build
-        run: tools/app-version.sh >tools/app-version.txt
+        run: tools/app-version.sh | tee tools/app-version.txt
 
       - name: Install QEMU dependencies
         if: ${{ matrix.arch != 'x86_64' }}
