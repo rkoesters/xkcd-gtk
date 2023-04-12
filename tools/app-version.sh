@@ -6,7 +6,7 @@ version_from_git () {
 }
 
 version_from_text_file () {
-  cat tools/app-version.txt
+  tr ',' '_' <tools/app-version.txt
 }
 
 version_from_appdata () {
