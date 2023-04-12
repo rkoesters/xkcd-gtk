@@ -21,7 +21,7 @@ modules:
   - name: com.github.rkoesters.xkcd-gtk
     buildsystem: simple
     build-commands:
-      - 'ln -s "$(pwd)/vendor" src/'
+      - 'ln -s "${PWD}/vendor" src/'
       - 'cd src && . /usr/lib/sdk/golang/enable.sh && make'
       - 'cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app'
 
