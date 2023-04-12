@@ -112,6 +112,11 @@ jobs:
           name: flatpak-config
           path: flatpak
 
+      - run: ls -A -F -l
+      - run: bash -x tools/app-version.sh
+      - name: Configuring build
+        run: tools/app-version.sh >tools/app-version.txt
+
       - name: Install QEMU dependencies
         if: ${{ matrix.arch != 'x86_64' }}
         run: dnf -y install docker
@@ -121,11 +126,6 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
-
-      - run: ls -A -F -l
-      - run: bash -x tools/app-version.sh
-      - run: git config --global --add safe.directory '*'
-      - run: bash -x tools/app-version.sh
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
