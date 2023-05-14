@@ -63,7 +63,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.3.7
+        tag: v2.3.8
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
@@ -138,7 +138,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v15.3.9
+        tag: v15.3.10
         dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
@@ -164,7 +164,7 @@ modules:
 
       - type: git
         url: https://github.com/gotk3/gotk3.git
-        tag: v0.6.1
+        tag: v0.6.2
         dest: vendor/github.com/gotk3/gotk3
 
       - type: git
