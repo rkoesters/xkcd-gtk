@@ -116,7 +116,7 @@ jobs:
         run: tools/app-version.sh | tee tools/app-version.txt
 
       - name: Install QEMU dependencies
-        if: ${{ matrix.arch != 'x86_64' }}
+        if: ${{ matrix.arch == 'aarch64' && matrix.repo == 'flathub' }}
         run: dnf -y install docker
 
       - name: Initialize QEMU
