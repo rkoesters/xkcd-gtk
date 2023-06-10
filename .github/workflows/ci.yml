@@ -89,7 +89,7 @@ jobs:
         include:
           - repo: appcenter
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
-            image: bilelmoussaoui/flatpak-github-actions:elementary-juno
+            image: ghcr.io/elementary/flatpak-platform/runtime:7.2
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
             image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
