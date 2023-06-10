@@ -115,10 +115,6 @@ jobs:
       - name: Configuring build
         run: tools/app-version.sh | tee tools/app-version.txt
 
-      - name: Install QEMU dependencies
-        if: ${{ matrix.arch != 'x86_64' }}
-        run: dnf -y install docker
-
       - name: Initialize QEMU
         if: ${{ matrix.arch == 'aarch64' }}
         uses: docker/setup-qemu-action@v2
