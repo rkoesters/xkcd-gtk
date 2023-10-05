@@ -10,7 +10,7 @@ sdk: io.elementary.Sdk
 command: com.github.rkoesters.xkcd-gtk
 
 finish-args:
-  - '--socket=x11'
+  - '--socket=fallback-x11'
   - '--socket=wayland'
   - '--share=ipc'
   - '--share=network'
