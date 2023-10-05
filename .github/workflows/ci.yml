@@ -5,6 +5,8 @@ name: CI
 "on":
   pull_request:
   push:
+    branches-ignore:
+      - 'dependabot/**'
   schedule:
     - cron: '29 4 1 * *'
 
