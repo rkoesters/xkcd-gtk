@@ -16,69 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: internal/widget/about-dialog.go:19
-msgid "A simple xkcd viewer written in Go using GTK+3"
-msgstr ""
-
-#: internal/widget/window-menu.go:91 internal/widget/app-menu.ui:46
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
-msgid "About"
-msgstr ""
-
-#: internal/widget/window-menu.go:88 internal/widget/app-menu.ui:36
-msgid "About xkcd"
-msgstr ""
-
-#: internal/widget/bookmarks-menu.go:157
-msgid "Add to bookmarks"
-msgstr ""
-
-#: internal/widget/properties-dialog.go:97
-msgid "Alt text"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:152
-msgid "Application"
-msgstr ""
-
-#: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
-msgid "Bookmark this comic"
-msgstr ""
-
-#: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
-msgid "Bookmarks"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
-msgid "Cache comics for later offline viewing"
-msgstr ""
-
-#: internal/widget/cache-window.go:38 internal/widget/window-menu.go:70
-#: internal/widget/app-menu.ui:12
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
-msgid "Cache manager"
-msgstr ""
-
-#: internal/widget/cache-window.go:77
-msgid "Cached comic images"
-msgstr ""
-
-#: internal/widget/cache-window.go:71
-msgid "Cached comic metadata"
-msgstr ""
-
-#: internal/widget/application-window.go:308
-msgid "Checking for new comic..."
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:22
-msgid "Close window"
-msgstr ""
-
-#: internal/widget/application.go:11
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 msgid "Comic Sticks"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
+msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
@@ -87,236 +32,182 @@ msgid ""
 "offline browsing, and intuitive keyboard shortcuts."
 msgstr ""
 
-#: internal/cache/cache.go:67
-msgid "Comic not found"
-msgstr ""
-
-#: internal/widget/application-window.go:384
-msgid "Connect to the internet to download comic image"
-msgstr ""
-
-#: internal/cache/cache.go:69
-msgid "Connect to the internet to download some comics!"
-msgstr ""
-
-#: internal/cache/cache.go:68
-msgid "Couldn't get comic"
-msgstr ""
-
-#: internal/widget/dark-mode-switch.go:54
-msgid "Dark mode"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
-msgid "Dark mode for late night reading"
-msgstr ""
-
-#: internal/widget/properties-dialog.go:89
-msgid "Date"
-msgstr ""
-
-#: internal/widget/cache-window.go:92
-msgid "Download all comic images"
-msgstr ""
-
-#: internal/cache/cache.go:66
-msgid "Error reading local comic database"
-msgstr ""
-
-#: internal/widget/context-menu.go:50 internal/widget/window-menu.go:53
-msgid "Explain"
-msgstr ""
-
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
 msgid "Features:"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:11
-msgid "General"
-msgstr ""
-
-#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
-msgid "Go to a random comic"
-msgstr ""
-
-#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:42
-msgid "Go to the first comic"
-msgstr ""
-
-#: internal/widget/navigation-bar.go:75 internal/widget/shortcuts-window.ui:63
-msgid "Go to the newest comic"
-msgstr ""
-
-#: internal/widget/navigation-bar.go:70 internal/widget/shortcuts-window.ui:56
-msgid "Go to the next comic"
-msgstr ""
-
-#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:49
-msgid "Go to the previous comic"
-msgstr ""
-
-#: internal/widget/properties-dialog.go:93
-msgid "Image"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
-msgid "Keep track of comics with bookmarks"
-msgstr ""
-
-#: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:42
-#: internal/widget/shortcuts-window.ui:4
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
-msgid "Keyboard shortcuts"
-msgstr ""
-
-#: internal/widget/properties-dialog.go:105
-msgid "Link"
-msgstr ""
-
-#: internal/widget/application-window.go:391
-msgid "Loading comic..."
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:38
-msgid "Navigate"
-msgstr ""
-
-#: internal/widget/window-menu.go:68 internal/widget/app-menu.ui:6
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
-msgid "New window"
-msgstr ""
-
-#: internal/widget/properties-dialog.go:101
-msgid "News"
-msgstr ""
-
-#: internal/widget/search-menu.go:79
-msgid "No results found"
-msgstr ""
-
-#: internal/widget/properties-dialog.go:81
-msgid "Number"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:130
-msgid "Open bookmarks menu"
-msgstr ""
-
-#: internal/widget/context-menu.go:49 internal/widget/window-menu.go:52
-msgid "Open link"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:15
-msgid "Open new window"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:143
-msgid "Open properties window"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:163
-msgid "Open shortcuts window"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:29
-msgid "Open window menu"
-msgstr ""
-
-#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
-#: internal/widget/window-menu.go:54 internal/widget/shortcuts-window.ui:139
-msgid "Properties"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
-msgid "Quickly access comic explainations via the explain xkcd wiki"
-msgstr ""
-
-#: internal/widget/app-menu.ui:50
-msgid "Quit"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:170
-msgid "Quit application"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
-msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
-msgstr ""
-
-#: internal/widget/bookmarks-menu.go:154
-msgid "Remove from bookmarks"
-msgstr ""
-
-#: internal/widget/zoom-box.go:51 internal/widget/shortcuts-window.ui:110
-msgid "Reset zoom"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:79
-msgid "Search"
-msgstr ""
-
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
-msgid "Search comics"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
 msgid "Search for comics"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:85
-msgid "Title"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+msgid "Keep track of comics with bookmarks"
 msgstr ""
 
-#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:18
-#: internal/widget/shortcuts-window.ui:156
-msgid "Toggle dark mode"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+msgid "Cache comics for later offline viewing"
 msgstr ""
 
-#: internal/widget/properties-dialog.go:109
-msgid "Transcript"
-msgstr ""
-
-#: internal/widget/search-menu.go:66
-msgid "Updating comic search index..."
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
+msgid "Dark mode for late night reading"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
 msgid "View comic metadata"
 msgstr ""
 
-#: internal/widget/window-menu.go:85 internal/widget/app-menu.ui:24
-msgid "What If?"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
+msgid "Quickly access comic explainations via the explain xkcd wiki"
 msgstr ""
 
-#: internal/widget/window-menu.go:29
-msgid "Window menu"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:27
+msgid "Ryan Koesters"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:92
-msgid "Zoom"
-msgstr ""
-
-#: internal/widget/zoom-box.go:59 internal/widget/shortcuts-window.ui:96
-msgid "Zoom in"
-msgstr ""
-
-#: internal/widget/zoom-box.go:38 internal/widget/shortcuts-window.ui:103
-msgid "Zoom out"
-msgstr ""
-
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr ""
 
-#: internal/widget/window-menu.go:86 internal/widget/app-menu.ui:28
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
+#: internal/widget/app-menu.ui:6
+msgid "New window"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
+#: internal/widget/app-menu.ui:12
+msgid "Cache manager"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
+#: internal/widget/app-menu.ui:42 internal/widget/shortcuts-window.ui:4
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
+#: internal/widget/app-menu.ui:46
+msgid "About"
+msgstr ""
+
+#: internal/widget/app-menu.ui:18 internal/widget/shortcuts-window.ui:156
+msgid "Toggle dark mode"
+msgstr ""
+
+#: internal/widget/app-menu.ui:24
+msgid "What If?"
+msgstr ""
+
+#: internal/widget/app-menu.ui:28
 msgid "xkcd blog"
 msgstr ""
 
-#: internal/widget/window-menu.go:87 internal/widget/app-menu.ui:32
+#: internal/widget/app-menu.ui:32
 msgid "xkcd books"
+msgstr ""
+
+#: internal/widget/app-menu.ui:36
+msgid "About xkcd"
+msgstr ""
+
+#: internal/widget/app-menu.ui:50
+msgid "Quit"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:11
+msgid "General"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:15
+msgid "Open new window"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:22
+msgid "Close window"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:29
+msgid "Open window menu"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:38
+msgid "Navigate"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:42
+msgid "Go to the first comic"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:49
+msgid "Go to the previous comic"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:56
+msgid "Go to the next comic"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:63
+msgid "Go to the newest comic"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:70
+msgid "Go to a random comic"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:79
+msgid "Search"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:83
+msgid "Search comics"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:92
+msgid "Zoom"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:96
+msgid "Zoom in"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:103
+msgid "Zoom out"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:110
+msgid "Reset zoom"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:119
+msgid "Bookmarks"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:123
+msgid "Bookmark this comic"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:130
+msgid "Open bookmarks menu"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:139
+msgid "Properties"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:143
+msgid "Open properties window"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:152
+msgid "Application"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:163
+msgid "Open shortcuts window"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:170
+msgid "Quit application"
 msgstr ""
