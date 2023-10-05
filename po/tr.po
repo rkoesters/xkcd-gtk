@@ -20,16 +20,72 @@ msgstr ""
 "X-Generator: Poedit 3.1.1\n"
 "X-Project-Style: gnome\n"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: internal/widget/about-dialog.go:19
+msgid "A simple xkcd viewer written in Go using GTK+3"
+msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
+
+#: internal/widget/window-menu.go:91 internal/widget/app-menu.ui:46
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
+msgid "About"
+msgstr "Hakkında"
+
+#: internal/widget/window-menu.go:88 internal/widget/app-menu.ui:36
+msgid "About xkcd"
+msgstr "xkcd Hakkında"
+
+#: internal/widget/bookmarks-menu.go:157
+msgid "Add to bookmarks"
+msgstr "Yer imlerine ekle"
+
+#: internal/widget/properties-dialog.go:97
+msgid "Alt text"
+msgstr "Alternatif metin"
+
+#: internal/widget/shortcuts-window.ui:152
+msgid "Application"
+msgstr "Yer imlerine ekle"
+
+#: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
+msgid "Bookmark this comic"
+msgstr "Bu karikatürü yer imlerine ekle"
+
+#: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
+msgid "Bookmarks"
+msgstr "Yer imleri"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+msgid "Cache comics for later offline viewing"
+msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
+
+#: internal/widget/cache-window.go:38 internal/widget/window-menu.go:70
+#: internal/widget/app-menu.ui:12
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
+msgid "Cache manager"
+msgstr ""
+
+#: internal/widget/cache-window.go:77
+#, fuzzy
+msgid "Cached comic images"
+msgstr "Karikatür ara"
+
+#: internal/widget/cache-window.go:71
+#, fuzzy
+msgid "Cached comic metadata"
+msgstr "Karikatür üst verisini görüntüle"
+
+#: internal/widget/application-window.go:308
+msgid "Checking for new comic..."
+msgstr "Yeni karikatür denetleniyor..."
+
+#: internal/widget/shortcuts-window.ui:22
+msgid "Close window"
+msgstr "Pencereyi kapat"
+
+#: internal/widget/application.go:11
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
 msgstr "Comic Sticks"
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
-msgstr ""
-"xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid ""
@@ -39,258 +95,241 @@ msgstr ""
 "Karikatürler, hızlı çizgi roman arama, çevrimdışı çalışma ve sezgisel klavye "
 "kısayollarıyla xkcd karikatürlerini masaüstünüze getirir."
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
-msgid "Features:"
-msgstr "Özellikler:"
+#: internal/cache/cache.go:67
+msgid "Comic not found"
+msgstr "Karikatür bulunamadı"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
-msgid "Search for comics"
-msgstr "Karikatür ara"
+#: internal/widget/application-window.go:384
+msgid "Connect to the internet to download comic image"
+msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
-msgid "Keep track of comics with bookmarks"
-msgstr "Yer imleriyle karikatürleri takip edin"
+#: internal/cache/cache.go:69
+msgid "Connect to the internet to download some comics!"
+msgstr "Karikatürleri indirmek için internete bağlanın!"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
-msgid "Cache comics for later offline viewing"
-msgstr "Karikatürleri daha sonra çevrimdışı görüntülemek için önbelleğe al"
+#: internal/cache/cache.go:68
+msgid "Couldn't get comic"
+msgstr "Karikatür alınamadı"
+
+#: internal/widget/dark-mode-switch.go:54
+msgid "Dark mode"
+msgstr "Koyu kipi aç/kapat"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "Dark mode for late night reading"
 msgstr "Gece geç saatlerde okumak için koyu kip"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
-msgid "View comic metadata"
-msgstr "Karikatür üst verisini görüntüle"
+#: internal/widget/properties-dialog.go:89
+msgid "Date"
+msgstr "Tarih"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
-msgid "Quickly access comic explainations via the explain xkcd wiki"
-msgstr "xkcd wiki aracılığıyla karikatür açıklamalarına hızla erişin"
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:27
-msgid "Ryan Koesters"
+#: internal/widget/cache-window.go:92
+msgid "Download all comic images"
 msgstr ""
 
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
-msgid "XKCD Viewer"
-msgstr "XKCD Görüntüleyici"
+#: internal/cache/cache.go:66
+msgid "Error reading local comic database"
+msgstr "Yerel karikatür veritabanı okuma hatası"
 
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
-msgid "webcomic;romance;sarcasm;math;language;"
-msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
+#: internal/widget/context-menu.go:50 internal/widget/window-menu.go:53
+msgid "Explain"
+msgstr "Açıkla"
 
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
-#: internal/widget/app-menu.ui:6
-msgid "New window"
-msgstr "Yeni pencere"
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
-#: internal/widget/app-menu.ui:12
-msgid "Cache manager"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
-#: internal/widget/app-menu.ui:42 internal/widget/shortcuts-window.ui:4
-msgid "Keyboard shortcuts"
-msgstr "Klavye kısayolları"
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
-#: internal/widget/app-menu.ui:46
-msgid "About"
-msgstr "Hakkında"
-
-#: internal/widget/app-menu.ui:18 internal/widget/shortcuts-window.ui:156
-msgid "Toggle dark mode"
-msgstr "Koyu kipi aç/kapat"
-
-#: internal/widget/app-menu.ui:24
-msgid "What If?"
-msgstr "Farzedelim?"
-
-#: internal/widget/app-menu.ui:28
-msgid "xkcd blog"
-msgstr "xkcd günlüğü"
-
-#: internal/widget/app-menu.ui:32
-msgid "xkcd books"
-msgstr "xkcd kitapları"
-
-#: internal/widget/app-menu.ui:36
-msgid "About xkcd"
-msgstr "xkcd Hakkında"
-
-#: internal/widget/app-menu.ui:50
-msgid "Quit"
-msgstr "Çık"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
+msgid "Features:"
+msgstr "Özellikler:"
 
 #: internal/widget/shortcuts-window.ui:11
 msgid "General"
 msgstr "Genel"
 
-#: internal/widget/shortcuts-window.ui:15
-msgid "Open new window"
-msgstr "Yeni pencere aç"
+#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
+msgid "Go to a random comic"
+msgstr "Rastgele bir karikatüre git"
 
-#: internal/widget/shortcuts-window.ui:22
-msgid "Close window"
-msgstr "Pencereyi kapat"
+#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:42
+msgid "Go to the first comic"
+msgstr "İlk karikatüre git"
 
-#: internal/widget/shortcuts-window.ui:29
-msgid "Open window menu"
-msgstr "Pencere menüsünü açar"
+#: internal/widget/navigation-bar.go:75 internal/widget/shortcuts-window.ui:63
+msgid "Go to the newest comic"
+msgstr "En yeni karikatüre git"
+
+#: internal/widget/navigation-bar.go:70 internal/widget/shortcuts-window.ui:56
+msgid "Go to the next comic"
+msgstr "Sonraki karikatüre git"
+
+#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:49
+msgid "Go to the previous comic"
+msgstr "Önceki karikatüre git"
+
+#: internal/widget/properties-dialog.go:93
+msgid "Image"
+msgstr "Görüntü"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+msgid "Keep track of comics with bookmarks"
+msgstr "Yer imleriyle karikatürleri takip edin"
+
+#: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:42
+#: internal/widget/shortcuts-window.ui:4
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
+msgid "Keyboard shortcuts"
+msgstr "Klavye kısayolları"
+
+#: internal/widget/properties-dialog.go:105
+msgid "Link"
+msgstr "Bağlantı"
+
+#: internal/widget/application-window.go:391
+msgid "Loading comic..."
+msgstr "Karikatür yükleniyor..."
 
 #: internal/widget/shortcuts-window.ui:38
 msgid "Navigate"
 msgstr "Dolaş"
 
-#: internal/widget/shortcuts-window.ui:42
-msgid "Go to the first comic"
-msgstr "İlk karikatüre git"
+#: internal/widget/window-menu.go:68 internal/widget/app-menu.ui:6
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
+msgid "New window"
+msgstr "Yeni pencere"
 
-#: internal/widget/shortcuts-window.ui:49
-msgid "Go to the previous comic"
-msgstr "Önceki karikatüre git"
+#: internal/widget/properties-dialog.go:101
+msgid "News"
+msgstr "Haberler"
 
-#: internal/widget/shortcuts-window.ui:56
-msgid "Go to the next comic"
-msgstr "Sonraki karikatüre git"
+#: internal/widget/search-menu.go:79
+msgid "No results found"
+msgstr "Sonuç bulunamadı"
 
-#: internal/widget/shortcuts-window.ui:63
-msgid "Go to the newest comic"
-msgstr "En yeni karikatüre git"
-
-#: internal/widget/shortcuts-window.ui:70
-msgid "Go to a random comic"
-msgstr "Rastgele bir karikatüre git"
-
-#: internal/widget/shortcuts-window.ui:79
-msgid "Search"
-msgstr "Ara"
-
-#: internal/widget/shortcuts-window.ui:83
-msgid "Search comics"
-msgstr "Karikatür ara"
-
-#: internal/widget/shortcuts-window.ui:92
-msgid "Zoom"
-msgstr "Yakınlaştırma"
-
-#: internal/widget/shortcuts-window.ui:96
-msgid "Zoom in"
-msgstr "Yaklaştır"
-
-#: internal/widget/shortcuts-window.ui:103
-msgid "Zoom out"
-msgstr "Uzaklaştır"
-
-#: internal/widget/shortcuts-window.ui:110
-msgid "Reset zoom"
-msgstr "Yakınlaştırmayı sıfırla"
-
-#: internal/widget/shortcuts-window.ui:119
-msgid "Bookmarks"
-msgstr "Yer imleri"
-
-#: internal/widget/shortcuts-window.ui:123
-msgid "Bookmark this comic"
-msgstr "Bu karikatürü yer imlerine ekle"
+#: internal/widget/properties-dialog.go:81
+msgid "Number"
+msgstr "Sayı"
 
 #: internal/widget/shortcuts-window.ui:130
 msgid "Open bookmarks menu"
 msgstr "Yer imleri menüsünü göster"
 
-#: internal/widget/shortcuts-window.ui:139
-msgid "Properties"
-msgstr "Özellikler"
+#: internal/widget/context-menu.go:49 internal/widget/window-menu.go:52
+msgid "Open link"
+msgstr "Bağlantıyı aç"
+
+#: internal/widget/shortcuts-window.ui:15
+msgid "Open new window"
+msgstr "Yeni pencere aç"
 
 #: internal/widget/shortcuts-window.ui:143
 msgid "Open properties window"
 msgstr "Özellikler penceresini aç"
 
-#: internal/widget/shortcuts-window.ui:152
-msgid "Application"
-msgstr "Yer imlerine ekle"
-
 #: internal/widget/shortcuts-window.ui:163
 msgid "Open shortcuts window"
 msgstr "Kısayollar penceresini aç"
+
+#: internal/widget/shortcuts-window.ui:29
+msgid "Open window menu"
+msgstr "Pencere menüsünü açar"
+
+#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
+#: internal/widget/window-menu.go:54 internal/widget/shortcuts-window.ui:139
+msgid "Properties"
+msgstr "Özellikler"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
+msgid "Quickly access comic explainations via the explain xkcd wiki"
+msgstr "xkcd wiki aracılığıyla karikatür açıklamalarına hızla erişin"
+
+#: internal/widget/app-menu.ui:50
+msgid "Quit"
+msgstr "Çık"
 
 #: internal/widget/shortcuts-window.ui:170
 msgid "Quit application"
 msgstr "Uygulamadan çık"
 
-#~ msgid "A simple xkcd viewer written in Go using GTK+3"
-#~ msgstr "Go dili ve GTK+3 kullanılarak yazılmış basit xkcd görüntüleyici"
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
+msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
+msgstr ""
+"xkcd'yi okuyun: aşk, iğneleme, matematik ve dil ile ilgi bir web çizgi romanı"
 
-#~ msgid "Add to bookmarks"
-#~ msgstr "Yer imlerine ekle"
+#: internal/widget/bookmarks-menu.go:154
+msgid "Remove from bookmarks"
+msgstr "Yer imlerinden kaldır"
 
-#~ msgid "Alt text"
-#~ msgstr "Alternatif metin"
+#: internal/widget/zoom-box.go:51 internal/widget/shortcuts-window.ui:110
+msgid "Reset zoom"
+msgstr "Yakınlaştırmayı sıfırla"
 
-#~ msgid "Checking for new comic..."
-#~ msgstr "Yeni karikatür denetleniyor..."
+#: internal/widget/shortcuts-window.ui:79
+msgid "Search"
+msgstr "Ara"
 
-#~ msgid "Comic not found"
-#~ msgstr "Karikatür bulunamadı"
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
+msgid "Search comics"
+msgstr "Karikatür ara"
 
-#~ msgid "Connect to the internet to download comic image"
-#~ msgstr "Karikatür görüntüsünü indirmek için internete bağlan"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+msgid "Search for comics"
+msgstr "Karikatür ara"
 
-#~ msgid "Connect to the internet to download some comics!"
-#~ msgstr "Karikatürleri indirmek için internete bağlanın!"
+#: internal/widget/properties-dialog.go:85
+msgid "Title"
+msgstr "Başlık"
 
-#~ msgid "Couldn't get comic"
-#~ msgstr "Karikatür alınamadı"
-
-#~ msgid "Dark mode"
-#~ msgstr "Koyu kipi aç/kapat"
-
-#~ msgid "Date"
-#~ msgstr "Tarih"
-
-#~ msgid "Error reading local comic database"
-#~ msgstr "Yerel karikatür veritabanı okuma hatası"
-
-#~ msgid "Explain"
-#~ msgstr "Açıkla"
-
-#~ msgid "Image"
-#~ msgstr "Görüntü"
-
-#~ msgid "Link"
-#~ msgstr "Bağlantı"
-
-#~ msgid "Loading comic..."
-#~ msgstr "Karikatür yükleniyor..."
-
-#~ msgid "News"
-#~ msgstr "Haberler"
-
-#~ msgid "No results found"
-#~ msgstr "Sonuç bulunamadı"
-
-#~ msgid "Number"
-#~ msgstr "Sayı"
-
-#~ msgid "Open link"
-#~ msgstr "Bağlantıyı aç"
-
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Yer imlerinden kaldır"
-
-#~ msgid "Title"
-#~ msgstr "Başlık"
+#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:18
+#: internal/widget/shortcuts-window.ui:156
+msgid "Toggle dark mode"
+msgstr "Koyu kipi aç/kapat"
 
 # Arayüzde, özellikler sayfasında karikatürde yazılı olan metinleri göstermek için kullanılıyor.
-#~ msgid "Transcript"
-#~ msgstr "Yazılı metin"
+#: internal/widget/properties-dialog.go:109
+msgid "Transcript"
+msgstr "Yazılı metin"
 
-#~ msgid "Updating comic search index..."
-#~ msgstr "Karikatür arama dizini güncelleniyor..."
+#: internal/widget/search-menu.go:66
+msgid "Updating comic search index..."
+msgstr "Karikatür arama dizini güncelleniyor..."
 
-#~ msgid "Window menu"
-#~ msgstr "Pencere menüsü"
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+msgid "View comic metadata"
+msgstr "Karikatür üst verisini görüntüle"
+
+#: internal/widget/window-menu.go:85 internal/widget/app-menu.ui:24
+msgid "What If?"
+msgstr "Farzedelim?"
+
+#: internal/widget/window-menu.go:29
+msgid "Window menu"
+msgstr "Pencere menüsü"
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
+msgid "XKCD Viewer"
+msgstr "XKCD Görüntüleyici"
+
+#: internal/widget/shortcuts-window.ui:92
+msgid "Zoom"
+msgstr "Yakınlaştırma"
+
+#: internal/widget/zoom-box.go:59 internal/widget/shortcuts-window.ui:96
+msgid "Zoom in"
+msgstr "Yaklaştır"
+
+#: internal/widget/zoom-box.go:38 internal/widget/shortcuts-window.ui:103
+msgid "Zoom out"
+msgstr "Uzaklaştır"
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
+msgid "webcomic;romance;sarcasm;math;language;"
+msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
+
+#: internal/widget/window-menu.go:86 internal/widget/app-menu.ui:28
+msgid "xkcd blog"
+msgstr "xkcd günlüğü"
+
+#: internal/widget/window-menu.go:87 internal/widget/app-menu.ui:32
+msgid "xkcd books"
+msgstr "xkcd kitapları"
 
 #~ msgid "Search Index Update"
 #~ msgstr "Arama Dizini Güncellemesi"

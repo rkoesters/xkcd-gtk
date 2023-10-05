@@ -17,15 +17,72 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
+#: internal/widget/about-dialog.go:19
+msgid "A simple xkcd viewer written in Go using GTK+3"
+msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
+
+#: internal/widget/window-menu.go:91 internal/widget/app-menu.ui:46
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
+msgid "About"
+msgstr "Informazioni"
+
+#: internal/widget/window-menu.go:88 internal/widget/app-menu.ui:36
+msgid "About xkcd"
+msgstr "Informazioni su xkcd"
+
+#: internal/widget/bookmarks-menu.go:157
+msgid "Add to bookmarks"
+msgstr "Aggiungi questo fumetto ai preferiti"
+
+#: internal/widget/properties-dialog.go:97
+msgid "Alt text"
+msgstr "Ferma Testo"
+
+#: internal/widget/shortcuts-window.ui:152
+msgid "Application"
+msgstr ""
+
+#: internal/widget/context-menu.go:30 internal/widget/shortcuts-window.ui:123
+msgid "Bookmark this comic"
+msgstr "Aggiungi questo fumetto ai preferiti"
+
+#: internal/widget/bookmarks-menu.go:59 internal/widget/shortcuts-window.ui:119
+msgid "Bookmarks"
+msgstr "Segnalibri"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
+msgid "Cache comics for later offline viewing"
+msgstr "Fumetti della cache per una successiva visualizzazione offline"
+
+#: internal/widget/cache-window.go:38 internal/widget/window-menu.go:70
+#: internal/widget/app-menu.ui:12
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
+msgid "Cache manager"
+msgstr ""
+
+#: internal/widget/cache-window.go:77
+#, fuzzy
+msgid "Cached comic images"
+msgstr "Cerca fumetti"
+
+#: internal/widget/cache-window.go:71
+#, fuzzy
+msgid "Cached comic metadata"
+msgstr "Visualizza metadati fumetto"
+
+#: internal/widget/application-window.go:308
+msgid "Checking for new comic..."
+msgstr "Verifica di nuovi fumetti..."
+
+#: internal/widget/shortcuts-window.ui:22
+msgid "Close window"
+msgstr ""
+
+#: internal/widget/application.go:11
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
 msgstr "Comic Sticks"
-
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
-msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
-msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:13
 msgid ""
@@ -35,29 +92,145 @@ msgstr ""
 "Comic Sticks porta i fumetti xkcd sul desktop con una rapida ricerca dei "
 "fumetti, navigazione offline e scorciatoie da tastiera intuitive."
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
-msgid "Features:"
-msgstr "Caratteristiche:"
+#: internal/cache/cache.go:67
+msgid "Comic not found"
+msgstr "Fumetto non trovato"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
-msgid "Search for comics"
-msgstr "Cerca fumetti"
+#: internal/widget/application-window.go:384
+msgid "Connect to the internet to download comic image"
+msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
-msgid "Keep track of comics with bookmarks"
-msgstr "Tieni traccia dei fumetti con i segnalibri"
+#: internal/cache/cache.go:69
+msgid "Connect to the internet to download some comics!"
+msgstr "Collegati a Internet per scaricare alcuni fumetti!"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:18
-msgid "Cache comics for later offline viewing"
-msgstr "Fumetti della cache per una successiva visualizzazione offline"
+#: internal/cache/cache.go:68
+msgid "Couldn't get comic"
+msgstr "Impossibile ottenere fumetto"
+
+#: internal/widget/dark-mode-switch.go:54
+msgid "Dark mode"
+msgstr "Modalità scura"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:19
 msgid "Dark mode for late night reading"
 msgstr "Modalità scura per la lettura a tarda notte"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
-msgid "View comic metadata"
-msgstr "Visualizza metadati fumetto"
+#: internal/widget/properties-dialog.go:89
+msgid "Date"
+msgstr "Data"
+
+#: internal/widget/cache-window.go:92
+msgid "Download all comic images"
+msgstr ""
+
+#: internal/cache/cache.go:66
+msgid "Error reading local comic database"
+msgstr ""
+
+#: internal/widget/context-menu.go:50 internal/widget/window-menu.go:53
+msgid "Explain"
+msgstr "Spiega"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:14
+msgid "Features:"
+msgstr "Caratteristiche:"
+
+#: internal/widget/shortcuts-window.ui:11
+msgid "General"
+msgstr ""
+
+#: internal/widget/navigation-bar.go:65 internal/widget/shortcuts-window.ui:70
+msgid "Go to a random comic"
+msgstr "Vai ad un fumetto a caso"
+
+#: internal/widget/navigation-bar.go:55 internal/widget/shortcuts-window.ui:42
+msgid "Go to the first comic"
+msgstr "Vai al primo fumetto"
+
+#: internal/widget/navigation-bar.go:75 internal/widget/shortcuts-window.ui:63
+msgid "Go to the newest comic"
+msgstr "Vai al fumetto più recente"
+
+#: internal/widget/navigation-bar.go:70 internal/widget/shortcuts-window.ui:56
+msgid "Go to the next comic"
+msgstr "Vai al prossimo fumetto"
+
+#: internal/widget/navigation-bar.go:60 internal/widget/shortcuts-window.ui:49
+msgid "Go to the previous comic"
+msgstr "Vai al fumetto precedente"
+
+#: internal/widget/properties-dialog.go:93
+msgid "Image"
+msgstr "Immagine"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:17
+msgid "Keep track of comics with bookmarks"
+msgstr "Tieni traccia dei fumetti con i segnalibri"
+
+#: internal/widget/window-menu.go:90 internal/widget/app-menu.ui:42
+#: internal/widget/shortcuts-window.ui:4
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
+msgid "Keyboard shortcuts"
+msgstr "Tasti Rapidi"
+
+#: internal/widget/properties-dialog.go:105
+msgid "Link"
+msgstr "Link"
+
+#: internal/widget/application-window.go:391
+msgid "Loading comic..."
+msgstr "Caricamento fumetto..."
+
+#: internal/widget/shortcuts-window.ui:38
+msgid "Navigate"
+msgstr "Naviga"
+
+#: internal/widget/window-menu.go:68 internal/widget/app-menu.ui:6
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
+msgid "New window"
+msgstr "Nuova Finestra"
+
+#: internal/widget/properties-dialog.go:101
+msgid "News"
+msgstr "Novità"
+
+#: internal/widget/search-menu.go:79
+msgid "No results found"
+msgstr "Nessun risultato trovato"
+
+#: internal/widget/properties-dialog.go:81
+msgid "Number"
+msgstr "Numero"
+
+#: internal/widget/shortcuts-window.ui:130
+msgid "Open bookmarks menu"
+msgstr "Mostra menu segnalibri"
+
+#: internal/widget/context-menu.go:49 internal/widget/window-menu.go:52
+msgid "Open link"
+msgstr "Apri Link"
+
+#: internal/widget/shortcuts-window.ui:15
+msgid "Open new window"
+msgstr "Apri nuova finestra"
+
+#: internal/widget/shortcuts-window.ui:143
+msgid "Open properties window"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:163
+msgid "Open shortcuts window"
+msgstr "Apri la finestra delle scorciatoie"
+
+#: internal/widget/shortcuts-window.ui:29
+msgid "Open window menu"
+msgstr ""
+
+#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
+#: internal/widget/window-menu.go:54 internal/widget/shortcuts-window.ui:139
+msgid "Properties"
+msgstr "Proprietà"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
 msgid "Quickly access comic explainations via the explain xkcd wiki"
@@ -65,223 +238,95 @@ msgstr ""
 "Accedi rapidamente alle spiegazioni dei fumetti tramite il wiki esplicativo "
 "di xkcd"
 
-#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:27
-msgid "Ryan Koesters"
+#: internal/widget/app-menu.ui:50
+msgid "Quit"
+msgstr "Esci"
+
+#: internal/widget/shortcuts-window.ui:170
+msgid "Quit application"
+msgstr "Esci dall'applicazione"
+
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:7
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:11
+msgid "Read xkcd: a webcomic of romance, sarcasm, math, and language"
+msgstr "Leggi xkcd: un webcomic di romanticismo, sarcasmo, matematica e lingua"
+
+#: internal/widget/bookmarks-menu.go:154
+msgid "Remove from bookmarks"
+msgstr "Rimuovi questo fumetto dai preferiti"
+
+#: internal/widget/zoom-box.go:51 internal/widget/shortcuts-window.ui:110
+msgid "Reset zoom"
+msgstr ""
+
+#: internal/widget/shortcuts-window.ui:79
+msgid "Search"
+msgstr "Cerca"
+
+#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
+msgid "Search comics"
+msgstr "Cerca fumetti"
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:16
+msgid "Search for comics"
+msgstr "Cerca fumetti"
+
+#: internal/widget/properties-dialog.go:85
+msgid "Title"
+msgstr "Titolo"
+
+#: internal/widget/dark-mode-switch.go:42 internal/widget/app-menu.ui:18
+#: internal/widget/shortcuts-window.ui:156
+msgid "Toggle dark mode"
+msgstr "Abilità modalità scura"
+
+#: internal/widget/properties-dialog.go:109
+msgid "Transcript"
+msgstr "Trascrizione"
+
+#: internal/widget/search-menu.go:66
+msgid "Updating comic search index..."
+msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:20
+msgid "View comic metadata"
+msgstr "Visualizza metadati fumetto"
+
+#: internal/widget/window-menu.go:85 internal/widget/app-menu.ui:24
+msgid "What If?"
+msgstr "E se?"
+
+#: internal/widget/window-menu.go:29
+msgid "Window menu"
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:6
 msgid "XKCD Viewer"
 msgstr "Visualizzatore XKCD"
 
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
-msgid "webcomic;romance;sarcasm;math;language;"
-msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:19
-#: internal/widget/app-menu.ui:6
-msgid "New window"
-msgstr "Nuova Finestra"
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
-#: internal/widget/app-menu.ui:12
-msgid "Cache manager"
-msgstr ""
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:29
-#: internal/widget/app-menu.ui:42 internal/widget/shortcuts-window.ui:4
-msgid "Keyboard shortcuts"
-msgstr "Tasti Rapidi"
-
-#: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
-#: internal/widget/app-menu.ui:46
-msgid "About"
-msgstr "Informazioni"
-
-#: internal/widget/app-menu.ui:18 internal/widget/shortcuts-window.ui:156
-msgid "Toggle dark mode"
-msgstr "Abilità modalità scura"
-
-#: internal/widget/app-menu.ui:24
-msgid "What If?"
-msgstr "E se?"
-
-#: internal/widget/app-menu.ui:28
-msgid "xkcd blog"
-msgstr "xkcd blog"
-
-#: internal/widget/app-menu.ui:32
-msgid "xkcd books"
-msgstr ""
-
-#: internal/widget/app-menu.ui:36
-msgid "About xkcd"
-msgstr "Informazioni su xkcd"
-
-#: internal/widget/app-menu.ui:50
-msgid "Quit"
-msgstr "Esci"
-
-#: internal/widget/shortcuts-window.ui:11
-msgid "General"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:15
-msgid "Open new window"
-msgstr "Apri nuova finestra"
-
-#: internal/widget/shortcuts-window.ui:22
-msgid "Close window"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:29
-msgid "Open window menu"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:38
-msgid "Navigate"
-msgstr "Naviga"
-
-#: internal/widget/shortcuts-window.ui:42
-msgid "Go to the first comic"
-msgstr "Vai al primo fumetto"
-
-#: internal/widget/shortcuts-window.ui:49
-msgid "Go to the previous comic"
-msgstr "Vai al fumetto precedente"
-
-#: internal/widget/shortcuts-window.ui:56
-msgid "Go to the next comic"
-msgstr "Vai al prossimo fumetto"
-
-#: internal/widget/shortcuts-window.ui:63
-msgid "Go to the newest comic"
-msgstr "Vai al fumetto più recente"
-
-#: internal/widget/shortcuts-window.ui:70
-msgid "Go to a random comic"
-msgstr "Vai ad un fumetto a caso"
-
-#: internal/widget/shortcuts-window.ui:79
-msgid "Search"
-msgstr "Cerca"
-
-#: internal/widget/shortcuts-window.ui:83
-msgid "Search comics"
-msgstr "Cerca fumetti"
-
 #: internal/widget/shortcuts-window.ui:92
 msgid "Zoom"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:96
+#: internal/widget/zoom-box.go:59 internal/widget/shortcuts-window.ui:96
 msgid "Zoom in"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:103
+#: internal/widget/zoom-box.go:38 internal/widget/shortcuts-window.ui:103
 msgid "Zoom out"
 msgstr ""
 
-#: internal/widget/shortcuts-window.ui:110
-msgid "Reset zoom"
+#: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
+msgid "webcomic;romance;sarcasm;math;language;"
+msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"
+
+#: internal/widget/window-menu.go:86 internal/widget/app-menu.ui:28
+msgid "xkcd blog"
+msgstr "xkcd blog"
+
+#: internal/widget/window-menu.go:87 internal/widget/app-menu.ui:32
+msgid "xkcd books"
 msgstr ""
-
-#: internal/widget/shortcuts-window.ui:119
-msgid "Bookmarks"
-msgstr "Segnalibri"
-
-#: internal/widget/shortcuts-window.ui:123
-msgid "Bookmark this comic"
-msgstr "Aggiungi questo fumetto ai preferiti"
-
-#: internal/widget/shortcuts-window.ui:130
-msgid "Open bookmarks menu"
-msgstr "Mostra menu segnalibri"
-
-#: internal/widget/shortcuts-window.ui:139
-msgid "Properties"
-msgstr "Proprietà"
-
-#: internal/widget/shortcuts-window.ui:143
-msgid "Open properties window"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:152
-msgid "Application"
-msgstr ""
-
-#: internal/widget/shortcuts-window.ui:163
-msgid "Open shortcuts window"
-msgstr "Apri la finestra delle scorciatoie"
-
-#: internal/widget/shortcuts-window.ui:170
-msgid "Quit application"
-msgstr "Esci dall'applicazione"
-
-#~ msgid "A simple xkcd viewer written in Go using GTK+3"
-#~ msgstr "Un semplice visualizzatore xkcd scritto in Go usando GTK+3"
-
-#~ msgid "Add to bookmarks"
-#~ msgstr "Aggiungi questo fumetto ai preferiti"
-
-#~ msgid "Alt text"
-#~ msgstr "Ferma Testo"
-
-#~ msgid "Checking for new comic..."
-#~ msgstr "Verifica di nuovi fumetti..."
-
-#~ msgid "Comic not found"
-#~ msgstr "Fumetto non trovato"
-
-#~ msgid "Connect to the internet to download comic image"
-#~ msgstr "Collegati a Internet per scaricare l'immagine del fumetto"
-
-#~ msgid "Connect to the internet to download some comics!"
-#~ msgstr "Collegati a Internet per scaricare alcuni fumetti!"
-
-#~ msgid "Couldn't get comic"
-#~ msgstr "Impossibile ottenere fumetto"
-
-#~ msgid "Dark mode"
-#~ msgstr "Modalità scura"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgid "Explain"
-#~ msgstr "Spiega"
-
-#~ msgid "Image"
-#~ msgstr "Immagine"
-
-#~ msgid "Link"
-#~ msgstr "Link"
-
-#~ msgid "Loading comic..."
-#~ msgstr "Caricamento fumetto..."
-
-#~ msgid "News"
-#~ msgstr "Novità"
-
-#~ msgid "No results found"
-#~ msgstr "Nessun risultato trovato"
-
-#~ msgid "Number"
-#~ msgstr "Numero"
-
-#~ msgid "Open link"
-#~ msgstr "Apri Link"
-
-#~ msgid "Remove from bookmarks"
-#~ msgstr "Rimuovi questo fumetto dai preferiti"
-
-#~ msgid "Title"
-#~ msgstr "Titolo"
-
-#~ msgid "Transcript"
-#~ msgstr "Trascrizione"
-
-#~ msgid "Updating comic search index..."
-#~ msgstr "Aggiornamento dell'indice di ricerca del fumetto..."
 
 #~ msgid "Search Index Update"
 #~ msgstr "Cerca aggiornamento indice"
