@@ -445,7 +445,7 @@ func (win *ApplicationWindow) updateZoomButtonStatus() {
 
 // Explain opens a link to explainxkcd.com in the user's web browser.
 func (win *ApplicationWindow) Explain() {
-	win.app.OpenURL(fmt.Sprintf("https://www.explainxkcd.com/%v/", win.comicNumber()))
+	win.app.OpenURL(fmt.Sprintf("https://www.explainxkcd.com/%v/#Explanation", win.comicNumber()))
 }
 
 // OpenLink opens the comic's Link in the user's web browser.
