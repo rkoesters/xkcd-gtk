@@ -44,6 +44,7 @@ jobs:
 
       - name: Set up Go cache
         uses: actions/cache@v3
+        if: ${{ matrix.language == 'go' }}
         with:
           path: |
             ${{ env.GOCACHE }}
