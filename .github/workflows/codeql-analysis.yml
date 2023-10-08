@@ -41,6 +41,7 @@ jobs:
           languages: ${{ matrix.language }}
 
       - name: Initialize Set up Go cache
+        if: ${{ matrix.language == 'go' }}
         run: |
           go version | sed 's/^go version /GOVERSION=/' | \
           tr ' /' '-' >>$GITHUB_ENV
@@ -48,8 +49,8 @@ jobs:
           go env GOMODCACHE | sed 's/^/GOMODCACHE=/' >>$GITHUB_ENV
 
       - name: Set up Go cache
-        uses: actions/cache@v3
         if: ${{ matrix.language == 'go' }}
+        uses: actions/cache@v3
         with:
           path: |
             ${{ env.GOCACHE }}
