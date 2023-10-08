@@ -40,7 +40,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
-      - name: Set up GITHUB_ENV
+      - name: Initialize Set up Go cache
         run: |
           go version | sed 's/^go version /GOVERSION=/' | \
           tr ' /' '-' >>$GITHUB_ENV
