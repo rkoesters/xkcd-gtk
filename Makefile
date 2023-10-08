@@ -37,7 +37,7 @@ APPDATA = data/$(APP).appdata.xml
 MODULE_PACKAGES = $(MODULE)/cmd/... $(MODULE)/internal/...
 BUILD_PACKAGE   = $(MODULE)/internal/build
 BUILD_DATA      = app-id=$(APP),version=$(shell tools/app-version.sh)
-TAGS            = $(shell tools/gtk-version.sh) $(shell tools/pango-version.sh)
+TAGS            = $(shell tools/pkg-config-tags.sh)
 
 GO_SOURCES  = $(shell find cmd internal -name '*.go' -type f)
 CSS_SOURCES = $(shell find cmd internal -name '*.css' -type f)
