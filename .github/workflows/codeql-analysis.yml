@@ -30,12 +30,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Initialize Go
-        uses: actions/setup-go@v4
-        with:
-          go-version-file: go.mod
-          cache: true
-
       - name: Install build dependencies
         run: |
           sudo apt-get update && \
