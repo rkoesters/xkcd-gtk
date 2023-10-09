@@ -317,6 +317,10 @@ msgstr ""
 msgid "Zoom out"
 msgstr ""
 
+#: internal/widget/about-dialog.go:22
+msgid "translator-credits"
+msgstr "Albano Battistella"
+
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "webcomic;romanticismo;sarcasmo;matematica;lingua;"

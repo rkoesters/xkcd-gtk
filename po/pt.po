@@ -322,6 +322,10 @@ msgstr ""
 msgid "Zoom out"
 msgstr ""
 
+#: internal/widget/about-dialog.go:22
+msgid "translator-credits"
+msgstr "André Barata"
+
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "banda desenhada;romance;sarcasmo;matemática;linguagem;"

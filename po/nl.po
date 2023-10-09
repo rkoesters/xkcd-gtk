@@ -316,6 +316,10 @@ msgstr "Inzoomen"
 msgid "Zoom out"
 msgstr "Uitzoomen"
 
+#: internal/widget/about-dialog.go:22
+msgid "translator-credits"
+msgstr "Heimen Stoffels"
+
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "online;strip;romantiek;sarcasme;wiskunde;taal;"
