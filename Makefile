@@ -45,7 +45,6 @@ UI_SOURCES  = $(shell find cmd internal -name '*.ui' -type f)
 SH_SOURCES  = $(shell find tools -name '*.sh' -type f)
 
 POT      = po/$(APP).pot
-POTFILES = $(shell cat po/POTFILES)
 LINGUAS  = $(shell cat po/LINGUAS)
 PO       = $(shell find po -name '*.po' -type f)
 MO       = $(patsubst %.po,%.mo,$(PO))
@@ -65,11 +64,11 @@ $(EXEC): Makefile $(GO_SOURCES) $(CSS_SOURCES) $(UI_SOURCES) $(APPDATA)
 dev: $(APPDATA)
 	go build -o $(EXEC)-dev -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
-$(POT): $(POTFILES) tools/fill-pot-header.sh
-	xgettext -o $@ -LC -kl $(POTFLAGS) $(filter %.go,$(POTFILES))
-	xgettext -o $@ -j $(POTFLAGS) $(filter %.ui,$(POTFILES))
-	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(filter %.desktop.in,$(POTFILES))
-	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(filter %.xml.in,$(POTFILES))
+$(POT): tools/fill-pot-header.sh $(GO_SOURCES) $(UI_SOURCES) $(DESKTOP).in $(APPDATA).in
+	xgettext -o $@ -LC -kl $(POTFLAGS) $(GO_SOURCES)
+	xgettext -o $@ -j $(POTFLAGS) $(UI_SOURCES)
+	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(DESKTOP).in
+	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(APPDATA).in
 	tools/fill-pot-header.sh <$@ >$@.out
 	mv $@.out $@
 
