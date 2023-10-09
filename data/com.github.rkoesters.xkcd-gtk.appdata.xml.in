@@ -57,7 +57,7 @@
   </custom>
 
   <releases>
-    <release version="1.7.2">
+    <release version="1.7.2" date="2023-10-08">
       <description translatable="no">
         <p>Update Dutch translations (thanks to Vistaus).</p>
         <p>Minor improvements:</p>
