@@ -13,15 +13,18 @@ import (
 
 var imageFileNameRegex = regexp.MustCompile("^[0-9][0-9]*$")
 
+// Stat represents a cache statistic.
 type Stat struct {
 	LatestComicNumber int
 	CachedCount       int
 }
 
+// Complete returns true if s represents a full cache.
 func (s Stat) Complete() bool {
 	return s.LatestComicNumber == s.CachedCount
 }
 
+// Fraction returns a float64 representing the fullness of s.
 func (s Stat) Fraction() (float64, error) {
 	if s.LatestComicNumber == 0 {
 		return 0, errors.New("division by zero")
@@ -29,6 +32,7 @@ func (s Stat) Fraction() (float64, error) {
 	return float64(s.CachedCount) / float64(s.LatestComicNumber), nil
 }
 
+// String returns a string representation of s.
 func (s Stat) String() string {
 	var b strings.Builder
 	b.WriteString(strconv.Itoa(s.CachedCount))
@@ -37,6 +41,8 @@ func (s Stat) String() string {
 	return b.String()
 }
 
+// StatMetadata returns a Stat for the comic metadata cache. Should not be
+// called directly in the UI event loop.
 func StatMetadata() (Stat, error) {
 	var s Stat
 	latestComic, err := CheckForNewestComicInfo(time.Minute)
@@ -76,6 +82,8 @@ func countCachedMetadata() (int, error) {
 	return count, err
 }
 
+// StatImages returns a Stat for the comic image cache. Should not be called
+// directly in the UI event loop.
 func StatImages() (Stat, error) {
 	var s Stat
 	latestComic, err := CheckForNewestComicInfo(time.Minute)

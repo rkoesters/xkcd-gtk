@@ -11,9 +11,12 @@ type ViewRefreshWither interface {
 // All methods must silently accept a nil receiver.
 type ViewRefresher interface {
 	ViewRefreshWither
+
 	// RefreshMetadata queries StatMetadata then calls RefreshMetadataWith.
+	// Should not be called directly in the UI event loop.
 	RefreshMetadata()
-	// RefreshImages queries StatImages then calls RefreshImagesWith.
+	// RefreshImages queries StatImages then calls RefreshImagesWith. Should
+	// not be called directly in the UI event loop.
 	RefreshImages()
 }
 
