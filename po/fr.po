@@ -234,7 +234,8 @@ msgid "Properties"
 msgstr "Propriétés"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:21
-msgid "Quickly access comic explainations via the explain xkcd wiki"
+#, fuzzy
+msgid "Quickly access comic explainations via explainxkcd.com"
 msgstr "Accédez rapidement aux explications de la BD via le wiki de XKCD"
 
 #: internal/widget/app-menu.ui:50

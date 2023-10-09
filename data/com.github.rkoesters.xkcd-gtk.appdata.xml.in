@@ -18,7 +18,7 @@
       <li>Cache comics for later offline viewing</li>
       <li>Dark mode for late night reading</li>
       <li>View comic metadata</li>
-      <li>Quickly access comic explainations via the explain xkcd wiki</li>
+      <li>Quickly access comic explainations via explainxkcd.com</li>
     </ul>
   </description>
   <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
@@ -57,6 +57,19 @@
   </custom>
 
   <releases>
+    <release version="1.7.2">
+      <description translatable="no">
+        <p>Update Dutch translations (thanks to Vistaus).</p>
+        <p>Minor improvements:</p>
+        <ul>
+          <li>The explain comic action now scrolls directly to the explanation.</li>
+          <li>Add icons to app actions in application metadata.</li>
+          <li>ChromeOS theming fixes.</li>
+          <li>Minor packaging fixes.</li>
+          <li>Dependency updates.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.7.1" date="2023-03-19">
       <description translatable="no">
         <p>Minor packaging fixes.</p>
