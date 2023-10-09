@@ -65,9 +65,9 @@ dev: $(APPDATA)
 	go build -o $(EXEC)-dev -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 $(POT): tools/fill-pot-header.sh $(GO_SOURCES) $(UI_SOURCES) $(DESKTOP).in $(APPDATA).in
-	xgettext -o $@ -LC -kl $(POTFLAGS) $(GO_SOURCES)
+	xgettext -o $@ --language=C -kl $(POTFLAGS) $(GO_SOURCES)
 	xgettext -o $@ -j $(POTFLAGS) $(UI_SOURCES)
-	xgettext -o $@ -j -k -kName -kGenericName -kComment -kKeywords $(POTFLAGS) $(DESKTOP).in
+	xgettext -o $@ -j --language=Desktop $(POTFLAGS) $(DESKTOP).in
 	xgettext -o $@ -j --its=po/appdata.its $(POTFLAGS) $(APPDATA).in
 	tools/fill-pot-header.sh <$@ >$@.out
 	mv $@.out $@
