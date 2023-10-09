@@ -320,6 +320,10 @@ msgstr "Yaklaştır"
 msgid "Zoom out"
 msgstr "Uzaklaştır"
 
+#: internal/widget/about-dialog.go:22
+msgid "translator-credits"
+msgstr "Sabri Ünal"
+
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:15
 msgid "webcomic;romance;sarcasm;math;language;"
 msgstr "web çizgi roman;aşk;alaycılık;matematik;dil;"
