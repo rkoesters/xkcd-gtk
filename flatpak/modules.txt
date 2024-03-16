@@ -112,7 +112,7 @@ github.com/golang/protobuf/proto
 # github.com/golang/snappy v0.0.1
 ## explicit
 github.com/golang/snappy
-# github.com/gotk3/gotk3 v0.6.2
+# github.com/gotk3/gotk3 v0.6.3
 ## explicit; go 1.14
 github.com/gotk3/gotk3/cairo
 github.com/gotk3/gotk3/gdk
@@ -135,7 +135,7 @@ github.com/rkoesters/xdg/basedir
 # github.com/rkoesters/xkcd v1.4.0
 ## explicit; go 1.13
 github.com/rkoesters/xkcd
-# go.etcd.io/bbolt v1.3.7
+# go.etcd.io/bbolt v1.3.9
 ## explicit; go 1.17
 go.etcd.io/bbolt
 # golang.org/x/sys v0.5.0

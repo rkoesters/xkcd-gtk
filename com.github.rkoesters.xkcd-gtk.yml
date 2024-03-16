@@ -164,7 +164,7 @@ modules:
 
       - type: git
         url: https://github.com/gotk3/gotk3.git
-        tag: v0.6.2
+        tag: v0.6.3
         dest: vendor/github.com/gotk3/gotk3
 
       - type: git
@@ -185,7 +185,7 @@ modules:
 
       - type: git
         url: https://github.com/etcd-io/bbolt.git
-        tag: v1.3.7
+        tag: v1.3.9
         dest: vendor/go.etcd.io/bbolt
 
       - type: git
