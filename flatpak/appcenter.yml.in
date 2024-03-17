@@ -48,5 +48,5 @@ modules:
       - type: archive
         only-arches: [aarch64]
         url: https://go.dev/dl/go1.21.8.linux-arm64.tar.gz
-        sha256: b25f37fcfc171514497f4a7ebc2e8cb945ee89cf142cd677d2fe5e79001cfa09
+        sha256: 3c19113c686ffa142e9159de1594c952dee64d5464965142d222eab3a81f1270
         dest: go
