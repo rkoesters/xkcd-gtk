@@ -58,7 +58,7 @@
 
   <releases>
     <release version="1.7.2" date="2023-10-08">
-      <description translatable="no">
+      <description translate="no">
         <p>Update Dutch translations (thanks to Vistaus).</p>
         <p>Minor improvements:</p>
         <ul>
@@ -71,12 +71,12 @@
       </description>
     </release>
     <release version="1.7.1" date="2023-03-19">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor packaging fixes.</p>
       </description>
     </release>
     <release version="1.7.0" date="2023-03-19">
-      <description translatable="no">
+      <description translate="no">
         <p>Add the cache management window, allowing you to download all comic images in preparation for being offline.</p>
         <p>Add or remove bookmarks with one button click.</p>
         <p>Keyboard shortcut changes:</p>
@@ -88,7 +88,7 @@
       </description>
     </release>
     <release version="1.6.5" date="2022-07-31">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor improvements:</p>
         <ul>
           <li>Overhaul search and bookmark menus to improve performance with large lists</li>
@@ -98,7 +98,7 @@
       </description>
     </release>
     <release version="1.6.4" date="2022-07-16">
-      <description translatable="no">
+      <description translate="no">
         <p>Add a couple new keyboard shortcuts and add some common aliases for existing keyboard shortcuts. Open the shortcuts window with ctrl+? to check out what's new!</p>
         <p>Other improvements:</p>
         <ul>
@@ -108,7 +108,7 @@
       </description>
     </release>
     <release version="1.6.3" date="2022-07-09">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor improvements:</p>
         <ul>
           <li>Fix crash when closing window in desktop environments that show an app menu</li>
@@ -119,7 +119,7 @@
       </description>
     </release>
     <release version="1.6.2" date="2022-07-04">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor improvements:</p>
         <ul>
           <li>Fix keyboard navigation for dark mode switch</li>
@@ -129,7 +129,7 @@
       </description>
     </release>
     <release version="1.6.1" date="2022-06-30">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor improvements:</p>
         <ul>
           <li>The dark mode toggle in the window menu is now a switch</li>
@@ -141,7 +141,7 @@
       </description>
     </release>
     <release version="1.6.0" date="2022-06-20">
-      <description translatable="no">
+      <description translate="no">
         <p>The zoom update!</p>
         <ul>
           <li>Zoom in and out to get a better look at comics</li>
@@ -151,7 +151,7 @@
       </description>
     </release>
     <release version="1.5.3" date="2022-06-18">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Fixes and tweaks to app UI text and translations</li>
@@ -160,7 +160,7 @@
       </description>
     </release>
     <release version="1.5.2" date="2022-02-13">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Improve caching behavior of "Newest Comic" button</li>
@@ -170,7 +170,7 @@
       </description>
     </release>
     <release version="1.5.1" date="2021-10-23">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Fix a localization bug</li>
@@ -178,7 +178,7 @@
       </description>
     </release>
     <release version="1.5.0" date="2021-10-22">
-      <description translatable="no">
+      <description translate="no">
         <p>The context menu update!</p>
         <ul>
           <li>Add a context menu when right-clicking on a comic</li>
@@ -189,7 +189,7 @@
       </description>
     </release>
     <release version="1.4.4" date="2021-10-18">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Improve appearance of window menu, including shortcut hints where applicable</li>
@@ -198,7 +198,7 @@
       </description>
     </release>
     <release version="1.4.3" date="2021-10-16">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Minor performance improvements</li>
@@ -206,7 +206,7 @@
       </description>
     </release>
     <release version="1.4.2" date="2021-07-18">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Improve UI contrast in dark mode by always using symbolic icons while in dark mode</li>
@@ -215,12 +215,12 @@
       </description>
     </release>
     <release version="1.4.1" date="2021-07-17">
-      <description translatable="no">
+      <description translate="no">
         <p>Improve dark mode on elementary OS by making the title bar dark instead of pastel blue.</p>
       </description>
     </release>
     <release version="1.4.0" date="2021-06-09">
-      <description translatable="no">
+      <description translate="no">
         <p>Major fixes:</p>
         <ul>
           <li>Move the random comic button to sit between the other navigation buttons</li>
@@ -231,7 +231,7 @@
       </description>
     </release>
     <release version="1.3.4" date="2021-05-30">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Add Portuguese translations (Thanks to rottenpants466)</li>
@@ -242,7 +242,7 @@
       </description>
     </release>
     <release version="1.3.2" date="2020-02-08">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Add Italian translations (Thanks to albanobattistella)</li>
@@ -252,7 +252,7 @@
       </description>
     </release>
     <release version="1.3.1" date="2019-11-08">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Add loading icon while fetching comic</li>
@@ -261,7 +261,7 @@
       </description>
     </release>
     <release version="1.3.0" date="2019-05-11">
-      <description translatable="no">
+      <description translate="no">
         <p>The bookmarks update!</p>
         <ul>
           <li>Add bookmarks for keeping track of comics</li>
@@ -270,7 +270,7 @@
       </description>
     </release>
     <release version="1.2.0" date="2019-05-03">
-      <description translatable="no">
+      <description translate="no">
         <p>The localization update!</p>
         <ul>
           <li>Add support for translations (user interface only, comics will remain in their original language)</li>
@@ -279,17 +279,17 @@
       </description>
     </release>
     <release version="1.1.3" date="2019-01-14">
-      <description translatable="no">
+      <description translate="no">
         <p>Fix for changes to xkcd API encoding.</p>
       </description>
     </release>
     <release version="1.1.2" date="2018-11-16">
-      <description translatable="no">
+      <description translate="no">
         <p>Fix restoring of window state when maximized.</p>
       </description>
     </release>
     <release version="1.1.1" date="2018-11-04">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Add keyboard shortcut for dark mode</li>
@@ -298,7 +298,7 @@
       </description>
     </release>
     <release version="1.1.0" date="2018-10-30">
-      <description translatable="no">
+      <description translate="no">
         <p>The dark mode update!</p>
         <ul>
           <li>Add dark mode that inverts the comic image to improve readability in the dark</li>
@@ -309,17 +309,17 @@
       </description>
     </release>
     <release version="1.0.4" date="2018-10-22">
-      <description translatable="no">
+      <description translate="no">
         <p>Update app metadata to pass appstream-util validate-relax.</p>
       </description>
     </release>
     <release version="1.0.3" date="2018-10-21">
-      <description translatable="no">
+      <description translate="no">
         <p>Revert fuzzy searching due to regressions.</p>
       </description>
     </release>
     <release version="1.0.2" date="2018-10-21">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor fixes:</p>
         <ul>
           <li>Use fuzzy searching</li>
@@ -328,12 +328,12 @@
       </description>
     </release>
     <release version="1.0.1" date="2018-10-19">
-      <description translatable="no">
+      <description translate="no">
         <p>Update OARS metadata.</p>
       </description>
     </release>
     <release version="1.0.0" date="2018-10-18">
-      <description translatable="no">
+      <description translate="no">
         <p>First stable release!</p>
         <ul>
           <li>Improve startup time</li>
