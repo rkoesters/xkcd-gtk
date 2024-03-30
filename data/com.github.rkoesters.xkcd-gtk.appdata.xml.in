@@ -23,6 +23,8 @@
   </description>
   <url type="homepage">https://github.com/rkoesters/xkcd-gtk</url>
   <url type="bugtracker">https://github.com/rkoesters/xkcd-gtk/issues</url>
+  <url type="vcs-browser">https://github.com/rkoesters/xkcd-gtk</url>
+  <url type="translate">https://github.com/rkoesters/xkcd-gtk/tree/main/po</url>
 
   <developer_name>Ryan Koesters</developer_name>
   <update_contact>https://github.com/rkoesters/xkcd-gtk/issues</update_contact>
