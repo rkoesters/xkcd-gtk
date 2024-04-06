@@ -8,6 +8,7 @@ TESTFLAGS  = -race -cover
 VETFLAGS   = -v
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 FPBFLAGS   = --user --force-clean
+ASVFLAGS   = --explain --pedantic --override=cid-contains-hyphen=pedantic
 
 ################################################################################
 # Install Variables
@@ -129,8 +130,8 @@ check: $(APPDATA) $(FLATPAK_YML)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA) $(ICON) $(UI_SOURCES)
 	yamllint .github/workflows/*.yml $(FLATPAK_YML)
-	-appstreamcli validate --no-net --explain --pedantic $(APPDATA)
-	-appstreamcli validate --strict --explain --pedantic $(APPDATA)
+	-appstreamcli validate $(ASVFLAGS) --no-net $(APPDATA)
+	-appstreamcli validate $(ASVFLAGS) --strict $(APPDATA)
 
 test: $(FLATPAK_YML) $(APPDATA)
 	go test -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS)" $(TESTFLAGS) $(MODULE_PACKAGES)
