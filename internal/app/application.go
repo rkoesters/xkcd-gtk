@@ -4,10 +4,8 @@ package app
 import (
 	"errors"
 	"flag"
-	"math/rand"
 	"os"
 	"sync"
-	"time"
 
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
@@ -115,9 +113,6 @@ func (app *Application) Startup() {
 
 	app.LoadBookmarks()
 	app.SetupCache()
-
-	// ApplicationWindow.RandomComic() would like a seeded PRNG.
-	rand.Seed(time.Now().Unix())
 }
 
 // Shutdown is called when the "shutdown" signal is emitted.
