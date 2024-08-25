@@ -16,9 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         go:
-          - 1.18.x  # ubuntu jammy
-          - 1.19.x  # debian bookworm
-          - 1.20.x
+          - 1.21.x
+          - 1.22.x  # ubuntu noble
           - 1.x     # latest
         include:
           - staticcheck: latest
