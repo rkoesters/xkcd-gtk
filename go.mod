@@ -1,6 +1,7 @@
 module github.com/rkoesters/xkcd-gtk
 
 go 1.21
+toolchain go1.22.5
 
 require (
 	github.com/blevesearch/bleve/v2 v2.4.0
@@ -8,7 +9,7 @@ require (
 	github.com/gotk3/gotk3 v0.6.3
 	github.com/rkoesters/xdg v0.0.1
 	github.com/rkoesters/xkcd v1.4.0
-	go.etcd.io/bbolt v1.3.9
+	go.etcd.io/bbolt v1.3.11
 )
 
 require (
