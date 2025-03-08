@@ -119,7 +119,7 @@ github.com/golang/protobuf/proto
 # github.com/golang/snappy v0.0.1
 ## explicit
 github.com/golang/snappy
-# github.com/gotk3/gotk3 v0.6.3
+# github.com/gotk3/gotk3 v0.6.5-0.20240618185848-ff349ae13f56
 ## explicit; go 1.14
 github.com/gotk3/gotk3/cairo
 github.com/gotk3/gotk3/gdk

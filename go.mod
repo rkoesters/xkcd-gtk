@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/blevesearch/bleve/v2 v2.4.0
 	github.com/emirpasic/gods v1.18.1
-	github.com/gotk3/gotk3 v0.6.3
+	github.com/gotk3/gotk3 v0.6.5-0.20240618185848-ff349ae13f56
 	github.com/rkoesters/xdg v0.0.1
 	github.com/rkoesters/xkcd v1.4.0
 	go.etcd.io/bbolt v1.3.9
