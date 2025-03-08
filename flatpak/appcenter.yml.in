@@ -41,12 +41,12 @@ modules:
 
       - type: archive
         only-arches: [x86_64]
-        url: https://go.dev/dl/go1.21.13.linux-amd64.tar.gz
-        sha256: 502fc16d5910562461e6a6631fb6377de2322aad7304bf2bcd23500ba9dab4a7
+        url: https://go.dev/dl/go1.24.1.linux-amd64.tar.gz
+        sha256: cb2396bae64183cdccf81a9a6df0aea3bce9511fc21469fb89a0c00470088073
         dest: go
 
       - type: archive
         only-arches: [aarch64]
-        url: https://go.dev/dl/go1.21.13.linux-arm64.tar.gz
-        sha256: 2ca2d70dc9c84feef959eb31f2a5aac33eefd8c97fe48f1548886d737bffabd4
+        url: https://go.dev/dl/go1.24.1.linux-arm64.tar.gz
+        sha256: 8df5750ffc0281017fb6070fba450f5d22b600a02081dceef47966ffaf36a3af
         dest: go
