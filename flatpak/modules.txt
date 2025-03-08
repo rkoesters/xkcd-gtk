@@ -43,7 +43,7 @@ github.com/blevesearch/bleve/v2/search/scorer
 github.com/blevesearch/bleve/v2/search/searcher
 github.com/blevesearch/bleve/v2/size
 github.com/blevesearch/bleve/v2/util
-# github.com/blevesearch/bleve_index_api v1.1.6
+# github.com/blevesearch/bleve_index_api v1.1.7
 ## explicit; go 1.20
 github.com/blevesearch/bleve_index_api
 # github.com/blevesearch/geo v0.1.20

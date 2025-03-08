@@ -68,7 +68,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve_index_api.git
-        tag: v1.1.6
+        tag: v1.1.7
         dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git

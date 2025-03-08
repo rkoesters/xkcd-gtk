@@ -14,7 +14,7 @@ require (
 require (
 	github.com/RoaringBitmap/roaring v1.2.3 // indirect
 	github.com/bits-and-blooms/bitset v1.2.0 // indirect
-	github.com/blevesearch/bleve_index_api v1.1.6 // indirect
+	github.com/blevesearch/bleve_index_api v1.1.7 // indirect
 	github.com/blevesearch/geo v0.1.20 // indirect
 	github.com/blevesearch/go-faiss v1.0.13 // indirect
 	github.com/blevesearch/go-porterstemmer v1.0.3 // indirect
