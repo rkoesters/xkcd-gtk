@@ -41,7 +41,7 @@ for dep in ${deps:?}; do
   echo "      - type: git"
   echo "        url: ${remote:?}"
   case ${version:?} in
-    v[0-9].[0-9].[0-9]-*)
+    v[0-9]*.[0-9]*.[0-9]*-*)
       commit="$(echo "${version:?}" | cut -d '-' -f 3)"
       echo "        # ${version:?}"
       echo "        commit: ${commit:?}"
