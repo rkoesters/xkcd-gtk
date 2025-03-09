@@ -53,22 +53,22 @@ modules:
 
       - type: git
         url: https://github.com/RoaringBitmap/roaring.git
-        tag: v1.2.3
+        tag: v1.9.3
         dest: vendor/github.com/RoaringBitmap/roaring
 
       - type: git
         url: https://github.com/bits-and-blooms/bitset.git
-        tag: v1.2.0
+        tag: v1.12.0
         dest: vendor/github.com/bits-and-blooms/bitset
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.4.0
+        tag: v2.4.4
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
         url: https://github.com/blevesearch/bleve_index_api.git
-        tag: v1.1.7
+        tag: v1.1.12
         dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git
@@ -93,7 +93,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/scorch_segment_api.git
-        tag: v2.2.9
+        tag: v2.2.16
         dest: vendor/github.com/blevesearch/scorch_segment_api/v2
 
       - type: git
@@ -138,12 +138,13 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v15.3.13
+        tag: v15.3.16
         dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v16.0.12
+        # v16.1.9-0.20241217210638-a0519e7caf3b
+        commit: a0519e7caf3b
         dest: vendor/github.com/blevesearch/zapx/v16
 
       - type: git
