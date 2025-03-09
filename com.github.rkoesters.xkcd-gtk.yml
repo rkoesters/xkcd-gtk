@@ -191,10 +191,10 @@ modules:
 
       - type: git
         url: https://github.com/etcd-io/bbolt.git
-        tag: v1.3.9
+        tag: v1.4.0
         dest: vendor/go.etcd.io/bbolt
 
       - type: git
         url: https://go.googlesource.com/sys.git
-        tag: v0.4.0
+        tag: v0.29.0
         dest: vendor/golang.org/x/sys

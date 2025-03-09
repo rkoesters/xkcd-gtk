@@ -18,10 +18,10 @@ name_to_remote () {
 list_deps () {
   tools/list-app-deps.sh |
   tr '@' ' ' |
-  sort -r |
-  rev |
+  sort -r -V |
+  awk '{temp=$1; $1=$2; $2=temp; print}' |
   uniq -f 1 |
-  rev |
+  awk '{temp=$1; $1=$2; $2=temp; print}' |
   sort
 }
 
