@@ -9,7 +9,6 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
 	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/search"
 	"github.com/rkoesters/xkcd-gtk/internal/style"
 )
 
@@ -24,17 +23,20 @@ type SearchMenu struct {
 	resultsNone     *gtk.Label
 	resultsScroller *gtk.ScrolledWindow
 	resultsList     *ComicListView
+
+	searcher func(string) (*bleve.SearchResult, error)
 }
 
 var _ Widget = &SearchMenu{}
 
-func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int)) (*SearchMenu, error) {
+func NewSearchMenu(accels *gtk.AccelGroup, comicSetter func(int), searcher func(string) (*bleve.SearchResult, error)) (*SearchMenu, error) {
 	super, err := gtk.MenuButtonNew()
 	if err != nil {
 		return nil, err
 	}
 	sm := &SearchMenu{
 		MenuButton: super,
+		searcher:   searcher,
 	}
 
 	sm.SetTooltipText(l("Search comics"))
@@ -111,6 +113,7 @@ func (sm *SearchMenu) Dispose() {
 	}
 
 	sm.MenuButton = nil
+	sm.searcher = nil
 
 	sm.popover = nil
 	sm.popoverBox = nil
@@ -137,7 +140,7 @@ func (sm *SearchMenu) Search() {
 		}
 		return
 	}
-	result, err := search.Search(userQuery)
+	result, err := sm.searcher(userQuery)
 	if err != nil {
 		log.Print("error getting search results: ", err)
 	}

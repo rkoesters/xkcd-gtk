@@ -5,6 +5,7 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/rkoesters/xkcd-gtk/internal/bookmarks"
 	"github.com/rkoesters/xkcd-gtk/internal/cache"
+	"github.com/rkoesters/xkcd-gtk/internal/search"
 )
 
 // AppName is the user-visible name of this application.
@@ -25,5 +26,6 @@ type Application interface {
 	OpenURL(string) error
 	PrefersAppMenu() bool
 	RemoveWindow(gtk.IWindow)
+	SearchIndex() *search.Index
 	SetDarkMode(bool)
 }

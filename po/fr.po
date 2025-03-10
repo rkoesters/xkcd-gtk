@@ -78,7 +78,7 @@ msgstr "Recherche d'une nouvelle bande dessinée…"
 msgid "Close window"
 msgstr ""
 
-#: internal/widget/application.go:11
+#: internal/widget/application.go:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
@@ -196,7 +196,7 @@ msgstr "Nouvelle fenêtre"
 msgid "News"
 msgstr "Actualités"
 
-#: internal/widget/search-menu.go:79
+#: internal/widget/search-menu.go:81
 msgid "No results found"
 msgstr ""
 
@@ -265,7 +265,7 @@ msgstr ""
 msgid "Search"
 msgstr "Rechercher"
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Rechercher des BD"
 
@@ -286,7 +286,7 @@ msgstr "Activer le thème sombre"
 msgid "Transcript"
 msgstr "Transcription"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:68
 msgid "Updating comic search index..."
 msgstr "Mise à jour de l'index de recherche des BD…"
 

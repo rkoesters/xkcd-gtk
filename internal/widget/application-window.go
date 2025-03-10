@@ -166,7 +166,7 @@ func NewApplicationWindow(app Application) (*ApplicationWindow, error) {
 	win.header.PackEnd(win.windowMenu)
 
 	// Create the search menu.
-	win.searchMenu, err = NewSearchMenu(accels, win.SetComic)
+	win.searchMenu, err = NewSearchMenu(accels, win.SetComic, app.SearchIndex().Search)
 	if err != nil {
 		return nil, err
 	}

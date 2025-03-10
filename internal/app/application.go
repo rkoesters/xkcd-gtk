@@ -38,8 +38,9 @@ type Application struct {
 	cacheWindow      *widget.CacheWindow
 	cacheWindowMutex sync.RWMutex
 
-	settings  state.Application
-	bookmarks bookmarks.List
+	settings    state.Application
+	bookmarks   bookmarks.List
+	searchIndex search.Index
 }
 
 // New creates an instance of our GTK Application.
@@ -145,20 +146,22 @@ func (app *Application) SetupCache() {
 	log.Debug("SetupCache() start")
 	defer log.Debug("SetupCache() end")
 
-	log.Debug("calling cache.Init()")
-	err := cache.Init(search.Index)
+	log.Debug("Initializing comic cache")
+	err := cache.Init(app.searchIndex.Index)
 	if err != nil {
 		log.Fatal("error initializing comic cache: ", err)
 	}
 
-	log.Debug("calling search.Init()")
-	err = search.Init()
+	paths.CheckForMisplacedSearchIndex()
+	sipath := paths.SearchIndex()
+	log.Debugf("Initializing search index %q", sipath)
+	app.searchIndex, err = search.New(sipath)
 	if err != nil {
-		log.Fatal("error initializing search index: ", err)
+		log.Fatalf("error initializing search index %q: %v", sipath, err)
 	}
 
 	// Asynchronously fill the comic metadata cache and search index.
-	log.Debug("calling cache.DownloadAllComicMetadata()")
+	log.Debug("Filling comic metadata cache and search index in the background")
 	go cache.DownloadAllComicMetadata(app.CacheWindowVRW)
 }
 
@@ -167,16 +170,16 @@ func (app *Application) CloseCache() {
 	log.Debug("CloseCache() start")
 	defer log.Debug("CloseCache() end")
 
-	log.Debug("calling search.Close()")
-	err := search.Close()
+	log.Debug("Closing the search index")
+	err := app.searchIndex.Close()
 	if err != nil {
 		log.Print("error closing search index: ", err)
 	}
 
-	log.Debug("calling cache.Close()")
+	log.Debug("Closing the comic metadata cache")
 	err = cache.Close()
 	if err != nil {
-		log.Print("error closing comic cache: ", err)
+		log.Print("error closing comic metadata cache: ", err)
 	}
 }
 
@@ -343,6 +346,11 @@ func (app *Application) SaveBookmarks() {
 // BookmarksList returns a pointer to the app's list of bookmarks.
 func (app *Application) BookmarksList() *bookmarks.List {
 	return &app.bookmarks
+}
+
+// SearchIndex returns a pointer to the app's search index.
+func (app *Application) SearchIndex() *search.Index {
+	return &app.searchIndex
 }
 
 // ShowShortcuts shows a shortcuts window to the user.

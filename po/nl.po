@@ -21,8 +21,8 @@ msgstr ""
 #: internal/widget/about-dialog.go:19
 msgid "A simple xkcd viewer written in Go using GTK+3"
 msgstr ""
-"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en GTK"
-"+3"
+"Een eenvoudige toepassing om de xkcd-strip te lezen, geschreven in Go en "
+"GTK+3"
 
 #: internal/widget/window-menu.go:91 internal/widget/app-menu.ui:46
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:34
@@ -79,7 +79,7 @@ msgstr "Bezig met zoeken naar nieuw verhaal…"
 msgid "Close window"
 msgstr "Venster sluiten"
 
-#: internal/widget/application.go:11
+#: internal/widget/application.go:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
@@ -196,7 +196,7 @@ msgstr "Nieuw venster"
 msgid "News"
 msgstr "Nieuws"
 
-#: internal/widget/search-menu.go:79
+#: internal/widget/search-menu.go:81
 msgid "No results found"
 msgstr "Er zijn geen zoekresultaten"
 
@@ -263,7 +263,7 @@ msgstr "Oorspronkelijk zoomniveau"
 msgid "Search"
 msgstr "Zoeken"
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Verhalen doorzoeken"
 
@@ -284,7 +284,7 @@ msgstr "Donker thema aan/uit"
 msgid "Transcript"
 msgstr "Transcriptie"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:68
 msgid "Updating comic search index..."
 msgstr "Bezig met bijwerken van zoekindex…"
 

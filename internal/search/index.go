@@ -8,39 +8,38 @@ import (
 	"github.com/blevesearch/bleve/v2"
 	"github.com/blevesearch/bleve/v2/search/query"
 	"github.com/rkoesters/xkcd"
-	"github.com/rkoesters/xkcd-gtk/internal/log"
-	"github.com/rkoesters/xkcd-gtk/internal/paths"
 )
 
-var index bleve.Index
+type Index struct {
+	index bleve.Index
+}
 
-// Init initializes the search index.
-func Init() (err error) {
-	paths.CheckForMisplacedSearchIndex()
+// New initializes and returns a search index. If a search index does not exist
+// at the provided path, then New will attempt to create it..
+func New(path string) (Index, error) {
+	i := Index{}
 
-	log.Debug("opening search index: ", paths.SearchIndex())
-	index, err = bleve.Open(paths.SearchIndex())
+	var err error
+	i.index, err = bleve.Open(path)
 	if err == bleve.ErrorIndexPathDoesNotExist {
-		log.Debug("search index not found, creating new search index")
 		mapping := bleve.NewIndexMapping()
-		index, err = bleve.New(paths.SearchIndex(), mapping)
+		i.index, err = bleve.New(path, mapping)
 	}
-	return
+	return i, err
 }
 
 // Close closes the search index.
-func Close() error {
-	return index.Close()
+func (i *Index) Close() error {
+	return i.index.Close()
 }
 
 // Index adds comic to the search index.
-func Index(comic *xkcd.Comic) error {
-	log.Debug("indexing: ", comic)
-	return index.Index(strconv.Itoa(comic.Num), comic)
+func (i *Index) Index(comic *xkcd.Comic) error {
+	return i.index.Index(strconv.Itoa(comic.Num), comic)
 }
 
 // Search searches the index for the given userQuery.
-func Search(userQuery string) (*bleve.SearchResult, error) {
+func (i *Index) Search(userQuery string) (*bleve.SearchResult, error) {
 	q := query.NewDisjunctionQuery([]query.Query{
 		query.NewQueryStringQuery(userQuery),
 		query.NewFuzzyQuery(userQuery),
@@ -48,5 +47,5 @@ func Search(userQuery string) (*bleve.SearchResult, error) {
 	searchRequest := bleve.NewSearchRequest(q)
 	searchRequest.Size = 100
 	searchRequest.Fields = []string{"*"}
-	return index.Search(searchRequest)
+	return i.index.Search(searchRequest)
 }

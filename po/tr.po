@@ -81,7 +81,7 @@ msgstr "Yeni karikatür denetleniyor..."
 msgid "Close window"
 msgstr "Pencereyi kapat"
 
-#: internal/widget/application.go:11
+#: internal/widget/application.go:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:5
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:10
 msgid "Comic Sticks"
@@ -198,7 +198,7 @@ msgstr "Yeni pencere"
 msgid "News"
 msgstr "Haberler"
 
-#: internal/widget/search-menu.go:79
+#: internal/widget/search-menu.go:81
 msgid "No results found"
 msgstr "Sonuç bulunamadı"
 
@@ -266,7 +266,7 @@ msgstr "Yakınlaştırmayı sıfırla"
 msgid "Search"
 msgstr "Ara"
 
-#: internal/widget/search-menu.go:40 internal/widget/shortcuts-window.ui:83
+#: internal/widget/search-menu.go:42 internal/widget/shortcuts-window.ui:83
 msgid "Search comics"
 msgstr "Karikatür ara"
 
@@ -288,7 +288,7 @@ msgstr "Koyu kipi aç/kapat"
 msgid "Transcript"
 msgstr "Yazılı metin"
 
-#: internal/widget/search-menu.go:66
+#: internal/widget/search-menu.go:68
 msgid "Updating comic search index..."
 msgstr "Karikatür arama dizini güncelleniyor..."
 
