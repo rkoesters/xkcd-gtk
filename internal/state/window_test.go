@@ -72,15 +72,15 @@ func TestWriteTo(t *testing.T) {
 func TestWindowState(t *testing.T) {
 	tests := []struct {
 		name string
-		app  state.Window
+		win  state.Window
 	}{{
 		name: "mostly default",
-		app: state.Window{
+		win: state.Window{
 			ComicNumber: 123,
 		},
 	}, {
 		name: "everything",
-		app: state.Window{
+		win: state.Window{
 			ComicNumber:         321,
 			Maximized:           true,
 			Height:              1,
@@ -100,18 +100,15 @@ func TestWindowState(t *testing.T) {
 			path := filepath.Join(t.TempDir(),
 				strings.ReplaceAll(test.name, " ", "_"))
 
-			err := test.app.WriteFile(path)
+			err := test.win.WriteFile(path)
 			if err != nil {
 				t.Fatalf("error writing %q: %v", path, err)
 			}
 
-			var app state.Application
-			err = app.ReadFile(path)
-			if err != nil {
-				t.Fatalf("error reading %q: %v", path, err)
-			}
+			var win state.Window
+			win.ReadFile(path)
 
-			if reflect.DeepEqual(test.app, app) {
+			if reflect.DeepEqual(test.win, win) {
 				t.Error("mismatch between WriteFile and ReadFile")
 			}
 		})

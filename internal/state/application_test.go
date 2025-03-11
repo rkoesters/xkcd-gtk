@@ -73,8 +73,7 @@ func TestApplicationState(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			path := filepath.Join(
-				t.TempDir(),
+			path := filepath.Join(t.TempDir(),
 				strings.ReplaceAll(test.name, " ", "_"))
 
 			err := test.app.WriteFile(path)
