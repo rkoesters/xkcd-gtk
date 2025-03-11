@@ -25,6 +25,6 @@ func CheckForMisplacedSettings() {
 
 	_, err := os.Stat(misplacedSettings)
 	if !os.IsNotExist(err) {
-		log.Printf("WARNING: Potentially misplaced settings file '%v'. Should be '%v'.", misplacedSettings, Settings())
+		log.Printf("WARNING: Potentially misplaced settings file %q. Should be %q.", misplacedSettings, Settings())
 	}
 }

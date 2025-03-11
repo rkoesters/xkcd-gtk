@@ -151,7 +151,7 @@ func checkForMisplacedWindowState() {
 
 	_, err := os.Stat(misplacedWindowState)
 	if !os.IsNotExist(err) {
-		log.Printf("WARNING: Potentially misplaced window state file '%v'. Should be '%v'.", misplacedWindowState, windowStatePath())
+		log.Printf("WARNING: Potentially misplaced window state file %q. Should be %q.", misplacedWindowState, windowStatePath())
 	}
 }
 

@@ -37,7 +37,7 @@ func TestWrite(t *testing.T) {
 	as.DarkMode = true
 	as.WriteTo(&b)
 	if b.String() != state1 {
-		t.Fatalf("b.String()='%v' state1='%v'", b.String(), state1)
+		t.Fatalf("b.String()=%q state1=%q", b.String(), state1)
 	}
 
 	b.Reset()
@@ -45,7 +45,7 @@ func TestWrite(t *testing.T) {
 	as.DarkMode = false
 	as.WriteTo(&b)
 	if b.String() != state2 {
-		t.Fatalf("b.String()='%v' state2='%v'", b.String(), state2)
+		t.Fatalf("b.String()=%q state2=%q", b.String(), state2)
 	}
 }
 

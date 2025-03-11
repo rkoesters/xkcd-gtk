@@ -304,12 +304,12 @@ func (app *Application) SaveSettings() {
 
 	err := paths.EnsureConfigDir()
 	if err != nil {
-		log.Printf("error saving settings: %v", err)
+		log.Print("error saving settings: ", err)
 	}
 
 	err = app.settings.WriteFile(paths.Settings())
 	if err != nil {
-		log.Printf("error saving settings: %v", err)
+		log.Print("error saving settings: ", err)
 	}
 }
 
@@ -334,12 +334,12 @@ func (app *Application) SaveBookmarks() {
 
 	err := paths.EnsureDataDir()
 	if err != nil {
-		log.Printf("error saving bookmarks: %v", err)
+		log.Print("error saving bookmarks: ", err)
 	}
 
 	err = app.bookmarks.WriteFile(paths.Bookmarks())
 	if err != nil {
-		log.Printf("error saving bookmarks: %v", err)
+		log.Print("error saving bookmarks: ", err)
 	}
 }
 

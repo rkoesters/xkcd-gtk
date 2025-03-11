@@ -30,7 +30,7 @@ func CheckForMisplacedBookmarks() {
 	for _, p := range misplacedBookmarksList {
 		_, err := os.Stat(p)
 		if !os.IsNotExist(err) {
-			log.Printf("WARNING: Potentially misplaced bookmarks file '%v'. Should be '%v'.", p, Bookmarks())
+			log.Printf("WARNING: Potentially misplaced bookmarks file %q. Should be %q.", p, Bookmarks())
 		}
 	}
 }

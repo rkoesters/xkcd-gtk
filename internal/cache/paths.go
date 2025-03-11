@@ -19,7 +19,7 @@ func checkForMisplacedCacheFiles() {
 	for misplaced, correct := range misplacedCacheFiles {
 		_, err := os.Stat(misplaced)
 		if !os.IsNotExist(err) {
-			log.Printf("WARNING: Potentially misplaced cache file '%v'. Should be '%v'.", misplaced, correct)
+			log.Printf("WARNING: Potentially misplaced cache file %q. Should be %q.", misplaced, correct)
 		}
 	}
 }

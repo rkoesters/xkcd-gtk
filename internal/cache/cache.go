@@ -82,7 +82,7 @@ func Init(index func(comic *xkcd.Comic) error) error {
 	}
 
 	// Open comic cache database.
-	log.Debug("openning cache database: ", comicCacheDBPath())
+	log.Debugf("Opening cache database %q", comicCacheDBPath())
 	cacheDB, err = bolt.Open(comicCacheDBPath(), 0644, nil)
 	if err != nil {
 		return err

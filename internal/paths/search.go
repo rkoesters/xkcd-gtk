@@ -25,6 +25,6 @@ func CheckForMisplacedSearchIndex() {
 
 	_, err := os.Stat(misplacedSearchIndex)
 	if !os.IsNotExist(err) {
-		log.Printf("WARNING: Potentially misplaced search index '%v'. Should be '%v'.", misplacedSearchIndex, SearchIndex())
+		log.Printf("WARNING: Potentially misplaced search index %q. Should be %q.", misplacedSearchIndex, SearchIndex())
 	}
 }

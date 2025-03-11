@@ -24,8 +24,9 @@ func (b Builder) CacheDir() string {
 // EnsureCacheDir creates the CacheDir() directory, if it doesn't exist. It does
 // not return an error if it already exists.
 func (b Builder) EnsureCacheDir() error {
-	log.Debug("EnsureCacheDir: ", b.CacheDir())
-	return os.MkdirAll(b.CacheDir(), defaultDirMode)
+	p := b.CacheDir()
+	log.Debugf("Ensuring cache directory %q exists", p)
+	return os.MkdirAll(p, defaultDirMode)
 }
 
 // ConfigDir returns the path to our app's user configuration directory.
@@ -36,8 +37,9 @@ func (b Builder) ConfigDir() string {
 // EnsureConfigDir creates the ConfigDir() directory, if it doesn't exist. It
 // does not return an error if it already exists.
 func (b Builder) EnsureConfigDir() error {
-	log.Debug("EnsureConfigDir: ", b.ConfigDir())
-	return os.MkdirAll(b.ConfigDir(), defaultDirMode)
+	p := b.ConfigDir()
+	log.Debugf("Ensuring configuration directory %q exists", p)
+	return os.MkdirAll(p, defaultDirMode)
 }
 
 // DataDir returns the path to our app's user data directory.
@@ -48,8 +50,9 @@ func (b Builder) DataDir() string {
 // EnsureDataDir creates the DataDir() directory, if it doesn't exist. It does
 // not return an error if it already exists.
 func (b Builder) EnsureDataDir() error {
-	log.Debug("EnsureDataDir: ", b.DataDir())
-	return os.MkdirAll(b.DataDir(), defaultDirMode)
+	p := b.DataDir()
+	log.Debugf("Ensuring data directory %q exists", p)
+	return os.MkdirAll(p, defaultDirMode)
 }
 
 // LocaleDir returns the path to the system locale directory.

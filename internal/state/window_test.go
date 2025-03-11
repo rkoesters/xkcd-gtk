@@ -53,7 +53,7 @@ func TestWriteTo(t *testing.T) {
 			var buf bytes.Buffer
 			n, err := tc.ws.WriteTo(&buf)
 			if err != nil {
-				t.Errorf("WriteTo returned error: %q", err)
+				t.Error("WriteTo returned error: ", err)
 			}
 			if n != tc.n {
 				t.Errorf("wrote %v bytes, want %v", n, tc.n)
