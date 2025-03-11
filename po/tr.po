@@ -1,5 +1,4 @@
 # Turkish translation for Comic Sticks (xkcd-gtk).
-# Copyright (C) 2015-2022 Ryan Koesters
 # This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
 #
 # Sabri Ünal <libreajans@gmail.com>, 2022, 2023.

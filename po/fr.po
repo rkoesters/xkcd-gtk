@@ -1,5 +1,4 @@
 # Translations for Comic Sticks (xkcd-gtk).
-# Copyright (C) 2015-2020 Ryan Koesters
 # This file is distributed under the same license as the com.github.rkoesters.xkcd-gtk package.
 # NathanBnm, 2019.
 #
