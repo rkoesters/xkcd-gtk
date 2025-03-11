@@ -2,6 +2,9 @@ package state_test
 
 import (
 	"bytes"
+	"path/filepath"
+	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/rkoesters/xkcd-gtk/internal/state"
@@ -61,6 +64,55 @@ func TestWriteTo(t *testing.T) {
 			s := buf.String()
 			if s != tc.json {
 				t.Errorf("wrong json, got=%q, want=%q", s, tc.json)
+			}
+		})
+	}
+}
+
+func TestWindowState(t *testing.T) {
+	tests := []struct {
+		name string
+		app  state.Window
+	}{{
+		name: "mostly default",
+		app: state.Window{
+			ComicNumber: 123,
+		},
+	}, {
+		name: "everything",
+		app: state.Window{
+			ComicNumber:         321,
+			Maximized:           true,
+			Height:              1,
+			Width:               2,
+			PositionX:           3,
+			PositionY:           4,
+			ImageScale:          5.5,
+			PropertiesVisible:   true,
+			PropertiesHeight:    6,
+			PropertiesWidth:     7,
+			PropertiesPositionX: 8,
+			PropertiesPositionY: 9,
+		},
+	}}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			path := filepath.Join(t.TempDir(),
+				strings.ReplaceAll(test.name, " ", "_"))
+
+			err := test.app.WriteFile(path)
+			if err != nil {
+				t.Fatalf("error writing %q: %v", path, err)
+			}
+
+			var app state.Application
+			err = app.ReadFile(path)
+			if err != nil {
+				t.Fatalf("error reading %q: %v", path, err)
+			}
+
+			if reflect.DeepEqual(test.app, app) {
+				t.Error("mismatch between WriteFile and ReadFile")
 			}
 		})
 	}

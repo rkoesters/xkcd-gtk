@@ -1,6 +1,7 @@
 package state_test
 
 import (
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -56,5 +57,40 @@ func TestBadReadFrom(t *testing.T) {
 	as.ReadFrom(r)
 	if as.DarkMode {
 		t.Fatal("dark mode enabled after bad read")
+	}
+}
+
+func TestApplicationState(t *testing.T) {
+	tests := []struct {
+		name string
+		app  state.Application
+	}{{
+		name: "dark on",
+		app:  state.Application{DarkMode: true},
+	}, {
+		name: "dark off",
+		app:  state.Application{DarkMode: false},
+	}}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			path := filepath.Join(
+				t.TempDir(),
+				strings.ReplaceAll(test.name, " ", "_"))
+
+			err := test.app.WriteFile(path)
+			if err != nil {
+				t.Fatalf("error writing %q: %v", path, err)
+			}
+
+			var app state.Application
+			err = app.ReadFile(path)
+			if err != nil {
+				t.Fatalf("error reading %q: %v", path, err)
+			}
+
+			if test.app.DarkMode != app.DarkMode {
+				t.Error("mismatch between WriteFile and ReadFile")
+			}
+		})
 	}
 }
