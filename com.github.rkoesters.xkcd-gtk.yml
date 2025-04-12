@@ -53,22 +53,22 @@ modules:
 
       - type: git
         url: https://github.com/RoaringBitmap/roaring.git
-        tag: v1.9.3
-        dest: vendor/github.com/RoaringBitmap/roaring
+        tag: v2.4.5
+        dest: vendor/github.com/RoaringBitmap/roaring/v2
 
       - type: git
         url: https://github.com/bits-and-blooms/bitset.git
-        tag: v1.12.0
+        tag: v1.22.0
         dest: vendor/github.com/bits-and-blooms/bitset
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.4.4
+        tag: v2.5.0
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
         url: https://github.com/blevesearch/bleve_index_api.git
-        tag: v1.1.12
+        tag: v1.2.7
         dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git
@@ -93,7 +93,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/scorch_segment_api.git
-        tag: v2.2.16
+        tag: v2.3.9
         dest: vendor/github.com/blevesearch/scorch_segment_api/v2
 
       - type: git
@@ -113,38 +113,37 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/vellum.git
-        tag: v1.0.10
+        tag: v1.1.0
         dest: vendor/github.com/blevesearch/vellum
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v11.3.10
+        tag: v11.4.1
         dest: vendor/github.com/blevesearch/zapx/v11
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v12.3.10
+        tag: v12.4.1
         dest: vendor/github.com/blevesearch/zapx/v12
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v13.3.10
+        tag: v13.4.1
         dest: vendor/github.com/blevesearch/zapx/v13
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v14.3.10
+        tag: v14.4.1
         dest: vendor/github.com/blevesearch/zapx/v14
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v15.3.16
+        tag: v15.4.1
         dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        # v16.1.9-0.20241217210638-a0519e7caf3b
-        commit: a0519e7caf3b
+        tag: v16.2.2
         dest: vendor/github.com/blevesearch/zapx/v16
 
       - type: git
@@ -165,7 +164,7 @@ modules:
 
       - type: git
         url: https://github.com/golang/snappy.git
-        tag: v0.0.1
+        tag: v0.0.4
         dest: vendor/github.com/golang/snappy
 
       - type: git
