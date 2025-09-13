@@ -156,9 +156,11 @@ func (iv *ImageViewer) applyDarkModeImageInversion() error {
 	rowstride := iv.unscaledPixbuf.GetRowstride()
 	nChannels := iv.unscaledPixbuf.GetNChannels()
 	log.Debugf("inverting comic image: len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
-	for x := 0; x < width; x++ {
-		for y := 0; y < height; y++ {
-			index := (y * rowstride) + (x * nChannels)
+	
+	for y := 0; y < height; y++ {
+		rowstart := y * rowstride
+		for x := 0; x < width; x++ {
+			index := rowstart + (x * nChannels)
 			switch nChannels {
 			case 3, 4:
 				h, s, l := rgbToHsl(pixels[index], pixels[index+1], pixels[index+2])
