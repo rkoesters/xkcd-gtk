@@ -161,9 +161,12 @@ func (iv *ImageViewer) applyDarkModeImageInversion() error {
 			index := (y * rowstride) + (x * nChannels)
 			switch nChannels {
 			case 3, 4:
-				pixels[index] = math.MaxUint8 - pixels[index]
-				pixels[index+1] = math.MaxUint8 - pixels[index+1]
-				pixels[index+2] = math.MaxUint8 - pixels[index+2]
+				h, s, l := rgbToHsl(pixels[index], pixels[index+1], pixels[index+2])
+				l = 1 - l
+				r, g, b := hslToRgb(h, s, l)
+				pixels[index] = r
+				pixels[index+1] = g
+				pixels[index+2] = b
 			default:
 				return errors.New("unsupported number of channels")
 			}
@@ -191,4 +194,50 @@ func safeScale(scale float64) float64 {
 	default:
 		return scale
 	}
+}
+
+func rgbToHsl(r, g, b uint8) (h, s, l float64) {
+	rf := float64(r) / math.MaxUint8
+	gf := float64(g) / math.MaxUint8
+	bf := float64(b) / math.MaxUint8
+
+	max := math.Max(rf, math.Max(gf, bf))
+	min := math.Min(rf, math.Min(gf, bf))
+	c := max - min
+	l = max - (c / 2)
+
+	if l == 0 || l == 1 {
+		s = 0
+	} else {
+		s = (max - l) / math.Min(l, 1 - l)
+	}
+
+	if max == min {
+		h = 0
+	} else if max == rf {
+		h = 60 * math.Mod((gf - bf) / c, 6)
+	} else if max == gf {
+		h = 60 * ((bf - rf) / c + 2)
+	} else {
+		h = 60 * ((rf - gf) / c + 4)
+	}
+
+	if h < 0 {
+		h += 360
+	}
+	return
+}
+
+func hslToRgb(h, s, l float64) (r, g, b uint8) {
+	a := s * math.Min(l, 1 - l)
+	f := func(n float64) uint8 {
+		k := math.Mod((n + (h / 30)), 12)
+		fn := l - a * math.Max(-1, math.Min(k - 3, math.Min(9 - k, 1)))
+		return uint8(math.Round(fn * math.MaxUint8))
+	}
+
+	r = f(0)
+	g = f(8)
+	b = f(4)
+	return
 }
