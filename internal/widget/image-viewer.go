@@ -214,14 +214,17 @@ func rgbToHsl(r, g, b uint8) (h, s, l float64) {
 		s = (max - l) / math.Min(l, 1 - l)
 	}
 
-	if max == min {
+	switch max {
+	case min:
 		h = 0
-	} else if max == rf {
+	case rf:
 		h = 60 * math.Mod((gf - bf) / c, 6)
-	} else if max == gf {
+	case gf:
 		h = 60 * ((bf - rf) / c + 2)
-	} else {
+	case bf:
 		h = 60 * ((rf - gf) / c + 4)
+	default: 
+		h = 0
 	}
 
 	if h < 0 {
