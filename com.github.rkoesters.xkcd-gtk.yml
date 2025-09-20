@@ -63,17 +63,17 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.5.0
+        tag: v2.5.3
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
         url: https://github.com/blevesearch/bleve_index_api.git
-        tag: v1.2.7
+        tag: v1.2.8
         dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git
         url: https://github.com/blevesearch/geo.git
-        tag: v0.1.20
+        tag: v0.2.4
         dest: vendor/github.com/blevesearch/geo
 
       - type: git
@@ -93,7 +93,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/scorch_segment_api.git
-        tag: v2.3.9
+        tag: v2.3.10
         dest: vendor/github.com/blevesearch/scorch_segment_api/v2
 
       - type: git
@@ -118,44 +118,38 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v11.4.1
+        tag: v11.4.2
         dest: vendor/github.com/blevesearch/zapx/v11
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v12.4.1
+        tag: v12.4.2
         dest: vendor/github.com/blevesearch/zapx/v12
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v13.4.1
+        tag: v13.4.2
         dest: vendor/github.com/blevesearch/zapx/v13
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v14.4.1
+        tag: v14.4.2
         dest: vendor/github.com/blevesearch/zapx/v14
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v15.4.1
+        tag: v15.4.2
         dest: vendor/github.com/blevesearch/zapx/v15
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v16.2.2
+        tag: v16.2.4
         dest: vendor/github.com/blevesearch/zapx/v16
 
       - type: git
         url: https://github.com/emirpasic/gods.git
         tag: v1.18.1
         dest: vendor/github.com/emirpasic/gods
-
-      - type: git
-        url: https://github.com/golang/geo.git
-        # v0.0.0-20210211234256-740aa86cb551
-        commit: 740aa86cb551
-        dest: vendor/github.com/golang/geo
 
       - type: git
         url: https://github.com/golang/protobuf.git
@@ -191,7 +185,7 @@ modules:
 
       - type: git
         url: https://github.com/etcd-io/bbolt.git
-        tag: v1.4.0
+        tag: v1.4.3
         dest: vendor/go.etcd.io/bbolt
 
       - type: git
