@@ -6,7 +6,7 @@ github.com/RoaringBitmap/roaring/v2/roaring64
 # github.com/bits-and-blooms/bitset v1.22.0
 ## explicit; go 1.16
 github.com/bits-and-blooms/bitset
-# github.com/blevesearch/bleve/v2 v2.5.0
+# github.com/blevesearch/bleve/v2 v2.5.3
 ## explicit; go 1.23
 github.com/blevesearch/bleve/v2
 github.com/blevesearch/bleve/v2/analysis
@@ -47,12 +47,16 @@ github.com/blevesearch/bleve/v2/search/scorer
 github.com/blevesearch/bleve/v2/search/searcher
 github.com/blevesearch/bleve/v2/size
 github.com/blevesearch/bleve/v2/util
-# github.com/blevesearch/bleve_index_api v1.2.7
+# github.com/blevesearch/bleve_index_api v1.2.8
 ## explicit; go 1.21
 github.com/blevesearch/bleve_index_api
-# github.com/blevesearch/geo v0.1.20
-## explicit; go 1.18
+# github.com/blevesearch/geo v0.2.4
+## explicit; go 1.21.0
 github.com/blevesearch/geo/geojson
+github.com/blevesearch/geo/r1
+github.com/blevesearch/geo/r2
+github.com/blevesearch/geo/r3
+github.com/blevesearch/geo/s1
 github.com/blevesearch/geo/s2
 # github.com/blevesearch/go-faiss v1.0.25
 ## explicit; go 1.21
@@ -66,7 +70,7 @@ github.com/blevesearch/gtreap
 # github.com/blevesearch/mmap-go v1.0.4
 ## explicit; go 1.13
 github.com/blevesearch/mmap-go
-# github.com/blevesearch/scorch_segment_api/v2 v2.3.9
+# github.com/blevesearch/scorch_segment_api/v2 v2.3.10
 ## explicit; go 1.21
 github.com/blevesearch/scorch_segment_api/v2
 # github.com/blevesearch/segment v0.9.1
@@ -85,23 +89,23 @@ github.com/blevesearch/vellum
 github.com/blevesearch/vellum/levenshtein
 github.com/blevesearch/vellum/regexp
 github.com/blevesearch/vellum/utf8
-# github.com/blevesearch/zapx/v11 v11.4.1
+# github.com/blevesearch/zapx/v11 v11.4.2
 ## explicit; go 1.21
 github.com/blevesearch/zapx/v11
-# github.com/blevesearch/zapx/v12 v12.4.1
+# github.com/blevesearch/zapx/v12 v12.4.2
 ## explicit; go 1.21
 github.com/blevesearch/zapx/v12
-# github.com/blevesearch/zapx/v13 v13.4.1
+# github.com/blevesearch/zapx/v13 v13.4.2
 ## explicit; go 1.21
 github.com/blevesearch/zapx/v13
-# github.com/blevesearch/zapx/v14 v14.4.1
+# github.com/blevesearch/zapx/v14 v14.4.2
 ## explicit; go 1.21
 github.com/blevesearch/zapx/v14
-# github.com/blevesearch/zapx/v15 v15.4.1
+# github.com/blevesearch/zapx/v15 v15.4.2
 ## explicit; go 1.21
 github.com/blevesearch/zapx/v15
-# github.com/blevesearch/zapx/v16 v16.2.2
-## explicit; go 1.21
+# github.com/blevesearch/zapx/v16 v16.2.4
+## explicit; go 1.23
 github.com/blevesearch/zapx/v16
 # github.com/emirpasic/gods v1.18.1
 ## explicit; go 1.2
@@ -111,12 +115,6 @@ github.com/emirpasic/gods/sets/treeset
 github.com/emirpasic/gods/trees
 github.com/emirpasic/gods/trees/redblacktree
 github.com/emirpasic/gods/utils
-# github.com/golang/geo v0.0.0-20210211234256-740aa86cb551
-## explicit; go 1.12
-github.com/golang/geo/r1
-github.com/golang/geo/r2
-github.com/golang/geo/r3
-github.com/golang/geo/s1
 # github.com/golang/protobuf v1.3.2
 ## explicit
 github.com/golang/protobuf/proto
@@ -146,7 +144,7 @@ github.com/rkoesters/xdg/basedir
 # github.com/rkoesters/xkcd v1.4.0
 ## explicit; go 1.13
 github.com/rkoesters/xkcd
-# go.etcd.io/bbolt v1.4.0
+# go.etcd.io/bbolt v1.4.3
 ## explicit; go 1.23
 go.etcd.io/bbolt
 go.etcd.io/bbolt/errors

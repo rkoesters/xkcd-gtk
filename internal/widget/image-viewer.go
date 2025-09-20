@@ -156,7 +156,7 @@ func (iv *ImageViewer) applyDarkModeImageInversion() error {
 	rowstride := iv.unscaledPixbuf.GetRowstride()
 	nChannels := iv.unscaledPixbuf.GetNChannels()
 	log.Debugf("inverting comic image: len(pixels) = %v, colorspace = %v, alpha = %v, bitsPerSample = %v, width = %v, height = %v, rowstride = %v, nChannels = %v", len(pixels), colorspace, alpha, bitsPerSample, width, height, rowstride, nChannels)
-	
+
 	for y := 0; y < height; y++ {
 		rowstart := y * rowstride
 		for x := 0; x < width; x++ {
@@ -211,19 +211,19 @@ func rgbToHsl(r, g, b uint8) (h, s, l float64) {
 	if l == 0 || l == 1 {
 		s = 0
 	} else {
-		s = (max - l) / math.Min(l, 1 - l)
+		s = (max - l) / math.Min(l, 1-l)
 	}
 
 	switch max {
 	case min:
 		h = 0
 	case rf:
-		h = 60 * math.Mod((gf - bf) / c, 6)
+		h = 60 * math.Mod((gf-bf)/c, 6)
 	case gf:
-		h = 60 * ((bf - rf) / c + 2)
+		h = 60 * ((bf-rf)/c + 2)
 	case bf:
-		h = 60 * ((rf - gf) / c + 4)
-	default: 
+		h = 60 * ((rf-gf)/c + 4)
+	default:
 		h = 0
 	}
 
@@ -234,10 +234,10 @@ func rgbToHsl(r, g, b uint8) (h, s, l float64) {
 }
 
 func hslToRgb(h, s, l float64) (r, g, b uint8) {
-	a := s * math.Min(l, 1 - l)
+	a := s * math.Min(l, 1-l)
 	f := func(n float64) uint8 {
 		k := math.Mod((n + (h / 30)), 12)
-		fn := l - a * math.Max(-1, math.Min(k - 3, math.Min(9 - k, 1)))
+		fn := l - a*math.Max(-1, math.Min(k-3, math.Min(9-k, 1)))
 		return uint8(math.Round(fn * math.MaxUint8))
 	}
 
