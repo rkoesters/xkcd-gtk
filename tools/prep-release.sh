@@ -27,12 +27,21 @@ if ! release=$(grep "<release version=" "${appdata_xml:?}" | head -n 1 | cut -d 
 fi
 
 echo "Checking if current commit is tagged v${release:?}"
-if [ "v${release:?}" != "$(git describe --exact-match --tags --match='v[0-9].[0-9]*.[0-9]*')" ]; then
+if jj root >/dev/null 2>&1; then
+  tag=$(jj log -r "latest(@-::@ ~ empty())" --no-graph -T 'tags')
+else
+  tag=$(git describe --exact-match --tags --match='v[0-9].[0-9]*.[0-9]*')
+fi
+if [ "v${release:?}" != "${tag?}" ]; then
   failure "current commit not tagged v${release:?}"
 fi
 
 echo "Checking for date for release ${release:?} in changelog"
-date=$(git log -1 --format='%ad' --date=short "v${release:?}" --)
+if jj root >/dev/null 2>&1; then
+  date=$(jj log -r "v${release:?}" --no-graph -T 'self.author().timestamp().format("%F")')
+else
+  date=$(git log -1 --format='%ad' --date=short "v${release:?}" --)
+fi
 if ! grep -q "<release version=\"${release:?}\" date=\"${date:?}\"" "${appdata_xml:?}"; then
   failure "date ${date:?} not found in appdata changelog for version ${release:?}"
 fi
