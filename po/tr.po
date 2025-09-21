@@ -273,6 +273,22 @@ msgstr "Karikatür ara"
 msgid "Search for comics"
 msgstr "Karikatür ara"
 
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:37
+msgid "The application displaying xkcd comic 1906, \"Making Progress\"."
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:41
+msgid ""
+"The application displaying xkcd comic 888, \"Heaven\", with the search menu "
+"open and showing results for \"heaven\"."
+msgstr ""
+
+#: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:45
+msgid ""
+"The application, with dark mode enabled, displaying xkcd comic 888, "
+"\"Heaven\", with the search menu open and showing results for \"heaven\"."
+msgstr ""
+
 #: internal/widget/properties-dialog.go:85
 msgid "Title"
 msgstr "Başlık"
