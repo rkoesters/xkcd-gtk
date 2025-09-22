@@ -62,7 +62,7 @@
   </custom>
 
   <releases>
-    <release version="1.7.3">
+    <release version="1.7.3" date="2025-09-21">
       <description translate="no">
         <p>Improve the comic image inversion in dark mode so that the resulting colors are closer to what they would look like in the original image (thanks to Flachz).</p>
         <p>Dependency updates.</p>
