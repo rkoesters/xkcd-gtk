@@ -8,7 +8,7 @@ TESTFLAGS  = -race -cover
 VETFLAGS   = -v
 POTFLAGS   = --package-name="$(APP)" --from-code=utf-8 --sort-output
 FPBFLAGS   = --user --force-clean
-ASVFLAGS   = --explain --pedantic --override=cid-contains-hyphen=pedantic
+ASVFLAGS   = --explain --pedantic
 
 ################################################################################
 # Install Variables
