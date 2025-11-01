@@ -34,15 +34,15 @@
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/main/screenshots/screenshot-1@2x.png</image>
-      <caption>The application displaying xkcd comic 1906, "Making Progress".</caption>
+      <caption>The app displaying xkcd comic 1906, "Making Progress".</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/main/screenshots/screenshot-2@2x.png</image>
-      <caption>The application displaying xkcd comic 888, "Heaven", with the search menu open and showing results for "heaven".</caption>
+      <caption>The app displaying xkcd comic 888, "Heaven", with the search menu open.</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/rkoesters/xkcd-gtk/main/screenshots/screenshot-3@2x.png</image>
-      <caption>The application, with dark mode enabled, displaying xkcd comic 888, "Heaven", with the search menu open and showing results for "heaven".</caption>
+      <caption>The app, with dark mode enabled, displaying xkcd comic 888, "Heaven", with the search menu open.</caption>
     </screenshot>
   </screenshots>
 
