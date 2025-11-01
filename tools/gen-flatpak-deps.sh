@@ -11,6 +11,7 @@ name_to_remote () {
     -e 's#/v[0-9][0-9]*$##g' \
     -e 's#go.etcd.io/#github.com/etcd-io/#g' \
     -e 's#golang.org/x/#go.googlesource.com/#g' \
+    -e 's#google.golang.org/protobuf#github.com/protocolbuffers/protobuf-go#g' \
   # This comment ensures printf does not become an argument to sed.
   printf '.git\n'
 }
