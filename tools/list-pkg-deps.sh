@@ -3,8 +3,9 @@
 set -eu -o pipefail
 
 go list -buildvcs=false -f '{{ join .Deps "\n" }}' "$@" |
-grep -v -e '^internal/' -e '^vendor/' -e '^github.com/rkoesters/xkcd-gtk' |
-grep '^.*\..*/' |
-sed -e 's#\([^/]*/[^/]*/[^/]*\).*#\1#g' |
+grep -v '^github.com/rkoesters/xkcd-gtk' |
+grep '^[^/]*\.[^/]*/' |
+sed 's#\([^/]*/[^/]*/[^/]*\).*#\1#g' |
+sed 's#^google.golang.org/\([^/]*\)/.*#google.golang.org/\1#g' |
 sort |
 uniq
