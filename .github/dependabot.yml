@@ -7,6 +7,7 @@ updates:
     groups:
       artifacts:
         patterns:
+          - "actions/artifacts"
           - "actions/download-artifact"
           - "actions/upload-artifact"
 
