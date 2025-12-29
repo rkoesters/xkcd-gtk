@@ -102,7 +102,7 @@ jobs:
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
             image: >-
-              ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
+              ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
     needs: flatpak-config
