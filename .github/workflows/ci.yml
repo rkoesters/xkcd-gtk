@@ -91,10 +91,12 @@ jobs:
             runs-on: ubuntu-24.04
           - repo: appcenter
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
-            image: ghcr.io/elementary/flatpak-platform/runtime:8.2
+            image: >
+              ghcr.io/elementary/flatpak-platform/runtime:8.2
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
-            image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
+            image: >
+              ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
     needs: flatpak-config
