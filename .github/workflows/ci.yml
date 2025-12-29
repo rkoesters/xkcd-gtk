@@ -86,9 +86,9 @@ jobs:
           - flathub
         include:
           - arch: aarch64
-            runs-on: ubuntu-latest-arm
+            runs-on: ubuntu-24.04-arm
           - arch: x86_64
-            runs-on: ubuntu-latest
+            runs-on: ubuntu-24.04
           - repo: appcenter
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
           - repo: flathub
@@ -96,8 +96,8 @@ jobs:
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
     needs: flatpak-config
-    runs-on: ${{ matrix.runs-on }}
 
+    runs-on: ${{ matrix.runs-on }}
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
       options: --privileged
