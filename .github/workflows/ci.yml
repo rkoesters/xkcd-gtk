@@ -93,11 +93,11 @@ jobs:
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
           - repo: appcenter
             arch: aarch64
-            image: >
+            image: >-
               ghcr.io/elementary/flatpak-platform/runtime:8.2-aarch64
           - repo: appcenter
             arch: x86_64
-            image: >
+            image: >-
               ghcr.io/elementary/flatpak-platform/runtime:8.2-x86_64
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
