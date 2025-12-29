@@ -85,20 +85,18 @@ jobs:
           - appcenter
           - flathub
         include:
+          - arch: aarch64
+            runs-on: ubuntu-latest-arm
+          - arch: x86_64
+            runs-on: ubuntu-latest
           - repo: appcenter
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
-            image: ghcr.io/elementary/flatpak-platform/runtime:7.2
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
-            image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
 
     name: ${{ matrix.repo }}-${{ matrix.arch }}
     needs: flatpak-config
-    runs-on: ubuntu-latest
-
-    container:
-      image: ${{ matrix.image }}
-      options: --privileged
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - name: Checkout repository
@@ -112,16 +110,6 @@ jobs:
 
       - name: Configuring build
         run: tools/app-version.sh | tee tools/app-version.txt
-
-      - name: Install QEMU dependencies
-        if: ${{ matrix.arch == 'aarch64' && matrix.repo == 'flathub' }}
-        run: dnf -y install docker
-
-      - name: Initialize QEMU
-        if: ${{ matrix.arch == 'aarch64' }}
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
