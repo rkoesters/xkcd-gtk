@@ -129,7 +129,7 @@ check: $(APPDATA) $(FLATPAK_YML)
 	staticcheck -tags "$(TAGS)" $(MODULE_PACKAGES)
 	shellcheck $(SH_SOURCES)
 	xmllint --noout $(APPDATA) $(ICON) $(UI_SOURCES)
-	yamllint .github/workflows/*.yml .github/*.yml $(FLATPAK_YML)
+	yamllint .github/*.yml .github/*/*.yml $(FLATPAK_YML)
 	-appstreamcli validate $(ASVFLAGS) --no-net $(APPDATA)
 	-appstreamcli validate $(ASVFLAGS) --strict $(APPDATA)
 
