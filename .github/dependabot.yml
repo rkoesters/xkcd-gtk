@@ -1,17 +1,17 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     groups:
       artifacts:
         patterns:
-          - "actions/artifacts"
-          - "actions/download-artifact"
-          - "actions/upload-artifact"
+          - actions/artifacts
+          - actions/download-artifact
+          - actions/upload-artifact
 
-  - package-ecosystem: "gomod"
-    directory: "/"
+  - package-ecosystem: gomod
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
