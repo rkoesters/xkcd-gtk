@@ -98,6 +98,10 @@ jobs:
     needs: flatpak-config
     runs-on: ${{ matrix.runs-on }}
 
+    container:
+      image: ${{ matrix.image }}
+      options: --privileged
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
