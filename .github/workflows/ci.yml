@@ -2,13 +2,13 @@
 
 name: CI
 
-"on":
+'on':
   pull_request:
     branches:
-      - 'main'
+      - main
   push:
     branches:
-      - 'main'
+      - main
       - 'v[0-9]+.[0-9]+.[0-9]+'
   schedule:
     - cron: '29 4 1 * *'
