@@ -19,9 +19,9 @@ modules:
   - name: com.github.rkoesters.xkcd-gtk
     buildsystem: simple
     build-commands:
-      - 'ln -s "${PWD}/vendor" src/'
-      - 'PATH="${PATH}:${PWD}/go/bin"; cd src && make'
-      - 'PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app'
+      - ln -s "${PWD}/vendor" src/
+      - PATH="${PATH}:${PWD}/go/bin"; cd src && make
+      - PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app
 
     sources:
       - type: dir
