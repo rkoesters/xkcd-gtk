@@ -50,7 +50,7 @@ jobs:
       - run: make test
 
   flatpak-config:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
