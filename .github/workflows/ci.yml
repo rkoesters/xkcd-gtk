@@ -99,7 +99,7 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
 
     container:
-      image: ${{ matrix.image }}
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
       options: --privileged
 
     steps:
