@@ -122,7 +122,7 @@ jobs:
           name: flatpak-config
           path: flatpak
 
-      - name: Configuring build
+      - name: Configure build
         run: tools/app-version.sh | tee tools/app-version.txt
 
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
