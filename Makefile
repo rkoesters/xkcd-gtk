@@ -6,7 +6,7 @@ BUILDFLAGS = -v
 DEVFLAGS   = -v -race
 TESTFLAGS  = -race -cover
 VETFLAGS   = -v
-POTFLAGS   = --from-code=utf-8 --sort-output
+POTFLAGS   = --sort-output
 FPBFLAGS   = --user --force-clean
 ASVFLAGS   = --explain --pedantic
 
@@ -66,10 +66,10 @@ dev: $(APPDATA)
 	go build -o $(EXEC)-dev -ldflags="-X $(BUILD_PACKAGE).data=$(BUILD_DATA)" -tags "$(TAGS) xkcd_gtk_debug" $(DEVFLAGS) $(MODULE)/cmd/xkcd-gtk
 
 $(POT): tools/fill-pot-header.sh $(GO_SOURCES) $(UI_SOURCES) $(DESKTOP).in $(APPDATA).in
-	xgettext -o $@ --package-name="$(APP)" --language=C -kl $(POTFLAGS) $(GO_SOURCES)
-	xgettext -o $@ --package-name="$(APP)" -j $(POTFLAGS) $(UI_SOURCES)
-	xgettext -o $@ --package-name="$(APP)" -j --language=Desktop $(POTFLAGS) $(DESKTOP).in
-	xgettext -o $@ --package-name="$(APP)" -j --its=po/appdata.its $(POTFLAGS) $(APPDATA).in
+	xgettext -o $@ --package-name="$(APP)" --from-code=utf-8 --language=C -kl $(POTFLAGS) $(GO_SOURCES)
+	xgettext -o $@ --package-name="$(APP)" --from-code=utf-8 -j $(POTFLAGS) $(UI_SOURCES)
+	xgettext -o $@ --package-name="$(APP)" --from-code=utf-8 -j --language=Desktop $(POTFLAGS) $(DESKTOP).in
+	xgettext -o $@ --package-name="$(APP)" --from-code=utf-8 -j --its=po/appdata.its $(POTFLAGS) $(APPDATA).in
 	tools/fill-pot-header.sh <$@ >$@.out
 	mv $@.out $@
 
