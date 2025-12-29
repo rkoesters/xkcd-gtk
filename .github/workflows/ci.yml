@@ -24,7 +24,7 @@ jobs:
           - 1.25.x
           - 1.x     # latest
 
-    name: Go ${{ matrix.go }}
+    name: go${{ matrix.go }}
     runs-on: ubuntu-latest
 
     steps:
