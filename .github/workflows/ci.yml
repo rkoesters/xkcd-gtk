@@ -133,3 +133,4 @@ jobs:
           arch: ${{ matrix.arch }}
           bundle: xkcd-gtk-${{ matrix.repo }}.flatpak
           verbose: true
+          run-tests: true
