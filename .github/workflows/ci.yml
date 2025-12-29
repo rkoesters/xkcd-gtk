@@ -92,7 +92,7 @@ jobs:
           - repo: appcenter
             repo-url: https://flatpak.elementary.io/repo.flatpakrepo
             image: >
-              ghcr.io/elementary/flatpak-platform/runtime:8.2
+              ghcr.io/elementary/flatpak-platform/runtime:8.2-${{ matrix.arch }}
           - repo: flathub
             repo-url: https://flathub.org/repo/flathub.flatpakrepo
             image: >
