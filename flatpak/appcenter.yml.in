@@ -22,6 +22,8 @@ modules:
       - ln -s "${PWD}/vendor" src/
       - PATH="${PATH}:${PWD}/go/bin"; cd src && make
       - PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app
+    test-commands:
+      - PATH="${PATH}:${PWD}/go/bin"; cd src && make test
 
     sources:
       - type: dir
