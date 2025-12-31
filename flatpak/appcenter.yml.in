@@ -22,8 +22,8 @@ modules:
     buildsystem: simple
     build-commands:
       - ln -s "${PWD}/vendor" src/
-      - PATH="${PATH}:${PWD}/go/bin"; cd src && make
-      - PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app
+      - cd src && . /usr/lib/sdk/golang/enable.sh && make
+      - cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app
 
     sources:
       - type: dir
