@@ -43,10 +43,10 @@ $ make test
 In addition to the regular build requirements, running static analysis requires the following tools:
 
 - staticcheck (`go install honnef.co/go/tools/cmd/staticcheck@latest`)
-- shellcheck
-- xmllint
-- yamllint
-- appstreamcli
+- shellcheck (apt: `shellcheck`)
+- xmllint (apt: `libxml2-utils`)
+- yamllint (apt: `yamllint`)
+- appstreamcli (apt: `appstream`)
 
 Run static analysis with:
 
