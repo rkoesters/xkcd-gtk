@@ -30,16 +30,18 @@ $ make
 
 #### Testing
 
-Run static analysis with:
-
-```shell
-$ make check
-```
-
 Run tests with:
 
 ```shell
 $ make test
+```
+
+#### Static Analysis
+
+Run static analysis with:
+
+```shell
+$ make check
 ```
 
 ### Installing
