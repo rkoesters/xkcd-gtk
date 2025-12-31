@@ -24,6 +24,8 @@ modules:
       - ln -s "${PWD}/vendor" src/
       - cd src && . /usr/lib/sdk/golang/enable.sh && make
       - cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app
+    test-commands:
+      - cd src && . /usr/lib/sdk/golang/enable.sh && make test
 
     sources:
       - type: dir
