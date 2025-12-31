@@ -3,10 +3,12 @@
 Comic Sticks (`xkcd-gtk`) is a simple xkcd comic viewer written in Go using
 GTK+3.
 
+![screenshot](screenshots/screenshot-1@2x.png)
+
+## Install
+
 <a href="https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Get it on AppCenter" src="https://appcenter.elementary.io/badge.svg"/></a>
 <a href="https://flathub.org/apps/details/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.svg"/></a>
-
-![screenshot](screenshots/screenshot-1@2x.png)
 
 ## Building from source
 
@@ -28,13 +30,7 @@ Just run `make` from the root of the repo:
 $ make
 ```
 
-#### Testing
-
-Run static analysis with:
-
-```shell
-$ make check
-```
+### Testing
 
 Run tests with:
 
@@ -42,7 +38,23 @@ Run tests with:
 $ make test
 ```
 
-### Installing
+#### Running static analysis
+
+In addition to the regular build requirements, running static analysis requires the following tools:
+
+- staticcheck (`go install honnef.co/go/tools/cmd/staticcheck@latest`)
+- shellcheck (apt: `shellcheck`)
+- xmllint (apt: `libxml2-utils`)
+- yamllint (apt: `yamllint`)
+- appstreamcli (apt: `appstream`)
+
+Run static analysis with:
+
+```shell
+$ make check
+```
+
+### Installing from source
 
 After you have compiled the application, you can install it.
 
@@ -59,7 +71,7 @@ your `$PATH`):
 $ make install prefix="$HOME/.local"
 ```
 
-### Uninstalling
+#### Uninstalling from source
 
 To uninstall for all users:
 
