@@ -40,6 +40,14 @@ $ make test
 
 #### Running static analysis
 
+In addition to the regular build requirements, running static analysis requires the following tools:
+
+- staticcheck
+- shellcheck
+- xmllint
+- yamllint
+- appstreamcli
+
 Run static analysis with:
 
 ```shell
