@@ -28,7 +28,7 @@ Just run `make` from the root of the repo:
 $ make
 ```
 
-#### Testing
+### Testing
 
 Run tests with:
 
