@@ -3,10 +3,12 @@
 Comic Sticks (`xkcd-gtk`) is a simple xkcd comic viewer written in Go using
 GTK+3.
 
+![screenshot](screenshots/screenshot-1@2x.png)
+
+## Install
+
 <a href="https://appcenter.elementary.io/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Get it on AppCenter" src="https://appcenter.elementary.io/badge.svg"/></a>
 <a href="https://flathub.org/apps/details/com.github.rkoesters.xkcd-gtk"><img height="51" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.svg"/></a>
-
-![screenshot](screenshots/screenshot-1@2x.png)
 
 ## Building from source
 
@@ -36,7 +38,7 @@ Run tests with:
 $ make test
 ```
 
-#### Static Analysis
+#### Running static analysis
 
 Run static analysis with:
 
@@ -44,7 +46,7 @@ Run static analysis with:
 $ make check
 ```
 
-### Installing
+### Installing from source
 
 After you have compiled the application, you can install it.
 
@@ -61,7 +63,7 @@ your `$PATH`):
 $ make install prefix="$HOME/.local"
 ```
 
-### Uninstalling
+#### Uninstalling from source
 
 To uninstall for all users:
 
