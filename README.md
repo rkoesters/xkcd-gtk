@@ -42,7 +42,7 @@ $ make test
 
 In addition to the regular build requirements, running static analysis requires the following tools:
 
-- staticcheck
+- staticcheck (`go install honnef.co/go/tools/cmd/staticcheck@latest`)
 - shellcheck
 - xmllint
 - yamllint
