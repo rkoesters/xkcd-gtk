@@ -6,6 +6,8 @@ runtime: io.elementary.Platform
 runtime-version: '8.2'
 
 sdk: io.elementary.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.golang
 
 command: com.github.rkoesters.xkcd-gtk
 
@@ -20,8 +22,8 @@ modules:
     buildsystem: simple
     build-commands:
       - ln -s "${PWD}/vendor" src/
-      - PATH="${PATH}:${PWD}/go/bin"; cd src && make
-      - PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app
+      - cd src && . /usr/lib/sdk/golang/enable.sh && make
+      - cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app
 
     sources:
       - type: dir
@@ -39,14 +41,3 @@ modules:
         dest: vendor
         dest-filename: modules.txt
 
-      - type: archive
-        only-arches: [x86_64]
-        url: https://go.dev/dl/go1.25.1.linux-amd64.tar.gz
-        sha256: 7716a0d940a0f6ae8e1f3b3f4f36299dc53e31b16840dbd171254312c41ca12e
-        dest: go
-
-      - type: archive
-        only-arches: [aarch64]
-        url: https://go.dev/dl/go1.25.1.linux-arm64.tar.gz
-        sha256: 65a3e34fb2126f55b34e1edfc709121660e1be2dee6bdf405fc399a63a95a87d
-        dest: go
