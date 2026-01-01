@@ -104,7 +104,7 @@ jobs:
             image: >-
               ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
 
-    name: ${{ matrix.repo }}-${{ matrix.arch }}
+    name: ${{ matrix.repo }} / ${{ matrix.arch }}
     needs: flatpak-config
 
     runs-on: ${{ matrix.runs-on }}
