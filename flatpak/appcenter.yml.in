@@ -20,6 +20,7 @@ modules:
     buildsystem: simple
     build-commands:
       - ln -s "${PWD}/vendor" src/
+      - PATH="${PATH}:${PWD}/go/bin"; go version
       - PATH="${PATH}:${PWD}/go/bin"; cd src && make
       - PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app
     test-commands:

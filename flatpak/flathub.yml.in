@@ -22,10 +22,11 @@ modules:
     buildsystem: simple
     build-commands:
       - ln -s "${PWD}/vendor" src/
-      - cd src && . /usr/lib/sdk/golang/enable.sh && make
-      - cd src && . /usr/lib/sdk/golang/enable.sh && make install prefix=/app
+      - . /usr/lib/sdk/golang/enable.sh && go version
+      - . /usr/lib/sdk/golang/enable.sh && cd src && make
+      - . /usr/lib/sdk/golang/enable.sh && cd src && make install prefix=/app
     test-commands:
-      - cd src && . /usr/lib/sdk/golang/enable.sh && make test
+      - . /usr/lib/sdk/golang/enable.sh && cd src && make test
 
     sources:
       - type: dir
