@@ -53,7 +53,7 @@ msgstr ""
 msgid "Cache comics for later offline viewing"
 msgstr "Sauvegardez des BD pour les regarder plus tard sans connexion"
 
-#: internal/widget/cache-window.go:38 internal/widget/window-menu.go:70
+#: internal/widget/window-menu.go:70 internal/widget/cache-window.go:38
 #: internal/widget/app-menu.ui:12
 #: data/com.github.rkoesters.xkcd-gtk.desktop.in:24
 msgid "Cache manager"
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Error reading local comic database"
 msgstr ""
 
-#: internal/widget/context-menu.go:50 internal/widget/window-menu.go:53
+#: internal/widget/window-menu.go:53 internal/widget/context-menu.go:50
 msgid "Explain"
 msgstr "Explication"
 
@@ -207,7 +207,7 @@ msgstr "Numéro"
 msgid "Open bookmarks menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:49 internal/widget/window-menu.go:52
+#: internal/widget/window-menu.go:52 internal/widget/context-menu.go:49
 msgid "Open link"
 msgstr "Ouvrir le lien"
 
@@ -227,8 +227,8 @@ msgstr "Ouvir la fenêtre des raccourcis"
 msgid "Open window menu"
 msgstr ""
 
-#: internal/widget/context-menu.go:51 internal/widget/properties-dialog.go:46
-#: internal/widget/window-menu.go:54 internal/widget/shortcuts-window.ui:139
+#: internal/widget/properties-dialog.go:46 internal/widget/window-menu.go:54
+#: internal/widget/context-menu.go:51 internal/widget/shortcuts-window.ui:139
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -273,19 +273,18 @@ msgid "Search for comics"
 msgstr "Recherchez des BD"
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:37
-msgid "The application displaying xkcd comic 1906, \"Making Progress\"."
+msgid "The app displaying xkcd comic 1906, \"Making Progress\"."
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:41
 msgid ""
-"The application displaying xkcd comic 888, \"Heaven\", with the search menu "
-"open and showing results for \"heaven\"."
+"The app displaying xkcd comic 888, \"Heaven\", with the search menu open."
 msgstr ""
 
 #: data/com.github.rkoesters.xkcd-gtk.appdata.xml.in:45
 msgid ""
-"The application, with dark mode enabled, displaying xkcd comic 888, "
-"\"Heaven\", with the search menu open and showing results for \"heaven\"."
+"The app, with dark mode enabled, displaying xkcd comic 888, \"Heaven\", with "
+"the search menu open."
 msgstr ""
 
 #: internal/widget/properties-dialog.go:85

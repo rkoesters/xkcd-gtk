@@ -10,10 +10,11 @@ sdk: io.elementary.Sdk
 command: com.github.rkoesters.xkcd-gtk
 
 finish-args:
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--share=ipc'
-  - '--share=network'
+  - --device=dri  # gpu acceleration
+  - --share=ipc  # x11 xshm
+  - --share=network  # accessing xkcd.com
+  - --socket=fallback-x11  # x11 if no wayland
+  - --socket=wayland  # wayland
 
 modules:
   - name: com.github.rkoesters.xkcd-gtk
@@ -22,6 +23,8 @@ modules:
       - ln -s "${PWD}/vendor" src/
       - PATH="${PATH}:${PWD}/go/bin"; cd src && make
       - PATH="${PATH}:${PWD}/go/bin"; cd src && make install prefix=/app
+    test-commands:
+      - PATH="${PATH}:${PWD}/go/bin"; cd src && make test
 
     sources:
       - type: dir
@@ -63,12 +66,12 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/bleve.git
-        tag: v2.5.4
+        tag: v2.5.7
         dest: vendor/github.com/blevesearch/bleve/v2
 
       - type: git
         url: https://github.com/blevesearch/bleve_index_api.git
-        tag: v1.2.10
+        tag: v1.2.11
         dest: vendor/github.com/blevesearch/bleve_index_api
 
       - type: git
@@ -93,7 +96,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/scorch_segment_api.git
-        tag: v2.3.12
+        tag: v2.3.13
         dest: vendor/github.com/blevesearch/scorch_segment_api/v2
 
       - type: git
@@ -143,7 +146,7 @@ modules:
 
       - type: git
         url: https://github.com/blevesearch/zapx.git
-        tag: v16.2.6
+        tag: v16.2.8
         dest: vendor/github.com/blevesearch/zapx/v16
 
       - type: git
