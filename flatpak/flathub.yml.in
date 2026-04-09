@@ -12,10 +12,11 @@ sdk-extensions:
 command: com.github.rkoesters.xkcd-gtk
 
 finish-args:
-  - '--socket=fallback-x11'
-  - '--socket=wayland'
-  - '--share=ipc'
-  - '--share=network'
+  - --device=dri  # gpu acceleration
+  - --share=ipc  # x11 xshm
+  - --share=network  # accessing xkcd.com
+  - --socket=fallback-x11  # x11 if no wayland
+  - --socket=wayland  # wayland
 
 modules:
   - name: com.github.rkoesters.xkcd-gtk
