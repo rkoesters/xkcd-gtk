@@ -1,15 +1,10 @@
 ---
 
-name: CI
+name: CI (cron)
 
 'on':
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
-      - v[0-9]+.[0-9]+.[0-9]+
+  schedule:
+    - cron: 0 0 * * 6
 
 permissions:
   contents: read
